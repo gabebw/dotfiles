@@ -1,0 +1,28 @@
+# RVM
+# ~/.bash/ruby checks that RVM exists and is in good working order before
+# sourcing this file, so no need to check for that here.
+
+source "$HOME/.rvm/scripts/rvm"
+
+# RVM bash completion
+# zsh comes with it baked in.
+# For either one, use rvm[tab][tab], rvm use[tab][tab], etc.
+# (No space, so NOT "rvm use [tab]")
+#[ $BASH ] && source $rvm_path/scripts/completion
+
+ruby_version() {
+	# rvm-prompt options:
+	# i => interpreter ("ree", "ruby", "jruby")
+	# v => version ("1.8.7")
+	# g => gemset ("@rails3")
+	# s => print "system" if using system intepreter (otherwise blank, for
+	# 	   some reason)
+	version=$(~/.rvm/bin/rvm-prompt i v g s)
+	# If it's standard MRI, then don't display interpreter.
+	# If it's "ree-1.8.7", then it'll show the "ree-"
+	version=${version/ruby-/}
+	# If using global gemset, show nothing
+	version=${version/@global/}
+
+	print "%{$fg[magenta]%}${version}%{$reset_color%}"
+}

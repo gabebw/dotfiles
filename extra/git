@@ -1,0 +1,52 @@
+# git stuff
+# To delete a branch on github, do:
+# git push origin :BRANCH_NAME
+# This pushes nothing into BRANCH_NAME and so deletes it.
+# More: http://help.github.com/remotes/
+
+export MANPATH=$MANPATH:/usr/local/git/share/man
+# http://repo.or.cz/w/git.git/blob_plain/HEAD:/contrib/completion/git-completion.bash
+# downloaded 5/11/10
+[ $BASH ] && source ~/.bash/completion/git-completion.bash
+
+function git_branch {
+  local git_branch="${vcs_info_msg_0_}$(parse_git_dirty)"
+# Must use print (not echo) for ZSH colors to work
+    print $git_branch
+}
+
+# Stolen from oh-my-zsh
+parse_git_dirty(){
+  if [[ -n $(git status -s 2> /dev/null) ]]; then
+    #echo ' ¹'
+    echo ' ✗'
+  else
+    # Do nothing when repo is clean
+    #echo '²'
+    #echo '✔'
+  fi
+}
+
+alias gp="git push"
+alias gph="git push && git push heroku"
+alias gd="git diff"
+alias ga="git add"
+
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gst="git status"
+alias gcm="git commit -m"
+alias gcam="git commit -am"
+
+# What changed between last commit and now?
+alias recent="git diff master~1"
+
+# Use git-tweet project
+function tweet(){
+  prev_wd="$PWD"
+  cd /Users/gabe/jbs/git-tweets
+  git msg "$*"
+  git push
+  cd "$prev_wd"
+}

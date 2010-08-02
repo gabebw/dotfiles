@@ -1,0 +1,33 @@
+# Ruby stuff for bash
+
+qq rails
+# Add binaries for non-sudo installed 1.8 gems
+#PATH="$PATH:/Users/gabe/.gem/ruby/1.8/bin"
+
+# Ruby stuff
+# RUBYLIB is where ruby looks for additional require()d scripts
+#export RUBYLIB=$RUBYLIB:/Users/gabe/bin
+# No need to do "require rubygems"
+export RUBYOPT=rubygems
+
+# qri stuff
+if [[ -x $(which qri) ]]
+then
+  export RI="--use-cache" # so it doesn't update every time
+  # Don't need "ansi" format because I use a white background
+  alias qri="qri -f plain"
+  alias ri="qri"
+fi
+# Gem search
+alias gs="gem search -rd"
+
+# RVM
+if [[ -d ~/.rvm ]]
+then
+  # Double check that we have a good installation of RVM
+  [[ -s "$HOME/.rvm/scripts/rvm" && -x ~/.rvm/bin/rvm-prompt ]] && qq rvm
+else
+  # No rvm, fake it.
+  echo "WARNING: no rvm, faking it." # warn once, when sourcing this file
+  ruby_version(){ print "%{$fg[magenta]%}system%{$reset_color%}"; }
+fi

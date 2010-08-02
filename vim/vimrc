@@ -1,0 +1,118 @@
+" Good .vimrc files
+" http://people.mandriva.com/~rgarciasuarez/dotfiles/vimrc
+
+set nocompatible
+
+filetype on
+filetype plugin on
+filetype indent on
+syntax on
+" FINALLY! Don't need to reload to detect syntax of a file with a valid
+" extension
+runtime! ftdetect/*.vim
+
+" Wow, this cleaned up my ~/.vim like you would not believe.
+" http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags() " Generate help tags for every bundle
+
+set laststatus=2
+" http://vim.runpaint.org/display/changing-status-line/
+" Status line detail:
+" %F = file name ("~/.vimrc")
+" %t = file BASENAME (".vimrc")
+" %m = display "[+]" if file has been modified
+" %r = display "[RO]" if file is read-only
+" %y = file content type, e.g. "[ruby]"
+" %{&ff} = file format (unix/dos)
+" strftime.... = time
+"   (See: http://vim.wikia.com/wiki/Insert_current_date_or_time)
+" getftime = last modification time
+" %= = right-align everything after this
+" %l = current line number
+" %L = total lines
+" %c = current column
+" %P = ??? something with percentage ???
+let part1="%{fugitive#statusline()}%t%h%m%r%h%w"
+" time is like "07/29/10 07:36:44"
+let time=" %{strftime(\"%m/%d/%y %T\",getftime(expand(\"%:p\")))}"
+let part3="%= lin:%l/%L col:%c"
+" Using "let &stl" instead of "set statusline" lets us use a string.
+let &stl=part1.time.part3
+
+"colorscheme railscasts
+set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
+
+set number " line numbers
+set ruler  " show cursor position all the time
+set nowrap " don't wrap lines
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set autoindent
+set copyindent " copy previous indentation on autoindenting
+set showmatch " show matching parenthesis
+set ignorecase " ignore case when searching
+set smartcase " ignore case if search pattern is all lowercase, case-sensitive otherwise
+set smarttab " insert tabs on the start of a line according to shiftwidth, not tabstop
+set incsearch " show search matches as you type
+set showcmd " display incomplete commands
+set modelines=2 " inspect top/bottom 2 lines for modeline
+
+set fileencodings=utf-8,iso-8859-1
+set ff=unix
+set textwidth=77 " Numbers on the side take off 3 columns
+set showbreak="@" " This is prepended to wrapped lines
+" tabs are trail, end of lines are $
+set listchars=tab:>-,eol:$
+
+" Use apostrophe for backquote function, since backquote is so much more
+" useful than apostrophe
+nnoremap ` '
+
+" **** TABS ****
+" Note that ~/.vim/after/ftplugin changes some of these settings
+" http://vim.wikia.com/wiki/Indenting_source_code#Setup
+" No tabs: set expandtab, set shiftwidth=softtabstop, don't change tabstop
+" Pure tabs: set noexpandtab, set tabstop=shiftwidth, don't touch softtabstop
+" Tabs+spaces: set noexpandtab, set softtabstop=shiftwidth, don't touch tabstop
+"
+" http://vim.wikia.com/wiki/Indenting_source_code#Explanation_of_the_options
+" tabstop = how many columns a TAB counts for
+" shiftwidth = what happens when you press <</>>/==
+" softtabstop = number of spaces inserted when TAB is pressed
+" expandtab = if expandtab is set, then <TAB> inserts softtabstop amount of
+" space characters. Otherwise, the amount of spaces inserted is minimized by
+" using TAB characters
+" Currently ruby style (tabs = 2 spaces)
+set expandtab
+" set tabstop=4
+set softtabstop=2
+set shiftwidth=2
+retab " replace \t with new values of tabstop
+
+" With backup and writebackup on, it overwrites the old backup
+set backup
+set writebackup
+set backupdir=~/.vim/backups
+" setting backupskip to this to allow for 'crontab -e' using vim.
+" thanks to: http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html
+set backupskip=/tmp/*,/private/tmp/*"
+
+" views options
+set viewdir=~/.vim/views
+" Match all files but don't trigger when opening vim without a file
+autocmd BufWinLeave ?* mkview
+autocmd BufWinEnter ?* silent loadview
+
+map :Nohl :nohlsearch
+"map q :set hlsearch!<Return>
+" create a fold by matching brackets.
+"map t zf%<Return>
+"map T :set list!<Return>
+map Q q " no ex mode
+
+" When you call Rpreview <x>, use this command to open localhost:3000/<x>
+:command -bar -nargs=1 OpenURL :!open <args>
+
+" on opening the file, clear search-highlighting
+autocmd BufReadCmd :set nohlsearch
+autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving

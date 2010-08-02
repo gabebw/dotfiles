@@ -1,0 +1,11 @@
+# Used for moving files
+# from ~/.vimrc -> ~/dotfiles/vimrc (no leading dot).
+# Makes for a pretty display in github, as well as a non-insane
+# ~/.gitignore.
+function dotfile(){
+  file="$1"
+  newfile=${1#.}
+  newlocation=~/.dotfiles/$newfile
+  mv $file $newlocation
+  ln -s $newlocation $file
+}

@@ -1,0 +1,6 @@
+# Specifically un-ignore all files except those below.
+!*
+views
+backups
+# Ignore bundle doc
+bundle/*/doc
