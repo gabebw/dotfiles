@@ -2,8 +2,9 @@
 # to change shell: chsh -s /bin/bash
 echo "sourcing bashrc"
 unalias -a
-source ~/.bash/path
-source ~/.bash/aliases
+# aliases file gives us qq alias, so do that first.
+source ~/.dotfiles/extra/aliases
+qq path
 
 ## shopt ##
 # http://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
@@ -65,24 +66,17 @@ alias macvim=mvim
 #alias msh="ssh gbw@conch.unet.brandeis.edu" #:/usr/users/gbw/WWW/"
 #alias ssh-cs="ssh gbw@themis.cs.brandeis.edu" #:/usr/users/gbw/WWW/"
 
-# Java
-function jv {
-    f="${1%.*}" # strip off extension
-    javac "$f.java" && java "$f" ${@:2}
-}
-
 #### Others ####
-source ~/.bash/ruby
-source ~/.bash/html
+qq ruby
+qq html
 # Sets PATH with leading Python 2.6, so do it after other PATH stuff
-#source ~/.bash/python
-#source ~/.bash/ragel
+#qq python
+#qq ragel
+#qq java
 # mdfind has today, red, blue, etc
-#source ~/.bash/mdfind
-source ~/.bash/git # includes completion
+#qq mdfind
+qq git # includes completion
 
-# git_branch only shows up if you're in a git directory
-git_branch='$(__git_ps1 "(%s) ")'
 # AFTER ~/.bash/ruby
 ruby_version="\$(~/.rvm/bin/rvm-prompt v)"
 # \w = full path; \W = basename
