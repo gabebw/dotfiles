@@ -38,7 +38,7 @@ alias ga="git add"
 alias gb="git branch"
 alias gcb="git checkout -b"
 alias gc="git checkout"
-alias gst="git status"
+alias gst="git st" # Use my alias from ~/.gitconfig
 alias gcm="git commit -m"
 alias gcam="git commit -am"
 
