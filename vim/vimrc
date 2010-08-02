@@ -105,12 +105,11 @@ autocmd BufWinEnter ?* silent loadview
 
 autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
 
+" Mappings
 map :Nohl :nohlsearch
 "map q :set hlsearch!<Return>
-" create a fold by matching brackets.
-"map t zf%<Return>
-"map T :set list!<Return>
-map Q q " no ex mode
+" no ex mode
+map Q q
 
 " When you call Rpreview <x>, use this command to open localhost:3000/<x>
 :command -bar -nargs=1 OpenURL :!open <args>
