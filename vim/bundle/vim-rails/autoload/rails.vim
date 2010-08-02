@@ -1148,6 +1148,11 @@ function! s:Rake(bang,lnum,arg)
         let arg = rails#buffer().default_rake_task(lnum)
       endif
     endif
+    if !has_key(self,'options') | let self.options = {} | endif
+    if arg == '-'
+      let arg = get(self.options,'last_rake_task','')
+    endif
+    let self.options['last_rake_task'] = arg
     let withrubyargs = '-r ./config/boot -r '.s:rquote(self.path('config/environment')).' -e "puts \%((in \#{Dir.getwd}))" '
     if arg =~# '^notes\>'
       let &l:errorformat = '%-P%f:,\ \ *\ [%*[\ ]%l]\ [%t%*[^]]] %m,\ \ *\ [%*[\ ]%l] %m,%-Q'
@@ -1204,7 +1209,9 @@ endfunction
 function! s:readable_default_rake_task(lnum) dict abort
   let app = self.app()
   let lnum = a:lnum < 0 ? 0 : a:lnum
-  if self.getline(lnum) =~# '# rake '
+  if self.getvar('&buftype') == 'quickfix'
+    return '-'
+  elseif self.getline(lnum) =~# '# rake '
     return matchstr(self.getline(lnum),'\C# rake \zs.*')
   elseif self.getline(self.last_method_line(lnum)-1) =~# '# rake '
     return matchstr(self.getline(self.last_method_line(lnum)-1),'\C# rake \zs.*')
@@ -1231,9 +1238,9 @@ function! s:readable_default_rake_task(lnum) dict abort
     if self.name() =~# '\<spec/spec_helper\.rb$'
       return 'spec'
     elseif lnum > 0
-      return 'spec SPEC="%:p":'.lnum
+      return 'spec SPEC="'.self.path().'":'.lnum
     else
-      return 'spec SPEC="%:p"'
+      return 'spec SPEC="'.self.path().'"'
     endif
   elseif self.type_name('test')
     let meth = self.last_method(lnum)
@@ -1243,11 +1250,11 @@ function! s:readable_default_rake_task(lnum) dict abort
       let call = ""
     endif
     if self.type_name('test-unit','test-functional','test-integration')
-      return s:sub(s:gsub(self.type_name(),'-',':'),'unit$|functional$','&s')." TEST=\"%:p\"".s:sub(call,'^ ',' TESTOPTS=')
+      return s:sub(s:gsub(self.type_name(),'-',':'),'unit$|functional$','&s').' TEST="'.self.path().'"'.s:sub(call,'^ ',' TESTOPTS=')
     elseif self.name() =~# '\<test/test_helper\.rb$'
       return 'test'
     else
-      return "test:recent TEST=\"%:p\"".s:sub(call,'^ ',' TESTOPTS=')
+      return 'test:recent TEST="'.self.path().'"'.s:sub(call,'^ ',' TESTOPTS=')
     endif
   elseif self.type_name('db-migration')
     let ver = matchstr(self.name(),'\<db/migrate/0*\zs\d*\ze_')
@@ -1276,12 +1283,12 @@ function! s:readable_default_rake_task(lnum) dict abort
       return 'routes CONTROLLER='.self.controller_name()
     endif
   elseif app.has('spec') && self.name() =~# '^app/.*\.rb' && app.has_file(s:sub(self.name(),'^app/(.*)\.rb$','spec/\1_spec.rb'))
-    return 'spec SPEC="%:p:r:s?[\/]app[\/]?/spec/?_spec.rb" SPEC_OPTS='
+    return 'spec SPEC="'.fnamemodify(s:sub(self.name(),'<app/','spec/'),':p:r').'_spec.rb"'
   elseif self.type_name('model')
-    return 'test:units TEST="%:p:r:s?[\/]app[\/]models[\/]?/test/unit/?_test.rb"'
-  elseif self.type_name('api')
-    return 'test:units TEST="%:p:r:s?[\/]app[\/]apis[\/]?/test/functional/?_test.rb"'
-  elseif self.type_name('\<\%(controller\|helper\|view\)')
+    return 'test:units TEST="'.fnamemodify(s:sub(self.name(),'<app/models/','test/unit/'),':p:r').'_test.rb"'
+  elseif self.type_name('api','mailer')
+    return 'test:units TEST="'.fnamemodify(s:sub(self.name(),'<app/%(apis|mailers|models)/','test/functional/'),':p:r').'_test.rb"'
+  elseif self.type_name('controller','helper','view')
     if self.name() =~ '\<app/' && s:controller() !~# '^\%(application\)\=$'
       return 'test:functionals TEST="'.s:escarg(app.path('test/functional/'.s:controller().'_controller_test.rb')).'"'
     else
@@ -1289,9 +1296,9 @@ function! s:readable_default_rake_task(lnum) dict abort
     endif
   elseif self.type_name('cucumber-feature')
     if lnum > 0
-      return 'cucumber FEATURE="%:p":'.lnum
+      return 'cucumber FEATURE="'.self.path().'":'.lnum
     else
-      return 'cucumber FEATURE="%:p"'
+      return 'cucumber FEATURE="'.self.path().'"'
     endif
   elseif self.type_name('cucumber')
     return 'cucumber'
@@ -3093,7 +3100,7 @@ function! s:readable_related(...) dict abort
     elseif file =~ '\<vendor/.*/test/'
       return s:sub(file,'<vendor/.{-}/\zstest/','lib/')
     else
-      return fnamemodify(file,":t")
+      return fnamemodify(file,':t')."\n".s:sub(s:sub(f,'\.rb$','_spec.rb'),'^app/','spec/')
     endif
   else
     return ""
@@ -3694,16 +3701,25 @@ function! s:HiDefaults()
 endfunction
 
 function! rails#log_syntax()
-  syn match   railslogRender      '^\s*\<\%(Processing\|Rendering\|Rendered\|Redirected\|Completed\)\>'
+  if has('conceal')
+    syn match railslogEscape      '\e\[[0-9;]*m' conceal
+    syn match railslogEscapeMN    '\e\[[0-9;]*m' conceal nextgroup=railslogModelNum,railslogEscapeMN skipwhite contained
+    syn match railslogEscapeSQL   '\e\[[0-9;]*m' conceal nextgroup=railslogSQL,railslogEscapeSQL skipwhite contained
+  else
+    syn match railslogEscape      '\e\[[0-9;]*m'
+    syn match railslogEscapeMN    '\e\[[0-9;]*m' nextgroup=railslogModelNum,railslogEscapeMN skipwhite contained
+    syn match railslogEscapeSQL   '\e\[[0-9;]*m' nextgroup=railslogSQL,railslogEscapeSQL skipwhite contained
+  endif
+  syn match   railslogRender      '\%(^\s*\%(\e\[[0-9;]*m\)\=\)\@<=\%(Processing\|Rendering\|Rendered\|Redirected\|Completed\)\>'
   syn match   railslogComment     '^\s*# .*'
-  syn match   railslogModel       '^\s*\u\%(\w\|:\)* \%(Load\%( Including Associations\| IDs For Limited Eager Loading\)\=\|Columns\|Count\|Create\|Update\|Destroy\|Delete all\)\>' skipwhite nextgroup=railslogModelNum
-  syn match   railslogModel       '^\s*SQL\>' skipwhite nextgroup=railslogModelNum
-  syn region  railslogModelNum    start='(' end=')' contains=railslogNumber contained skipwhite nextgroup=railslogSQL
-  syn match   railslogSQL         '\u.*$' contained
+  syn match   railslogModel       '\%(^\s*\%(\e\[[0-9;]*m\)\=\)\@<=\u\%(\w\|:\)* \%(Load\%( Including Associations\| IDs For Limited Eager Loading\)\=\|Columns\|Count\|Create\|Update\|Destroy\|Delete all\)\>' skipwhite nextgroup=railslogModelNum,railslogEscapeMN
+  syn match   railslogModel       '\%(^\s*\%(\e\[[0-9;]*m\)\=\)\@<=SQL\>' skipwhite nextgroup=railslogModelNum,railslogEscapeMN
+  syn region  railslogModelNum    start='(' end=')' contains=railslogNumber contained skipwhite nextgroup=railslogSQL,railslogEscapeSQL
+  syn match   railslogSQL         '\u[^\e]*' contained
   " Destroy generates multiline SQL, ugh
-  syn match   railslogSQL         '^ \%(FROM\|WHERE\|ON\|AND\|OR\|ORDER\) .*$'
+  syn match   railslogSQL         '\%(^ \%(\e\[[0-9;]*m\)\=\)\@<=\%(FROM\|WHERE\|ON\|AND\|OR\|ORDER\) .*$'
   syn match   railslogNumber      '\<\d\+\>%'
-  syn match   railslogNumber      '[ (]\@<=\<\d\+\.\d\+\>'
+  syn match   railslogNumber      '[ (]\@<=\<\d\+\.\d\+\>\.\@!'
   syn region  railslogString      start='"' skip='\\"' end='"' oneline contained
   syn region  railslogHash        start='{' end='}' oneline contains=railslogHash,railslogString
   syn match   railslogIP          '\<\d\{1,3\}\%(\.\d\{1,3}\)\{3\}\>'
@@ -3716,6 +3732,9 @@ function! rails#log_syntax()
   syn match   railslogError       '^DEPRECATION WARNING\>'
   syn keyword railslogHTTP        OPTIONS GET HEAD POST PUT DELETE TRACE CONNECT
   syn region  railslogStackTrace  start=":\d\+:in `\w\+'$" end="^\s*$" keepend fold
+  hi def link railslogEscapeMN    railslogEscape
+  hi def link railslogEscapeSQL   railslogEscape
+  hi def link railslogEscape      Ignore
   hi def link railslogComment     Comment
   hi def link railslogRender      Keyword
   hi def link railslogModel       Type
@@ -3752,7 +3771,7 @@ function! s:BufInitStatusline()
     if &l:statusline == ''
       let &l:statusline='%<%f %h%m%r%='
       if &ruler
-        let &l:statusline .= '%-16( %l,%c-%v %)%P'
+        let &l:statusline .= '%-14.(%l,%c%V%) %P'
       endif
     endif
     let &l:statusline = s:InjectIntoStatusline(&l:statusline)
@@ -4506,13 +4525,17 @@ function! RailsBufInit(path)
   if firsttime
     call s:BufInitStatusline()
   endif
-  if expand("%:e") == "log"
-    setlocal modifiable filetype=railslog
-    silent! %s/\%(\e\[[0-9;]*m\|\r$\)//g
-    setlocal readonly nomodifiable noswapfile autoread foldmethod=syntax
+  if expand('%:e') == 'log'
     nnoremap <buffer> <silent> R :checktime<CR>
     nnoremap <buffer> <silent> G :checktime<Bar>$<CR>
     nnoremap <buffer> <silent> q :bwipe<CR>
+    setlocal modifiable filetype=railslog noswapfile autoread foldmethod=syntax
+    if exists('+concealcursor')
+      setlocal concealcursor=nc conceallevel=2
+    else
+      silent %s/\%(\e\[[0-9;]*m\|\r$\)//ge
+    endif
+    setlocal readonly nomodifiable
     $
   endif
   call s:BufSettings()
