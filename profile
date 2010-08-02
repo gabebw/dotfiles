@@ -1,2 +1,1 @@
-echo "sourcing profile"
-#source ~/.bashrc
+source ~/.bashrc
