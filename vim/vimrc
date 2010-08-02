@@ -103,6 +103,8 @@ set viewdir=~/.vim/views
 autocmd BufWinLeave ?* mkview
 autocmd BufWinEnter ?* silent loadview
 
+autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+
 map :Nohl :nohlsearch
 "map q :set hlsearch!<Return>
 " create a fold by matching brackets.
