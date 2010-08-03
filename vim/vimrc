@@ -145,9 +145,6 @@ map :Nohl :nohlsearch
 map Q q
 
 inoremap kj <Esc>
-inoremap <Caps> <Esc>
-" Try to retrain my muscle memory and stay on the home row
-inoremap <Esc> <NOP>
 
 " When you call Rpreview <x>, use this command to open localhost:3000/<x>
 :command -bar -nargs=1 OpenURL :!open <args>
