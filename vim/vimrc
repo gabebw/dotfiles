@@ -1,6 +1,5 @@
 " Good .vimrc files
 " http://people.mandriva.com/~rgarciasuarez/dotfiles/vimrc
-
 set nocompatible
 
 filetype on
@@ -118,3 +117,5 @@ map Q q
 " on opening the file, clear search-highlighting
 autocmd BufReadCmd :set nohlsearch
 autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
+
+autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
