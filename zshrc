@@ -118,16 +118,6 @@ FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
 # "zstyle -d" to delete all defs
 #### END INFO BLOCK
 zstyle ':vcs_info:*' enable git # disables all other VCSes
-#zstyle ':vcs_info:*' check-for-changes true
-
-# display ¹ if there are unstaged changes
-#zstyle ':vcs_info:*:prompt:*' unstagedstr '¹'
-# display ² if there are staged changes
-#zstyle ':vcs_info:*:prompt:*' stagedstr '²'
-
-#zstyle ':vcs_info:*' actionformats \
-#'%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-#zstyle ':vcs_info:*' actionformats "${FMT_BRANCH}//" "aaa"
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
 
@@ -160,17 +150,14 @@ alias macvim=mvim
 
 #### Others ####
 qq util
-# pulls in rails
-qq ruby
+qq ruby # pulls in rails
 #qq html
 # Sets PATH with leading Python 2.6, so do it after other PATH stuff
 #qq python
 #qq ragel
-# mdfind has today, red, blue, etc
-qq mdfind
+qq mdfind # has today(), red(), blue(), etc
 qq java
-# includes completion if using bash
-qq git
+qq git # includes completion if using bash
 qq jbs
 qq android
 PATH=$PATH:/Users/gabe/bin/nodejs/bin
