@@ -1,0 +1,14 @@
+### SSH
+alias msh="ssh gbw@conch.unet.brandeis.edu" #:/usr/users/gbw/WWW/"
+# "my scp" => "mcp"
+function mcp {
+    from=$1
+    # $to is a path to a dir or file under WWW.
+    # Use ":" instead of "/" when passing in $2 to allow passing in a dir as
+    # a string.
+    to=${2//:/\/} # '' if no second argument
+    scp "$from" gbw@conch.unet.brandeis.edu:/usr/users/gbw/WWW/"$to"
+}
+
+# CS ssh stuff
+alias ssh-cs="ssh gbw@themis.cs.brandeis.edu" #:/usr/users/gbw/WWW/"

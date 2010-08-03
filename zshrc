@@ -144,9 +144,6 @@ export EDITOR=vim
 alias j=$EDITOR
 alias macvim=mvim
 
-### SSH
-#alias msh="ssh gbw@conch.unet.brandeis.edu" #:/usr/users/gbw/WWW/"
-#alias ssh-cs="ssh gbw@themis.cs.brandeis.edu" #:/usr/users/gbw/WWW/"
 
 #### Others ####
 qq util

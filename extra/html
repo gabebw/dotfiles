@@ -1,4 +1,5 @@
 # HTML stuff for bash
+qq ssh # for mcp()
 
 ##### HTML STUFF ####
 ## /Applications/Firefox.app/Contents/MacOS/res/html.css
@@ -25,19 +26,10 @@ function min {
     done
 }
 
-# my scp
-function mcp {
-    from=$1
-    # $to is a path to a dir or file under WWW, with ":" instead of "/"
-    # so I can pass in a dir as a string
-    to=${2//:/\/} # '' if no second argument
-    scp "$from" gbw@conch.unet.brandeis.edu:/usr/users/gbw/WWW/"$to"
-}
-
 # Minify and scp (for javascript)
 function mincp {
     # don't provide "js:" prefix
-    
+
     # dev version (non-minified)
     from_dev="$1"
     to_dev=js:"${from_dev}"
