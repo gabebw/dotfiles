@@ -43,6 +43,7 @@ let &stl=part1.time.part3
 set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
 
 set number " line numbers
+set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
 set nowrap " don't wrap lines
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -87,7 +88,6 @@ set expandtab
 " set tabstop=4
 set softtabstop=2
 set shiftwidth=2
-retab " replace \t with new values of tabstop
 
 " With backup and writebackup on, it overwrites the old backup
 set backup
@@ -98,7 +98,7 @@ set backupdir=~/.vim/backups
 set backupskip=/tmp/*,/private/tmp/*"
 
 " views options
-" set viewdir=~/.vim/views
+set viewdir=~/.vim/views
 " http://github.com/tpope/vim-rails/issues/closed/#issue/25
 " Having these mkview lines make rails.vim not work (lots of "File not in
 " path" errors.
@@ -106,9 +106,40 @@ set backupskip=/tmp/*,/private/tmp/*"
 "autocmd BufWinLeave ?* mkview
 "autocmd BufWinEnter ?* silent loadview
 
+" map autocomplete to Tab
+imap <Tab> <C-N>
+
+" "," is the <Leader> character
+let mapleader=","
+
+" Rails.vim
+" Leader shortcuts for Rails commands
+" from http://github.com/ryanb/dotfiles/blob/master/vimrc
+map <Leader>m :Rmodel
+map <Leader>c :Rcontroller
+map <Leader>v :Rview
+map <Leader>u :Runittest
+map <Leader>f :Rfunctionaltest
+map <Leader>tm :RTmodel
+map <Leader>tc :RTcontroller
+map <Leader>tv :RTview
+map <Leader>tu :RTunittest
+map <Leader>tf :RTfunctionaltest
+map <Leader>sm :RSmodel
+map <Leader>sc :RScontroller
+map <Leader>sv :RSview
+map <Leader>su :RSunittest
+map <Leader>sf :RSfunctionaltest
+
+" Move lines up and down
+"map <C-J> :m +1 <CR>
+"map <C-K> :m -2 <CR>
+" Window navigation
+nmap <C-J> <C-W><C-J>
+nmap <C-K> <C-W><C-K>
+
 " Mappings
 map :Nohl :nohlsearch
-"map q :set hlsearch!<Return>
 " no ex mode
 map Q q
 
