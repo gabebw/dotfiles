@@ -15,7 +15,7 @@ runtime! ftdetect/*.vim
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " Generate help tags for every bundle
 
-set laststatus=2
+set laststatus=2 " always display status line
 " http://vim.runpaint.org/display/changing-status-line/
 " Status line detail:
 " %F = file name ("~/.vimrc")
