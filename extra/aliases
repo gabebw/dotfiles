@@ -24,7 +24,6 @@ function al { ls -t | head -n ${1:-10}; }
 alias svi="sudo vim"
 function viw { vim `which "$1"`; }
 
-[ $BASH ] && rc=bashrc || rc=zshrc
 function q {
     local snippet=$1
     if [[ -n $snippet ]]; then
@@ -34,7 +33,7 @@ function q {
         echo "~/.dotfiles/extra/$snippet does not exist."
       fi
     else
-      vim ~/.$rc
+      vim ~/.zshrc
     fi
 }
 
@@ -48,7 +47,7 @@ function qq {
         echo "~/.dotfiles/extra/$snippet does not exist."
       fi
     else
-      source ~/.$rc
+      source ~/.zshrc
     fi
 }
 

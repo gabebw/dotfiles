@@ -8,7 +8,6 @@ source "$HOME/.rvm/scripts/rvm"
 # zsh comes with it baked in.
 # For either one, use rvm[tab][tab], rvm use[tab][tab], etc.
 # (No space, so NOT "rvm use [tab]")
-#[ $BASH ] && source $rvm_path/scripts/completion
 
 ruby_version() {
 	# rvm-prompt options:
