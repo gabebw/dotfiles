@@ -157,3 +157,12 @@ autocmd BufReadCmd :set nohlsearch
 autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
 
 autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event
+" handler (happens when dropping a file on gvim).
+" via: http://github.com/jferris/config_files/blob/master/vimrc
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
