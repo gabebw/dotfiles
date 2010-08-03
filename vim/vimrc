@@ -130,6 +130,7 @@ map <Leader>sc :RScontroller
 map <Leader>sv :RSview
 map <Leader>su :RSunittest
 map <Leader>sf :RSfunctionaltest
+command! Rroutes :e config/routes.rb
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
