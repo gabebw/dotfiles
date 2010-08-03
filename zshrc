@@ -17,6 +17,7 @@ qq path
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=1000
+setopt no_list_beep
 setopt appendhistory
 # don't store history line if it's the same as the previous one
 setopt hist_ignore_all_dups
