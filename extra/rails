@@ -23,4 +23,4 @@ alias rcu="bundle exec cucumber" # not :all because that runs @wip too
 # Scenario: blah blah blah
 alias wip="bundle exec cucumber:wip"
 
-alias hartl="cd ~/rails/sample_app"
+alias hartl="cd ~/Projects/rails/sample_app"

@@ -1,16 +1,16 @@
-alias jbs="cd ~/jbs/"
-alias bs="cd ~/jbs/jbs-cosi"
-alias bsc="cd ~/jbs/brandeis-cosci"
+alias jbs="cd ~/Projects/jbs/"
+alias bs="cd ~/Projects/jbs/jbs-cosi"
+alias bsc="cd ~/Projects/jbs/brandeis-cosci"
 
 # Web apps
-hash -d rh="/Users/gabe/jbs/web-apps/roommate_helper"
+hash -d rh="/Users/gabe/Projects/jbs/web-apps/roommate_helper"
 alias rh="cd ~rh"
-#alias tv="cd ~/jbs/web-apps/tv_episodes"
+#alias tv="cd ~/Projects/jbs/web-apps/tv_episodes"
 
 # Mobile apps stuff
-hash -d mobile="/Users/gabe/jbs/mobile-apps/"
+hash -d mobile="/Users/gabe/Projects/jbs/mobile-apps/"
 alias mobile="cd ~mobile"
-PATH="$PATH:/Users/gabe/jbs/mobile-apps/android-sdk-mac_86/tools"
+PATH="$PATH:/Users/gabe/Projects/jbs/mobile-apps/android-sdk-mac_86/tools"
 # Mobile roommate helper
-hash -d rhm="/Users/gabe/jbs/mobile-apps/android-app"
+hash -d rhm="/Users/gabe/Projects/jbs/mobile-apps/android-app"
 alias rhm="cd ~rhm"
