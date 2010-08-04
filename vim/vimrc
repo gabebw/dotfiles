@@ -118,6 +118,7 @@ let mapleader=","
 map <Leader>m :Rmodel
 map <Leader>c :Rcontroller
 map <Leader>v :Rview
+map <Leader>h :Rhelper
 map <Leader>u :Runittest
 map <Leader>f :Rfunctionaltest
 map <Leader>tm :RTmodel
