@@ -1,5 +1,5 @@
 # HTML stuff for bash
-qq ssh # for mcp()
+source_extra ssh # for mcp()
 
 ##### HTML STUFF ####
 ## /Applications/Firefox.app/Contents/MacOS/res/html.css

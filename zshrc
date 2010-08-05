@@ -10,9 +10,9 @@
 # Do not use ~ in the directory, either. Use /Users/gabe/.
 # http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
 
-# aliases file gives us qq alias, so do that first.
+# aliases file gives us source_extra alias, so do that first.
 source ~/.dotfiles/extra/aliases
-qq path
+source_extra path
 
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
@@ -40,7 +40,7 @@ autoload -U compinit && compinit
 # This sets q to be completed with stuff in ~/.dotfiles/extra without
 # showing the ~/.dotfiles/extra part, so you type "q u<TAB>" -> "q util"
 compctl -f -W ~/.dotfiles/extra/ q
-compctl -f -W ~/.dotfiles/extra/ qq
+compctl -f -W ~/.dotfiles/extra/ source_extra
 # complete command names, inc. aliases, shell functions, builtins and reserved
 # words.
 compctl -m viw
@@ -147,17 +147,17 @@ alias macvim=mvim
 
 
 #### Others ####
-qq util
-qq ruby # pulls in rails
-#qq html
+source_extra util
+source_extra ruby # pulls in rails
+#source_extra html
 # Sets PATH with leading Python 2.6, so do it after other PATH stuff
-#qq python
-#qq ragel
-qq mdfind # has today(), red(), blue(), etc
-qq java
-qq git # includes completion if using bash
-qq jbs
-qq android
+#source_extra python
+#source_extra ragel
+source_extra mdfind # has today(), red(), blue(), etc
+source_extra java
+source_extra git # includes completion if using bash
+source_extra jbs
+source_extra android
 PATH=$PATH:/Users/gabe/bin/nodejs/bin
 
 function precmd {

@@ -1,6 +1,6 @@
 # basic aliases (mostly coreutils)
 # * cp/rm/mv
-# * q and qq
+# * q and source_extra
 # * m/mm and p/pp
 
 alias cp="cp -iv"
@@ -37,8 +37,8 @@ function q {
     fi
 }
 
-# qq by itself sources profile; qq with an argument sources ~/.bash-{arg}
-function qq {
+# source_extra by itself sources profile; source_extra with an argument sources ~/.bash-{arg}
+function source_extra {
     local snippet=$1
     if [[ -n $snippet ]]; then
       if [[ -f ~/.dotfiles/extra/$snippet ]]; then
@@ -50,6 +50,7 @@ function qq {
       source ~/.zshrc
     fi
 }
+alias qq=source_extra # for easy typing. ZSH even autocompletes it!
 
 # VLC / Preview stuff
 function m {

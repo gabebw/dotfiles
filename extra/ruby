@@ -1,6 +1,6 @@
 # Ruby stuff for bash
 
-qq rails
+source_extra rails
 # Add binaries for non-sudo installed 1.8 gems
 #PATH="$PATH:/Users/gabe/.gem/ruby/1.8/bin"
 
@@ -25,7 +25,7 @@ alias gs="gem search -rd"
 if [[ -d ~/.rvm ]]
 then
   # Double check that we have a good installation of RVM
-  [[ -s "$HOME/.rvm/scripts/rvm" && -x ~/.rvm/bin/rvm-prompt ]] && qq rvm
+  [[ -s "$HOME/.rvm/scripts/rvm" && -x ~/.rvm/bin/rvm-prompt ]] && source_extra rvm
 else
   # No rvm, fake it.
   echo "WARNING: no rvm, faking it." # warn once, when sourcing this file
