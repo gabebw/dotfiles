@@ -37,9 +37,9 @@ setopt prompt_subst
 ### COMPLETION
 autoload -U compinit && compinit
 # see "man 1 zshcompctl"
-# This sets q to be completed with stuff in ~/.dotfiles/extra without
-# showing the ~/.dotfiles/extra part, so you type "q u<TAB>" -> "q util"
-compctl -f -W ~/.dotfiles/extra/ q
+# This sets edit_extra to be completed with stuff in ~/.dotfiles/extra without
+# showing the ~/.dotfiles/extra part, so you type "edit_extra u<TAB>" -> "edit_extra util"
+compctl -f -W ~/.dotfiles/extra/ edit_extra
 compctl -f -W ~/.dotfiles/extra/ source_extra
 # complete command names, inc. aliases, shell functions, builtins and reserved
 # words.

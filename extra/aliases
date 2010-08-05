@@ -1,6 +1,6 @@
 # basic aliases (mostly coreutils)
 # * cp/rm/mv
-# * q and source_extra
+# * edit_extra and source_extra
 # * m/mm and p/pp
 
 alias cp="cp -iv"
@@ -24,7 +24,7 @@ function al { ls -t | head -n ${1:-10}; }
 alias svi="sudo vim"
 function viw { vim `which "$1"`; }
 
-function q {
+function edit_extra {
     local snippet=$1
     if [[ -n $snippet ]]; then
       if [[ -f ~/.dotfiles/extra/$snippet ]]; then
@@ -50,6 +50,7 @@ function source_extra {
       source ~/.zshrc
     fi
 }
+alias q=edit_extra # for easy typing. ZSH even autocompletes it!
 alias qq=source_extra # for easy typing. ZSH even autocompletes it!
 
 # VLC / Preview stuff
