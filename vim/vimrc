@@ -154,7 +154,22 @@ inoremap kj <Esc>
 autocmd BufReadCmd :set nohlsearch
 autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
 
-autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+" http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
+augroup myfiletypes
+  " Clear old autocmds in group
+  autocmd!
+  " autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+  autocmd FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+  " treat rackup files like ruby
+  au BufRead,BufNewFile *.ru set ft=ruby
+  au BufRead,BufNewFile Gemfile set ft=ruby
+  au BufRead,BufNewFile Gemfile set ft=ruby
+
+  autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+augroup END " END myfiletypes
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event
