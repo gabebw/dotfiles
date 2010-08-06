@@ -23,3 +23,10 @@ begin
 rescue LoadError => err
     $stderr.puts "Couldn't load something for irb: #{err}"
 end
+
+class Object
+  # Get an object's "own methods" - methods that only it (not Object) has
+  def ownm
+    return self.methods - Object.methods
+  end
+end
