@@ -168,7 +168,7 @@ augroup myfiletypes
   " treat rackup files like ruby
   au BufRead,BufNewFile *.ru set ft=ruby
   au BufRead,BufNewFile Gemfile set ft=ruby
-  au BufRead,BufNewFile Gemfile set ft=ruby
+  au BufRead,BufNewFile .autotest set ft=ruby
 
   autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
 augroup END " END myfiletypes
