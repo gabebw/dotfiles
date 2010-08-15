@@ -31,3 +31,5 @@ else
   echo "WARNING: no rvm, faking it." # warn once, when sourcing this file
   ruby_version(){ print "%{$fg[magenta]%}system%{$reset_color%}"; }
 fi
+
+hash -d p2a="/Users/gabe/Projects/pidgin2adium"
