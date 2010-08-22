@@ -3,6 +3,10 @@
 # sourcing this file, so no need to check for that here.
 
 source "$HOME/.rvm/scripts/rvm"
+# Add rvm's ZSH completion script to $fpath so that compinit (autoload -U
+# compinit && compinit) will load the script.
+fpath=($fpath ~/.rvm/scripts/zsh/Completion)
+autoload -U compinit && compinit
 
 # RVM bash completion
 # zsh comes with it baked in.
