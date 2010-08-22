@@ -24,3 +24,4 @@ alias rcu="bundle exec cucumber" # not :all because that runs @wip too
 alias wip="bundle exec cucumber:wip"
 
 alias hartl="cd ~/Projects/rails/sample_app"
+alias bi="bundle install --without production"
