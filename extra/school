@@ -1,0 +1,10 @@
+hash -d brandeis="/Users/gabe/Documents/School/Brandeis"
+hash -d senior1=~brandeis/"Year 4, Semester 1"
+hash -d 21b=~senior1/"COSI 21b - SICP"
+
+# "mscheme" = "my scheme"
+alias mscheme='mit-scheme --load "/Users/gabe/Documents/School/Brandeis/Year 4, Semester 1/COSI 21b - SICP/PS1 - Lunar Lander/2 Lunar Lander/main.scm"' $*
+
+# mit-scheme
+PATH=$PATH:/Applications/mit-scheme.app/Contents/Resources/
+alias scheme=mit-scheme
