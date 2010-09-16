@@ -171,6 +171,7 @@ augroup myfiletypes
   au BufRead,BufNewFile .autotest set ft=ruby
 
   autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+  autocmd BufRead /usr/share/file/magic/* set syntax=magic
 augroup END " END myfiletypes
 
 " When editing a file, always jump to the last known cursor position.
