@@ -4,6 +4,7 @@
 # Okay, useful stuff:
 # fc: opens an editor (default vi) to edit the last command
 # r: redoes last command with optional changes, e.g.
+# cal/ncal: gives you an ASCII calendar
 # echo foo  # => "foo"
 # r foo=bar # => "bar"
 # hashing: hash -d HASH=directory, then "cd ~HASH"
@@ -158,6 +159,7 @@ source_extra java
 source_extra git # includes completion if using bash
 source_extra jbs
 source_extra android
+source_extra school
 PATH=$PATH:/Users/gabe/bin/nodejs/bin
 
 function precmd {
