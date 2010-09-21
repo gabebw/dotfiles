@@ -3,7 +3,7 @@
 # sourcing this file, so no need to check for that here.
 
 source "$HOME/.rvm/scripts/rvm"
-# Add rvm's ZSH completion script to $fpath so that compinit (autoload -U
+# Add rvm ZSH completion script to $fpath so that compinit (autoload -U
 # compinit && compinit) will load the script.
 fpath=($fpath ~/.rvm/scripts/zsh/Completion)
 autoload -U compinit && compinit
@@ -20,10 +20,10 @@ ruby_version() {
 	# g => gemset ("@rails3")
 	# s => print "system" if using system intepreter (otherwise blank, for
 	# 	   some reason)
-	version=$(~/.rvm/bin/rvm-prompt i v g s)
-	# If it's standard MRI, then don't display interpreter.
-	# If it's "ree-1.8.7", then it'll show the "ree-"
-	version=${version/ruby-/}
+	# Use cut so that "ruby-1.9.2" -> "1.9.2" and
+        # "jruby-jruby" -> "jruby"
+	# i.e. if it's standard MRI, then don't display interpreter.
+	version=$(~/.rvm/bin/rvm-prompt i v g s | cut -d'-' -f2)
 	# If using global gemset, show nothing
 	version=${version/@global/}
 
