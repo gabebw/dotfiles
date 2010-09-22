@@ -1,10 +1,12 @@
 " Good .vimrc files
 " http://people.mandriva.com/~rgarciasuarez/dotfiles/vimrc
+" To see value of a variable inside vim, do (e.g.) "echo version"
 set nocompatible
 
 " version 703 = Vim 7.3
-if v:version >= 703
-  set relativenumber
+if version >= 703
+  set relativenumber " line number are relative to current line
+  set undofile " Create FILE.un~ files for persistent undo
 endif
 
 " Turn on syntax highlighting when we have colors or gui is running
