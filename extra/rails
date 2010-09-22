@@ -2,11 +2,11 @@ alias ss="rails server"
 alias sc="rails console"
 
 # Use test environment
-alias sst="rails server -e test"
+alias sst="ss -e test"
 alias rt="RAILS_ENV=test rake"
 
 # Use production environment
-alias ssp="rails server -e production"
+alias ssp="ss -e production"
 alias rp="RAILS_ENV=production rake"
 
 # tests
@@ -16,7 +16,7 @@ alias rtc="rake test:recent"
 alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
-alias rcu="bundle exec cucumber" # not :all because that runs @wip too
+alias cuc="bundle exec cucumber" # not :all because that runs @wip too
 # Only run scenarios tagged with @wip
 # Tag a scenario with "@wip" above it like
 # @wip
