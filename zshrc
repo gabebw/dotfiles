@@ -11,10 +11,16 @@
 # Do not use ~ in the directory, either. Use /Users/gabe/.
 # http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
 
+########################################
+#  INIT (everything depends on these)  #
+########################################
 # aliases file gives us source_extra alias, so do that first.
 source ~/.dotfiles/extra/aliases
 source_extra path
 
+#################
+#  ZSH options  #
+#################
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=1000
@@ -35,7 +41,9 @@ unsetopt correctall
 # allow commands in prompt
 setopt prompt_subst
 
-### COMPLETION
+################
+#  COMPLETION  #
+################
 autoload -U compinit && compinit
 # see "man 1 zshcompctl"
 # This sets edit_extra to be completed with stuff in ~/.dotfiles/extra without
@@ -46,11 +54,18 @@ compctl -f -W ~/.dotfiles/extra/ source_extra
 # words.
 compctl -m viw
 
-### COLORS
+############
+#  COLORS  #
+############
 # allows e.g. $fg[blue] and $bg[green]
 autoload colors && colors
+## colorful listings
+zmodload -i zsh/complist
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-### KEYBOARD
+##############
+#  KEYBOARD  #
+##############
 autoload zkbd
 [[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
 source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
@@ -58,11 +73,9 @@ source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
-## colorful listings
-zmodload -i zsh/complist
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-### GIT (branch, vcs)
+#######################
+#  GIT (branch, vcs)  #
+#######################
 # I have only a faint idea of what this does: it is cobbled together from the web
 # this is helpful: http://kriener.org/articles/2009/06/04/zsh-prompt-magic
 ## set formats:
@@ -123,33 +136,18 @@ zstyle ':vcs_info:*' enable git # disables all other VCSes
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
 
-# via http://everything2.com/e2node/Good%2520%2525GREETING_TIME%252C%2520%2525FULL_NAME
-HOUR=`/bin/date +%H`
-USER=`whoami`
-if [ $HOUR -lt 5 ] ; then
-	# midnight - 4:59am
-	GREETING_TIME="night"
-elif [ $HOUR -lt 12 ] ; then
-	# 5 am - 11:59am
-	GREETING_TIME="morning"
-elif [ $HOUR -lt 18 ] ; then
-	# noon - 5:59pm
-	GREETING_TIME="afternoon"
-else
-	# 6pm - 11:59pm
-	GREETING_TIME="evening"
-fi
-echo "Good $GREETING_TIME, $USER. Your wish is my command."
-
-### vim/editor things
+############
+#  EDITOR  #
+############
 alias macvim=mvim
 export EDITOR=macvim
 alias j=$EDITOR
 alias vi=macvim
 alias vim=macvim
 
-
-#### Others ####
+############
+#  EXTRAS  #
+############
 source_extra util
 source_extra ruby # pulls in rails
 #source_extra html
@@ -166,6 +164,24 @@ source_extra school
 function precmd {
   vcs_info 'prompt'
 }
+
+# via http://everything2.com/e2node/Good%2520%2525GREETING_TIME%252C%2520%2525FULL_NAME
+HOUR=`/bin/date +%H`
+USER=`whoami`
+if [ $HOUR -lt 5 ] ; then
+  # midnight - 4:59am
+  GREETING_TIME="night"
+elif [ $HOUR -lt 12 ] ; then
+  # 5 am - 11:59am
+  GREETING_TIME="morning"
+elif [ $HOUR -lt 18 ] ; then
+  # noon - 5:59pm
+  GREETING_TIME="afternoon"
+else
+  # 6pm - 11:59pm
+  GREETING_TIME="evening"
+fi
+echo "Good $GREETING_TIME, $USER. Your wish is my command."
 
 # MUST wrap $fg in %{...%} or it creates weird errors with commands >1 line
 # Use %f to reset color and use terminal default colors (set in Terminal prefs)
