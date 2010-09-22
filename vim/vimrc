@@ -2,7 +2,8 @@
 " http://people.mandriva.com/~rgarciasuarez/dotfiles/vimrc
 set nocompatible
 
-if version >= 730
+" version 703 = Vim 7.3
+if v:version >= 703
   set relativenumber
 endif
 
