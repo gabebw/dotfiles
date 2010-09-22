@@ -63,11 +63,11 @@ endif
 "set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
 set gfn=Menlo\ 12 " Use the Menlo font
 
-set number " line numbers
 if version >= 703 " 703 = Vim 7.3
-  " Must set relativenumber after setting number!
-  set relativenumber " line number are relative to current line
+  set relativenumber " line numbers are relative to current line
   set undofile " Create FILE.un~ files for persistent undo
+else
+  set number " non-relative line numbers
 endif
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
