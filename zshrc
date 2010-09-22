@@ -142,9 +142,11 @@ fi
 echo "Good $GREETING_TIME, $USER. Your wish is my command."
 
 ### vim/editor things
-export EDITOR=vim
-alias j=$EDITOR
 alias macvim=mvim
+export EDITOR=macvim
+alias j=$EDITOR
+alias vi=macvim
+alias vim=macvim
 
 
 #### Others ####
