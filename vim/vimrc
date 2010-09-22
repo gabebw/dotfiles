@@ -26,9 +26,6 @@ endif
 " Status line detail:
 " %F = file name ("~/.vimrc")
 " %t = file BASENAME (".vimrc")
-" %m = display "[+]" if file has been modified
-" %r = display "[RO]" if file is read-only
-" %y = file content type, e.g. "[ruby]" - includes brackets
 " %{&ff} = file format (unix/dos)
 " strftime.... = time
 "   (See: http://vim.wikia.com/wiki/Insert_current_date_or_time)
@@ -48,7 +45,13 @@ set statusline+=%2*buf:\ %-3.3n%0* " buffer number
 " %f = Path to the file in the buffer, as typed or relative to current
 " directory. %t = file basename
 set statusline+=%f
-set statusline+=%h%m%r%h%y " flags
+" FLAGS
+" %m = display "[+]" if file has been modified
+" %r = display "[RO]" if file is read-only
+" %h = help buffer flag, "[help]"
+" %w = [Preview] if in preview window
+" %y = file content type, e.g. "[ruby]" - includes brackets
+set statusline+=%m%r%h%w%y " flags
 set statusline+=\  " add a space
 set statusline+=lin\:%l/%L\ col\:%c " line and column
 set statusline+=%= " right align
