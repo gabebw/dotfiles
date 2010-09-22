@@ -162,7 +162,6 @@ source_extra git # includes completion if using bash
 source_extra jbs
 source_extra android
 source_extra school
-PATH=$PATH:/Users/gabe/bin/nodejs/bin
 
 function precmd {
   vcs_info 'prompt'
