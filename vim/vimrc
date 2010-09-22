@@ -10,7 +10,7 @@ if version >= 703
 endif
 
 " Turn on syntax highlighting when we have colors or gui is running
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
   syntax on
 endif
 
