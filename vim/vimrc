@@ -11,9 +11,6 @@ endif
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
-" FINALLY! Don't need to reload to detect syntax of a file with a valid
-" extension
-runtime! ftdetect/*.vim
 
 " Wow, this cleaned up my ~/.vim like you would not believe.
 " http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
@@ -180,6 +177,9 @@ set completeopt=longest
 if has("autocmd")
   " Turn on filetype detection, filetype plugins, and per-filetype indenting
   filetype plugin indent on
+  " FINALLY! Don't need to reload to detect syntax of a file with a valid
+  " extension
+  runtime! ftdetect/*.vim
   " on opening the file, clear search-highlighting
   autocmd BufReadCmd :set nohlsearch
   autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
