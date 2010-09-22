@@ -2,10 +2,14 @@
 " http://people.mandriva.com/~rgarciasuarez/dotfiles/vimrc
 set nocompatible
 
-filetype on
-filetype plugin on
-filetype indent on
-syntax on
+if version >= 730
+  set relativenumber
+endif
+
+" Turn on syntax highlighting when we have colors or gui is running
+if &t_Co > 2 || has("gui_running")
+  syntax on
+endif
 " FINALLY! Don't need to reload to detect syntax of a file with a valid
 " extension
 runtime! ftdetect/*.vim
@@ -39,8 +43,15 @@ let part3="%= lin:%l/%L col:%c"
 " Using "let &stl" instead of "set statusline" lets us use a string.
 let &stl=part1.time.part3
 
-"colorscheme railscasts
-set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
+if has("gui_running")
+  colorscheme railscasts
+  "colorscheme mustang
+else
+  "colorscheme molokai
+endif
+
+"set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
+set gfn=Menlo\ 12 " Use the Menlo font
 
 set number " line numbers
 set numberwidth=3 " minimum
@@ -152,33 +163,50 @@ inoremap kj <Esc>
 " When you call Rpreview <x>, use this command to open localhost:3000/<x>
 :command -bar -nargs=1 OpenURL :!open <args>
 
-" on opening the file, clear search-highlighting
-autocmd BufReadCmd :set nohlsearch
-autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
+" Completion {{{
+set wildmenu
+" list:longest    - When > 1 match, list all matches and
+"                   complete till longest common string.
+" full            - enables you to tab through the remaining completions
+set wildmode=list:longest,full
+set wildignore+=*.pyc,*.zip,*.gz,*.bz,*.tar,*.jpg,*.png,*.gif,*.avi,*.wmv,*.ogg,*.mp3,*.mov
+" longest: only tab-completes up to the common elements, if any: " allows
+"          you to hit tab, type to reduce options, hit tab to complete.
+set completeopt=longest
+" end completion }}}
 
-" http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
-augroup myfiletypes
-  " Clear old autocmds in group
-  autocmd!
-  " autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
-  autocmd FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-  " treat rackup files like ruby
-  au BufRead,BufNewFile *.ru set ft=ruby
-  au BufRead,BufNewFile Gemfile set ft=ruby
-  au BufRead,BufNewFile .autotest set ft=ruby
+" Auto commands {{{
+if has("autocmd")
+  " Turn on filetype detection, filetype plugins, and per-filetype indenting
+  filetype plugin indent on
+  " on opening the file, clear search-highlighting
+  autocmd BufReadCmd :set nohlsearch
+  autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
 
-  autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
-  autocmd BufRead /usr/share/file/magic/* set syntax=magic
-augroup END " END myfiletypes
+  " http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
+  augroup myfiletypes
+    " Clear old autocmds in group
+    autocmd!
+    " autoindent with two spaces, always expand tabs
+    autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+    autocmd FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
+    autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    " treat rackup files like ruby
+    au BufRead,BufNewFile *.ru set ft=ruby
+    au BufRead,BufNewFile Gemfile set ft=ruby
+    au BufRead,BufNewFile .autotest set ft=ruby
 
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event
-" handler (happens when dropping a file on gvim).
-" via: http://github.com/jferris/config_files/blob/master/vimrc
-autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+    autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
+    autocmd BufRead /usr/share/file/magic/* set syntax=magic
+  augroup END " END myfiletypes
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event
+  " handler (happens when dropping a file on gvim).
+  " via: http://github.com/jferris/config_files/blob/master/vimrc
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+endif " Auto commands }}}
