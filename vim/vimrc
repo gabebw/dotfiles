@@ -3,11 +3,6 @@
 " To see value of a variable inside vim, do (e.g.) "echo version"
 set nocompatible
 
-" version 703 = Vim 7.3
-if version >= 703
-  set relativenumber " line number are relative to current line
-  set undofile " Create FILE.un~ files for persistent undo
-endif
 
 " Turn on syntax highlighting when we have colors or gui is running
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
@@ -69,6 +64,11 @@ endif
 set gfn=Menlo\ 12 " Use the Menlo font
 
 set number " line numbers
+if version >= 703 " 703 = Vim 7.3
+  " Must set relativenumber after setting number!
+  set relativenumber " line number are relative to current line
+  set undofile " Create FILE.un~ files for persistent undo
+endif
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
 set nowrap " don't wrap lines
@@ -237,3 +237,4 @@ if has("autocmd")
         \   exe "normal g`\"" |
         \ endif
 endif " Auto commands }}}
+
