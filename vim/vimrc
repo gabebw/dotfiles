@@ -12,10 +12,12 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-" Wow, this cleaned up my ~/.vim like you would not believe.
-" http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags() " Generate help tags for every bundle
+if exists("*pathogen#runtime_append_all_bundles")
+  " Wow, this cleaned up my ~/.vim like you would not believe.
+  " http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
+  call pathogen#runtime_append_all_bundles()
+  call pathogen#helptags() " Generate help tags for every bundle
+endif
 
 set laststatus=2 " always display status line
 " http://vim.runpaint.org/display/changing-status-line/
