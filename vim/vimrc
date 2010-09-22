@@ -19,14 +19,14 @@ if exists("*pathogen#runtime_append_all_bundles")
   call pathogen#helptags() " Generate help tags for every bundle
 endif
 
-set laststatus=2 " always display status line
 " http://vim.runpaint.org/display/changing-status-line/
+" http://vimdoc.sourceforge.net/htmldoc/options.html#'statusline'
 " Status line detail:
 " %F = file name ("~/.vimrc")
 " %t = file BASENAME (".vimrc")
 " %m = display "[+]" if file has been modified
 " %r = display "[RO]" if file is read-only
-" %y = file content type, e.g. "[ruby]"
+" %y = file content type, e.g. "[ruby]" - includes brackets
 " %{&ff} = file format (unix/dos)
 " strftime.... = time
 "   (See: http://vim.wikia.com/wiki/Insert_current_date_or_time)
@@ -36,12 +36,22 @@ set laststatus=2 " always display status line
 " %L = total lines
 " %c = current column
 " %P = ??? something with percentage ???
-let part1="%{fugitive#statusline()}%t%h%m%r%h%w"
-" time is like "07/29/10 07:36:44"
-let time=" %{strftime(\"%m/%d/%y %T\",getftime(expand(\"%:p\")))}"
-let part3="%= lin:%l/%L col:%c"
-" Using "let &stl" instead of "set statusline" lets us use a string.
-let &stl=part1.time.part3
+set laststatus=2 " always display status line
+" clear statusline
+set statusline=
+if exists("*fugitive#statusline")
+  set statusline+=%{fugitive#statusline()}
+endif
+set statusline+=%2*buf:\ %-3.3n%0* " buffer number
+" %f = Path to the file in the buffer, as typed or relative to current
+" directory. %t = file basename
+set statusline+=%f
+set statusline+=%h%m%r%h%y " flags
+set statusline+=\  " add a space
+set statusline+=lin\:%l/%L\ col\:%c " line and column
+set statusline+=%= " right align
+" last modified time, like "07/29/10 07:36:44"
+set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
 
 if has("gui_running")
   colorscheme railscasts
