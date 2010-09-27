@@ -14,18 +14,16 @@ autoload -U compinit && compinit
 # (No space, so NOT "rvm use [tab]")
 
 ruby_version() {
-	# rvm-prompt options:
-	# i => interpreter ("ree", "ruby", "jruby")
-	# v => version ("1.8.7")
-	# g => gemset ("@rails3")
-	# s => print "system" if using system intepreter (otherwise blank, for
-	# 	   some reason)
-	# Use cut so that "ruby-1.9.2" -> "1.9.2" and
-        # "jruby-jruby" -> "jruby"
-	# i.e. if it's standard MRI, then don't display interpreter.
-	version=$(~/.rvm/bin/rvm-prompt i v g s | cut -d'-' -f2)
-	# If using global gemset, show nothing
-	version=${version/@global/}
+  # rvm-prompt options:
+  # i => interpreter ("ree", "ruby", "macruby")
+  # v => version ("1.8.7", "0.6")
+  # i + v => "ree-1.8.7" or "macruby-0.6"
+  # g => gemset ("@rails3")
+  # s => print "system" if using system intepreter (otherwise blank, for
+  # 	   some reason)
+  version=$(~/.rvm/bin/rvm-prompt i v g s) # with gemset
+  # If using global gemset, show nothing
+  version=${version/@global/}
 
-	print "%{$fg[magenta]%}${version}%{$reset_color%}"
+  print "%{$fg[magenta]%}${version}%{$reset_color%}"
 }
