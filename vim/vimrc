@@ -85,7 +85,7 @@ set modelines=2 " inspect top/bottom 2 lines for modeline
 set scrolloff=3 " When scrolling, show 3 lines of context
 
 set fileencodings=utf-8,iso-8859-1
-set ff=unix
+set fileformats=unix,mac,dos
 set textwidth=76 " Numbers on the side take off 4 columns, 80-4 = 76
 set showbreak="@" " This is prepended to wrapped lines
 " tabs are trail, end of lines are $
@@ -176,7 +176,7 @@ map Q q
 inoremap kj <Esc>
 
 " When you call Rpreview <x>, use this command to open localhost:3000/<x>
-:command -bar -nargs=1 OpenURL :!open <args>
+command -bar -nargs=1 OpenURL :!open <args>
 
 " Completion {{{
 " "set wildmenu" enables a menu at the bottom of the vim/gvim window.
