@@ -5,6 +5,10 @@ autoload zkbd
 [[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
 source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 
+# Set some defaults
+[[ -e "${key[Home]}" ]] && $key[Home]='^[[H'
+[[ -e "${key[End]}" ]] && $key[End]='^[[F'
+
 # Via http://dev.codemac.net/?p=config.git;a=blob_plain;f=zsh/env;h=350939a5c6b890e91a0a3bfec6e7c96c21fd8d5b
 # How about that "#{key[Home]}", huh? I love well-named variables.
 # setup key accordingly
