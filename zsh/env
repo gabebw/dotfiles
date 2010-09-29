@@ -7,9 +7,10 @@ zkbd_file=${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 source $zkbd_file
 unset zkbd_file # don't litter
 
-# Set some defaults
-[[ -e "${key[Home]}" ]] && $key[Home]='^[[H'
-[[ -e "${key[End]}" ]] && $key[End]='^[[F'
+# Set some defaults. Use -z, not -e, because we're checking that it's set to
+# an empty string.
+[[ -z "${key[Home]}" ]] && key[Home]='^[[H'
+[[ -z "${key[End]}" ]] && key[End]='^[[F'
 
 # Via http://dev.codemac.net/?p=config.git;a=blob_plain;f=zsh/env;h=350939a5c6b890e91a0a3bfec6e7c96c21fd8d5b
 # How about that "#{key[Home]}", huh? I love well-named variables.
