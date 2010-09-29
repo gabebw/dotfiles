@@ -15,7 +15,7 @@
 #  INIT (everything depends on these)  #
 ########################################
 # aliases file gives us source_extra alias, so do that first.
-source ~/.dotfiles/zsh/aliases
+source ~/.dotfiles/zsh/alias
 source ~/.dotfiles/zsh/path
 
 #################
