@@ -2,8 +2,10 @@
 #  KEYBOARD  #
 ##############
 autoload zkbd
-[[ ! -f ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE ]] && zkbd
-source ${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
+zkbd_file=${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
+[[ ! -f "$zkbd_file" ]] && zkbd
+source $zkbd_file
+unset zkbd_file # don't litter
 
 # Set some defaults
 [[ -e "${key[Home]}" ]] && $key[Home]='^[[H'
