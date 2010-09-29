@@ -1,0 +1,22 @@
+#################
+#  ZSH options  #
+#################
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=1000
+setopt no_list_beep
+setopt appendhistory
+# don't store history line if it's the same as the previous one
+setopt hist_ignore_all_dups
+# Removes meaningless whitespace
+# so "echo 'asdf 1234'    " -> "echo 'asdf 1234'"
+setopt hist_reduce_blanks
+# autocd: simply type name of directory and you cd to it
+setopt autocd
+setopt extendedglob
+setopt cdablevars
+# correct: correct commands
+# correctall: correct commmands AND arguments
+unsetopt correctall
+# allow commands in prompt
+setopt prompt_subst

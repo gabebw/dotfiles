@@ -1,0 +1,8 @@
+############
+#  EDITOR  #
+############
+alias macvim=mvim
+export EDITOR=macvim
+alias j=$EDITOR
+alias vi=macvim
+alias vim=macvim

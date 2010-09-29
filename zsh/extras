@@ -1,0 +1,15 @@
+############
+#  EXTRAS  #
+############
+source_extra util
+source_extra ruby # pulls in rails
+#source_extra html
+# Sets PATH with leading Python 2.6, so do it after other PATH stuff
+#source_extra python
+#source_extra ragel
+source_extra mdfind # has today(), red(), blue(), etc
+source_extra java
+source_extra git # includes completion if using bash
+source_extra jbs
+source_extra android
+source_extra school
