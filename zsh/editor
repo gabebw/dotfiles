@@ -4,9 +4,10 @@
 # don't set it to macvim, zsh has troubles with double-aliases
 export EDITOR=mvim
 alias j=$EDITOR
-alias vi=mvim
-alias vim=mvim
-alias macvim=mvim
+# -O = if given multiple files, open in 1 window/file
+alias vim="mvim -O"
+alias vi="mvim -O"
+alias macvim="mvim -O"
 
 alias svi="sudo vim"
 
