@@ -1,0 +1,7 @@
+# NOTE: This is the global gitignore, not the gitignore for the dotfiles
+# repository!
+
+# Vim swap files
+*.swp
+# Vim persistent undo files
+*.un~
