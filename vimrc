@@ -138,6 +138,13 @@ set viewdir=~/.vim/views
 " "," is the <Leader> character
 let mapleader=","
 
+" Change the current working directory to the directory that the current file you are editing is in.
+map <Leader>cd :cd %:p:h <CR>
+" Opens a file with the current working directory already filled in so you have to specify only the filename.
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+" Remove trailing whitespace before saving
+map <Leader>w :%s/\s\+$//e<CR>
+
 " Rails.vim
 " Leader shortcuts for Rails commands
 " from http://github.com/ryanb/dotfiles/blob/master/vimrc
@@ -208,7 +215,6 @@ if has("autocmd")
   runtime! ftdetect/*.vim
   " on opening the file, clear search-highlighting
   autocmd BufReadCmd :set nohlsearch
-  autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace before saving
 
   " http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
   augroup myfiletypes
