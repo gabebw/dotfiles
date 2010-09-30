@@ -1,8 +1,9 @@
 ############
 #  EDITOR  #
 ############
-alias macvim=mvim
-export EDITOR=macvim
+# don't set it to macvim, zsh has troubles with double-aliases
+export EDITOR=mvim
 alias j=$EDITOR
-alias vi=macvim
-alias vim=macvim
+alias vi=mvim
+alias vim=mvim
+alias macvim=mvim
