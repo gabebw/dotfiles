@@ -7,3 +7,14 @@ alias j=$EDITOR
 alias vi=mvim
 alias vim=mvim
 alias macvim=mvim
+
+alias svi="sudo vim"
+
+function viw {
+  local location=$(which "$1")
+  if [[ -f "$location" ]]; then
+    $EDITOR "$location"
+  else
+    echo "$location isn't a file."
+  fi
+}

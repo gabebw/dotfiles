@@ -21,15 +21,6 @@ alias diff="colordiff -u"
 alias sed="sed -E"
 
 function al { ls -t | head -n ${1:-10}; }
-alias svi="sudo vim"
-function viw {
-  local location=$(which "$1")
-  if [[ -f "$location" ]]; then
-    vim "$location"
-  else
-    echo "$location isn't a file."
-  fi
-}
 
 # 3 params:
 #  * topdir
