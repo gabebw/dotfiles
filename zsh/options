@@ -13,7 +13,11 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 # autocd: simply type name of directory and you cd to it
 setopt autocd
-setopt extendedglob
+# in order to use #, ~ and ^ for filename generation
+# grep word *~(*.gz|*.bz|*.bz2|*.zip|*.Z) ->
+# -> searches for word not in compressed files
+# don't forget to quote '^', '~' and '#'!
+#setopt extendedglob
 setopt cdablevars
 # correct: correct commands
 # correctall: correct commmands AND arguments

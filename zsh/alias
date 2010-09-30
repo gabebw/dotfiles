@@ -78,6 +78,9 @@ alias qe=edit_extra
 alias qqe=source_extra
 alias qz=edit_extra_zsh
 alias qqz=source_extra_zsh
+# zshrc only
+alias q="$EDITOR ~/.zshrc"
+alias qq="source ~/.zshrc"
 
 # VLC / Preview stuff
 function m {
