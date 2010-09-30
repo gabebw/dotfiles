@@ -83,7 +83,7 @@ function source_extra_zsh {
   perform_under_basedir $basedir "$snippet" source
 }
 # Set aliases for easy typing. ZSH even autocompletes them!
-alias qe=edit_extra 
+alias qe=edit_extra
 alias qqe=source_extra
 alias qz=edit_extra_zsh
 alias qqz=source_extra_zsh
