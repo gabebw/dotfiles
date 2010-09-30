@@ -31,35 +31,62 @@ function viw {
   fi
 }
 
-function edit_extra {
-    local snippet=$1
-    if [[ -n $snippet ]]; then
-      if [[ -f ~/.dotfiles/extra/$snippet ]]; then
-        vim ~/.dotfiles/extra/$snippet
-      else
-        echo "~/.dotfiles/extra/$snippet does not exist."
-      fi
+# 3 params:
+#  * topdir
+#  * basename of file
+#  * command to perform
+# If file is given, performs $command on
+# $topdir/$basename, else performs $command on
+# ~/.zshrc. If file is given but doesn't exist, prints an error message.
+function perform_under_basedir {
+  local topdir=$1
+  local snippet=$2
+  local cmd=$3
+  local fname="$topdir/$snippet"
+  if [[ -n "$snippet" ]]; then
+    if [[ -f "$fname" ]]; then
+      $cmd "$fname"
     else
-      vim ~/.zshrc
+      echo "$fname does not exist."
     fi
+  else
+    $cmd ~/.zshrc
+  fi
+}
+
+function edit_extra {
+  local basedir=~/.dotfiles/extra/
+  local snippet=$1
+  perform_under_basedir $basedir "$snippet" $EDITOR
+}
+
+# Edit ~/.dotfiles/zsh/*
+function edit_extra_zsh {
+  local basedir=~/.dotfiles/zsh/
+  local snippet=$1
+  perform_under_basedir $basedir "$snippet" $EDITOR
 }
 
 # source_extra by itself sources profile,
 # source_extra with an argument sources ~/.dotfiles/extra/{arg}
 function source_extra {
-    local snippet=$1
-    if [[ -n $snippet ]]; then
-      if [[ -f ~/.dotfiles/extra/$snippet ]]; then
-        source ~/.dotfiles/extra/$snippet
-      else
-        echo "~/.dotfiles/extra/$snippet does not exist."
-      fi
-    else
-      source ~/.zshrc
-    fi
+  local basedir=~/.dotfiles/extra/
+  local snippet=$1
+  # You can actually pass a builtin as a parameter. Who knew?
+  perform_under_basedir $basedir "$snippet" source
 }
-alias q=edit_extra # for easy typing. ZSH even autocompletes it!
-alias qq=source_extra # for easy typing. ZSH even autocompletes it!
+
+function source_extra_zsh {
+  local basedir=~/.dotfiles/zsh/
+  local snippet=$1
+  # You can actually pass a builtin as a parameter. Who knew?
+  perform_under_basedir $basedir "$snippet" source
+}
+# Set aliases for easy typing. ZSH even autocompletes them!
+alias qe=edit_extra 
+alias qqe=source_extra
+alias qz=edit_extra_zsh
+alias qqz=source_extra_zsh
 
 # VLC / Preview stuff
 function m {
