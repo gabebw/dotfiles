@@ -11,10 +11,17 @@ then
 fi
 
 source "$HOME/.rvm/scripts/rvm"
-# Add rvm ZSH completion script to $fpath so that compinit (autoload -U
-# compinit && compinit) will load the script.
-fpath+=(~/.rvm/scripts/zsh/Completion) # push onto fpath array
-autoload -U compinit && compinit
+
+rvm_completion_dir=/Users/gabe/.rvm/scripts/zsh/Completion
+# If == 0, then not in $fpath
+if [[ $fpath[(I)$rvm_completion_dir] == 0 ]]
+then
+  # Add rvm ZSH completion script to $fpath so that compinit (autoload -U
+  # compinit && compinit) will load the script.
+  fpath+=(~/.rvm/scripts/zsh/Completion) # push onto fpath array
+  autoload -U compinit && compinit
+fi
+unset rvm_completion_dir # don't litter
 
 # RVM bash completion
 # zsh comes with it baked in.
@@ -29,7 +36,7 @@ ruby_version() {
   # g => gemset ("@rails3")
   # s => print "system" if using system intepreter (otherwise blank, for
   # 	   some reason)
-  version=$(~/.rvm/bin/rvm-prompt i v g s) # with gemset
+  local version=$(~/.rvm/bin/rvm-prompt i v g s) # with gemset
   # If using global gemset, show nothing
   version=${version/@global/}
 
