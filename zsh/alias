@@ -102,5 +102,6 @@ function p() {
 # pst = "p star"; intentionally not quoted so you can put your own stars in
 #pst(){ open -a Preview *$1*; }
 # you can pipe pure "ls" output to "pp"
+# See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
 alias pp="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a Preview"
 alias mm="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a VLC"
