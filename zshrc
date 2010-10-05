@@ -13,27 +13,24 @@
 # http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
 # Hey, "unfunction" is a thing. It's like unset, but for functions.
 
+function progress {
+  echo -n "$1 | "
+}
+
 ZSH_CONFIG_PATH=~/.dotfiles/zsh
-. $ZSH_CONFIG_PATH/env
-echo -n "env | "
-. $ZSH_CONFIG_PATH/editor # set it as early as possible so the vim alias is present
-echo -n "editor | "
-. $ZSH_CONFIG_PATH/alias  # gives {source,edit}_extra
-echo -n "alias | "
-. $ZSH_CONFIG_PATH/path
-echo -n "path | "
-. $ZSH_CONFIG_PATH/options
-echo -n "options | "
-. $ZSH_CONFIG_PATH/completion
-echo -n "completion | "
-. $ZSH_CONFIG_PATH/colors
-echo -n "colors | "
-. $ZSH_CONFIG_PATH/git
-echo -n "git | "
-. $ZSH_CONFIG_PATH/extras # before sourcing prompt
-echo -n "extras | "
-. $ZSH_CONFIG_PATH/prompt
-echo -n "prompt"
+. $ZSH_CONFIG_PATH/env        && progress "env"
+. $ZSH_CONFIG_PATH/colors     && progress "colors"
+# set editor as early as possible so the vim alias is present
+. $ZSH_CONFIG_PATH/editor     && progress "editor"
+# gives {source,edit}_extra
+. $ZSH_CONFIG_PATH/alias      && progress "alias"
+. $ZSH_CONFIG_PATH/path       && progress "path"
+. $ZSH_CONFIG_PATH/options    && progress "options"
+. $ZSH_CONFIG_PATH/completion && progress "completion"
+. $ZSH_CONFIG_PATH/git        && progress "git"
+# do extras before sourcing prompt
+. $ZSH_CONFIG_PATH/extras     && progress "extras"
+. $ZSH_CONFIG_PATH/prompt     && progress "prompt"
 echo # make way for greeting
 . $ZSH_CONFIG_PATH/greeting
 
