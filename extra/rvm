@@ -32,13 +32,10 @@ ruby_version() {
   # rvm-prompt options:
   # i => interpreter ("ree", "ruby", "macruby")
   # v => version ("1.8.7", "0.6")
-  # i + v => "ree-1.8.7" or "macruby-0.6"
+  #   i + v => "ree-1.8.7" or "macruby-0.6"
   # g => gemset ("@rails3")
   # s => print "system" if using system intepreter (otherwise blank, for
   # 	   some reason)
-  local version=$(~/.rvm/bin/rvm-prompt i v g s) # with gemset
-  # If using global gemset, show nothing
-  version=${version/@global/}
-
+  local version=$(~/.rvm/bin/rvm-prompt i v g s)
   print "%{$fg[magenta]%}${version}%{$reset_color%}"
 }
