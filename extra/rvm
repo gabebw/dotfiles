@@ -18,7 +18,7 @@ if [[ $fpath[(I)$rvm_completion_dir] == 0 ]]
 then
   # Add rvm ZSH completion script to $fpath so that compinit (autoload -U
   # compinit && compinit) will load the script.
-  fpath+=(~/.rvm/scripts/zsh/Completion) # push onto fpath array
+  fpath+=($rvm_completion_dir) # push onto fpath array
   autoload -U compinit && compinit
 fi
 unset rvm_completion_dir # don't litter
