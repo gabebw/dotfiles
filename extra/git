@@ -10,24 +10,6 @@ export PATH="$PATH:/Users/gabe/Projects/git-achievements/"
 alias git="git-achievements"
 compdef git-achievements=git
 
-# http://repo.or.cz/w/git.git/blob_plain/HEAD:/contrib/completion/git-completion.bash
-# downloaded 5/11/10
-function git_branch {
-  local git_branch="${vcs_info_msg_0_}$(parse_git_dirty)"
-  # Must use print (not echo) for ZSH colors to work
-  print $git_branch
-}
-
-# Stolen from oh-my-zsh
-parse_git_dirty(){
-  if [[ -n $(git status -s 2> /dev/null) ]]; then
-    echo ' ✗'
-  else
-    # Do nothing when repo is clean
-    #echo '✔'
-  fi
-}
-
 alias gp="git push"
 alias gph="git push && git push heroku"
 alias gd="git diff"

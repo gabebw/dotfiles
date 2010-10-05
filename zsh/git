@@ -60,3 +60,21 @@ FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
 zstyle ':vcs_info:*' enable git # disables all other VCSes
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
+
+# http://repo.or.cz/w/git.git/blob_plain/HEAD:/contrib/completion/git-completion.bash
+# downloaded 5/11/10
+function git_branch {
+  local git_branch="${vcs_info_msg_0_}$(parse_git_dirty)"
+  # Must use print (not echo) for ZSH colors to work
+  print $git_branch
+}
+
+# Stolen from oh-my-zsh
+parse_git_dirty(){
+  if [[ -n $(git status -s 2> /dev/null) ]]; then
+    echo ' ✗'
+  else
+    # Do nothing when repo is clean
+    #echo '✔'
+  fi
+}
