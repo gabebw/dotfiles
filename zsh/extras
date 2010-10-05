@@ -1,10 +1,10 @@
 ############
 #  EXTRAS  #
 ############
-source_extra util
+#source_extra util # unneeded - just dotfile() function
 source_extra ruby
 source_extra rails
-source_extra rvm
+source_extra rvm # takes a while, since it re-runs compinit
 #source_extra html
 # Sets PATH with leading Python 2.6, so do it after other PATH stuff
 #source_extra python
