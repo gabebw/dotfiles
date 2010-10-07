@@ -21,7 +21,7 @@ alias cuc="bundle exec cucumber" # not :all because that runs @wip too
 # Tag a scenario with "@wip" above it like
 # @wip
 # Scenario: blah blah blah
-alias wip="bundle exec cucumber:wip"
+alias wip="bundle exec cucumber --profile wip"
 
 alias hartl="cd ~/Projects/rails/sample_app"
 alias bi="bundle install --without production"
