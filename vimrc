@@ -236,8 +236,8 @@ if has("autocmd")
     au BufRead,BufNewFile Gemfile set ft=ruby
     au BufRead,BufNewFile .autotest set ft=ruby
 
-    autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh
-    autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh
+    autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh ft=zsh
+    autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh ft=zsh
     autocmd BufRead /usr/share/file/magic/* set syntax=magic
   augroup END " END myfiletypes
 
