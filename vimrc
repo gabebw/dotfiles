@@ -210,6 +210,10 @@ set wildignore+=*.pyc,*.zip,*.gz,*.bz,*.tar,*.jpg,*.png,*.gif,*.avi,*.wmv,*.ogg,
 set completeopt=menu,menuone,longest,preview
 " end completion }}}
 
+" Allows % to switch between if/elsif/else/end, open/close XML tags, and
+" more.
+runtime macros/matchit.vim
+
 " Auto commands {{{
 if has("autocmd")
   " Turn on filetype detection, filetype plugins, and per-filetype indenting
