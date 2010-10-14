@@ -147,26 +147,28 @@ map <Leader>w :%s/\s\+$//e<CR>
 " Run scheme
 map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
 
-" Rails.vim
-" Leader shortcuts for Rails commands
-" from http://github.com/ryanb/dotfiles/blob/master/vimrc
-map <Leader>m :Rmodel
-map <Leader>c :Rcontroller
-map <Leader>v :Rview
-map <Leader>h :Rhelper
-map <Leader>u :Runittest
-map <Leader>f :Rfunctionaltest
-map <Leader>tm :RTmodel
-map <Leader>tc :RTcontroller
-map <Leader>tv :RTview
-map <Leader>tu :RTunittest
-map <Leader>tf :RTfunctionaltest
-map <Leader>sm :RSmodel
-map <Leader>sc :RScontroller
-map <Leader>sv :RSview
-map <Leader>su :RSunittest
-map <Leader>sf :RSfunctionaltest
-command! Rroutes :e config/routes.rb
+if exists('g:autoloaded_rails') && exists("b:rails_root")
+  " Rails.vim
+  " Leader shortcuts for Rails commands
+  " from http://github.com/ryanb/dotfiles/blob/master/vimrc
+  map <Leader>m :Rmodel
+  map <Leader>c :Rcontroller
+  map <Leader>v :Rview
+  map <Leader>h :Rhelper
+  map <Leader>u :Runittest
+  map <Leader>f :Rfunctionaltest
+  map <Leader>tm :RTmodel
+  map <Leader>tc :RTcontroller
+  map <Leader>tv :RTview
+  map <Leader>tu :RTunittest
+  map <Leader>tf :RTfunctionaltest
+  map <Leader>sm :RSmodel
+  map <Leader>sc :RScontroller
+  map <Leader>sv :RSview
+  map <Leader>su :RSunittest
+  map <Leader>sf :RSfunctionaltest
+  command! Rroutes :e config/routes.rb
+endif
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
