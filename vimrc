@@ -165,6 +165,8 @@ if exists('g:autoloaded_rails') && exists("b:rails_root")
   map <Leader>su :RSunittest
   map <Leader>sf :RSfunctionaltest
   command! Rroutes :e config/routes.rb
+  " When you call Rpreview <x>, use this command to open localhost:3000/<x>
+  command -bar -nargs=1 OpenURL :!open <args>
 endif
 
 " Move lines up and down
