@@ -144,6 +144,8 @@ map <Leader>cd :cd %:p:h <CR>
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Remove trailing whitespace before saving
 map <Leader>w :%s/\s\+$//e<CR>
+" Run scheme
+map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
 
 " Rails.vim
 " Leader shortcuts for Rails commands
