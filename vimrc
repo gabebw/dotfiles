@@ -218,11 +218,8 @@ runtime macros/matchit.vim
 if has("autocmd")
   " Turn on filetype detection, filetype plugins, and per-filetype indenting
   filetype plugin indent on
-  " FINALLY! Don't need to reload to detect syntax of a file with a valid
-  " extension
-  runtime! ftdetect/*.vim
   " on opening the file, clear search-highlighting
-  autocmd BufReadCmd :set nohlsearch
+  autocmd BufReadCmd set nohlsearch
 
   " http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
   augroup myfiletypes
