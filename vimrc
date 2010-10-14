@@ -91,9 +91,6 @@ set showbreak="@" " This is prepended to wrapped lines
 " tabs are trail, end of lines are $
 set listchars=tab:>-,eol:$
 
-" Use apostrophe for backquote function, since backquote is so much more
-" useful than apostrophe
-nnoremap ` '
 
 " **** TABS ****
 " Note that ~/.vim/after/ftplugin changes some of these settings
@@ -183,11 +180,10 @@ nmap <C-H> <C-W><C-H>
 map :Nohl :nohlsearch
 " no ex mode
 map Q q
-
 inoremap kj <Esc>
-
-" When you call Rpreview <x>, use this command to open localhost:3000/<x>
-command -bar -nargs=1 OpenURL :!open <args>
+" Use apostrophe for backquote function, since backquote is so much more
+" useful than apostrophe
+nnoremap ` '
 
 " Completion {{{
 " "set wildmenu" enables a menu at the bottom of the vim/gvim window.
