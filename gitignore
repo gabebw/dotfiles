@@ -5,3 +5,5 @@
 *.swp
 # Vim persistent undo files
 *.un~
+# Created by _rake autocomplete function
+.rake_tasks
