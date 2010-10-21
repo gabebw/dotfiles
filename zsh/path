@@ -14,7 +14,8 @@ then
     MANPATH=$MANPATH:/opt/local/share/man
 fi
 [[ -d /usr/games ]] && PATH="$PATH:/usr/games"
-
+# Node.js
+[[ -d /Users/gabe/bin/node/bin ]] && PATH="$PATH:/Users/gabe/bin/node/bin"
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
 PATH="$PATH:/Users/gabe/bin"
