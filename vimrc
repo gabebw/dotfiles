@@ -144,7 +144,7 @@ map <Leader>w :%s/\s\+$//e<CR>
 " Run scheme
 map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
 
-if exists('g:autoloaded_rails') && exists("b:rails_root")
+augroup rails_shortcuts
   " Rails.vim
   " Leader shortcuts for Rails commands
   " from http://github.com/ryanb/dotfiles/blob/master/vimrc
@@ -167,7 +167,7 @@ if exists('g:autoloaded_rails') && exists("b:rails_root")
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
   command -bar -nargs=1 OpenURL :!open <args>
-endif
+augroup END
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
