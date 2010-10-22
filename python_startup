@@ -1,4 +1,4 @@
-# vim: set ft=python syntax=python
+# vim: set ft=python syntax=python:
 # Add auto-completion and a stored history file of commands to your Python
 # interactive interpreter. Requires Python 2.0+, readline. Autocomplete is
 # bound to the Esc key by default (you can change it - see readline docs).
@@ -12,10 +12,16 @@ import atexit
 import os
 import readline
 import rlcompleter
+import platform
 
 historyPath = os.path.expanduser("~/.pyhistory")
+
 # use Tab for completion
-readline.parse_and_bind('tab: complete')
+if platform.system() == 'Darwin':
+    # Mac OS X
+    readline.parse_and_bind("bind ^I rl_complete")
+else:
+    readline.parse_and_bind('tab: complete')
 
 def save_history(historyPath=historyPath):
     import readline
@@ -25,4 +31,4 @@ if os.path.exists(historyPath):
     readline.read_history_file(historyPath)
 
 atexit.register(save_history)
-del os, atexit, readline, rlcompleter, save_history, historyPath
+del os, atexit, readline, rlcompleter, save_history, historyPath, platform
