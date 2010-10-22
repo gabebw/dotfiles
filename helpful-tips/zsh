@@ -1,0 +1,11 @@
+Search backward through history: Ctrl-R
+
+Modify the most recent command: r search=replace
+  i.e., $ mkdir my_dir
+        $ r mkdir=cd # this runs "cd my_dir"
+
+Open an editor ($EDITOR) to edit the last command: fc
+
+Print an ASCII calendar: cal or ncal
+
+
