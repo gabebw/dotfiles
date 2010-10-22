@@ -7,3 +7,6 @@
 *.un~
 # Created by _rake autocomplete function
 .rake_tasks
+
+# python byte-compiled files
+*.py[co]
