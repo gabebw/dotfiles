@@ -1,0 +1,2 @@
+.headers on
+.mode column
