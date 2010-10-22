@@ -6,8 +6,7 @@ source_extra ruby
 source_extra rails
 source_extra rvm # takes a while, since it re-runs compinit
 #source_extra html
-# Sets PATH with leading Python 2.6, so do it after other PATH stuff
-#source_extra python
+source_extra python
 #source_extra ragel
 source_extra mdfind # has today(), red(), blue(), etc
 source_extra java
