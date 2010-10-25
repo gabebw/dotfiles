@@ -1,0 +1,7 @@
+# Node.js
+
+MANPATH=$MANPATH:/Users/gabe/bin/node/share/man 
+[[ -d /Users/gabe/bin/node/bin ]] && PATH="$PATH:/Users/gabe/bin/node/bin"
+
+export PATH
+export MANPATH
