@@ -38,7 +38,9 @@ function perform_under_basedir {
     if [[ -f "$fname" ]]; then
       $cmd "$fname"
     else
-      echo "$fname does not exist."
+      echo -n "$fname does not exist. Edit anyway? Y/n:"
+      read response
+      [[ ! $response =~ '[Nn][Oo]' ]] && $cmd "$fname"
     fi
   else
     $cmd ~/.zshrc
