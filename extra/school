@@ -21,3 +21,5 @@ function mscheme(){
   done
   mit-scheme --load $args
 }
+
+hash -d quest=/Users/gabe/Projects/quest-db-engine/quest
