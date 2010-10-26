@@ -24,11 +24,16 @@ else:
     readline.parse_and_bind('tab: complete')
 
 def save_history(historyPath=historyPath):
+    # Re-import readline because del deletes it below
     import readline
     readline.write_history_file(historyPath)
 
 if os.path.exists(historyPath):
-    readline.read_history_file(historyPath)
+    if hasattr(readline, "read_history_file"):
+        try:
+            readline.read_history_file(historyPath)
+        except IOError as ioe:
+            print "ERROR reading {0} (Detail: {1})".format(historyPath, ioe)
 
 atexit.register(save_history)
 del os, atexit, readline, rlcompleter, save_history, historyPath, platform
