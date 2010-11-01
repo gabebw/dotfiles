@@ -1,5 +1,10 @@
 # Homebrew stuff
 
-# Python
-PATH="/usr/local/Cellar/python/2.7/bin:$PATH"
+# `brew doctor` recommendations
+# Consider editing your .bashrc to put:
+#  /usr/local/bin
+#ahead of /usr/bin in your $PATH.
+PATH=/usr/local/bin:$PATH
+# Put /usr/local/sbin in PATH
+PATH=/usr/local/sbin:$PATH
 export PATH
