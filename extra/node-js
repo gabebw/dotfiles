@@ -1,7 +1,14 @@
-# Node.js
+# Node.js, via Homebrew
 
-MANPATH=$MANPATH:/Users/gabe/bin/node/share/man 
-[[ -d /Users/gabe/bin/node/bin ]] && PATH="$PATH:/Users/gabe/bin/node/bin"
+# Add these for NPM, since Node itself is symlinked in /usr/local/*, but npm
+# installs directly to the Cellar
+NODE_BIN=/usr/local/Cellar/node/0.2.4/bin
+NODE_MAN=/usr/local/Cellar/node/0.2.4/share/man
+[[ -d $NODE_BIN ]] && PATH=$PATH:$NODE_BIN
+[[ -d $NODE_MAN ]] && MANPATH=$MANPATH:$NODE_MAN
 
 export PATH
 export MANPATH
+
+# clean up
+unset NODE_BIN NODE_MAN
