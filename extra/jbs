@@ -10,7 +10,6 @@ alias rh="cd ~rh"
 # Mobile apps stuff
 hash -d mobile="/Users/gabe/Projects/jbs/mobile-apps/"
 alias mobile="cd ~mobile"
-PATH="$PATH:/Users/gabe/Projects/jbs/mobile-apps/android-sdk-mac_86/tools"
 # Mobile roommate helper
 hash -d rhm="/Users/gabe/Projects/jbs/mobile-apps/android-app"
 alias rhm="cd ~rhm"
