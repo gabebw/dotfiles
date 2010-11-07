@@ -8,7 +8,14 @@ BREW_PREFIX="$(brew --prefix)"
 PATH="$BREW_PREFIX"/bin:$PATH
 # Put /usr/local/sbin in PATH
 PATH="$BREW_PREFIX"/sbin:$PATH
+
+# If you install Python packages via pip, binaries will be installed under
+# Python's cellar but not automatically linked into the Homebrew prefix.
+# You may want to add Python's bin folder to your PATH as well:
+# /usr/local/Cellar/python/2.7/bin
+BREW_PYTHON_PREFIX="$(brew --prefix python)"
+PATH="$BREW_PYTHON_PREFIX"/bin:$PATH
 export PATH
 
 # Clean up
-unset BREW_PREFIX
+unset BREW_PREFIX BREW_PYTHON_PREFIX
