@@ -1,10 +1,14 @@
 # Homebrew stuff
 
+BREW_PREFIX="$(brew --prefix)"
 # `brew doctor` recommendations
 # Consider editing your .bashrc to put:
 #  /usr/local/bin
 #ahead of /usr/bin in your $PATH.
-PATH=/usr/local/bin:$PATH
+PATH="$BREW_PREFIX"/bin:$PATH
 # Put /usr/local/sbin in PATH
-PATH=/usr/local/sbin:$PATH
+PATH="$BREW_PREFIX"/sbin:$PATH
 export PATH
+
+# Clean up
+unset BREW_PREFIX
