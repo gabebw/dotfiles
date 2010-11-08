@@ -15,3 +15,5 @@ else
   GREETING_TIME="evening"
 fi
 echo "Good $GREETING_TIME, $USER. Your wish is my command."
+# Fortune! Thanks, homebrew!
+[[ -x $(which fortune) ]] && fortune -s
