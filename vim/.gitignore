@@ -1,6 +1,5 @@
-# Specifically un-ignore all files except those below.
-!*
 views
-backups
+# Keep the actual backups folder, but not its contents
+backups/*
 # Ignore bundle doc
 bundle/*/doc
