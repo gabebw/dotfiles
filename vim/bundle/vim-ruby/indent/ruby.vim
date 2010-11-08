@@ -1,7 +1,6 @@
 " Vim indent file
 " Language:		Ruby
 " Maintainer:		Nikolai Weibull <now at bitwi.se>
-" Last Change:		2009 Dec 17
 " URL:			http://vim-ruby.rubyforge.org
 " Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
@@ -34,7 +33,8 @@ set cpo&vim
 " ============
 
 " Regex of syntax group names that are or delimit string or are comments.
-let s:syng_strcom = '\<ruby\%(String\|StringEscape\|ASCIICode' .
+let s:syng_strcom = '\<ruby\%(Regexp\|RegexpDelimiter' .
+      \ '\|String\|StringEscape\|ASCIICode' .
       \ '\|Interpolation\|NoInterpolation\|Comment\|Documentation\)\>'
 
 " Regex of syntax group names that are strings.
@@ -52,45 +52,45 @@ let s:skip_expr =
 " Regex used for words that, at the start of a line, add a level of indent.
 let s:ruby_indent_keywords = '^\s*\zs\<\%(module\|class\|def\|if\|for' .
       \ '\|while\|until\|else\|elsif\|case\|when\|unless\|begin\|ensure' .
-      \ '\|rescue\)\>' .
-      \ '\|\%([*+/,=-]\|<<\|>>\|:\s\)\s*\zs' .
-      \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\)\>'
+      \ '\|rescue\):\@!\>' .
+      \ '\|\%([=,*/%+-]\|<<\|>>\|:\s\)\s*\zs' .
+      \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\):\@!\>'
 
 " Regex used for words that, at the start of a line, remove a level of indent.
 let s:ruby_deindent_keywords =
-      \ '^\s*\zs\<\%(ensure\|else\|rescue\|elsif\|when\|end\)\>'
+      \ '^\s*\zs\<\%(ensure\|else\|rescue\|elsif\|when\|end\):\@!\>'
 
 " Regex that defines the start-match for the 'end' keyword.
 "let s:end_start_regex = '\%(^\|[^.]\)\<\%(module\|class\|def\|if\|for\|while\|until\|case\|unless\|begin\|do\)\>'
 " TODO: the do here should be restricted somewhat (only at end of line)?
 let s:end_start_regex = '^\s*\zs\<\%(module\|class\|def\|if\|for' .
-      \ '\|while\|until\|case\|unless\|begin\)\>' .
-      \ '\|\%([*+/,=-]\|<<\|>>\|:\s\)\s*\zs' .
-      \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\)\>' .
-      \ '\|\<do\>'
+      \ '\|while\|until\|case\|unless\|begin\):\@!\>' .
+      \ '\|\%([=,*/%+-]\|<<\|>>\|:\s\)\s*\zs' .
+      \    '\<\%(if\|for\|while\|until\|case\|unless\|begin\):\@!\>' .
+      \ '\|\<do:\@!\>'
 
 " Regex that defines the middle-match for the 'end' keyword.
-let s:end_middle_regex = '\<\%(ensure\|else\|\%(\%(^\|;\)\s*\)\@<=\<rescue\>\|when\|elsif\)\>'
+let s:end_middle_regex = '\<\%(ensure\|else\|\%(\%(^\|;\)\s*\)\@<=\<rescue:\@!\>\|when\|elsif\):\@!\>'
 
 " Regex that defines the end-match for the 'end' keyword.
-let s:end_end_regex = '\%(^\|[^.:@$]\)\@<=\<end\>'
+let s:end_end_regex = '\%(^\|[^.:@$]\)\@<=\<end:\@!\>'
 
 " Expression used for searchpair() call for finding match for 'end' keyword.
 let s:end_skip_expr = s:skip_expr .
       \ ' || (expand("<cword>") == "do"' .
-      \ ' && getline(".") =~ "^\\s*\\<\\(while\\|until\\|for\\)\\>")'
+      \ ' && getline(".") =~ "^\\s*\\<\\(while\\|until\\|for\\):\\@!\\>")'
 
 " Regex that defines continuation lines, not including (, {, or [.
-let s:continuation_regex = '\%([\\*+/.,:]\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
+let s:continuation_regex = '\%([\\.,:*/%+]\|and\|or\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
 
 " Regex that defines continuation lines.
 " TODO: this needs to deal with if ...: and so on
 let s:continuation_regex2 =
-      \ '\%([\\*+/.,:({[]\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
+      \ '\%([({[\\.,:*/%+]\|and\|or\|\%(<%\)\@<![=-]\|\W[|&?]\|||\|&&\)\s*\%(#.*\)\=$'
 
 " Regex that defines blocks.
 let s:block_regex =
-      \ '\%(\<do\>\|{\)\s*\%(|\%([*@]\=\h\w*,\=\s*\)\%(,\s*[*@]\=\h\w*\)*|\)\=\s*\%(#.*\)\=$'
+      \ '\%(\<do:\@!\>\|{\)\s*\%(|\%([*@]\=\h\w*,\=\s*\)\%(,\s*[*@]\=\h\w*\)*|\)\=\s*\%(#.*\)\=$'
 
 " 2. Auxiliary Functions {{{1
 " ======================
@@ -157,24 +157,35 @@ function s:GetMSL(lnum)
 endfunction
 
 " Check if line 'lnum' has more opening brackets than closing ones.
-function s:LineHasOpeningBrackets(lnum)
-  let open_0 = 0
-  let open_2 = 0
-  let open_4 = 0
+function s:FindRightmostOpenBracket(lnum)
+  let open = {'parentheses': [], 'braces': [], 'brackets': []}
   let line = getline(a:lnum)
   let pos = match(line, '[][(){}]', 0)
   while pos != -1
     if !s:IsInStringOrComment(a:lnum, pos + 1)
-      let idx = stridx('(){}[]', line[pos])
-      if idx % 2 == 0
-	let open_{idx} = open_{idx} + 1
-      else
-	let open_{idx - 1} = open_{idx - 1} - 1
+      if line[pos] == '('
+	call add(open.parentheses, {'type': '(', 'pos': pos})
+      elseif line[pos] == ')'
+	let open.parentheses = open.parentheses[0:-2]
+      elseif line[pos] == '{'
+	call add(open.braces, {'type': '{', 'pos': pos})
+      elseif line[pos] == '}'
+	let open.braces = open.braces[0:-2]
+      elseif line[pos] == '['
+	call add(open.brackets, {'type': '[', 'pos': pos})
+      elseif line[pos] == ']'
+	let open.brackets = open.brackets[0:-2]
       endif
     endif
     let pos = match(line, '[][(){}]', pos + 1)
   endwhile
-  return (open_0 > 0) . (open_2 > 0) . (open_4 > 0)
+  let rightmost = {'type': '(', 'pos': -1}
+  for open in open.parentheses + open.braces + open.brackets
+    if open.pos > rightmost.pos
+      let rightmost = open
+    endif
+  endfor
+  return rightmost
 endfunction
 
 function s:Match(lnum, regex)
@@ -218,7 +229,7 @@ function GetRubyIndent()
     let bs = strpart('(){}[]', stridx(')}]', line[col - 1]) * 2, 2)
     if searchpair(escape(bs[0], '\['), '', bs[1], 'bW', s:skip_expr) > 0
       if line[col-1]==')' && col('.') != col('$') - 1
-	let ind = virtcol('.')-1
+	let ind = virtcol('.') - 1
       else
 	let ind = indent(s:GetMSL(line('.')))
       endif
@@ -281,15 +292,18 @@ function GetRubyIndent()
   " If the previous line contained an opening bracket, and we are still in it,
   " add indent depending on the bracket type.
   if line =~ '[[({]'
-    let counts = s:LineHasOpeningBrackets(lnum)
-    if counts[0] == '1' && searchpair('(', '', ')', 'bW', s:skip_expr) > 0
-      if col('.') + 1 == col('$')
-	return ind + &sw
+    let open = s:FindRightmostOpenBracket(lnum)
+    if open.pos != -1
+      if open.type == '(' && searchpair('(', '', ')', 'bW', s:skip_expr) > 0
+	if col('.') + 1 == col('$')
+	  return ind + &sw
+	else
+	  return virtcol('.')
+	endif
       else
-	return virtcol('.')
+	let nonspace = matchend(line, '\S', open.pos + 1) - 1
+	return nonspace > 0 ? nonspace : ind + &sw
       endif
-    elseif counts[1] == '1' || counts[2] == '1'
-      return ind + &sw
     else
       call cursor(v:lnum, vcol)
     end

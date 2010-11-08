@@ -44,6 +44,20 @@ function! s:compact(ary)
   return s:sub(s:sub(s:gsub(a:ary,'\n\n+','\n'),'\n$',''),'^\n','')
 endfunction
 
+function! s:uniq(list)
+  let seen = {}
+  let i = 0
+  while i < len(a:list)
+    if has_key(seen,a:list[i])
+      call remove(a:list, i)
+    else
+      let seen[a:list[i]] = 1
+      let i += 1
+    endif
+  endwhile
+  return a:list
+endfunction
+
 function! s:scrub(collection,item)
   " Removes item from a newline separated collection
   let col = "\n" . a:collection
@@ -510,7 +524,7 @@ function! rails#singularize(word)
     return word
   endif
   let word = s:sub(word,'eople$','ersons')
-  let word = s:sub(word,'[aeio]@<!ies$','ys')
+  let word = s:sub(word,'%([Mm]ov|[aeio])@<!ies$','ys')
   let word = s:sub(word,'xe[ns]$','xs')
   let word = s:sub(word,'ves$','fs')
   let word = s:sub(word,'ss%(es)=$','sss')
@@ -2229,7 +2243,12 @@ function! s:layoutList(A,L,P)
 endfunction
 
 function! s:stylesheetList(A,L,P)
-  return s:completion_filter(rails#app().relglob("public/stylesheets/","**/*",".css"),a:A)
+  let list = rails#app().relglob('public/stylesheets/','**/*','.css')
+  if rails#app().has('sass')
+    call extend(list,rails#app().relglob('public/stylesheets/sass/','**/*','.s?ss'))
+    call s:uniq(list)
+  endif
+  return s:completion_filter(list,a:A)
 endfunction
 
 function! s:javascriptList(A,L,P)
@@ -3542,7 +3561,7 @@ function! s:BufSyntax()
         syn keyword rubyRailsFilterMethod verify
       endif
       if buffer.type_name('db-migration','db-schema')
-        syn keyword rubyRailsMigrationMethod create_table change_table drop_table rename_table add_column rename_column change_column change_column_default remove_column add_index remove_index
+        syn keyword rubyRailsMigrationMethod create_table change_table drop_table rename_table add_column rename_column change_column change_column_default remove_column add_index remove_index execute
       endif
       if buffer.type_name('test')
         if !empty(rails#app().user_assertions())

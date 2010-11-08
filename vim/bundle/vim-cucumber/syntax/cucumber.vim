@@ -2,6 +2,7 @@
 " Language:     Cucumber
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:    *.feature
+" Last Change:	2010 May 21
 
 if exists("b:current_syntax")
     finish
@@ -96,7 +97,7 @@ exe 'syn match cucumberExamples "\%(^\s*\)\@<='.s:pattern('examples').':" nextgr
 
 syn match   cucumberPlaceholder   "<[^<>]*>" contained containedin=@cucumberStepRegions
 syn match   cucumberExampleTable  "\%(^\s*\)\@<=|.*" contains=cucumberDelimiter
-syn match   cucumberDelimiter     "|" contained
+syn match   cucumberDelimiter     "\\\@<!\%(\\\\\)*\zs|" contained
 syn match   cucumberTags          "\%(^\s*\)\@<=\%(@[^@[:space:]]\+\s\+\)*@[^@[:space:]]\+\s*$"
 syn region  cucumberString   start=+\%(^\s*\)\@<="""+ end=+"""+
 
