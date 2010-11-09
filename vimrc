@@ -25,10 +25,6 @@ endif
 " strftime.... = time
 "   (See: http://vim.wikia.com/wiki/Insert_current_date_or_time)
 " getftime = last modification time
-" %= = right-align everything after this
-" %l = current line number
-" %L = total lines
-" %c = current column
 " %P = ??? something with percentage ???
 set laststatus=2 " always display status line
 " clear statusline
@@ -48,7 +44,11 @@ set statusline+=%f
 " %y = file content type, e.g. "[ruby]" - includes brackets
 set statusline+=%m%r%h%w%y " flags
 set statusline+=\  " add a space
+" %l = current line number
+" %L = total lines
+" %c = current column
 set statusline+=lin\:%l/%L\ col\:%c " line and column
+" %= = right-align everything after this
 set statusline+=%= " right align
 " last modified time, like "07/29/10 07:36:44"
 set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
