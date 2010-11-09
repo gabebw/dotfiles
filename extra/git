@@ -13,7 +13,9 @@ compdef git-achievements=git
 alias gp="git push"
 alias gph="git push && git push heroku"
 alias gd="git diff"
+
 alias ga="git add"
+alias gai="git add --interactive"
 
 alias gb="git branch"
 alias gcb="git checkout -b"
@@ -23,7 +25,7 @@ alias gcm="git commit -m"
 alias gcam="git commit -am"
 
 # What changed between last commit and now?
-alias recent="git diff master~1"
+alias git-recent="git diff master~1"
 
 # Use git-tweet project
 function tweet(){
