@@ -1,14 +1,44 @@
 # Node.js, via Homebrew
 
-# Add these for NPM, since Node itself is symlinked in /usr/local/*, but npm
-# installs directly to the Cellar
-NODE_BIN=/usr/local/Cellar/node/0.2.4/bin
-NODE_MAN=/usr/local/Cellar/node/0.2.4/share/man
-[[ -d $NODE_BIN ]] && PATH=$PATH:$NODE_BIN
-[[ -d $NODE_MAN ]] && MANPATH=$MANPATH:$NODE_MAN
+NODE_PREFIX=$(brew --prefix node)
 
-export PATH
-export MANPATH
+[[ $(brew list npm) == *"No such keg"* ]] && have_homebrew_npm=false || have_homebrew_npm=true
+if [[ ! $have_homebrew_npm ]]; then
+  [[ $(which npm) != *"not found" ]] && have_other_npm=true || have_other_npm=false
+fi
 
-# clean up
-unset NODE_BIN NODE_MAN
+if [[ $have_other_npm ]]; then
+  # Add these for (non-homebrew installed) NPM, since Node itself is symlinked
+  # in /usr/local/*, but NPM installs directly to the Cellar
+  NODE_BIN=$NODE_PREFIX/bin
+  NODE_MAN=$NODE_PREFIX/share/man
+
+  # Node
+  [[ -d $NODE_BIN ]] && PATH=$PATH:$NODE_BIN
+  [[ -d $NODE_MAN ]] && MANPATH=$MANPATH:$NODE_MAN
+
+  export PATH
+  export MANPATH
+
+  unset NODE_BIN NODE_MAN
+elif [[ $have_homebrew_npm ]]; then
+  # From Homebrew's NPM caveats:
+  #"npm will install libraries to:
+  #  /usr/local/lib/node/.npm
+  #To manually remove libraries installed by npm, delete this (hidden!) folder."
+
+  # homebrew-installed NPM installs binaries in this dir.
+  NPM_BIN=/usr/local/share/npm/bin
+  # homebrew-installed NPM symlinks libraries in this dir. Add to NODE_PATH to
+  # require libs without a path
+  NPM_LIB=/usr/local/lib/node
+
+  # NPM
+  [[ -d $NPM_LIB ]] && NODE_PATH=$NODE_PATH:$NPM_LIB
+  [[ -d $NPM_BIN ]] && PATH=$PATH:$NPM_BIN
+
+  export NODE_PATH
+
+  # clean up
+  unset NPM_BIN NPM_LIB
+fi
