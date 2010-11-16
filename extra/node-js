@@ -2,12 +2,12 @@
 
 NODE_PREFIX=$(brew --prefix node)
 
-[[ $(brew list npm) == *"No such keg"* ]] && have_homebrew_npm=false || have_homebrew_npm=true
-if [[ ! $have_homebrew_npm ]]; then
-  [[ $(which npm) != *"not found" ]] && have_other_npm=true || have_other_npm=false
+[[ $(brew list npm) == *"No such keg"* ]] && have_homebrew_npm='' || have_homebrew_npm='yes'
+if [[ ! -n $have_homebrew_npm ]]; then
+  [[ $(which npm) != *"not found" ]] && have_other_npm='' || have_other_npm='yes'
 fi
 
-if [[ $have_other_npm ]]; then
+if [[ -n $have_other_npm ]]; then
   # Add these for (non-homebrew installed) NPM, since Node itself is symlinked
   # in /usr/local/*, but NPM installs directly to the Cellar
   NODE_BIN=$NODE_PREFIX/bin
@@ -21,7 +21,7 @@ if [[ $have_other_npm ]]; then
   export MANPATH
 
   unset NODE_BIN NODE_MAN
-elif [[ $have_homebrew_npm ]]; then
+elif [[ -n $have_homebrew_npm ]]; then
   # From Homebrew's NPM caveats:
   #"npm will install libraries to:
   #  /usr/local/lib/node/.npm
@@ -42,3 +42,4 @@ elif [[ $have_homebrew_npm ]]; then
   # clean up
   unset NPM_BIN NPM_LIB
 fi
+unset NODE_PREFIX
