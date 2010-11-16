@@ -12,7 +12,7 @@ source_extra mdfind # has today(), red(), blue(), etc
 source_extra java
 source_extra git # includes completion if using bash
 source_extra jbs
-#source_extra android
+source_extra android
 source_extra school
 source_extra node-js
 source_extra homebrew
