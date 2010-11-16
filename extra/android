@@ -1,3 +1,8 @@
 # Helpful android stuff
 # ddms - can get screenshots of device screen
-export PATH="$PATH:/Users/gabe/bin:/Users/gabe/bin/apache-ant-1.8.1/bin"
+PATH="$PATH:/Users/gabe/bin:/Users/gabe/bin/apache-ant-1.8.1/bin"
+
+# android-ndk doesn't put symliinks in /usr/local/bin
+PATH="$PATH:/usr/local/Cellar/android-ndk/r4/"
+
+export PATH
