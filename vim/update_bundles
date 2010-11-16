@@ -31,6 +31,9 @@ git_bundles = [
   "git://github.com/vim-ruby/vim-ruby.git",
 ]
 
+# [name, script_id, script type]
+# e.g. ["jquery",        "12276", "syntax"]
+# puts script id 12276 in bundle/jquery/syntax/jquery.vim
 vim_org_scripts = [
   # http://www.vim.org/scripts/script.php?script_id=1682
   # 7062: v070503
@@ -41,6 +44,9 @@ vim_org_scripts = [
   # http://www.vim.org/scripts/script.php?script_id=2416
   # 12276: v0.4
   ["jquery",        "12276", "syntax"],
+  # highlight hex colors, so #FF0000 displays in red
+  # 8846: v0.7 (2007-06-24)
+  ["css", 8846, "syntax"],
 ]
 
 require 'fileutils'
