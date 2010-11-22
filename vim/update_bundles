@@ -6,7 +6,7 @@
 RAGEL_URL = 'http://www.complang.org/ragel/ragel.vim'
 RAGEL_FILE = 'ragel/syntax/ragel.vim'
 
-git_bundles = [ 
+git_bundles = [
   #"git://github.com/astashov/vim-ruby-debugger.git",
   #"git://github.com/godlygeek/tabular.git",
   #"git://github.com/hallison/vim-rdoc.git",
@@ -47,6 +47,9 @@ vim_org_scripts = [
   # highlight hex colors, so #FF0000 displays in red
   # 8846: v0.7 (2007-06-24)
   ["css", 8846, "syntax"],
+  # http://www.vim.org/scripts/script.php?script_id=910
+  # 14079: v1.3.3
+  ["pydoc", 14079, "plugin"],
 ]
 
 require 'fileutils'
@@ -79,4 +82,3 @@ vim_org_scripts.each do |name, script_id, script_type|
     file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
   end
 end
-
