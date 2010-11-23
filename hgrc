@@ -1,0 +1,22 @@
+# man hgrc
+[ui]
+# Having just "Gabe B-W" in the username makes Bitbucket not link my commits
+# to my Bitbucket account :(
+username = Gabe B-W <gbw@brandeis.edu>
+email = gbw@brandeis.edu
+ignore = ~/.hgignore-global
+editor = $EDITOR -f
+
+[merge-tools]
+# Just creating opendiff.* tells Hg that opendiff exists, and to call it via
+# "opendiff".
+opendiff.gui = true # requires a GUI to run
+# Compare $local and $base, and put the merged file in $output.
+# $local, $base, $other and $output are magic variables that Hg
+# auto-expands.
+opendiff.args = $local $base $other -merge $output
+
+[extensions]
+# blank on purpose; enables "hg glog"
+hgext.graphlog = 
+convert = 
