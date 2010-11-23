@@ -57,7 +57,7 @@ FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
 #  http://zsh.sourceforge.net/Doc/Release/zsh_21.html#SEC182
 # "zstyle -d" to delete all defs
 #### END INFO BLOCK
-zstyle ':vcs_info:*' enable git # disables all other VCSes
+zstyle ':vcs_info:*' enable git hg # disables all other VCSes
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
 
