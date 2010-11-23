@@ -13,8 +13,8 @@ set tw=78 ts=4 sw=4 sta et sts=4 ai
 " More syntax highlighting.
 let python_highlight_all = 1
 
-" Smart indenting
-set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" Smart indenting (makes comments at the beginning of lines, so no go)
+"set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
 " Auto completion via ctrl-space (instead of the nasty ctrl-x ctrl-o)
 set omnifunc=pythoncomplete#Complete
@@ -22,12 +22,12 @@ inoremap <Nul> <C-x><C-o>
 
 " Get this plugin from http://www.vim.org/scripts/script.php?script_id=1112
 " Pressing "K" takes you to the documentation for the word under the cursor.
-autocmd filetype python source ~/.vim/plugin/pydoc.vim
+autocmd filetype python source ~/.vim/bundle/pydoc/plugin/pydoc.vim
 
 " Wrap at 72 chars for comments.
 set formatoptions=cq textwidth=72 foldignore= wildignore+=*.py[co]
 
-" Highlight end of line whitespace.
+" Highlight end of line whitespace. (removed b/c no match -> error)
 "highlight WhitespaceEOL ctermbg=red guibg=red
 "match WhitespaceEOL /\s\+$/
 
