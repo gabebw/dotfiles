@@ -1,8 +1,8 @@
 # Compound options
-OPTIONS=role:Monk
-OPTIONS=race:Human
-OPTIONS=align:neutral
-OPTIONS=gender:male
+#OPTIONS=role:Monk
+#OPTIONS=race:Human
+#OPTIONS=align:neutral
+#OPTIONS=gender:male
 OPTIONS=name:Gabe
 OPTIONS=catname:Whiskers
 OPTIONS=dogname:Bailey
