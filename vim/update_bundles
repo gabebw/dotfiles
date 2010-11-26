@@ -1,10 +1,20 @@
 #!/usr/bin/env ruby
 # From https://github.com/tsaleh/dotfiles/blob/master/vim/update_bundles
 
+require 'fileutils'
+require 'open-uri'
+
 # Ragel doesn't have a git repo or vim script, it's just hosted by the Ragel
 # maintainer.
 RAGEL_URL = 'http://www.complang.org/ragel/ragel.vim'
 RAGEL_FILE = 'ragel/syntax/ragel.vim'
+
+def get_ragel
+  FileUtils.mkdir_p("ragel/syntax")
+  File.open(RAGEL_FILE, 'w') do |file|
+    file << open(RAGEL_URL).read
+  end
+end
 
 git_bundles = [
   #"git://github.com/astashov/vim-ruby-debugger.git",
@@ -52,8 +62,6 @@ vim_org_scripts = [
   ["pydoc", 14079, "plugin"],
 ]
 
-require 'fileutils'
-require 'open-uri'
 
 bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 
@@ -62,10 +70,7 @@ FileUtils.cd(bundles_dir)
 puts "trashing everything (lookout!)"
 Dir["*"].each {|d| FileUtils.rm_rf d }
 
-FileUtils.mkdir_p("ragel/syntax")
-File.open(RAGEL_FILE, 'w') do |file|
-  file << open(RAGEL_URL).read
-end
+get_ragel()
 
 git_bundles.each do |url|
   dir = url.split('/').last.sub(/\.git$/, '')
