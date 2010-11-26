@@ -18,5 +18,10 @@ opendiff.args = $local $base $other -merge $output
 
 [extensions]
 # blank on purpose; enables "hg glog"
-hgext.graphlog = 
-convert = 
+hgext.graphlog =
+convert =
+# http://hgtip.com/tips/advanced/2009-09-29-the-fetch-extension/
+# make "hg pull" auto-merge like "git pull"
+# Confusingly, "hg fetch" will behave like "git pull", and "hg pull" will
+# behave like "git fetch" (but the latter happens anyway).
+hgext.fetch =
