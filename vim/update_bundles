@@ -9,6 +9,11 @@ require 'open-uri'
 RAGEL_URL = 'http://www.complang.org/ragel/ragel.vim'
 RAGEL_FILE = 'ragel/syntax/ragel.vim'
 
+# Where we put zip files from vim.org/scripts/
+TEMP_ZIP_NAME = 'temp.zip'
+# Where we extract the zipfile to
+TEMP_ZIP_DIR = 'temp_zip_dir'
+
 def get_ragel
   FileUtils.mkdir_p("ragel/syntax")
   File.open(RAGEL_FILE, 'w') do |file|
@@ -60,8 +65,13 @@ vim_org_scripts = [
   # http://www.vim.org/scripts/script.php?script_id=910
   # 14079: v1.3.3
   ["pydoc", 14079, "plugin"],
-]
 
+  # http://www.vim.org/scripts/script.php?script_id=2441
+  # 14288: v3.0
+  # 4-element array to mark it as a zip
+  ["pyflakes", 14288, "ftplugin", "zip"],
+
+]
 
 bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 
@@ -79,11 +89,26 @@ git_bundles.each do |url|
   FileUtils.rm_rf(File.join(dir, ".git"))
 end
 
-vim_org_scripts.each do |name, script_id, script_type|
+vim_org_scripts.each do |name, script_id, script_type, zip|
   puts "Downloading #{name}"
-  local_file = File.join(name, script_type, "#{name}.vim")
-  FileUtils.mkdir_p(File.dirname(local_file))
-  File.open(local_file, "w") do |file|
-    file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+  if zip
+    # pyflakes/ftplugin
+    target_dir = File.join(name, script_type)
+    FileUtils.mkdir_p(target_dir)
+    File.open(TEMP_ZIP_NAME, "w") do |file|
+      file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+    end
+    `unzip #{TEMP_ZIP_NAME} -d #{TEMP_ZIP_DIR}`
+    FileUtils.mv(Dir.glob(TEMP_ZIP_DIR + '/*'), target_dir)
+    # Clean up
+    FileUtils.rm(TEMP_ZIP_NAME)
+    FileUtils.rm_rf(TEMP_ZIP_DIR)
+  else
+    # pyflakes/ftplugin/pyflakes.vim
+    local_file = File.join(name, script_type, "#{name}.vim")
+    FileUtils.mkdir_p(File.dirname(local_file))
+    File.open(local_file, "w") do |file|
+      file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+    end
   end
 end
