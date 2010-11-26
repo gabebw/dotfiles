@@ -253,4 +253,3 @@ if has("autocmd")
         \   exe "normal g`\"" |
         \ endif
 endif " Auto commands }}}
-
