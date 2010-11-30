@@ -1,12 +1,11 @@
-# Python stuff for bashrc
-
-# Setting PATH for MacPython 2.6. Note that we can use python3 and python2
-# aliases if we really want those versions of python, so this just adds MacPython
-# 2.6 to the end of the PATH
-# The original version is saved in .profile.pysave
-PATH="$PATH:/Library/Frameworks/Python.framework/Versions/2.6/bin"
+# Python stuff
 
 # python-install-scripts contains executables installed using python
 # (easy_install, etc)
-export PATH="$PATH:/Users/gabe/bin/python-install-scripts"
+PATH="$PATH:/Users/gabe/bin/python-install-scripts"
+PATH="$PATH:/usr/local/Cellar/python/2.7.1/bin"
+export PATH
+
 export PYTHONSTARTUP=~/.python_startup
+# =<command> is like $(which command)
+[[ -x =pip ]] && eval "`pip completion --zsh`"
