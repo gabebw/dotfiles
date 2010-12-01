@@ -1,8 +1,10 @@
 # NOTE: This is the global gitignore, not the gitignore for the dotfiles
 # repository!
+.DS_Store
+Thumbs.db
 
 # Vim swap files
-*.swp
+*.sw[po]
 # Vim persistent undo files
 *.un~
 # Created by _rake autocomplete function
