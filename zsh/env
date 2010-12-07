@@ -7,6 +7,10 @@ zkbd_file=${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 source $zkbd_file
 unset zkbd_file # don't litter
 
+# Vim-style line editing (starts in viins insert mode, but can Escape to
+# vicmd mode)
+bindkey -v
+
 # Set some defaults. Use -z, not -e, because we're checking that it's set to
 # an empty string.
 [[ -z "${key[Home]}" ]] && key[Home]='^[[H'
