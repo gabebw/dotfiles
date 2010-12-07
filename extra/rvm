@@ -1,4 +1,7 @@
 # RVM
+# You should always source this file, since it defines the ruby_version
+# function which is used in the prompt. If ruby_version is undefined, then
+# you get an error on every new line in the terminal.
 
 # Double check that we have a good installation of RVM
 if [[ ! (-d ~/.rvm && -s "$HOME/.rvm/scripts/rvm" && -x ~/.rvm/bin/rvm-prompt) ]]
