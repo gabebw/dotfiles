@@ -30,7 +30,7 @@ function al { ls -t | head -n ${1:-10}; }
 #  * command to perform
 # If file is given, performs $command on
 # $topdir/$basename, else performs $command on
-# ~/.zshrc. If file is given but doesn't exist, prints an error message.
+# ~/.zshrc. If file is given but doesn't exist, asks user what to do.
 function perform_under_basedir {
   local topdir=$1
   local snippet=$2
@@ -40,9 +40,10 @@ function perform_under_basedir {
     if [[ -f "$fname" ]]; then
       $cmd "$fname"
     else
-      echo -n "$fname does not exist. Edit anyway? Y/n:"
+      echo -n "$fname does not exist. Edit anyway? Y/n: "
       read response
-      [[ ! $response =~ '[Nn][Oo]' ]] && $cmd "$fname"
+      # Must type "n" or "no"
+      [[ ! $response =~ '[Nn][Oo]?' ]] && $cmd "$fname"
     fi
   else
     $cmd ~/.zshrc
