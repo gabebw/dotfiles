@@ -1,0 +1,1 @@
+/usr/local/Library/Contributions/brew_zsh_completion.zsh

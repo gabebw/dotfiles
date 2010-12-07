@@ -15,20 +15,6 @@ fi
 
 source "$HOME/.rvm/scripts/rvm"
 
-rvm_completion_dir=/Users/gabe/.rvm/scripts/zsh/Completion
-
-# Only add $rvm_completion_dir to $fpath once. It's by far the thing that
-# takes the longest in this file.
-# If == 0, then not in $fpath
-if [[ $fpath[(I)$rvm_completion_dir] == 0 ]]
-then
-  # Add rvm ZSH completion script to $fpath so that compinit (autoload -U
-  # compinit && compinit) will load the script.
-  fpath+=($rvm_completion_dir) # push onto fpath array
-  autoload -U compinit && compinit
-fi
-unset rvm_completion_dir # don't litter
-
 # RVM bash completion
 # zsh comes with it baked in.
 # For either one, use rvm[tab][tab], rvm use[tab][tab], etc.

@@ -1,7 +1,17 @@
 ################
 #  COMPLETION  #
 ################
+
+# Add my extra ZSH completion scripts to $fpath so that compinit will find
+# them. Can use ~ path, and $fpath[(I)] will still find it later.
+MY_COMPLETION_DIR=~/.dotfiles/zsh/completion-scripts
+# Only push MY_COMPLETION_DIR onto the $fpath array once.
+# If == 0, then not in $fpath
+[[ $fpath[(I)$MY_COMPLETION_DIR] == 0 ]] && fpath+=($MY_COMPLETION_DIR)
+unset MY_COMPLETION_DIR # don't litter
+
 autoload -U compinit && compinit
+
 # see "man 1 zshcompctl"
 # This sets {edit,source}_extra to be completed with stuff in ~/.dotfiles/extra without
 # showing the ~/.dotfiles/extra part, so you type "edit_extra u<TAB>" -> "edit_extra util"

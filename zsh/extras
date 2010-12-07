@@ -4,7 +4,7 @@
 #source_extra util # unneeded - just dotfile() function
 source_extra ruby
 source_extra rails
-source_extra rvm # takes a while, since it re-runs compinit
+source_extra rvm
 #source_extra html
 source_extra python
 #source_extra ragel
