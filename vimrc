@@ -21,7 +21,6 @@ endif
 " Status line detail:
 " %F = file name ("~/.vimrc")
 " %t = file BASENAME (".vimrc")
-" %{&ff} = file format (unix/dos)
 " strftime.... = time
 "   (See: http://vim.wikia.com/wiki/Insert_current_date_or_time)
 " getftime = last modification time
@@ -42,7 +41,8 @@ set statusline+=%f
 " %h = help buffer flag, "[help]"
 " %w = [Preview] if in preview window
 " %y = file content type, e.g. "[ruby]" - includes brackets
-set statusline+=%m%r%h%w%y " flags
+" %{&ff} = file format (unix/dos)
+set statusline+=%m%r%h%w%y\ fmt=%{&ff} " flags
 set statusline+=\  " add a space
 " %l = current line number
 " %L = total lines
