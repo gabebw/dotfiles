@@ -19,6 +19,8 @@ alias grpe="grep" # fix typo
 export GREP_COLOR='1;31'
 alias diff="colordiff -u"
 
+[[ -x $(which colormake) ]] && alias make=colormake
+
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
