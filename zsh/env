@@ -10,6 +10,9 @@ unset zkbd_file # don't litter
 # Vim-style line editing (starts in viins insert mode, but can Escape to
 # vicmd mode)
 bindkey -v
+# I want my bck-i-search
+bindkey -M viins "^r" history-incremental-search-backward
+bindkey -M vicmd "f" history-incremental-search-backward
 
 # Set some defaults. Use -z, not -e, because we're checking that it's set to
 # an empty string.
