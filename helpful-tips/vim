@@ -1,2 +1,5 @@
 How do I reselect the most recently selected visual block?
 gv
+
+How do I go to column 4 (or any other column) in the current line?
+4|
