@@ -34,7 +34,7 @@ git_bundles = [
   "git://github.com/tsaleh/vim-matchit.git",
   "git://github.com/tsaleh/vim-supertab.git", # tab completion
   #"git://github.com/tsaleh/vim-tcomment.git",
-  "git://github.com/msanders/snipmate.vim.git",
+  #"git://github.com/msanders/snipmate.vim.git",
   "git://github.com/kchmck/vim-coffee-script.git",
   "git://github.com/tpope/vim-cucumber.git",
   "git://github.com/tpope/vim-fugitive.git",
@@ -70,7 +70,6 @@ vim_org_scripts = [
   # 14288: v3.0
   # 4-element array to mark it as a zip
   ["pyflakes", 14288, "ftplugin", "zip"],
-
 ]
 
 bundles_dir = File.join(File.dirname(__FILE__), "bundle")
