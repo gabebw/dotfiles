@@ -21,6 +21,12 @@ alias diff="colordiff -u"
 
 [[ -x $(which colormake) ]] && alias make=colormake
 
+# So I can tell ZSH to scan the PATH for newly-installed programs, without
+# running the whole bootup process all over again. And yes, I used to use
+# Gentoo.
+# Wrap it in a function so it's evaluated at run-time.
+function env-update { export PATH=$PATH; }
+
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 
