@@ -10,10 +10,8 @@ alias ls="ls -FGh"
 alias du="du -cksh"
 alias df="df -h"
 # "color=auto" removes color when piping
-#alias grep="grep --color=auto"
-#alias egrep="egrep --color=auto"
-alias grep="ack"
-alias egrep="ack"
+alias grep="grep --color=auto"
+alias egrep="egrep --color=auto"
 alias grpe="grep" # fix typo
 # highlight matched strings in red
 export GREP_COLOR='1;31'
