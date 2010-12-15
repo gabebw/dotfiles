@@ -111,3 +111,15 @@ vim_org_scripts.each do |name, script_id, script_type, zip|
     end
   end
 end
+
+# Patch pydoc so that K doesn't call Python help in non-python files
+# Also: the first time I've actually found a use for Array#assoc
+pydoc = vim_org_scripts.assoc('pydoc')
+if pydoc
+  pydoc_type = pydoc[2]
+  print "Patching pydoc..."
+  STDOUT.flush
+  # Currently in /bundle dir, so path is relative to that
+  `sed -E -i '' -e 's/^(nnoremap .* K :call)/au FileType python \\1/' pydoc/#{pydoc_type}/pydoc.vim`
+  puts "done."
+end
