@@ -4,7 +4,17 @@
 autoload zkbd
 zkbd_file=${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 [[ ! -f "$zkbd_file" ]] && zkbd
-source $zkbd_file
+# zkbd aborted
+if [[ ! -f "$zkbd_file" ]]
+then
+  print
+  print "!!! zkbd aborted! Please run it again. To skip a key, press Space."
+  print
+  # Note that the key bindings below all have checks, so we don't have to
+  # wrap them in an "if"
+else
+  source $zkbd_file
+fi
 unset zkbd_file # don't litter
 
 # Vim-style line editing (starts in viins insert mode, but can Escape to
