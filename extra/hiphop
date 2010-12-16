@@ -1,35 +1,38 @@
 # hiphop-php functions and variables
 # https://github.com/facebook/hiphop-php
 
-function check_hiphop_deps {
-  hiphop_deps="gcc icu4c gd oniguruma re2c binutils libmemcached openssl tbb libpcre libexpat boost cmake mysql mcrypt"
+hiphop_deps=(gcc icu4c gd oniguruma re2c binutils libmemcached openssl tbb libpcre libexpat boost cmake mysql mcrypt)
+function check_hiphop_deps() {
   # e.g. "^(gcc|icu4c|gd|...|mcrypt)$"
-  hiphop_deps_regex="^${hiphop_deps// /|}$"
-  installed_deps=$(brew ls | awk '{print $1 $2 $3}' | egrep "^(gcc|icu4c|gd|oniguruma|lua|nethack)$")
+  hiphop_deps_regex="^(${hiphop_deps// /|})$"
+  installed_deps=$(brew ls | awk '{print $1 $2 $3}' | egrep "$hiphop_deps_regex")
+
 
   # Iterate through all the deps to check that we have all of them
-  have_all_deps='no'
   missing_deps=() # empty array
-  for dep in $installed_deps do
-    $have_all_deps[(I)$x]
+  IFS=" "
+  for dep in $hiphop_deps
+  do
     # If == 0, then not in $installed_deps, so add it to missing_deps
-    [[ $installed_deps[(I)$dep] == 0 ]] && $missing_deps+=$dep
+    [[ $installed_deps[(I)$dep] == 0 ]] && missing_deps+=$dep
   done
 
   if [[ ${#missing_deps} > 0 ]]
   then
-    [[ $missing_deps[(I)$gcc] != 0 ]] && print "You are missing GCC. To get it, run install_hiphop_deps()"
-    print "!!! You are missing the following HipHop dependencies:"
+    print "!!! You are missing the following HipHop dependencies."
+    print "!!! To get them, including GCC, run \`install_hiphop_deps\`"
     print "(And don't forget to install patched versions of curl and libevent.)"
     print -C 1 $missing_deps
-  done
+  else
+    print "You have all required Hiphop dependencies!"
+  fi
 }
-    
+
 function install_hiphop_deps {
   local formula_dir=$(brew --prefix)/Library/Formula
   print -n "Getting gcc formula..."
   curl -o $formula_dir/gcc.rb \
-    https://github.com/andreabedini/homebrew/raw/cd8d8d943634125eeb6b0eba1e7280c32fce9f4e/Library/Formula/gcc.rb 
+    https://github.com/andreabedini/homebrew/raw/cd8d8d943634125eeb6b0eba1e7280c32fce9f4e/Library/Formula/gcc.rb
   print "done."
   # Autoconf
   print -n "Getting autoconf formula..."
@@ -42,8 +45,8 @@ function install_hiphop_deps {
     https://github.com/andreabedini/homebrew/raw/bffe1ac1b3863a607d3e6120009f4a0feb4236dc/Library/Formula/automake.rb
   print "done."
 
-  print "Running `brew install gcc`, after that you should be good to go."
-  brew install gcc
+  print "Running \`brew install $hiphop_deps\`, after that you should be good to go."
+  brew install $hiphop_deps
 }
 
 
@@ -62,15 +65,13 @@ function set_hiphop_vars {
 
 # "hiphoP CMake" => "pcm"
 # Should be run in hiphop-php directory
-function pcm { 
 function pcm {
-  set_hiphop_vars()
   export LIBEVENT_INSTALLED=$CMAKE_PREFIX_PATH/libevent-installed/
   local gcc_bin=/usr/local/Cellar/gcc/4.5.1/bin
   local icu_dir=/usr/local/Cellar/icu4c/4.4.1/
   local cclient_dir=~/imap-2007e/c-client
   #git clean -fdx && \
-    cmake \
+  cmake \
     -D CMAKE_PREFIX_PATH:FILEPATH=$CMAKE_PREFIX_PATH \
     -D CMAKE_INSTALL_PREFIX:PATH=~/hphp-install-prefix \
     -D CMAKE_C_COMPILER:FILEPATH=$gcc_bin/gcc-4.5 \
@@ -85,5 +86,5 @@ function pcm {
     .
 }
 
-set_hiphop_variables()
-check_hiphop_deps()
+set_hiphop_vars
+check_hiphop_deps
