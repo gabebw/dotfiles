@@ -47,23 +47,28 @@ function install_hiphop_deps {
 }
 
 
-function set_hiphop_variables {
-  export CMAKE_PREFIX_PATH=/Users/gabe/php-builder/
+export DID_SET_HIPHOP_VARS='no'
+function set_hiphop_vars {
+  [[ $DID_SET_HIPHOP_VARS == 'yes' ]] && return
+  export CMAKE_PREFIX_PATH=~/php-builder/
   # "$TBB_INSTALL_DIR"/"$TBB_INSTALL_DIR" should contain TBB libs
   export TBB_INSTALL_DIR="$(brew --prefix tbb)"
   export TBB_ARCH_PLATFORM="lib"
   export HPHP_HOME=$CMAKE_PREFIX_PATH/hiphop-php
   export HPHP_LIB=$CMAKE_PREFIX_PATH/hiphop-php/bin
   #export PATH=$(brew --prefix gcc)/bin:$PATH
+  export DID_SET_HIPHOP_VARS='yes'
 }
 
 # "hiphoP CMake" => "pcm"
 # Should be run in hiphop-php directory
 function pcm { 
+function pcm {
+  set_hiphop_vars()
   export LIBEVENT_INSTALLED=$CMAKE_PREFIX_PATH/libevent-installed/
   local gcc_bin=/usr/local/Cellar/gcc/4.5.1/bin
   local icu_dir=/usr/local/Cellar/icu4c/4.4.1/
-  local cclient_dir=/Users/gabe/imap-2007e/c-client
+  local cclient_dir=~/imap-2007e/c-client
   #git clean -fdx && \
     cmake \
     -D CMAKE_PREFIX_PATH:FILEPATH=$CMAKE_PREFIX_PATH \
