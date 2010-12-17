@@ -3,7 +3,8 @@
 # python-install-scripts contains executables installed using python
 # (easy_install, etc)
 PATH="$PATH:/Users/gabe/bin/python-install-scripts"
-PATH="$PATH:/usr/local/Cellar/python/2.7.1/bin"
+# For pip-installed stuff
+PATH="$PATH:$(brew --prefix python)/bin"
 export PATH
 
 export PYTHONSTARTUP=~/.python_startup
