@@ -34,7 +34,7 @@ if platform.system() == 'Darwin':
 
         """
 
-        def __init__(self, tab='    '):
+        def __init__(self, tab=' ' * 4):
             self.tab = tab
             rlcompleter.Completer.__init__(self)
 
