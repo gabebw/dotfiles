@@ -56,7 +56,7 @@ if os.path.exists(historyPath):
         try:
             readline.read_history_file(historyPath)
         except IOError as ioe:
-            print "ERROR reading {0} (Detail: {1})".format(historyPath, ioe)
+            print("ERROR reading {0} (Detail: {1})".format(historyPath, ioe))
 
 atexit.register(save_history)
 del os, atexit, save_history, historyPath, platform
