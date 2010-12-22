@@ -242,6 +242,8 @@ if has("autocmd")
     autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh ft=zsh
     autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh ft=zsh
     autocmd BufRead /usr/share/file/magic/* set syntax=magic
+    autocmd BufRead /Users/gabe/Projects/thinkingtank/lib/*.rb set autoindent shiftwidth=4 softtabstop=4 tabstop=4 expandtab
+    autocmd BufRead /Users/gabe/Projects/thinkingtank/lib/thinkingtank/*.rb set autoindent shiftwidth=4 softtabstop=4 tabstop=4 expandtab
   augroup END " END myfiletypes
 
   " When editing a file, always jump to the last known cursor position.
