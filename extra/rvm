@@ -31,3 +31,7 @@ ruby_version() {
   local version=$(~/.rvm/bin/rvm-prompt i v g s)
   print "%{$fg[magenta]%}${version}%{$reset_color%}"
 }
+
+function rgcu {
+  rvm gemset create "$1" && rvm gemset use "$1"
+}
