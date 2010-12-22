@@ -1,6 +1,9 @@
 # Vim persistent undo files
 *.un~
 *.swp
+
 # zcompile'd files
 *.zwc
+*.zwc.old
+
 vim/.netrwhist
