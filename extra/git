@@ -27,6 +27,13 @@ alias gcam="git commit -am"
 # What changed between last commit and now?
 alias git-recent="git diff master~1"
 
+# `git rm`'s files that have been `rm`ed manually (i.e. not through git).
+# It's a function because I don't want to have to deal with quoting sed in
+# an alias.
+function git-remove {
+  git status --porcelain | \egrep '^D' | \sed -E -e 's/^D *//' -e 's/ /\\ /g' -e 's/^|$/"/g'
+}
+
 # Use git-tweet project
 function tweet(){
   prev_wd="$PWD"
