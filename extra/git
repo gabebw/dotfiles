@@ -36,9 +36,8 @@ function git-remove {
 
 # Use git-tweet project
 function tweet(){
-  prev_wd="$PWD"
-  cd /Users/gabe/jbs/git-tweets
+  pushd /Users/gabe/jbs/git-tweets
   git msg "$*"
   git push
-  cd "$prev_wd"
+  popd
 }
