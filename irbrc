@@ -1,7 +1,9 @@
 require 'rubygems'
 require 'pp'
 
-IRB.conf[:AUTO_INDENT]=true
+# ripl sources this file too, so check which one we're using.
+# ripl-irb defines IRB constant, so we check for nonexistence of Ripl
+using_irb = (not defined?(Ripl))
 
 # To install all of these gems:
 # gem install awesome_print map_by_method what_methods wirble hirb
@@ -13,10 +15,14 @@ IRB.conf[:AUTO_INDENT]=true
   end
 end
 
-# Set up Wirble, if it was loaded successfully
-if defined?(Wirble)
-  Wirble.init
-  Wirble.colorize
+if using_irb
+  IRB.conf[:AUTO_INDENT] = true
+
+  # Set up Wirble, if it was loaded successfully
+  if defined?(Wirble)
+    Wirble.init
+    Wirble.colorize
+  end
 end
 
 # Set up Hirb, if it was loaded successfully
@@ -32,6 +38,6 @@ end
 class Object
   # Get an object's "own methods" - methods that only it (not Object) has
   def ownm
-    return self.methods - Object.methods
+    methods - Object.methods
   end
 end
