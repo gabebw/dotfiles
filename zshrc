@@ -12,6 +12,7 @@
 #   Do not use ~ in the directory, either. Use /Users/gabe/.
 # http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
 # Hey, "unfunction" is a thing. It's like unset, but for functions.
+# od -a -> named hexdump, i.e. "nul" instead of hexdump -C's "0"
 
 function progress {
   echo -n "$1 | "
