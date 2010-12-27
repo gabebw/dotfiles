@@ -16,6 +16,13 @@ opendiff.gui = true # requires a GUI to run
 # auto-expands.
 opendiff.args = $local $base $other -merge $output
 
+[diff]
+# hg diff in git mode creates a *binary diff* for binary files:
+# z9cpXxz0Az8b(1gD&oL}&2*yJGFi0}KdO$1m3L8<MS_sdO=eKGP1H;#KUwuPf6UZXM
+# while normal diffs just say "binary file <bf> changed"
+# MAYBE YOU COULD APPLY THAT LOGIC IN GIT FORMAT
+#git = True
+
 [extensions]
 # blank on purpose; enables "hg glog"
 hgext.graphlog =
@@ -27,6 +34,12 @@ convert =
 hgext.fetch =
 # colorized diff output
 color =
+# git add --interactive
+record =
+# Show progress bars for some actions
+progress =
+# Adds `git clean`-like functionality
+purge =
 
 [color]
 status.modified = blue bold underline
