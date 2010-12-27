@@ -50,3 +50,13 @@ status.removed = red bold blue_background
 status.deleted = cyan bold underline
 status.unknown = magenta bold underline
 status.ignored = black bold
+
+diff.diffline = bold
+diff.extended = cyan bold
+diff.file_a = red bold
+diff.file_b = green bold
+diff.hunk = magenta
+diff.deleted = red
+diff.inserted = green
+diff.changed = white
+diff.trailingwhitespace = bold red_background
