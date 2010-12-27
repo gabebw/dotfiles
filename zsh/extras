@@ -14,6 +14,6 @@ source_extra git # includes completion if using bash
 #source_extra jbs
 source_extra android
 #source_extra school
-#source_extra node-js
+source_extra node-js
 source_extra homebrew
 #source_extra haskell
