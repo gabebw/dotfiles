@@ -14,7 +14,7 @@ TEMP_ZIP_NAME = 'temp.zip'
 # Where we extract the zipfile to
 TEMP_ZIP_DIR = 'temp_zip_dir'
 
-def get_ragel
+def update_ragel
   FileUtils.mkdir_p("ragel/syntax")
   File.open(RAGEL_FILE, 'w') do |file|
     file << open(RAGEL_URL).read
@@ -79,7 +79,7 @@ FileUtils.cd(bundles_dir)
 puts "trashing everything (lookout!)"
 Dir["*"].each {|d| FileUtils.rm_rf d }
 
-get_ragel()
+update_ragel()
 
 git_bundles.each do |url|
   dir = url.split('/').last.sub(/\.git$/, '')
