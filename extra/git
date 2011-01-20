@@ -27,6 +27,10 @@ alias gcam="git commit -am"
 # What changed between last commit and now?
 alias git-recent="git diff master~1"
 
+# Prints out untracked files in a single line, with double quotes around
+# them
+alias git-new="gst | egrep '^\?\?' | sed 's/^.. //' | sed 's/^|$/\\\\\"/g' | xargs echo"
+
 # `git rm`'s files that have been `rm`ed manually (i.e. not through git).
 # It's a function because I don't want to have to deal with quoting sed in
 # an alias.
