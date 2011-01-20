@@ -72,54 +72,69 @@ vim_org_scripts = [
   ["pyflakes", 14288, "ftplugin", "zip"],
 ]
 
-bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 
-FileUtils.cd(bundles_dir)
+def setup
+  bundles_dir = File.join(File.dirname(__FILE__), "bundle")
 
-puts "trashing everything (lookout!)"
-Dir["*"].each {|d| FileUtils.rm_rf d }
+  FileUtils.cd(bundles_dir)
 
-update_ragel()
-
-git_bundles.each do |url|
-  dir = url.split('/').last.sub(/\.git$/, '')
-  puts "Unpacking #{url} into #{dir}"
-  `git clone #{url} #{dir}`
-  FileUtils.rm_rf(File.join(dir, ".git"))
+  puts "trashing everything (lookout!)"
+  Dir["*"].each {|d| FileUtils.rm_rf d }
 end
 
-vim_org_scripts.each do |name, script_id, script_type, zip|
-  puts "Downloading #{name}"
-  if zip
-    # pyflakes/ftplugin
-    target_dir = File.join(name, script_type)
-    FileUtils.mkdir_p(target_dir)
-    File.open(TEMP_ZIP_NAME, "w") do |file|
-      file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
-    end
-    `unzip #{TEMP_ZIP_NAME} -d #{TEMP_ZIP_DIR}`
-    FileUtils.mv(Dir.glob(TEMP_ZIP_DIR + '/*'), target_dir)
-    # Clean up
-    FileUtils.rm(TEMP_ZIP_NAME)
-    FileUtils.rm_rf(TEMP_ZIP_DIR)
-  else
-    # pyflakes/ftplugin/pyflakes.vim
-    local_file = File.join(name, script_type, "#{name}.vim")
-    FileUtils.mkdir_p(File.dirname(local_file))
-    File.open(local_file, "w") do |file|
-      file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
-    end
+
+def update_git_bundles
+  git_bundles.each do |url|
+    dir = url.split('/').last.sub(/\.git$/, '')
+    puts "Unpacking #{url} into #{dir}"
+    `git clone #{url} #{dir}`
+    FileUtils.rm_rf(File.join(dir, ".git"))
   end
 end
 
-# Patch pydoc so that K doesn't call Python help in non-python files
-# Also: the first time I've actually found a use for Array#assoc
-pydoc = vim_org_scripts.assoc('pydoc')
-if pydoc
-  pydoc_type = pydoc[2]
-  print "Patching pydoc..."
-  STDOUT.flush
-  # Currently in /bundle dir, so path is relative to that
-  `sed -E -i '' -e 's/^(nnoremap .* K :call)/au FileType python \\1/' pydoc/#{pydoc_type}/pydoc.vim`
-  puts "done."
+def update_vim_org_scripts
+  vim_org_scripts.each do |name, script_id, script_type, zip|
+    puts "Downloading #{name}"
+    if zip
+      # pyflakes/ftplugin
+      target_dir = File.join(name, script_type)
+      FileUtils.mkdir_p(target_dir)
+      File.open(TEMP_ZIP_NAME, "w") do |file|
+        file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+      end
+      `unzip #{TEMP_ZIP_NAME} -d #{TEMP_ZIP_DIR}`
+      FileUtils.mv(Dir.glob(TEMP_ZIP_DIR + '/*'), target_dir)
+      # Clean up
+      FileUtils.rm(TEMP_ZIP_NAME)
+      FileUtils.rm_rf(TEMP_ZIP_DIR)
+    else
+      # pyflakes/ftplugin/pyflakes.vim
+      local_file = File.join(name, script_type, "#{name}.vim")
+      FileUtils.mkdir_p(File.dirname(local_file))
+      File.open(local_file, "w") do |file|
+        file << open("http://www.vim.org/scripts/download_script.php?src_id=#{script_id}").read
+      end
+    end
+  end
+
+  # Patch pydoc so that K doesn't call Python help in non-python files
+  # Also: the first time I've actually found a use for Array#assoc
+  pydoc = vim_org_scripts.assoc('pydoc')
+  if pydoc
+    pydoc_type = pydoc[2]
+    print "Patching pydoc..."
+    STDOUT.flush
+    # Currently in /bundle dir, so path is relative to that
+    `sed -E -i '' -e 's/^(nnoremap .* K :call)/au FileType python \\1/' pydoc/#{pydoc_type}/pydoc.vim`
+    puts "done."
+  end
 end
+
+def update_all
+  setup
+  update_ragel
+  update_git_bundles
+  update_vim_org_scripts
+end
+
+update_all if $0 == __FILE__
