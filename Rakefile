@@ -4,6 +4,8 @@ get my system back, with no need to resort to ln or installation docs and
 with a minimum of input from me.
 =end
 
+require ‘rbconfig’
+
 def info_install(pkg)
   puts "* Installing #{pkg}"
 end
@@ -23,17 +25,51 @@ def link_file(file)
   system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
 end
 
+def is_windows?
+  Config::CONFIG[‘host_os’] =~ /mswin|mingw/
+end
+
+def is_ruby_19?
+  RUBY_VERSION.to_f == 1.9
+end
+
+# platform-specific way to represent a dotfile
+# .file for Unix, _file for Windows
+def dotfile_path(fname)
+  if is_windows?
+    "_#{fname}"
+  else
+    ".#{fname}"
+  end
+end
+
+def home_directory
+  if is_ruby_19?
+    # Ruby 1.9 handles Windows home dirs just fine
+    # http://redmine.ruby-lang.org/issues/show/1147
+    File.expand_path("~")
+  else
+    if is_windows?
+      ENV['USERPROFILE']
+    else
+      ENV['HOME']
+    end
+  end
+end
+
 # link dotfiles into ~
 namespace :link do
   task :all do
     # Via ryan bates, https://github.com/ryanb/dotfiles/blob/master/Rakefile
     replace_all = false
+    home_dir = home_directory()
     Dir['*'].each do |file|
       next if %w[Rakefile README.rdoc LICENSE].include?(file)
-      dotfile = ".#{file}"
+      next if %w[Rakefile README.textile .gitignore .gitkeep].include?(file)
+      dotfile = dotfile_path("#{file}")
 
-      if File.exist?(File.join(ENV['HOME'], dotfile))
-        if File.identical?(file, File.join(ENV['HOME'], dotfile))
+      if File.exist?(File.join(home_dir, dotfile))
+        if File.identical?(file, File.join(home_dir, dotfile))
           puts "identical ~/#{dotfile}"
         elsif replace_all
           replace_file(file)
