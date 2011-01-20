@@ -76,6 +76,10 @@ namespace :install do
     EOF
   end
 
+  task :slime do
+    system "cvs -d :pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot co -d emacs-plugins/slime slime"
+  end
+
   task :rvm do
     info_install 'RVM'
     # Requires "bash -c" because by default, the system command uses
