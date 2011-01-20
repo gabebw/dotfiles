@@ -123,4 +123,4 @@ namespace :update do
   task :slime => ['install:slime']
 end
 
-task :default => ['install:all']
+task :default => ['install:all', 'link:all']
