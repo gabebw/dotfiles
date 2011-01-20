@@ -9,4 +9,4 @@ export PATH
 
 export PYTHONSTARTUP=~/.python_startup
 # =<command> is like $(which command)
-[[ -x =pip ]] && eval "`pip completion --zsh`"
+[[ -x $(which pip 2>/dev/null) ]] && eval "`pip completion --zsh`"
