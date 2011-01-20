@@ -6,9 +6,5 @@
 ;;; This is the binary name of my scheme implementation
 (setq scheme-program-name "mit-scheme")
 
-;;; QUACK
-;(add-to-list 'load-path "/Users/gabe/emacs.d/")
-;(require 'quack)
-
 ;;; Always do syntax highlighting. Why is it called this? WHO KNOWS
 (global-font-lock-mode 1)
