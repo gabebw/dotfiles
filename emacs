@@ -1,3 +1,4 @@
+; vim:syntax=lisp
 ; to quit emacs: Ctrl-X Ctrl-C
 ; To run scheme after loading this library, do
 ; M-x scheme
