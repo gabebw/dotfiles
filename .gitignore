@@ -7,3 +7,6 @@
 *.zwc.old
 
 vim/.netrwhist
+
+# SBCL core for faster SLIME startup
+sbcl.core-for-slime
