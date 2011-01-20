@@ -105,7 +105,7 @@ namespace :uninstall do
 
   task :rvm do
     info_uninstall 'RVM'
-    puts "This command requires confirmation!"
+    puts "!!! This command requires confirmation!"
     system "rvm implode"
   end
 
