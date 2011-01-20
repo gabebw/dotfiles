@@ -63,8 +63,9 @@ namespace :link do
     # Via ryan bates, https://github.com/ryanb/dotfiles/blob/master/Rakefile
     replace_all = false
     home_dir = home_directory()
-    Dir['*'].each do |file|
-      next if %w[Rakefile README.rdoc LICENSE].include?(file)
+    # Get only top-level, non-ignored files
+    files = `git ls-files | grep -v '/'`.split
+    files.each do |file|
       next if %w[Rakefile README.textile .gitignore .gitkeep].include?(file)
       dotfile = dotfile_path("#{file}")
 
