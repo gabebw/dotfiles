@@ -112,4 +112,15 @@ namespace :uninstall do
   task :all => [:homebrew, :rvm]
 end
 
+namespace :update do
+  task :vim_plugins do
+    $LOAD_PATH << File.join(File.dirname(__FILE__), 'vim')
+    require 'update_bundles'
+    update_all()
+  end
+
+  # cvs checkout will update it too
+  task :slime => ['install:slime']
+end
+
 task :default => ['install:all']
