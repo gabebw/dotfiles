@@ -26,7 +26,7 @@
 ; ...other stuff, then it exits
 
 (setq slime-lisp-implementations
-           '((sbcl ("sbcl" "--core" "sbcl.core-for-slime"))))
+           '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl.core-for-slime"))))
 (require 'slime-autoloads) ; only load SLIME on demand (M-x slime)
 ;(slime-setup)
 (slime-setup '(slime-repl))
