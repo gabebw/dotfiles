@@ -4,7 +4,7 @@ get my system back, with no need to resort to ln or installation docs and
 with a minimum of input from me.
 =end
 
-require ‘rbconfig’
+require 'rbconfig'
 
 def info_install(pkg)
   puts "* Installing #{pkg}"
@@ -26,7 +26,7 @@ def link_file(file)
 end
 
 def is_windows?
-  Config::CONFIG[‘host_os’] =~ /mswin|mingw/
+  Config::CONFIG['host_os'] =~ /mswin|mingw/
 end
 
 def is_ruby_19?
