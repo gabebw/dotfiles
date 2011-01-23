@@ -10,6 +10,8 @@ then
   print
   print "!!! zkbd aborted! Please run it again. To skip a key, press Space."
   print
+  # Create an empty $key array so that setting $key[subscript] below doesn't fail
+  typeset -g -A key
   # Note that the key bindings below all have checks, so we don't have to
   # wrap them in an "if"
 else
