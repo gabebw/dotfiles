@@ -1,4 +1,4 @@
-These are my dotfiles - the .<whatever> files that live in my home directory.
+These are my dotfiles - the .[whatever] files that live in my home directory.
 
 As you may notice, they aren't actually dotfiles - they don't have a dot in
 front! To interactively link them into ~, run
