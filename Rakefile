@@ -59,6 +59,7 @@ end
 
 # link dotfiles into ~
 namespace :link do
+  desc "Link all dotfiles into ~"
   task :all do
     # Via ryan bates, https://github.com/ryanb/dotfiles/blob/master/Rakefile
     replace_all = false
@@ -96,6 +97,7 @@ namespace :link do
 end
 
 namespace :install do
+  desc "Install homebrew"
   task :homebrew do
     info_install 'homebrew'
     puts 'You can ignore this message: "/usr/local/.git already exists!"'
@@ -103,6 +105,7 @@ namespace :install do
   end
 
   # Helpful brews via homebrew
+  desc "Install some useful homebrew formulae"
   task :brews => [:homebrew] do
     system <<-EOF
       brew install android-sdk android-ndk \
@@ -113,10 +116,12 @@ namespace :install do
     EOF
   end
 
+  desc "Install SLIME, a good Lisp mode for Emacs"
   task :slime do
     system "cvs -d :pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot co -d emacs-plugins/slime slime"
   end
 
+  desc "Install RVM"
   task :rvm do
     info_install 'RVM'
     # Requires "bash -c" because by default, the system command uses
@@ -124,10 +129,12 @@ namespace :install do
     system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
   end
 
+  desc "Install RVM, Homebrew, and useful Homebrew formulae"
   task :all => [:brews, :rvm]
 end
 
 namespace :uninstall do
+  desc "Uninstall homebrew"
   task :homebrew do
     info_uninstall 'homebrew'
 
@@ -140,16 +147,19 @@ namespace :uninstall do
     EOF
   end
 
+  desc "Uninstall RVM"
   task :rvm do
     info_uninstall 'RVM'
     puts "!!! This command requires confirmation!"
     system "rvm implode"
   end
 
+  desc "Uninstall everything"
   task :all => [:homebrew, :rvm]
 end
 
 namespace :update do
+  desc "Update vim plugins"
   task :vim_plugins do
     $LOAD_PATH << File.join(File.dirname(__FILE__), 'vim')
     require 'update_bundles'
@@ -157,7 +167,9 @@ namespace :update do
   end
 
   # cvs checkout will update it too
+  desc "Update SLIME"
   task :slime => ['install:slime']
 end
 
+desc "Install everything and link dotfiles"
 task :default => ['install:all', 'link:all']
