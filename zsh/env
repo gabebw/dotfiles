@@ -2,6 +2,9 @@
 #  KEYBOARD  #
 ##############
 autoload zkbd
+# Actually ${DISPLAY:-$VENDOR-$OSTYPE}, but $DISPLAY is something like
+# "/tmp/launch-cpuipO/org.x:0" on OS X, so just go with this and, uh, mv it
+# when you need to.
 zkbd_file=${ZDOTDIR:-$HOME}/.zkbd/$TERM-$VENDOR-$OSTYPE
 [[ ! -f "$zkbd_file" ]] && zkbd
 # zkbd aborted
