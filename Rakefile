@@ -149,13 +149,12 @@ namespace :uninstall do
   task :homebrew do
     info_uninstall 'homebrew'
 
-    system <<-EOF
-      cd `brew --prefix`';
-      rm -rf Cellar;
-      system brew prune;
-      rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew;
-      rm -rf ~/Library/Caches/Homebrew;
-    EOF
+    Dir.chdir(`brew --prefix`.chomp) do
+      FileUtils.rm_r("Cellar", :force => true)
+      system "brew prune"
+      FileUtils.rm_r(%w{Library .git .gitignore bin/brew README.md share/man/man1/brew}, :force => true)
+      FileUtils.rm_r(File.expand_path('~/Library/Caches/Homebrew'), :force => true)
+    end
   end
 
   desc "Uninstall RVM"
