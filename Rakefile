@@ -30,7 +30,7 @@ def is_windows?
 end
 
 def is_ruby_19?
-  RUBY_VERSION.to_f == 1.9
+  Config::CONFIG['MAJOR'] == '1' and Config::CONFIG['MINOR'] == '9'
 end
 
 # platform-specific way to represent a dotfile
