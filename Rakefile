@@ -141,6 +141,16 @@ namespace :install do
     system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
   end
 
+  desc "Install Pik (Windows only)"
+  task :pik do
+    unless is_windows?
+      fail "Pik is Windows-only, install:rvm instead"
+    end
+    `gem install pik`
+    puts "Installed Pik gem, now run pik_install"
+    puts "Help: https://github.com/vertiginous/pik"
+  end
+
   desc "Install RVM, Homebrew, and useful Homebrew formulae"
   task :all => [:brews, :rvm]
 end
