@@ -10,6 +10,8 @@ me.
 require 'rbconfig'
 require 'fileutils'
 
+TOPLEVEL = File.dirname(__FILE__)
+
 def info_install(pkg)
   puts "++ Installing #{pkg}"
 end
@@ -126,7 +128,9 @@ namespace :install do
 
   desc "Install SLIME, a good Lisp mode for Emacs"
   task :slime do
-    system "cvs -d :pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot co -d emacs-plugins/slime slime"
+    Dir.chdir(TOPLEVEL) do
+      system "cvs -d :pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot co -d emacs-plugins/slime slime"
+    end
   end
 
   desc "Install RVM"
@@ -177,7 +181,7 @@ namespace :update do
 
   desc "Update vim plugins"
   task :vim_plugins do
-    $LOAD_PATH << File.join(File.dirname(__FILE__), 'vim')
+    $LOAD_PATH << File.join(TOPLEVEL, 'vim')
     require 'update_bundles'
     update_all()
   end
