@@ -5,6 +5,7 @@ with a minimum of input from me.
 =end
 
 require 'rbconfig'
+require 'fileutils'
 
 def info_install(pkg)
   puts "* Installing #{pkg}"
@@ -15,14 +16,18 @@ def info_uninstall(pkg)
 end
 
 
+# replace_file and link_file get just "zshenv", not ".zshenv" or
+# "$HOME/.zshenv"
 def replace_file(file)
-  system %Q{rm -rf "$HOME/.#{file}"}
+  full_dotfile_path = File.join(home_directory, dotfile_path(file))
+  FileUtils.rm(full_dotfile_path, :force => true)
   link_file(file)
 end
 
 def link_file(file)
-  puts "linking ~/.#{file}"
-  system %Q{ln -s "$PWD/#{file}" "$HOME/.#{file}"}
+  full_dotfile_path = File.join(home_directory, dotfile_path(file))}
+  puts "linking ~/#{dotfile_path(file)}"
+  FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
 end
 
 def is_windows?
