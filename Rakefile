@@ -20,6 +20,12 @@ def info_uninstall(pkg)
   puts "-- Uninstalling #{pkg}"
 end
 
+# Comma-separated list with "and"
+def pretty_list(array)
+  new = array[0...-1]
+  new << "and #{array.last}"
+  new.join(", ")
+end
 
 # replace_file and link_file get just "zshenv", not ".zshenv" or
 # "$HOME/.zshenv"
@@ -37,6 +43,10 @@ end
 
 def is_windows?
   Config::CONFIG['host_os'] =~ /mswin|mingw/
+end
+
+def is_osx?
+  Config::CONFIG['host_os'] =~ /darwin/
 end
 
 def is_ruby_19?
@@ -65,6 +75,12 @@ def home_directory
       ENV['HOME']
     end
   end
+end
+
+# No official desc since this really shouldn't be called directly
+def homebrew_is_installed?
+  # Test that `which brew` is executable
+  test(?x, `which brew`.chomp)
 end
 
 # link dotfiles into ~
@@ -107,11 +123,17 @@ namespace :link do
 end
 
 namespace :install do
-  desc "Install homebrew"
+  desc "Install homebrew (OSX only)"
   task :homebrew do
-    info_install 'homebrew'
-    puts 'You can ignore this message: "/usr/local/.git already exists!"'
-    system 'ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"'
+    unless is_osx?
+      fail "Not OSX, can't install Homebrew"
+    else
+      info_install 'homebrew'
+      # Don't fail, since they may have a broken install
+      warn "Homebrew already installed!" if homebrew_is_installed?
+      puts 'You can ignore this message: "/usr/local/.git already exists!"'
+      system 'ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"'
+      end
   end
 
   # Helpful brews via homebrew
@@ -136,12 +158,16 @@ namespace :install do
   desc "Install (and update) Vim plugins"
   task :vim_plugins => ['update:vim_plugins']
 
-  desc "Install RVM"
+  desc "Install RVM (Unixy OSes only)"
   task :rvm do
-    info_install 'RVM'
-    # Requires "bash -c" because by default, the system command uses
-    # /bin/sh, which chokes on the "<"s
-    system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
+    if is_windows?
+      fail "RVM doesn't work on Windows, install:pik instead"
+    else
+      info_install 'RVM'
+      # Requires "bash -c" because by default, the system command uses
+      # /bin/sh, which chokes on the "<"s
+      system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
+    end
   end
 
   desc "Install Pik (Windows only)"
@@ -154,8 +180,21 @@ namespace :install do
     puts "Help: https://github.com/vertiginous/pik"
   end
 
-  desc "Install RVM, Homebrew, and useful Homebrew formulae"
-  task :all => [:brews, :rvm]
+  xplatform = [:slime, :vim_plugins]
+  unix = [:rvm] + xplatform
+  windows = [:pik] + xplatform
+  osx = [:brews] + unix
+
+  if is_windows?
+    desc "Install #{pretty_list(windows)}"
+    task :all => windows
+  elsif is_osx?
+    desc "Install #{pretty_list(osx)}"
+    task :all => osx
+  else
+    desc "Install #{pretty_list(unix)}"
+    task :all => unix
+  end
 end
 
 desc "Alias for install:all"
