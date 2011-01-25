@@ -133,6 +133,9 @@ namespace :install do
     end
   end
 
+  desc "Install (and update) Vim plugins"
+  task :vim_plugins => ['update:vim_plugins']
+
   desc "Install RVM"
   task :rvm do
     info_install 'RVM'
