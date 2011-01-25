@@ -133,6 +133,9 @@ namespace :install do
   task :all => [:brews, :rvm]
 end
 
+desc "Alias for install:all"
+task :install => ['install:all']
+
 namespace :uninstall do
   desc "Uninstall homebrew"
   task :homebrew do
@@ -158,7 +161,13 @@ namespace :uninstall do
   task :all => [:homebrew, :rvm]
 end
 
+desc "Alias for uninstall:all"
+task :uninstall => ['uninstall:all']
+
 namespace :update do
+  desc "Update everything"
+  task :all => [:vim_plugins, :slime]
+
   desc "Update vim plugins"
   task :vim_plugins do
     $LOAD_PATH << File.join(File.dirname(__FILE__), 'vim')
@@ -170,6 +179,9 @@ namespace :update do
   desc "Update SLIME"
   task :slime => ['install:slime']
 end
+
+desc "Alias for update:all"
+task :update => ['update:all']
 
 desc "Install everything and link dotfiles"
 task :default => ['install:all', 'link:all']
