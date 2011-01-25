@@ -28,7 +28,7 @@ def replace_file(file)
 end
 
 def link_file(file)
-  full_dotfile_path = File.join(home_directory, dotfile_path(file))}
+  full_dotfile_path = File.join(home_directory, dotfile_path(file))
   puts "linking ~/#{dotfile_path(file)}"
   FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
 end
