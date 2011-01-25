@@ -122,7 +122,29 @@ namespace :link do
   end
 end
 
+desc "Alias for install:all"
+task :install => ['install:all']
+
 namespace :install do
+  # install:all is platform-dependent
+
+  # Cross-platform
+  xplatform = [:slime, :vim_plugins]
+  unix = [:rvm] + xplatform
+  windows = [:pik] + xplatform
+  osx = [:brews] + unix
+
+  if is_windows?
+    desc "Install #{pretty_list(windows)}"
+    task :all => windows
+  elsif is_osx?
+    desc "Install #{pretty_list(osx)}"
+    task :all => osx
+  else
+    desc "Install #{pretty_list(unix)}"
+    task :all => unix
+  end
+
   desc "Install homebrew (OSX only)"
   task :homebrew do
     unless is_osx?
@@ -180,27 +202,15 @@ namespace :install do
     puts "Help: https://github.com/vertiginous/pik"
   end
 
-  xplatform = [:slime, :vim_plugins]
-  unix = [:rvm] + xplatform
-  windows = [:pik] + xplatform
-  osx = [:brews] + unix
-
-  if is_windows?
-    desc "Install #{pretty_list(windows)}"
-    task :all => windows
-  elsif is_osx?
-    desc "Install #{pretty_list(osx)}"
-    task :all => osx
-  else
-    desc "Install #{pretty_list(unix)}"
-    task :all => unix
-  end
 end
 
-desc "Alias for install:all"
-task :install => ['install:all']
+desc "Alias for uninstall:all"
+task :uninstall => ['uninstall:all']
 
 namespace :uninstall do
+  desc "Uninstall everything"
+  task :all => [:homebrew, :rvm]
+
   desc "Uninstall homebrew"
   task :homebrew do
     info_uninstall 'homebrew'
@@ -219,13 +229,10 @@ namespace :uninstall do
     puts "!!! This command requires confirmation!"
     system "rvm implode"
   end
-
-  desc "Uninstall everything"
-  task :all => [:homebrew, :rvm]
 end
 
-desc "Alias for uninstall:all"
-task :uninstall => ['uninstall:all']
+desc "Alias for update:all"
+task :update => ['update:all']
 
 namespace :update do
   desc "Update everything"
@@ -242,9 +249,6 @@ namespace :update do
   desc "Update SLIME"
   task :slime => ['install:slime']
 end
-
-desc "Alias for update:all"
-task :update => ['update:all']
 
 desc "Install everything and link dotfiles"
 task :default => ['install:all', 'link:all']
