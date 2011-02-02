@@ -202,7 +202,7 @@ augroup rails_shortcuts
   map <Leader>sf :RSfunctionaltest
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
-  command -bar -nargs=1 OpenURL :!open <args>
+  command! -bar -nargs=1 OpenURL :!open <args>
 augroup END
 
 " Move lines up and down
