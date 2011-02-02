@@ -1,3 +1,13 @@
 syntax: glob
 .DS_Store
-.hgignore
+Thumbs.db
+
+# Vim swap files
+*.sw[po]
+# Vim persistent undo files
+*.un~
+# Created by _rake autocomplete function
+.rake_tasks
+
+# python byte-compiled files
+*.py[co]
