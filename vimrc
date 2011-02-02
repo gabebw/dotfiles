@@ -12,6 +12,37 @@ filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-e
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " Generate help tags for every bundle
 
+" Vundle; see https://github.com/gmarik/vundle
+" To install, run :BundleInstall
+" To update, run BundleInstall!
+" **DO NOT** put a call to BundleInstall in your vimrc! It'll recurse A LOT
+" and things will get weird.
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+
+" Bundles:
+Bundle "jquery"
+Bundle "css"
+Bundle "pydoc"
+" Bundle "pyflakes"
+Bundle "git://github.com/scrooloose/nerdtree.git"
+Bundle "git://github.com/tsaleh/vim-matchit.git"
+
+" tab completion
+Bundle "git://github.com/tsaleh/vim-supertab.git"
+
+" Syntax and the like
+Bundle "git://github.com/pangloss/vim-javascript.git"
+Bundle "git://github.com/kchmck/vim-coffee-script.git"
+Bundle "git://github.com/tpope/vim-cucumber.git"
+Bundle "git://github.com/tpope/vim-fugitive.git"
+Bundle "git://github.com/tpope/vim-git.git"
+Bundle "git://github.com/tpope/vim-haml.git"
+Bundle "git://github.com/tpope/vim-markdown.git"
+Bundle "git://github.com/tpope/vim-rails.git"
+Bundle "git://github.com/tsaleh/vim-shoulda.git"
+Bundle "git://github.com/vim-ruby/vim-ruby.git"
+
 " Turn on syntax highlighting when we have colors or gui is running
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
   syntax on
