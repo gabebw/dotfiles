@@ -8,6 +8,7 @@ set nocompatible
 " Note that pathogen must be called before built-in filetype plugin is
 " loaded
 filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
+
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " Generate help tags for every bundle
 
@@ -28,10 +29,14 @@ endif
 set laststatus=2 " always display status line
 " clear statusline
 set statusline=
-if exists("*fugitive#statusline")
-  set statusline+=%{fugitive#statusline()}
-endif
-set statusline+=%2*buf:\ %-3.3n%0* " buffer number
+set statusline+=%{fugitive#statusline()}
+" %2* means invert the background/foreground colors
+set statusline+=%2*
+" space at the end
+set statusline+=\ 
+
+" buffer number
+set statusline+=%2*buf:\ %-3.3n%0*
 " %f = Path to the file in the buffer, as typed or relative to current
 " directory. %t = file basename
 set statusline+=%f
