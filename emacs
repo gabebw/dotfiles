@@ -33,3 +33,6 @@
 
 ; To exit SLIME, type a comma to get in the minibuffer, then type
 ; `sayoonara` and hit ENTER. Voila, back to Emacs!
+
+; Indent on enter
+(global-set-key "\C-m" 'newline-and-indent)
