@@ -11,8 +11,8 @@
 
 ; SLIME
 ; your Lisp system
-(setq inferior-lisp-program
-  (concat (shell-command-to-string "brew --prefix") "/bin/sbcl"))
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+  ;(concat (shell-command-to-string "brew --prefix") "/bin/sbcl"))
 (add-to-list 'load-path "~/.dotfiles/emacs-plugins/slime/")  ; your SLIME directory
 ; load SBCL faster
 ; see: http://common-lisp.net/project/slime/doc/html/Loading-Swank-faster.html#Loading-Swank-faster
