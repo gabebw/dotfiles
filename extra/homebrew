@@ -1,12 +1,13 @@
 # Homebrew stuff
 
+HOMEBREW_PREFIX=$(brew --prefix)
 # `brew doctor` recommendations
 # Consider editing your .bashrc to put:
 #  /usr/local/bin
 #ahead of /usr/bin in your $PATH.
-PATH="$(brew --prefix)"/bin:$PATH
+PATH="$HOMEBREW_PREFIX"/bin:$PATH
 # Put /usr/local/sbin in PATH
-PATH="$(brew --prefix)"/sbin:$PATH
+PATH="$HOMEBREW_PREFIX"/sbin:$PATH
 
 # If you install Python packages via pip, binaries will be installed under
 # Python's cellar but not automatically linked into the Homebrew prefix.
