@@ -6,6 +6,9 @@
 *.zwc
 *.zwc.old
 
+# OneBigFile of zsh/* and extra/*
+zsh-all.zsh
+
 vim/.netrwhist
 
 # SBCL core for faster SLIME startup
