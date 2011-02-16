@@ -8,6 +8,7 @@
 
 ;;; Always do syntax highlighting. Why is it called this? WHO KNOWS
 (global-font-lock-mode 1)
+(setq font-lock-maximum-decoration t) ;;all possible colors
 
 ; SLIME
 ; your Lisp system
@@ -25,14 +26,38 @@
 ; [undoing binding stack and other enclosing state... done]
 ; ...other stuff, then it exits
 
-(setq slime-lisp-implementations
-           '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl.core-for-slime"))))
+;(setq slime-lisp-implementations
+;           '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl.core-for-slime"))))
+
 (require 'slime-autoloads) ; only load SLIME on demand (M-x slime)
-;(slime-setup)
-(slime-setup '(slime-repl))
+;(slime-setup) ; basic setup
+;(slime-setup '(slime-repl)) ; load the repl too
+; slime-fancy loads almost everything, including the REPL
+(slime-setup '(slime-fancy))
 
 ; To exit SLIME, type a comma to get in the minibuffer, then type
 ; `sayoonara` and hit ENTER. Voila, back to Emacs!
 
+
 ; Indent on enter
+; binding to (kbd "RET") might be more xplatform
 (global-set-key "\C-m" 'newline-and-indent)
+
+
+;;; This was installed by package-install.el.
+;;; This provides support for the package system and
+;;; interfacing with ELPA, the package archive.
+;;; Move this code earlier if you want to reference
+;;; packages in your .emacs.
+(when
+    (load
+     (expand-file-name "~/.emacs.d/elpa/package.el"))
+  (package-initialize))
+
+(global-set-key "%" 'match-paren)
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
+	((looking-at "\\s\)") (forward-char 1) (backward-list 1))
+	(t (self-insert-command (or arg 1)))))
