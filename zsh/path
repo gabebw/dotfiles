@@ -8,14 +8,13 @@
 MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr/local/man
 
 PATH=$PATH:/usr/local/mysql/bin
+
 if [[ -d /opt/local ]]
 then
     PATH="$PATH:/opt/local/bin:/opt/local/sbin:/opt/local/libexec/"
     MANPATH=$MANPATH:/opt/local/share/man
 fi
 [[ -d /usr/games ]] && PATH="$PATH:/usr/games"
-# Node.js
-[[ -d /Users/gabe/bin/node/bin ]] && PATH="$PATH:/Users/gabe/bin/node/bin"
 
 # TeX
 pdflatex_dir='/usr/local/texlive/2010/bin/x86_64-darwin'
