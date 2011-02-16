@@ -202,6 +202,10 @@ namespace :install do
     puts "Help: https://github.com/vertiginous/pik"
   end
 
+  desc "Install NPM, the node package manager"
+  task :npm do
+    curl http://npmjs.org/install.sh | sudo sh
+  end
 end
 
 desc "Alias for uninstall:all"
@@ -228,6 +232,11 @@ namespace :uninstall do
     info_uninstall 'RVM'
     puts "!!! This command requires confirmation!"
     system "rvm implode"
+  end
+
+  desc "Uninstall NPM"
+  task :npm do
+    sudo npm uninstall npm
   end
 end
 
