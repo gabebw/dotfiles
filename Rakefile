@@ -217,9 +217,6 @@ desc "Alias for uninstall:all"
 task :uninstall => ['uninstall:all']
 
 namespace :uninstall do
-  desc "Uninstall everything"
-  task :all => [:homebrew, :rvm]
-
   desc "Uninstall homebrew"
   task :homebrew do
     info_uninstall 'homebrew'
