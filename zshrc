@@ -14,26 +14,41 @@
 # Hey, "unfunction" is a thing. It's like unset, but for functions.
 # od -a -> named hexdump, i.e. "nul" instead of hexdump -C's "0"
 
-function progress {
-  echo -n "$1 | "
+# Order does matter to an extent:
+#  - editor must come before alias
+#  - you probably want env to be first
+#  - greeting should be last, just because
+#  - greeting takes a while (relatively), because it outputs text
+core_files=(env colors editor 'alias' path options completion git prompt) #greeting)
+# order doesn't matter for extra_files
+extra_files=(ruby rails rvm python git android node-js homebrew)
+
+all=~/.dotfiles/zsh-all.zsh
+
+# Sourcing tens of files makes this take too long. So, just jam everything
+# into one big file, zcompile it, and source that.
+function compile_all {
+  print "Compiling all..."
+  echo -n > $all # clear it
+  # put core and extras all in one big file
+  # core should go before extras.
+  for f in $core_files
+  do
+    cat ~/.dotfiles/zsh/$f >> $all
+  done
+
+  for f in $extra_files
+  do
+    cat ~/.dotfiles/extra/$f >> $all
+  done
+
+  zcompile $all # EXXXTREME PERFORMANCE (not really)
+  print "done with all."
 }
 
-ZSH_CONFIG_PATH=~/.dotfiles/zsh
-. $ZSH_CONFIG_PATH/env        && progress "env"
-. $ZSH_CONFIG_PATH/colors     && progress "colors"
-# set editor as early as possible so the vim alias is present
-. $ZSH_CONFIG_PATH/editor     && progress "editor"
-# gives {source,edit}_extra
-. $ZSH_CONFIG_PATH/alias      && progress "alias"
-. $ZSH_CONFIG_PATH/path       && progress "path"
-. $ZSH_CONFIG_PATH/options    && progress "options"
-. $ZSH_CONFIG_PATH/completion && progress "completion"
-. $ZSH_CONFIG_PATH/git        && progress "git"
-# do extras before sourcing prompt
-. $ZSH_CONFIG_PATH/extras     && progress "extras"
-. $ZSH_CONFIG_PATH/prompt     && progress "prompt"
-echo # make way for greeting
-. $ZSH_CONFIG_PATH/greeting
+#compile_all
+
+. $all
 
 function precmd {
   vcs_info 'prompt'
