@@ -46,7 +46,8 @@ function compile_all {
   print "done with all."
 }
 
-#compile_all
+# Make it if it doesn't exist
+[[ ! -f $all ]] && compile_all
 
 . $all
 
