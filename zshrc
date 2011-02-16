@@ -42,7 +42,9 @@ function compile_all {
     cat ~/.dotfiles/extra/$f >> $all
   done
 
-  zcompile $all # EXXXTREME PERFORMANCE (not really)
+  # recompile (creates compiled file if it doesn't exist, and updates
+  # compiled file if needed)
+  autoload -U zrecompile && zrecompile -p -R $all
   print "done with all."
 }
 
