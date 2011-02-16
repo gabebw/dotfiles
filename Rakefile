@@ -204,7 +204,7 @@ namespace :install do
 
   desc "Install NPM, the node package manager"
   task :npm do
-    curl http://npmjs.org/install.sh | sudo sh
+    system "curl http://npmjs.org/install.sh | sudo sh"
   end
 end
 
