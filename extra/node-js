@@ -2,56 +2,27 @@
 
 NODE_PREFIX=$(brew --prefix node)
 
-# Test for NPM. If installed, detect whether it's installed via Homebrew or
-# not, and add to $PATH appropriately.
+NODE_BIN=$NODE_PREFIX/bin
+NODE_MAN=$NODE_PREFIX/share/man
 
-# Assume we have neither
-have_homebrew_npm='no'
-have_other_npm='no'
+# Can't use ~
+NPM_PREFIX="$HOME/.npm_root"
+NPM_BIN="$NPM_PREFIX/bin"
+NPM_MAN="$NPM_PREFIX/man"
 
-# Test for Homebrew-installed NPM
-[[ $(brew list npm) != *"No such keg"* ]] && have_homebrew_npm='yes'
+# Node
+[[ -d $NODE_BIN ]] && PATH=$PATH:$NODE_BIN
+[[ -d $NODE_MAN ]] && MANPATH=$MANPATH:$NODE_MAN
 
-if [[ $have_homebrew_npm == 'no' ]]; then
-  if [[ $(which npm) != *"not found" ]]; then
-    # Found NPM, but not from Homebrew
-    have_other_npm='yes'
-  fi
-fi
+# NPM
+[[ -d $NPM_BIN ]] && PATH="$PATH:$NPM_BIN"
+[[ -d $NPM_MAN ]] && MANPATH="$MANPATH:$NPM_MAN"
 
-if [[ $have_other_npm == 'yes' ]]; then
-  # Add these for (non-homebrew installed) NPM, since Node itself is symlinked
-  # in /usr/local/*, but NPM installs directly to the Cellar
-  NODE_BIN=$NODE_PREFIX/bin
-  NODE_MAN=$NODE_PREFIX/share/man
+export NODE_PATH
+export PATH
+export MANPATH
 
-  # Node
-  [[ -d $NODE_BIN ]] && PATH=$PATH:$NODE_BIN
-  [[ -d $NODE_MAN ]] && MANPATH=$MANPATH:$NODE_MAN
-
-  export PATH
-  export MANPATH
-
-  unset NODE_BIN NODE_MAN
-elif [[ $have_homebrew_npm == 'yes' ]]; then
-  # From Homebrew's NPM caveats:
-  #"npm will install libraries to:
-  #  /usr/local/lib/node/.npm
-  #To manually remove libraries installed by npm, delete this (hidden!) folder."
-
-  # homebrew-installed NPM installs binaries in this dir.
-  NPM_BIN=/usr/local/share/npm/bin
-  # homebrew-installed NPM symlinks libraries in this dir. Add to NODE_PATH to
-  # require libs without a path
-  NPM_LIB=/usr/local/lib/node
-
-  # NPM
-  [[ -d $NPM_LIB ]] && NODE_PATH=$NODE_PATH:$NPM_LIB
-  [[ -d $NPM_BIN ]] && PATH=$PATH:$NPM_BIN
-
-  export NODE_PATH
-
-  # clean up
-  unset NPM_BIN NPM_LIB
-fi
+# clean up
+unset NPM_BIN NPM_LIB
+unset NODE_BIN NODE_MAN
 unset NODE_PREFIX
