@@ -53,6 +53,8 @@ function compile_all {
 
 . $all
 
+trim_path
+
 function precmd {
   vcs_info 'prompt'
 }

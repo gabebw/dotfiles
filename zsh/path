@@ -5,6 +5,12 @@
 # /etc/profile gives us these
 # /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin
 
+# trim_path is called at the end of zshrc
+trim_path() {
+  # http://chunchung.blogspot.com/2007/11/remove-duplicate-paths-from-path-in.html
+  export PATH=$(awk -F: '{for(i=1;i<=NF;i++){if(!($i in a)){a[$i];printf s$i;s=":"}}}'<<<$PATH)
+}
+
 MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr/local/man
 
 PATH=$PATH:/usr/local/mysql/bin
