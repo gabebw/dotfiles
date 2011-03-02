@@ -122,7 +122,7 @@ set scrolloff=3 " When scrolling, show 3 lines of context
 
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
-set textwidth=76 " Numbers on the side take off 4 columns, 80-4 = 76
+set textwidth=78
 set showbreak="@" " This is prepended to wrapped lines
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
@@ -253,6 +253,11 @@ if has("autocmd")
   filetype plugin indent on
   " on opening the file, clear search-highlighting
   autocmd BufReadCmd set nohlsearch
+
+  " Highlight trailing whitespace except on the current line
+  autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+  autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+  highlight EOLWS ctermbg=red guibg=red
 
   " http://github.com/technicalpickles/pickled-vim/blob/master/home/.vimrc
   augroup myfiletypes
