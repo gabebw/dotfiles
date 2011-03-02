@@ -124,9 +124,8 @@ set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
 set textwidth=76 " Numbers on the side take off 4 columns, 80-4 = 76
 set showbreak="@" " This is prepended to wrapped lines
-" tabs are trail, end of lines are $
-set listchars=tab:>-,eol:$
-
+" Display extra whitespace
+set list listchars=tab:»·,trail:·
 
 " **** TABS ****
 " Note that ~/.vim/after/ftplugin changes some of these settings
