@@ -18,9 +18,6 @@ alias gst="git st" # Use my alias from ~/.gitconfig
 alias gcm="git commit -m"
 alias gcam="git commit -am"
 
-# What changed between last commit and now?
-alias git-recent="git diff master~1"
-
 # Prints out untracked files in a single line, with double quotes around
 # them
 alias git-new="gst | egrep '^\?\?' | sed 's/^.. //' | sed 's/^|$/\\\\\"/g' | xargs echo"
@@ -30,12 +27,4 @@ alias git-new="gst | egrep '^\?\?' | sed 's/^.. //' | sed 's/^|$/\\\\\"/g' | xar
 # an alias.
 function git-remove {
   git status --porcelain | \egrep '^D' | \sed -E -e 's/^D *//' -e 's/ /\\ /g' -e 's/^|$/"/g'
-}
-
-# Use git-tweet project
-function tweet(){
-  pushd /Users/gabe/jbs/git-tweets
-  git msg "$*"
-  git push
-  popd
 }
