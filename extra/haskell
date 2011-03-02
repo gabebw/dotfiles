@@ -1,3 +1,0 @@
-# Add Cabal-installed binaries
-PATH=$PATH:/Users/gabe/.cabal/bin
-export PATH
