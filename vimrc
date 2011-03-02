@@ -165,7 +165,7 @@ set viewdir=~/.vim/views
 "autocmd BufWinEnter ?* silent loadview
 
 " map autocomplete to Tab
-"imap <Tab> <C-N>
+" imap <Tab> <C-P>
 
 " "," is the <Leader> character
 let mapleader=","
@@ -223,7 +223,7 @@ inoremap kj <Esc>
 nnoremap ` '
 
 " Completion {{{
-" "set wildmenu" enables a menu at the bottom of the vim/gvim window.
+" :set wildmenu enables a menu at the bottom of the vim/gvim window.
 set wildmenu
 " list:longest    - When > 1 match, list all matches and
 "                   complete till longest common string.
