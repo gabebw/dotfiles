@@ -13,7 +13,7 @@ then
   return
 fi
 
-source "$HOME/.rvm/scripts/rvm"
+[[ -e $rvmrc ]] && source "$HOME/.rvm/scripts/rvm"
 
 # RVM bash completion
 # zsh comes with it baked in.
