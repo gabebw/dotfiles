@@ -4,11 +4,6 @@
 # This pushes nothing into BRANCH_NAME and so deletes it.
 # More: http://help.github.com/remotes/
 
-# Git achievements; see http://github.com/icefox/git-achievements
-export PATH="$PATH:/Users/gabe/Projects/git-achievements/"
-alias git="git-achievements"
-compdef git-achievements=git
-
 alias gp="git push"
 alias gph="git push && git push heroku"
 alias gd="git diff"
