@@ -21,6 +21,16 @@ def update_ragel
   end
 end
 
+
+def update_pathogen
+  # Not in bundle/, so do it by hand
+  Dir.chdir(File.join(File.dirname(__FILE__), 'autoload')) do
+    File.open('pathogen.vim', 'w') do |f|
+      f << open('https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim').read
+    end
+  end
+end
+
 $git_bundles = [
   #"git://github.com/astashov/vim-ruby-debugger.git",
   #"git://github.com/godlygeek/tabular.git",
@@ -132,6 +142,7 @@ end
 
 def update_all
   setup
+  update_pathogen
   update_ragel
   update_git_bundles
   update_vim_org_scripts
