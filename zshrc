@@ -21,7 +21,7 @@
 #  - greeting takes a while (relatively), because it outputs text
 core_files=(env colors editor 'alias' path options completion git prompt) #greeting)
 # order doesn't matter for extra_files
-extra_files=(ruby rails rvm python git android node-js homebrew)
+extra_files=(ruby rails rvm git homebrew)
 
 all=~/.dotfiles/zsh-all.zsh
 
