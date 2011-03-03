@@ -12,21 +12,12 @@ HISTSIZE=10000
 SAVEHIST=1000
 setopt no_list_beep
 setopt appendhistory
-# don't store history line if it's the same as the previous one
-setopt hist_ignore_all_dups
+setopt hist_ignore_all_dups # don't store repeated commands
 # Removes meaningless whitespace
 # so "echo 'asdf 1234'    " -> "echo 'asdf 1234'"
 setopt hist_reduce_blanks
-# autocd: simply type name of directory and you cd to it
-setopt autocd
-# in order to use #, ~ and ^ for filename generation
-# grep word *~(*.gz|*.bz|*.bz2|*.zip|*.Z) ->
-# -> searches for word not in compressed files
-# don't forget to quote '^', '~' and '#'!
-#setopt extendedglob
-setopt cdablevars
+setopt autocd # type a directory name to cd to it
 # correct: correct commands
 # correctall: correct commmands AND arguments
 unsetopt correctall
-# allow commands in prompt
-setopt prompt_subst
+setopt prompt_subst # allow commands in prompt
