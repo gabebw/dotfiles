@@ -3,15 +3,9 @@
 ################
 
 # Add my extra ZSH completion scripts to $fpath so that compinit will find
-# them. Can use ~ path, and $fpath[(I)] will still find it later.
-MY_COMPLETION_DIR=~/.dotfiles/zsh/completion-scripts
-# Only push MY_COMPLETION_DIR onto the $fpath array once.
-# If == 0, then not in $fpath
-[[ $fpath[(I)$MY_COMPLETION_DIR] == 0 ]] && fpath+=($MY_COMPLETION_DIR)
-unset MY_COMPLETION_DIR # don't litter
-
+# them.
+fpath=(~/.dotfiles/zsh/completion-scripts $fpath)
 autoload -U compinit && compinit
-
 
 # complete command names, inc. aliases, shell functions, builtins and reserved
 # words.
