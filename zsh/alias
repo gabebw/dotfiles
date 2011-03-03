@@ -95,19 +95,11 @@ alias qq="source ~/.zshrc"
 
 # VLC / Preview stuff
 function m {
-    if [ ! $1 ]; then
-      open -a VLC .
-    else
-      open -a VLC "$@"
-    fi
+  open -a VLC "${@:-.}"
 }
 
 function p() {
-  if [ ! $1 ]; then
-    open -a Preview .
-  else
-    open -a Preview "$@"
-  fi
+  open -a Preview "${@:-.}"
 }
 
 # pst = "p star"; intentionally not quoted so you can put your own stars in
