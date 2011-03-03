@@ -24,6 +24,13 @@ export GREP_COLOR='1;31' # highlight matches in red
 # Wrap it in a function so it's evaluated at run-time.
 function env-update { export PATH=$PATH; }
 function al { ls -t | head -n ${1:-10}; }
+function m { open -a VLC "${@:-.}"; }
+function p() { open -a Preview "${@:-.}"; }
+
+# you can pipe pure "ls" output to "pp"
+# See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
+alias pp="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a Preview"
+alias mm="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a VLC"
 
 # 3 params:
 #  * topdir
@@ -87,13 +94,3 @@ alias qqz=source_extra_zsh
 # zshrc only
 alias q="$EDITOR ~/.zshrc"
 alias qq="source ~/.zshrc"
-
-function m { open -a VLC "${@:-.}"; }
-function p() { open -a Preview "${@:-.}"; }
-
-# pst = "p star"; intentionally not quoted so you can put your own stars in
-#pst(){ open -a Preview *$1*; }
-# you can pipe pure "ls" output to "pp"
-# See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
-alias pp="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a Preview"
-alias mm="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a VLC"
