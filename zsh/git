@@ -71,10 +71,5 @@ function git_branch {
 
 # Stolen from oh-my-zsh
 parse_git_dirty(){
-  if [[ -n $(git status -s 2> /dev/null) ]]; then
-    echo ' ✗'
-  else
-    # Do nothing when repo is clean
-    #echo '✔'
-  fi
+  [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'
 }
