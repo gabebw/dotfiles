@@ -2,19 +2,15 @@
 #  EDITOR  #
 ############
 # don't set it to macvim, zsh has troubles with double-aliases
-export EDITOR=mvim
+export EDITOR="mvim -p" # -p = 1 tab/file
 alias j=$EDITOR
-# -O = if given multiple files, open in 1 window/file
-alias vim="mvim -O"
-alias vi="mvim -O"
-alias macvim="mvim -O"
-
+alias vi="mvim -p"
 alias svi="sudo vim"
 
 function viw {
   local location=$(which "$1")
   if [[ -f "$location" ]]; then
-    $EDITOR "$location"
+    vim "$location"
   else
     echo "$location isn't a file."
   fi
