@@ -12,6 +12,9 @@ filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-e
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " Generate help tags for every bundle
 
+" RVM fix via http://rvm.beginrescueend.com/integration/vim/
+set shell=/bin/sh
+
 " Vundle; see https://github.com/gmarik/vundle
 " To install, run :BundleInstall
 " To update, run BundleInstall!
