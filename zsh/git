@@ -1,35 +1,6 @@
 #######################
 #  GIT (branch, vcs)  #
 #######################
-# I have only a faint idea of what this does: it is cobbled together from the web
-# this is helpful: http://kriener.org/articles/2009/06/04/zsh-prompt-magic
-## set formats:
-# In normal formats and actionformats:
-#  %s - vcs in use (git, svn, etc)
-#  %b - info about current branch
-#  %a -
-#  %b - branchname
-#  %u - unstagedstr (see below)
-#  %c - stagedstr (see below)
-#  %a - action (e.g. rebase-i) [only makes sense in actionformats]
-#  %R - base dir of repository
-#  %r - repository name. If %R is /foo/bar/repoXY, %r is repoXY.
-#  %S - path in the repository. If $PWD is /foo/bar/reposXY/beer/tasty,
-#  		%S is "beer/tasty".
-#  - you probably want %R/%S -> "~/repo/subdir"
-# In branchformat:
-#  %b - the branch name
-#  %r - the current revision number
-## colors as %F{n}: (advantage of not needing %{...%}
-# 1: red (%F{1})
-# 2: green
-# 3: yellow
-# 4: blue
-# 5: purple
-# 6: cyan
-# 7: gray
-# 8: black
-# %f: reset color
 autoload -Uz vcs_info
 # colors
 PR_RESET="%{${reset_color}%}"
@@ -37,39 +8,15 @@ BRANCH="%{$fg[red]%}"
 PAREN_COLOR="%{$fg[green]%}"
 PAREN_OPEN="${PAREN_COLOR}(%f"
 PAREN_CLOSE="${PAREN_COLOR})%f"
-
 BASIC_BRANCH="${BRANCH}%b${PR_RESET}" # e.g. "master"
 FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
 
-#### START INFO BLOCK
-# http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#SEC273
-# :vcs_info:<vcs-string>:<user-context>:<repo-root-name>
-# 	<vcs-string>: one of: git, svn, cvs, etc.
-# 	<user-context>: a freely configurable string, assignable by the user as
-# 				  	the first argument to vcs_info.
-# 	<repo-root-name>: the name of a repository in which you want a style to
-# 					  match.  So, if you want a setting specific to
-# 					  /usr/src/zsh, with that being a cvs checkout, you can
-# 					  set <repo-root-name>  to zsh to make it so.
-#
-# just type zstyle to see current styles
-# For more on style:
-#  http://zsh.sourceforge.net/Doc/Release/zsh_21.html#SEC182
-# "zstyle -d" to delete all defs
-#### END INFO BLOCK
-zstyle ':vcs_info:*' enable git hg # disables all other VCSes
+zstyle ':vcs_info:*' enable git hg
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
 
-# http://repo.or.cz/w/git.git/blob_plain/HEAD:/contrib/completion/git-completion.bash
-# downloaded 5/11/10
-function git_branch {
-  local git_branch="${vcs_info_msg_0_}$(parse_git_dirty)"
-  # Must use print (not echo) for ZSH colors to work
-  print $git_branch
-}
+# Must use print (not echo) for ZSH colors to work
+git_branch() { print "${vcs_info_msg_0_}$(parse_git_dirty)"; }
 
 # Stolen from oh-my-zsh
-parse_git_dirty(){
-  [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'
-}
+parse_git_dirty(){ [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'; }
