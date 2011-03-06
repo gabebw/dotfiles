@@ -1,3 +1,9 @@
+How do I change my shell to ZSH?
+chsh -s /bin/zsh
+
+Where can I find awesome 'zshrc's?
+http://dotfiles.org/.zshrc (and check out the rest of the site too)
+
 Search backward through history: Ctrl-R
 
 Modify the most recent command: r search=replace
@@ -8,4 +14,13 @@ Open an editor ($EDITOR) to edit the last command: fc
 
 Print an ASCII calendar: cal or ncal
 
+hashing: hash -d HASH=directory, then "cd ~HASH"
+- Do not use ~ in the directory, either. Use /Users/gabe/.
+- more info: http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
+
+How do I unset a function?
+unfunction <function-name>
+
+How do I do a named hexdump, with "nul" instead of hexdump -C's "0"?
+od -a (and check out `man od`)
 
