@@ -173,6 +173,40 @@ ${right_arrow}%{$fg[blue]%}%2c %{$fg[green]%}$%f "
 # (non-core functionality) #
 ############################
 
+############
+# Homebrew #
+############
+HOMEBREW_PREFIX="$(brew --prefix)"
+PATH="$HOMEBREW_PREFIX"/bin:$PATH
+PATH="$HOMEBREW_PREFIX"/sbin:$PATH
+# android-ndk doesn't put symlinks in /usr/local/bin
+PATH="$PATH:$(brew --prefix android-ndk)"
+
+# If you install Python packages via pip, binaries will be installed under
+# Python's cellar but not automatically linked into the Homebrew prefix.
+PATH="$(brew --prefix python)"/bin:$PATH
+unset HOMEBREW_PREFIX
+
+##########
+# Python #
+##########
+export PYTHONSTARTUP=~/.python_startup
+
+#######
+# Git #
+#######
+alias gp="git push"
+alias gd="git diff"
+
+alias ga="git add"
+alias gai="git add --interactive"
+
+alias gb="git branch"
+alias gcb="git checkout -b"
+alias gc="git checkout"
+alias gst="git st" # Use my alias from ~/.gitconfig
+alias gcm="git commit -m"
+
 ##########
 #  Ruby  #
 ##########
