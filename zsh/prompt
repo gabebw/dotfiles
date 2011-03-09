@@ -1,7 +1,0 @@
-# MUST wrap $fg in %{...%} or it creates weird errors with commands >1 line
-# Use %f to reset color and use terminal default colors (set in Terminal prefs)
-right_arrow=$(echo "\u21AA") # ↪
-
-# 2 line prompt!
-export PROMPT="[\$(ruby_version)\$(git_branch)]
-${right_arrow}%{$fg[blue]%}%2c %{$fg[green]%}$%f "
