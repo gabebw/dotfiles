@@ -37,7 +37,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # don't set it to macvim, zsh has troubles with double-aliases
 export EDITOR="mvim -p" # -p = 1 tab/file
 alias vi="mvim -p"
-alias svi="sudo vim"
+alias svi="sudo $EDITOR"
 
 function viw {
   local location=$(which "$1")
