@@ -282,6 +282,7 @@ fi
 rgcu() { rvm gemset create "$1" && rvm gemset use "$1"; }
 
 
+export PATH
 trim_path
 
 # Houston, we have liftoff.
