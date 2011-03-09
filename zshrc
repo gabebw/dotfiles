@@ -65,11 +65,6 @@ export GREP_COLOR='1;31' # highlight matches in red
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
 [[ -x $(which colormake) ]] && alias make=colormake
 
-# So I can tell ZSH to scan the PATH for newly-installed programs, without
-# running the whole bootup process all over again. And yes, I used to use
-# Gentoo.
-# Wrap it in a function so it's evaluated at run-time.
-function env-update { export PATH=$PATH; }
 function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
 function p { open -a Preview "${@:-.}"; }
@@ -90,11 +85,16 @@ alias qq="source ~/.zshrc"
 # /etc/profile gives us these
 # /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin
 
-# trim_path is called at the end of zshrc
+# Removes duplicate PATH entries but keeps the original order.
 trim_path() {
   # http://chunchung.blogspot.com/2007/11/remove-duplicate-paths-from-path-in.html
   export PATH=$(awk -F: '{for(i=1;i<=NF;i++){if(!($i in a)){a[$i];printf s$i;s=":"}}}'<<<$PATH)
 }
+# So I can tell ZSH to scan the PATH for newly-installed programs, without
+# running the whole bootup process all over again. And yes, I used to use
+# Gentoo.
+# Wrap it in a function so it's evaluated at run-time.
+env-update() { export PATH=$PATH; }
 
 MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr/local/man
 
