@@ -9,7 +9,7 @@
 # OneBigFile of zsh/* and extra/*
 zsh-all.zsh
 
-vim/.netrwhist
+.netrwhist
 
 # SBCL core for faster SLIME startup
 sbcl.core-for-slime
