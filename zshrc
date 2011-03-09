@@ -105,6 +105,7 @@ unset pdflatex_dir
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
 PATH="$PATH:/Users/gabe/bin"
+PATH="/usr/local/bin:$PATH" # homebrew
 
 #################
 #  ZSH options  #
