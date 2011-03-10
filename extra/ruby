@@ -1,14 +1,6 @@
 ##########
 #  Ruby  #
 ##########
-
-# Add binaries for non-sudo installed 1.8 gems
-#PATH="$PATH:/Users/gabe/.gem/ruby/1.8/bin"
-
-# Ruby stuff
-# RUBYLIB is where ruby looks for additional require()d scripts
-#export RUBYLIB=$RUBYLIB:/Users/gabe/bin
-# No need to do "require rubygems"
 export RUBYOPT=rubygems
 
 # qri stuff
@@ -21,8 +13,6 @@ then
 fi
 # Gem search
 alias gs="gem search -rd"
-
-hash -d p2a="/Users/gabe/Projects/pidgin2adium"
 
 # Rake task completion, WITH nested items (like db:clear)
 # Via: http://weblog.rubyonrails.org/2006/3/9/fast-rake-task-completion-for-zsh

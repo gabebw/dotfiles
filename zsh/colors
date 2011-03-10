@@ -1,8 +1,0 @@
-############
-#  COLORS  #
-############
-# allows e.g. $fg[blue] and $bg[green]
-autoload colors && colors
-## colorful listings
-zmodload -i zsh/complist
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
