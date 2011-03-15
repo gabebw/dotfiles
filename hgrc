@@ -8,6 +8,9 @@ email = gbw@brandeis.edu
 ignore = ~/.gitignore
 editor = $EDITOR -f
 
+[alias]
+stn = status .
+
 [merge-tools]
 # Just creating opendiff.* tells Hg that opendiff exists, and to call it via
 # "opendiff".
