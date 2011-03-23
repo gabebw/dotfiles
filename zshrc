@@ -148,7 +148,7 @@ PAREN_CLOSE="${PAREN_COLOR})%f"
 BASIC_BRANCH="${BRANCH}%b${PR_RESET}" # e.g. "master"
 FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
 
-zstyle ':vcs_info:*' enable git hg
+zstyle ':vcs_info:*' enable git hg svn
 # Note leading space!
 zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
 
