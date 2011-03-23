@@ -167,7 +167,7 @@ parse_git_dirty(){ [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'; }
 right_arrow=$(echo "\u21AA") # ↪
 # 2 line prompt!
 export PROMPT="[\$(ruby_version)\$(git_branch)]
-${right_arrow}%{$fg[blue]%}%2c %{$fg[green]%}$%f "
+${right_arrow}%{$fg[blue]%}%~ %{$fg[green]%}$%f "
 
 ############################
 #         EXTRAS           #
