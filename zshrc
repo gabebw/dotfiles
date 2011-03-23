@@ -60,6 +60,7 @@ alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 alias grpe="grep" # fix typo
+alias pgrep="grep -P" # PCRE-compatible
 export GREP_OPTIONS="--color=auto" # removes color when piping
 export GREP_COLOR='1;31' # highlight matches in red
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
