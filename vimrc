@@ -180,6 +180,7 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>w :%s/\s\+$//e<CR>
 " Run scheme
 map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
+map <Leader>n :NERDTreeToggle<CR>
 
 augroup rails_shortcuts
   " Rails.vim
