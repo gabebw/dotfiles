@@ -103,11 +103,10 @@ endif
 set gfn=Menlo\ 12 " Use the Menlo font
 
 if version >= 703 " 703 = Vim 7.3
-  set relativenumber " line numbers are relative to current line
+  "set relativenumber " line numbers are relative to current line
   set undofile " Create FILE.un~ files for persistent undo
-else
-  set number " non-relative line numbers
 endif
+set number " non-relative line numbers
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
 set nowrap " don't wrap lines
