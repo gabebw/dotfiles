@@ -103,12 +103,21 @@ else
   "colorscheme molokai
 endif
 
-"set gfn=Bitsteam\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
-set gfn=Menlo\ 12 " Use the Menlo font
+if has('win32')
+  set gfn=Bitstream\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
+elseif has('macunix') " OSX
+  set gfn=Menlo\ 12 " Use the Menlo font
+endif
 
 if version >= 703 " 703 = Vim 7.3
   "set relativenumber " line numbers are relative to current line
   set undofile " Create FILE.un~ files for persistent undo
+  " Persistent undo
+  if has('win32')
+    set undodir=C:\Windows\Temp
+  else
+    set undodir=~/.vim/undodir
+  endif
 endif
 set number " non-relative line numbers
 set numberwidth=3 " minimum
@@ -159,7 +168,9 @@ set writebackup
 set backupdir=~/.vim/backups
 " setting backupskip to this to allow for 'crontab -e' using vim.
 " thanks to: http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html
-set backupskip=/tmp/*,/private/tmp/*"
+if has('unix')
+  set backupskip=/tmp/*,/private/tmp/*"
+endif
 
 " views options
 set viewdir=~/.vim/views
