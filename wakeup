@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Take a picture on wakeup
 
 # isightcapture comes from http://www.intergalactic.de/pages/iSight.html
