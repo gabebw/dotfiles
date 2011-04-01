@@ -261,6 +261,12 @@ fi
 
 rgcu() { rvm gemset create "$1" && rvm gemset use "$1"; }
 
+#######
+# NPM #
+#######
+#PATH="$PATH:/Users/gabe/.npm_root/bin/"
+PATH="$PATH:/Users/gabe/.npm/coffee-script/1.0.1/package/bin"
+
 
 export PATH
 trim_path
