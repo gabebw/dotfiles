@@ -3,12 +3,12 @@
 " To see value of a variable inside vim, do (e.g.) "echo version"
 set nocompatible
 
+filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
+
 " Wow, this cleaned up my ~/.vim like you would not believe.
 " http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
 " Note that pathogen must be called before built-in filetype plugin is
 " loaded
-filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
-
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags() " Generate help tags for every bundle
 
