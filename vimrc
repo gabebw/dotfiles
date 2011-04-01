@@ -31,9 +31,6 @@ Bundle "pydoc"
 Bundle "git://github.com/scrooloose/nerdtree.git"
 Bundle "git://github.com/tsaleh/vim-matchit.git"
 
-" Colors
-Bundle "git://github.com/altercation/vim-colors-solarized.git"
-
 " tab completion
 Bundle "git://github.com/tsaleh/vim-supertab.git"
 
@@ -96,8 +93,7 @@ set statusline+=%= " right align
 set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
 
 if has("gui_running")
-  "colorscheme railscasts
-  colorscheme solarized
+  colorscheme railscasts
   "colorscheme mustang
 else
   "colorscheme molokai
