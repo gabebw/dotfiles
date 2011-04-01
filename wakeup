@@ -1,0 +1,8 @@
+# Take a picture on wakeup
+
+# isightcapture comes from http://www.intergalactic.de/pages/iSight.html
+# Creates a picture named like 2011-04-01_01_24_23.jpg
+# It chokes on anything with a colon in it.
+
+mkdir -p ~/snapshots
+isightcapture -w 800 -h 600 ~/snapshots/$(date +%F_%H_%M_%S).jpg
