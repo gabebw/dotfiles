@@ -32,6 +32,7 @@ syntax sync fromstart
 "" JavaScript comments
 syntax keyword javaScriptCommentTodo    TODO FIXME XXX TBD contained
 syntax region  javaScriptLineComment    start=+\/\/+ end=+$+ keepend contains=javaScriptCommentTodo,@Spell
+syntax region  javaScriptEnvComment     start=+^#!+ end=+$+ keepend contains=javaScriptCommentTodo,@Spell
 syntax region  javaScriptLineComment    start=+^\s*\/\/+ skip=+\n\s*\/\/+ end=+$+ keepend contains=javaScriptCommentTodo,@Spell fold
 syntax region  javaScriptCvsTag         start="\$\cid:" end="\$" oneline contained
 syntax region  javaScriptComment        start="/\*"  end="\*/" contains=javaScriptCommentTodo,javaScriptCvsTag,@Spell fold
@@ -97,7 +98,7 @@ syntax keyword javaScriptGlobalObjects  Array Boolean Date Function Infinity Jav
 
 syntax keyword javaScriptExceptions     Error EvalError RangeError ReferenceError SyntaxError TypeError URIError
 
-syntax keyword javaScriptFutureKeys     abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public
+syntax keyword javaScriptFutureKeys     abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws goto private transient debugger implements protected volatile double import public
 
 "" DOM/HTML/CSS specified things
 
@@ -199,6 +200,7 @@ if version >= 508 || !exists("did_javascript_syn_inits")
   endif
   HiLink javaScriptComment              Comment
   HiLink javaScriptLineComment          Comment
+  HiLink javaScriptEnvComment           Comment
   HiLink javaScriptDocComment           Comment
   HiLink javaScriptCommentTodo          Todo
   HiLink javaScriptCvsTag               Function
