@@ -178,7 +178,7 @@ ${right_arrow}%{$fg[blue]%}%~ %{$fg[green]%}$%f "
 ############
 # Homebrew #
 ############
-HOMEBREW_PREFIX="$(brew --prefix)"
+HOMEBREW_PREFIX=/usr/local # "$(brew --prefix)"
 PATH="$HOMEBREW_PREFIX"/bin:$PATH
 PATH="$HOMEBREW_PREFIX"/sbin:$PATH
 # android-ndk doesn't put symlinks in /usr/local/bin
@@ -194,7 +194,7 @@ unset HOMEBREW_PREFIX
 ##########
 # Python #
 ##########
-export PYTHONSTARTUP=~/.python_startup
+PYTHONSTARTUP=~/.python_startup
 
 #######
 # Git #
@@ -214,8 +214,7 @@ alias gcm="git commit -m"
 ##########
 #  Ruby  #
 ##########
-export RUBYOPT=rubygems
-alias gs="gem search -rd"
+RUBYOPT=rubygems
 
 #########
 # RAILS #
