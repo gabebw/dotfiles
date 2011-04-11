@@ -22,8 +22,8 @@
 ;   * (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
 ;   * (save-lisp-and-die "sbcl.core-for-slime")
 
-;(setq slime-lisp-implementations
-;           '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl.core-for-slime"))))
+(setq slime-lisp-implementations
+      '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl-1.0.47.core-for-slime"))))
 
 (require 'slime-autoloads) ; only load SLIME on demand (M-x slime)
 ;(slime-setup) ; basic setup
@@ -33,7 +33,6 @@
 
 ; To exit SLIME, type a comma to get in the minibuffer, then type
 ; `sayoonara` and hit ENTER. Voila, back to Emacs!
-
 
 ; Indent on enter
 ; binding to (kbd "RET") might be more xplatform
