@@ -67,7 +67,9 @@ set statusline+=%{fugitive#statusline()}
 " %2* means invert the background/foreground colors
 set statusline+=%2*
 " space at the end
-set statusline+=\ 
+" Add empty quotes at end so that removing trailing whitespace won't remove
+" that space
+set statusline+=\ ""
 
 " buffer number
 set statusline+=%2*buf:\ %-3.3n%0*
