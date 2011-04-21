@@ -1,6 +1,14 @@
 require 'rubygems'
 require 'pp'
 
+=begin
+Tips
+_ (an underscore) is always set to the result of the last successful expression
+  (so you can't capture errors)
+  But this won't work:
+  %w{a b c}; _.map{|x| 'x'}. You have to do it in 2 lines.
+=end
+
 # ripl sources this file too, so check which one we're using.
 # ripl-irb defines IRB constant, so we check for nonexistence of Ripl
 using_irb = (not defined?(Ripl))
