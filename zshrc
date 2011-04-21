@@ -233,9 +233,10 @@ alias rtc="rake test:recent"
 alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
-alias cuc="bundle exec cucumber" # not :all because that runs @wip too
-alias wip="bundle exec cucumber --profile wip"
+alias cuc="rake cucumber" # not :all because that runs @wip too
+alias wip="rake cucumber:wip"
 alias bi="bundle install --without production"
+alias migrate="rake db:migrate db:test:prepare"
 
 #######
 # RVM #
