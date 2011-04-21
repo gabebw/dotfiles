@@ -7,7 +7,7 @@ using_irb = (not defined?(Ripl))
 
 # To install all of these gems:
 # gem install awesome_print map_by_method what_methods wirble hirb
-%w{ap map_by_method what_methods wirble}.each do |pkg|
+%w{ap map_by_method what_methods wirble hirb}.each do |pkg|
   begin
     require pkg
   rescue LoadError => err
