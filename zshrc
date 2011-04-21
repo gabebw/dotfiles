@@ -69,6 +69,7 @@ export GREP_OPTIONS="--color=auto" # removes color when piping
 export GREP_COLOR='1;31' # highlight matches in red
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
 [[ -x $(which colormake) ]] && alias make=colormake
+alias less="less -R" # correctly interpret ASCII color escapes
 
 function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
