@@ -39,6 +39,9 @@ export EDITOR="mvim -p" # -p = 1 tab/file
 alias vi="mvim -p"
 alias svi="sudo $EDITOR"
 
+# Use non-Macvim for crontab -e
+alias crontab="EDITOR=vim crontab"
+
 function viw {
   local location=$(which "$1")
   if [[ -f "$location" ]]; then
