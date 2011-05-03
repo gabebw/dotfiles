@@ -16,3 +16,6 @@ zsh-all.zsh
 
 emacs-plugins/*
 !emacs-plugins/.gitkeep
+
+# dotjs folder
+js/
