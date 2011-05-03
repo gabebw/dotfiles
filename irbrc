@@ -13,6 +13,14 @@ _ (an underscore) is always set to the result of the last successful expression
 # ripl-irb defines IRB constant, so we check for nonexistence of Ripl
 using_irb = (not defined?(Ripl))
 
+def is_rails_3?
+  Object.const_defined?(:Rails) && Rails::VERSION::STRING.to_i == 3
+end
+
+def is_rails_2?
+  Object.const_defined?(:Rails) && Rails::VERSION::STRING.to_i == 2
+end
+
 # To install all of these gems:
 # gem install awesome_print map_by_method what_methods wirble hirb
 %w{ap map_by_method what_methods wirble hirb}.each do |pkg|
@@ -37,8 +45,11 @@ end
 Hirb::View.enable if defined?(Hirb)
 
 # Logger
-require 'logger'
-if ENV.include?('RAILS_ENV') and not Object.const_defined?('RAILS_DEFAULT_LOGGER')
+if is_rails_3? and not Rails.logger
+  require 'logger'
+  Rails.logger = ActiveSupport::BufferedLogger.new(STDOUT)
+elsif is_rails_2? and not Object.const_defined?('RAILS_DEFAULT_LOGGER')
+  require 'logger'
   Object.const_set('RAILS_DEFAULT_LOGGER', Logger.new(STDOUT))
 end
 
