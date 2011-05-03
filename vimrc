@@ -192,7 +192,7 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Remove trailing whitespace before saving
 map <Leader>w :%s/\s\+$//e<CR>
 " Run scheme
-map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
+"map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
 map <Leader>n :NERDTreeToggle<CR>
 
 augroup rails_shortcuts
