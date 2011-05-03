@@ -54,7 +54,7 @@ elsif is_rails_2? and not Object.const_defined?('RAILS_DEFAULT_LOGGER')
 end
 
 # Monkeypatching ahoy!
-class Object
+class Class
   # Get an object's "own methods" - methods that only it (not Object) has
   def ownm
     methods - Object.methods
