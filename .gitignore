@@ -12,7 +12,7 @@ zsh-all.zsh
 .netrwhist
 
 # SBCL core for faster SLIME startup
-sbcl.core-for-slime
+*.core-for-slime
 
 emacs-plugins/*
 !emacs-plugins/.gitkeep
