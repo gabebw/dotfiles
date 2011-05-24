@@ -255,5 +255,5 @@ namespace :uninstall do
   end
 end
 
-desc "Install everything and link dotfiles"
-task :default => ['install:all', 'link:all']
+desc "Install vim, homebrew, and RVM and link dotfiles"
+task :default => ['install:vim', 'install:homebrew', 'install:rvm', 'link:all']
