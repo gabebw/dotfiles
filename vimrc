@@ -104,15 +104,21 @@ set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
 if has("gui_running")
   colorscheme railscasts
   "colorscheme mustang
+
+  " FONTS
+  if has('win32')
+    set gfn=Bitstream\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
+  else
+    if has('gui_gtk2') " GTK2 but not GTK1
+      set gfn=Menlo\ 12
+    elseif has('gui_macvim') " MacVim
+      set gfn=Menlo:h12 " Use the Menlo font
+    endif
+  endif
 else
   "colorscheme molokai
 endif
 
-if has('win32')
-  set gfn=Bitstream\ Vera\ Sans\ Mono\ 12 " Use the Bitstream font
-elseif has('macunix') " OSX
-  set gfn=Menlo\ 12 " Use the Menlo font
-endif
 
 if version >= 703 " 703 = Vim 7.3
   "set relativenumber " line numbers are relative to current line
