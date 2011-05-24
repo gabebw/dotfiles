@@ -158,6 +158,30 @@ namespace :install do
       end
   end
 
+  task :vim => ["vim:pathogen", "vim:vundle"]
+  namespace :vim do
+    desc "Install Pathogen"
+    task :pathogen => "pathogen.vim"
+
+    desc "Install Vundle"
+    task :vundle => "autoload/vundle.vim"
+
+    directory "vim/bundle/vundle"
+    file "autoload/vundle.vim" => "vim/bundle/vundle" do |t|
+      `git clone http://github.com/gmarik/vundle.git vim/bundle/vundle`
+    end
+
+    directory "vim/autoload"
+    file "pathogen.vim" => "vim/autoload" do |t|
+      require 'open-uri'
+      path = "vim/autoload/pathogen.vim"
+      File.open(path, 'w') do |f|
+        f << open('https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim').read
+      end
+    end
+  end
+
+
   # Helpful brews via homebrew
   desc "Install some useful homebrew formulae"
   task :brews => [:homebrew] do
