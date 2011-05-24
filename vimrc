@@ -26,27 +26,27 @@ call vundle#rc()
 " Bundles:
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle "jquery"
-Bundle "css"
-Bundle "pydoc"
-" Bundle "pyflakes"
-Bundle "git://github.com/scrooloose/nerdtree.git"
-Bundle "git://github.com/tsaleh/vim-matchit.git"
+Bundle 'jquery'
+Bundle 'css'
+Bundle 'pydoc'
+" Bundle 'pyflakes'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tsaleh/vim-matchit'
 
 " tab completion
-Bundle "git://github.com/ervandew/supertab.git"
+Bundle 'ervandew/supertab'
 
 " Syntax and the like
-Bundle "git://github.com/pangloss/vim-javascript.git"
-Bundle "git://github.com/kchmck/vim-coffee-script.git"
-Bundle "git://github.com/tpope/vim-cucumber.git"
-Bundle "git://github.com/tpope/vim-fugitive.git"
-Bundle "git://github.com/tpope/vim-git.git"
-Bundle "git://github.com/tpope/vim-haml.git"
-Bundle "git://github.com/tpope/vim-markdown.git"
-Bundle "git://github.com/tpope/vim-rails.git"
-Bundle "git://github.com/tsaleh/vim-shoulda.git"
-Bundle "git://github.com/vim-ruby/vim-ruby.git"
+Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-haml'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
+Bundle 'tsaleh/vim-shoulda'
+Bundle 'vim-ruby/vim-ruby'
 
 " Turn on syntax highlighting when we have colors or gui is running
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
