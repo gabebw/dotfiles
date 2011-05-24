@@ -32,7 +32,7 @@ Bundle "git://github.com/scrooloose/nerdtree.git"
 Bundle "git://github.com/tsaleh/vim-matchit.git"
 
 " tab completion
-Bundle "git://github.com/tsaleh/vim-supertab.git"
+Bundle "git://github.com/ervandew/supertab.git"
 
 " Syntax and the like
 Bundle "git://github.com/pangloss/vim-javascript.git"
