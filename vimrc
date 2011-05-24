@@ -49,8 +49,9 @@ Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
 
 " Colorschemes
-Bundle 'railscasts'
-Bundle 'vividchalk'
+Bundle 'Railscasts-Theme-GUIand256color'
+Bundle 'vividchalk.vim'
+Bundle 'molokai'
 
 " Turn on syntax highlighting when we have colors or gui is running
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
