@@ -185,13 +185,7 @@ namespace :install do
   # Helpful brews via homebrew
   desc "Install some useful homebrew formulae"
   task :brews => [:homebrew] do
-    system <<-EOF
-      brew install android-sdk android-ndk \
-        colordiff colormake dos2unix \
-        fortune git macvim \
-        nethack pip python readline \
-        watch
-    EOF
+    system "brew install colordiff colormake ack fortune git macvim watch"
   end
 
   desc "Install (and update) Vim plugins"
