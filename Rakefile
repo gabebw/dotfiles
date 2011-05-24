@@ -188,8 +188,10 @@ namespace :install do
     system "brew install colordiff colormake ack fortune git macvim watch"
   end
 
-  desc "Install (and update) Vim plugins"
-  task :vim_plugins => ['update:vim_plugins']
+  desc "Install Vim plugins"
+  task :vim_plugins => "vim:vundle" do
+    puts "To install/update Vim plugins, start Vim and run :BundleInstall"
+  end
 
   desc "Install RVM (Unixy OSes only)"
   task :rvm do
@@ -250,21 +252,6 @@ namespace :uninstall do
   desc "Uninstall NPM"
   task :npm do
     sudo npm uninstall npm
-  end
-end
-
-desc "Alias for update:all"
-task :update => ['update:all']
-
-namespace :update do
-  desc "Update everything"
-  task :all => [:vim_plugins]
-
-  desc "Update vim plugins"
-  task :vim_plugins do
-    $LOAD_PATH << File.join(TOPLEVEL, 'vim')
-    require 'update_bundles'
-    update_all()
   end
 end
 
