@@ -129,7 +129,7 @@ namespace :install do
   # install:all is platform-dependent
 
   # Cross-platform
-  xplatform = [:slime, :vim_plugins]
+  xplatform = [:vim_plugins]
   unix = [:rvm] + xplatform
   windows = [:pik] + xplatform
   osx = [:brews] + unix
@@ -192,13 +192,6 @@ namespace :install do
         nethack pip python readline \
         watch
     EOF
-  end
-
-  desc "Install SLIME, a good Lisp mode for Emacs"
-  task :slime do
-    Dir.chdir(TOPLEVEL) do
-      system "cvs -d :pserver:anonymous:anonymous@common-lisp.net:/project/slime/cvsroot co -d emacs-plugins/slime slime"
-    end
   end
 
   desc "Install (and update) Vim plugins"
@@ -271,7 +264,7 @@ task :update => ['update:all']
 
 namespace :update do
   desc "Update everything"
-  task :all => [:vim_plugins, :slime]
+  task :all => [:vim_plugins]
 
   desc "Update vim plugins"
   task :vim_plugins do
@@ -279,10 +272,6 @@ namespace :update do
     require 'update_bundles'
     update_all()
   end
-
-  # cvs checkout will update it too
-  desc "Update SLIME"
-  task :slime => ['install:slime']
 end
 
 desc "Install everything and link dotfiles"
