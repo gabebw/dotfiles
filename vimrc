@@ -24,6 +24,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Bundles:
+" let Vundle manage Vundle
+Bundle 'gmarik/vundle'
 Bundle "jquery"
 Bundle "css"
 Bundle "pydoc"
