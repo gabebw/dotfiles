@@ -4,12 +4,22 @@
 
 " Install in ~/.vim/autoload (or ~\vimfiles\autoload).
 "
+" For management of individually installed plugins in ~/.vim/bundle
+" (or $HOME/vimfiles/bundle), adding 'call pathogen#infect()' to your
+" .vimrc prior to 'fileype plugin indent on' is the only other setup necessary.
+"
 " API is documented below.
 
 if exists("g:loaded_pathogen") || &cp
   finish
 endif
 let g:loaded_pathogen = 1
+
+" Point of entry for basic default usage.
+function! pathogen#infect() abort " {{{1
+  call pathogen#runtime_append_all_bundles()
+  call pathogen#cycle_filetype()
+endfunction " }}}1
 
 " Split a path into a list.
 function! pathogen#split(path) abort " {{{1
@@ -81,6 +91,14 @@ function! pathogen#glob_directories(pattern) abort " {{{1
   return filter(pathogen#glob(a:pattern),'isdirectory(v:val)')
 endfunction "}}}1
 
+" Turn filetype detection off and back on again if it was already enabled.
+function! pathogen#cycle_filetype() " {{{1
+  if exists('g:did_load_filetypes')
+    filetype off
+    filetype on
+  endif
+endfunction " }}}1
+
 " Checks if a bundle is 'disabled'. A bundle is considered 'disabled' if
 " its 'basename()' is included in g:pathogen_disabled[]'.
 function! pathogen#is_disabled(path) " {{{1
@@ -133,10 +151,12 @@ let s:done_bundles = ''
 " Invoke :helptags on all non-$VIM doc directories in runtimepath.
 function! pathogen#helptags() " {{{1
   for dir in pathogen#split(&rtp)
-    if dir[0 : strlen($VIM)-1] !=# $VIM && isdirectory(dir.'/doc') && !empty(glob(dir.'/doc/*')) && (!filereadable(dir.'/doc/tags') || filewritable(dir.'/doc/tags'))
+    if dir[0 : strlen($VIMRUNTIME)-1] !=# $VIMRUNTIME && filewritable(dir.'/doc') == 2 && !empty(glob(dir.'/doc/*')) && (!filereadable(dir.'/doc/tags') || filewritable(dir.'/doc/tags'))
       helptags `=dir.'/doc'`
     endif
   endfor
 endfunction " }}}1
+
+command! -bar Helptags :call pathogen#helptags()
 
 " vim:set ft=vim ts=8 sw=2 sts=2:

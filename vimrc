@@ -9,7 +9,7 @@ filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-e
 " http://tammersaleh.com/posts/the-modern-vim-config-with-pathogen
 " Note that pathogen must be called before built-in filetype plugin is
 " loaded
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 call pathogen#helptags() " Generate help tags for every bundle
 
 " RVM fix via http://rvm.beginrescueend.com/integration/vim/
