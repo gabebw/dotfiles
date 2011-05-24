@@ -20,7 +20,7 @@ set shell=/bin/sh
 " To update, run BundleInstall!
 " **DO NOT** put a call to BundleInstall in your vimrc! It'll recurse A LOT
 " and things will get weird.
-set rtp+=~/.vim/vundle.git/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Bundles:
