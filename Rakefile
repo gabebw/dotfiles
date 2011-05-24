@@ -164,7 +164,7 @@ namespace :install do
     task :pathogen => "pathogen.vim"
 
     desc "Install Vundle"
-    task :vundle => "autoload/vundle.vim"
+    task :vundle => ["autoload/vundle.vim", :pathogen]
 
     directory "vim/bundle/vundle"
     file "autoload/vundle.vim" => "vim/bundle/vundle" do |t|
