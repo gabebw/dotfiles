@@ -122,6 +122,13 @@ namespace :link do
   end
 end
 
+namespace :new do
+  desc "Change your shell to ZSH"
+  task :zsh do
+    system "chsh -s `which zsh` #{ENV['USER']}"
+  end
+end
+
 desc "Alias for install:all"
 task :install => ['install:all']
 
@@ -254,6 +261,9 @@ namespace :uninstall do
     sudo npm uninstall npm
   end
 end
+
+desc "Everything a new laptop needs"
+task :new => ['new:zsh', 'install:vim', 'install:rvm', 'install:brews']
 
 desc "Install vim, homebrew, and RVM and link dotfiles"
 task :default => ['install:vim', 'install:homebrew', 'install:rvm', 'link:all']
