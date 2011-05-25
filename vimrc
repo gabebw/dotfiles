@@ -193,7 +193,7 @@ set viewdir=~/.vim/views
 "autocmd BufWinEnter ?* silent loadview
 
 " map autocomplete to Tab
-" imap <Tab> <C-P>
+imap <Tab> <C-P>
 
 " "," is the <Leader> character
 let mapleader=","
