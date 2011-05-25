@@ -194,6 +194,9 @@ set viewdir=~/.vim/views
 
 " map autocomplete to Tab
 imap <Tab> <C-P>
+" whack kj to escape
+inoremap kj <esc>
+
 
 " "," is the <Leader> character
 let mapleader=","
