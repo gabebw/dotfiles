@@ -185,7 +185,7 @@ namespace :install do
   # Helpful brews via homebrew
   desc "Install some useful homebrew formulae"
   task :brews => [:homebrew] do
-    system "brew install colordiff colormake ack fortune git macvim watch"
+    system "brew install colordiff colormake ack fortune git macvim watch memcached"
   end
 
   desc "Install Vim plugins"
