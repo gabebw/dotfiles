@@ -203,6 +203,7 @@ PYTHONSTARTUP=~/.python_startup
 #######
 # Git #
 #######
+alias g=git
 alias gp="git push"
 alias gd="git diff"
 
