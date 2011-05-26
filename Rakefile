@@ -190,16 +190,15 @@ namespace :install do
     end
   end
 
+  desc "Install Vim plugins"
+  task :vim_plugins => "vim:vundle" do
+    puts "To install/update Vim plugins, start Vim and run :BundleInstall"
+  end
 
   # Helpful brews via homebrew
   desc "Install some useful homebrew formulae"
   task :brews => [:homebrew] do
     system "brew install colordiff colormake ack fortune git macvim watch memcached"
-  end
-
-  desc "Install Vim plugins"
-  task :vim_plugins => "vim:vundle" do
-    puts "To install/update Vim plugins, start Vim and run :BundleInstall"
   end
 
   desc "Install RVM (Unixy OSes only)"
