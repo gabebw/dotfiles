@@ -47,6 +47,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'godlygeek/tabular'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
@@ -338,6 +339,9 @@ if has("autocmd")
     au BufRead,BufNewFile *.ru set ft=ruby
     au BufRead,BufNewFile Gemfile set ft=ruby
     au BufRead,BufNewFile .autotest set ft=ruby
+
+    " .gitconfig and gitconfig are the same
+    au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
     autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh ft=zsh
     autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh ft=zsh
