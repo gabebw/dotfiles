@@ -13,3 +13,6 @@ Thumbs.db
 
 # python byte-compiled files
 *.py[co]
+
+# Rubinius-compiled files
+*.rbc
