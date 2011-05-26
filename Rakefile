@@ -154,15 +154,13 @@ namespace :install do
 
   desc "Install homebrew (OSX only)"
   task :homebrew do
-    unless is_osx?
-      fail "Not OSX, can't install Homebrew"
-    else
-      info_install 'homebrew'
-      # Don't fail, since they may have a broken install
-      warn "Homebrew already installed!" if homebrew_is_installed?
-      puts 'You can ignore this message: "/usr/local/.git already exists!"'
-      system 'ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"'
-      end
+    fail "Not OSX, can't install Homebrew" unless is_osx?
+
+    info_install 'homebrew'
+    # Don't fail, since they may have a broken install
+    warn "Homebrew already installed!" if homebrew_is_installed?
+    puts 'You can ignore this message: "/usr/local/.git already exists!"'
+    system 'ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"'
   end
 
   desc "Install Pathogen and Vundle"
@@ -203,21 +201,18 @@ namespace :install do
 
   desc "Install RVM (Unixy OSes only)"
   task :rvm do
-    if is_windows?
-      fail "RVM doesn't work on Windows, install:pik instead"
-    else
-      info_install 'RVM'
-      # Requires "bash -c" because by default, the system command uses
-      # /bin/sh, which chokes on the "<"s
-      system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
-    end
+    fail "RVM doesn't work on Windows, install:pik instead" if is_windows?
+
+    info_install 'RVM'
+    # Requires "bash -c" because by default, the system command uses
+    # /bin/sh, which chokes on the "<"s
+    system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
   end
 
   desc "Install Pik (Windows only)"
   task :pik do
-    unless is_windows?
-      fail "Pik is Windows-only, install:rvm instead"
-    end
+    fail "Pik is Windows-only, install:rvm instead" unless is_windows?
+
     `gem install pik`
     puts "Installed Pik gem, now run pik_install"
     puts "Help: https://github.com/vertiginous/pik"
