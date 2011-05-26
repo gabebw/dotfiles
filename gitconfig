@@ -1,0 +1,61 @@
+# See: man gitconfig
+# or http://www.kernel.org/pub/software/scm/git/docs/git-config.html
+[user]
+  name = Gabe Berke-Williams
+# THESE LINES WILL BREAK script/plugin install git://xxxx.git
+#[branch "master"]
+#  remote = origin
+#  merge = refs/heads/master
+[github]
+  # via http://help.github.com/git-email-settings/
+  user = gabebw
+[core]
+  #editor = mate -w
+  editor = mvim -f # -f is required!
+[merge]
+  tool = opendiff
+[alias]
+  st = status -sb
+  co = checkout
+  # via http://ozmm.org/posts/git_msg.html
+  msg = commit --allow-empty -m
+  # Pretty!
+  # via http://andyjeffries.co.uk/articles/25-tips-for-intermediate-git-users
+  lol = log --pretty=oneline --abbrev-commit --graph --decorate
+  unstage = reset HEAD
+  done = !git fetch && git rebase origin/master && git checkout master && git merge @{-1} && rake && git push
+# color the UI!
+[color]
+  ui = auto
+[color "branch"]
+  # What colors should "git branch" show?
+  #current = yellow reverse # default black
+  #local = cyan # default yellow
+  #remote = green # default red
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  # Options:
+  # header: the header text of the status message
+  # added/updated: added but not committed
+  # changed: changed but not added in the index
+  # untracked
+  # nobranch: the color the "no branch" warning is shown in (default red)
+  added = yellow # files deleted with "git rm" are this color too
+  changed = green # deleted items NOT done with "git rm" are this color too
+  untracked = cyan
+[help]
+  autocorrect = 1
+[svn]
+  authorsfile = /Users/gabe/.git-author
+[core]
+  whitespace=trailing-space,cr-at-eol
+  excludesfile = /Users/gabe/.gitignore
+  autocrlf = input
+[achievement]
+  upload = true
+[instaweb]
+  httpd = webrick
