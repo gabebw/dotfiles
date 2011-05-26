@@ -60,3 +60,17 @@ class Class
     methods - Object.methods
   end
 end
+
+class Array
+  def self.toy
+    [1, 2, 3] + %w{a b c}
+  end
+end
+
+class Hash
+  def self.toy
+    {'a' => 'b',
+     'foo' => 'bar',
+     1 => 2}
+  end
+end
