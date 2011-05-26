@@ -112,13 +112,13 @@ if has("gui_running")
   else
     if has('gui_gtk2') " GTK2 but not GTK1
       try
-        set guifont=Inconsolata\ 14
+        set guifont=Inconsolata\ 15
       catch /E596:/ " Invalid font
         set guifont=Menlo\ 12
       endtry
     elseif has('gui_macvim') " MacVim
       try
-        set guifont=Inconsolata:h14
+        set guifont=Inconsolata:h15
       catch /E596:/ " Invalid font
         set guifont=Menlo:h12 " Use the Menlo font
       endtry
