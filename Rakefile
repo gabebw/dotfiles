@@ -165,7 +165,9 @@ namespace :install do
       end
   end
 
+  desc "Install Pathogen and Vundle"
   task :vim => ["vim:pathogen", "vim:vundle"]
+
   namespace :vim do
     desc "Install Pathogen"
     task :pathogen => "pathogen.vim"
