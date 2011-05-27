@@ -238,6 +238,7 @@ alias cuc="cucumber"
 alias wip="rake cucumber:wip"
 alias bi="bundle install --without production"
 alias migrate="rake db:migrate db:test:prepare"
+alias be="bundle exec"
 
 #######
 # RVM #
