@@ -8,35 +8,50 @@
 " getftime = last modification time
 " %P = ??? something with percentage ???
 set laststatus=2 " always display status line
-" clear statusline
-set statusline=
-set statusline+=%{fugitive#statusline()}
-" %2* means invert the background/foreground colors
-set statusline+=%2*
-" space at the end
-" Add empty quotes at end so that removing trailing whitespace won't remove
-" that space
-set statusline+=\ ""
 
-" buffer number
-set statusline+=%2*buf:\ %-3.3n%0*
-" %f = Path to the file in the buffer, as typed or relative to current
-" directory. %t = file basename
-set statusline+=%f
-" FLAGS
-" %m = display "[+]" if file has been modified
-" %r = display "[RO]" if file is read-only
-" %h = help buffer flag, "[help]"
-" %w = [Preview] if in preview window
-" %y = file content type, e.g. "[ruby]" - includes brackets
-" %{&ff} = file format (unix/dos)
-set statusline+=%m%r%h%w%y\ fmt=%{&ff} " flags
-set statusline+=\  " add a space
-" %l = current line number
-" %L = total lines
-" %c = current column
-set statusline+=lin\:%l/%L\ col\:%c " line and column
-" %= = right-align everything after this
-set statusline+=%= " right align
-" last modified time, like "07/29/10 07:36:44"
-set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
+" This is a function so that it can be called by autocmd. We need autocmd
+" because exists("*fugitive#statusline") fails if it's called during the
+" sourcing of plugins, so we call it after everything's loaded, to test for
+" fugitive.
+function! statusline#set()
+  " clear statusline
+  set statusline=
+
+  if exists("*fugitive#statusline")
+    set statusline+=%{fugitive#statusline()}
+  else
+    echoerr "Fugitive is not installed, please run :BundleInstall"
+  endif
+
+  " %2* means invert the background/foreground colors
+  set statusline+=%2*
+  " space at the end
+  " Add empty quotes at end so that removing trailing whitespace won't remove
+  " that space
+  set statusline+=\ ""
+
+  " buffer number
+  set statusline+=%2*buf:\ %-3.3n%0*
+  " %f = Path to the file in the buffer, as typed or relative to current
+  " directory. %t = file basename
+  set statusline+=%f
+  " FLAGS
+  " %m = display "[+]" if file has been modified
+  " %r = display "[RO]" if file is read-only
+  " %h = help buffer flag, "[help]"
+  " %w = [Preview] if in preview window
+  " %y = file content type, e.g. "[ruby]" - includes brackets
+  " %{&ff} = file format (unix/dos)
+  set statusline+=%m%r%h%w%y\ fmt=%{&ff} " flags
+  set statusline+=\  " add a space
+  " %l = current line number
+  " %L = total lines
+  " %c = current column
+  set statusline+=lin\:%l/%L\ col\:%c " line and column
+  " %= = right-align everything after this
+  set statusline+=%= " right align
+  " last modified time, like "07/29/10 07:36:44"
+  set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
+endfunction
+
+autocmd VimEnter * call statusline#set()
