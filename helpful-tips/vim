@@ -3,3 +3,18 @@ gv
 
 How do I go to column 4 (or any other column) in the current line?
 4|
+
+How do I autocomplete the current line (not word)?
+C-x-l will autocomplete as much of the current line as possible. Say you have a line
+  like: "Given I sign up", then you can type "Given", press C-x-l, and it'll
+  autocomplete to "Given I sign up" (if that's the only Given line), or if
+  other lines match, they'll show up in a standard autocomplete menu. This is
+  really helpful in cucumber feature files. (Thanks, Harold)
+
+
+= cucumber.vim
+If you're on a step line (Given/When/Then) in a cucumber feature file (*.feature), pressing C-] will
+  go to the file where that step is defined. Pressing C-6 will go back to the
+  feature file. (Thanks, Harold)
+
+
