@@ -270,8 +270,13 @@ namespace :uninstall do
   end
 end
 
-desc "Everything a new laptop needs"
-task :new => ['new:zsh', 'install:vim', 'install:rvm', 'install:brews']
+if is_osx?
+  desc "Everything a new OS X laptop needs"
+  task :new => ['new:zsh', 'install:vim', 'install:rvm', 'install:brews']
 
-desc "Install vim, homebrew, and RVM and link dotfiles"
-task :default => ['install:vim', 'install:homebrew', 'install:rvm', 'link:all']
+  desc "Install vim, homebrew, and RVM and link dotfiles"
+  task :default => ['install:vim', 'install:homebrew', 'install:rvm', 'link:all']
+elsif is_windows?
+  desc "Install Pik and link dotfiles"
+  task :default => ['install:pik', 'link:al']
+end
