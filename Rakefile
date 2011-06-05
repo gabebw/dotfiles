@@ -266,7 +266,7 @@ namespace :uninstall do
 
   desc "Uninstall NPM"
   task :npm do
-    sudo npm uninstall npm
+    system "sudo npm uninstall npm"
   end
 end
 
