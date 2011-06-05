@@ -129,6 +129,18 @@ namespace :new do
   end
 end
 
+namespace :download do
+  desc "Open the iTerm2 download page"
+  task :iterm2 do
+    open "http://code.google.com/p/iterm2/downloads/list"
+  end
+
+  desc "Open the Dropbox download page"
+  task :dropbox do
+    open "http://www.dropbox.com/"
+  end
+end
+
 desc "Alias for install:all"
 task :install => ['install:all']
 
