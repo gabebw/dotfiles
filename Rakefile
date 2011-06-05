@@ -9,6 +9,7 @@ me.
 
 require 'rbconfig'
 require 'fileutils'
+require 'erb'
 
 TOPLEVEL = File.dirname(__FILE__)
 
@@ -37,8 +38,16 @@ end
 
 def link_file(file)
   full_dotfile_path = File.join(home_directory, dotfile_path(file))
-  puts "linking ~/#{dotfile_path(file)}"
-  FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
+  if file =~ /\.erb$/
+    file_without_erb = file.sub(/\.erb$/, '')
+    puts "generating ~/#{dotfile_path(file_without_erb)}"
+    File.open(File.join(home_directory, dotfile_path(file_without_erb)), 'w') do |new_file|
+      new_file.write ERB.new(File.read(file)).result(binding)
+    end
+  else
+    puts "linking ~/#{dotfile_path(file)}"
+    FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
+  end
 end
 
 def is_windows?
@@ -94,15 +103,16 @@ namespace :link do
     files = `git ls-files | grep -v '/'`.split
     files.each do |file|
       next if %w[Rakefile README.textile .gitignore .gitkeep].include?(file)
-      dotfile = dotfile_path("#{file}")
+      dotfile_with_erb = dotfile_path(file)
+      dotfile_without_erb = dotfile_path("#{file.sub(/\.erb$/, '')}")
 
-      if File.exist?(File.join(home_dir, dotfile))
-        if File.identical?(file, File.join(home_dir, dotfile))
-          puts "identical ~/#{dotfile}"
+      if File.exist?(File.join(home_dir, dotfile_without_erb))
+        if File.identical?(file, File.join(home_dir, dotfile_without_erb))
+          puts "identical ~/#{dotfile_without_erb}"
         elsif replace_all
           replace_file(file)
         else
-          print "overwrite ~/#{dotfile}? [ynaq] "
+          print "overwrite ~/#{dotfile_without_erb}? [ynaq] "
           case $stdin.gets.chomp
           when 'a'
             replace_all = true
@@ -112,7 +122,7 @@ namespace :link do
           when 'q'
             exit
           else
-            puts "skipping ~/#{dotfile}"
+            puts "skipping ~/#{dotfile_without_erb}"
           end
         end
       else
