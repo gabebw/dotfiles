@@ -278,5 +278,5 @@ if is_osx?
   task :default => ['install:vim', 'install:homebrew', 'install:rvm', 'link:all']
 elsif is_windows?
   desc "Install Pik and link dotfiles"
-  task :default => ['install:pik', 'link:al']
+  task :default => ['install:pik', 'link:all']
 end
