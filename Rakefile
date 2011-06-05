@@ -232,12 +232,7 @@ namespace :install do
 
   desc "Install NPM, the node package manager"
   task :npm do
-    # The curl output overwrites the sudo prompt, and then you can't see
-    # that it's asking for sudo access until you hit enter, and it's a whole
-    # thing. Just get sudo access early.
-    puts "Running `sudo echo` to get sudo credentials for NPM."
-    system "sudo echo 'Thanks, got sudo access.'"
-    system "curl http://npmjs.org/install.sh | sudo sh"
+    system "curl http://npmjs.org/install.sh | sh"
   end
 end
 
