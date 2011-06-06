@@ -3,13 +3,14 @@
 # or http://www.kernel.org/pub/software/scm/git/docs/git-config.html
 [user]
   name = Gabe Berke-Williams
+  email = <%= print("Email: "); STDOUT.flush; STDIN.gets.chomp %>
 # THESE LINES WILL BREAK script/plugin install git://xxxx.git
 #[branch "master"]
 #  remote = origin
 #  merge = refs/heads/master
 [github]
   # via http://help.github.com/git-email-settings/
-  user = gabebw
+  user = <%= print("Github token: "); STDOUT.flush; STDIN.gets.chomp %>
   token = <%= print("Github token: "); STDOUT.flush; STDIN.gets.chomp %>
 [core]
   #editor = mate -w
@@ -35,10 +36,10 @@
   #local = cyan # default yellow
   #remote = green # default red
 [color "diff"]
-  meta = yellow bold
+  meta = cyan
   frag = magenta bold
-  old = red bold
-  new = green bold
+  old = red
+  new = green
 [color "status"]
   # Options:
   # header: the header text of the status message
