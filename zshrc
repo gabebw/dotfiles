@@ -261,7 +261,7 @@ else
     # g => gemset ("@rails3")
     # s => print "system" if using system intepreter (otherwise blank, for
     # 	   some reason)
-    print "%{$fg[magenta]%}${$(~/.rvm/bin/rvm-prompt i v g s)}%{$reset_color%}"
+    print "%{$fg[magenta]%}${$(~/.rvm/bin/rvm-prompt i v g s)#ruby-}%{$reset_color%}"
   }
 fi
 
