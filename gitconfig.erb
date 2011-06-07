@@ -27,6 +27,16 @@
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unstage = reset HEAD
   done = !git fetch && git rebase origin/master && git checkout master && git merge @{-1} && rake && git push
+  # Not yet added - doesn't include ignored files
+  new = ls-files --others --exclude-standard
+  # Files that are in the staging area
+  added = diff --cached --name-only
+[format]
+  # git log uses --pretty format by default, so this changes the default
+  # format
+  # Now log uses --pretty by default
+  # 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
+  pretty = %Cblue%h%Creset %Cgreen[%cr]%Creset (%an) %s
 # color the UI!
 [color]
   ui = auto
