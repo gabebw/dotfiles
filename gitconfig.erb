@@ -27,6 +27,7 @@
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unstage = reset HEAD
   done = !git fetch && git rebase origin/master && git checkout master && git merge @{-1} && rake && git push
+  up = !git fetch origin && git rebase origin/master
   # Not yet added - doesn't include ignored files
   new = ls-files --others --exclude-standard
   # Files that are in the staging area
