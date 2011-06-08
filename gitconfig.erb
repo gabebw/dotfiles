@@ -10,7 +10,7 @@
 #  merge = refs/heads/master
 [github]
   # via http://help.github.com/git-email-settings/
-  user = <%= print("Github token: "); STDOUT.flush; STDIN.gets.chomp %>
+  user = <%= print("Github username: "); STDOUT.flush; STDIN.gets.chomp %>
   token = <%= print("Github token: "); STDOUT.flush; STDIN.gets.chomp %>
 [core]
   #editor = mate -w
