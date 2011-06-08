@@ -37,3 +37,11 @@ Bundle 'ack.vim'
 Bundle 'Railscasts-Theme-GUIand256color'
 Bundle 'vividchalk.vim'
 Bundle 'molokai'
+
+" Light
+"   set background=light
+"   colorscheme solarized
+" Dark
+"   set background=dark
+"   colorscheme solarized
+Bundle 'altercation/vim-colors-solarized'
