@@ -221,6 +221,7 @@ RUBYOPT=rubygems
 # RAILS #
 #########
 # Bundler
+alias b="bundle"
 alias bi="bundle install --without production"
 alias be="bundle exec"
 
