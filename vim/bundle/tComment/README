@@ -1,0 +1,48 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1173
+
+:TComment works like a toggle, i.e., it will comment out text that 
+contains uncommented lines, and it will uncomment already 
+commented text (i.e. text that contains no uncommented lines).
+
+If the file-type is properly defined, :TComment will figure out which 
+comment string to use based on the values of &commentstring or &comments. 
+For some filetypes, the comment definition is explicitly defined. You can 
+|tcomment#DefineType()| to add your own definitions.
+
+TComment knows how to deal with embedded code of a different filetype 
+than the main filetype, e.g., ruby/python/perl regions in vim scripts, HTML or 
+JavaScript in php code etc.
+
+As operator (the prefix can be customized via g:tcommentMapLeaderOp1 
+and g:tcommentMapLeaderOp2):
+
+    gc{motion}   :: Toggle comments (for small comments within one line 
+                    the &filetype_inline style will be used, if 
+                    defined)
+    gcc          :: Toggle comment for the current line
+    gC{motion}   :: Comment region
+    gCc          :: Comment the current line
+
+Primary key maps:
+
+    <c-_><c-_>   :: :TComment
+    <c-_><space> :: :TComment <QUERY COMMENT-BEGIN ?COMMENT-END>
+    <c-_>b       :: :TCommentBlock
+    <c-_>a       :: :TCommentAs <QUERY COMMENT TYPE>
+    <c-_>n       :: :TCommentAs &filetype <QUERY COUNT>
+    <c-_>s       :: :TCommentAs &filetype_<QUERY COMMENT SUBTYPE>
+    <c-_>i       :: :TCommentInline
+    <c-_>r       :: :TCommentRight
+    <c-_>p       :: Comment the current inner paragraph
+
+There is also a secondary set of key maps with <Leader>_ as leader (more 
+preferable on terminals).
+
+The full documentation is available here:
+http://github.com/tomtom/tcomment_vim/blob/master/doc/tcomment.txt
+
+Demo:
+http://vimsomnia.blogspot.com/2010/11/tcomment-vim-plugin.html
+
+Also available via git
+http://github.com/tomtom/tcomment_vim

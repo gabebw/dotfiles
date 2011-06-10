@@ -30,3 +30,4 @@ set textwidth=78
 set showbreak="@" " This is prepended to wrapped lines
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
+set guioptions-=T " Don't show the menubar

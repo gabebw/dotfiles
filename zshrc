@@ -230,7 +230,8 @@ alias rtc="rake test:recent"
 alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
-alias cuc="cucumber"
+alias cuc="bundle exec cucumber"
+compdef cuc=cucumber
 alias wip="rake cucumber:wip"
 alias bi="bundle install --without production"
 alias migrate="rake db:migrate db:test:prepare"
