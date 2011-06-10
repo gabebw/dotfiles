@@ -220,22 +220,24 @@ RUBYOPT=rubygems
 #########
 # RAILS #
 #########
-alias sst="rails server -e test"
-alias ssp="rails server -e production"
+# Bundler
+alias bi="bundle install --without production"
+alias be="bundle exec"
+
+# Cucumber
+alias cuc="bundle exec cucumber"
+compdef cuc=cucumber
+alias wip="bundle exec rake cucumber:wip"
 
 # tests
-alias rtu="rake test:units"
-alias rtf="rake test:functionals"
+alias rtu="be rake test:units"
+alias rtf="be rake test:functionals"
 alias rtc="rake test:recent"
 alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
-alias cuc="bundle exec cucumber"
-compdef cuc=cucumber
-alias wip="rake cucumber:wip"
-alias bi="bundle install --without production"
-alias migrate="rake db:migrate db:test:prepare"
-alias be="bundle exec"
+alias migrate="bundle exec rake db:migrate db:test:prepare"
+alias rspec="be rspec"
 
 #######
 # RVM #
