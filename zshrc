@@ -62,6 +62,7 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
+alias noascii="sed 's/.\\[[0-9][0-9]?m//g'" # remove ASCII color codes
 alias grep=egrep
 alias grpe=grep # fix typo
 alias pgrep="\grep -P" # PCRE-compatible
