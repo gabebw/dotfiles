@@ -227,9 +227,9 @@ alias bi="bundle install --without production"
 alias be="bundle exec"
 
 # Cucumber
-alias cuc="bundle exec cucumber"
+alias cuc="be cucumber"
 compdef cuc=cucumber
-alias wip="bundle exec rake cucumber:wip"
+alias wip="be rake cucumber:wip"
 
 # tests
 alias rtu="be rake test:units"
@@ -238,7 +238,7 @@ alias rtc="rake test:recent"
 alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
-alias migrate="bundle exec rake db:migrate db:test:prepare"
+alias migrate="be rake db:migrate db:test:prepare"
 alias rspec="be rspec"
 
 #######
