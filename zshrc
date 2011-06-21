@@ -239,6 +239,8 @@ alias rtp="rake test:plugins"
 alias rti="rake test:integration"
 
 alias migrate="be rake db:migrate db:test:prepare"
+alias remigrate="rake db:migrate && rake db:migrate:redo && rake db:schema:dump db:test:prepare"
+alias trake="RAILS_ENV=test be rake"
 alias rspec="be rspec"
 
 #######
