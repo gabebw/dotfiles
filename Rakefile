@@ -23,13 +23,13 @@ namespace :new do
   end
 end
 
-if is_osx?
+if osx?
   desc "Everything a new OS X laptop needs"
   task :new => ['new:zsh', 'install:vim', 'install:rvm', 'install:brews']
 
   desc "Run the :new task and link dotfiles"
   task :default => [:new, 'link:all']
-elsif is_windows?
+elsif windows?
   desc "Install Pik and link dotfiles"
   task :default => ['install:pik', 'link:all']
 end

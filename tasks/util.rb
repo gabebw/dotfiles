@@ -37,22 +37,22 @@ def link_file(file)
   end
 end
 
-def is_windows?
+def windows?
   Config::CONFIG['host_os'] =~ /mswin|mingw/
 end
 
-def is_osx?
+def osx?
   Config::CONFIG['host_os'] =~ /darwin/
 end
 
-def is_ruby_19?
+def ruby_19?
   Config::CONFIG['MAJOR'] == '1' and Config::CONFIG['MINOR'] == '9'
 end
 
 # platform-specific way to represent a dotfile
 # .file for Unix, _file for Windows
 def dotfile_path(fname)
-  if is_windows?
+  if windows?
     "_#{fname}"
   else
     ".#{fname}"
@@ -60,12 +60,12 @@ def dotfile_path(fname)
 end
 
 def home_directory
-  if is_ruby_19?
+  if ruby_19?
     # Ruby 1.9 handles Windows home dirs just fine
     # http://redmine.ruby-lang.org/issues/show/1147
     File.expand_path("~")
   else
-    if is_windows?
+    if windows?
       ENV['USERPROFILE']
     else
       ENV['HOME']
@@ -74,7 +74,7 @@ def home_directory
 end
 
 # No official desc since this really shouldn't be called directly
-def homebrew_is_installed?
+def homebrew_installed?
   # Test that `which brew` is executable
   test(?x, `which brew`.chomp)
 end
