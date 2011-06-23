@@ -7,7 +7,6 @@ Ideally, it will also work on a Windows box, but that's less important to
 me.
 =end
 
-require 'rbconfig'
 require 'fileutils'
 require 'erb'
 

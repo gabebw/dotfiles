@@ -1,3 +1,5 @@
+require 'rbconfig'
+
 def info_install(pkg)
   puts "++ Installing #{pkg}"
 end
