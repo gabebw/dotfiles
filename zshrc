@@ -234,12 +234,12 @@ alias wip="be rake cucumber:wip"
 # tests
 alias rtu="be rake test:units"
 alias rtf="be rake test:functionals"
-alias rtc="rake test:recent"
-alias rtp="rake test:plugins"
-alias rti="rake test:integration"
+alias rtc="be rake test:recent"
+alias rtp="be rake test:plugins"
+alias rti="be rake test:integration"
 
 alias migrate="be rake db:migrate db:test:prepare"
-alias remigrate="rake db:migrate && rake db:migrate:redo && rake db:schema:dump db:test:prepare"
+alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
 alias trake="RAILS_ENV=test be rake"
 alias rspec="be rspec"
 
