@@ -34,5 +34,3 @@ source $HOME/.vim/autocommand.vim
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
   syntax on
 endif
-
-

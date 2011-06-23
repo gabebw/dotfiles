@@ -23,6 +23,7 @@ set incsearch " show search matches as you type
 set showcmd " display incomplete commands
 set modelines=2 " inspect top/bottom 2 lines for modeline
 set scrolloff=3 " When scrolling, show 3 lines of context
+set visualbell " No more beeping - supposedly flashes the screen instead, but doesn't happen for me
 
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
