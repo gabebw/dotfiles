@@ -23,8 +23,8 @@ color signature blue            default
 set imap_user = # "xxxx@gmail.com"
 set imap_pass = # "password"
 
-set from = # xxxx@gmail.com
-set realname = # "Your Name Here"
+set from =      # xxxx@gmail.com
+set realname =  # "Your Name Here"
 
 set folder = "imaps://imap.gmail.com:993"
 set spoolfile = "+INBOX"
