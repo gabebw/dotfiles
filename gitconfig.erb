@@ -27,6 +27,7 @@
   new = ls-files --others --exclude-standard
   # Files that are in the staging area
   added = diff --cached --name-only
+  today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format
