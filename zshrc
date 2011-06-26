@@ -78,8 +78,13 @@ function p { open -a Preview "${@:-.}"; }
 
 # you can pipe pure "ls" output to "pp"
 # See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
-alias pp="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a Preview"
-alias mm="sed -e 's/ /\\\\\\\ /g' | xargs echo | xargs open -a VLC"
+# $'string' (vs 'string') quotes using the ANSI C standard, meaning you can
+# put single quotes inside single quotes by '\''. Otherwise you flat-out can't
+# put single quotes in a single-quoted stringput single quotes in a
+# single-quoted string.
+alias quote="sed -Ee $'s/([ \'\"])/\\\\\\\\\\\1/g'"
+alias pp='quote | xargs open -a Preview'
+alias mm='quote | xargs open -a VLC'
 alias q="$EDITOR ~/.zshrc"
 alias qq="source ~/.zshrc"
 
