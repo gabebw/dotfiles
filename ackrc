@@ -11,5 +11,4 @@
 --ignore-dir=doc
 --ignore-dir=coverage
 --sort-files
---color
 --follow
