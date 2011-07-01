@@ -80,8 +80,7 @@ function p { open -a Preview "${@:-.}"; }
 # See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
 # $'string' (vs 'string') quotes using the ANSI C standard, meaning you can
 # put single quotes inside single quotes by '\''. Otherwise you flat-out can't
-# put single quotes in a single-quoted stringput single quotes in a
-# single-quoted string.
+# put single quotes in a single-quoted string.
 alias quote="sed -Ee $'s/([ \'\"])/\\\\\\\\\\\1/g'"
 alias pp='quote | xargs open -a Preview'
 alias mm='quote | xargs open -a VLC'
