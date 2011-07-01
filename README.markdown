@@ -1,10 +1,12 @@
-These are my dotfiles - the .[whatever] files that live in my home directory.
+# gabebw's dotfiles
+These are my dotfiles: `~/.*`
 
 As you may notice, they aren't actually dotfiles - they don't have a dot in
 front! To interactively link them into ~, run
-    rake link:all
+`rake link:all`
 
 The Rakefile has following tasks:
+```bash
     rake default             # Install everything and link dotfiles
     rake install:all         # Install RVM, Homebrew, and useful Homebrew formulae
     rake install:brews       # Install some useful homebrew formulae
@@ -17,3 +19,4 @@ The Rakefile has following tasks:
     rake uninstall:rvm       # Uninstall RVM
     rake update:slime        # Update SLIME
     rake update:vim_plugins  # Update vim plugins
+```
