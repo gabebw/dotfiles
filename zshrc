@@ -206,7 +206,7 @@ PYTHONSTARTUP=~/.python_startup
 #######
 alias g=git
 alias gp="git push"
-alias gd="git diff"
+alias gd="git diff --color-words"
 
 alias ga="git add"
 alias gai="git add --interactive"
