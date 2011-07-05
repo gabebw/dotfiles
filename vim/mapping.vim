@@ -81,3 +81,6 @@ inoremap kj <Esc>
 " Use apostrophe for backquote function, since backquote is so much more
 " useful than apostrophe
 nnoremap ` '
+
+map <C-s> <esc>:w<cr>
+imap <C-s> <esc>:w<cr>
