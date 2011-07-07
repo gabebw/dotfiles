@@ -281,16 +281,27 @@ rgcu() { rvm gemset create "$1" && rvm gemset use "$1"; }
 PATH="$PATH:/Users/gabe/.npm/coffee-script/1.0.1/package/bin"
 
 
+##########
+# HITCH  #
+##########
+# Get it here: https://github.com/therubymug/hitch
+
+if [[ ! -x $(which hitch) ]]; then
+  echo "Hitch not installed! (https://github.com/therubymug/hitch)"
+  echo "To install, do this:"
+  echo "for x in \$(rvm list strings); do rvm use \$x@global && gem install hitch; done"
+else
+  # Add the following to your ~/.bashrc or ~/.zshrc
+  hitch() {
+    command hitch "$@"
+    if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+  }
+  alias unhitch='hitch -u'
+  # Uncomment to persist pair info between terminal instances
+  hitch
+fi
+
 export PATH
 trim_path
 
 # Houston, we have liftoff.
-
-# Add the following to your ~/.bashrc or ~/.zshrc
-hitch() {
-  command hitch "$@"
-  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
-}
-alias unhitch='hitch -u'
-# Uncomment to persist pair info between terminal instances
-hitch
