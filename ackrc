@@ -10,5 +10,6 @@
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
+--ignore-dir=public/assets
 --sort-files
 --follow
