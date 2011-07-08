@@ -305,4 +305,6 @@ fi
 export PATH
 trim_path
 
+fortune
+
 # Houston, we have liftoff.
