@@ -288,9 +288,11 @@ PATH="$PATH:/Users/gabe/.npm/coffee-script/1.0.1/package/bin"
 # Get it here: https://github.com/therubymug/hitch
 
 if [[ ! -x $(which hitch) ]]; then
-  echo "Hitch not installed! (https://github.com/therubymug/hitch)"
-  echo "To install, do this:"
-  echo "for x in \$(rvm list strings); do rvm use \$x@global && gem install hitch; done"
+  hitch() {
+    echo "Hitch not installed! (https://github.com/therubymug/hitch)"
+    echo "To install, do this:"
+    echo "for x in \$(rvm list strings); do rvm use \$x@global && gem install hitch; done"
+  }
 else
   # Add the following to your ~/.bashrc or ~/.zshrc
   hitch() {
