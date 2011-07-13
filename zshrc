@@ -228,7 +228,7 @@ RUBYOPT=rubygems
 #########
 # Bundler
 alias b="bundle"
-alias bi="bundle install --without production"
+alias bi="bundle install"
 alias be="bundle exec"
 
 # Cucumber
