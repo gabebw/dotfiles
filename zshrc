@@ -205,6 +205,7 @@ PYTHONSTARTUP=~/.python_startup
 # Git #
 #######
 alias g=git
+alias gm="git merge --ff-only"
 alias gp="rake && git push"
 alias gci="git pull --rebase && rake && git push"
 alias gd="git diff"
