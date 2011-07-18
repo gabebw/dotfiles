@@ -47,7 +47,7 @@ function! statusline#set()
   " %l = current line number
   " %L = total lines
   " %c = current column
-  set statusline+=lin\:%l/%L\ col\:%c " line and column
+  set statusline+=lin\:%l/%L\ col\:%c\  " line and column
   " %= = right-align everything after this
   set statusline+=%= " right align
   " last modified time, like "07/29/10 07:36:44"
