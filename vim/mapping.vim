@@ -20,44 +20,45 @@ augroup rails_shortcuts
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
   " Steps
-  autocmd User Rails map <Leader>p :Rstep
-  autocmd User Rails map <Leader>tp :RTstep
-  autocmd User Rails map <Leader>sp :RSstep
+  autocmd User Rails map <Leader>p :Rstep<Space>
+  autocmd User Rails map <Leader>vp :RTstep<Space>
+  autocmd User Rails map <Leader>sp :RSstep<Space>
 
   " Models
-  autocmd User Rails map <Leader>m :Rmodel
-  autocmd User Rails map <Leader>tm :RTmodel
-  autocmd User Rails map <Leader>sm :RSmodel
+  autocmd User Rails map <Leader>m :Rmodel<Space>
+  autocmd User Rails map <Leader>vm :RVmodel<Space>
+  autocmd User Rails map <Leader>sm :RSmodel<Space>
 
   " Controller
-  autocmd User Rails map <Leader>c :Rcontroller
-  autocmd User Rails map <Leader>tc :RTcontroller
-  autocmd User Rails map <Leader>sc :RScontroller
+  autocmd User Rails map <Leader>c :Rcontroller<Space>
+  autocmd User Rails map <Leader>vc :RVcontroller<Space>
+  autocmd User Rails map <Leader>sc :RScontroller<Space>
 
   " Views
-  autocmd User Rails map <Leader>v :Rview
-  autocmd User Rails map <Leader>tv :RTview
-  autocmd User Rails map <Leader>sv :RSview
+  autocmd User Rails map <Leader>v :Rview<Space>
+  autocmd User Rails map <Leader>vv :RVview<Space>
+  autocmd User Rails map <Leader>sv :RSview<Space>
 
   " Test
-  autocmd User Rails map <Leader>u :Runittest
-  autocmd User Rails map <Leader>tu :RTunittest
-  autocmd User Rails map <Leader>su :RSunittest
+  autocmd User Rails map <Leader>u :Runittest<Space>
+  autocmd User Rails map <Leader>vu :RVunittest<Space>
+  autocmd User Rails map <Leader>su :RSunittest<Space>
 
-  autocmd User Rails map <Leader>h :Rhelper
-  autocmd User Rails map <Leader>i :Rintegrationtest
+  autocmd User Rails map <Leader>h :Rhelper<Space>
+  autocmd User Rails map <Leader>vh :RVhelper<Space>
+  autocmd User Rails map <Leader>sh :RShelper<Space>
 
-  autocmd User Rails map <Leader>f :Rfunctionaltest
-  autocmd User Rails map <Leader>tf :RTfunctionaltest
-  autocmd User Rails map <Leader>sf :RSfunctionaltest
+  autocmd User Rails map <Leader>i :Rintegrationtest<Space>
+  autocmd User Rails map <Leader>vi :RVintegrationtest<Space>
+  autocmd User Rails map <Leader>si :RSintegrationtest<Space>
 
-  autocmd User Rails map <Leader>i :Rintegrationtest
-  autocmd User Rails map <Leader>ti :RTintegrationtest
-  autocmd User Rails map <Leader>si :RSintegrationtest
+  autocmd User Rails map <Leader>g :Rconfig<Space>
+  autocmd User Rails map <Leader>vg :RVconfig<Space>
+  autocmd User Rails map <Leader>sg :RSconfig<Space>
 
-  autocmd User Rails map <Leader>g :Rconfig
-  autocmd User Rails map <Leader>tg :RTconfig
-  autocmd User Rails map <Leader>sg :RSconfig
+  autocmd User Rails map <Leader>j :Rjavascript<Space>
+  autocmd User Rails map <Leader>vj :RVjavascript<Space>
+  autocmd User Rails map <Leader>sj :RSjavascript<Space>
 
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
