@@ -1,7 +1,7 @@
 if has("gui_running")
-  colorscheme railscasts
-  " set background=dark " set to light for light solarized
-  "colorscheme solarized
+  "colorscheme railscasts
+  set background=dark " set to light for light solarized
+  colorscheme solarized
 
   " FONTS
   if has('win32')
