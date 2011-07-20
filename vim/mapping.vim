@@ -21,7 +21,7 @@ augroup rails_shortcuts
 
   " Steps
   autocmd User Rails map <Leader>p :Rstep<Space>
-  autocmd User Rails map <Leader>vp :RTstep<Space>
+  autocmd User Rails map <Leader>vp :RVstep<Space>
   autocmd User Rails map <Leader>sp :RSstep<Space>
 
   " Models
