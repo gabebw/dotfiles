@@ -75,6 +75,8 @@ augroup END
 
 " Git
 map <Leader>gc :Gcommit -m ""<LEFT>
+map <Leader>gcv :Gcommit -v<CR>
+map <Leader>ga :Git add .<CR>
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
