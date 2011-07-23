@@ -78,6 +78,8 @@ map <Leader>gc :Gcommit -m ""<LEFT>
 map <Leader>gcv :Gcommit -v<CR>
 map <Leader>ga :Git add .<CR>
 
+map <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .
+
 " Move lines up and down
 "map <C-J> :m +1 <CR>
 "map <C-K> :m -2 <CR>
