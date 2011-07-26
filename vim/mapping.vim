@@ -22,49 +22,49 @@ augroup rails_shortcuts
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
 
   " Steps
-  autocmd User Rails map <Leader>p :Rstep<Space>
-  autocmd User Rails map <Leader>vp :RVstep<Space>
-  autocmd User Rails map <Leader>sp :RSstep<Space>
+  autocmd User Rails nmap <Leader>p :Rstep<Space>
+  autocmd User Rails nmap <Leader>vp :RVstep<Space>
+  autocmd User Rails nmap <Leader>sp :RSstep<Space>
 
   " Models
-  autocmd User Rails map <Leader>m :Rmodel<Space>
-  autocmd User Rails map <Leader>vm :RVmodel<Space>
-  autocmd User Rails map <Leader>sm :RSmodel<Space>
+  autocmd User Rails nmap <Leader>m :Rmodel<Space>
+  autocmd User Rails nmap <Leader>vm :RVmodel<Space>
+  autocmd User Rails nmap <Leader>sm :RSmodel<Space>
 
   " Controller
-  autocmd User Rails map <Leader>c :Rcontroller<Space>
-  autocmd User Rails map <Leader>vc :RVcontroller<Space>
-  autocmd User Rails map <Leader>sc :RScontroller<Space>
+  autocmd User Rails nmap <Leader>c :Rcontroller<Space>
+  autocmd User Rails nmap <Leader>vc :RVcontroller<Space>
+  autocmd User Rails nmap <Leader>sc :RScontroller<Space>
 
   " Views
-  autocmd User Rails map <Leader>v :Rview<Space>
-  autocmd User Rails map <Leader>vv :RVview<Space>
-  autocmd User Rails map <Leader>sv :RSview<Space>
+  autocmd User Rails nmap <Leader>v :Rview<Space>
+  autocmd User Rails nmap <Leader>vv :RVview<Space>
+  autocmd User Rails nmap <Leader>sv :RSview<Space>
 
   " Rake
-  autocmd User Rails map <Leader>t :.Rake!<CR>
-  autocmd User Rails map <Leader>tt :Rake!<CR>
+  autocmd User Rails nmap <Leader>t :.Rake!<CR>
+  autocmd User Rails nmap <Leader>tt :Rake!<CR>
 
   " Test
-  autocmd User Rails map <Leader>u :Runittest<Space>
-  autocmd User Rails map <Leader>vu :RVunittest<Space>
-  autocmd User Rails map <Leader>su :RSunittest<Space>
+  autocmd User Rails nmap <Leader>u :Runittest<Space>
+  autocmd User Rails nmap <Leader>vu :RVunittest<Space>
+  autocmd User Rails nmap <Leader>su :RSunittest<Space>
 
-  autocmd User Rails map <Leader>h :Rhelper<Space>
-  autocmd User Rails map <Leader>vh :RVhelper<Space>
-  autocmd User Rails map <Leader>sh :RShelper<Space>
+  autocmd User Rails nmap <Leader>h :Rhelper<Space>
+  autocmd User Rails nmap <Leader>vh :RVhelper<Space>
+  autocmd User Rails nmap <Leader>sh :RShelper<Space>
 
-  autocmd User Rails map <Leader>i :Rintegrationtest<Space>
-  autocmd User Rails map <Leader>vi :RVintegrationtest<Space>
-  autocmd User Rails map <Leader>si :RSintegrationtest<Space>
+  autocmd User Rails nmap <Leader>i :Rintegrationtest<Space>
+  autocmd User Rails nmap <Leader>vi :RVintegrationtest<Space>
+  autocmd User Rails nmap <Leader>si :RSintegrationtest<Space>
 
-  autocmd User Rails map <Leader>g :Rconfig<Space>
-  autocmd User Rails map <Leader>vg :RVconfig<Space>
-  autocmd User Rails map <Leader>sg :RSconfig<Space>
+  autocmd User Rails nmap <Leader>g :Rconfig<Space>
+  autocmd User Rails nmap <Leader>vg :RVconfig<Space>
+  autocmd User Rails nmap <Leader>sg :RSconfig<Space>
 
-  autocmd User Rails map <Leader>j :Rjavascript<Space>
-  autocmd User Rails map <Leader>vj :RVjavascript<Space>
-  autocmd User Rails map <Leader>sj :RSjavascript<Space>
+  autocmd User Rails nmap <Leader>j :Rjavascript<Space>
+  autocmd User Rails nmap <Leader>vj :RVjavascript<Space>
+  autocmd User Rails nmap <Leader>sj :RSjavascript<Space>
 
   map <Leader>sc :sp db/schema.rb<CR>
 
