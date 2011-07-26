@@ -71,12 +71,16 @@ augroup rails_shortcuts
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
   command! -bar -nargs=1 OpenURL :!open <args>
+
+  command! -nargs=+ Cuc :!ack --no-heading --no-break <q-args> | cut -d':' -f1,2 | xargs bundle exec cucumber --no-color
 augroup END
 
 " Git
 map <Leader>gc :Gcommit -m ""<LEFT>
 map <Leader>gcv :Gcommit -v<CR>
 map <Leader>ga :Git add .<CR>
+" Show blame info for selected text (via Mike Burns)
+vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 map <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .
 
