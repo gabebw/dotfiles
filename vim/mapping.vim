@@ -84,7 +84,7 @@ map <Leader>ga :Git add .<CR>
 " Show blame info for selected text (via Mike Burns)
 vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-map <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .
+map <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
