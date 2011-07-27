@@ -26,7 +26,7 @@ set scrolloff=3 " When scrolling, show 3 lines of context
 set visualbell " No more beeping - supposedly flashes the screen instead, but doesn't happen for me
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 " Use _ as a word-separator
-" set iskeyword-=_
+set iskeyword+=?
 
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
