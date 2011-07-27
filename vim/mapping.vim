@@ -20,6 +20,8 @@ augroup rails_shortcuts
   " Rails configuration - from jferris
   autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
+  autocmd User Rails Rnavcommand initializer config/initializers -glob=**/*
+  autocmd User Rails Rnavcommand factories spec test -glob=**/* -default=factories
 
   " Steps
   autocmd User Rails nmap <Leader>p :Rstep<Space>
