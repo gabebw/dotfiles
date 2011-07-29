@@ -18,7 +18,7 @@ if has("autocmd")
     autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
     " Include ! as a word character, so dw will delete all of e.g. gsub!,
     " and not leave the "!"
-    autocmd FileType ruby set iskeyword+=!
+    autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
     autocmd FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
