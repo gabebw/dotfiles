@@ -25,7 +25,7 @@ class Install < BetterThor
     installing 'homebrew'
     # Don't fail, since they may have a broken install
     warn "Homebrew already installed!" if homebrew_installed?
-    puts 'You can ignore this message: "/usr/local/.git already exists!"'
+    info('You can ignore this message: "/usr/local/.git already exists!"')
     system 'ruby -e "$(curl -fsSL https://gist.github.com/raw/323731/install_homebrew.rb)"'
   end
 
@@ -53,7 +53,7 @@ class Install < BetterThor
     desc "plugins", "Install Vim plugins"
     def plugins
       invoke :vundle
-      say "To install/update Vim plugins, start Vim and run :BundleInstall/:BundleInstall!"
+      warning("To install/update Vim plugins, start Vim and run :BundleInstall/:BundleInstall!")
     end
   end
 
@@ -79,8 +79,8 @@ class Install < BetterThor
     fail "Pik is Windows-only, install:rvm instead" unless windows?
 
     `gem install pik`
-    say "Installed Pik gem, now run pik_install"
-    say "Help: https://github.com/vertiginous/pik"
+    announce("Installed Pik gem, now run pik_install")
+    announce("Help: https://github.com/vertiginous/pik")
   end
 
   desc "npm", "Install NPM, the node package manager"

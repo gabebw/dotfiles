@@ -14,6 +14,18 @@ class BetterThor < Thor
       say "-- Uninstalling #{pkg}", :red
     end
 
+    def warning(message)
+      say "==> #{message}", :yellow
+    end
+
+    def info(message)
+      say "==> #{message}"
+    end
+
+    def success(message)
+      say "==> #{message}", :green
+    end
+
     def windows?
       Config::CONFIG['host_os'] =~ /mswin|mingw/
     end

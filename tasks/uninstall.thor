@@ -14,7 +14,7 @@ class Uninstall < BetterThor
   desc "rvm", "Uninstall RVM"
   def rvm
     uninstalling 'RVM'
-    puts "!!! This command requires confirmation!"
+    warning("!!! This command requires confirmation!")
     system "rvm implode"
   end
 
