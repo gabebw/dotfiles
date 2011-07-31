@@ -1,5 +1,5 @@
 # link dotfiles into ~
-class Link < Thor
+class Link < BetterThor
   default_task :all
 
   desc "all", "Link all dotfiles into ~"

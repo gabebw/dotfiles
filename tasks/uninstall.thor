@@ -1,4 +1,4 @@
-class Uninstall < Thor
+class Uninstall < BetterThor
   desc "homebrew", "Uninstall homebrew"
   def homebrew
     info_uninstall 'homebrew'

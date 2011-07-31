@@ -1,4 +1,4 @@
-class Install < Thor
+class Install < BetterThor
   default_task :all
 
   # install:all is platform-dependent
@@ -35,9 +35,7 @@ class Install < Thor
     invoke "install:vim:vundle"
   end
 
-  class Vim < Thor
-    include Thor::Actions
-
+  class Vim < BetterThor
     desc "pathogen", "Install Pathogen"
     def pathogen
       require 'open-uri'

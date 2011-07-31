@@ -10,8 +10,6 @@ me.
 require 'fileutils'
 require 'erb'
 
-require './tasks/util'
-
 class New < Thor
   default_task :all
 

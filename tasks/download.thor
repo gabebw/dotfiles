@@ -1,6 +1,4 @@
-class Download < Thor
-  include Thor::Actions
-
+class Download < BetterThor
   default_task :download
 
   no_tasks do
