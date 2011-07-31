@@ -1,7 +1,9 @@
 # link dotfiles into ~
-namespace :link do
-  desc "Link all dotfiles into ~"
-  task :all do
+class Link < Thor
+  default_task :all
+
+  desc "all", "Link all dotfiles into ~"
+  def all
     # Via ryan bates, https://github.com/ryanb/dotfiles/blob/master/Rakefile
     replace_all = false
     home_dir = home_directory()
