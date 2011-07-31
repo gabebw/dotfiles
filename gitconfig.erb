@@ -1,13 +1,7 @@
 # vim: syntax=gitconfig ft=gitconfig
 # See: man gitconfig
 # or http://www.kernel.org/pub/software/scm/git/docs/git-config.html
-[user]
-  name = Gabe Berke-Williams
-  email = <%= print("Email: "); STDOUT.flush; STDIN.gets.chomp %>
-[github]
-  # via http://help.github.com/git-email-settings/
-  user = <%= print("Github username: "); STDOUT.flush; STDIN.gets.chomp %>
-  token = <%= print("Github token: "); STDOUT.flush; STDIN.gets.chomp %>
+<%= IO.read(File.join(File.dirname(__FILE__), 'gitconfig.local')) %>
 [core]
   editor = mvim -f # -f is required!
 [merge]
