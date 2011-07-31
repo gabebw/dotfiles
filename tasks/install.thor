@@ -7,7 +7,7 @@ class Install < Thor
   WINDOWS        = [:pik] + CROSS_PLATFORM
   OSX            = [:brews] + UNIX
 
-  desc "all", "Install everything for your platform"
+  desc "all", "Install a good starting point for your platform"
   def all
     if windows?
       WINDOWS.each{|t| invoke t }
