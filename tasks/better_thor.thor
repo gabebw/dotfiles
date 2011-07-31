@@ -14,28 +14,6 @@ class BetterThor < Thor
       say "-- Uninstalling #{pkg}", :red
     end
 
-    # replace_file and link_file get just "zshenv", not ".zshenv" or
-    # "$HOME/.zshenv"
-    def replace_file(file)
-      full_dotfile_path = File.join(home_directory, dotfile_path(file))
-      FileUtils.rm(full_dotfile_path, :force => true)
-      link_file(file)
-    end
-
-    def link_file(file)
-      full_dotfile_path = File.join(home_directory, dotfile_path(file))
-      if file =~ /\.erb$/
-        file_without_erb = file.sub(/\.erb$/, '')
-        say "generating ~/#{dotfile_path(file_without_erb)}"
-        File.open(File.join(home_directory, dotfile_path(file_without_erb)), 'w') do |new_file|
-          new_file.write ERB.new(File.read(file)).result(binding)
-        end
-      else
-        say "linking ~/#{dotfile_path(file)}"
-        FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
-      end
-    end
-
     def windows?
       Config::CONFIG['host_os'] =~ /mswin|mingw/
     end
@@ -45,7 +23,7 @@ class BetterThor < Thor
     end
 
     def ruby_19?
-      Config::CONFIG['MAJOR'] == '1' and Config::CONFIG['MINOR'] == '9'
+      Config::CONFIG['MAJOR'] == '1' && Config::CONFIG['MINOR'] == '9'
     end
 
     # platform-specific way to represent a dotfile
@@ -72,7 +50,6 @@ class BetterThor < Thor
       end
     end
 
-    # No official desc since this really shouldn't be called directly
     def homebrew_installed?
       # Test that `which brew` is executable
       test(?x, `which brew`.chomp)

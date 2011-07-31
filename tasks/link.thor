@@ -18,15 +18,15 @@ class Link < BetterThor
         if File.identical?(file, File.join(home_dir, dotfile_without_erb))
           puts "identical ~/#{dotfile_without_erb}"
         elsif replace_all
-          replace_file(file)
+          force_link_file(file)
         else
           print "overwrite ~/#{dotfile_without_erb}? [ynaq] "
           case $stdin.gets.chomp
           when 'a'
             replace_all = true
-            replace_file(file)
+            force_link_file(file)
           when 'y'
-            replace_file(file)
+            force_link_file(file)
           when 'q'
             exit
           else
@@ -35,6 +35,30 @@ class Link < BetterThor
         end
       else
         link_file(file)
+      end
+    end
+  end
+
+  no_tasks do
+    # replace_file and link_file get just "zshenv", not ".zshenv" or
+    # "$HOME/.zshenv"
+    def force_link_file(file)
+      full_dotfile_path = File.join(home_directory, dotfile_path(file))
+      FileUtils.rm(full_dotfile_path, :force => true)
+      link_file(file)
+    end
+
+    def link_file(file)
+      full_dotfile_path = File.join(home_directory, dotfile_path(file))
+      if file =~ /\.erb$/
+        file_without_erb = file.sub(/\.erb$/, '')
+        say "generating ~/#{dotfile_path(file_without_erb)}"
+        File.open(File.join(home_directory, dotfile_path(file_without_erb)), 'w') do |new_file|
+          new_file.write ERB.new(File.read(file)).result(binding)
+        end
+      else
+        say "linking ~/#{dotfile_path(file)}"
+        FileUtils.ln_s(File.join(Dir.pwd, file), full_dotfile_path)
       end
     end
   end
