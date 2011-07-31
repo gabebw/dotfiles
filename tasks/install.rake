@@ -91,4 +91,9 @@ namespace :install do
   task :npm do
     system "curl http://npmjs.org/install.sh | sh"
   end
+
+  desc "Install Pow"
+  task :pow do
+    system "curl get.pow.cx | sh"
+  end
 end
