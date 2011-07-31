@@ -31,15 +31,17 @@ class Install < Thor
 
   desc "vim", "Install Pathogen and Vundle"
   def vim
-    invoke "vim:pathogen"
-    invoke "vim:vundle"
+    invoke "install:vim:pathogen"
+    invoke "install:vim:vundle"
   end
 
-  module Vim
+  class Vim < Thor
+    include Thor::Actions
+
     desc "pathogen", "Install Pathogen"
     def pathogen
       require 'open-uri'
-      create_file "vim/autoload/pathogen.vim" do
+      create_file("vim/autoload/pathogen.vim") do
         open('https://github.com/tpope/vim-pathogen/raw/master/autoload/pathogen.vim').read
       end
     end
