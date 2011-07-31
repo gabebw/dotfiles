@@ -204,8 +204,13 @@ PYTHONSTARTUP=~/.python_startup
 #######
 # Git #
 #######
-alias g=git
-alias gm="git merge --ff-only"
+function g {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git st
+  fi
+}
 alias gp="rake && git push"
 alias gci="git pull --rebase && rake && git push"
 alias gd="git diff"
@@ -213,10 +218,9 @@ alias gd="git diff"
 alias ga="git add"
 alias gai="git add --interactive"
 
-alias gb="git branch"
-alias gcb="git checkout -b"
+alias gb="git checkout -b"
 alias gc="git checkout"
-alias gst="git st" # Use my alias from ~/.gitconfig
+alias gs="git st" # Use my alias from ~/.gitconfig
 alias gcm="git commit -m"
 
 ##########
