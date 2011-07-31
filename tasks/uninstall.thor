@@ -1,9 +1,6 @@
-desc "Alias for uninstall:all"
-task :uninstall => ['uninstall:all']
-
-namespace :uninstall do
-  desc "Uninstall homebrew"
-  task :homebrew do
+class Uninstall < Thor
+  desc "homebrew", "Uninstall homebrew"
+  def homebrew
     info_uninstall 'homebrew'
 
     Dir.chdir(`brew --prefix`.chomp) do
@@ -14,15 +11,15 @@ namespace :uninstall do
     end
   end
 
-  desc "Uninstall RVM"
-  task :rvm do
+  desc "rvm", "Uninstall RVM"
+  def rvm
     info_uninstall 'RVM'
     puts "!!! This command requires confirmation!"
     system "rvm implode"
   end
 
-  desc "Uninstall NPM"
-  task :npm do
+  desc "npm", "Uninstall NPM"
+  def npm
     system "sudo npm uninstall npm"
   end
 end
