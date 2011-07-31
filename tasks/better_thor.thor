@@ -6,19 +6,12 @@ class BetterThor < Thor
   include Thor::Actions
 
   no_tasks do
-    def info_install(pkg)
+    def installing(pkg)
       say "++ Installing #{pkg}", :green
     end
 
-    def info_uninstall(pkg)
+    def uninstalling(pkg)
       say "-- Uninstalling #{pkg}", :red
-    end
-
-    # Comma-separated list with "and"
-    def pretty_list(array)
-      new = array[0...-1]
-      new << "and #{array.last}"
-      new.join(", ")
     end
 
     # replace_file and link_file get just "zshenv", not ".zshenv" or

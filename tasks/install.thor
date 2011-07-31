@@ -22,7 +22,7 @@ class Install < BetterThor
   def homebrew
     fail "Not OSX, can't install Homebrew" unless osx?
 
-    info_install 'homebrew'
+    installing 'homebrew'
     # Don't fail, since they may have a broken install
     warn "Homebrew already installed!" if homebrew_installed?
     puts 'You can ignore this message: "/usr/local/.git already exists!"'
@@ -68,7 +68,7 @@ class Install < BetterThor
   def rvm
     fail "RVM doesn't work on Windows, install:pik instead" if windows?
 
-    info_install 'RVM'
+    installing 'RVM'
     # Requires "bash -c" because by default, the system command uses
     # /bin/sh, which chokes on the "<"s
     system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'

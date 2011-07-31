@@ -1,7 +1,7 @@
 class Uninstall < BetterThor
   desc "homebrew", "Uninstall homebrew"
   def homebrew
-    info_uninstall 'homebrew'
+    uninstalling 'homebrew'
 
     Dir.chdir(`brew --prefix`.chomp) do
       FileUtils.rm_r("Cellar", :force => true)
@@ -13,7 +13,7 @@ class Uninstall < BetterThor
 
   desc "rvm", "Uninstall RVM"
   def rvm
-    info_uninstall 'RVM'
+    uninstalling 'RVM'
     puts "!!! This command requires confirmation!"
     system "rvm implode"
   end
