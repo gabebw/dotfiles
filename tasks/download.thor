@@ -3,7 +3,7 @@ class Download < Thor
 
   no_tasks do
     def system_open(url)
-      system "open #{url}"
+      system "open -g #{url}"
     end
   end
 
