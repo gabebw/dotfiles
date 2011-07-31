@@ -1,9 +1,11 @@
 class Download < Thor
+  include Thor::Actions
+
   default_task :download
 
   no_tasks do
     def open_url(url)
-      system "open -g #{url}"
+      run "open -g #{url}"
     end
   end
 
