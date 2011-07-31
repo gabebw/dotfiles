@@ -2,7 +2,7 @@ class Download < Thor
   default_task :download
 
   no_tasks do
-    def system_open(url)
+    def open_url(url)
       system "open -g #{url}"
     end
   end
@@ -16,16 +16,16 @@ class Download < Thor
 
   desc "iterm2", "Open the iTerm2 download page"
   def iterm2
-    system_open('http://code.google.com/p/iterm2/downloads/list')
+    open_url('http://code.google.com/p/iterm2/downloads/list')
   end
 
   desc "dropbox", "Open the Dropbox download page"
   def dropbox
-    system_open('https://www.dropbox.com/install')
+    open_url('https://www.dropbox.com/install')
   end
 
   desc "growl", "Open the Growl download page"
   def growl
-    system_open('http://growl.info/')
+    open_url('http://growl.info/')
   end
 end
