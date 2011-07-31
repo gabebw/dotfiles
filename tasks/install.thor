@@ -49,7 +49,6 @@ class Install < Thor
     desc "vundle", "Install Vundle"
     def vundle
       invoke :pathogen
-      empty_directory("vim/bundle/vundle")
       `git clone http://github.com/gmarik/vundle.git vim/bundle/vundle`
     end
 
