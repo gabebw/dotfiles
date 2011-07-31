@@ -7,8 +7,8 @@ class Download < Thor
     end
   end
 
-  desc "download", "Open all download pages (default)"
-  def download
+  desc "all", "Open all download pages (default)"
+  def all
     [:iterm2, :dropbox, :growl].each do |task|
       invoke task
     end
