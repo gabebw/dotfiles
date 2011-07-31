@@ -1,5 +1,5 @@
 def system_open(url)
-  system "open #{url}"
+  system "open -g #{url}"
 end
 
 desc "Alias for download:all"
