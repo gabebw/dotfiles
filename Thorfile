@@ -1,11 +1,5 @@
-#!/usr/bin/env ruby
-# set ft=ruby
-
-require 'rubygems'
-require 'thor'
-
 =begin
-The goal is to be able to run `./install` on a brand new OSX system and magically
+The goal is to be able to run `thor new` on a brand new OSX system and magically
 get my system back, with no need to resort to ln or installation docs and
 with a minimum of input from me.
 
@@ -17,10 +11,6 @@ require 'fileutils'
 require 'erb'
 
 require './tasks/util'
-
-Dir['tasks/*.thor'].each{|f| load f }
-
-TOPLEVEL = File.dirname(__FILE__)
 
 class New < Thor
   default_task :all
@@ -43,5 +33,3 @@ class New < Thor
     system "chsh -s `which zsh` #{ENV['USER']}"
   end
 end
-
-New.start
