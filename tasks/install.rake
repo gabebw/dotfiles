@@ -4,11 +4,10 @@ task :install => ['install:all']
 namespace :install do
   # install:all is platform-dependent
 
-  # Cross-platform
-  xplatform = [:vim_plugins]
-  unix = [:rvm] + xplatform
-  windows = [:pik] + xplatform
-  osx = [:brews] + unix
+  cross_platform = [:vim]
+  unix           = [:rvm] + cross_platform
+  windows        = [:pik] + cross_platform
+  osx            = [:brews] + unix
 
   if windows?
     desc "Install #{pretty_list(windows)}"
@@ -59,7 +58,7 @@ namespace :install do
 
   desc "Install Vim plugins"
   task :vim_plugins => "vim:vundle" do
-    puts "To install/update Vim plugins, start Vim and run :BundleInstall"
+    puts "To install/update Vim plugins, start Vim and run :BundleInstall/:BundleInstall!"
   end
 
   # Helpful brews via homebrew
