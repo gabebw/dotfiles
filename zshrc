@@ -251,8 +251,8 @@ alias rti="be rake test:integration"
 
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
-alias brake="be rake"
-alias trake="RAILS_ENV=test be rake"
+alias bake="be rake"
+alias take="RAILS_ENV=test be rake"
 alias rspec="be rspec"
 
 #######
