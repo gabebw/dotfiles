@@ -215,6 +215,7 @@ compdef g=git
 alias gp="rake && git push"
 alias gci="git pull --rebase && rake && git push"
 alias gd="git diff"
+alias gg="git grep"
 
 alias ga="git add"
 alias gai="git add --interactive"
