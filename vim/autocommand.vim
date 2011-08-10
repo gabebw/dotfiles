@@ -31,6 +31,9 @@ if has("autocmd")
     au BufRead,BufNewFile Gemfile set ft=ruby
     au BufRead,BufNewFile .autotest set ft=ruby
 
+    " Let's detect Clojure
+    au BufRead,BufNewFile *.clojure set ft=clojure
+
     " .gitconfig and gitconfig are the same
     au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
