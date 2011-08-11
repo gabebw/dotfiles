@@ -214,6 +214,7 @@ function g {
 compdef g=git
 alias gp="rake && git push"
 alias gci="git pull --rebase && rake && git push"
+alias gcl="git clone"
 alias gd="git diff"
 alias gg="git grep"
 
