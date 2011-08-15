@@ -24,6 +24,7 @@ source $HOME/.vim/backups.vim
 source $HOME/.vim/mapping.vim
 source $HOME/.vim/completion.vim
 source $HOME/.vim/tabularizing.vim
+source $HOME/.vim/functions.vim
 " Allows % to switch between if/elsif/else/end, open/close XML tags, and
 " more.
 runtime macros/matchit.vim
