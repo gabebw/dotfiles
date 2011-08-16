@@ -34,6 +34,8 @@ if has("autocmd")
     " .gitconfig and gitconfig are the same
     au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
+    au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+
     autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh ft=zsh
     autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh ft=zsh
     autocmd BufRead /usr/share/file/magic/* set syntax=magic
