@@ -52,6 +52,9 @@ function! statusline#set()
   set statusline+=%= " right align
   " last modified time, like "07/29/10 07:36:44"
   set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
 endfunction
 
 autocmd VimEnter * call statusline#set()
