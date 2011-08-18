@@ -31,7 +31,7 @@ function! statusline#set()
   set statusline+=\ ""
 
   " buffer number
-  set statusline+=%2*buf:\ %-3.3n%0*
+  set statusline+=%2*%-3.3n%0*
   " %f = Path to the file in the buffer, as typed or relative to current
   " directory. %t = file basename
   set statusline+=%f
