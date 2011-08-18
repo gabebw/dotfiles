@@ -10,7 +10,6 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 Bundle 'jquery'
-Bundle 'css'
 Bundle 'pydoc'
 " Bundle 'pyflakes'
 Bundle 'scrooloose/nerdtree'
