@@ -34,9 +34,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 ############
 #  EDITOR  #
 ############
-# don't set it to macvim, zsh has troubles with double-aliases
-export EDITOR="mvim -p" # -p = 1 tab/file
-alias vi="mvim -p"
+# don't set it to "macvim", zsh has troubles with double-aliases
+export EDITOR="vim -p" # -p = 1 tab/file
+alias vi="vim -p"
 alias svi="sudo $EDITOR"
 
 # Use non-Macvim for crontab -e
@@ -45,7 +45,7 @@ alias crontab="EDITOR=vim crontab"
 function viw {
   local location=$(which "$1")
   if [[ -f "$location" ]]; then
-    vim "$location"
+    $EDITOR "$location"
   else
     echo "$location isn't a file."
   fi
