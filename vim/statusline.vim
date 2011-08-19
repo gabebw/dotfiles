@@ -44,9 +44,6 @@ function! statusline#set()
   " %{&ff} = file format (unix/dos)
   set statusline+=%m%r%h%w%y\ fmt=%{&ff} " flags
   set statusline+=\  " add a space
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
   " %= = right-align everything after this
   set statusline+=%= " right align
   " last modified time, like "07/29/10 07:36:44"

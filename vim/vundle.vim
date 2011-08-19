@@ -32,7 +32,6 @@ Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
 Bundle 'ack.vim'
-Bundle 'scrooloose/syntastic'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
