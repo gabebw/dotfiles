@@ -219,6 +219,7 @@ alias gci="git pull --rebase && rake && git push"
 alias gcl="git clone"
 alias gd="git diff"
 alias gg="git grep"
+alias amend="git commit --amend"
 
 alias ga="git add"
 alias gai="git add --interactive"
