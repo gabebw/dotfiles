@@ -44,8 +44,8 @@ augroup rails_shortcuts
   autocmd User Rails nmap <Leader>sv :RSview<Space>
 
   " Rake
-  autocmd User Rails nmap <Leader>t :.Rake!<CR>
-  autocmd User Rails nmap <Leader>tt :Rake!<CR>
+  autocmd User Rails nmap <Leader>o :.Rake!<CR>
+  autocmd User Rails nmap <Leader>t :Rake!<CR>
 
   " Test
   autocmd User Rails nmap <Leader>u :Runittest<Space>
