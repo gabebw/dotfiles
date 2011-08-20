@@ -76,6 +76,8 @@ function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
 function p { open -a Preview "${@:-.}"; }
 
+alias spell="aspell --lang=en --conf=~/aspell.conf -c"
+
 # you can pipe pure "ls" output to "pp"
 # See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
 # $'string' (vs 'string') quotes using the ANSI C standard, meaning you can
