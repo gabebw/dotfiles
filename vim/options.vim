@@ -26,6 +26,8 @@ set scrolloff=3 " When scrolling, show 3 lines of context
 set visualbell " No more beeping - supposedly flashes the screen instead, but doesn't happen for me
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
+set cursorline
+
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
 set textwidth=80
