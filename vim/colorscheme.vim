@@ -22,5 +22,6 @@ if has("gui_running")
     endif
   endif
 else
-  "colorscheme molokai
+  set background=light
+  colorscheme railscasts
 endif
