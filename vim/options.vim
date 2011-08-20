@@ -28,7 +28,7 @@ set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
-set textwidth=78
+set textwidth=80
 set showbreak="@" " This is prepended to wrapped lines
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
