@@ -77,6 +77,7 @@ function m { open -a VLC "${@:-.}"; }
 function p { open -a Preview "${@:-.}"; }
 
 alias spell="aspell --lang=en --conf=~/aspell.conf -c"
+alias get="curl -O"
 
 # you can pipe pure "ls" output to "pp"
 # See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
