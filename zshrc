@@ -78,6 +78,16 @@ function p { open -a Preview "${@:-.}"; }
 
 alias spell="aspell --lang=en --conf=~/aspell.conf -c"
 alias get="curl -O"
+function mp4convert(){
+  input="$1"
+  output="${1%.*}.mp4"
+  if  [[ $# == 1 ]]; then
+    HandbrakeCLI -i "$input" -o "$output"
+  elif [[ $# == 2 ]]; then
+    # specify start time in seconds
+    HandbrakeCLI -i "$input" -o "$output" --start-at=duration:$2
+  fi
+}
 
 # you can pipe pure "ls" output to "pp"
 # See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
