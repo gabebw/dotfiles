@@ -77,7 +77,13 @@ function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
 function p { open -a Preview "${@:-.}"; }
 
-alias spell="aspell --lang=en --conf=~/aspell.conf -c"
+function spell(){
+  for file in **/*
+  do
+    aspell --lang=en --conf=~/aspell.conf -c "$file"
+  done
+}
+
 alias get="curl -O"
 function mp4convert(){
   input="$1"
