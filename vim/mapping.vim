@@ -1,6 +1,9 @@
 " "," is the <Leader> character
 let mapleader=","
 
+" For Ben
+imap <F1> <Esc>
+
 " Change the current working directory to the directory that the current file you are editing is in.
 map <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
