@@ -27,6 +27,7 @@
   today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   plre = pull --rebase
   ff = merge --ff-only
+  newauthor = commit --amend --reset-author -C HEAD
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format
