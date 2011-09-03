@@ -3,7 +3,7 @@
 # or http://www.kernel.org/pub/software/scm/git/docs/git-config.html
 <%= IO.read(File.join(File.dirname(__FILE__), 'gitconfig.local')) %>
 [core]
-  editor = mvim -f # -f is required!
+  editor = `which vim`
 [init]
   templatedir = <%= File.expand_path(File.dirname(__FILE__)) %>/git-template-dir
 [merge]
