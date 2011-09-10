@@ -9,12 +9,12 @@ map <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>v :vnew <C-R>=expand("%:p:h") . '/'<CR>
+map <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 " Remove trailing whitespace before saving
 map <Leader>w :%s/\s\+$//e<CR>
-" Run scheme
-"map <Leader>r :!mit-scheme --edit --load "<C-R>=expand("%:p:h") . "/" <CR>"
-map <Leader>n :NERDTreeToggle<CR>
+map <Leader>n :Explore<CR>
+
+map <Leader>y :!rspec %<CR>
 
 augroup rails_shortcuts
   " Rails.vim
