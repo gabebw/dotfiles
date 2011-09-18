@@ -106,6 +106,16 @@ function mp4convert(){
 alias quote="sed -Ee $'s/([ \'\"])/\\\\\\\\\\\1/g'"
 alias pp='quote | xargs open -a Preview'
 alias mm='quote | xargs open -a VLC'
+
+# List black & white images in current dir
+function bandw() {
+  for image in *
+  do
+    colorspace=$(identify -format "%[colorspace]" "$image" 2>/dev/null)
+    [[ $? == 0 && $colorspace != "RGB" ]] && echo $image
+  done
+}
+
 alias q="$EDITOR ~/.zshrc"
 alias qq="source ~/.zshrc"
 
