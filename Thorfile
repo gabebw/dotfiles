@@ -9,8 +9,9 @@ me.
 
 require 'fileutils'
 require 'erb'
+load './tasks/better_thor.thor'
 
-class New < Thor
+class New < BetterThor
   default_task :all
 
   desc "all", "Everything your new laptop needs"
