@@ -12,7 +12,7 @@ map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 " Remove trailing whitespace
 map <Leader>w :%s/\s\+$//e<CR>
-map <Leader>n :Explore<CR>
+map <Leader>n :40Vexplore<CR> " 40 columns wide
 
 map <Leader>y :!rspec %<CR>
 
