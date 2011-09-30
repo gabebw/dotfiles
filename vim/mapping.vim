@@ -64,16 +64,6 @@ augroup rails_shortcuts
   autocmd User Rails nmap <Leader>vi :RVintegrationtest<Space>
   autocmd User Rails nmap <Leader>si :RSintegrationtest<Space>
 
-  autocmd User Rails nmap <Leader>g :Rconfig<Space>
-  autocmd User Rails nmap <Leader>vg :RVconfig<Space>
-  autocmd User Rails nmap <Leader>sg :RSconfig<Space>
-
-  autocmd User Rails nmap <Leader>j :Rjavascript<Space>
-  autocmd User Rails nmap <Leader>vj :RVjavascript<Space>
-  autocmd User Rails nmap <Leader>sj :RSjavascript<Space>
-
-  map <Leader>sc :sp db/schema.rb<CR>
-
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
   command! -bar -nargs=1 OpenURL :!open <args>
