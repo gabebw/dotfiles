@@ -26,6 +26,10 @@ set scrolloff=3 " When scrolling, show 3 lines of context
 set visualbell " No more beeping - supposedly flashes the screen instead, but doesn't happen for me
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 
+" Open below and to the right, the same way you read a page
+set splitbelow
+set splitright
+
 set cursorline
 
 set fileencodings=utf-8,iso-8859-1
