@@ -5,12 +5,12 @@ let mapleader=","
 imap <F1> <Esc>
 
 " Change the current working directory to the directory that the current file you are editing is in.
-map <Leader>cd :cd %:p:h <CR>
+nmap <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
-" Remove trailing whitespace before saving
+" Remove trailing whitespace
 map <Leader>w :%s/\s\+$//e<CR>
 map <Leader>n :Explore<CR>
 
@@ -81,13 +81,13 @@ augroup rails_shortcuts
 augroup END
 
 " Git
-map <Leader>gc :Gcommit -m ""<LEFT>
-map <Leader>gcv :Gcommit -v<CR>
-map <Leader>ga :Git add .<CR>
+nmap <Leader>gc :Gcommit -m ""<LEFT>
+nmap <Leader>gcv :Gcommit -v<CR>
+nmap <Leader>ga :Git add .<CR>
 " Show blame info for selected text (via Mike Burns)
 vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-map <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
+nmap <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
 
 " Move lines up and down
 "map <C-J> :m +1 <CR>
@@ -99,10 +99,10 @@ nmap <C-L> <C-W><C-L>
 nmap <C-H> <C-W><C-H>
 
 " Disable K looking stuff up
-map K <Nop>
+nmap K <Nop>
 
 " Mappings
-map :Nohl :nohlsearch
+nmap :Nohl :nohlsearch
 " no ex mode
 map Q <Nop>
 inoremap kj <Esc>
