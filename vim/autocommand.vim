@@ -15,32 +15,30 @@ if has("autocmd")
     " Clear old autocmds in group
     autocmd!
     " autoindent with two spaces, always expand tabs
-    autocmd FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+    au FileType ruby,eruby,yaml set autoindent shiftwidth=2 softtabstop=2 tabstop=2 expandtab
     " Include ! as a word character, so dw will delete all of e.g. gsub!,
     " and not leave the "!"
-    autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
-    autocmd FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
-    autocmd FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
-    autocmd FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-    autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    au FileType ruby,eruby,yaml set iskeyword+=!,?
+    au FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
+    au FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
+    au FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+    au FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     " Magic Python settings
-    autocmd FileType python source ~/.vim/python
+    au FileType python source ~/.vim/python
 
     " treat rackup files like ruby
-    au BufRead,BufNewFile *.ru set ft=ruby
-    au BufRead,BufNewFile Gemfile,Guardfile set ft=ruby
-    au BufRead,BufNewFile .autotest set ft=ruby
+    au BufRead,BufNewFile *.ru setf ruby
+    au BufRead,BufNewFile Gemfile,Guardfile setf ruby
+    au BufRead,BufNewFile .autotest setf ruby
 
     " .gitconfig and gitconfig are the same
     au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
     au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
-    autocmd BufRead ~/.dotfiles/extra/* set syntax=zsh ft=zsh
-    autocmd BufRead ~/.dotfiles/zsh/* set syntax=zsh ft=zsh
-    autocmd BufRead /usr/share/file/magic/* set syntax=magic
-    autocmd BufRead /Users/gabe/Projects/thinkingtank/lib/*.rb set autoindent shiftwidth=4 softtabstop=4 tabstop=4 expandtab
-    autocmd BufRead /Users/gabe/Projects/thinkingtank/lib/thinkingtank/*.rb set autoindent shiftwidth=4 softtabstop=4 tabstop=4 expandtab
+    au BufRead ~/.dotfiles/extra/* setf zsh
+    au BufRead ~/.dotfiles/zsh/* setf zsh
+    au BufRead /usr/share/file/magic/* set syntax=magic
   augroup END " END myfiletypes
 
   " When editing a file, always jump to the last known cursor position.
