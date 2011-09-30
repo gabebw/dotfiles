@@ -277,6 +277,9 @@ alias cuc="be cucumber"
 compdef cuc=cucumber
 alias wip="be rake cucumber:wip"
 
+# Rspec
+alias spec="be rspec"
+
 # tests
 alias rtu="be rake test:units"
 alias rtf="be rake test:functionals"
