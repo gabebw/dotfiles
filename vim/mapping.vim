@@ -14,7 +14,8 @@ map <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 map <Leader>w :%s/\s\+$//e<CR>
 map <Leader>n :40Vexplore<CR> " 40 columns wide
 
-map <Leader>y :!rspec %<CR>
+nmap <Leader>a :!rspec %<CR>
+nmap <Leader>l :execute ":!rspec " . expand("%:p") . ":" . line(".")<CR>
 
 augroup rails_shortcuts
   " Rails.vim
