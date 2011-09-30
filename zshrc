@@ -280,19 +280,13 @@ alias wip="be rake cucumber:wip"
 
 # Rspec
 alias spec="be rspec"
+alias rspec="be rspec"
 
-# tests
-alias rtu="be rake test:units"
-alias rtf="be rake test:functionals"
-alias rtc="be rake test:recent"
-alias rtp="be rake test:plugins"
-alias rti="be rake test:integration"
-
+# Rake
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
 alias bake="be rake"
 alias take="RAILS_ENV=test be rake"
-alias rspec="be rspec"
 
 #######
 # RVM #
