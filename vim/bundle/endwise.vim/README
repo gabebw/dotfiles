@@ -1,0 +1,7 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2386
+
+This is a simple plugin that helps to end certain structures automatically.  In Ruby, this means adding "end" after "if", "do", "def" and several other keywords. In Vim Script, this amounts to appropriately adding "endfunction", "endif", etc.  There's also VB support (don't ask).
+
+A primary guiding principle in designing this plugin was that an erroneous insertion is never acceptable.  The behavior is only triggered once pressing enter on the end of the line.  When this happens, endwise searches for a matching end structure and only adds one if none is found.
+
+While the goal was to make it customizable, this turned out to be a tall order.  Every language has vastly different requirements.  Nonetheless, for those bold enough to attempt it, you can follow the model of the autocmds in the plugin to set the three magic variables governing endwise's behavior.
