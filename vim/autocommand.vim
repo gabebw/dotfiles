@@ -28,7 +28,7 @@ if has("autocmd")
 
     " treat rackup files like ruby
     au BufRead,BufNewFile *.ru set ft=ruby
-    au BufRead,BufNewFile Gemfile set ft=ruby
+    au BufRead,BufNewFile Gemfile,Guardfile set ft=ruby
     au BufRead,BufNewFile .autotest set ft=ruby
 
     " .gitconfig and gitconfig are the same
