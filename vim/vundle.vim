@@ -12,7 +12,6 @@ Bundle 'gmarik/vundle'
 Bundle 'jquery'
 Bundle 'pydoc'
 " Bundle 'pyflakes'
-Bundle 'scrooloose/nerdtree'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
 
