@@ -1,0 +1,6 @@
+# Use vim bindings for IRB, script/console, mysql
+bind -v
+# Tab complete
+bind \\t rl_complete
+bind ^l ed-clear-screen
+bind ^r em-inc-search-prev
