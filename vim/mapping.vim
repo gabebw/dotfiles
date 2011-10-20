@@ -23,15 +23,15 @@ function! CorrectTestRunner()
 endfunction
 
 function! RunCurrentTest()
-  exec "!" . CorrectTestRunner() . expand('%:p')
+  exec "!" . CorrectTestRunner() . " " . expand('%:p')
 endfunction
 
 function! RunCurrentLineInTest()
-  exec "!" . CorrectTestRunner() . expand('%:p') . ":" . line(".")
+  exec "!" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
 endfunction
 
-nnoremap <Leader>l RunCurrentTest()
-nnoremap <Leader>l RunCurrentLineInTest()
+nnoremap <Leader>a :call RunCurrentTest()<CR>
+nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 augroup rails_shortcuts
   " Rails.vim
