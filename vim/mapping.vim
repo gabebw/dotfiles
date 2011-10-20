@@ -2,17 +2,19 @@
 let mapleader=","
 
 " For Ben
-imap <F1> <Esc>
+inoremap <F1> <Esc>
 
 " Change the current working directory to the directory that the current file you are editing is in.
-nmap <Leader>cd :cd %:p:h <CR>
+nnoremap <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
-map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-map <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
-map <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
+nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
+nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 " Remove trailing whitespace
 map <Leader>w :%s/\s\+$//e<CR>
 map <Leader>n :40Vexplore<CR> " 40 columns wide
+nnoremap <Leader>w :%s/\s\+$//e<CR>
+nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
 
 nmap <Leader>a :!rspec %<CR>
 nmap <Leader>l :execute ":!rspec " . expand("%:p") . ":" . line(".")<CR>
