@@ -11,13 +11,27 @@ nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 " Remove trailing whitespace
-map <Leader>w :%s/\s\+$//e<CR>
-map <Leader>n :40Vexplore<CR> " 40 columns wide
 nnoremap <Leader>w :%s/\s\+$//e<CR>
 nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
 
-nmap <Leader>a :!rspec %<CR>
-nmap <Leader>l :execute ":!rspec " . expand("%:p") . ":" . line(".")<CR>
+function! CorrectTestRunner()
+  if match(expand('%'), '\.feature$') != -1
+    return "bundle exec cucumber"
+  elseif match(expand('%'), '_spec\.rb$') != -1
+     return "rspec"
+   endif
+endfunction
+
+function! RunCurrentTest()
+  exec "!" . CorrectTestRunner() . expand('%:p')
+endfunction
+
+function! RunCurrentLineInTest()
+  exec "!" . CorrectTestRunner() . expand('%:p') . ":" . line(".")
+endfunction
+
+nnoremap <Leader>l RunCurrentTest()
+nnoremap <Leader>l RunCurrentLineInTest()
 
 augroup rails_shortcuts
   " Rails.vim
