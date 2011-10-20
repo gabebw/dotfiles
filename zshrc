@@ -220,10 +220,6 @@ export PROMPT="[\$(ruby_version)\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%
 HOMEBREW_PREFIX=/usr/local # "$(brew --prefix)"
 PATH="$HOMEBREW_PREFIX"/bin:$PATH
 PATH="$HOMEBREW_PREFIX"/sbin:$PATH
-# android-ndk doesn't put symlinks in /usr/local/bin
-PATH="$PATH:$(brew --prefix android-ndk)"
-# Allows running "emulator -avd em21" from command line
-export ANDROID_SDK_ROOT=/usr/local/var/lib/android-sdk
 
 # If you install Python packages via pip, binaries will be installed under
 # Python's cellar but not automatically linked into the Homebrew prefix.
