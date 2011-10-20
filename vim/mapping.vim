@@ -16,7 +16,7 @@ nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
 
 function! CorrectTestRunner()
   if match(expand('%'), '\.feature$') != -1
-    return "bundle exec cucumber"
+    return "cucumber"
   elseif match(expand('%'), '_spec\.rb$') != -1
      return "rspec"
    endif
