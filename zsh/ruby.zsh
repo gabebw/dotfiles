@@ -1,0 +1,4 @@
+##########
+#  Ruby  #
+##########
+RUBYOPT=rubygems
