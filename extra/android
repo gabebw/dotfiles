@@ -1,8 +1,0 @@
-# Helpful android stuff
-# ddms - can get screenshots of device screen
-PATH="$PATH:/Users/gabe/bin:/Users/gabe/bin/apache-ant-1.8.1/bin"
-
-# android-ndk doesn't put symlinks in /usr/local/bin
-PATH="$PATH:$(brew --prefix android-ndk)"
-
-export PATH

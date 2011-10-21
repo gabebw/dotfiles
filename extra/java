@@ -1,5 +1,0 @@
-function jv {
-    f="${1%.*}" # strip off extension
-	# pass in args 2+ to allow for passing options
-    javac "$f.java" && java "$f" ${@[2,-1]}
-}
