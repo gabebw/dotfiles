@@ -217,9 +217,8 @@ export PROMPT="[\$(ruby_version)\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%
 ############
 # Homebrew #
 ############
-HOMEBREW_PREFIX=/usr/local # "$(brew --prefix)"
-PATH="$HOMEBREW_PREFIX"/bin:$PATH
-PATH="$HOMEBREW_PREFIX"/sbin:$PATH
+HOMEBREW_PREFIX=/usr/local
+PATH=$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH
 
 # If you install Python packages via pip, binaries will be installed under
 # Python's cellar but not automatically linked into the Homebrew prefix.
@@ -243,7 +242,7 @@ function g {
 }
 compdef g=git
 alias gp="rake && git push"
-alias gci="git pull --rebase && rake && git push"
+alias gci="git pull --rebase && brake && git push"
 alias gcl="git clone"
 alias gd="git diff"
 alias gg="git grep"
@@ -277,12 +276,12 @@ alias wip="be rake cucumber:wip"
 
 # Rspec
 alias spec="be rspec"
-alias rspec="be rspec"
 
 # Rake
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
 alias bake="be rake"
+alias brake=bake
 alias take="RAILS_ENV=test be rake"
 
 #######
@@ -316,10 +315,9 @@ rgcu() { rvm gemset create "$1" && rvm gemset use "$1"; }
 # for x in $(rvm list strings); do rvm use $x@global && gem install hitch; done
 hitch() {
   command hitch "$@"
-  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+  [[ -s "$HOME/.hitch_export_authors" ]] && source "$HOME/.hitch_export_authors"
 }
 alias unhitch='hitch -u'
-# hitch # Persist pair info between terminal instances
 
 export PATH
 trim_path
