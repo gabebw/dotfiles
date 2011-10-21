@@ -16,7 +16,7 @@ nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
 
 function! CorrectTestRunner()
   if match(expand('%'), '\.feature$') != -1
-    return "cucumber"
+    return "bundle exec cucumber"
   elseif match(expand('%'), '_spec\.rb$') != -1
      return "rspec"
    endif
@@ -62,10 +62,6 @@ augroup rails_shortcuts
   autocmd User Rails nmap <Leader>v :Rview<Space>
   autocmd User Rails nmap <Leader>vv :RVview<Space>
   autocmd User Rails nmap <Leader>sv :RSview<Space>
-
-  " Rake
-  autocmd User Rails nmap <Leader>o :.Rake!<CR>
-  autocmd User Rails nmap <Leader>t :Rake!<CR>
 
   " Test
   autocmd User Rails nmap <Leader>u :Runittest<Space>
