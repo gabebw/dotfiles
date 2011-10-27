@@ -20,3 +20,4 @@ alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:sch
 alias bake="be rake"
 alias brake=bake
 alias take="RAILS_ENV=test be rake"
+alias rrg="bake routes | grep"
