@@ -9,7 +9,7 @@ function g {
   fi
 }
 compdef g=git
-alias gp="rake && git push"
+alias gp="bundle exec rake && git push"
 alias gci="git pull --rebase && brake && git push"
 alias gcl="git clone"
 alias gd="git diff"
