@@ -21,3 +21,4 @@ alias bake="be rake"
 alias brake=bake
 alias take="RAILS_ENV=test be rake"
 alias rrg="bake routes | grep"
+alias reset-db="bake db:drop db:create && migrate"
