@@ -57,8 +57,8 @@ function mp4convert(){
 # put single quotes inside single quotes by '\''. Otherwise you flat-out can't
 # put single quotes in a single-quoted string.
 alias quote="sed -Ee $'s/([ \'\"])/\\\\\\\\\\\1/g'"
-alias pp='quote | xargs open -a Preview'
-alias mm='quote | xargs open -a VLC'
+alias pp='quote | sort -df | xargs open -a Preview'
+alias mm='quote | sort -df | xargs open -a VLC'
 
 # List black & white images in current dir
 function bandw() {
