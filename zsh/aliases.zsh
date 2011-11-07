@@ -20,9 +20,17 @@ export GREP_COLOR='1;31' # highlight matches in red
 alias less="less -R" # correctly interpret ASCII color escapes
 alias eject="drutil tray eject"
 
+
 function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
-function p { open -a Preview "${@:-.}"; }
+function p {
+  if [[ $1 == '.' || $# == 0 ]]; then
+    # Preview will sort them like Finder for you
+    open -a Preview .
+  else
+    open -a Preview "$@"
+  fi
+}
 
 function spell(){
   for file in **/*
