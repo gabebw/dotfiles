@@ -9,7 +9,6 @@ alias be="bundle exec"
 # Cucumber
 alias cuc="be cucumber"
 compdef cuc=cucumber
-alias wip="be rake cucumber:wip"
 
 # Rspec
 alias spec="be rspec"
