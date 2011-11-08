@@ -13,6 +13,9 @@ compdef cuc=cucumber
 # Rspec
 alias spec="be rspec"
 
+# Guard
+alias reguard="guard; killall -9 ruby; passenger stop; guard"
+
 # Rake
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
