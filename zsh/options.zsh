@@ -12,4 +12,6 @@ setopt hist_reduce_blanks
 setopt autocd
 cdpath=($HOME/thoughtbot $HOME/src)
 setopt prompt_subst
+setopt autopushd
+
 unsetopt correctall
