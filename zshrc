@@ -1,4 +1,4 @@
-[[ -z $TMUX ]] && tmux
+# [[ -z $TMUX ]] && tmux
 
 BASE="$HOME/.dotfiles/zsh/"
 
@@ -17,8 +17,10 @@ source $BASE'prompt.zsh'
 # (non-core functionality) #
 ############################
 
-source $BASE'homebrew.zsh'
+# source $BASE'homebrew.zsh'
 # source $BASE'python.zsh'
+source $BASE'erlang.zsh'
+source $BASE'fink.zsh'
 source $BASE'git.zsh'
 source $BASE'ruby.zsh'
 source $BASE'rails.zsh'
