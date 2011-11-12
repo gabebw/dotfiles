@@ -26,5 +26,5 @@ pdflatex_dir='/usr/local/texlive/2010/bin/x86_64-darwin'
 unset pdflatex_dir
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
-PATH="$PATH:/Users/gabe/bin"
+PATH="$PATH:/Users/randy/bin"
 PATH="/usr/local/bin:$PATH" # homebrew
