@@ -17,13 +17,6 @@
 (add-to-list 'load-path "~/.dotfiles/emacs-plugins/slime/")  ; your SLIME directory
 ; load SBCL faster
 ; see: http://common-lisp.net/project/slime/doc/html/Loading-Swank-faster.html#Loading-Swank-faster
-; Or, if you don't want to look at the webpage:
-;   shell$ sbcl
-;   * (mapc 'require '(sb-bsd-sockets sb-posix sb-introspect sb-cltl2 asdf))
-;   * (save-lisp-and-die "sbcl.core-for-slime")
-
-(setq slime-lisp-implementations
-      '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl-1.0.47.core-for-slime"))))
 
 (require 'slime-autoloads) ; only load SLIME on demand (M-x slime)
 ;(slime-setup) ; basic setup
@@ -44,9 +37,7 @@
 ;;; interfacing with ELPA, the package archive.
 ;;; Move this code earlier if you want to reference
 ;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
+(when (load (expand-file-name "~/.emacs.d/elpa/package.el"))
   (package-initialize))
 
 (global-set-key "%" 'match-paren)
