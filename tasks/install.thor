@@ -1,27 +1,15 @@
 class Install < BetterThor
   default_task :all
 
-  # install:all is platform-dependent
-  CROSS_PLATFORM = [:vim]
-  UNIX           = [:rvm] + CROSS_PLATFORM
-  WINDOWS        = [:pik] + CROSS_PLATFORM
-  OSX            = [:brews] + UNIX
+  ALL = [:brews, :rvm, :vim]
 
   desc "all", "Install a good starting point for your platform"
   def all
-    if windows?
-      WINDOWS.each{|t| invoke t }
-    elsif osx?
-      OSX.each{|t| invoke t }
-    else
-      UNIX.each{|t| invoke t }
-    end
+    ALL.each{|t| invoke t }
   end
 
-  desc "homebrew", "Install homebrew (OSX only)"
+  desc "homebrew", "Install homebrew"
   def homebrew
-    fail "Not OSX, can't install Homebrew" unless osx?
-
     installing 'homebrew'
     # Don't fail, since they may have a broken install
     warn "Homebrew already installed!" if homebrew_installed?
@@ -64,23 +52,12 @@ class Install < BetterThor
     system "brew install colordiff colormake ack fortune git macvim watch memcached"
   end
 
-  desc "rvm", "Install RVM (Unixy OSes only)"
+  desc "rvm", "Install RVM"
   def rvm
-    fail "RVM doesn't work on Windows, install:pik instead" if windows?
-
     installing 'RVM'
     # Requires "bash -c" because by default, the system command uses
     # /bin/sh, which chokes on the "<"s
     system '/bin/bash -c "bash < <( curl http://rvm.beginrescueend.com/releases/rvm-install-head )"'
-  end
-
-  desc "pik", "Install Pik (Windows only)"
-  def pik
-    fail "Pik is Windows-only, install:rvm instead" unless windows?
-
-    `gem install pik`
-    announce("Installed Pik gem, now run pik_install")
-    announce("Help: https://github.com/vertiginous/pik")
   end
 
   desc "npm", "Install NPM, the node package manager"
