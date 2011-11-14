@@ -23,7 +23,7 @@
 ;   * (save-lisp-and-die "sbcl.core-for-slime")
 
 (setq slime-lisp-implementations
-      '((sbcl ("sbcl" "--core" "/Users/gabe/.dotfiles/sbcl-1.0.47.core-for-slime"))))
+      '((sbcl ("sbcl" "--core" "/Users/randy/.dotfiles/sbcl-1.0.47.core-for-slime"))))
 
 (require 'slime-autoloads) ; only load SLIME on demand (M-x slime)
 ;(slime-setup) ; basic setup
