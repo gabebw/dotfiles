@@ -28,6 +28,8 @@
   plre = pull --rebase
   ff = merge --ff-only
   newauthor = commit --amend --reset-author -C HEAD
+  prune-remotes = remote prune origin
+  next = !git add . && git rebase --continue
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format
@@ -90,3 +92,5 @@
 [push]
   # Push current branch even if you've never pushed it before
   default = current
+[rerere]
+  enabled = 1
