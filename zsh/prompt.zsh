@@ -1,4 +1,4 @@
-user_host() { print "%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}"; }
+user_host() { print "%{$terminfo[bold]$fg[cyan]%}%n@%m%{$reset_color%}"; }
 
 # Must use print (not echo) for ZSH colors to work
 git_branch() { print "${vcs_info_msg_0_}$(parse_git_dirty)"; }
