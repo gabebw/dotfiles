@@ -24,3 +24,15 @@ alias brake=bake
 alias take="RAILS_ENV=test be rake"
 alias rrg="bake routes | grep"
 alias reset-db="bake db:drop db:create && migrate"
+
+# Via Dan Croak.
+alias staging='heroku run console --remote staging'
+alias staging-logs='bundle exec heroku logs --tail --remote staging'
+
+alias production='heroku run console --remote production'
+alias production-logs='bundle exec heroku logs --tail --remote production'
+
+alias db-pull-staging='heroku db:pull --remote staging --confirm `basename $PWD`-staging'
+alias db-pull-production='heroku db:pull --remote production --confirm `basename $PWD`-production'
+alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging  --confirm `basename $PWD`-staging'
+alias db-backup-production='heroku pgbackups:capture --remote production'
