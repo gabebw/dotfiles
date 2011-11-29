@@ -25,11 +25,11 @@ alias reset-db="bake db:drop db:create && migrate"
 # Via Dan Croak.
 alias staging='heroku run console --remote staging'
 alias staging-logs='bundle exec heroku logs --tail --remote staging'
-alias migrate-productino='heroku run rake db:migrate --remote staging'
+alias migrate-production='heroku run rake db:migrate --remote staging'
 
 alias production='heroku run console --remote production'
 alias production-logs='bundle exec heroku logs --tail --remote production'
-alias migrate-productino='heroku run rake db:migrate --remote production'
+alias migrate-production='heroku run rake db:migrate --remote production'
 
 alias db-pull-staging='heroku db:pull --remote staging --confirm `basename $PWD`-staging'
 alias db-pull-production='heroku db:pull --remote production --confirm `basename $PWD`-production'
