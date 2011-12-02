@@ -34,7 +34,7 @@ function! statusline#set()
   set statusline+=%2*%-3.3n%0*
   " %f = Path to the file in the buffer, as typed or relative to current
   " directory. %t = file basename
-  set statusline+=%f
+  set statusline+=%.30F " Print at most 30 chars of the full path to the file
   " FLAGS
   " %m = display "[+]" if file has been modified
   " %r = display "[RO]" if file is read-only
