@@ -7,6 +7,7 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
+
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>
 nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
@@ -15,8 +16,8 @@ function! CorrectTestRunner()
   if match(expand('%'), '\.feature$') != -1
     return "cucumber --drb"
   elseif match(expand('%'), '_spec\.rb$') != -1
-     return "rspec --drb"
-   endif
+    return "rspec --drb"
+  endif
 endfunction
 
 function! RunCurrentTest()
