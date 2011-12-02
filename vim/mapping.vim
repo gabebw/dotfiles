@@ -10,7 +10,20 @@ nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>
-nnoremap <Leader>n :40Vexplore<CR> " 40 columns wide
+" Directory explorer is 40 columns wide
+nnoremap <Leader>n :40Vexplore<CR>
+
+" Stronger h
+nnoremap H 0
+" Stronger l
+nnoremap L $
+
+" Duplicate a selection
+" Visual mode: D
+vnoremap D y'>p
+
+nnoremap <Leader>a :call RunCurrentTest()<CR>
+nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 function! CorrectTestRunner()
   if match(expand('%'), '\.feature$') != -1
@@ -27,9 +40,6 @@ endfunction
 function! RunCurrentLineInTest()
   exec "!" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
 endfunction
-
-nnoremap <Leader>a :call RunCurrentTest()<CR>
-nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 augroup rails_shortcuts
   " Rails.vim
@@ -107,21 +117,14 @@ inoremap kj <Esc>
 " useful than apostrophe
 nnoremap ` '
 
-" Duplicate a selection
-" Visual mode: D
-vmap D y'>p
-
 " Chapter 7
+" Vimrc editing/sourcing
 nnoremap <Leader>sv :source $MYVIMRC<CR>
 nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
 
 " Chapter 9
 " double-quote selected text
 vnoremap <Leader>z "zdi""<ESC>"zPgvl
-" Stronger h
-nnoremap H 0
-" Stronger l
-nnoremap L $
 
 " Chapter 13
 autocmd FileType javascript :iabbrev <buffer> iff if ( ) {}<left><left><left><left><left>
