@@ -128,3 +128,7 @@ vnoremap <Leader>z "zdi""<ESC>"zPgvl
 nnoremap H 0
 " Stronger l
 nnoremap L $
+
+" Chapter 13
+autocmd FileType javascript :iabbrev <buffer> iff if ( ) {}<left><left><left><left><left>
+autocmd FileType python :iabbrev <buffer> iff if:<left>
