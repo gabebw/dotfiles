@@ -2,5 +2,5 @@ nnoremap <C-s> <esc>:w<CR>
 inoremap <C-s> <esc>:w<CR>
 
 " Ben, what a guy.
-nnoremap <Leader>t <Leader>a
-nnoremap <Leader>o <Leader>l
+nmap <Leader>t <Leader>a
+nmap <Leader>o <Leader>l
