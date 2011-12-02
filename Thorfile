@@ -16,7 +16,7 @@ class New < BetterThor
 
   desc "all", "Everything your new laptop needs"
   def all
-    invoke "new:zsh" unless (windows? || using_zsh?)
+    invoke "new:zsh"
     invoke "install:all"
     invoke "link:all"
   end
@@ -29,6 +29,10 @@ class New < BetterThor
 
   desc "zsh", "Change your shell to ZSH"
   def zsh
-    system "chsh -s `which zsh` #{ENV['USER']}"
+    if using_zsh?
+      puts "Already using ZSH."
+    else
+      system "chsh -s `which zsh` #{ENV['USER']}"
+    end
   end
 end
