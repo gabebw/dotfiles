@@ -116,3 +116,15 @@ nnoremap ` '
 " Duplicate a selection
 " Visual mode: D
 vmap D y'>p
+
+" Chapter 7
+nnoremap <Leader>sv :source $MYVIMRC<CR>
+nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+
+" Chapter 9
+" double-quote selected text
+vnoremap <Leader>z "zdi""<ESC>"zPgvl
+" Stronger h
+nnoremap H 0
+" Stronger l
+nnoremap L $
