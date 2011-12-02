@@ -113,9 +113,6 @@ inoremap kj <Esc>
 " useful than apostrophe
 nnoremap ` '
 
-map <C-s> <esc>:w<cr>
-imap <C-s> <esc>:w<cr>
-
 " Duplicate a selection
 " Visual mode: D
 vmap D y'>p
