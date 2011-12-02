@@ -127,5 +127,15 @@ nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
 vnoremap <Leader>z "zdi""<ESC>"zPgvl
 
 " Chapter 13
-autocmd FileType javascript :iabbrev <buffer> iff if ( ) {}<left><left><left><left><left>
-autocmd FileType python :iabbrev <buffer> iff if:<left>
+augroup if_statements
+  autocmd!
+  autocmd FileType javascript :iabbrev <buffer> iff if( ) {}<left><left><left><left><left>
+  autocmd FileType python :iabbrev <buffer> iff if:<left>
+augroup END
+
+" Chapter 14 - autocmd groups
+augroup filetype_html
+  " Clear the augroup - otherwise you just keep adding to the same group!
+  autocmd!
+  autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+augroup END

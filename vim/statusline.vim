@@ -50,4 +50,7 @@ function! statusline#set()
   set statusline+=%{strftime(\"%m/%d/%y\ %T\",getftime(expand(\"%:p\")))}
 endfunction
 
-autocmd VimEnter * call statusline#set()
+augroup statusline
+  autocmd!
+  autocmd VimEnter * call statusline#set()
+augroup END
