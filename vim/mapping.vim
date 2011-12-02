@@ -36,43 +36,44 @@ augroup rails_shortcuts
   " Leader shortcuts for Rails commands
   " from http://github.com/ryanb/dotfiles/blob/master/vimrc
   " Rails configuration - from jferris
+  autocmd!
   autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
   autocmd User Rails Rnavcommand initializer config/initializers -glob=**/*
   autocmd User Rails Rnavcommand factories spec test -glob=**/* -default=factories
 
   " Steps
-  autocmd User Rails nmap <Leader>p :Rstep<Space>
-  autocmd User Rails nmap <Leader>vp :RVstep<Space>
-  autocmd User Rails nmap <Leader>sp :RSstep<Space>
+  autocmd User Rails nnoremap <Leader>p :Rstep<Space>
+  autocmd User Rails nnoremap <Leader>vp :RVstep<Space>
+  autocmd User Rails nnoremap <Leader>sp :RSstep<Space>
 
   " Models
-  autocmd User Rails nmap <Leader>m :Rmodel<Space>
-  autocmd User Rails nmap <Leader>vm :RVmodel<Space>
-  autocmd User Rails nmap <Leader>sm :RSmodel<Space>
+  autocmd User Rails nnoremap <Leader>m :Rmodel<Space>
+  autocmd User Rails nnoremap <Leader>vm :RVmodel<Space>
+  autocmd User Rails nnoremap <Leader>sm :RSmodel<Space>
 
   " Controller
-  autocmd User Rails nmap <Leader>c :Rcontroller<Space>
-  autocmd User Rails nmap <Leader>vc :RVcontroller<Space>
-  autocmd User Rails nmap <Leader>sc :RScontroller<Space>
+  autocmd User Rails nnoremap <Leader>c :Rcontroller<Space>
+  autocmd User Rails nnoremap <Leader>vc :RVcontroller<Space>
+  autocmd User Rails nnoremap <Leader>sc :RScontroller<Space>
 
   " Views
-  autocmd User Rails nmap <Leader>v :Rview<Space>
-  autocmd User Rails nmap <Leader>vv :RVview<Space>
-  autocmd User Rails nmap <Leader>sv :RSview<Space>
+  autocmd User Rails nnoremap <Leader>v :Rview<Space>
+  autocmd User Rails nnoremap <Leader>vv :RVview<Space>
+  autocmd User Rails nnoremap <Leader>sv :RSview<Space>
 
   " Test
-  autocmd User Rails nmap <Leader>u :Runittest<Space>
-  autocmd User Rails nmap <Leader>vu :RVunittest<Space>
-  autocmd User Rails nmap <Leader>su :RSunittest<Space>
+  autocmd User Rails nnoremap <Leader>u :Runittest<Space>
+  autocmd User Rails nnoremap <Leader>vu :RVunittest<Space>
+  autocmd User Rails nnoremap <Leader>su :RSunittest<Space>
 
-  autocmd User Rails nmap <Leader>h :Rhelper<Space>
-  autocmd User Rails nmap <Leader>vh :RVhelper<Space>
-  autocmd User Rails nmap <Leader>sh :RShelper<Space>
+  autocmd User Rails nnoremap <Leader>h :Rhelper<Space>
+  autocmd User Rails nnoremap <Leader>vh :RVhelper<Space>
+  autocmd User Rails nnoremap <Leader>sh :RShelper<Space>
 
-  autocmd User Rails nmap <Leader>i :Rintegrationtest<Space>
-  autocmd User Rails nmap <Leader>vi :RVintegrationtest<Space>
-  autocmd User Rails nmap <Leader>si :RSintegrationtest<Space>
+  autocmd User Rails nnoremap <Leader>i :Rintegrationtest<Space>
+  autocmd User Rails nnoremap <Leader>vi :RVintegrationtest<Space>
+  autocmd User Rails nnoremap <Leader>si :RSintegrationtest<Space>
 
   command! Rroutes :e config/routes.rb
   " When you call Rpreview <x>, use this command to open localhost:3000/<x>
@@ -82,28 +83,23 @@ augroup rails_shortcuts
 augroup END
 
 " Git
-nmap <Leader>gc :Gcommit -m ""<LEFT>
-nmap <Leader>gcv :Gcommit -v<CR>
-nmap <Leader>ga :Git add .<CR>
+nnoremap <Leader>gc :Gcommit -m ""<LEFT>
+nnoremap <Leader>gcv :Gcommit -v<CR>
+nnoremap <Leader>ga :Git add .<CR>
 " Show blame info for selected text (via Mike Burns)
-vmap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+vnoremap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
-nmap <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
+nnoremap <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
 
-" Move lines up and down
-"map <C-J> :m +1 <CR>
-"map <C-K> :m -2 <CR>
-" Window navigation
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-L> <C-W><C-L>
-nmap <C-H> <C-W><C-H>
+" Buffer navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Disable K looking stuff up
-nmap K <Nop>
-
-" Mappings
-nmap :Nohl :nohlsearch
+nnoremap K <Nop>
+nnoremap :Nohl :nohlsearch
 " no ex mode
 map Q <Nop>
 inoremap kj <Esc>
