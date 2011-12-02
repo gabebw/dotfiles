@@ -11,10 +11,25 @@ C-x-l will autocomplete as much of the current line as possible. Say you have a 
   other lines match, they'll show up in a standard autocomplete menu. This is
   really helpful in cucumber feature files. (Thanks, Harold)
 
+How do I open a tag (e.g. a method name)?
+C-] when the cursor's on the tag (like jumping into a cave)
+
+How do I get back once I've jumped into a tag?
+<C-o> (jump Out) or <C-6> (which will jump to the alternate file, which in this case
+is the file you were in. Apparently this is because <C-^> is the real mapping, but
+<C-S-6> is too many keys.)
+
+How do I open a tag in a split?
+<C-w ]>. See `:help window-tag` for more awesomeness.
+
+How do I jump back to a previous cursor position (maintained across files)?
+<C-o>. See next question for more detail.
+
+How do I jump forward to a newer cursor position (maintained across files)?
+<C-i>. <C-i> is the opposite of <C-o>; think of your cursor positions as a list,
+like browser history. <C-o> moves back, <C-i> moves forward.
 
 = cucumber.vim
 If you're on a step line (Given/When/Then) in a cucumber feature file (*.feature), pressing C-] will
   go to the file where that step is defined. Pressing C-6 will go back to the
   feature file. (Thanks, Harold)
-
-
