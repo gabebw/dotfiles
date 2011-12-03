@@ -59,7 +59,7 @@ OPTIONS=verbose
 # Compound options
 OPTIONS=msghistory:20
 OPTIONS=boulder:0
-OPTIONS=disclose:+i +a +v +g +c 
+OPTIONS=disclose:+i +a +v +g +c
 OPTIONS=fruit:snozberry
 OPTIONS=menustyle:full
 OPTIONS=menu_headings:inverse
@@ -80,20 +80,20 @@ OPTIONS=suppress_alert:3.4.3
 #MENUCOLOR="* cursed * (being worn)"=red&underline
 #
 ## With Statuscolor patch installed
-## HP 
-#STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=orange 
-#STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink 
-## Pw 
-#STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold 
-## Carry 
-#STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold 
-#STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink 
-## Hunger 
-#STATUSCOLOR=satiated:yellow,hungry:orange,weak:red&bold 
-#STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink 
-## Mental 
-#STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold 
-## Health 
-#STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse 
-## Other 
-#STATUSCOLOR=held:red&inverse,blind:red&inverse 
+## HP
+#STATUSCOLOR=hp%100=green,hp%66=yellow,hp%50=orange
+#STATUSCOLOR=hp%33=red&bold,hp%15:red&inverse,hp%0:red&inverse&blink
+## Pw
+#STATUSCOLOR=pw%100=green,pw%66=yellow,pw%50:orange,pw%33=red&bold
+## Carry
+#STATUSCOLOR=burdened:yellow,stressed:orange,strained:red&bold
+#STATUSCOLOR=overtaxed:red&inverse,overloaded:red&inverse&blink
+## Hunger
+#STATUSCOLOR=satiated:yellow,hungry:orange,weak:red&bold
+#STATUSCOLOR=fainting:red&inverse,fainted:red&inverse&blink
+## Mental
+#STATUSCOLOR=hallu:yellow,conf:orange,stun:red&bold
+## Health
+#STATUSCOLOR=ill:red&inverse,foodpois:red&inverse,slime:red&inverse
+## Other
+#STATUSCOLOR=held:red&inverse,blind:red&inverse
