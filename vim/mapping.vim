@@ -112,7 +112,7 @@ nnoremap K <Nop>
 nnoremap :Nohl :nohlsearch
 " no ex mode
 map Q <Nop>
-inoremap kj <Esc>
+inoremap kj <Esc>:w<CR>
 " Use apostrophe for backquote function, since backquote is so much more
 " useful than apostrophe
 nnoremap ` '
@@ -120,7 +120,7 @@ nnoremap ` '
 " Chapter 7
 " Vimrc editing/sourcing
 nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <Leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <Leader>ev :vsplit $HOME/.dotfiles/vim/mapping.vim<CR>
 
 " Chapter 9
 " double-quote selected text
