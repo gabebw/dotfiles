@@ -15,8 +15,11 @@ alias grpe=grep # fix typo
 alias pgrep="\grep -P" # PCRE-compatible
 export GREP_OPTIONS="--color=auto" # removes color when piping
 export GREP_COLOR='1;31' # highlight matches in red
-[[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
-[[ -x $(which colormake) ]] && alias make=colormake
+unamestr=`uname`
+if [[ "$unamestr" == 'Darwin' ]]; then
+  [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
+  [[ -x $(which colormake) ]] && alias make=colormake
+fi
 alias less="less -R" # correctly interpret ASCII color escapes
 alias eject="drutil tray eject"
 
