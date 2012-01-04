@@ -18,6 +18,9 @@
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   unstage = reset HEAD
   done = !git fetch && git rebase origin/master && git checkout master && git merge @{-1} && bundle exec rake && git push
+  # Merge current branch into master, only if it's a fast-forward. Doesn't check
+  # out master if it's not a FF merge.
+  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
   up = !git fetch origin && git rebase origin/master
   aa = add .
   # Not yet added - doesn't include ignored files
