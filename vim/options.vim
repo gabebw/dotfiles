@@ -1,5 +1,5 @@
 if version >= 703 " 703 = Vim 7.3
-  "set relativenumber " line numbers are relative to current line
+  set relativenumber " line numbers are relative to current line
   set undofile " Create FILE.un~ files for persistent undo
   " Persistent undo
   if has('win32')
@@ -8,7 +8,6 @@ if version >= 703 " 703 = Vim 7.3
     set undodir=~/.vim/undodir
   endif
 endif
-set number " non-relative line numbers
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
 set nowrap " don't wrap lines
