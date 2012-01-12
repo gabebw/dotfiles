@@ -6,17 +6,20 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
-if git rev-parse --verify HEAD >/dev/null 2>&1
-then
-  against=HEAD
-else
-  # Initial commit: diff against an empty tree object
-  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
-fi
+# if git rev-parse --verify HEAD >/dev/null 2>&1
+# then
+#   against=HEAD
+# else
+#   # Initial commit: diff against an empty tree object
+#   against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+# fi
 
-git diff --cached | grep "show me the page" &>/dev/null
+for debugging_statement in p puts "show me the page" save_and_open_page
+do
+  git diff --cached | grep "\<${debugging_statement}\>" &>/dev/null
 
-if [ $? == 0 ]; then
-  echo "Please remove a stray 'show me the page'."
-  exit 1
-fi
+  if [ $? == 0 ]; then
+    echo "Please remove a stray '${debugging_statement}' statement, then \`git add\` again."
+    exit 1
+  fi
+done
