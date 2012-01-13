@@ -1,2 +1,7 @@
+set -o vi
+
 set editing-mode vi
 set keymap vi
+
+# Required so that <Enter> doesn't show up as "^M"
+set convert-meta on
