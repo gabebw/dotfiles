@@ -22,25 +22,6 @@ nnoremap L $
 " Visual mode: D
 vnoremap D y'>p
 
-nnoremap <Leader>a :call RunCurrentTest()<CR>
-nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
-
-function! CorrectTestRunner()
-  if match(expand('%'), '\.feature$') != -1
-    return "cucumber --drb"
-  elseif match(expand('%'), '_spec\.rb$') != -1
-    return "rspec --drb"
-  endif
-endfunction
-
-function! RunCurrentTest()
-  exec "!" . CorrectTestRunner() . " " . expand('%:p')
-endfunction
-
-function! RunCurrentLineInTest()
-  exec "!" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
-endfunction
-
 augroup rails_shortcuts
   " Rails.vim
   " Leader shortcuts for Rails commands
