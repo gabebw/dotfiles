@@ -15,10 +15,15 @@ nnoremap <Leader>a :call RunCurrentTest()<CR>
 nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 function! CorrectTestRunner()
-  if match(expand('%'), '\.feature$') != -1
-    return "cucumber --drb"
-  elseif match(expand('%'), '_spec\.rb$') != -1
+  if match(expand('%'), '_spec\.rb$') != -1
     return "rspec --drb"
+  elseif match(expand('%'), 'spec/acceptance/') != -1
+    " Turnip
+    return "rspec -r turnip --drb"
+  elseif match(expand('%'), '\.feature$') != -1
+    return "cucumber --drb"
+  else
+    echoerr "Can't run test (is this a test file?)"
   endif
 endfunction
 
