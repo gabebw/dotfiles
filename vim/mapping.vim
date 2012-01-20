@@ -98,22 +98,6 @@ inoremap kj <Esc>:w<CR>
 " useful than apostrophe
 nnoremap ` '
 
-" Chapter 7
-" Vimrc editing/sourcing
-nnoremap <Leader>sv :source $MYVIMRC<CR>
-nnoremap <Leader>ev :vsplit $HOME/.dotfiles/vim/mapping.vim<CR>
-
-" Chapter 9
-" double-quote selected text
-vnoremap <Leader>z "zdi""<ESC>"zPgvl
-
-" Chapter 13
-augroup if_statements
-  autocmd!
-  autocmd FileType javascript :iabbrev <buffer> iff if( ) {}<left><left><left><left><left>
-  autocmd FileType python :iabbrev <buffer> iff if:<left>
-augroup END
-
 " Chapter 14 - autocmd groups
 augroup filetype_html
   " Clear the augroup - otherwise you just keep adding to the same group!
