@@ -19,3 +19,6 @@ Thumbs.db
 
 # From `bundle install --binstubs=bundler_binstubs`
 bundler_binstubs
+
+# ctags file
+tags
