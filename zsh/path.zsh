@@ -12,6 +12,7 @@ trim_path() {
   # http://chunchung.blogspot.com/2007/11/remove-duplicate-paths-from-path-in.html
   export PATH=$(awk -F: '{for(i=1;i<=NF;i++){if(!($i in a)){a[$i];printf s$i;s=":"}}}'<<<$PATH)
 }
+
 # So I can tell ZSH to scan the PATH for newly-installed programs, without
 # running the whole bootup process all over again. And yes, I used to use
 # Gentoo.
@@ -19,11 +20,6 @@ trim_path() {
 env-update() { export PATH=$PATH; }
 
 MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr/local/man
-
-# TeX
-pdflatex_dir='/usr/local/texlive/2010/bin/x86_64-darwin'
-[[ -x ${pdflatex_dir}/pdflatex ]] && PATH="$PATH:$pdflatex_dir"
-unset pdflatex_dir
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
 PATH="$PATH:/Users/gabe/bin"
