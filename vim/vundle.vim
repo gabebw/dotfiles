@@ -32,6 +32,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
 Bundle 'ack.vim'
 Bundle 'greplace.vim'
+Bundle 'snippetsEmu'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
