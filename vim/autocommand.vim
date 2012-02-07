@@ -23,8 +23,6 @@ if has("autocmd")
     au FileType javascript set autoindent shiftwidth=2 softtabstop=2 expandtab
     au FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     au FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-    " Magic Python settings
-    au FileType python source ~/.vim/python
 
     " treat rackup files like ruby
     au BufRead,BufNewFile *.ru setf ruby
