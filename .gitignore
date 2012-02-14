@@ -2,6 +2,9 @@
 *.un~
 *.swp
 
+# Vim undodir
+vim/undodir
+
 # Local config
 *.local
 
