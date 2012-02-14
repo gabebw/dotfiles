@@ -23,6 +23,10 @@ alias eject="drutil tray eject"
 alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 
+# Global aliases
+alias -g G="| grep "
+alias -g ONE="| awk '{ print \$1}'"
+
 function al { ls -t | head -n ${1:-10}; }
 function m { open -a VLC "${@:-.}"; }
 function p {
