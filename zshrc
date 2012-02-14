@@ -2,7 +2,7 @@ if [[ -z $TMUX ]]; then
   # Let's boot tmux before loading anything. Without this if/else, everything
   # loads in the "real", non-tmux terminal, slowing everything down by like
   # half.
-  tmux
+  tmux attach
 else
   # We're in tmux, GO GO GO
 
