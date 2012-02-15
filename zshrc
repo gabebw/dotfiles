@@ -9,6 +9,7 @@ else
   BASE="$HOME/.dotfiles/zsh/"
 
   source $BASE'key_bindings.zsh'
+  source $BASE'navigation.zsh'
   source $BASE'colors.zsh'
   source $BASE'editor.zsh'
   source $BASE'aliases.zsh'
