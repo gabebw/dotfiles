@@ -1,3 +1,4 @@
+" --- Look at the bottom for non-gui settings!
 if has("gui_running")
   "colorscheme railscasts
   set background=dark " set to light for light solarized
@@ -22,6 +23,5 @@ if has("gui_running")
     endif
   endif
 else
-  set background=light
-  colorscheme github
+  colorscheme badwolf
 endif
