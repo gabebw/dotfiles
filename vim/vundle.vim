@@ -33,6 +33,9 @@ Bundle 'godlygeek/tabular'
 Bundle 'ack.vim'
 Bundle 'greplace.vim'
 Bundle 'snippetsEmu'
+" I have an open pull request against kikijump/tslime.vim
+" https://github.com/kikijump/tslime.vim/pull/9
+Bundle 'gabebw/tslime.vim'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
