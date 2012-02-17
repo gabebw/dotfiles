@@ -28,9 +28,11 @@ function! CorrectTestRunner()
 endfunction
 
 function! RunCurrentTest()
-  exec "!" . CorrectTestRunner() . " " . expand('%:p')
+  let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+  call Send_to_Tmux(command_string . "\n")
 endfunction
 
 function! RunCurrentLineInTest()
-  exec "!" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+  let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+  call Send_to_Tmux(command_string . "\n")
 endfunction
