@@ -38,8 +38,6 @@ Bundle 'snippetsEmu'
 Bundle 'Railscasts-Theme-GUIand256color'
 Bundle 'vividchalk.vim'
 Bundle 'molokai'
-" http://stevelosh.com/projects/badwolf/
-Bundle 'sjl/badwolf'
 
 " Light
 "   set background=light
