@@ -9,4 +9,5 @@ parse_git_dirty(){ [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'; }
 ##########
 # MUST wrap $fg in %{...%} or it creates weird errors with commands >1 line
 # Use %f to reset color and use terminal default colors (set in Terminal prefs)
-export PROMPT="[\$(ruby_version)\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%f "
+export PROMPT="[\$(ruby_version)\$(git_branch)] %{$fg[blue]%}%~
+%{$fg[green]%}$%f "
