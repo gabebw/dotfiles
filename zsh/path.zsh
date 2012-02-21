@@ -23,4 +23,5 @@ MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
 PATH="$PATH:/Users/gabe/bin"
+PATH="$PATH:/Users/gabe/.dotfiles/bin"
 PATH="/usr/local/bin:$PATH" # homebrew
