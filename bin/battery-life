@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-pmset -g batt | tail -n1 | awk '{print $2}' | sed 's/;//'
+pmset -g batt | grep Internal | awk '{print $2}' | sed 's/;//'
