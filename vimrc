@@ -31,6 +31,7 @@ source $HOME/.vim/rails_shortcuts.vim
 runtime macros/matchit.vim
 
 source $HOME/.vim/autocommand.vim
+source $HOME/.vim/levelup.vim
 source $HOME/.vim/ben.vim
 
 " Turn on syntax highlighting when we have colors or gui is running
