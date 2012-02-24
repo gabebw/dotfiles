@@ -31,6 +31,7 @@ else
   source $BASE'rails.zsh'
   source $BASE'rvm.zsh'
   source $BASE'hitch.zsh'
+  source $BASE'levelup.zsh'
 
   export PATH
   trim_path
