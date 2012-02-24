@@ -22,6 +22,9 @@ function! CorrectTestRunner()
     return "rspec -r turnip --drb"
   elseif match(expand('%'), '\.feature$') != -1
     return "cucumber --drb"
+  elseif match(expand('%'), '_test\.rb$') != -1
+    " TestUnit
+    return "ruby -Itest"
   else
     echoerr "Can't run test (is this a test file?)"
   endif
@@ -33,6 +36,11 @@ function! RunCurrentTest()
 endfunction
 
 function! RunCurrentLineInTest()
-  let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
-  call Send_to_Tmux(command_string . "\n")
+  if CorrectTestRunner() == "ruby -Itest"
+    " TestUnit can't do specific lines
+    call RunCurrentTest()
+  else
+    let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+    call Send_to_Tmux(command_string . "\n")
+  endif
 endfunction
