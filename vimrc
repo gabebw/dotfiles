@@ -32,7 +32,6 @@ runtime macros/matchit.vim
 
 source $HOME/.vim/autocommand.vim
 source $HOME/.vim/levelup.vim
-source $HOME/.vim/ben.vim
 
 " Turn on syntax highlighting when we have colors or gui is running
 if &t_Co > 2 || has("gui_running") " &t_Co > 2 => we have colors
