@@ -35,6 +35,11 @@ Bundle 'greplace.vim'
 Bundle 'snippetsEmu'
 " This fixes a bunch of stuff.
 Bundle 'jgdavey/tslime.vim'
+Bundle 'surround.vim'
+Bundle 'Markdown'
+Bundle 'endwise.vim'
+Bundle 'file-line'
+Bundle 'rake.vim'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
