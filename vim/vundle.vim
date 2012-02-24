@@ -40,6 +40,7 @@ Bundle 'Markdown'
 Bundle 'endwise.vim'
 Bundle 'file-line'
 Bundle 'rake.vim'
+Bundle 'Command-T'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
