@@ -48,7 +48,8 @@ endfunction
 " Return the part of the line appropriate for passing to Test::Unit for
 " matching. I.E.:
 "   context "should be great for us"
-" would return "should be great for us"
+" would return "should be great for us".
+" If no line matches, returns an empty string.
 function! StringAppropriateForMatchingInTestUnit()
   let line_content = getline(LineNumberOfNearestUpwardsContextOrShouldBlock())
   " Friggin' Vim, not letting me escape quotes.
@@ -56,7 +57,11 @@ function! StringAppropriateForMatchingInTestUnit()
   let repeated_non_quote = '[^"' . "']\\+"
   let pattern = single_or_double_quote.'\('.repeated_non_quote.'\)'.single_or_double_quote
   let result = matchlist(line_content, pattern)
-  return result[1]
+  if len(result) >= 2
+    return result[1]
+  else
+    return ""
+  endif
 endfunction
 
 function! RunCurrentLineInTest()
