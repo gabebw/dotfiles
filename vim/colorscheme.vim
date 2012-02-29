@@ -24,6 +24,5 @@ if has("gui_running")
   endif
 else
   " badwolf doesn't work with ruby/rails files. DEALBREAKER.
-  set bg=dark
-  colorscheme solarized
+  colorscheme railscasts
 endif
