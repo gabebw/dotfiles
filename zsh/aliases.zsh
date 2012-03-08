@@ -73,3 +73,5 @@ function bandw() {
 
 alias q="$EDITOR ~/.zshrc"
 alias qq="source ~/.zshrc"
+
+alias bundle='noglob bundle'
