@@ -25,6 +25,7 @@ set scrolloff=3 " When scrolling, show 3 lines of context
 set visualbell " No more beeping - supposedly flashes the screen instead, but doesn't happen for me
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nojoinspaces " Don't insert a space when joining lines, e.g. with J
+set noswapfile
 
 " Open below and to the right, the same way you read a page
 set splitbelow
