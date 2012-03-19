@@ -1,5 +1,5 @@
 " Ruby
-au BufNewFile,BufRead *.rb,*.rbw,*.gem,*.gemspec	set filetype=ruby
+au BufNewFile,BufRead *.rb,*.rbw,*.gemspec		set filetype=ruby
 
 " Ruby on Rails
 au BufNewFile,BufRead *.builder,*.rxml,*.rjs		set filetype=ruby
@@ -13,6 +13,9 @@ au BufNewFile,BufRead [rR]antfile,*.rant		set filetype=ruby
 " IRB config
 au BufNewFile,BufRead .irbrc,irbrc			set filetype=ruby
 
+" Pry config
+au BufNewFile,BufRead .pryrc				set filetype=ruby
+
 " Rackup
 au BufNewFile,BufRead *.ru				set filetype=ruby
 
@@ -22,6 +25,12 @@ au BufNewFile,BufRead Capfile				set filetype=ruby
 " Bundler
 au BufNewFile,BufRead Gemfile				set filetype=ruby
 
+" Guard
+au BufNewFile,BufRead Guardfile,.Guardfile		set filetype=ruby
+
+" Vagrant
+au BufNewFile,BufRead [vV]agrantfile			set filetype=ruby
+
 " Autotest
 au BufNewFile,BufRead .autotest				set filetype=ruby
 
@@ -30,3 +39,6 @@ au BufNewFile,BufRead *.erb,*.rhtml			set filetype=eruby
 
 " Thor
 au BufNewFile,BufRead [tT]horfile,*.thor		set filetype=ruby
+
+" Rabl
+au BufNewFile,BufRead *.rabl				set filetype=ruby
