@@ -9,9 +9,6 @@ call vundle#rc()
 " Bundles:
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle 'jquery'
-Bundle 'pydoc'
-" Bundle 'pyflakes'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
 
@@ -20,12 +17,10 @@ Bundle 'ervandew/supertab'
 
 " Syntax and the like
 Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-haml'
-Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
@@ -35,8 +30,6 @@ Bundle 'greplace.vim'
 Bundle 'snippetsEmu'
 " This fixes a bunch of stuff.
 Bundle 'jgdavey/tslime.vim'
-Bundle 'surround.vim'
-Bundle 'Markdown'
 Bundle 'endwise.vim'
 Bundle 'file-line'
 Bundle 'rake.vim'
@@ -44,13 +37,3 @@ Bundle 'Command-T'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
-Bundle 'vividchalk.vim'
-Bundle 'molokai'
-
-" Light
-"   set background=light
-"   colorscheme solarized
-" Dark
-"   set background=dark
-"   colorscheme solarized
-Bundle 'altercation/vim-colors-solarized'
