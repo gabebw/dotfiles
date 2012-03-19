@@ -23,6 +23,5 @@ if has("gui_running")
     endif
   endif
 else
-  " badwolf doesn't work with ruby/rails files. DEALBREAKER.
-  colorscheme railscasts
+  colorscheme jellybeans
 endif

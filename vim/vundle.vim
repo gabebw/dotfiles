@@ -37,3 +37,4 @@ Bundle 'Command-T'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
+Bundle 'nanotech/jellybeans.vim'
