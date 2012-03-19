@@ -39,7 +39,7 @@ if has("autocmd")
     au BufRead /usr/share/file/magic/* set syntax=magic
 
     " Indent text inside <p> tags
-    autocmd TabEnter,WinEnter,BufWinEnter *.html,*.erb let g:html_indent_tags = g:html_indent_tags.'\|p'
+    autocmd TabEnter,WinEnter,BufWinEnter *.html,*.html.erb let g:html_indent_tags = g:html_indent_tags.'\|p'
   augroup END " END myfiletypes
 
   " When editing a file, always jump to the last known cursor position.
