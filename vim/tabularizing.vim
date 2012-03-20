@@ -11,7 +11,3 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
-vmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a. :Tabularize /=><CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>

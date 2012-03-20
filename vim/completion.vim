@@ -1,5 +1,5 @@
 " map autocomplete to Tab
-imap <Tab> <C-P>
+inoremap <Tab> <C-P>
 
 " Completion {{{
 " :set wildmenu enables a menu at the bottom of the vim/gvim window.
