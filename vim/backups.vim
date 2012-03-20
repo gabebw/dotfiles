@@ -7,12 +7,3 @@ set backupdir=~/.vim/backups
 if has('unix')
   set backupskip=/tmp/*,/private/tmp/*"
 endif
-
-" views options
-set viewdir=~/.vim/views
-" http://github.com/tpope/vim-rails/issues/closed/#issue/25
-" Having these mkview lines make rails.vim not work (lots of "File not in
-" path" errors.
-" Match all files but don't trigger when opening vim without a file
-"autocmd BufWinLeave ?* mkview
-"autocmd BufWinEnter ?* silent loadview
