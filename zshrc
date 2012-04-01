@@ -24,14 +24,10 @@ else
   # (non-core functionality) #
   ############################
 
-  source $BASE'homebrew.zsh'
-  # source $BASE'python.zsh'
-  source $BASE'git.zsh'
-  source $BASE'ruby.zsh'
-  source $BASE'rails.zsh'
-  source $BASE'rvm.zsh'
-  source $BASE'hitch.zsh'
-  source $BASE'levelup.zsh'
+  for extra in homebrew git ruby rails rvm hitch levelup psql
+  do
+    source ${BASE}${extra}.zsh
+  done
 
   export PATH
   trim_path
