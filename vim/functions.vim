@@ -75,7 +75,12 @@ function! RunCurrentLineInTest()
       call Send_to_Tmux(command_string . "\n")
     endif
   else
-    let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+    if match(CorrectTestRunner(), 'turnip') != -1
+      " Turnip doesn't work with line numbers
+      let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+    else
+      let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+    endif
     call Send_to_Tmux(command_string . "\n")
   endif
 endfunction
