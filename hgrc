@@ -60,4 +60,4 @@
 
 # http://mercurial.selenic.com/wiki/CACertificates#Mac_OS_X_10.6_and_higher
 [web]
-  cacerts = ~/.hg/hg-dummy-cert.pem
+  cacerts = ~/.dotfiles/hg/dummy-cert.pem
