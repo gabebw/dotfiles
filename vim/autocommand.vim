@@ -29,6 +29,9 @@ if has("autocmd")
     au BufRead,BufNewFile Gemfile,Guardfile setf ruby
     au BufRead,BufNewFile .autotest setf ruby
 
+    " It's Markdown, not modula2, you infernal machine
+    au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
+
     " .gitconfig and gitconfig are the same
     au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
