@@ -25,3 +25,8 @@ emacs-plugins/*
 
 # dotjs folder
 js/
+
+# Command-T build artifacts
+vim/bundle/Command-T/ruby/command-t/Makefile
+vim/bundle/Command-T/ruby/command-t/ext.bundle
+vim/bundle/Command-T/ruby/command-t/*.o
