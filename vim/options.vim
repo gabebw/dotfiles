@@ -28,6 +28,14 @@ set nojoinspaces " Don't insert a space when joining lines, e.g. with J
 set noswapfile
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 set formatoptions-=or
+" Tell vim to remember certain things when we exit
+"  '10 : marks will be remembered for up to 10 previously edited files
+"  "100 : will save up to 100 lines for each register
+"  :20 : up to 20 lines of command-line history will be remembered
+"  % : saves and restores the buffer list
+"  n... : where to save the viminfo files
+" From https://gist.github.com/955547
+set viminfo='10,\"100,:20,%,n~/.viminfo
 
 " Open below and to the right, the same way you read a page
 set splitbelow
