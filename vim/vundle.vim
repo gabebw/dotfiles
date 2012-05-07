@@ -33,7 +33,7 @@ Bundle 'jgdavey/tslime.vim'
 Bundle 'endwise.vim'
 Bundle 'file-line'
 Bundle 'rake.vim'
-Bundle 'Command-T'
+Bundle 'kien/ctrlp.vim'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
