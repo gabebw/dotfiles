@@ -13,6 +13,9 @@ nnoremap <Leader>w :%s/\s\+$//e<CR>
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
 
+" Change mapping for ctrl-p plugin
+let g:ctrlp_map = '<Leader>t'
+
 " Stronger h
 nnoremap H 0
 " Stronger l
