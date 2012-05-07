@@ -1,0 +1,2 @@
+# rbenv
+eval "$(rbenv init -)"
