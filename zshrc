@@ -24,7 +24,7 @@ else
   # (non-core functionality) #
   ############################
 
-  for extra in homebrew git ruby rails rbenv hitch levelup psql twios tmux
+  for extra in homebrew git ruby rails rbenv hitch psql twios tmux
   do
     source ${BASE}${extra}.zsh
   done
