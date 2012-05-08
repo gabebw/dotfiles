@@ -11,6 +11,9 @@ Thumbs.db
 # Created by _rake autocomplete function
 .rake_tasks
 
+# rbenv
+.rbenv-version
+
 # python byte-compiled files
 *.py[co]
 
