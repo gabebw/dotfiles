@@ -4,8 +4,6 @@
 <%= IO.read(File.join(File.dirname(__FILE__), 'gitconfig.local')) %>
 [core]
   editor = `which vim`
-[init]
-  templatedir = <%= File.expand_path(File.dirname(__FILE__)) %>/git-template-dir
 [merge]
   tool = opendiff
 [alias]
