@@ -1,0 +1,7 @@
+#compdef ack
+
+if (( CURRENT == 2 )); then
+  if [[ -f tmp/tags ]]; then
+    compadd $(cat tmp/tags | awk '{print $1}')
+  fi
+fi
