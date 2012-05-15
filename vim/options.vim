@@ -50,3 +50,7 @@ set showbreak="@" " This is prepended to wrapped lines
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 set guioptions-=T " Don't show the menubar
+
+" `yy` copies to clipboard, so you don't have to do `"*yy`. Bad. Ass.
+set clipboard=unnamed
+
