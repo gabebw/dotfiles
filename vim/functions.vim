@@ -32,6 +32,7 @@ endfunction
 
 function! RunCurrentTest()
   let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+  call Send_to_Tmux("clear\n")
   call Send_to_Tmux(command_string . "\n")
 endfunction
 
@@ -72,6 +73,7 @@ function! RunCurrentLineInTest()
       call RunCurrentTest()
     else
       let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . " -n '/" . matcher . "/'"
+      call Send_to_Tmux("clear\n")
       call Send_to_Tmux(command_string . "\n")
     endif
   else
@@ -81,6 +83,7 @@ function! RunCurrentLineInTest()
     else
       let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
     endif
+    call Send_to_Tmux("clear\n")
     call Send_to_Tmux(command_string . "\n")
   endif
 endfunction
