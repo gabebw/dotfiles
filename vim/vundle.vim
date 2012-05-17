@@ -25,6 +25,9 @@ Bundle 'tpope/vim-rails'
 Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
+Bundle 'kchmck/vim-coffee-script'
+
+" Other
 Bundle 'ack.vim'
 Bundle 'greplace.vim'
 Bundle 'snippetsEmu'
@@ -36,5 +39,4 @@ Bundle 'rake.vim'
 Bundle 'kien/ctrlp.vim'
 
 " Colorschemes
-Bundle 'Railscasts-Theme-GUIand256color'
 Bundle 'nanotech/jellybeans.vim'
