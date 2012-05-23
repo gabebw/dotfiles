@@ -11,6 +11,10 @@ alias guard="be guard"
 alias cuc="be cucumber"
 compdef cuc=cucumber
 
+# Rspec
+alias s=rspec
+compdef s=rspec
+
 # Rake
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
