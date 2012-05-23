@@ -9,8 +9,10 @@ call vundle#rc()
 " Bundles:
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
+
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
+Bundle 'Lokaltog/vim-powerline'
 
 " tab completion
 Bundle 'ervandew/supertab'
