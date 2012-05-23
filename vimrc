@@ -20,7 +20,6 @@ source $HOME/.vim/statusline.vim
 source $HOME/.vim/colorscheme.vim
 source $HOME/.vim/options.vim
 source $HOME/.vim/tabs.vim
-source $HOME/.vim/backups.vim
 source $HOME/.vim/mapping.vim
 source $HOME/.vim/completion.vim
 source $HOME/.vim/tabularizing.vim

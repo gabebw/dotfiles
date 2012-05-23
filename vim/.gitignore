@@ -1,6 +1,3 @@
 views
-# Keep the actual backups folder, but not its contents
-backups/*
-!backups/.gitkeep
 # Ignore bundle doc
 bundle/*/doc
