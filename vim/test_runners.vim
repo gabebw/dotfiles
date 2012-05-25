@@ -1,39 +1,60 @@
-" Custom, non-autocommand functions
-
-function! NoDistractions()
-  " cursor doesn't blink
-  set guicursor=a:blinkon0
-  " Remove scrollbar in gvim
-  set guioptions-=r
-  " Remove menubar
-  set guioptions-=T
-  " fullscreen. duh.
-  set fullscreen
-endfunction
+" Functions for running tests
 
 nnoremap <Leader>a :call RunCurrentTest()<CR>
 nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 function! CorrectTestRunner()
+  let rspec="rspec --drb --color"
   if match(expand('%'), '_spec\.rb$') != -1
-    return "rspec --drb"
-  elseif match(expand('%:p'), 'spec/acceptance\|features/') != -1
+    return rspec
+  elseif match(expand('%:p'), 'spec/\(acceptance\|features\)/') != -1
     " Turnip
-    return "rspec -r turnip --drb"
+    return rspec . " -r turnip"
   elseif match(expand('%'), '\.feature$') != -1
     return "cucumber --drb"
   elseif match(expand('%'), '_test\.rb$') != -1
     " TestUnit
     return "ruby -Itest"
   else
-    echoerr "Can't run test (is this a test file?)"
+    return "false"
   endif
 endfunction
 
 function! RunCurrentTest()
-  let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
-  call Send_to_Tmux("clear\n")
-  call Send_to_Tmux(command_string . "\n")
+  if CorrectTestRunner() == "false"
+    echoerr "Can't run test (is this a test file?)"
+  else
+    let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+    call Send_to_Tmux("clear\n")
+    call Send_to_Tmux(command_string . "\n")
+  endif
+endfunction
+
+function! RunCurrentLineInTest()
+  if CorrectTestRunner() == "false"
+    echoerr "Can't run test (is this a test file?)"
+  else
+    if CorrectTestRunner() == "ruby -Itest"
+      let matcher = StringAppropriateForMatchingInTestUnit()
+      if matcher == ""
+        " No matched line, run the whole test.
+        call RunCurrentTest()
+      else
+        let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . " -n '/" . matcher . "/'"
+        call Send_to_Tmux("clear\n")
+        call Send_to_Tmux(command_string . "\n")
+      endif
+    else
+      if match(CorrectTestRunner(), 'turnip') != -1
+        " Turnip doesn't work with line numbers
+        let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+      else
+        let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
+      endif
+      call Send_to_Tmux("clear\n")
+      call Send_to_Tmux(command_string . "\n")
+    endif
+  endif
 endfunction
 
 " Returns the line number of the closest `context` or `should` *block* (so
@@ -62,28 +83,5 @@ function! StringAppropriateForMatchingInTestUnit()
     return result[1]
   else
     return ""
-  endif
-endfunction
-
-function! RunCurrentLineInTest()
-  if CorrectTestRunner() == "ruby -Itest"
-    let matcher = StringAppropriateForMatchingInTestUnit()
-    if matcher == ""
-      " No matched line, run the whole test.
-      call RunCurrentTest()
-    else
-      let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . " -n '/" . matcher . "/'"
-      call Send_to_Tmux("clear\n")
-      call Send_to_Tmux(command_string . "\n")
-    endif
-  else
-    if match(CorrectTestRunner(), 'turnip') != -1
-      " Turnip doesn't work with line numbers
-      let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
-    else
-      let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
-    endif
-    call Send_to_Tmux("clear\n")
-    call Send_to_Tmux(command_string . "\n")
   endif
 endfunction
