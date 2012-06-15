@@ -8,6 +8,8 @@ nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
+nnoremap <Leader>rr :call Send_to_Tmux("r\n")<CR>
+
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>
 " Directory explorer is 40 columns wide
