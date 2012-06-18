@@ -4,14 +4,14 @@ nnoremap <Leader>a :call RunCurrentTest()<CR>
 nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
 
 function! CorrectTestRunner()
-  let rspec="rspec --drb --color"
+  let rspec="rspec --color"
   if match(expand('%'), '_spec\.rb$') != -1
     return rspec
   elseif match(expand('%:p'), 'spec/\(acceptance\|features\)/') != -1
     " Turnip
     return rspec . " -r turnip"
   elseif match(expand('%'), '\.feature$') != -1
-    return "cucumber --drb"
+    return "cucumber"
   elseif match(expand('%'), '_test\.rb$') != -1
     " TestUnit
     return "ruby -Itest"
