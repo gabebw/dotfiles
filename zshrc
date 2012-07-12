@@ -29,6 +29,8 @@ else
     source ${BASE}${extra}.zsh
   done
 
+  source $BASE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
   export PATH
   trim_path
 
