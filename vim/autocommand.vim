@@ -24,10 +24,10 @@ if has("autocmd")
     au FileType vim set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     au FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
-    " treat rackup files like ruby
+    " treat extra files like ruby
     au BufRead,BufNewFile *.ru setf ruby
     au BufRead,BufNewFile Gemfile,Guardfile setf ruby
-    au BufRead,BufNewFile .autotest setf ruby
+    au BufRead,BufNewFile .autotest,.simplecov setf ruby
 
     " It's Markdown, not modula2, you infernal machine
     au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
