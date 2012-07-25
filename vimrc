@@ -17,7 +17,7 @@ set shell=/bin/sh
 
 source $HOME/.vim/vundle.vim
 source $HOME/.vim/statusline.vim
-source $HOME/.vim/colorscheme.vim
+" source $HOME/.vim/colorscheme.vim
 source $HOME/.vim/options.vim
 source $HOME/.vim/tabs.vim
 source $HOME/.vim/backups.vim
@@ -25,6 +25,7 @@ source $HOME/.vim/mapping.vim
 source $HOME/.vim/completion.vim
 source $HOME/.vim/tabularizing.vim
 source $HOME/.vim/functions.vim
+source $HOME/.vim/json.vim
 " Allows % to switch between if/elsif/else/end, open/close XML tags, and
 " more.
 runtime macros/matchit.vim

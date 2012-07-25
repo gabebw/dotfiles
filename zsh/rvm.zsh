@@ -13,10 +13,6 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
     #      some reason)
     print "%{$fg[magenta]%}${$(~/.rvm/bin/rvm-prompt i v p g s)#ruby-}%{$reset_color%}"
   }
-else
-  # No rvm, fake it.
-  echo "WARNING: no rvm, faking it."
-  ruby_version(){ print "%{$fg[magenta]%}system%{$reset_color%}"; }
 fi
 
 rgcu() { rvm gemset create "$1" && rvm gemset use "$1"; }
