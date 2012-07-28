@@ -97,3 +97,5 @@
   default = current
 [rerere]
   enabled = 1
+[credential]
+	helper = osxkeychain
