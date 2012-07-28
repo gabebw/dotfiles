@@ -1,7 +1,6 @@
-# vim: syntax=gitconfig ft=gitconfig
-# See: man gitconfig
-# or http://www.kernel.org/pub/software/scm/git/docs/git-config.html
-<%= IO.read(File.join(File.dirname(__FILE__), 'gitconfig.local')) %>
+[user]
+  name = Gabe Berke-Williams
+  email = gabe@thoughtbot.com
 [core]
   editor = `which vim`
 [merge]
@@ -76,10 +75,10 @@
 [help]
   autocorrect = 1
 [svn]
-  authorsfile = <%= ENV['HOME'] %>/.git-author
+  authorsfile = ~/.git-author
 [core]
   whitespace=trailing-space,cr-at-eol
-  excludesfile = <%= ENV['HOME'] %>/.gitignore
+  excludesfile = ~/.gitignore
   autocrlf = input
 [achievement]
   upload = true
