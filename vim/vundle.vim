@@ -28,6 +28,7 @@ Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'Textile-for-VIM'
 
 " Other
 Bundle 'ack.vim'
