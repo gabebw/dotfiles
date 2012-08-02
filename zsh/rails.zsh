@@ -46,3 +46,6 @@ alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku p
 alias db-backup-production='heroku pgbackups:capture --remote production'
 
 alias db-create-all='be rake db:create:all && migrate'
+
+alias db-dump='pg_dump -Fc'
+alias db-restore='pg_restore --verbose --clean --no-acl --no-owner'
