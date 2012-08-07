@@ -1,2 +1,5 @@
 # rbenv
-eval "$(rbenv init -)"
+if [[ -n $TMUX ]]
+then
+  eval "$(rbenv init -)"
+fi
