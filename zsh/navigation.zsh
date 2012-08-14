@@ -1,6 +1,6 @@
 export CURRENT_PROJECT_PATH=$HOME/.current-project
 
-cdpath=($HOME/thoughtbot $HOME/Projects $HOME/src)
+cdpath=($HOME/thoughtbot/* $HOME/Projects $HOME/src)
 
 function chpwd {
   echo $(pwd) >! $CURRENT_PROJECT_PATH
