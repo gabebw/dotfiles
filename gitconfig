@@ -91,6 +91,9 @@
 [url "git@github.com:"]
   # With write access
   insteadOf = wgh:
+[url "git@github.com:thoughtbot/"]
+  # thoughtbot, with write access
+  insteadOf = tb:
 [push]
   # Push current branch even if you've never pushed it before
   default = current
