@@ -3,6 +3,9 @@
   email = gabe@thoughtbot.com
 [core]
   editor = `which vim`
+  whitespace=trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore
+  autocrlf = input
 [merge]
   tool = opendiff
 [alias]
@@ -76,10 +79,6 @@
   autocorrect = 1
 [svn]
   authorsfile = ~/.git-author
-[core]
-  whitespace=trailing-space,cr-at-eol
-  excludesfile = ~/.gitignore
-  autocrlf = input
 [achievement]
   upload = true
 [instaweb]
