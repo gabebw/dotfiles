@@ -1,0 +1,5 @@
+-- http://www.postgresql.org/docs/8.3/static/app-psql.html
+\pset null 'NULL'
+
+-- http://www.postgresql.org/docs/8.3/static/app-psql.html#APP-PSQL-PROMPTING
+\set PROMPT1 '%[%033[1;33;42m%]%R %/%[%033[0m%] %[%033[0;34m%]>%[%033[0m%] '
