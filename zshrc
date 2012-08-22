@@ -3,27 +3,47 @@ if [[ -n $TMUX ]]; then
   # everything loads in the "real", non-tmux terminal, slowing everything down
   # by like half.
 
-  BASE="$HOME/.dotfiles/zsh/"
+  BASE="$HOME/.dotfiles/zsh"
 
-  source $BASE'key_bindings.zsh'
-  source $BASE'navigation.zsh'
-  source $BASE'colors.zsh'
-  source $BASE'editor.zsh'
-  source $BASE'aliases.zsh'
-  source $BASE'path.zsh'
-  source $BASE'options.zsh'
-  source $BASE'completion.zsh'
-  source $BASE'vcs.zsh'
-  source $BASE'prompt.zsh'
+  CORE=(
+    key_bindings
+    # "tmux" needs to be before "navigation" because of current-tmux-session
+    tmux
+    navigation
+    colors
+    editor
+    aliases
+    path
+    options
+    completion
+    vcs
+    prompt
+  )
 
   ############################
   #         EXTRAS           #
   # (non-core functionality) #
   ############################
+  EXTRA=(
+    homebrew
+    git
+    ruby
+    rails
+    rbenv
+    hitch
+    psql
+    twios
+    arduino
+  )
 
-  for extra in homebrew git ruby rails rbenv hitch psql twios tmux arduino
+  for core in $CORE
   do
-    source ${BASE}${extra}.zsh
+    source $BASE/$core.zsh
+  done
+
+  for extra in $EXTRA
+  do
+    source $BASE/$extra.zsh
   done
 
   source $BASE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
