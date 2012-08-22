@@ -3,19 +3,10 @@ require 'pp'
 
 IRB.conf[:AUTO_INDENT] = true
 
-class Array
-  def self.toy
-    [1, 2, 3] + %w(a b c)
+def require_rb_files_from(dir)
+  Dir.glob(File.join(dir, '*.rb')) do |file|
+    require file
   end
 end
 
-class Hash
-  def self.toy
-    {
-      1 => 2
-      'a' => 'b',
-      'foo' => 'bar',
-      :hello => 'there'
-    }
-  end
-end
+require_rb_files_from(File.join(ENV['HOME'], '.irbrc.d'))
