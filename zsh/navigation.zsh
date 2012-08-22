@@ -1,14 +1,20 @@
-export CURRENT_PROJECT_PATH=$HOME/.current-project
+TMUX_PROJECT_DIRECTORY=$HOME/.tmux-project-directory
+
+mkdir -p $TMUX_PROJECT_DIRECTORY
+
+function current-project-path() {
+  echo "$TMUX_PROJECT_DIRECTORY/`current-tmux-session`"
+}
 
 cdpath=($HOME/thoughtbot/ $HOME/thoughtbot/* $HOME/Projects $HOME/src)
 
 function chpwd {
-  echo $(pwd) >! $CURRENT_PROJECT_PATH
+  echo $(pwd) >! `current-project-path`
 }
 
 current() {
-  if [[ -f $CURRENT_PROJECT_PATH ]]; then
-    cd "$(cat $CURRENT_PROJECT_PATH)"
+  if [[ -f `current-project-path` ]]; then
+    cd "$(cat `current-project-path`)"
   fi
 }
 
