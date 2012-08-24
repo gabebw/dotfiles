@@ -6,6 +6,28 @@
 # 2) A remote exists with the same name
 # 3) You only deploy the branch to the remote (and don't deploy master)
 
+# Sample output with no changes:
+# $ deploy-to.sh development
+# Already on 'development'
+# HEAD is now at 00d54ad Users can view created/edited recipes.
+#
+# ---> Viewing list of new commits
+# No new commits
+# Continue? (Y/n) > y
+#
+# ---> Viewing changed files
+# No changes
+# Continue? (Y/n) > y
+#
+# ---> Merging master into development.
+# Already up-to-date.
+#
+# ---> Pushing development -> origin.
+# Everything up-to-date
+#
+# ---> Deploying.
+# Everything up-to-date
+
 function ask_to_continue() {
   echo -n "Continue? (Y/n) > "
   read response
