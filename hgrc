@@ -4,8 +4,6 @@
 # to my Bitbucket account :(
 username = Gabe B-W <gbw@brandeis.edu>
 email = gbw@brandeis.edu
-# might as well use the global gitignore
-ignore = ~/.gitignore
 editor = $EDITOR -f
 
 [alias]

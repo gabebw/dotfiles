@@ -1,6 +1,5 @@
 # NOTE: This is the global gitignore, not the gitignore for the dotfiles
 # repository!
-syntax: glob
 .DS_Store
 Thumbs.db
 
