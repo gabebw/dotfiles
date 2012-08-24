@@ -27,5 +27,5 @@ PATH="/usr/local/bin:$PATH"
 # Bundler binstubs
 PATH="./bundler_binstubs:$PATH"
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
-PATH="$PATH:/Users/gabe/bin"
-PATH="$PATH:/Users/gabe/.dotfiles/bin"
+MYPATH="/Users/gabe/bin:/Users/gabe/.dotfiles/scripts"
+PATH=$PATH:$MYPATH
