@@ -44,11 +44,11 @@ function message() {
 }
 
 function output_or() {
-  local output=$1
-  local null_output=$2
-  if [[ -n $output ]]
+  local command="$1"
+  local null_output="$2"
+  if [[ -n `eval $command` ]]
   then
-    echo $output
+    eval $command
   else
     echo $null_output
   fi
@@ -60,12 +60,12 @@ git checkout $environment
 git reset --hard origin/$environment
 
 message "Viewing list of new commits"
-output_or `git log $environment..master` "No new commits"
+output_or "git log --format='%p (%an) %s' $environment..master" "No new commits"
 ask_to_continue
 
 message "Viewing changed files"
 
-output_or `git diff --stat $environment master` "No changes"
+output_or "git diff --stat $environment master" "No changes"
 ask_to_continue
 
 message "Merging master into $environment."
