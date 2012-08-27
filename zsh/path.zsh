@@ -24,6 +24,9 @@ MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr
 # Homebrew
 PATH="/usr/local/bin:$PATH"
 
+# Tex
+PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin/"
+
 # Bundler binstubs
 PATH="./bundler_binstubs:$PATH"
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
