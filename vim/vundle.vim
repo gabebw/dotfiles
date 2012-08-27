@@ -29,6 +29,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'Textile-for-VIM'
+Bundle 'Markdown'
 
 " Other
 Bundle 'ack.vim'
