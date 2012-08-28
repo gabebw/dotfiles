@@ -7,7 +7,7 @@ end
 class Hash
   def self.toy
     {
-      1 => 2
+      1 => 2,
       'a' => 'b',
       'foo' => 'bar',
       :hello => 'there'
