@@ -54,6 +54,11 @@ function output_or() {
   fi
 }
 
+if [[ $# == 0 ]]; then
+  echo "USAGE: deploy-to.sh ENV"
+  exit 1
+fi
+
 environment=$1
 
 git checkout $environment
