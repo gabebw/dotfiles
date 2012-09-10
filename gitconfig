@@ -33,7 +33,7 @@
   newauthor = commit --amend --reset-author -C HEAD
   prune-remotes = remote prune origin
   next = !git add . && git rebase --continue
-  assume-unchanged = git update-index --assume-unchanged
+  assume-unchanged = update-index --assume-unchanged
 
   # Typos
   pul = pull
