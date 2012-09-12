@@ -51,6 +51,7 @@ function output_or() {
     eval $command
   else
     echo $null_output
+    exit 1
   fi
 }
 
