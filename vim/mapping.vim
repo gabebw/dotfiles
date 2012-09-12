@@ -8,7 +8,7 @@ nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 
-nnoremap <Leader>rr :call Send_to_Tmux("r\n")<CR>
+nnoremap <Leader>rr :call Send_to_Tmux("clear\n!-2\n")<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>
