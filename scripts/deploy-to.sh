@@ -82,7 +82,13 @@ git push origin $environment
 
 # Deploy
 message "Deploying."
-git push $environment $environment:master
+git push -f $environment $environment:master
+
+if [[ $? != 0 ]]
+then
+  echo "Pushing to heroku failed. :("
+  exit 1
+fi
 
 # Introspect to make sure everything is OK
 watch heroku ps --remote $environment
