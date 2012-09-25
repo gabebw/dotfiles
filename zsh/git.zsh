@@ -1,6 +1,9 @@
 #######
 # Git #
 #######
+
+# No arguments: run `git status`
+# With arguments: acts like `git`
 function g {
   if [[ $# > 0 ]]; then
     git $@
@@ -8,9 +11,11 @@ function g {
     git st
   fi
 }
+
+# Complete `g` like `git`
 compdef g=git
+
 alias gp="bundle exec rake && git push"
-alias gci="git pull --rebase && brake && git push"
 alias gcl="git clone"
 alias gd="git diff"
 alias gg="git grep"
@@ -22,5 +27,4 @@ alias gai="git add --interactive"
 
 alias gb="git checkout -b"
 alias gc="git checkout"
-alias gs="git st" # Use my alias from ~/.gitconfig
 alias gcm="git commit -m"

@@ -31,7 +31,7 @@ if [[ -n $TMUX ]]; then
     rails
     rbenv
     hitch
-    psql
+    postgres
     twios
     arduino
   )
