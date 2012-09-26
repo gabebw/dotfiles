@@ -1,7 +1,11 @@
 #########
 # RAILS #
 #########
+
 # Bundler
+alias be="bundle exec"
+alias bi="bundle install --local || bundle install"
+
 function b {
   if [[ $# == 0 ]]
   then
@@ -10,10 +14,6 @@ function b {
     bundle "$@"
   fi
 }
-
-alias bi="bundle install --local || bundle install"
-alias be="bundle exec"
-alias guard="be guard"
 
 # Cucumber
 alias cuc="be cucumber"
