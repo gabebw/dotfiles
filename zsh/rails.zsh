@@ -34,8 +34,8 @@ alias reset-db="bake db:drop db:create && migrate"
 # Test::Unit
 alias tu="ruby -Itest"
 
-# tags
-alias tagit='/usr/local/bin/ctags -R --exclude=.git --exclude=log *'
+# ctags
+alias tagit='/usr/local/bin/ctags -R --languages=-javascript --langmap="ruby:+.rake.builder.rjs" --exclude=.git --exclude=log -f ./tmp/tags *'
 
 # Via Dan Croak.
 alias staging='heroku run console --remote staging'
