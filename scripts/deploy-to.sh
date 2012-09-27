@@ -70,7 +70,6 @@ output_or "git log --format='%p (%an) %s' $environment..master" "No new commits"
 ask_to_continue
 
 message "Viewing changed files"
-
 output_or "git diff --stat $environment master" "No changes"
 ask_to_continue
 
