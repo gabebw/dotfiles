@@ -40,14 +40,5 @@ function p {
   fi
 }
 
-# you can pipe pure "ls" output to "pp"
-# See also:  echo ${(qqqfo)$(ls)}, via "man zshexpn"
-# $'string' (vs 'string') quotes using the ANSI C standard, meaning you can
-# put single quotes inside single quotes by '\''. Otherwise you flat-out can't
-# put single quotes in a single-quoted string.
-alias quote="sed -Ee $'s/([ \'\"])/\\\\\\\\\\\1/g'"
-alias pp='quote | sort -df | xargs open -a Preview'
-alias mm='quote | sort -df | xargs open -a VLC'
-
 alias q="$EDITOR ~/.zshrc"
 alias qq="source ~/.zshrc"

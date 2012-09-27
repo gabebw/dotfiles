@@ -50,5 +50,3 @@ alias production-migrate='heroku run rake db:migrate --remote production'
 
 alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging  --confirm `basename $PWD`-staging'
 alias db-backup-production='heroku pgbackups:capture --remote production'
-
-alias db-create-all='be rake db:create:all && migrate'
