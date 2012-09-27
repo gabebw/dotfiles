@@ -51,8 +51,5 @@ if [[ -n $TMUX ]]; then
   export PATH
   trim_path
 
-  # [In]offensive short fortunes, where short means <= 140 chars
-  fortune -a -s -n140
-
   # Houston, we have liftoff.
 fi
