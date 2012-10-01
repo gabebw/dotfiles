@@ -20,6 +20,8 @@ export GREP_COLOR='1;31' # highlight matches in red
 alias less="less -R" # correctly interpret ASCII color escapes
 alias eject="drutil tray eject"
 
+alias ack="ag"
+
 alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 

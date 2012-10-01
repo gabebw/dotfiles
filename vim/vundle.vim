@@ -33,6 +33,9 @@ Bundle 'Markdown'
 
 " Other
 Bundle 'ack.vim'
+" https://github.com/ggreer/the_silver_searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 Bundle 'greplace.vim'
 Bundle 'snippetsEmu'
 " This fixes a bunch of stuff.
