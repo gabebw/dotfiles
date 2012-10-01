@@ -10,6 +10,8 @@
   tool = opendiff
 [alias]
   st = status -sb
+  # Delete branch locally and remotely
+  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   co = checkout
   # via http://ozmm.org/posts/git_msg.html
   msg = commit --allow-empty -m
