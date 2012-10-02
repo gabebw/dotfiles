@@ -25,7 +25,7 @@ MANPATH=/usr/share/man:/usr/local/share/man:/usr/X11/share/man:/usr/X11/man:/usr
 PATH="/usr/local/bin:$PATH"
 
 # Tex
-PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin/"
+PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin"
 
 # Bundler binstubs
 PATH="./bundler_binstubs:$PATH"
