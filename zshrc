@@ -1,7 +1,6 @@
 if [[ -n $TMUX ]]; then
   # Let's make sure we're in tmux boots before loading anything. Without this if,
-  # everything loads in the "real", non-tmux terminal, slowing everything down
-  # by like half.
+  # everything loads in the "real", non-tmux terminal.
 
   BASE="$HOME/.dotfiles/zsh"
 
