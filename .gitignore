@@ -12,21 +12,7 @@ vim/undodir
 *.zwc
 *.zwc.old
 
-# OneBigFile of zsh/* and extra/*
-zsh-all.zsh
-
 .netrwhist
-
-# SBCL core for faster SLIME startup
-*.core-for-slime
 
 emacs-plugins/*
 !emacs-plugins/.gitkeep
-
-# dotjs folder
-js/
-
-# Command-T build artifacts
-vim/bundle/Command-T/ruby/command-t/Makefile
-vim/bundle/Command-T/ruby/command-t/ext.bundle
-vim/bundle/Command-T/ruby/command-t/*.o
