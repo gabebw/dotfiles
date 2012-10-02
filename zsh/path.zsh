@@ -3,7 +3,6 @@
 ########
 
 # DO NOT SET PATH ANEW - always use $PATH and your stuff before/after it
-# * note that setting it anew breaks rvm
 # /etc/profile gives us these
 # /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/git/bin:/usr/X11/bin
 
