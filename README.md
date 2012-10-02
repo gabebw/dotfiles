@@ -2,6 +2,12 @@
 
 These are my dotfiles: `~/.*`
 
+## Installation
+
+To interactively link the dotfiles into `~`, run:
+
+    ./install.sh
+
 ## Tools I use
 
 * ZSH. To change your default shell to ZSH: `chsh -s $(which zsh) $USER`
@@ -17,9 +23,3 @@ These don't relate to my dotfiles at all, but I keep forgetting to install them
 on new machines.
 
 * [Dropbox](https://www.dropbox.com/install)
-
-## Linking the dotfiles into ~
-
-To interactively link the dotfiles into `~`, run:
-
-    ./install.sh
