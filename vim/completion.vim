@@ -8,7 +8,20 @@ set wildmenu
 "                   complete till longest common string.
 " full            - enables you to tab through the remaining completions
 set wildmode=list:longest,full
-set wildignore+=*.pyc,*.zip,*.gz,*.bz,*.tar,*.jpg,*.png,*.gif,*.avi,*.wmv,*.ogg,*.mp3,*.mov
+" wildignore: stuff to ignore when tab completing
+set wildignore+=*.zip,*.gz,*.bz,*.tar
+set wildignore=*.pyc,*.pyo,*.o,*.obj,*~
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.avi,*.wmv,*.ogg,*.mp3,*.mov
+
 " completeopt values (default: "menu,preview")
 " menu:    use popup menu to show possible completion
 " menuone: Use the popup menu also when there is only one match.

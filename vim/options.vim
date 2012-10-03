@@ -2,6 +2,7 @@ if version >= 703 " 703 = Vim 7.3
   set relativenumber " line numbers are relative to current line
   set undofile " Create FILE.un~ files for persistent undo
   " Persistent undo
+  silent !mkdir ~/.vim/undodir > /dev/null 2>&1
   if has('win32')
     set undodir=C:\Windows\Temp
   else
@@ -53,4 +54,3 @@ set guioptions-=T " Don't show the menubar
 
 " `yy` copies to clipboard, so you don't have to do `"*yy`. Bad. Ass.
 set clipboard=unnamed
-

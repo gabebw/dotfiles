@@ -7,7 +7,6 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
-
 nnoremap <Leader>rr :call Send_to_Tmux("clear\n!-2\n")<CR>
 
 " Remove trailing whitespace
@@ -18,20 +17,10 @@ nnoremap <Leader>n :40Vexplore<CR>
 " Change mapping for ctrl-p plugin
 let g:ctrlp_map = '<Leader>t'
 
-" Stronger h
-nnoremap H 0
-" Stronger l
-nnoremap L $
-
 " Duplicate a selection
-" Visual mode: D
 vnoremap D y'>p
 
-" Git
-nnoremap <Leader>gc :Gcommit -m ""<LEFT>
-nnoremap <Leader>gcv :Gcommit -v<CR>
-nnoremap <Leader>ga :Git add .<CR>
-" Show blame info for selected text (via Mike Burns)
+" Show git blame for current line
 vnoremap <Leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 nnoremap <Leader>ctags :!ctags -f 'tmp/tags' -R --langmap="ruby:+.rake.builder.rjs" .<CR>
@@ -47,14 +36,3 @@ nnoremap K <Nop>
 nnoremap :Nohl :nohlsearch
 " no ex mode
 map Q <Nop>
-inoremap kj <Esc>:w<CR>
-" Use apostrophe for backquote function, since backquote is so much more
-" useful than apostrophe
-nnoremap ` '
-
-" Chapter 14 - autocmd groups
-augroup filetype_html
-  " Clear the augroup - otherwise you just keep adding to the same group!
-  autocmd!
-  autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
-augroup END

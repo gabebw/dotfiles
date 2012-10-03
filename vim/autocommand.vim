@@ -25,9 +25,7 @@ if has("autocmd")
     au FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
     " treat extra files like ruby
-    au BufRead,BufNewFile *.ru setf ruby
-    au BufRead,BufNewFile Gemfile,Guardfile setf ruby
-    au BufRead,BufNewFile .autotest,.simplecov setf ruby
+    au BufRead,BufNewFile *.ru,Gemfile,Guardfile,.simplecov setf ruby
 
     " It's Markdown, not modula2, you infernal machine
     au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
@@ -37,8 +35,6 @@ if has("autocmd")
 
     au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
-    au BufRead ~/.dotfiles/extra/* setf zsh
-    au BufRead ~/.dotfiles/zsh/* setf zsh
     au BufRead /usr/share/file/magic/* set syntax=magic
 
     " Indent text inside <p> tags
