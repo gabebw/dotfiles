@@ -25,3 +25,6 @@ bundler_binstubs
 
 # ctags file
 tags
+
+# Sometimes a quote file gets created. Ignore it.
+'
