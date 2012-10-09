@@ -1,8 +1,6 @@
 " Vundle; see https://github.com/gmarik/vundle
 " To install, run :BundleInstall
-" To update, run BundleInstall!
-" **DO NOT** put a call to BundleInstall in your vimrc! It'll recurse A LOT
-" and things will get weird.
+" To update, run :BundleInstall!
 set rtp+=$HOME/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -18,30 +16,19 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'ervandew/supertab'
 
 " Syntax and the like
-Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-rails'
-Bundle 'tsaleh/vim-shoulda'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'Textile-for-VIM'
-Bundle 'Markdown'
 
 " Other
 Bundle 'ack.vim'
-" https://github.com/ggreer/the_silver_searcher
-let g:ackprg = 'ag --nogroup --nocolor --column'
 
-Bundle 'greplace.vim'
-Bundle 'snippetsEmu'
-" This fixes a bunch of stuff.
+" This fork of tslime fixes many things.
 Bundle 'jgdavey/tslime.vim'
 Bundle 'endwise.vim'
-Bundle 'file-line'
 Bundle 'rake.vim'
 Bundle 'kien/ctrlp.vim'
 
