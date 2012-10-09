@@ -44,10 +44,9 @@
   psuh = push
 [format]
   # git log uses --pretty format by default, so this changes the default
-  # format
-  # Now log uses --pretty by default
-  # 4436819 [23 hours ago] (Gabe Berke-Williams) One line prompt
-  pretty = %C(magenta reverse)%h%Creset %Cgreen[%cr]%Creset (%an) %s
+  # format.
+  # 4436819 [23 hours ago] One line prompt <Gabe Berke-Williams>
+  pretty = %C(magenta reverse)%h%Creset %Cgreen[%cr]%Creset %s <%an>
 [diff]
   # For Github-style word diffs
   wordRegex = [^[:space:]]
