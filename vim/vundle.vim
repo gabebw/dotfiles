@@ -8,24 +8,17 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
+Bundle 'ack.vim'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
 Bundle 'Lokaltog/vim-powerline'
-
-" tab completion
 Bundle 'ervandew/supertab'
-
-" Syntax and the like
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-rails'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
-
-" Other
-Bundle 'ack.vim'
-
 " This fork of tslime fixes many things.
 Bundle 'jgdavey/tslime.vim'
 Bundle 'endwise.vim'
