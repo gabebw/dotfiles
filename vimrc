@@ -5,11 +5,6 @@ set nocompatible
 
 filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
 
-" Pathogen must be called before built-in filetype plugin is loaded.
-call pathogen#infect()
-" Generate help tags for every bundle.
-call pathogen#helptags()
-
 source $HOME/.vim/vundle.vim
 source $HOME/.vim/statusline.vim
 source $HOME/.vim/colorscheme.vim
