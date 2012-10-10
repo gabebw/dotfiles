@@ -15,6 +15,7 @@ source ~/.vim/completion.vim
 source ~/.vim/tabularizing.vim
 source ~/.vim/test_runners.vim
 source ~/.vim/rails_shortcuts.vim
+source ~/.vim/functions.vim
 " Allows % to switch between if/elsif/else/end, open/close XML tags, and
 " more.
 runtime macros/matchit.vim
