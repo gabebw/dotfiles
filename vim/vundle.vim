@@ -2,7 +2,7 @@
 " To install, run :BundleInstall
 " To update, run :BundleInstall!
 filetype off
-set rtp+=$HOME/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " Bundles:

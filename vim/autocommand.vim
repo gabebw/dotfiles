@@ -2,6 +2,7 @@
 if has("autocmd")
   " Turn on filetype detection, filetype plugins, and per-filetype indenting
   filetype plugin indent on
+  syntax on
   " on opening the file, clear search-highlighting
   autocmd BufReadCmd set nohlsearch
 
