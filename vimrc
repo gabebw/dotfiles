@@ -6,7 +6,6 @@ set nocompatible
 filetype off " per http://www.adamlowe.me/2009/12/vim-destroys-all-other-rails-editors.html
 
 source ~/.vim/vundle.vim
-source ~/.vim/statusline.vim
 source ~/.vim/colorscheme.vim
 source ~/.vim/options.vim
 source ~/.vim/tabs.vim

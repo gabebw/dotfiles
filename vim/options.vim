@@ -3,12 +3,9 @@ if version >= 703 " 703 = Vim 7.3
   set undofile " Create FILE.un~ files for persistent undo
   " Persistent undo
   silent !mkdir ~/.vim/undodir > /dev/null 2>&1
-  if has('win32')
-    set undodir=C:\Windows\Temp
-  else
-    set undodir=~/.vim/undodir
-  endif
+  set undodir=~/.vim/undodir
 endif
+
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
 set nowrap " don't wrap lines
@@ -27,8 +24,10 @@ set visualbell " No more beeping - supposedly flashes the screen instead, but do
 set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set nojoinspaces " Don't insert a space when joining lines, e.g. with J
 set noswapfile
-" Don't add the comment prefix when I hit enter or o/O on a comment line.
-set formatoptions-=or
+" Don't add the comment prefix when I hit enter or o/O on a comment line. Must
+" be removed one-by-one.
+set formatoptions-=o
+set formatoptions-=r
 " Tell vim to remember certain things when we exit
 "  '10 : marks will be remembered for up to 10 previously edited files
 "  "100 : will save up to 100 lines for each register
@@ -39,10 +38,11 @@ set formatoptions-=or
 set viminfo='10,\"100,:20,%,n~/.viminfo
 
 " Open below and to the right, the same way you read a page
-set splitbelow
-set splitright
+set splitbelow splitright
 
 set cursorline
+" Always display statusline
+set laststatus=2
 
 set fileencodings=utf-8,iso-8859-1
 set fileformats=unix,mac,dos
@@ -50,7 +50,6 @@ set textwidth=80
 set showbreak="@" " This is prepended to wrapped lines
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
-set guioptions-=T " Don't show the menubar
 
 " `yy` copies to clipboard, so you don't have to do `"*yy`. Bad. Ass.
 set clipboard=unnamed

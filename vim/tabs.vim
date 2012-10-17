@@ -14,6 +14,5 @@
 " using TAB characters
 " Currently ruby style (tabs = 2 spaces)
 set expandtab
-" set tabstop=4
 set softtabstop=2
 set shiftwidth=2

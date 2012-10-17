@@ -1,6 +1,3 @@
-" map autocomplete to Tab
-inoremap <Tab> <C-P>
-
 " Completion {{{
 " :set wildmenu enables a menu at the bottom of the vim/gvim window.
 set wildmenu
@@ -14,11 +11,9 @@ set wildignore=*.pyc,*.pyo,*.o,*.obj,*~
 set wildignore+=*vim/backups*
 set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
+set wildignore+=vendor/rails/**,vendor/cache/**
 set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
+set wildignore+=log/**,tmp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.avi,*.wmv,*.ogg,*.mp3,*.mov
 
