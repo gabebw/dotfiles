@@ -5,6 +5,7 @@
 # Bundler
 alias be="bundle exec"
 alias bi="bundle install --local || bundle install"
+alias binstubs="bundle --binstubs=bundler_binstubs"
 
 function b {
   if [[ $# == 0 ]]
@@ -38,15 +39,15 @@ alias tu="ruby -Itest"
 alias tagit='/usr/local/bin/ctags -R --languages=-javascript --langmap="ruby:+.rake.builder.rjs" --exclude=.git --exclude=log -f ./tmp/tags *'
 
 # Via Dan Croak.
-alias staging='heroku run console --remote staging'
 function staging-rake(){ heroku run rake "$@" --remote staging }
+alias staging='heroku run console --remote staging'
 alias staging-logs='bundle exec heroku logs --tail --remote staging'
-alias staging-migrate='heroku run rake db:migrate --remote staging'
+alias staging-migrate='staging-rake db:migrate'
 
-alias production='heroku run console --remote production'
 function production-rake(){ heroku run rake "$@" --remote production }
+alias production='heroku run console --remote production'
 alias production-logs='bundle exec heroku logs --tail --remote production'
-alias production-migrate='heroku run rake db:migrate --remote production'
+alias production-migrate='production-rake rake db:migrate'
 
 alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging  --confirm `basename $PWD`-staging'
 alias db-backup-production='heroku pgbackups:capture --remote production'
