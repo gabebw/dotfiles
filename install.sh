@@ -2,10 +2,13 @@
 
 cutstring="DO NOT EDIT BELOW THIS LINE"
 
+nothing_to_do=true
 for name in *; do
   target="$HOME/.$name"
   if [ -e $target ]; then
     if [ ! -L $target ]; then
+      nothing_to_do=false
+
       cutline=`grep -n -m1 "$cutstring" "$target" | sed "s/:.*//"`
       if [[ -n $cutline ]]; then
         let "cutline = $cutline - 1"
@@ -33,3 +36,5 @@ for name in *; do
     fi
   fi
 done
+
+[[ $nothing_to_do == true ]] && echo "Nothing to do."
