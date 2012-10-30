@@ -6,7 +6,6 @@ augroup rails_shortcuts
   autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
   autocmd User Rails Rnavcommand initializer config/initializers -glob=**/*
   autocmd User Rails Rnavcommand factories spec test -glob=**/* -default=factories
-  autocmd User Rails Rnavcommand routes config/routes.rb
   command! Rroutes :e config/routes.rb
 
   " Models
