@@ -28,3 +28,5 @@ alias gai="git add --interactive"
 alias gb="git checkout -b"
 alias gc="git checkout"
 alias gcm="git commit -m"
+
+source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
