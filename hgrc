@@ -6,56 +6,6 @@ username = Gabe B-W <gbw@brandeis.edu>
 email = gbw@brandeis.edu
 editor = $EDITOR -f
 
-[alias]
-stn = status .
-
-[merge-tools]
-# Just creating opendiff.* tells Hg that opendiff exists, and to call it via
-# "opendiff".
-opendiff.gui = true # requires a GUI to run
-# Compare $local and $base, and put the merged file in $output.
-# $local, $base, $other and $output are magic variables that Hg
-# auto-expands.
-opendiff.args = $local $base $other -merge $output
-
-[extensions]
-# blank on purpose; enables "hg glog"
-hgext.graphlog =
-convert =
-# http://hgtip.com/tips/advanced/2009-09-29-the-fetch-extension/
-# make "hg pull" auto-merge like "git pull"
-# Confusingly, "hg fetch" will behave like "git pull", and "hg pull" will
-# behave like "git fetch" (but the latter happens anyway).
-hgext.fetch =
-# colorized diff output
-color =
-# git add --interactive
-record =
-# Show progress bars for some actions
-progress =
-# Adds `git clean`-like functionality
-purge =
-
-[color]
-status.modified = blue bold underline
-status.added = green bold
-# removed = removed through "hg rm"
-status.removed = red bold blue_background
-# deleted = manually removed (i.e. not through "hg rm")
-status.deleted = cyan bold underline
-status.unknown = magenta bold underline
-status.ignored = black bold
-
-diff.diffline = bold
-diff.extended = cyan bold
-diff.file_a = red bold
-diff.file_b = green bold
-diff.hunk = magenta
-diff.deleted = red
-diff.inserted = green
-diff.changed = white
-diff.trailingwhitespace = bold red_background
-
 # http://mercurial.selenic.com/wiki/CACertificates#Mac_OS_X_10.6_and_higher
 [web]
 cacerts = ~/.dotfiles/hg/dummy-cert.pem
