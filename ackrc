@@ -6,7 +6,9 @@
 --type-set=cucumber=.feature
 --type-set=markdown=.markdown,.md
 --type-set=image=.jpg,.png,.jpeg,.gif,.tiff,.bmp,.svg
+--type-set=tags=tags
 --type=noimage
+--type=notags
 --ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
