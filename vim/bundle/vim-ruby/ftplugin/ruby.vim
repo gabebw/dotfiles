@@ -95,7 +95,7 @@ if stridx(&l:path, s:ruby_path) == -1
   let &l:path = s:ruby_path
 endif
 if exists('s:ruby_paths') && stridx(&l:tags, join(map(copy(s:ruby_paths),'v:val."/tags"'),',')) == -1
-  let &l:tags .= ',' . join(map(copy(s:ruby_paths),'v:val."/tags"'),',')
+  let &l:tags = &tags . ',' . join(map(copy(s:ruby_paths),'v:val."/tags"'),',')
 endif
 
 if has("gui_win32") && !exists("b:browsefilter")
@@ -130,20 +130,25 @@ if !exists("g:no_plugin_maps") && !exists("g:no_ruby_maps")
   let b:undo_ftplugin = b:undo_ftplugin
         \."| sil! exe 'unmap <buffer> [[' | sil! exe 'unmap <buffer> ]]' | sil! exe 'unmap <buffer> []' | sil! exe 'unmap <buffer> ]['"
         \."| sil! exe 'unmap <buffer> [m' | sil! exe 'unmap <buffer> ]m' | sil! exe 'unmap <buffer> [M' | sil! exe 'unmap <buffer> ]M'"
-        \."! sil! exe 'ounmap <buffer> im'| sil! exe 'ounmap <buffer> am'| sil! exe 'ounmap <buffer> ic'| sil! exe 'ounmap <buffer> ac'"
 
   if maparg('im','n') == ''
     onoremap <silent> <buffer> im :<C-U>call <SID>wrap_i('[m',']M')<CR>
     onoremap <silent> <buffer> am :<C-U>call <SID>wrap_a('[m',']M')<CR>
+    xnoremap <silent> <buffer> im :<C-U>call <SID>wrap_i('[m',']M')<CR>
+    xnoremap <silent> <buffer> am :<C-U>call <SID>wrap_a('[m',']M')<CR>
     let b:undo_ftplugin = b:undo_ftplugin
-          \."! sil! exe 'ounmap <buffer> im' | sil! exe 'ounmap <buffer> am'"
+          \."| sil! exe 'ounmap <buffer> im' | sil! exe 'ounmap <buffer> am'"
+          \."| sil! exe 'xunmap <buffer> im' | sil! exe 'xunmap <buffer> am'"
   endif
 
   if maparg('iM','n') == ''
     onoremap <silent> <buffer> iM :<C-U>call <SID>wrap_i('[[','][')<CR>
     onoremap <silent> <buffer> aM :<C-U>call <SID>wrap_a('[[','][')<CR>
+    xnoremap <silent> <buffer> iM :<C-U>call <SID>wrap_i('[[','][')<CR>
+    xnoremap <silent> <buffer> aM :<C-U>call <SID>wrap_a('[[','][')<CR>
     let b:undo_ftplugin = b:undo_ftplugin
           \."| sil! exe 'ounmap <buffer> iM' | sil! exe 'ounmap <buffer> aM'"
+          \."| sil! exe 'xunmap <buffer> iM' | sil! exe 'xunmap <buffer> aM'"
   endif
 
   if maparg("\<C-]>",'n') == ''
@@ -233,29 +238,29 @@ function! RubyBalloonexpr()
 endfunction
 
 function! s:searchsyn(pattern,syn,flags,mode)
-    norm! m'
-    if a:mode ==# 'v'
-      norm! gv
-    endif
-    let i = 0
-    let cnt = v:count ? v:count : 1
-    while i < cnt
-        let i = i + 1
-        let line = line('.')
-        let col  = col('.')
-        let pos = search(a:pattern,'W'.a:flags)
-        while pos != 0 && s:synname() !~# a:syn
-            let pos = search(a:pattern,'W'.a:flags)
-        endwhile
-        if pos == 0
-            call cursor(line,col)
-            return
-        endif
+  norm! m'
+  if a:mode ==# 'v'
+    norm! gv
+  endif
+  let i = 0
+  let cnt = v:count ? v:count : 1
+  while i < cnt
+    let i = i + 1
+    let line = line('.')
+    let col  = col('.')
+    let pos = search(a:pattern,'W'.a:flags)
+    while pos != 0 && s:synname() !~# a:syn
+      let pos = search(a:pattern,'W'.a:flags)
     endwhile
+    if pos == 0
+      call cursor(line,col)
+      return
+    endif
+  endwhile
 endfunction
 
 function! s:synname()
-    return synIDattr(synID(line('.'),col('.'),0),'name')
+  return synIDattr(synID(line('.'),col('.'),0),'name')
 endfunction
 
 function! s:wrap_i(back,forward)

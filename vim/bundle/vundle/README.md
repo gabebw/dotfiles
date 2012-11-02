@@ -1,51 +1,72 @@
 ## About
 
-[Vundle] is a short cut for **V**imb**undle** and is a [Vim] plugin manager.
+[Vundle] is short for **V**imb**undle** and is a [Vim] plugin manager.
+
+![Vundle-installer](http://25.media.tumblr.com/tumblr_m8m96w06G81r39828o1_1280.png)
 
 ## Quick start
 
 1. Setup [Vundle]:
 
-        git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+     ```
+     $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+     ```
 
 2. Configure bundles:
 
-      Sample `.vimrc`:
+     Sample `.vimrc`:
 
-        set nocompatible               " be iMproved
-        filetype off                   " required!
+     ```vim
+     set nocompatible               " be iMproved
+     filetype off                   " required!
 
-        set rtp+=~/.vim/bundle/vundle/
-        call vundle#rc()
+     set rtp+=~/.vim/bundle/vundle/
+     call vundle#rc()
 
-        " let Vundle manage Vundle
-        Bundle 'gmarik/vundle'
+     " let Vundle manage Vundle
+     " required! 
+     Bundle 'gmarik/vundle'
 
-        " My Bundles here:
-        "
-        " original repos on github
-        Bundle 'tpope/vim-fugitive'
-        Bundle 'lokaltog/vim-easymotion'
-        Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-        " vim-scripts repos
-        Bundle 'L9'
-        Bundle 'FuzzyFinder'
-        Bundle 'rails.vim'
-        " non github repos
-        Bundle 'git://git.wincent.com/command-t.git'
-        " ...
+     " My Bundles here:
+     "
+     " original repos on github
+     Bundle 'tpope/vim-fugitive'
+     Bundle 'Lokaltog/vim-easymotion'
+     Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+     Bundle 'tpope/vim-rails.git'
+     " vim-scripts repos
+     Bundle 'L9'
+     Bundle 'FuzzyFinder'
+     " non github repos
+     Bundle 'git://git.wincent.com/command-t.git'
+     " ...
 
-        filetype plugin indent on     " required! 
-        " or 
-        " filetype plugin on          " to not use the indentation settings set by plugins
+     filetype plugin indent on     " required!
+     "
+     " Brief help
+     " :BundleList          - list configured bundles
+     " :BundleInstall(!)    - install(update) bundles
+     " :BundleSearch(!) foo - search(or refresh cache first) for foo
+     " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+     "
+     " see :h vundle for more details or wiki for FAQ
+     " NOTE: comments after Bundle command are not allowed..
+
+     ```
 
 3. Install configured bundles:
 
-   Launch `vim`, run `:BundleInstall`. 
+     Launch `vim`, run `:BundleInstall` 
+     (or `vim +BundleInstall +qall` for CLI lovers)
 
-   *Windows users* see [Vundle for Windows](https://github.com/gmarik/vundle/wiki/Vundle-for-Windows)
+     *Windows users* see [Vundle for Windows](https://github.com/gmarik/vundle/wiki/Vundle-for-Windows)
 
-   Installing requires [Git] and triggers [Git clone](http://gitref.org/creating/#clone) for each configured repo to `~/.vim/bundle/`.
+     Installing requires [Git] and triggers [Git clone](http://gitref.org/creating/#clone) for each configured repo to `~/.vim/bundle/`.
+
+4. Consider [donating](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T44EJZX8RBUWY)
+
+[*Thank you*](http://j.mp/rSbm01) for supporting this project! )
+
 
 ## Why Vundle
 
@@ -61,43 +82,23 @@
 Also [Vundle]:
 
 - manages runtime path of your installed scripts
-- regenerates helptag atomatically
+- regenerates helptag automatically
 
 ## Docs
 
 see [`:h vundle`](vundle/blob/master/doc/vundle.txt#L1) vimdoc for more details.
 
-## Examples
+## People Using Vundle
 
-   See [gmarik's vimrc](https://github.com/gmarik/vimfiles/blob/1f4f26d42f54443f1158e0009746a56b9a28b053/vimrc#L136) for working example.
-
-   If you have an interesting example, feel free to send a pull request with link to your config. Thx!
+see [Examples](/gmarik/vundle/wiki/Examples)
 
 ## FAQ
 
--   **Q** Why am I asked for username/pass?
-
-    **A** This is the case of invalid name used with `Bundle`, which leads to attempt to clone nonexisting repo:
-
-        git clone http://github.com/gmarik/non_existin_repo
-        Cloning into non_existin_repo...
-        Username: 
-        Password: 
-        fatal: Authentication failed
-
-
--   **Q** My configuration is bundle dependant, so when I try to install plugins for the first time I get errors. How do I fix that?
-
-    **A** [Fix your Chicken or Egg dilemma](http://gmarik.info/blog/2011/05/17/chicken-or-egg-dilemma)
+see [wiki](/gmarik/vundle/wiki)
 
 ## Contributors
 
-* [redlinesoftware](http://redlinesoftware.com) - for lending me 24" monitor!
-* [Marc Jeanson](https://github.com/marcjeanson) - vim dude I always bug for help...;)
-* [Brad Anderson](http://github.com/eco) (windows support)
-* [Ryan W](http://github.com/rygwdn)
-* [termac](http://github.com/termac)
-* and others
+  see [vundle contributors](https://github.com/gmarik/vundle/graphs/contributors)
 
 *Thank you!*
 
@@ -120,12 +121,11 @@ see [`:h vundle`](vundle/blob/master/doc/vundle.txt#L1) vimdoc for more details.
 * √ vim documentation
 * √ put vundle to bundles/ too(will fix vundle help)
 * √ tests
-* improve error handling
-* handle dependencies
+* √ improve error handling
 * allow specify revision/version?
-* search by description aswell
-* show descrption in search results
-* instead sourcing .vimrc before installation come up with another solution
+* handle dependencies
+* show description in search results
+* search by description as well
 * make it rock!
 
 [Vundle]:http://github.com/gmarik/vundle
@@ -136,7 +136,7 @@ see [`:h vundle`](vundle/blob/master/doc/vundle.txt#L1) vimdoc for more details.
 [all available vim scripts]:http://vim-scripts.org/vim/scripts.html
 
 [install]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L110-124
-[update]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L126-131
-[search]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L133-155
-[clean]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L157-169
-[interactive mode]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L172-205
+[update]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L128-134
+[search]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L136-158
+[clean]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L168-180
+[interactive mode]:https://github.com/gmarik/vundle/blob/master/doc/vundle.txt#L184-210
