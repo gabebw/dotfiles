@@ -24,7 +24,6 @@ if [[ -n $TMUX ]]; then
   # (non-core functionality) #
   ############################
   EXTRA=(
-    homebrew
     git
     ruby
     rails
