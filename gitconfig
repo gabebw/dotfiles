@@ -37,6 +37,12 @@
   next = !git add . && git rebase --continue
   assume-unchanged = update-index --assume-unchanged
 
+  current-branch = !git symbolic-ref HEAD | sed 's|refs/heads/||'
+
+  # git-flow
+  start = !sh -c 'git flow feature start gbw-$1' -
+  finish = !git flow feature finish `git current-branch | sed \"s|feature/||\"`
+
   # Typos
   pul = pull
   pus = push
