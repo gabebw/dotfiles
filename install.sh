@@ -27,6 +27,7 @@ for name in *; do
     fi
   else
     if [[ $name != 'install.sh' ]]; then
+      nothing_to_do=false
       echo "Creating $target"
       if [[ -n `grep "$cutstring" "$name"` ]]; then
         cp "$PWD/$name" "$target"
