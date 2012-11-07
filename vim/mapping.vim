@@ -1,6 +1,3 @@
-" "," is the <Leader> character
-let mapleader=","
-
 " Change the current working directory to the directory that the current file you are editing is in.
 nnoremap <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
@@ -8,7 +5,6 @@ nnoremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 nnoremap <Leader>s :split <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>v :vsplit <C-R>=expand("%:p:h") . '/'<CR>
 nnoremap <Leader>rr :call Send_to_Tmux("clear\n!-2\n")<CR>
-nnoremap <Leader>rl :call ReloadChrome()<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>

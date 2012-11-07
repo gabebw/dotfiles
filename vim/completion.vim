@@ -1,10 +1,7 @@
 " Completion {{{
 " :set wildmenu enables a menu at the bottom of the vim/gvim window.
 set wildmenu
-" list:longest    - When > 1 match, list all matches and
-"                   complete till longest common string.
-" full            - enables you to tab through the remaining completions
-set wildmode=list:longest,full
+set wildmode=list:longest,list:full
 " wildignore: stuff to ignore when tab completing
 set wildignore+=*.zip,*.gz,*.bz,*.tar
 set wildignore=*.pyc,*.pyo,*.o,*.obj,*~
