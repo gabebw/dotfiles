@@ -16,10 +16,6 @@ function b {
   fi
 }
 
-# Cucumber
-alias cuc="be cucumber"
-compdef cuc=cucumber
-
 # Rspec
 alias s=rspec
 compdef s=rspec
@@ -27,10 +23,8 @@ compdef s=rspec
 # Rake
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
-alias bake="be rake"
-alias brake=bake
-alias rrg="bake routes | grep"
-alias reset-db="bake db:drop db:create && migrate"
+alias rrg="be rake routes | grep"
+alias reset-db="be rake db:drop db:create && migrate"
 
 # Test::Unit
 alias tu="ruby -Itest"
