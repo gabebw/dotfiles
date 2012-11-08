@@ -43,5 +43,7 @@ alias production-logs='heroku logs --tail -r production'
 alias production-migrate='production-rake rake db:migrate'
 
 # Database
+alias db-development-name='egrep "database:.*development" config/database.yml | awk "{print \$2}"'
+alias db-copy-staging-to-local='heroku pgbackups:capture -r staging && curl `heroku pgbackups:url -r staging` | db-restore `db-development-name`'
 alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url -r production` -r staging  --confirm `basename $PWD`-staging'
 alias db-backup-production='heroku pgbackups:capture -r production'
