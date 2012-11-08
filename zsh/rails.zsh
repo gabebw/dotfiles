@@ -32,16 +32,16 @@ alias tu="ruby -Itest"
 # ctags
 alias tagit='/usr/local/bin/ctags -R --languages=-javascript --langmap="ruby:+.rake.builder.rjs" --exclude=.git --exclude=log -f ./tmp/tags *'
 
-# Via Dan Croak.
-function staging-rake(){ heroku run rake "$@" --remote staging }
-alias staging='heroku run console --remote staging'
-alias staging-logs='bundle exec heroku logs --tail --remote staging'
+function staging-rake(){ heroku run rake "$@" -r staging }
+alias staging='heroku run console -r staging'
+alias staging-logs='heroku logs --tail -r staging'
 alias staging-migrate='staging-rake db:migrate'
 
-function production-rake(){ heroku run rake "$@" --remote production }
-alias production='heroku run console --remote production'
-alias production-logs='bundle exec heroku logs --tail --remote production'
+function production-rake(){ heroku run rake "$@" -r production }
+alias production='heroku run console -r production'
+alias production-logs='heroku logs --tail -r production'
 alias production-migrate='production-rake rake db:migrate'
 
-alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url --remote production` --remote staging  --confirm `basename $PWD`-staging'
-alias db-backup-production='heroku pgbackups:capture --remote production'
+# Database
+alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url -r production` -r staging  --confirm `basename $PWD`-staging'
+alias db-backup-production='heroku pgbackups:capture -r production'
