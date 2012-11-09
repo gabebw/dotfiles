@@ -24,7 +24,6 @@ compdef s=rspec
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="be rake db:migrate && be rake db:migrate:redo && be rake db:schema:dump db:test:prepare"
 alias rrg="be rake routes | grep"
-alias reset-db="be rake db:drop db:create && migrate"
 
 # Test::Unit
 alias tu="ruby -Itest"
@@ -47,3 +46,4 @@ alias db-development-name='egrep "database:.*development" config/database.yml | 
 alias db-copy-staging-to-local='heroku pgbackups:capture -r staging && curl `heroku pgbackups:url -r staging` | db-restore `db-development-name`'
 alias db-copy-production-to-staging='heroku pgbackups:restore DATABASE `heroku pgbackups:url -r production` -r staging  --confirm `basename $PWD`-staging'
 alias db-backup-production='heroku pgbackups:capture -r production'
+alias db-reset="be rake db:drop db:create && migrate"
