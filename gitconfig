@@ -45,9 +45,6 @@
 
   # Typos
   pul = pull
-  pus = push
-  puhs = push
-  psuh = push
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format.
