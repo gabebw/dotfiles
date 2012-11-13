@@ -30,3 +30,12 @@ alias gc="git checkout"
 alias gcm="git commit -m"
 
 source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
+
+# https://gist.github.com/3960799
+function git-add-prs {
+  git config --add remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+  git config --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pr/*'
+  git config  --add remote.origin.url "git@github.com:thoughtbot/`basename $PWD`.git"
+  git fetch
+  echo "git checkout -t origin/pr/NUMBER"
+}
