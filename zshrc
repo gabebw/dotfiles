@@ -17,6 +17,7 @@ if [[ -n $TMUX ]]; then
     completion
     vcs
     prompt
+    rbenv
   )
 
   ############################
@@ -25,13 +26,11 @@ if [[ -n $TMUX ]]; then
   ############################
   EXTRA=(
     git
-    ruby
     rails
-    rbenv
     hitch
     postgres
-    twios
-    arduino
+    # twios
+    # arduino
   )
 
   for core in $CORE
