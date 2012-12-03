@@ -4,18 +4,17 @@ module Readline
   module History
     LOG = "#{ENV["HOME"]}/.irb-save-history"
     def self.write_log(line)
-      File.open(LOG, 'ab') {|f| f << "#{line}\n"} unless line == "exit"
+      if line != "exit"
+        File.open(LOG, 'ab') {|f| f << "#{line}\n"}
+      end
     end
   end
 
   alias :old_readline :readline
   def readline(*args)
-    ln = old_readline(*args)
-    begin
-      History.write_log(ln)
-    rescue
+    old_readline(*args).tap do |line|
+      History.write_log(line) rescue nil
     end
-    ln
   end
 end
 
