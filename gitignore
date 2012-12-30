@@ -26,6 +26,6 @@ bundler_binstubs
 # ctags file
 tags
 
-# Sometimes random files gets created. Ignore them.
+# Sometimes random files get created. Ignore them.
 '
 :w
