@@ -29,3 +29,4 @@ tags
 # Sometimes random files get created. Ignore them.
 '
 :w
+.foreman
