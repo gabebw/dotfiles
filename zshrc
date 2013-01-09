@@ -17,6 +17,7 @@ if [[ -n $TMUX ]]; then
     completion
     vcs
     prompt
+    ruby
     rbenv
   )
 
