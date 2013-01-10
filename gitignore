@@ -12,6 +12,7 @@ Thumbs.db
 
 # rbenv
 .rbenv-version
+.ruby-version
 
 # python byte-compiled files
 *.py[co]
