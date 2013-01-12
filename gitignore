@@ -14,6 +14,10 @@ Thumbs.db
 .rbenv-version
 .ruby-version
 
+# Zeus gem
+custom_plan.rb
+zeus.json
+
 # python byte-compiled files
 *.py[co]
 
