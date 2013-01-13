@@ -29,8 +29,6 @@ alias gb="git checkout -b"
 alias gc="git checkout"
 alias gcm="git commit -m"
 
-source /usr/local/share/zsh/site-functions/git-flow-completion.zsh
-
 # https://gist.github.com/3960799
 function git-add-prs {
   git config --add remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'

@@ -30,7 +30,6 @@ if [[ -n $TMUX ]]; then
     rails
     hitch
     postgres
-    # twios
     # arduino
   )
 
@@ -47,7 +46,6 @@ if [[ -n $TMUX ]]; then
   source $BASE/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
   export PATH
-  trim_path
 
   # Houston, we have liftoff.
 fi
