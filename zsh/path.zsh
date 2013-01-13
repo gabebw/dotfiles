@@ -32,4 +32,4 @@ PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin"
 # Bundler binstubs
 PATH="./bundler_binstubs:$PATH"
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
-PATH=$PATH:"/Users/gabe/bin:/Users/gabe/.dotfiles/scripts"
+PATH=$PATH:"/Users/gabe/bin:/Users/gabe/.dotfiles/bin"
