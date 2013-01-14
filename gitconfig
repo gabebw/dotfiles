@@ -13,8 +13,6 @@
   # Delete branch locally and remotely
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   co = checkout
-  # via http://ozmm.org/posts/git_msg.html
-  msg = commit --allow-empty -m
   # Pretty!
   # via http://andyjeffries.co.uk/articles/25-tips-for-intermediate-git-users
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
@@ -28,17 +26,10 @@
   #ff = merge --ff-only # commented out so I use `git mm`
   up = !git fetch origin && git rebase origin/master
   aa = add .
-  # Not yet added - doesn't include ignored files
-  new = ls-files --others --exclude-standard
-  # Files that are in the staging area
-  added = diff --cached --name-only
-  today = log --stat --since='1 Day Ago' --graph --pretty=oneline --abbrev-commit --date=relative
   plre = pull --rebase
   newauthor = commit --amend --reset-author -C HEAD
   prune-remotes = remote prune origin
   next = !git add . && git rebase --continue
-  assume-unchanged = update-index --assume-unchanged
-
   current-branch = !git symbolic-ref HEAD | sed 's|refs/heads/||'
 
   # git-flow
@@ -52,16 +43,13 @@
   # format.
   # 4436819 [23 hours ago] One line prompt <Gabe Berke-Williams>
   pretty = %C(magenta reverse)%h%Creset %Cgreen[%cr]%Creset %s <%an>
-[diff]
-  # For Github-style word diffs
-  wordRegex = [^[:space:]]
-# color the UI!
 [color]
+  # Color everything.
   ui = auto
 [color "branch"]
   # What colors should "git branch" show?
   # default black
-  current = yellow reverse
+  current = yellow
   # default yellow
   local = green
   # default red
@@ -92,10 +80,9 @@
   autocorrect = 1
 [svn]
   authorsfile = ~/.git-author
-[achievement]
-  upload = true
 [instaweb]
   httpd = webrick
+# insteadOf lets you do `git clone gh:thoughtbot/dotfiles`
 [url "git@heroku.com:"]
   insteadOf = heroku:
 [url "git://github.com/"]
@@ -108,7 +95,8 @@
   # thoughtbot, with write access
   insteadOf = tb:
 [push]
-  # Push current branch even if you've never pushed it before
+  # Push current branch (and ONLY current branch) even if you've never pushed it
+  # before.
   default = current
 [rerere]
   enabled = 1
