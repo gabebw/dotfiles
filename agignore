@@ -1,0 +1,14 @@
+log/*.log
+vendor/
+log/
+tmp/
+doc/
+coverage/
+public/assets/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.tiff
+*.bmp
+*.svg
