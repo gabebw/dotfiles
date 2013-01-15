@@ -13,7 +13,6 @@
   # Delete branch locally and remotely
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   co = checkout
-  # Pretty!
   # via http://andyjeffries.co.uk/articles/25-tips-for-intermediate-git-users
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   # Full commit messages without all the junk from `log --pretty=full`
@@ -31,6 +30,7 @@
   prune-remotes = remote prune origin
   next = !git add . && git rebase --continue
   current-branch = !git symbolic-ref HEAD | sed 's|refs/heads/||'
+  merged = branch -a --merged
 
   # git-flow
   start = !sh -c 'git flow feature start gbw-$1' -
