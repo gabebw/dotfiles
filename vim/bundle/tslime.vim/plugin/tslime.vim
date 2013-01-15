@@ -22,7 +22,7 @@ function! Send_to_Tmux(text)
 endfunction
 
 function! s:tmux_target()
-  return g:tmux_sessionname . ":" . g:tmux_windowname . "." . g:tmux_panenumber
+  return '"' . g:tmux_sessionname . '":' . g:tmux_windowname . "." . g:tmux_panenumber
 endfunction
 
 function! s:set_tmux_buffer(text)
@@ -35,22 +35,32 @@ endfunction
 
 " Session completion
 function! Tmux_Session_Names(A,L,P)
-  return system("tmux list-sessions | sed -e 's/:.*$//'")
+  return <SID>TmuxSessions()
 endfunction
 
 " Window completion
 function! Tmux_Window_Names(A,L,P)
-  return system("tmux list-windows -t" . g:tmux_sessionname . ' | grep -e "^\w:" | sed -e "s/ \[[0-9x]*\]$//"')
+  return system('tmux list-windows -t "' . g:tmux_sessionname . '" | grep -e "^\w:" | sed -e "s/ \[[0-9x]*\]$//"')
 endfunction
 
 " Pane completion
 function! Tmux_Pane_Numbers(A,L,P)
-  return system("tmux list-panes -t " . g:tmux_sessionname . ":" . g:tmux_windowname . " | sed -e 's/:.*$//'")
+  return system('tmux list-panes -t "' . g:tmux_sessionname . '":' . g:tmux_windowname . " | sed -e 's/:.*$//'")
+endfunction
+
+function! s:TmuxSessions()
+  let sessions = system("tmux list-sessions | sed -e 's/:.*$//'")
+  return sessions
 endfunction
 
 " set tslime.vim variables
 function! s:Tmux_Vars()
-  let g:tmux_sessionname = ''
+  let names = split(s:TmuxSessions(), "\n")
+  if len(names) == 1
+    let g:tmux_sessionname = names[0]
+  else
+    let g:tmux_sessionname = ''
+  endif
   while g:tmux_sessionname == ''
     let g:tmux_sessionname = input("session name: ", "", "custom,Tmux_Session_Names")
   endwhile

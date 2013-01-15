@@ -28,6 +28,10 @@ au BufNewFile,BufRead Gemfile			set filetype=ruby
 " Guard
 au BufNewFile,BufRead Guardfile,.Guardfile	set filetype=ruby
 
+" Chef
+au BufNewFile,BufRead Cheffile			set filetype=ruby
+au BufNewFile,BufRead Berksfile			set filetype=ruby
+
 " Vagrant
 au BufNewFile,BufRead [vV]agrantfile		set filetype=ruby
 
@@ -45,5 +49,11 @@ au BufNewFile,BufRead *.rabl			set filetype=ruby
 
 " Jbuilder
 au BufNewFile,BufRead *.jbuilder		set filetype=ruby
+
+" Puppet librarian
+au BufNewFile,BufRead Puppetfile		set filetype=ruby
+"
+" Buildr Buildfile
+au BufNewFile,BufRead [Bb]uildfile		set filetype=ruby
 
 " vim: nowrap sw=2 sts=2 ts=8 noet:

@@ -54,6 +54,10 @@ function! s:uniq(list)
   return a:list
 endfunction
 
+function! s:split(arg, ...)
+  return type(a:arg) == type([]) ? copy(a:arg) : split(a:arg, a:0 ? a:1 : "\n")
+endfunction
+
 function! s:escarg(p)
   return s:gsub(a:p,'[ !%#]','\\&')
 endfunction
@@ -302,11 +306,30 @@ function! s:controller(...)
   return rails#buffer().controller_name(a:0 ? a:1 : 0)
 endfunction
 
+function! s:find_classification(classifications, filename) abort
+  let f = a:filename
+  for c in a:classifications
+    for prefix in s:split(get(c, 'prefix', []))
+      for suffix in s:split(get(c, 'suffix', '.rb'))
+        if s:startswith(f, prefix) && f[-strlen(suffix) : - 1] ==# suffix
+          return [f[strlen(prefix) : -strlen(suffix)-1], c]
+        endif
+      endfor
+    endfor
+  endfor
+  return ['', {}]
+endfunction
+
 function! s:readable_controller_name(...) dict abort
   let f = self.name()
   if has_key(self,'getvar') && self.getvar('rails_controller') != ''
     return self.getvar('rails_controller')
-  elseif f =~ '\<app/views/layouts/'
+  endif
+  let [root, _] = s:find_classification(filter(values(self.app().config('classifications')), 'get(v:val, "affinity", "") ==# "controller"'), f)
+  if root !=# ''
+    return root
+  endif
+  if f =~ '\<app/views/layouts/'
     return s:sub(f,'.*<app/views/layouts/(.{-})\..*','\1')
   elseif f =~ '\<app/views/'
     return s:sub(f,'.*<app/views/(.{-})/\k+\.\k+%(\.\k+)=$','\1')
@@ -348,7 +371,12 @@ function! s:readable_model_name(...) dict abort
   let f = self.name()
   if has_key(self,'getvar') && self.getvar('rails_model') != ''
     return self.getvar('rails_model')
-  elseif f =~ '\<app/models/.*_observer.rb$'
+  endif
+  let [root, _] = s:find_classification(filter(values(self.app().config('classifications')), 'get(v:val, "affinity", "") ==# "model"'), f)
+  if root !=# ''
+    return root
+  endif
+  if f =~ '\<app/models/.*_observer.rb$'
     return s:sub(f,'.*<app/models/(.*)_observer\.rb$','\1')
   elseif f =~ '\<app/models/.*\.rb$'
     return s:sub(f,'.*<app/models/(.*)\.rb$','\1')
@@ -474,9 +502,7 @@ endfunction
 call s:add_methods('buffer',['getvar','setvar'])
 
 " }}}1
-" "Public" Interface {{{1
-
-" RailsRoot() is the only official public function
+" Public Interface {{{1
 
 function! rails#underscore(str)
   let str = s:gsub(a:str,'::','/')
@@ -1627,19 +1653,19 @@ function! s:Complete_script(ArgLead,CmdLine,P)
     if target =~# '^\w*controller$'
       return filter(s:controllerList(a:ArgLead,"",""),'v:val !=# "application"')
     elseif target ==# 'generator'
-      return s:completion_filter(map(rails#app().relglob('lib/generators/','*'),'s:sub(v:val,"/$","")'))
+      return s:completion_filter(map(rails#app().relglob('lib/generators/','*'),'s:sub(v:val,"/$","")'), a:ArgLead)
     elseif target ==# 'helper'
-      return s:helperList(a:ArgLead,"","")
+      return s:autocamelize(rails#app().relglob('app/helpers/','**/*','_helper.rb'),a:ArgLead)
     elseif target ==# 'integration_test' || target ==# 'integration_spec' || target ==# 'feature'
       return s:integrationtestList(a:ArgLead,"","")
     elseif target ==# 'metal'
-      return s:metalList(a:ArgLead,"","")
+      return s:autocamelize(rails#app().relglob('app/metal/','**/*','.rb'),a:ArgLead)
     elseif target ==# 'migration' || target ==# 'session_migration'
       return s:migrationList(a:ArgLead,"","")
     elseif target =~# '^\w*\%(model\|resource\)$' || target =~# '\w*scaffold\%(_controller\)\=$' || target ==# 'mailer'
       return s:modelList(a:ArgLead,"","")
     elseif target ==# 'observer'
-      let observers = s:observerList("","","")
+      let observers = rails#app().relglob("app/models/","**/*","_observer.rb")
       let models = s:modelList("","","")
       if cmd =~# '^destroy\>'
         let models = []
@@ -2147,15 +2173,16 @@ endfunction
 
 function! s:BufFinderCommands()
   command! -buffer -bar -nargs=+ Rnavcommand :call s:Navcommand(<bang>0,<f-args>)
-  call s:addfilecmds("metal")
+  call s:define_navcommand('helper', {'prefix': 'app/helpers/', 'suffix': '_helper.rb', 'default': 'controller'})
+  call s:define_navcommand('initializer', {'prefix': 'config/initializers/', 'default': '../routes'})
+  call s:define_navcommand('metal', {'prefix': 'app/metal/', 'default': '../boot'})
+  call s:define_navcommand('observer', {'prefix': 'app/observers/', 'suffix': '_observer.rb', 'default': 'model'})
   call s:addfilecmds("model")
   call s:addfilecmds("view")
   call s:addfilecmds("controller")
   call s:addfilecmds("mailer")
   call s:addfilecmds("migration")
   call s:addfilecmds("schema")
-  call s:addfilecmds("observer")
-  call s:addfilecmds("helper")
   call s:addfilecmds("layout")
   call s:addfilecmds("fixtures")
   call s:addfilecmds("locale")
@@ -2175,7 +2202,14 @@ function! s:BufFinderCommands()
   call s:addfilecmds("task")
   call s:addfilecmds("lib")
   call s:addfilecmds("environment")
-  call s:addfilecmds("initializer")
+  for [name, command] in items(rails#app().config('classifications'))
+    call s:define_navcommand(name, command)
+  endfor
+  if exists('b:rails_file_types')
+    for [name, command] in items(b:rails_file_types)
+      call s:define_navcommand(name, command)
+    endfor
+  endif
 endfunction
 
 function! s:completion_filter(results,A)
@@ -2229,10 +2263,6 @@ function! s:relglob(...)
   return join(call(rails#app().relglob,a:000,rails#app()),"\n")
 endfunction
 
-function! s:helperList(A,L,P)
-  return s:autocamelize(rails#app().relglob("app/helpers/","**/*","_helper.rb"),a:A)
-endfunction
-
 function! s:controllerList(A,L,P)
   let con = rails#app().relglob("app/controllers/","**/*",".rb")
   call map(con,'s:sub(v:val,"_controller$","")')
@@ -2276,18 +2306,10 @@ function! s:javascriptList(A,L,P)
   return s:completion_filter(list,a:A)
 endfunction
 
-function! s:metalList(A,L,P)
-  return s:autocamelize(rails#app().relglob("app/metal/","**/*",".rb"),a:A)
-endfunction
-
 function! s:modelList(A,L,P)
   let models = rails#app().relglob("app/models/","**/*",".rb")
   call filter(models,'v:val !~# "_observer$"')
   return s:autocamelize(models,a:A)
-endfunction
-
-function! s:observerList(A,L,P)
-  return s:autocamelize(rails#app().relglob("app/models/","**/*","_observer.rb"),a:A)
 endfunction
 
 function! s:fixturesList(A,L,P)
@@ -2401,93 +2423,90 @@ function! s:environmentList(A,L,P)
   return s:completion_filter(rails#app().relglob("config/environments/","**/*",".rb"),a:A)
 endfunction
 
-function! s:initializerList(A,L,P)
-  return s:completion_filter(rails#app().relglob("config/initializers/","**/*",".rb"),a:A)
-endfunction
-
 function! s:Navcommand(bang,...)
-  let suffix = ".rb"
-  let filter = "**/*"
-  let prefix = ""
-  let default = ""
-  let name = ""
+  let command = {'prefix': []}
   let i = 0
   while i < a:0
     let i += 1
     let arg = a:{i}
     if arg =~# '^-suffix='
       let suffix = matchstr(arg,'-suffix=\zs.*')
+      let command.suffix = suffix
     elseif arg =~# '^-default='
-      let default = matchstr(arg,'-default=\zs.*')
+      let command.default = matchstr(arg,'-default=\zs.*')
     elseif arg =~# '^-\%(glob\|filter\)='
-      let filter = matchstr(arg,'-\w*=\zs.*')
+      let command.glob = matchstr(arg,'-\w*=\zs.*')
     elseif arg !~# '^-'
-      " A literal '\n'.  For evaluation below
-      if name == ""
+      if !exists('name')
         let name = arg
       else
-        let prefix .= "\\n".s:sub(arg,'/=$','/')
+        let command.prefix += [arg]
       endif
     endif
   endwhile
-  let prefix = s:sub(prefix,'^\\n','')
-  if name !~ '^[A-Za-z]\+$'
+  if !exists('name') || name !~# '^[a-z]\+$'
     return s:error("E182: Invalid command name")
   endif
-  let cmds = 'ESVTD '
-  let cmd = ''
-  while cmds != ''
-    exe 'command! -buffer -bar -bang -nargs=* -complete=customlist,'.s:sid.'CommandList R'.cmd.name." :call s:CommandEdit('".cmd."<bang>','".name."',\"".prefix."\",".string(suffix).",".string(filter).",".string(default).",<f-args>)"
-    let cmd = strpart(cmds,0,1)
-    let cmds = strpart(cmds,1)
-  endwhile
+  return s:define_navcommand(name, command)
+endfunction
+
+function! s:define_navcommand(name, command) abort
+  let command = extend({'default': '', 'glob': '**/*'}, a:command)
+  let command.prefix = s:split(get(command, 'prefix', []))
+  let command.suffix = s:split(get(command, 'suffix', ['.rb']))
+  if has_key(command, 'affinity') && command.default ==# ''
+    let command.default = command.affinity . '()'
+  endif
+  if a:name !~# '^[a-z]\+$'
+    return s:error("E182: Invalid command name")
+  endif
+  for type in ['E', 'S', 'V', 'T', 'D', '']
+    exe 'command! -buffer -bar -bang -nargs=* '
+          \ '-complete=customlist,'.s:sid.'CommandList ' .
+          \ 'R' . type . a:name . ' :call s:CommandEdit(' .
+          \ string(type . "<bang>") . ',' .
+          \ string(a:name) . ',' . string(command) . ',<f-args>)'
+  endfor
 endfunction
 
 function! s:CommandList(A,L,P)
   let cmd = matchstr(a:L,'\CR[A-Z]\=\w\+')
   exe cmd." &"
-  let lp = s:last_prefix . "\n"
-  let res = []
-  while lp != ""
-    let p = matchstr(lp,'.\{-\}\ze\n')
-    let lp = s:sub(lp,'.{-}\n','')
-    let res += rails#app().relglob(p,s:last_filter,s:last_suffix)
-  endwhile
-  if s:last_camelize
-    return s:autocamelize(res,a:A)
+  let command = s:last_options
+  let matches = []
+  for prefix in command.prefix
+    for suffix in command.suffix
+      let matches += rails#app().relglob(prefix, command.glob, suffix)
+    endfor
+  endfor
+  if command.suffix == ['.rb']
+    return s:autocamelize(matches, a:A)
   else
-    return s:completion_filter(res,a:A)
+    return s:completion_filter(matches, a:A)
   endif
 endfunction
 
-function! s:CommandEdit(cmd,name,prefix,suffix,filter,default,...)
+function! s:CommandEdit(cmd, name, options, ...)
   if a:0 && a:1 == "&"
-    let s:last_prefix = a:prefix
-    let s:last_suffix = a:suffix
-    let s:last_filter = a:filter
-    let s:last_camelize = (a:suffix =~# '\.rb$')
+    let s:last_options = a:options
   else
-    if a:default == "both()"
-      if s:model() != ""
-        let default = s:model()
-      else
-        let default = s:controller()
-      endif
-    elseif a:default == "model()"
+    if a:options.default ==# "both()"
+      let default = s:model() !=# "" ? s:model() : s:controller()
+    elseif a:options.default ==# "model()"
       let default = s:model(1)
-    elseif a:default == "controller()"
+    elseif a:options.default ==# "controller()" || a:options.default ==# "collection()"
       let default = s:controller(1)
     else
-      let default = a:default
+      let default = a:options.default
     endif
-    call s:EditSimpleRb(a:cmd,a:name,a:0 ? a:1 : default,a:prefix,a:suffix)
+    let prefix = join(map(copy(a:options.prefix), 's:sub(v:val, "/=$", "/")'), "\n")
+    call s:EditSimpleRb(a:cmd,a:name,a:0 ? a:1 : default, prefix,a:options.suffix[0])
   endif
 endfunction
 
 function! s:EditSimpleRb(cmd,name,target,prefix,suffix,...)
   let cmd = s:findcmdfor(a:cmd)
   if a:target == ""
-    " Good idea to emulate error numbers like this?
     return s:error("E471: Argument required")
   endif
   let f = a:0 ? a:target : rails#underscore(a:target)
@@ -2597,20 +2616,8 @@ function! s:localeEdit(cmd,...)
   endif
 endfunction
 
-function! s:metalEdit(cmd,...)
-  if a:0
-    call s:EditSimpleRb(a:cmd,"metal",a:1,"app/metal/",".rb")
-  else
-    call s:EditSimpleRb(a:cmd,"metal",'config/boot',"",".rb")
-  endif
-endfunction
-
 function! s:modelEdit(cmd,...)
   call s:EditSimpleRb(a:cmd,"model",a:0? a:1 : s:model(1),"app/models/",".rb")
-endfunction
-
-function! s:observerEdit(cmd,...)
-  call s:EditSimpleRb(a:cmd,"observer",a:0? a:1 : s:model(1),"app/models/","_observer.rb")
 endfunction
 
 function! s:dotcmp(i1, i2)
@@ -2725,10 +2732,6 @@ endfunction
 
 function! s:mailerEdit(cmd,...)
   return s:EditSimpleRb(a:cmd,"mailer",a:0? a:1 : s:controller(1),"app/mailers/\napp/models/",".rb")
-endfunction
-
-function! s:helperEdit(cmd,...)
-  return s:EditSimpleRb(a:cmd,"helper",a:0? a:1 : s:controller(1),"app/helpers/","_helper.rb")
 endfunction
 
 function! s:stylesheetEdit(cmd,...)
@@ -2910,10 +2913,6 @@ function! s:environmentEdit(cmd,...)
   else
     return s:EditSimpleRb(a:cmd,"environment","environment","config/",".rb")
   endif
-endfunction
-
-function! s:initializerEdit(cmd,...)
-  return s:EditSimpleRb(a:cmd,"initializer",a:0? a:1 : "../routes","config/initializers/",".rb")
 endfunction
 
 " }}}1
@@ -3107,6 +3106,10 @@ function! s:readable_related(...) dict abort
       return self.app().migration(1)
     endif
   endif
+  let [root, classification] = s:find_classification(filter(values(self.app().config('classifications')), 'get(v:val, "alternate", "") =~# "%s"'), f)
+  if root !=# ''
+    return printf(classification.alternate, root)
+  endif
   if f =~ '\<config/environments/'
     return "config/application.rb\nconfig/environment.rb"
   elseif f == 'README'
@@ -3182,27 +3185,39 @@ function! s:readable_related(...) dict abort
       let file .= '_test.rb'
     endif
     if self.type_name('helper')
-      return s:sub(file,'<app/helpers/','test/unit/helpers/')."\n".s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/helpers/','spec/helpers/')
+      return s:sub(file,'<app/','test/')."\n".
+            \s:sub(file,'<app/helpers/','test/unit/helpers/')."\n".
+            \s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/helpers/','spec/helpers/')
     elseif self.type_name('model')
-      return s:sub(file,'<app/models/','test/unit/')."\n".s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/models/','spec/models/')
+      return s:sub(file,'<app/','test/')."\n".
+            \s:sub(file,'<app/models/','test/unit/')."\n".
+            \s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/models/','spec/models/')
     elseif self.type_name('controller')
-      return s:sub(file,'<app/controllers/','test/functional/')."\n".s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'app/controllers/','spec/controllers/')
+      return s:sub(file,'<app/','test/')."\n".
+            \s:sub(file,'<app/controllers/','test/functional/')."\n".
+            \s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'app/controllers/','spec/controllers/')
     elseif self.type_name('mailer')
-      return s:sub(file,'<app/m%(ailer|odel)s/','test/unit/')."\n".s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/','spec/')
+      return s:sub(file,'<app/','test/')."\n".
+            \s:sub(file,'<app/m%(ailer|odel)s/','test/unit/')."\n".
+            \s:sub(s:sub(file,'_test\.rb$','_spec.rb'),'<app/','spec/')
     elseif self.type_name('test-unit')
-      return s:sub(s:sub(file,'test/unit/helpers/','app/helpers/'),'test/unit/','app/models/')."\n".s:sub(file,'test/unit/','lib/')
+      let app_helpered = s:sub(file,'test/unit/helpers/','app/helpers/')
+      return s:sub(app_helpered,'test/unit/','app/models/')."\n".
+            \s:sub(app_helpered,'<test/','app/')."\n".
+            \s:sub(file,'test/unit/','lib/')
     elseif self.type_name('test-functional')
       if file =~ '_api\.rb'
-        return s:sub(file,'test/functional/','app/apis/')
+        return s:sub(file,'<test/functional/','app/apis/')
       elseif file =~ '_controller\.rb'
-        return s:sub(file,'test/functional/','app/controllers/')
+        return s:sub(file,'<test/functional/','app/controllers/')."\n".
+              \s:sub(file,'<test/','app/')
       else
-        return s:sub(file,'test/functional/','')
+        return s:sub(file,'<test/functional/','')
       endif
     elseif self.type_name('spec-lib')
       return s:sub(file,'<spec/','')
     elseif self.type_name('lib')
-      return s:sub(f, '<lib/(.*)\.rb$', 'test/unit/\1_test.rb')."\n".s:sub(f, '<lib/(.*)\.rb$', 'spec/lib/\1_spec.rb')
+      return s:sub(f,'<lib/(.*)\.rb$','test/unit/\1_test.rb')."\n".s:sub(f,'<lib/(.*)\.rb$','spec/lib/\1_spec.rb')
     elseif self.type_name('spec')
       return s:sub(file,'<spec/','app/')
     elseif file =~ '\<vendor/.*/lib/'
@@ -3277,7 +3292,6 @@ function! s:Extract(bang,...) range abort
       return s:error('No such directory')
     endif
   endif
-  " No tabs, they'll just complicate things
   if ext =~? '^\%(rhtml\|erb\|dryml\)$'
     let erub1 = '\<\%\s*'
     let erub2 = '\s*-=\%\>'
@@ -3314,7 +3328,7 @@ function! s:Extract(bang,...) range abort
     let renderstr = "xml << ".s:sub(renderstr,"render ","render(").")"
   elseif ext == "rjs"
     let renderstr = "page << ".s:sub(renderstr,"render ","render(").")"
-  elseif ext == "haml"
+  elseif ext == "haml" || ext == "slim"
     let renderstr = "= ".renderstr
   elseif ext == "mn"
     let renderstr = "_".renderstr
@@ -3603,7 +3617,7 @@ function! s:BufSyntax()
         syn keyword rubyRailsARCallbackMethod after_create after_destroy after_save after_update after_validation after_validation_on_create after_validation_on_update
         syn keyword rubyRailsARCallbackMethod around_create around_destroy around_save around_update
         syn keyword rubyRailsARCallbackMethod after_commit after_find after_initialize after_rollback after_touch
-        syn keyword rubyRailsARClassMethod attr_accessible attr_protected attr_readonly
+        syn keyword rubyRailsARClassMethod attr_accessible attr_protected attr_readonly has_secure_password
         syn keyword rubyRailsARValidationMethod validate validates validate_on_create validate_on_update validates_acceptance_of validates_associated validates_confirmation_of validates_each validates_exclusion_of validates_format_of validates_inclusion_of validates_length_of validates_numericality_of validates_presence_of validates_size_of validates_uniqueness_of validates_with
         syn keyword rubyRailsMethod logger
       endif
@@ -3728,7 +3742,6 @@ function! s:BufSyntax()
       exe 'syn cluster htmlJavaScript add=javascriptRailsFunction'
     elseif &syntax == "yaml"
       syn case match
-      " Modeled after syntax/eruby.vim
       unlet! b:current_syntax
       let g:main_syntax = 'eruby'
       syn include @rubyTop syntax/ruby.vim
@@ -4133,6 +4146,9 @@ function! s:BufAbbreviations()
     Rabbrev AO::  ActiveModel
     Rabbrev AE::  ActiveResource
   endif
+  for [lhs, rhs] in items(rails#app().config('abbreviations'))
+    call s:Abbrev(0, lhs, rhs)
+  endfor
 endfunction
 
 function! s:Abbrev(bang,...) abort
@@ -4191,6 +4207,38 @@ endfunction
 " }}}1
 " Settings {{{1
 
+function! rails#json_parse(string) abort
+  let [null, false, true] = ['', 0, 1]
+  let stripped = substitute(a:string,'\C"\(\\.\|[^"\\]\)*"','','g')
+  if stripped !~# "[^,:{}\\[\\]0-9.\\-+Eaeflnr-u \n\r\t]"
+    try
+      return eval(substitute(a:string,"[\r\n]"," ",'g'))
+    catch
+    endtry
+  endif
+  throw "invalid JSON: ".a:string
+endfunction
+
+function! s:app_config(...) dict abort
+  if self.cache.needs('config')
+    call self.cache.set('config', {})
+    if self.has_file('config/editor.json')
+      try
+        call self.cache.set('config', rails#json_parse(join(readfile(self.path('config/editor.json')), ' ')))
+      catch /^invalid JSON:/
+        call s:error("Couldn't parse config/editor.json")
+      endtry
+    endif
+  endif
+  if a:0
+    return get(self.cache.get('config'), a:1, {})
+  else
+    return self.cache.get('config')
+  endif
+endfunction
+
+call s:add_methods('app', ['config'])
+
 function! s:Set(bang,...)
   let c = 1
   let defscope = ''
@@ -4239,13 +4287,14 @@ function! s:getopt(opt,...)
   let var = s:sname().'_'.opt
   let lastmethod = s:lastmethod(lnum)
   if lastmethod == '' | let lastmethod = ' ' | endif
-  " Get buffer option
   if scope =~ 'l' && exists('b:_'.var) && has_key(b:_{var},lastmethod)
     return b:_{var}[lastmethod]
   elseif exists('b:'.var) && (scope =~ 'b' || (scope =~ 'l' && lastmethod == ' '))
     return b:{var}
   elseif scope =~ 'a' && has_key(app,'options') && has_key(app.options,opt)
     return app.options[opt]
+  elseif scope =~ 'a' && has_key(rails#app().config(), opt)
+    return rails#app().config()[opt]
   elseif scope =~ 'g' && exists("g:".s:sname()."_".opt)
     return g:{var}
   else
@@ -4307,7 +4356,7 @@ function! s:Complete_set(A,L,P)
 endfunction
 
 function! s:BufModelines()
-  if !g:rails_modelines
+  if !g:rails_modelines && !&modelines
     return
   endif
   let lines = getline("$")."\n".getline(line("$")-1)."\n".getline(1)."\n".getline(2)."\n".getline(3)."\n"
@@ -4362,6 +4411,9 @@ endfunction
 " Detection {{{1
 
 function! s:app_source_callback(file) dict
+  if !&modeline
+    return
+  endif
   if self.cache.needs('existence')
     call self.cache.set('existence',{})
   endif
@@ -4414,6 +4466,7 @@ function! RailsBufInit(path)
     $
   endif
   call s:BufSettings()
+  call app.source_callback("config/rails.vim")
   call s:BufCommands()
   call s:BufAbbreviations()
   let t = rails#buffer().type_name()
@@ -4430,7 +4483,6 @@ function! RailsBufInit(path)
   if f != ''
     exe "silent doautocmd User Rails".f
   endif
-  call app.source_callback("config/rails.vim")
   call s:BufModelines()
   call s:BufMappings()
   return b:rails_root
@@ -4519,7 +4571,6 @@ function! s:BufSettings()
     endif
   endif
   if ft =~# '^eruby\>' || ft =~# '^yaml\>'
-    " surround.vim
     if exists("g:loaded_surround")
       if self.getvar('surround_45') == '' || self.getvar('surround_45') == "<% \r %>" " -
         call self.setvar('surround_45', "<% \r %>")
@@ -4549,6 +4600,7 @@ augroup railsPluginAuto
   autocmd User BufEnterRails call s:BufDatabase(-1)
   autocmd User dbextPreConnection call s:BufDatabase(1)
   autocmd BufWritePost */config/database.yml      call rails#cache_clear("dbext_settings")
+  autocmd BufWritePost */config/editor.json       call rails#cache_clear("config")
   autocmd BufWritePost */test/test_helper.rb      call rails#cache_clear("user_assertions")
   autocmd BufWritePost */config/routes.rb         call rails#cache_clear("named_routes")
   autocmd BufWritePost */config/environment.rb    call rails#cache_clear("default_locale")

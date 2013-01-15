@@ -133,7 +133,7 @@ function! s:GetRubyVarType(v)
     let stopline = 1
     let vtp = ''
     let pos = getpos('.')
-    let sstr = '^\s*#\s*@var\s*'.a:v.'\>\s\+[^ \t]\+\s*$'
+    let sstr = '^\s*#\s*@var\s*'.escape(a:v, '*').'\>\s\+[^ \t]\+\s*$'
     let [lnum,lcol] = searchpos(sstr,'nb',stopline)
     if lnum != 0 && lcol != 0
         call setpos('.',pos)
@@ -771,10 +771,10 @@ class VimRubyCompletion
     constants = clean_sel( constants, message )
 
     valid = []
-    valid += methods.collect { |m| { :name => m, :type => 'm' } }
-    valid += variables.collect { |v| { :name => v, :type => 'v' } }
-    valid += classes.collect { |c| { :name => c, :type => 't' } }
-    valid += constants.collect { |d| { :name => d, :type => 'd' } }
+    valid += methods.collect { |m| { :name => m.to_s, :type => 'm' } }
+    valid += variables.collect { |v| { :name => v.to_s, :type => 'v' } }
+    valid += classes.collect { |c| { :name => c.to_s, :type => 't' } }
+    valid += constants.collect { |d| { :name => d.to_s, :type => 'd' } }
     valid.sort! { |x,y| x[:name] <=> y[:name] }
 
     outp = ""

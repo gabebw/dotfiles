@@ -1,6 +1,6 @@
 ## About
 
-[Vundle] is short for **V**imb**undle** and is a [Vim] plugin manager.
+[Vundle] is short for _Vim bundle_ and is a [Vim] plugin manager.
 
 ![Vundle-installer](http://25.media.tumblr.com/tumblr_m8m96w06G81r39828o1_1280.png)
 
@@ -131,7 +131,7 @@ see [wiki](/gmarik/vundle/wiki)
 [Vundle]:http://github.com/gmarik/vundle
 [Pathogen]:http://github.com/tpope/vim-pathogen/
 [Bundler]:http://github.com/wycats/bundler/
-[Vim]:http://vim.org
+[Vim]:http://www.vim.org
 [Git]:http://git-scm.com
 [all available vim scripts]:http://vim-scripts.org/vim/scripts.html
 

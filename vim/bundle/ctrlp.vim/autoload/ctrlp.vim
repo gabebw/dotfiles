@@ -432,7 +432,7 @@ fu! s:MatchedItems(items, pat, limit)
 	let items = s:narrowable() ? s:matched + s:mdata[3] : a:items
 	if s:matcher != {}
 		let argms = [items, a:pat, a:limit, s:mmode(), s:ispath, exc, s:regexp]
-		let lines = call(s:matcher['match'], argms)
+		let lines = call(s:matcher['match'], argms, s:matcher)
 	el
 		let lines = s:MatchIt(items, a:pat, a:limit, exc)
 	en
@@ -759,8 +759,10 @@ fu! s:PrtDeleteMRU()
 endf
 
 fu! s:PrtExit()
-	if !has('autocmd') | cal s:Close() | en
-	exe ( winnr('$') == 1 ? 'bw!' : 'winc p' )
+	if bufnr('%') == s:bufnr && bufname('%') == 'ControlP'
+		if !has('autocmd') | cal s:Close() | en
+		exe ( winnr('$') == 1 ? 'bw!' : 'winc p' )
+	en
 endf
 
 fu! s:PrtHistory(...)
@@ -1140,7 +1142,7 @@ fu! s:OpenNoMarks(md, line)
 		cal s:remarksigns()
 		cal s:BuildPrompt(0)
 	elsei a:md == 'x'
-		cal call(s:openfunc[s:ctype], [a:md, a:line])
+		cal call(s:openfunc[s:ctype], [a:md, a:line], s:openfunc)
 	elsei a:md == 'd'
 		let dir = fnamemodify(a:line, ':h')
 		if isdirectory(dir)
@@ -1276,7 +1278,7 @@ fu! ctrlp#statusline()
 		\ exists('s:marked') ? ' <'.s:dismrk().'>' : ' <->' : ''
 	if s:status != {}
 		let args = [focus, byfname, s:regexp, prv, s:ctype, nxt, marked]
-		let &l:stl = call(s:status['main'], args)
+		let &l:stl = call(s:status['main'], args, s:status)
 	el
 		let item    = '%#CtrlPMode1# '.s:ctype.' %*'
 		let focus   = '%#CtrlPMode2# '.focus.' %*'
@@ -1296,7 +1298,7 @@ endf
 fu! ctrlp#progress(enum, ...)
 	if has('macunix') || has('mac') | sl 1m | en
 	let txt = a:0 ? '(press ctrl-c to abort)' : ''
-	let &l:stl = s:status != {} ? call(s:status['prog'], [a:enum])
+	let &l:stl = s:status != {} ? call(s:status['prog'], [a:enum], s:status)
 		\ : '%#CtrlPStats# '.a:enum.' %* '.txt.'%=%<%#CtrlPMode2# %{getcwd()} %*'
 	redraws
 endf
@@ -1395,8 +1397,9 @@ fu! s:samerootsyml(each, isfile, cwd)
 endf
 
 fu! ctrlp#rmbasedir(items)
-	if a:items != [] && !stridx(a:items[0], s:dyncwd)
-		let idx = strlen(s:dyncwd) + ( s:dyncwd !~ '[\/]$' )
+	let cwd = s:dyncwd.( s:dyncwd !~ '[\/]$' ? s:lash : '' )
+	if a:items != [] && !stridx(a:items[0], cwd)
+		let idx = strlen(cwd)
 		retu map(a:items, 'strpart(v:val, idx)')
 	en
 	retu a:items
@@ -1869,9 +1872,9 @@ endf
 
 fu! s:buffunc(e)
 	if a:e && has_key(s:buffunc, 'enter')
-		cal call(s:buffunc['enter'], [])
+		cal call(s:buffunc['enter'], [], s:buffunc)
 	elsei !a:e && has_key(s:buffunc, 'exit')
-		cal call(s:buffunc['exit'], [])
+		cal call(s:buffunc['exit'], [], s:buffunc)
 	en
 endf
 
@@ -1989,7 +1992,7 @@ endf
 
 fu! s:insertcache(str)
 	let [data, g:ctrlp_newcache, str] = [g:ctrlp_allfiles, 1, a:str]
-	if strlen(str) <= strlen(data[0])
+	if data == [] || strlen(str) <= strlen(data[0])
 		let pos = 0
 	elsei strlen(str) >= strlen(data[-1])
 		let pos = len(data) - 1
@@ -2054,7 +2057,7 @@ fu! ctrlp#hicheck(grp, defgrp)
 endf
 
 fu! ctrlp#call(func, ...)
-	cal call(a:func, a:000)
+	retu call(a:func, a:000)
 endf
 "}}}1
 " * Initialization {{{1

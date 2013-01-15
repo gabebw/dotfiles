@@ -1,6 +1,6 @@
 " rake.vim - It's like rails.vim without the rails
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Version:      1.0
+" Maintainer:   Tim Pope <http://tpo.pe/>
+" Version:      1.1
 " GetLatestVimScripts: 3669 1 :AutoInstall: rake.vim
 
 if exists('g:loaded_rake') || &cp || v:version < 700
@@ -104,37 +104,32 @@ let s:abstract_prototype = {}
 " }}}1
 " Initialization {{{1
 
-function! s:FindRakeRoot(path) abort
-  let path = s:shellslash(a:path)
+function! s:find_root(path) abort
+  let root = s:shellslash(simplify(fnamemodify(a:path, ':p:s?[\/]$??')))
   for p in [$GEM_HOME] + split($GEM_PATH,':')
-    if p !=# '' && s:shellslash(p.'/gems/') ==# (path)[0 : strlen(p)+5]
-      return simplify(s:shellslash(p.'/gems/')).matchstr(path[strlen(p)+6:-1],'[^\\/]*')
+    if p !=# '' && s:shellslash(p.'/gems/') ==# (root)[0 : strlen(p)+5]
+      return simplify(s:shellslash(p.'/gems/')).matchstr(root[strlen(p)+6:-1],'[^\\/]*')
     endif
   endfor
-  let fn = fnamemodify(path,':s?[\/]$??')
-  let ofn = ""
-  let nfn = fn
-  while fn != ofn
-    if filereadable(fn.'/Rakefile')
-      if filereadable(fn.'/config/environment.rb')
+  let previous = ''
+  while root !=# previous && root !=# '/'
+    if filereadable(root.'/Rakefile') || (isdirectory(root.'/lib') && filereadable(root.'/Gemfile'))
+      if filereadable(root.'/config/environment.rb')
         return ''
       else
-        return s:sub(simplify(fnamemodify(fn,':p')),'[\\/]$','')
+        return root
       endif
     endif
-    let ofn = fn
-    let fn = fnamemodify(ofn,':h')
+    let previous = root
+    let root = fnamemodify(root, ':h')
   endwhile
   return ''
 endfunction
 
 function! s:Detect(path)
-  if exists('b:rake_root') && b:rake_root ==# ''
-    unlet b:rake_root
-  endif
   if !exists('b:rake_root')
-    let dir = s:FindRakeRoot(a:path)
-    if dir != ''
+    let dir = s:find_root(a:path)
+    if dir !=# ''
       let b:rake_root = dir
     endif
   endif
@@ -146,7 +141,8 @@ endfunction
 augroup rake
   autocmd!
   autocmd BufNewFile,BufReadPost * call s:Detect(expand('<amatch>:p'))
-  autocmd FileType           netrw call s:Detect(expand('<afile>:p'))
+  autocmd FileType           netrw call s:Detect(expand('%:p'))
+  autocmd User NERDTreeInit,NERDTreeNewRoot call s:Detect(b:NERDTreeRoot.path.str())
   autocmd VimEnter * if expand('<amatch>')==''|call s:Detect(getcwd())|endif
 augroup END
 
@@ -157,21 +153,21 @@ let s:project_prototype = {}
 let s:projects = {}
 
 function! s:project(...) abort
-  let dir = a:0 ? a:1 : (exists('b:rake_root') && b:rake_root !=# '' ? b:rake_root : s:FindRakeRoot(expand('%:p')))
+  let dir = a:0 ? a:1 : (exists('b:rake_root') && b:rake_root !=# '' ? b:rake_root : s:find_root(expand('%:p')))
   if dir !=# ''
-    if has_key(s:projects,dir)
-      let project = get(s:projects,dir)
+    if has_key(s:projects, dir)
+      let project = get(s:projects, dir)
     else
-      let project = {'root': dir}
+      let project = {'_root': dir}
       let s:projects[dir] = project
     endif
-    return extend(extend(project,s:project_prototype,'keep'),s:abstract_prototype,'keep')
+    return extend(extend(project, s:project_prototype, 'keep'), s:abstract_prototype, 'keep')
   endif
   call s:throw('not a rake project: '.expand('%:p'))
 endfunction
 
 function! s:project_path(...) dict abort
-  return join([self.root]+a:000,'/')
+  return join([self._root]+a:000,'/')
 endfunction
 
 call s:add_methods('project',['path'])
@@ -250,7 +246,15 @@ function! s:buffer_path() dict abort
   return s:shellslash(bufname == '' ? '' : fnamemodify(bufname,':p'))
 endfunction
 
-call s:add_methods('buffer',['getvar','setvar','getline','project','name','path'])
+function! s:buffer_relative() dict abort
+  return self.name()
+endfunction
+
+function! s:buffer_absolute() dict abort
+  return self.path()
+endfunction
+
+call s:add_methods('buffer',['getvar','setvar','getline','project','name','path','relative','absolute'])
 
 " }}}1
 " Rake {{{1
@@ -273,7 +277,11 @@ function! s:Rake(bang,arg)
   let old_errorformat = &l:errorformat
   call s:push_chdir()
   try
-    let &l:makeprg = 'rake'
+    if exists('b:bundle_root') && b:bundler_root ==# s:project().path()
+      let &l:makeprg = 'bundle exec rake'
+    else
+      let &l:makeprg = 'rake'
+    endif
     let &l:errorformat = '%D(in\ %f),'
           \.'%\\s%#from\ %f:%l:%m,'
           \.'%\\s%#from\ %f:%l:,'
@@ -340,10 +348,14 @@ function! s:buffer_related() dict abort
     return s:project().first_file(
           \'test/'.bare.'_test.rb',
           \'spec/'.bare.'_spec.rb',
+          \'test/lib/'.bare.'_test.rb',
+          \'spec/lib/'.bare.'_spec.rb',
           \'test/unit/'.bare.'_test.rb',
           \'spec/unit/'.bare.'_spec.rb')
   elseif self.name() =~# '^\(test\|spec\)/.*_\1\.rb$'
-    return 'lib/'.self.name()[5:-9].'.rb'
+    return s:project().first_file(
+      \'lib/'.self.name()[5:-9].'.rb',
+      \self.name()[5:-9].'.rb')
   elseif self.name() ==# 'Gemfile'
     return 'Gemfile.lock'
   elseif self.name() ==# 'Gemfile.lock'
@@ -449,7 +461,7 @@ endfunction
 
 function! s:Rlib(file)
   if a:file ==# ''
-    return 'Gemfile'
+    return get(s:project().relglob('','*.gemspec'),0,'Gemfile')
   elseif a:file =~# '/$'
     return 'lib/'.a:file
   else
@@ -516,7 +528,7 @@ call s:navcommand('task')
 " Rtags {{{1
 
 function! s:project_tags_file() dict abort
-  if filewritable(self.path())
+  if filereadable(self.path('tags')) || filewritable(self.path())
     return self.path('tags')
   else
     if !has_key(self,'_tags_file')
@@ -550,9 +562,8 @@ call s:command("-bar -bang -nargs=? Rtags :execute s:Tags(<q-args>)")
 augroup rake_tags
   autocmd!
   autocmd User Rake
-        \ if s:project().path() !~# ',' &&
-        \     stridx(&tags, s:project().tags_file()) < 0 |
-        \   let &l:tags .= ',' . s:project().tags_file() |
+        \ if stridx(&tags, escape(s:project().tags_file(),', ')) < 0 |
+        \   let &l:tags = escape(s:project().tags_file(),', ') . ',' . &tags |
         \ endif
 augroup END
 
@@ -562,8 +573,9 @@ augroup END
 augroup rake_path
   autocmd!
   autocmd User Rake
-        \ if stridx(&path, escape(s:project().path('lib'),', ')) < 0 |
-        \   let &l:path = escape(s:project().path('lib'),', ') . ',' . &l:path |
+        \ if &suffixesadd =~# '\.rb\>' && stridx(&path, escape(s:project().path('lib'),', ')) < 0 |
+        \   let &l:path = escape(s:project().path('lib'),', ')
+        \     . ',' . escape(s:project().path('ext'),', ') . ',' . &path |
         \ endif
 augroup END
 
