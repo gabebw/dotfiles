@@ -21,5 +21,7 @@ source ~/.vim/test_runners.vim
 source ~/.vim/rails_shortcuts.vim
 source ~/.vim/autocommand.vim
 
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " Colorscheme
 colorscheme jellybeans
