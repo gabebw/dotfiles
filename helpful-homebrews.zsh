@@ -20,7 +20,5 @@ echo "Installing ruby-build to get 'rbenv install'..."
 echo "Installing colordiff to get colorful diffs (alias diff='colordiff -u')..."
   brew install colordiff
 
-echo "Installing ack, a better grep..."
-  brew install ack
-
-
+echo "Installing ag, a better ack/grep..."
+  brew install the_silver_searcher
