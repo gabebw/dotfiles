@@ -24,6 +24,9 @@ alias prettyxml="xmllint --format -"
 
 alias dotfiles="cd ~/.dotfiles"
 
+# Needs to be a function because `alias -` breaks
+function -() { cd - }
+
 # Global aliases
 alias -g G="| grep "
 alias -g ONE="| awk '{ print \$1}'"
