@@ -19,6 +19,7 @@ source ~/.vim/completion.vim
 source ~/.vim/tabularizing.vim
 source ~/.vim/test_runners.vim
 source ~/.vim/rails_shortcuts.vim
+source ~/.vim/statusline.vim
 source ~/.vim/autocommand.vim
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
