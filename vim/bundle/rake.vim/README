@@ -1,0 +1,6 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3669
+
+With rake.vim, you can use all those parts of rails.vim (vimscript #1567) that you wish you could use on your other Ruby projects on anything with a Rakefile, including :R/:A, :Rlib and friends, and of course :Rake.  It's great when paired with `gem open` and `bundle open`.
+
+https://github.com/tpope/vim-rake
+
