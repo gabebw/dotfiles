@@ -12,10 +12,8 @@ To interactively link the dotfiles into `~`, run:
 
 * ZSH. To change your default shell to ZSH: `chsh -s $(which zsh) $USER`
 * [Homebrew](http://mxcl.github.com/homebrew/).
-* [iTerm2](http://code.google.com/p/iterm2/downloads/list)
-* Vim 7.3+. Homebrew recipe available [here](https://gist.github.com/2331951):
-  `brew install URL`
-* [rbenv](https://github.com/sstephenson/rbenv/)
+* Vim 7.3+. `brew install https://gist.github.com/2331951`
+* [rbenv](https://github.com/sstephenson/rbenv/): `brew install rbenv`
 
 ## Nice to have
 
