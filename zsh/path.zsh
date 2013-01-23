@@ -15,6 +15,6 @@ PATH="/usr/local/heroku/bin:$PATH"
 PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin"
 
 # Bundler binstubs
-PATH="./bundler_binstubs:$PATH"
+PATH="./bin/stubs:$PATH"
 
 PATH=$HOME/.dotfiles/bin:$PATH
