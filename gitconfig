@@ -26,17 +26,12 @@
   mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
   #ff = merge --ff-only # commented out so I use `git mm`
   up = !git fetch origin && git rebase origin/master
-  aa = add .
   plre = pull --rebase
   newauthor = commit --amend --reset-author -C HEAD
   prune-remotes = remote prune origin
   next = !git add . && git rebase --continue
   current-branch = !git symbolic-ref HEAD | sed 's|refs/heads/||'
   merged = branch -a --merged
-
-  # git-flow
-  start = !sh -c 'git flow feature start gbw-$1' -
-  finish = !git flow feature finish `git current-branch | sed \"s|feature/||\"`
 
   # Typos
   pul = pull
