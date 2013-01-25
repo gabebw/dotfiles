@@ -17,6 +17,8 @@
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   # Full commit messages without all the junk from `log --pretty=full`
   full = log --pretty='%C(red)%h%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
+  # No color, short messages
+  basic = log --pretty='%h %s'
   unstage = reset HEAD
   done = !git fetch && git rebase origin/master && git checkout master && git merge @{-1} && bundle exec rake && git push
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
