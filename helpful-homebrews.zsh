@@ -38,3 +38,6 @@ info "Installing tmux, a terminal multiplexer..."
 
 info "Installing reattach-to-user-namespace so copy/paste works in tmux..."
   brew install reattach-to-user-namespace
+
+info "Installing ctags so :Rtags works..."
+  brew install ctags
