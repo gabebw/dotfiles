@@ -24,8 +24,8 @@ zeus.json
 # Rubinius-compiled files
 *.rbc
 
-# From `bundle install --binstubs=bundler_binstubs`
-bundler_binstubs
+# From `bundle install --binstubs`
+/bin
 .bundle
 
 # ctags file
