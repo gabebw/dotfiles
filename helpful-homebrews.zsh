@@ -41,3 +41,6 @@ info "Installing reattach-to-user-namespace so copy/paste works in tmux..."
 
 info "Installing ctags so :Rtags works..."
   brew install ctags
+
+info "Installing Vim..."
+  brew install mercurial vim
