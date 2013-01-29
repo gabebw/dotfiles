@@ -1,10 +1,8 @@
-# Max memory = 2048m
-JRUBY_OPTS=-J-Xmx2048m
-
-# Avoid OutOfMemoryError
-JRUBY_OPTS="$JRUBY_OPTS -J-XX:+CMSClassUnloadingEnabled"
-
-# Disable JIT for faster startup
-JRUBY_OPTS="$JRUBY_OPTS -X-C"
-
-export JRUBY_OPTS
+export JRUBY_OPTS="--1.9 \
+ -J-Dfile.encoding=UTF-8 \
+ -J-Djruby.jit.threshold=10 \
+ -J-Djruby.compile.mode=FORCE \
+ -J-Xms1536m \
+ -J-Xmx1536m \
+ -J-XX:MaxPermSize=512m \
+ -J-server"
