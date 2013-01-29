@@ -1,2 +1,6 @@
 # Max memory = 1024MB
-export JRUBY_OPTS=-J-Xmx1024m
+JRUBY_OPTS=-J-Xmx1024m
+# Disable JIT
+JRUBY_OPTS="$JRUBY_OPTS -X-C"
+
+export JRUBY_OPTS
