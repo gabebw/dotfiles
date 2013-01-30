@@ -1,0 +1,6 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3590
+
+This plugin adds support for CoffeeScript. It handles syntax, indenting, and compiling. Also included is an eco syntax and support for CoffeeScript in Haml and HTML.
+
+Please see the project page for much more information:
+http://github.com/kchmck/vim-coffee-script

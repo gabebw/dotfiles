@@ -17,6 +17,8 @@ augroup myfiletypes
   " It's Markdown, not modula2, you infernal machine
   au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
 
+  au BufRead,BufNewFile *.coffee set syntax=coffee
+
   " .gitconfig and gitconfig are the same
   au BufRead,BufNewFile gitconfig set syntax=gitconfig
 
