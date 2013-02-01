@@ -5,7 +5,7 @@
   editor = `which vim`
   whitespace=trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
-  autocrlf = input
+  autocrlf = false
 [merge]
   tool = opendiff
 [alias]
