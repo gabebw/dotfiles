@@ -19,6 +19,8 @@ augroup myfiletypes
 
   au BufRead,BufNewFile *.coffee set syntax=coffee
 
+  au BufRead,BufNewFile *.go setf go
+
   " .gitconfig and gitconfig are the same
   au BufRead,BufNewFile gitconfig set syntax=gitconfig
 

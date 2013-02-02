@@ -25,6 +25,7 @@ Bundle 'endwise.vim'
 Bundle 'rake.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-coffee-script'
+Bundle 'go.vim'
 
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'

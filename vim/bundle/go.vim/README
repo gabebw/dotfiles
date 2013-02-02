@@ -1,0 +1,5 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=2853
+
+Syntax file for the Go programming language.
+
+NOTE: There is already a syntax file in the go repository. You can find it under $GOROOT/misc/vim/go.vim

@@ -16,3 +16,6 @@ vim/undodir
 
 emacs-plugins/*
 !emacs-plugins/.gitkeep
+
+# Vundle stuff
+.vim/bundle/.vundle/
