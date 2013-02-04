@@ -36,5 +36,8 @@ tags
 :w
 .foreman
 
+# https://github.com/sstephenson/rbenv-vars
+.rbenv-vars
+
 # Vim session files
 Session.vim
