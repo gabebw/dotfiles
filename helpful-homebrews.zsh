@@ -44,3 +44,9 @@ info "Installing ctags so :Rtags works..."
 
 info "Installing Vim..."
   brew install mercurial vim
+
+info "Installing rbenv-gem-rehash so you never have to rehash..."
+  brew install rbenv-gem-rehash
+
+info "Installing rbenv-vars so you can set per-project vars..."
+  brew install rbenv-vars
