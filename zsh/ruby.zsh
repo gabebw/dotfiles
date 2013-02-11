@@ -9,7 +9,15 @@ alias bi="bundle check || bundle install"
 alias binstubs="bundle --binstubs=./bin/stubs"
 
 # ctags
-alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R --languages=-javascript --langmap="ruby:+.rake.builder.rjs" --exclude=.git --exclude=log -f ./tmp/tags *'
+alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
+  --languages=-javascript \
+  --langmap="ruby:+.rake.builder.rjs" \
+  --exclude=.git \
+  --exclude=log \
+  --exclude=vendor \
+  --exclude=db \
+  --exclude=tmp \
+  -f ./tmp/tags *'
 
 function b {
   if [[ $# == 0 ]]
