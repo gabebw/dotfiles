@@ -16,6 +16,7 @@ alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
   --exclude=log \
   --exclude=vendor \
   --exclude=db \
+  --exclude=ext \
   --exclude=tmp \
   -f ./tmp/tags *'
 
