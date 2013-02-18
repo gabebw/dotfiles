@@ -2,9 +2,9 @@
 #  ZSH options  #
 #################
 HISTFILE=~/.zsh_history
-export HISTSIZE=
-export HISTFILESIZE=
-export SAVEHIST=
+export HISTSIZE=1000000000000000000
+export HISTFILESIZE=$HISTSIZE
+export SAVEHIST=$HISTSIZE
 setopt no_list_beep
 setopt no_beep
 setopt appendhistory
