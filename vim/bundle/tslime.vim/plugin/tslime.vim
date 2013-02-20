@@ -11,7 +11,7 @@ let g:loaded_tslime = 1
 " Main function.
 " Use it in your script if you want to send text to a tmux session.
 function! Send_to_Tmux(text)
-  if !exists("g:tmux_sessionname") || !exists("g:tmux_windowname") || !exists("g:tmux_panenumber")
+  if !exists("g:tslime")
     call <SID>Tmux_Vars()
   end
 
@@ -22,7 +22,7 @@ function! Send_to_Tmux(text)
 endfunction
 
 function! s:tmux_target()
-  return '"' . g:tmux_sessionname . '":' . g:tmux_windowname . "." . g:tmux_panenumber
+  return '"' . g:tslime['session'] . '":' . g:tslime['window'] . "." . g:tslime['pane']
 endfunction
 
 function! s:set_tmux_buffer(text)
@@ -40,12 +40,12 @@ endfunction
 
 " Window completion
 function! Tmux_Window_Names(A,L,P)
-  return system('tmux list-windows -t "' . g:tmux_sessionname . '" | grep -e "^\w:" | sed -e "s/ \[[0-9x]*\]$//"')
+  return <SID>TmuxWindows()
 endfunction
 
 " Pane completion
 function! Tmux_Pane_Numbers(A,L,P)
-  return system('tmux list-panes -t "' . g:tmux_sessionname . '":' . g:tmux_windowname . " | sed -e 's/:.*$//'")
+  return <SID>TmuxPanes()
 endfunction
 
 function! s:TmuxSessions()
@@ -53,30 +53,49 @@ function! s:TmuxSessions()
   return sessions
 endfunction
 
+function! s:TmuxWindows()
+  return system('tmux list-windows -t "' . g:tslime['session'] . '" | grep -e "^\w:" | sed -e "s/\s*([0-9].*//g"')
+endfunction
+
+function! s:TmuxPanes()
+  return system('tmux list-panes -t "' . g:tslime['session'] . '":' . g:tslime['window'] . " | sed -e 's/:.*$//'")
+endfunction
+
 " set tslime.vim variables
 function! s:Tmux_Vars()
   let names = split(s:TmuxSessions(), "\n")
+  let g:tslime = {}
   if len(names) == 1
-    let g:tmux_sessionname = names[0]
+    let g:tslime['session'] = names[0]
   else
-    let g:tmux_sessionname = ''
+    let g:tslime['session'] = ''
   endif
-  while g:tmux_sessionname == ''
-    let g:tmux_sessionname = input("session name: ", "", "custom,Tmux_Session_Names")
+  while g:tslime['session'] == ''
+    let g:tslime['session'] = input("session name: ", "", "custom,Tmux_Session_Names")
   endwhile
-  let g:tmux_windowname = substitute(input("window name: ", "", "custom,Tmux_Window_Names"), ":.*$" , '', 'g')
-  let g:tmux_panenumber = input("pane number: ", "", "custom,Tmux_Pane_Numbers")
 
-  if g:tmux_windowname == ''
-    let g:tmux_windowname = '0'
+  let windows = split(s:TmuxWindows(), "\n")
+  if len(windows) == 1
+    let window = windows[0]
+  else
+    let window = input("window name: ", "", "custom,Tmux_Window_Names")
+    if window == ''
+      let window = windows[0]
+    endif
   endif
 
-  if g:tmux_panenumber == ''
-    let g:tmux_panenumber = '0'
+  let g:tslime['window'] =  substitute(window, ":.*$" , '', 'g')
+
+  let panes = split(s:TmuxPanes(), "\n")
+  if len(panes) == 1
+    let g:tslime['pane'] = panes[0]
+  else
+    let g:tslime['pane'] = input("pane number: ", "", "custom,Tmux_Pane_Numbers")
+    if g:tslime['pane'] == ''
+      let g:tslime['pane'] = panes[0]
+    endif
   endif
 endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 vmap <unique> <Plug>SendSelectionToTmux "ry :call Send_to_Tmux(@r)<CR>
 nmap <unique> <Plug>NormalModeSendToTmux vip <Plug>SendSelectionToTmux

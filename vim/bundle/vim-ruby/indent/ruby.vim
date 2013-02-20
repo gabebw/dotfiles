@@ -430,7 +430,12 @@ function GetRubyIndent(...)
     elseif closing.pos != -1
       call cursor(lnum, closing.pos + 1)
       normal! %
-      return indent('.')
+
+      if s:Match(line('.'), s:ruby_indent_keywords)
+        return indent('.') + &sw
+      else
+        return indent('.')
+      endif
     else
       call cursor(clnum, vcol)
     end
@@ -496,11 +501,9 @@ function GetRubyIndent(...)
     return ind
   endif
 
-  " If the previous line ended with [*+/.,-=], but wasn't a block ending,
-  " indent one extra level.
-  if s:Match(lnum, s:non_bracket_continuation_regex)
-        \ && !s:Match(lnum, '^\s*\(}\|end\)')
-        \ && !s:IsInStringOrComment(lnum, len(line))
+  " If the previous line ended with [*+/.,-=], but wasn't a block ending or a
+  " closing bracket, indent one extra level.
+  if s:Match(lnum, s:non_bracket_continuation_regex) && !s:Match(lnum, '^\s*\([\])}]\|end\)')
     if lnum == p_lnum
       let ind = msl_ind + &sw
     else

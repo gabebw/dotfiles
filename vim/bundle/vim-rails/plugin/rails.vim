@@ -2,10 +2,7 @@
 " Author:       Tim Pope <http://tpo.pe/>
 " GetLatestVimScripts: 1567 1 :AutoInstall: rails.vim
 
-" Install this file as plugin/rails.vim.  See doc/rails.txt for details. (Grab
-" it from the URL above if you don't have it.)  To access it from Vim, see
-" :help add-local-help (hint: :helptags ~/.vim/doc) Afterwards, you should be
-" able to do :help rails
+" Install this file as plugin/rails.vim.
 
 if exists('g:loaded_rails') || &cp || v:version < 700
   finish
@@ -51,19 +48,9 @@ function! s:SetOptDefault(opt,val)
   endif
 endfunction
 
-call s:SetOptDefault("rails_syntax",1)
-call s:SetOptDefault("rails_mappings",1)
-call s:SetOptDefault("rails_abbreviations",1)
+call s:SetOptDefault("rails_abbreviations", {})
 call s:SetOptDefault("rails_ctags_arguments","--languages=-javascript")
-call s:SetOptDefault("rails_default_file","README")
 call s:SetOptDefault("rails_root_url",'http://localhost:3000/')
-call s:SetOptDefault("rails_modelines",0)
-call s:SetOptDefault("rails_gnu_screen",1)
-call s:SetOptDefault("rails_generators","controller\ngenerator\nhelper\nintegration_test\nmailer\nmetal\nmigration\nmodel\nobserver\nperformance_test\nplugin\nresource\nscaffold\nscaffold_controller\nsession_migration\nstylesheets")
-if exists("g:loaded_dbext") && executable("sqlite3") && ! executable("sqlite")
-  " Since dbext can't find it by itself
-  call s:SetOptDefault("dbext_default_SQLITE_bin","sqlite3")
-endif
 
 " }}}1
 " Detection {{{1
@@ -132,7 +119,7 @@ augroup railsPluginDetect
   autocmd Syntax railslog if s:autoload()|call rails#log_syntax()|endif
 augroup END
 
-command! -bar -bang -nargs=* -complete=dir Rails :if s:autoload()|call rails#new_app_command(<bang>0,<f-args>)|endif
+command! -bar -bang -nargs=* -complete=dir Rails :if s:autoload()|execute rails#new_app_command(<bang>0,<f-args>)|endif
 
 " }}}1
 " abolish.vim support {{{1
