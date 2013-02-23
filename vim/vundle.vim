@@ -9,7 +9,7 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/vundle'
 
-Bundle 'ack.vim'
+Bundle 'epmatsw/ag.vim'
 Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
 Bundle 'ervandew/supertab'
