@@ -3,7 +3,13 @@ export PSQL_EDITOR="vim -c ':set ft=sql'"
 
 # db-dump DB_NAME
 function db-dump() {
-  pg_dump -Fc -f database.dump "$1" && echo Wrote to database.dump
+  if [[ $# == 1 ]]
+  then
+    pg_dump --clean --create -Fc -f database.dump "$1" && echo Wrote to database.dump
+  else
+    echo "Usage: db-dump DB_NAME"
+    exit 1
+  fi
 }
 
 # db-restore DB_NAME
