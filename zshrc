@@ -18,7 +18,6 @@ if [[ -n $TMUX ]]; then
     vcs
     prompt
     ruby
-    jruby
     rbenv
   )
 
