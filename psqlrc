@@ -1,6 +1,7 @@
 -- vim: ft=sql
 
 -- http://craigkerstiens.com/2013/02/13/How-I-Work-With-Postgres/
+-- https://github.com/hgmnz/dotfiles/blob/master/psqlrc
 
 -- http://www.postgresql.org/docs/8.3/static/app-psql.html
 \pset null 'NULL'
@@ -10,3 +11,7 @@
 
 -- Use best available output format
 \x auto
+
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
