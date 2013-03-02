@@ -8,6 +8,13 @@
   autocrlf = false
 [merge]
   tool = opendiff
+  # Per @jferris: `ff = only` means Git will never implicitly do a merge commit, including while
+  # doing git pull. If I'm unexpectedly out of sync when I git pull, I get this
+  # message:
+  # fatal: Not possible to fast-forward, aborting.
+  # At that point, I know that I've forgotten to do something in my normal
+  # workflow, and I retrace my steps.
+  ff = only
 [alias]
   st = status -sb
   # Delete branch locally and remotely
