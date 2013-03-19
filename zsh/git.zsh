@@ -14,6 +14,7 @@ function g {
 
 # Complete `g` like `git`
 compdef g=git
+compdef _git gc=git-checkout
 
 alias gp="bundle exec rake && git push"
 alias gcl="git clone"
