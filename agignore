@@ -5,6 +5,7 @@ tmp/
 doc/
 coverage/
 public/assets/
+bin/stubs
 *.jpg
 *.jpeg
 *.png
