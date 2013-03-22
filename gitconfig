@@ -23,7 +23,7 @@
   # via http://andyjeffries.co.uk/articles/25-tips-for-intermediate-git-users
   lol = log --pretty=oneline --abbrev-commit --graph --decorate
   # Full commit messages without all the junk from `log --pretty=full`
-  full = log --pretty='%C(red)%h%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
+  full = log --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
   # No color, short messages
   basic = log --pretty='%h %s'
   unstage = reset HEAD
