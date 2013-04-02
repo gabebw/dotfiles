@@ -25,7 +25,7 @@ zeus.json
 *.rbc
 
 # From `bundle install --binstubs`
-/bin
+/bin/stubs/
 .bundle
 
 # ctags file
