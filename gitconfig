@@ -106,3 +106,5 @@
   enabled = 1
 [credential]
   helper = osxkeychain
+[init]
+  templatedir = ~/.git_template
