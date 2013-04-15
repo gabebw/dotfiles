@@ -1,0 +1,13 @@
+# ~/.tmuxinator/cc.yml
+
+project_name: cc
+project_root: ~/thoughtbot/clients/contacts-core
+tabs:
+  - cc:
+      layout: eb9a,273x64,0,0{204x64,0,0,0,68x64,205,0,6}]
+      panes:
+        - vim .
+        - #empty
+  - shell: git checkout local; git fetch upstream; git merge upstream/local; git checkout -
+  - scratch: #empty
+  - console: rails c
