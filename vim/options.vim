@@ -9,7 +9,7 @@ set laststatus=2  " Always display the status line
 set cursorline    " highlight the line the cursor is on
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set modelines=2   " inspect top/bottom 2 lines for modeline
-set scrolloff=3   " When scrolling, show 3 lines of context
+set scrolloff=999 " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 
 " Copy to the system clipboard
