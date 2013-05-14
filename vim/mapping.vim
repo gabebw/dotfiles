@@ -11,14 +11,14 @@ nnoremap <Leader>w :%s/\s\+$//e<CR>
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
 
-" Change mapping for ctrl-p plugin
+" Change ctrl-p.vim binding
 let g:ctrlp_map = '<Leader>t'
 
 " Buffer navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+nnoremap <C-h> <C-W>h
 
 " Disable K looking stuff up
 nnoremap K <Nop>
