@@ -23,7 +23,7 @@ alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
 function b {
   if [[ $# == 0 ]]
   then
-    bi
+    bi && binstubs
   else
     bundle "$@"
   fi
