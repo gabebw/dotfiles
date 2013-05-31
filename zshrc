@@ -27,6 +27,7 @@ source $BASE'rails.zsh'
 source $BASE'rvm.zsh'
 source $BASE'hitch.zsh'
 source $BASE'rbenv.zsh'
+source $BASE'openssl.zsh'
 
 export PATH
 trim_path
