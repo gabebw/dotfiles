@@ -2,7 +2,6 @@
 " Language:		Ruby
 " Maintainer:		Nikolai Weibull <now at bitwi.se>
 " URL:			https://github.com/vim-ruby/vim-ruby
-" Anon CVS:		See above site
 " Release Coordinator:	Doug Kearns <dougkearns@gmail.com>
 
 " 0. Initialization {{{1
@@ -32,9 +31,9 @@ set cpo&vim
 " 1. Variables {{{1
 " ============
 
-" Regex of syntax group names that are or delimit string or are comments.
+" Regex of syntax group names that are or delimit strings/symbols or are comments.
 let s:syng_strcom = '\<ruby\%(Regexp\|RegexpDelimiter\|RegexpEscape' .
-      \ '\|String\|StringDelimiter\|StringEscape\|ASCIICode' .
+      \ '\|Symbol\|String\|StringDelimiter\|StringEscape\|ASCIICode' .
       \ '\|Interpolation\|NoInterpolation\|Comment\|Documentation\)\>'
 
 " Regex of syntax group names that are strings.
@@ -125,6 +124,11 @@ function s:IsInStringOrDocumentation(lnum, col)
   return synIDattr(synID(a:lnum, a:col, 1), 'name') =~ s:syng_stringdoc
 endfunction
 
+" Check if the character at lnum:col is inside a string delimiter
+function s:IsInStringDelimiter(lnum, col)
+  return synIDattr(synID(a:lnum, a:col, 1), 'name') == 'rubyStringDelimiter'
+endfunction
+
 " Find line above 'lnum' that isn't empty, in a comment, or in a string.
 function s:PrevNonBlankNonString(lnum)
   let in_block = 0
@@ -161,7 +165,7 @@ function s:GetMSL(lnum)
     " Otherwise, terminate search as we have found our MSL already.
     let line = getline(lnum)
 
-    if line =~ s:splat_regex
+    if s:Match(lnum, s:splat_regex)
       " If the above line looks like the "*" of a splat, use the current one's
       " indentation.
       "
@@ -171,8 +175,8 @@ function s:GetMSL(lnum)
       "       something
       "
       return msl
-    elseif line =~ s:non_bracket_continuation_regex &&
-          \ msl_body =~ s:non_bracket_continuation_regex
+    elseif s:Match(line, s:non_bracket_continuation_regex) &&
+          \ s:Match(msl, s:non_bracket_continuation_regex)
       " If the current line is a non-bracket continuation and so is the
       " previous one, keep its indent and continue looking for an MSL.
       "
@@ -182,8 +186,8 @@ function s:GetMSL(lnum)
       "     three
       "
       let msl = lnum
-    elseif line =~ s:non_bracket_continuation_regex &&
-          \ (msl_body =~ s:bracket_continuation_regex || msl_body =~ s:block_continuation_regex)
+    elseif s:Match(lnum, s:non_bracket_continuation_regex) &&
+          \ (s:Match(msl, s:bracket_continuation_regex) || s:Match(msl, s:block_continuation_regex))
       " If the current line is a bracket continuation or a block-starter, but
       " the previous is a non-bracket one, respect the previous' indentation,
       " and stop here.
@@ -194,8 +198,8 @@ function s:GetMSL(lnum)
       "     three
       "
       return lnum
-    elseif line =~ s:bracket_continuation_regex &&
-          \ (msl_body =~ s:bracket_continuation_regex || msl_body =~ s:block_continuation_regex)
+    elseif s:Match(lnum, s:bracket_continuation_regex) &&
+          \ (s:Match(msl, s:bracket_continuation_regex) || s:Match(msl, s:block_continuation_regex))
       " If both lines are bracket continuations (the current may also be a
       " block-starter), use the current one's and stop here
       "
@@ -204,9 +208,9 @@ function s:GetMSL(lnum)
       "     other_method_call(
       "       foo
       return msl
-    elseif line =~ s:block_regex &&
-          \ msl_body !~ s:continuation_regex &&
-          \ msl_body !~ s:block_continuation_regex
+    elseif s:Match(lnum, s:block_regex) &&
+          \ !s:Match(msl, s:continuation_regex) &&
+          \ !s:Match(msl, s:block_continuation_regex)
       " If the previous line is a block-starter and the current one is
       " mostly ordinary, use the current one as the MSL.
       "
@@ -375,6 +379,14 @@ function GetRubyIndent(...)
   " If we are in a multi-line string or line-comment, don't do anything to it.
   if s:IsInStringOrDocumentation(clnum, matchend(line, '^\s*') + 1)
     return indent('.')
+  endif
+
+  " If we are at the closing delimiter of a "<<" heredoc-style string, set the
+  " indent to 0.
+  if line =~ '^\k\+\s*$'
+        \ && s:IsInStringDelimiter(clnum, 1)
+        \ && search('\V<<'.line, 'nbW') > 0
+    return 0
   endif
 
   " 3.3. Work on the previous line. {{{2

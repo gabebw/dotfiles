@@ -2,7 +2,6 @@
 " Language:             Ruby
 " Maintainer:           Mark Guzman <segfault@hasno.info>
 " URL:                  https://github.com/vim-ruby/vim-ruby
-" Anon CVS:             See above site
 " Release Coordinator:  Doug Kearns <dougkearns@gmail.com>
 " Maintainer Version:   0.8.1
 " ----------------------------------------------------------------------------
@@ -275,7 +274,7 @@ class VimRubyCompletion
     pare = /^\s*class\s*(.*)\s*<\s*(.*)\s*\n/.match( classdef )
     load_buffer_class( $2 ) if pare != nil  && $2 != name # load parent class if needed
 
-    mixre = /.*\n\s*include\s*(.*)\s*\n/.match( classdef )
+    mixre = /.*\n\s*(include|prepend)\s*(.*)\s*\n/.match( classdef )
     load_buffer_module( $2 ) if mixre != nil && $2 != name # load mixins if needed
 
     begin

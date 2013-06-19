@@ -264,9 +264,13 @@ endf
 
 fu! s:Close()
 	cal s:buffunc(0)
-	try | bun!
-	cat | clo! | endt
-	cal s:unmarksigns()
+	if winnr('$') == 1
+		bw!
+	el
+		try | bun!
+		cat | clo! | endt
+		cal s:unmarksigns()
+	en
 	for key in keys(s:glbs) | if exists('+'.key)
 		sil! exe 'let &'.key.' = s:glb_'.key
 	en | endfo
@@ -292,8 +296,7 @@ fu! ctrlp#clra()
 	let cadir = ctrlp#utils#cachedir()
 	if isdirectory(cadir)
 		let cafiles = split(s:glbpath(s:fnesc(cadir, 'g', ','), '**', 1), "\n")
-		let eval = '!isdirectory(v:val) && fnamemodify(v:val, ":t") !~'
-			\ . ' ''\v^<cache>[.a-z]+$|\.log$'''
+		let eval = '!isdirectory(v:val) && v:val !~ ''\v[\/]cache[.a-z]+$|\.log$'''
 		sil! cal map(filter(cafiles, eval), 'delete(v:val)')
 	en
 	cal ctrlp#clr()
@@ -313,7 +316,9 @@ fu! ctrlp#files()
 		let [lscmd, s:initcwd, g:ctrlp_allfiles] = [s:lsCmd(), s:dyncwd, []]
 		" Get the list of files
 		if empty(lscmd)
-			cal s:GlobPath(s:fnesc(s:dyncwd, 'g', ','), 0)
+			if !ctrlp#igncwd(s:dyncwd)
+				cal s:GlobPath(s:fnesc(s:dyncwd, 'g', ','), 0)
+			en
 		el
 			sil! cal ctrlp#progress('Indexing...')
 			try | cal s:UserCmd(lscmd)
@@ -350,6 +355,9 @@ endf
 
 fu! s:UserCmd(lscmd)
 	let [path, lscmd] = [s:dyncwd, a:lscmd]
+	let do_ign =
+		\ type(s:usrcmd) == 4 && has_key(s:usrcmd, 'ignore') && s:usrcmd['ignore']
+	if do_ign && ctrlp#igncwd(s:cwd) | retu | en
 	if exists('+ssl') && &ssl
 		let [ssl, &ssl, path] = [&ssl, 0, tr(path, '/', '\')]
 	en
@@ -365,7 +373,7 @@ fu! s:UserCmd(lscmd)
 	if exists('s:vcscmd') && s:vcscmd
 		cal map(g:ctrlp_allfiles, 'tr(v:val, "/", "\\")')
 	en
-	if type(s:usrcmd) == 4 && has_key(s:usrcmd, 'ignore') && s:usrcmd['ignore']
+	if do_ign
 		if !empty(s:usrign)
 			let g:ctrlp_allfiles = ctrlp#dirnfile(g:ctrlp_allfiles)[1]
 		en
@@ -407,8 +415,19 @@ endf
 " - Buffers {{{1
 fu! ctrlp#buffers(...)
 	let ids = sort(filter(range(1, bufnr('$')), 'empty(getbufvar(v:val, "&bt"))'
-		\ .' && getbufvar(v:val, "&bl") && strlen(bufname(v:val))'), 's:compmreb')
-	retu a:0 && a:1 == 'id' ? ids : map(ids, 'fnamemodify(bufname(v:val), ":.")')
+		\ .' && getbufvar(v:val, "&bl")'), 's:compmreb')
+	if a:0 && a:1 == 'id'
+		retu ids
+	el
+		let bufs = [[], []]
+		for id in ids
+			let bname = bufname(id)
+			let ebname = bname == ''
+			let fname = fnamemodify(ebname ? '['.id.'*No Name]' : bname, ':.')
+			cal add(bufs[ebname], fname)
+		endfo
+		retu bufs[0] + bufs[1]
+	en
 endf
 " * MatchedItems() {{{1
 fu! s:MatchIt(items, pat, limit, exc)
@@ -644,11 +663,26 @@ fu! s:PrtExpandDir()
 	if str =~ '\v^\@(cd|lc[hd]?|chd)\s.+' && s:spi
 		let hasat = split(str, '\v^\@(cd|lc[hd]?|chd)\s*\zs')
 		let str = get(hasat, 1, '')
+		if str =~# '\v^[~$]\i{-}[\/]?|^#(\<?\d+)?:(p|h|8|\~|\.|g?s+)'
+			let str = expand(s:fnesc(str, 'g'))
+		elsei str =~# '\v^(\%|\<c\h{4}\>):(p|h|8|\~|\.|g?s+)'
+			let spc = str =~# '^%' ? s:crfile
+				\ : str =~# '^<cfile>' ? s:crgfile
+				\ : str =~# '^<cword>' ? s:crword
+				\ : str =~# '^<cWORD>' ? s:crnbword : ''
+			let pat = '(:(p|h|8|\~|\.|g?s(.)[^\3]*\3[^\3]*\3))+'
+			let mdr = matchstr(str, '\v^[^:]+\zs'.pat)
+			let nmd = matchstr(str, '\v^[^:]+'.pat.'\zs.{-}$')
+			let str = fnamemodify(s:fnesc(spc, 'g'), mdr).nmd
+		en
 	en
 	if str == '' | retu | en
 	unl! s:hstgot
 	let s:act_add = 1
 	let [base, seed] = s:headntail(str)
+	if str =~# '^[\/]'
+		let base = expand('/').base
+	en
 	let dirs = s:dircompl(base, seed)
 	if len(dirs) == 1
 		let str = dirs[0]
@@ -760,8 +794,8 @@ endf
 
 fu! s:PrtExit()
 	if bufnr('%') == s:bufnr && bufname('%') == 'ControlP'
-		if !has('autocmd') | cal s:Close() | en
-		exe ( winnr('$') == 1 ? 'bw!' : 'winc p' )
+		noa cal s:Close()
+		noa winc p
 	en
 endf
 
@@ -904,9 +938,20 @@ fu! s:SetWD(args)
 endf
 " * AcceptSelection() {{{1
 fu! ctrlp#acceptfile(mode, line, ...)
-	let [md, filpath] = [a:mode, fnamemodify(a:line, ':p')]
+	let [md, useb] = [a:mode, 0]
+	if !type(a:line)
+		let [filpath, bufnr, useb] = [a:line, a:line, 1]
+	el
+		let filpath = fnamemodify(a:line, ':p')
+		if s:nonamecond(a:line, filpath)
+			let bufnr = str2nr(matchstr(a:line, '[\/]\?\[\zs\d\+\ze\*No Name\]$'))
+			let [filpath, useb] = [bufnr, 1]
+		el
+			let bufnr = bufnr('^'.filpath.'$')
+		en
+	en
 	cal s:PrtExit()
-	let [bufnr, tail] = [bufnr('^'.filpath.'$'), s:tail()]
+	let tail = s:tail()
 	let j2l = a:0 ? a:1 : matchstr(tail, '^ +\zs\d\+$')
 	if ( s:jmptobuf =~ md || ( s:jmptobuf && md =~ '[et]' ) ) && bufnr > 0
 		\ && !( md == 'e' && bufnr == bufnr('%') )
@@ -926,7 +971,7 @@ fu! ctrlp#acceptfile(mode, line, ...)
 		if j2l | cal ctrlp#j2l(j2l) | en
 	el
 		" Determine the command to use
-		let useb = bufnr > 0 && buflisted(bufnr) && empty(tail)
+		let useb = bufnr > 0 && buflisted(bufnr) && ( empty(tail) || useb )
 		let cmd =
 			\ md == 't' || s:splitwin == 1 ? ( useb ? 'tab sb' : 'tabe' ) :
 			\ md == 'h' || s:splitwin == 2 ? ( useb ? 'sb' : 'new' ) :
@@ -1224,6 +1269,12 @@ fu! s:shortest(lens)
 endf
 
 fu! s:mixedsort(...)
+	if s:itemtype == 1
+		let pat = '[\/]\?\[\d\+\*No Name\]$'
+		if a:1 =~# pat && a:2 =~# pat | retu 0
+		elsei a:1 =~# pat | retu 1
+		elsei a:2 =~# pat | retu -1 | en
+	en
 	let [cln, cml] = [ctrlp#complen(a:1, a:2), s:compmatlen(a:1, a:2)]
 	if s:ispath
 		let ms = []
@@ -1307,11 +1358,14 @@ endf
 fu! s:formatline(str)
 	let str = a:str
 	if s:itemtype == 1
-		let bfnr = bufnr('^'.fnamemodify(str, ':p').'$')
-		let idc = ( bfnr == bufnr('#') ? '#' : '' )
-			\ . ( getbufvar(bfnr, '&ma') ? '' : '-' )
-			\ . ( getbufvar(bfnr, '&ro') ? '=' : '' )
-			\ . ( getbufvar(bfnr, '&mod') ? '+' : '' )
+		let filpath = fnamemodify(str, ':p')
+		let bufnr = s:nonamecond(str, filpath)
+			\ ? str2nr(matchstr(str, '[\/]\?\[\zs\d\+\ze\*No Name\]$'))
+			\ : bufnr('^'.filpath.'$')
+		let idc = ( bufnr == bufnr('#') ? '#' : '' )
+			\ . ( getbufvar(bufnr, '&ma') ? '' : '-' )
+			\ . ( getbufvar(bufnr, '&ro') ? '=' : '' )
+			\ . ( getbufvar(bufnr, '&mod') ? '+' : '' )
 		let str .= idc != '' ? ' '.idc : ''
 	en
 	let cond = s:ispath && ( s:winw - 4 ) < s:strwidth(str)
@@ -1325,8 +1379,16 @@ endf
 " Directory completion {{{3
 fu! s:dircompl(be, sd)
 	if a:sd == '' | retu [] | en
-	let [be, sd] = a:be == '' ? [s:dyncwd, a:sd] : [a:be, a:be.s:lash(a:be).a:sd]
-	let dirs = ctrlp#rmbasedir(split(globpath(s:fnesc(be, 'g', ','), a:sd.'*/'), "\n"))
+	if a:be == ''
+		let [be, sd] = [s:dyncwd, a:sd]
+	el
+		let be = a:be.s:lash(a:be)
+		let sd = be.a:sd
+	en
+	let dirs = split(globpath(s:fnesc(be, 'g', ','), a:sd.'*/'), "\n")
+	if a:be == ''
+		let dirs = ctrlp#rmbasedir(dirs)
+	en
 	cal filter(dirs, '!match(v:val, escape(sd, ''~$.\''))'
 		\ . ' && v:val !~ ''\v(^|[\/])\.{1,2}[\/]$''')
 	retu dirs
@@ -1357,6 +1419,11 @@ endf
 
 fu! s:ispathitem()
 	retu s:itemtype < 3 || ( s:itemtype > 2 && s:getextvar('type') == 'path' )
+endf
+
+fu! ctrlp#igncwd(cwd)
+	retu ctrlp#utils#glob(a:cwd, 0) == '' ||
+		\ ( s:igntype >= 0 && s:usrign(a:cwd, getftype(a:cwd)) )
 endf
 
 fu! ctrlp#dirnfile(entries)
@@ -1575,6 +1642,11 @@ fu! s:bufwins(bufnr)
 		let winns += count(tabpagebuflist(tabnr), a:bufnr)
 	endfo
 	retu winns
+endf
+
+fu! s:nonamecond(str, filpath)
+	retu a:str =~ '[\/]\?\[\d\+\*No Name\]$' && !filereadable(a:filpath)
+		\ && bufnr('^'.a:filpath.'$') < 1
 endf
 
 fu! ctrlp#normcmd(cmd, ...)
@@ -1842,11 +1914,14 @@ endf
 " Entering & Exiting {{{2
 fu! s:getenv()
 	let [s:cwd, s:winres] = [getcwd(), [winrestcmd(), &lines, winnr('$')]]
-	let [s:crfile, s:crfpath] = [expand('%:p', 1), expand('%:p:h', 1)]
-	let [s:crword, s:crline] = [expand('<cword>', 1), getline('.')]
+	let [s:crword, s:crnbword] = [expand('<cword>', 1), expand('<cWORD>', 1)]
+	let [s:crgfile, s:crline] = [expand('<cfile>', 1), getline('.')]
 	let [s:winh, s:crcursor] = [min([s:mxheight, &lines]), getpos('.')]
 	let [s:crbufnr, s:crvisual] = [bufnr('%'), s:lastvisual()]
-	let [s:mrbs, s:crgfile] = [ctrlp#mrufiles#bufs(), expand('<cfile>', 1)]
+	let s:crfile = bufname('%') == ''
+		\ ? '['.s:crbufnr.'*No Name]' : expand('%:p', 1)
+	let s:crfpath = expand('%:p:h', 1)
+	let s:mrbs = ctrlp#mrufiles#bufs()
 endf
 
 fu! s:lastvisual()
