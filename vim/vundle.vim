@@ -26,6 +26,7 @@ Bundle 'rake.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-coffee-script'
 Bundle 'go.vim'
+Bundle 'christoomey/vim-tmux-navigator'
 
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
