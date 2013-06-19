@@ -48,3 +48,5 @@ set showbreak="@"
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
+" Make CtrlP use ag for listing the files. Way faster and no useless files.
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
