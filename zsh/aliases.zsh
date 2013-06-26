@@ -4,7 +4,7 @@
 alias cp="cp -iv"
 alias rm="rm -iv"
 alias mv="mv -iv"
-alias ls="ls -FGh"
+alias ls="ls -FG"
 alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
