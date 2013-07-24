@@ -21,5 +21,5 @@ alias gai="git add --interactive"
 
 alias gb="git checkout -b"
 alias gc="git checkout"
-alias gs="git st" # Use my alias from ~/.gitconfig
+alias gs="git status"
 alias gcm="git commit -m"
