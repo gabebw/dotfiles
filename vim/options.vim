@@ -15,6 +15,12 @@ set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 " Copy to the system clipboard
 set clipboard=unnamed
 
+" https://github.com/thoughtbot/dotfiles/pull/170
+" Automatically :write before commands such as :next or :!
+" Saves keystrokes by eliminating writes before running tests, etc
+" See :help 'autowrite' for more information
+set autowrite
+
 " Persistent undo
 set undofile " Create FILE.un~ files for persistent undo
 silent !mkdir ~/.vim/undodir > /dev/null 2>&1
