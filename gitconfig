@@ -2,7 +2,7 @@
   name = Gabe Berke-Williams
   email = gabe@thoughtbot.com
 [core]
-  editor = `which vim`
+  editor = /usr/local/bin/vim
   whitespace=trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
