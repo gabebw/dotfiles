@@ -27,6 +27,8 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'vim-coffee-script'
 Bundle 'go.vim'
 Bundle 'christoomey/vim-tmux-navigator'
+" Trim trailing whitespace on write
+Bundle 'derekprior/vim-trimmer'
 
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
