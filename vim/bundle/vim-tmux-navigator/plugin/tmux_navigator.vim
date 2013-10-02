@@ -31,8 +31,7 @@ function! s:TmuxAwareNavigate(direction)
   let nr = winnr()
   let tmux_last_pane = (a:direction == 'p' && s:tmux_is_last_pane)
   if !tmux_last_pane
-    " try to switch windows within vim
-    exec 'wincmd ' . a:direction
+    call s:VimNavigate(a:direction)
   endif
   " Forward the switch panes command to tmux if:
   " a) we're toggling between the last tmux pane;
@@ -47,17 +46,23 @@ function! s:TmuxAwareNavigate(direction)
 endfunction
 
 function! s:VimNavigate(direction)
-  execute 'wincmd ' . a:direction
+  try
+    execute 'wincmd ' . a:direction
+  catch
+    echohl ErrorMsg | echo 'E11: Invalid in command-line window; <CR> executes, CTRL-C quits: wincmd k' | echohl None
+  endtry
 endfunction
 
 command! TmuxNavigateLeft call <SID>TmuxWinCmd('h')
 command! TmuxNavigateDown call <SID>TmuxWinCmd('j')
 command! TmuxNavigateUp call <SID>TmuxWinCmd('k')
 command! TmuxNavigateRight call <SID>TmuxWinCmd('l')
+command! TmuxNavigatePrevious call <SID>TmuxWinCmd('p')
 
 if s:UseTmuxNavigatorMappings()
-  nmap <silent> <c-h> :TmuxNavigateLeft<cr>
-  nmap <silent> <c-j> :TmuxNavigateDown<cr>
-  nmap <silent> <c-k> :TmuxNavigateUp<cr>
-  nmap <silent> <c-l> :TmuxNavigateRight<cr>
+  nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+  nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+  nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+  nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+  nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 endif

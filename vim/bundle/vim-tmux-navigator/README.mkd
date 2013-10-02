@@ -1,21 +1,19 @@
 # Tmux Navigator
 
 This plugin is a repackaging of [Mislav Marohnić's][] tmux-navigator
-configuration described in [this gist][]. Please note that this plugin only
-captures the Vim specific configuration. In order to get the full
-functionality, there is a script file and a set of tmux mappings that are
-needed. Please see the previously mentioned gist for additional instructions.
+configuration described in [this gist][]. When combined with a set of tmux
+key bindings, the plugin will allow you to navigate seamlessly between
+vim and tmux splits using a consistent set of hotkeys.
 
 ## Usage
 
-This plugin, when used in conjunction with the other scripts listed in the gist
-referenced above, will allow for seamless navigation between Vim splits and
-tmux panes. By default it provides the following mappings:
+By default the script provides the following mappings:
 
 - `<ctrl-h>` => Left
 - `<ctrl-j>` => Down
 - `<ctrl-k>` => Up
 - `<ctrl-l>` => Right
+- `<ctrl-\>` => Previous split
 
 If you don't want the plugin to create any mappings, you can use the four
 provided functions to define your own custom maps. Add the following to your
@@ -24,15 +22,16 @@ vimrc to use custom maps:
 ``` vim
 let g:tmux_navigator_no_mappings = 1
 
-nmap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
-nmap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-nmap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-nmap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previoust-Mapping} :TmuxNavigatePrevious<cr>
 ```
 
 *Note* Each instance of `{Left-Mapping}` or `{Down-Mapping}` must be replaced
 in the above code with the desired mapping. Ie, the mapping for `<ctrl-h>` =>
-Left would be created with `nmap <silent> <c-h> :TmuxNavigateLeft<cr>`.
+Left would be created with `nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>`.
 
 ## Installation
 
@@ -54,11 +53,54 @@ For **Pathogen**, run the following commands in your shell:
 ``` bash
 cd ~/.vim
 mkdir -p bundle # creates bundle directory if it doesn't exist
-cd bundles
+cd bundle
 git clone https://github.com/christoomey/vim-tmux-navigator.git
 ```
+### Tmux Configuration
+
+Add the following to your `tmux.conf` file to configure the tmux side of
+this customization.
+
+``` tmux
+# Smart pane switching with awareness of vim splits
+bind -n C-h run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-h) || tmux select-pane -L"
+bind -n C-j run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-j) || tmux select-pane -D"
+bind -n C-k run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-k) || tmux select-pane -U"
+bind -n C-l run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys C-l) || tmux select-pane -R"
+bind -n C-\ run "(tmux display-message -p '#{pane_current_command}' | grep -iqE '(^|\/)vim$' && tmux send-keys 'C-\\') || tmux select-pane -l"
+```
+
+This configuration uses an inlined grep pattern match to help determine if the
+current pane is running Vim. If you run into any issues with the navigation
+not happening as expected, you can try using [Mislav's original external script][]
+which has a more robust check.
+
+Thanks to Christopher Sexton who provided the updated tmux configuration in
+[this blog post][].
+
+**NOTE**: This requires tmux v1.8 or higher.
+
+### Restoring Clear Screen Key Binding
+
+The default key bindings include `<Ctrl-l>` which is the common key binding for
+clearing the screen in interactive shells. If you want to still be able to
+clear the screen, there are two main options:
+
+1. Add an alternate key binding to your `.tmux.conf` to send the <Ctrl-l>
+   sequence. For instance, to bind `<prefix>-l` to clear screen, add `bind C-l
+send-keys 'C-l'` to your `.tmux.conf`. Assuming the default setting of
+`<prefix>` = `<Ctrl-b>`, this would mean that pressing `<Ctrl-b>` then `l`
+would act the same as `<Ctrl-l>` did before using this plugin.
+2. Use a different set of mappings for the navigator functionality, as described
+above, to avoid conflicting with the default `<Ctrl-l>` behavior.
+
+Thanks to [Brian Hogan][] for the tip on how to re-map the clear screen binding.
+
 
 [this gist]: https://gist.github.com/mislav/5189704
 [Mislav Marohnić's]: http://mislav.uniqpath.com/
 [Pathogen]: https://github.com/tpope/vim-pathogen
 [Vundle]: https://github.com/gmarik/vundle
+[this blog post]: http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits
+[Brian Hogan]: https://twitter.com/bphogan
+[Mislav's original external script]: https://github.com/mislav/dotfiles/blob/master/bin/tmux-vim-select-pane

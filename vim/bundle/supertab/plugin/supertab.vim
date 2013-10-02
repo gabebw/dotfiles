@@ -405,9 +405,9 @@ function! SuperTab(command) " {{{
     elseif pumvisible() && !b:complReset
       let type = b:complType == 'context' ? b:complTypeContext : b:complType
       if a:command == 'n'
-        return type == "\<c-p>" ? "\<c-p>" : "\<c-n>"
+        return type == "\<c-p>" || type == "\<c-x>\<c-p>" ? "\<c-p>" : "\<c-n>"
       endif
-      return type == "\<c-p>" ? "\<c-n>" : "\<c-p>"
+      return type == "\<c-p>" || type == "\<c-x>\<c-p>" ? "\<c-n>" : "\<c-p>"
     endif
 
     " handle 'context' completion.
@@ -424,6 +424,15 @@ function! SuperTab(command) " {{{
       let complType = s:CommandLineCompletion()
     else
       let complType = b:complType
+    endif
+
+    " switch <c-x><c-p> / <c-x><c-n> completion in <c-p> mode
+    if a:command == 'p'
+      if complType == "\<c-x>\<c-p>"
+        let complType = "\<c-x>\<c-n>"
+      elseif complType == "\<c-x>\<c-n>"
+        let complType = "\<c-x>\<c-p>"
+      endif
     endif
 
     " highlight first result if longest enabled
@@ -802,9 +811,16 @@ endfunction " }}}
       let expr_map = maparg('<cr>', 'i') =~? '\<cr>'
     endif
 
+    redir => iabbrevs
+    silent iabbrev
+    redir END
+    let iabbrev_map = iabbrevs =~? '\<cr>'
+
     if expr_map
       " Not compatible w/ expr mappings. This is most likely a user mapping,
       " typically with the same functionality anyways.
+    elseif iabbrev_map
+      " Not compatible w/ insert abbreviations containing <cr>
     elseif maparg('<CR>', 'i') =~ '<Plug>delimitMateCR'
       " Not compatible w/ delimitMate since it doesn't play well with others
       " and will always return a <cr> which we don't want when selecting a
