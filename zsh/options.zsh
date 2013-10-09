@@ -15,3 +15,6 @@ setopt prompt_subst
 setopt autopushd
 
 unsetopt correctall
+# Allow [ or ] whereever you want
+# (Prevents "zsh: no matches found: ...")
+unsetopt nomatch
