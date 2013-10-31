@@ -33,6 +33,7 @@
   mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
   #ff = merge --ff-only # commented out so I use `git mm`
   up = !git fetch origin && git rebase origin/master
+  r = rebase -i master
   plre = pull --rebase
   newauthor = commit --amend --reset-author -C HEAD
   prune-remotes = remote prune origin
