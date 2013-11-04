@@ -17,5 +17,8 @@ PATH="$PATH:/usr/local/texlive/2012basic/bin/universal-darwin"
 # Bundler binstubs
 PATH="./bin/stubs:$PATH"
 
+# rbenv
+PATH=~/.rbenv/shims:$PATH
+
 PATH=$HOME/.dotfiles/bin:$PATH
 PATH=$PATH:/usr/local/share/npm/bin
