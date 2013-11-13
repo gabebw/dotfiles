@@ -27,7 +27,10 @@ silent !mkdir ~/.vim/undodir > /dev/null 2>&1
 set undodir=~/.vim/undodir
 
 " Numbers
+" With relativenumber and number set, shows relative number but has current
+" number on current line.
 set relativenumber
+set number
 set numberwidth=3
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
