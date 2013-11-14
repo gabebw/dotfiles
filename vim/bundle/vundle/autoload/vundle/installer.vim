@@ -169,7 +169,7 @@ endf
 
 func! vundle#installer#delete(bang, dir_name) abort
 
-  let cmd = (has('win32') || has('win64')) ?
+  let cmd = ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh'))) ?
   \           'rmdir /S /Q' :
   \           'rm -rf'
 
@@ -202,7 +202,7 @@ func! s:helptags(rtp) abort
   let doc_path = a:rtp.'/doc/'
   call s:log(':helptags '.doc_path)
   try
-    execute 'helptags ' . doc_path
+    execute 'helptags ' . resolve(doc_path)
   catch
     call s:log("> Error running :helptags ".doc_path)
     return 0
@@ -251,7 +251,7 @@ func! s:sync(bang, bundle) abort
 endf
 
 func! g:shellesc(cmd) abort
-  if (has('win32') || has('win64'))
+  if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     if &shellxquote != '('                           " workaround for patch #445
       return '"'.a:cmd.'"'                          " enclose in quotes so && joined cmds work
     endif
@@ -260,7 +260,7 @@ func! g:shellesc(cmd) abort
 endf
 
 func! g:shellesc_cd(cmd) abort
-  if (has('win32') || has('win64'))
+  if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     let cmd = substitute(a:cmd, '^cd ','cd /d ','')  " add /d switch to change drives
     let cmd = g:shellesc(cmd)
     return cmd
