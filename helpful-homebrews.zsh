@@ -33,9 +33,6 @@ info "Installing ag, a better ack/grep..."
 info "Installing tmux, a terminal multiplexer..."
   brew install tmux
 
-info "Installing tmux, a terminal multiplexer..."
-  brew install tmux
-
 info "Installing reattach-to-user-namespace so copy/paste works in tmux..."
   brew install reattach-to-user-namespace
 
