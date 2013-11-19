@@ -1,4 +1,5 @@
 log/*.log
+tags
 vendor/
 log/
 tmp/
