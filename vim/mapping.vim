@@ -20,6 +20,9 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 nnoremap <C-h> <C-W>h
 
+" https://github.com/henrik/vim-yaml-flattener
+au FileType yaml nmap <buffer> <Leader>r :YAMLToggleFlatness<CR>
+
 " Disable K looking stuff up
 nnoremap K <Nop>
 nnoremap :Nohl :nohlsearch
