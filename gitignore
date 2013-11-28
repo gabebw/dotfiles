@@ -12,7 +12,6 @@ Thumbs.db
 
 # rbenv
 .rbenv-version
-.ruby-version
 
 # Zeus gem
 custom_plan.rb
