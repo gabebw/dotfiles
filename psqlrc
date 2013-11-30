@@ -4,6 +4,12 @@
 -- http://craigkerstiens.com/2013/02/13/How-I-Work-With-Postgres/
 -- https://github.com/hgmnz/dotfiles/blob/master/psqlrc
 
+-- Remove this:
+--    Null display is "[NULL]".
+--    Expanded display is used automatically.
+--    psql (9.3.1)
+--    Type "help" for help.
+\set QUIET 1
 \pset null '[NULL]'
 
 -- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
@@ -20,3 +26,4 @@
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper
+\unset quiet
