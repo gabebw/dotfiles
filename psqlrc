@@ -7,7 +7,11 @@
 \pset null '[NULL]'
 
 -- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
-\set PROMPT1 '%[%033[1;33;42m%]%R %/%[%033[0m%] %[%033[0;34m%]>%[%033[0m%] '
+
+\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+-- PROMPT2 is printed when the prompt expects more input, like when you type
+-- SELECT * FROM<enter>. %R shows what type of input it expects.
+\set PROMPT2 '[more] %R > '
 
 -- Use best available output format
 \x auto
@@ -16,4 +20,3 @@
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper
-\set ON_ERROR_ROLLBACK interactive
