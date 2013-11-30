@@ -1,12 +1,12 @@
 -- vim: ft=sql
 
+-- Official docs: http://www.postgresql.org/docs/9.3/static/app-psql.html
 -- http://craigkerstiens.com/2013/02/13/How-I-Work-With-Postgres/
 -- https://github.com/hgmnz/dotfiles/blob/master/psqlrc
 
--- http://www.postgresql.org/docs/8.3/static/app-psql.html
-\pset null 'NULL'
+\pset null '[NULL]'
 
--- http://www.postgresql.org/docs/8.3/static/app-psql.html#APP-PSQL-PROMPTING
+-- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
 \set PROMPT1 '%[%033[1;33;42m%]%R %/%[%033[0m%] %[%033[0;34m%]>%[%033[0m%] '
 
 -- Use best available output format
@@ -15,3 +15,5 @@
 \set VERBOSITY verbose
 \set HISTFILE ~/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\set ON_ERROR_ROLLBACK interactive
