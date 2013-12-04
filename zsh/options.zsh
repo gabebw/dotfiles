@@ -13,6 +13,8 @@ setopt hist_reduce_blanks
 setopt autocd
 setopt prompt_subst
 setopt autopushd
+# Timestamp history entries
+setopt extended_history
 
 unsetopt correctall
 # Allow [ or ] whereever you want
