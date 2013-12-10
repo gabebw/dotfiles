@@ -30,6 +30,7 @@ if [[ -n $TMUX ]]; then
     rails
     hitch
     postgres
+    haskell
     # arduino
   )
 
