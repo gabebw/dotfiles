@@ -19,6 +19,7 @@ compdef _git gc=git-checkout
 alias gp="bundle exec rake && git push"
 alias gcl="git clone"
 alias gd="git diff"
+alias gs="git show"
 alias gg="git grep"
 alias amend="git commit --amend -Chead"
 alias amend-new="git commit --amend"
