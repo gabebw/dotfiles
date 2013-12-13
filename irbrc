@@ -15,25 +15,6 @@ def is_rails_3?
   Object.const_defined?(:Rails) && Rails::VERSION::STRING.to_i == 3
 end
 
-# To install all of these gems:
-# gem install wirble hirb
-%w{wirble hirb}.each do |pkg|
-  begin
-    require pkg
-  rescue LoadError => err
-    $stderr.puts "Couldn't load something for irb: #{err}"
-  end
-end
-
-# Set up Wirble, if it was loaded successfully
-if defined?(Wirble)
-  Wirble.init
-  Wirble.colorize
-end
-
-# Set up Hirb, if it was loaded successfully
-Hirb::View.enable if defined?(Hirb)
-
 if is_rails_3?
   unless Rails.logger
     Rails.logger = ActiveSupport::BufferedLogger.new(STDOUT)
