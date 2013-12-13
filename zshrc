@@ -31,6 +31,7 @@ if [[ -n $TMUX ]]; then
     hitch
     postgres
     haskell
+    go
     # arduino
   )
 
