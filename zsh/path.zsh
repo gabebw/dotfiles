@@ -26,5 +26,5 @@ pdflatex_dir='/usr/local/texlive/2010/bin/x86_64-darwin'
 unset pdflatex_dir
 
 # My scripts are always last. Use full path instead of ~/ so that "which" works.
-PATH="$PATH:/Users/randy/bin"
+PATH="$PATH:$HOME/bin:$HOME/bin/scala-2.10.3/bin"
 PATH="/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH" # homebrew & python
