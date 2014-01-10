@@ -17,6 +17,15 @@ augroup myfiletypes
   " It's Markdown, not modula2, you infernal machine
   au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
 
+  " Highlight words to avoid in tech writing
+  " http://css-tricks.com/words-avoid-educational-writing/
+  highlight TechWordsToAvoid ctermbg=red ctermfg=white
+  match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy/
+  autocmd BufWinEnter *.md match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+  autocmd InsertEnter *.md match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+  autocmd InsertLeave *.md match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+  autocmd BufWinLeave *.md call clearmatches()
+
   au BufRead,BufNewFile *.coffee set syntax=coffee
 
   au BufRead,BufNewFile *.go setf go
