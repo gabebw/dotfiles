@@ -27,7 +27,10 @@ alias amend-new="git commit --amend"
 alias ga="git add"
 alias gai="git add --interactive"
 
-alias gb="git checkout -b"
+function gb(){
+  git checkout -b gbw-$1 $2
+}
+
 alias gc="git checkout"
 alias gcm="git commit -m"
 
