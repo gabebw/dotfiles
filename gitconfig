@@ -106,4 +106,4 @@
 [credential]
   helper = osxkeychain
 [init]
-  templatedir = ~/.git-template
+  templatedir = ~/.dotfiles/git-template
