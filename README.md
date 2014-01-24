@@ -11,9 +11,10 @@ These are my dotfiles: `~/.*`
 
 To interactively link the dotfiles into `~`, run:
 
-    ./install.sh
+    $ ./install.sh
+    $ brew bundle
+    $ vim +BundleInstall +qa
 
-Then run `brew bundle` to install some helpful brews.
 
 ## Nice to have
 
