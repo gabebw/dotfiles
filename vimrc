@@ -17,7 +17,6 @@ colorscheme jellybeans
 source ~/.vim/options.vim
 source ~/.vim/mapping.vim
 source ~/.vim/completion.vim
-source ~/.vim/tabularizing.vim
 source ~/.vim/test_runners.vim
 source ~/.vim/rails_shortcuts.vim
 source ~/.vim/statusline.vim
