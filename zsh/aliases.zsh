@@ -32,6 +32,12 @@ function -() { cd - }
 alias -g G="| grep "
 alias -g ONE="| awk '{ print \$1}'"
 
+# Screw you, "no nodename or servname not provided". I'll do `whois
+# http://google.com/` if I want.
+function whois() {
+  command whois $(echo $1 | sed -e 's|https?://||' -e 's|/||g')
+}
+
 function al { ls -t | head -n ${1:-10}; }
 function p {
   if [[ $1 == '.' || $# == 0 ]]; then
