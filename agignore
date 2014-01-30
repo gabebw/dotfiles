@@ -7,6 +7,8 @@ doc/
 coverage/
 public/assets/
 bin/stubs
+# For Middleman
+/build/
 *.jpg
 *.jpeg
 *.png
