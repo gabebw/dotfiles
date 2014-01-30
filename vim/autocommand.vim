@@ -20,9 +20,9 @@ augroup myfiletypes
   " Highlight words to avoid in tech writing
   " http://css-tricks.com/words-avoid-educational-writing/
   highlight TechWordsToAvoid ctermbg=red ctermfg=white
-  autocmd BufWinEnter *.md match TechWordsToAvoid /\c\<obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\>/
-  autocmd InsertEnter *.md match TechWordsToAvoid /\c\<obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\>/
-  autocmd InsertLeave *.md match TechWordsToAvoid /\c\<obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\>/
+  autocmd BufWinEnter *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
+  autocmd InsertEnter *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
+  autocmd InsertLeave *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
   autocmd BufWinLeave *.md call clearmatches()
 
   au BufRead,BufNewFile *.coffee set syntax=coffee
