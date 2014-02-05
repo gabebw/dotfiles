@@ -12,9 +12,6 @@ function g {
   fi
 }
 
-# Complete `g` like `git`
-compdef g=git
-compdef _git gc=git-checkout
 
 alias gp="bundle exec rake && git push"
 alias gcl="git clone"
@@ -33,6 +30,11 @@ function gb(){
 
 alias gc="git checkout"
 alias gcm="git commit -m"
+
+# Complete `g` like `git`, etc
+compdef g=git
+compdef _git gc=git-checkout
+compdef _git ga=git-add
 
 # https://gist.github.com/3960799
 function git-add-prs {
