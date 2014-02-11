@@ -31,6 +31,7 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'derekprior/vim-trimmer'
 Bundle 'skwp/greplace.vim'
 Bundle 'dockyard/vim-easydir'
+Bundle 'itchyny/lightline.vim'
 
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
