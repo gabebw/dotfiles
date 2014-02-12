@@ -39,3 +39,7 @@ install rbenv-gem-rehash
 
 # Per-project rbenv variables
 install rbenv-vars
+
+# Fast GitHub client
+tap jingweno/gh
+install gh
