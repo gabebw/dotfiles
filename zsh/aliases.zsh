@@ -48,6 +48,10 @@ function p {
   fi
 }
 
+icopy() {
+  scp "$1" i:~/images
+}
+
 # credit: http://nparikh.org/notes/zshrc.txt
 # Usage: extract <file>
 # Description: extracts archived files / mounts disk images
