@@ -11,8 +11,6 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
-grep(){ echo Use ag; }
-alias grpe=grep
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
 alias less="less -R" # correctly interpret ASCII color escapes
 
