@@ -43,5 +43,5 @@ function p {
 }
 
 icopy() {
-  scp "$1" i:~/images
+  scp "$1" i:~/images && rm -fv "$1"
 }
