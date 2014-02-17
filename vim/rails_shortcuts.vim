@@ -1,8 +1,6 @@
 " Rails.vim
 augroup rails_shortcuts
   autocmd!
-  autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
-  autocmd User Rails Rnavcommand factories spec test -glob=**/* -default=factories
   command! Rroutes :e config/routes.rb
 
   autocmd User Rails nnoremap <Leader>m :Rmodel<Space>
