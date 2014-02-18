@@ -45,3 +45,10 @@ function p {
 icopy() {
   scp "$1" i:~/images && rm -fv "$1"
 }
+
+serve() {
+  port="${1:-3000}"
+  echo "Serving on http://localhost:$port"
+  echo "\n\n"
+  ruby -run -e httpd . -p $port
+}
