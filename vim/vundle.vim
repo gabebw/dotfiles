@@ -32,6 +32,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
 Bundle 'ack.vim'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'elixir-lang/vim-elixir'
 
 " Colorschemes
 Bundle 'Railscasts-Theme-GUIand256color'
