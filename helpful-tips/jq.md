@@ -10,8 +10,21 @@ Run this:
     "hello"
     "there"
 
+Or given this:
+
+    {key: [{id: 1}, {id: 2}]}
+
+To get the IDs:
+
+    $ cat json | jq '.key[].id'
+    "1"
+    "2"
+
+## Get values out of an array of hashes
+
 ## Pretty-print JSON (with colors!)
 
 Run it through the "no-op" filter, `.`:
 
     echo $json | jq .
+
