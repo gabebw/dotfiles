@@ -16,23 +16,12 @@ augroup myfiletypes
 
   " It's Markdown, not modula2, you infernal machine
   au BufRead,BufNewFile *.md set syntax=markdown filetype=markdown
-
-  " Highlight words to avoid in tech writing
-  " http://css-tricks.com/words-avoid-educational-writing/
-  highlight TechWordsToAvoid ctermbg=red ctermfg=white
-  autocmd BufWinEnter *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
-  autocmd InsertEnter *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
-  autocmd InsertLeave *.md match TechWordsToAvoid /\c\<\(obviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy\)\>/
-  autocmd BufWinLeave *.md call clearmatches()
-
   au BufRead,BufNewFile *.coffee set syntax=coffee
-
   au BufRead,BufNewFile *.go setf go
+  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
   " .gitconfig and gitconfig are the same
   au BufRead,BufNewFile gitconfig set syntax=gitconfig
-
-  au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
   au BufRead /usr/share/file/magic/* set syntax=magic
 augroup END

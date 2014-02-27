@@ -32,6 +32,8 @@ Bundle 'derekprior/vim-trimmer'
 Bundle 'skwp/greplace.vim'
 Bundle 'dockyard/vim-easydir'
 Bundle 'itchyny/lightline.vim'
+" Words to avoid in tech writing
+Bundle 'nicholaides/words-to-avoid.vim'
 
 " Colorschemes
 Bundle 'nanotech/jellybeans.vim'
