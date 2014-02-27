@@ -130,6 +130,15 @@ function! fugitive#extract_git_dir(path) abort
   let root = s:shellslash(simplify(fnamemodify(a:path, ':p:s?[\/]$??')))
   let previous = ""
   while root !=# previous
+    if root =~# '\v^//%([^/]+/?)?$'
+      " This is for accessing network shares from Cygwin Vim. There won't be
+      " any git directory called //.git or //serverName/.git so let's avoid
+      " checking for them since such checks are extremely slow.
+      break
+    endif
+    if index(split($GIT_CEILING_DIRECTORIES, ':'), root) >= 0
+      break
+    endif
     let dir = s:sub(root, '[\/]$', '') . '/.git'
     let type = getftype(dir)
     if type ==# 'dir' && fugitive#is_git_dir(dir)
@@ -163,7 +172,7 @@ function! fugitive#detect(path)
     endif
   endif
   if exists('b:git_dir')
-    silent doautocmd User Fugitive
+    silent doautocmd User FugitiveBoot
     cnoremap <buffer> <expr> <C-R><C-G> fnameescape(<SID>recall())
     nnoremap <buffer> <silent> y<C-G> :call setreg(v:register, <SID>recall())<CR>
     let buffer = fugitive#buffer()
@@ -176,6 +185,7 @@ function! fugitive#detect(path)
         call buffer.setvar('&tags', escape(b:git_dir.'/'.&filetype.'.tags', ', ').','.buffer.getvar('&tags'))
       endif
     endif
+    silent doautocmd User Fugitive
   endif
 endfunction
 
@@ -1389,6 +1399,7 @@ function! s:diff_restore()
   let restore = 'setlocal nodiff noscrollbind'
         \ . ' scrollopt=' . &l:scrollopt
         \ . (&l:wrap ? ' wrap' : ' nowrap')
+        \ . ' foldlevel=999'
         \ . ' foldmethod=' . &l:foldmethod
         \ . ' foldcolumn=' . &l:foldcolumn
         \ . ' foldlevel=' . &l:foldlevel
@@ -1492,14 +1503,14 @@ function! s:Diff(bang,...)
   try
     let spec = s:repo().translate(file)
     let commit = matchstr(spec,'\C[^:/]//\zs\x\+')
+    let restore = s:diff_restore()
+    let w:fugitive_diff_restore = restore
     if s:buffer().compare_age(commit) < 0
-      execute 'rightbelow '.vert.'split '.s:fnameescape(spec)
+      execute 'rightbelow '.vert.'diffsplit '.s:fnameescape(spec)
     else
-      execute 'leftabove '.vert.'split '.s:fnameescape(spec)
+      execute 'leftabove '.vert.'diffsplit '.s:fnameescape(spec)
     endif
-    call s:diffthis()
-    wincmd p
-    call s:diffthis()
+    let w:fugitive_diff_restore = restore
     return ''
   catch /^fugitive:/
     return 'echoerr v:errmsg'

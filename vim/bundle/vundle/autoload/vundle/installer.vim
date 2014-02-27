@@ -174,7 +174,7 @@ func! vundle#installer#delete(bang, dir_name) abort
   \           'rm -rf'
 
   let bundle = vundle#config#init_bundle(a:dir_name, {})
-  let cmd .= ' '.shellescape(bundle.path())
+  let cmd .= ' '.vundle#installer#shellesc(bundle.path())
 
   let out = s:system(cmd)
 
@@ -199,10 +199,11 @@ func! s:has_doc(rtp) abort
 endf
 
 func! s:helptags(rtp) abort
-  let doc_path = a:rtp.'/doc/'
+  " it is important to keep trailing slash here
+  let doc_path = resolve(a:rtp).'/doc/'
   call s:log(':helptags '.doc_path)
   try
-    execute 'helptags ' . resolve(doc_path)
+    execute 'helptags ' . doc_path
   catch
     call s:log("> Error running :helptags ".doc_path)
     return 0
@@ -214,15 +215,15 @@ func! s:sync(bang, bundle) abort
   let git_dir = expand(a:bundle.path().'/.git/', 1)
   if isdirectory(git_dir) || filereadable(expand(a:bundle.path().'/.git', 1))
     if !(a:bang) | return 'todate' | endif
-    let cmd = 'cd '.shellescape(a:bundle.path()).' && git pull && git submodule update --init --recursive'
+    let cmd = 'cd '.vundle#installer#shellesc(a:bundle.path()).' && git pull && git submodule update --init --recursive'
 
     let cmd = g:shellesc_cd(cmd)
 
-    let get_current_sha = 'cd '.shellescape(a:bundle.path()).' && git rev-parse HEAD'
+    let get_current_sha = 'cd '.vundle#installer#shellesc(a:bundle.path()).' && git rev-parse HEAD'
     let get_current_sha = g:shellesc_cd(get_current_sha)
     let initial_sha = s:system(get_current_sha)[0:15]
   else
-    let cmd = 'git clone --recursive '.shellescape(a:bundle.uri).' '.shellescape(a:bundle.path())
+    let cmd = 'git clone --recursive '.vundle#installer#shellesc(a:bundle.uri).' '.vundle#installer#shellesc(a:bundle.path())
     let initial_sha = ''
   endif
 
@@ -250,19 +251,16 @@ func! s:sync(bang, bundle) abort
   return 'updated'
 endf
 
-func! g:shellesc(cmd) abort
+func! vundle#installer#shellesc(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
-    if &shellxquote != '('                           " workaround for patch #445
-      return '"'.a:cmd.'"'                          " enclose in quotes so && joined cmds work
-    endif
+    return '"' . substitute(a:cmd, '"', '\\"', 'g') . '"'
   endif
-  return a:cmd
+  return shellescape(a:cmd)
 endf
 
 func! g:shellesc_cd(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     let cmd = substitute(a:cmd, '^cd ','cd /d ','')  " add /d switch to change drives
-    let cmd = g:shellesc(cmd)
     return cmd
   else
     return a:cmd
