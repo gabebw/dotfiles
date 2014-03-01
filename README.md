@@ -9,10 +9,7 @@ These are my dotfiles: `~/.*`
 
 ## Installation
 
-    # interactively link the dotfiles into ~
     $ ./install.sh
-    $ brew bundle
-    $ vim +BundleInstall +qa
 
 ## Nice to have
 
