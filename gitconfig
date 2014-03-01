@@ -1,6 +1,6 @@
 [user]
   name = Gabe Berke-Williams
-  email = gabe@thoughtbot.com
+  email = gabebw@gabebw.com
 [core]
   editor = /usr/local/bin/vim
   whitespace=trailing-space,cr-at-eol
