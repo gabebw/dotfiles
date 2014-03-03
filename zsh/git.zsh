@@ -6,9 +6,9 @@
 # With arguments: acts like `git`
 function g {
   if [[ $# > 0 ]]; then
-    gh $@
+    git $@
   else
-    gh st
+    git st
   fi
 }
 
