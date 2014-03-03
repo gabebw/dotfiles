@@ -37,7 +37,7 @@
   next = !git add . && git rebase --continue
   current-branch = rev-parse --abbrev-ref HEAD
   merged = branch -a --merged
-  pr = !git push -u && hub pull-request
+  pr = !git push -u && gh pull-request
 
   # Typos
   pul = pull
