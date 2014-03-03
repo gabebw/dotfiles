@@ -38,6 +38,7 @@
   current-branch = rev-parse --abbrev-ref HEAD
   merged = branch -a --merged
   pr = !git push -u && gh pull-request
+  g = grep --break --heading --line-number
 
   # Typos
   pul = pull
@@ -107,3 +108,7 @@
   helper = osxkeychain
 [init]
   templatedir = ~/.dotfiles/git-template
+[grep]
+  # http://travisjeffery.com/b/2012/02/search-a-git-repo-like-a-ninja/
+  extendRegexp = true
+  lineNumber = true
