@@ -29,7 +29,7 @@
   unstage = reset HEAD
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
   # out master if it's not a FF merge.
-  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} || echo "Non-fastforward"
+  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git branch -d @{-1} || echo "Non-fastforward"
   up = !git fetch origin && git rebase origin/master
   r = rebase -i master
   newauthor = commit --amend --reset-author -C HEAD
