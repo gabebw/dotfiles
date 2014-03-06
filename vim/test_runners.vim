@@ -11,6 +11,8 @@ function! CorrectTestRunner()
   elseif match(expand('%'), '_test\.rb$') != -1
     " TestUnit
     return "ruby -Itest"
+  elseif match(expand('%'), 'spec/javascripts/.*\.coffee$') != -1
+    return "teaspoon"
   else
     return "false"
   endif
