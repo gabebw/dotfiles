@@ -1,65 +1,72 @@
 " Functions for running tests
 
-nnoremap <Leader>a :call RunCurrentTest()<CR>
-nnoremap <Leader>l :call RunCurrentLineInTest()<CR>
+" Export just the commands that I want to be globally available.
+command! RunCurrentTest call <SID>RunCurrentTest()
+command! RunCurrentLineInTest call <SID>RunCurrentLineInTest()
 
-function! CorrectTestRunner()
+nnoremap <Leader>a :RunCurrentTest<CR>
+nnoremap <Leader>l :RunCurrentLineInTest<CR>
+
+function! s:TestType()
   if match(expand('%'), '_spec\.rb$') != -1
     return "rspec"
   elseif match(expand('%'), '\.feature$') != -1
     return "cucumber"
   elseif match(expand('%'), '_test\.rb$') != -1
-    " TestUnit
-    return "ruby -Itest"
-  elseif match(expand('%'), 'spec/javascripts/.*\.coffee$') != -1
-    return "teaspoon"
-  else
-    return "false"
+    return "test_unit"
+  elseif match(expand('%'), 'spec/javascripts/[a-z].*\.\(coffee\|js\)$') != -1
+    return "javascript"
   endif
 endfunction
 
-function! RunCurrentTest()
-  if CorrectTestRunner() == "false"
+function! s:CorrectTestRunner()
+  let type_to_runner = {
+    \ 'rspec': 'rspec',
+    \ 'cucumber': 'cucumber',
+    \ 'test_unit': 'ruby -Itest',
+    \ 'javascript': 'teaspoon'
+  \}
+
+  let test_runner = get(type_to_runner, s:TestType(), 'NOT A TEST')
+  return test_runner
+endfunction
+
+function! s:RunCurrentTest()
+  let correct_test_runner = s:CorrectTestRunner()
+  if correct_test_runner == 'NOT A TEST'
     echoerr "Can't run test (is this a test file?)"
   else
-    let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
+    let command_string = "" . correct_test_runner . " " . expand('%:p')
     call Send_to_Tmux("clear\n")
     call Send_to_Tmux(command_string . "\n")
   endif
 endfunction
 
-function! RunCurrentLineInTest()
-  if CorrectTestRunner() == "false"
-    echoerr "Can't run test (is this a test file?)"
-  else
-    if CorrectTestRunner() == "ruby -Itest"
-      let matcher = StringAppropriateForMatchingInTestUnit()
-      if matcher == ""
-        " No matched line, run the whole test.
-        call RunCurrentTest()
-      else
-        let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . " -n '/" . matcher . "/'"
-        call Send_to_Tmux("clear\n")
-        call Send_to_Tmux(command_string . "\n")
-      endif
+function! s:RunCurrentLineInTest()
+  let correct_test_runner = s:CorrectTestRunner()
+  if correct_test_runner == "ruby -Itest"
+    let matcher = s:StringAppropriateForMatchingInTestUnit()
+    if matcher == ""
+      " No matched line, run the whole test.
+      call s:RunCurrentTest()
     else
-      if match(CorrectTestRunner(), 'turnip') != -1
-        " Turnip doesn't work with line numbers
-        let command_string = "" . CorrectTestRunner() . " " . expand('%:p')
-      else
-        let command_string = "" . CorrectTestRunner() . " " . expand('%:p') . ":" . line(".")
-      endif
+      let command_string = "" . correct_test_runner . " " . expand('%:p') . " -n '/" . matcher . "/'"
       call Send_to_Tmux("clear\n")
       call Send_to_Tmux(command_string . "\n")
     endif
+  else
+    let command_string = "" . correct_test_runner . " " . expand('%:p') . ":" . line(".")
+    call Send_to_Tmux("clear\n")
+    call Send_to_Tmux(command_string . "\n")
   endif
+endif
 endfunction
 
 " Returns the line number of the closest `context` or `should` *block* (so
 " `should have_many(:posts)` wouldn't match), searching upwards. Meant to be
 " used in Test::Unit files.
 " Returns 0 if no match found.
-function! LineNumberOfNearestUpwardsContextOrShouldBlock()
+function! s:LineNumberOfNearestUpwardsContextOrShouldBlock()
   " That weird concatenation is because you can't escape single quotes in a
   " single-quoted string. It should just be ["\']
   return search('^ *\(context\|should\) ["' . "']", 'bnc')
@@ -70,8 +77,8 @@ endfunction
 "   context "should be great for us"
 " would return "should be great for us".
 " If no line matches, returns an empty string.
-function! StringAppropriateForMatchingInTestUnit()
-  let line_content = getline(LineNumberOfNearestUpwardsContextOrShouldBlock())
+function! s:StringAppropriateForMatchingInTestUnit()
+  let line_content = getline(s:LineNumberOfNearestUpwardsContextOrShouldBlock())
   " Friggin' Vim, not letting me escape quotes.
   let single_or_double_quote = '["' . "']"
   let repeated_non_quote = '[^"' . "']\\+"
