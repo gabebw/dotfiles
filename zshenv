@@ -1,4 +1,9 @@
-# rbenv
+# Easily start a new named tmux session
+function t(){
+  tmux new -s "${1:-scratch}"
+}
+
+# Only do this if we're inside tmux
 if [[ -n $TMUX ]]
 then
   eval "$(rbenv init - --no-rehash)"
