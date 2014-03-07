@@ -2,17 +2,6 @@
 " :set wildmenu enables a menu at the bottom of the vim/gvim window.
 set wildmenu
 set wildmode=list:longest,list:full
-" wildignore: stuff to ignore when tab completing
-set wildignore+=*.zip,*.gz,*.bz,*.tar
-set wildignore=*.pyc,*.pyo,*.o,*.obj,*~
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**,vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**,tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=*.avi,*.wmv,*.ogg,*.mp3,*.mov
 
 " completeopt values (default: "menu,preview")
 " menu:    use popup menu to show possible completion
