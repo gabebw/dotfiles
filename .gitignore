@@ -19,4 +19,3 @@ emacs-plugins/*
 
 # Ignore bundles so that :BundleInstall can updating
 vim/bundle/
-
