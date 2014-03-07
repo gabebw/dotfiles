@@ -17,3 +17,8 @@ These don't relate to my dotfiles at all, but I keep forgetting to install them
 on new machines.
 
 * [Dropbox](https://www.dropbox.com/install)
+
+## Questions
+
+I'm happy to answer questions about these dotfiles. Hit me up
+[@gabebw](https://twitter.com/gabebw).
