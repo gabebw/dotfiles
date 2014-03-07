@@ -1,6 +1,7 @@
 # Easily start a new named tmux session
 function t(){
-  tmux new -s "${1:-scratch}"
+  session_name="${1:-scratch}"
+  tmux new -s "$session_name" || tmux attach -t "$session_name"
 }
 
 # Only do this if we're inside tmux
