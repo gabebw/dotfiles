@@ -21,6 +21,7 @@ source ~/.vim/test_runners.vim
 source ~/.vim/rails_shortcuts.vim
 source ~/.vim/statusline.vim
 source ~/.vim/autocommand.vim
+source ~/.vim/tmux.vim
 
 runtime macros/matchit.vim
 let g:ackprg = 'ag --nogroup --nocolor --column'
