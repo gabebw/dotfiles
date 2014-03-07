@@ -7,5 +7,5 @@
 brew bundle
 
 # Install Vim packages
-git clone https://github.com/gmarik/vundle.git ./vim/bundle/vundle
+git clone git@github.com:gmarik/Vundle.vim.git ./vim/bundle/Vundle.vim
 vim +BundleInstall +qa

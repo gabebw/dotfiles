@@ -2,12 +2,12 @@
 " To install, run :BundleInstall
 " To update, run :BundleInstall!
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 " Bundles:
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 
 Bundle 'epmatsw/ag.vim'
 Bundle 'tsaleh/vim-matchit'
