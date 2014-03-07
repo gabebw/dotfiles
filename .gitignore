@@ -17,5 +17,6 @@ vim/undodir
 emacs-plugins/*
 !emacs-plugins/.gitkeep
 
-# Vundle stuff
-.vim/bundle/.vundle/
+# Ignore bundles so that :BundleInstall can updating
+vim/bundle/
+
