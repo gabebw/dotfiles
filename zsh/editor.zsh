@@ -1,10 +1,9 @@
 ############
 #  EDITOR  #
 ############
-# don't set it to "macvim", zsh has troubles with double-aliases
 export EDITOR="vim -p" # -p = 1 tab/file
-alias vi=$EDITOR
-alias svi="sudo $EDITOR"
+alias vi="$EDITOR"
+alias svi="sudo vim"
 
 # Remove vim flags for crontab -e
 alias crontab="EDITOR=vim crontab"

@@ -2,9 +2,6 @@
 # PATH #
 ########
 
-# Re-scan $PATH for newly-installed programs.
-env-update() { export PATH=$PATH; }
-
 # Homebrew
 PATH="/usr/local/bin:$PATH"
 
@@ -20,5 +17,7 @@ PATH=~/.rbenv/shims:$PATH
 # Bundler binstubs
 PATH="./bin/stubs:$PATH"
 
-PATH=$HOME/.dotfiles/bin:$PATH
+# Node
 PATH=$PATH:/usr/local/share/npm/bin
+
+PATH=$HOME/.dotfiles/bin:$PATH
