@@ -5,7 +5,7 @@ These are my dotfiles: `~/.*`
 ## Prerequisites
 
 * ZSH. To change your default shell to ZSH: `chsh -s $(which zsh) $USER`
-* [Homebrew](http://mxcl.github.com/homebrew/).
+* [Homebrew](http://brew.sh/).
 
 ## Installation
 
