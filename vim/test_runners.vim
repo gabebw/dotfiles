@@ -59,7 +59,6 @@ function! s:RunCurrentLineInTest()
     call Send_to_Tmux("clear\n")
     call Send_to_Tmux(command_string . "\n")
   endif
-endif
 endfunction
 
 " Returns the line number of the closest `context` or `should` *block* (so
