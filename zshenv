@@ -12,4 +12,8 @@ else
     session_name="${1:-scratch}"
     tmux new -s "$session_name" || tmux attach -t "$session_name"
   }
+
+  echo
+  echo '>> Use `t [session-name]` to start tmux <<'
+  echo
 fi
