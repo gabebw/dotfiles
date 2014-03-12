@@ -13,7 +13,8 @@ function g {
 }
 
 alias gp="bundle exec rake && git push"
-alias gcl="git clone"
+# Clone a URL and cd into the directory
+function gcl() { git clone $1 && cd $( echo "$1" | sed -E 's|.*/(.*).git$|\1|' ) }
 alias gd="git diff"
 alias gs="git show"
 # Grep with grouped output like Ack
@@ -28,9 +29,6 @@ function gb(){ git checkout -b gbw-$1 $2 }
 
 alias gc="git checkout"
 alias gcm="git commit -m"
-
-# Clone a URL and cd into the directory
-function mkclone() { git clone $1 && cd $( echo "$1" | sed -E 's|.*/(.*).git$|\1|' ) }
 
 # Complete `g` like `git`, etc
 compdef g=git
