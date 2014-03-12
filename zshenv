@@ -1,12 +1,10 @@
-if [[ -n $TMUX ]]
-then
-  # We're in tmux, go go go
-  eval "$(rbenv init - --no-rehash)"
+eval "$(rbenv init - --no-rehash)"
+# Vim only sources zshenv (this file), not zshrc.
+# We source homebrew here so that Vim can find Homebrew's ctags.
+source ~/.zsh/homebrew.zsh
 
-  # Vim only sources zshenv (this file), not zshrc.
-  # We source homebrew here so that Vim can find Homebrew's ctags.
-  source ~/.zsh/homebrew.zsh
-else
+if [[ -z $TMUX ]]
+then
   # Easily start a new named tmux session
   function t(){
     session_name="${1:-scratch}"
