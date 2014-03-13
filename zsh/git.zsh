@@ -14,7 +14,7 @@ function g {
 
 alias gp="bundle exec rake && git push"
 # Clone a URL and cd into the directory
-function gcl() { git clone $1 && cd $( echo "$1" | sed -E 's|.*/(.*).git$|\1|' ) }
+function gcl() { git clone $1 && cd $( echo "$1" | sed -E  -e 's|[a-z]+:[a-z]+/||' -e 's|.*/(.*).git$|\1|') }
 alias gd="git diff"
 alias gs="git show"
 # Grep with grouped output like Ack
