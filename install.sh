@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Interactively link dotfiles into ~
+echo "Interactively linking dotfiles into ~..."
 ./link-dotfiles.sh
 
-# Install Homebrew package
+echo "Installing Homebrew packages..."
 brew bundle
 
-# Install Vim packages
+echo "Installing Vim packages..."
 git clone git@github.com:gmarik/Vundle.vim.git ./vim/bundle/Vundle.vim
 vim +BundleInstall +qa
 
