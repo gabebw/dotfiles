@@ -16,3 +16,6 @@ function viw {
     echo "$location isn't a file."
   fi
 }
+
+# complete viw like `which`
+compdef viw=which

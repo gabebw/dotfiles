@@ -1,6 +1,7 @@
 BASE="$HOME/.dotfiles/zsh"
 
 CORE=(
+  completion
   key_bindings
   # "tmux" needs to be before "navigation" because of current-tmux-session
   tmux
@@ -10,7 +11,6 @@ CORE=(
   aliases
   path
   options
-  completion
   vcs
   prompt
   ruby
