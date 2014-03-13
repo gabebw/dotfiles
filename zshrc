@@ -31,6 +31,9 @@ EXTRA=(
   # arduino
 )
 
+source $BASE/tmux.zsh
+attach_to_tmux
+
 for core in $CORE
 do
   source $BASE/$core.zsh
