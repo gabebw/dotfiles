@@ -59,5 +59,8 @@ set list listchars=tab:»·,trail:·
 
 " Make CtrlP use ag for listing the files. Way faster and no useless files.
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" Disable caching, ag is fast enough
+let g:ctrlp_use_caching = 0
+
 " Syntax-highlight languages inside fenced markdown blocks
 let g:markdown_fenced_languages = ['ruby', 'sh']
