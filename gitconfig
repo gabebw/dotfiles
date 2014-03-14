@@ -33,7 +33,6 @@
   up = !git fetch origin && git rebase origin/master
   r = rebase -i origin/master
   newauthor = commit --amend --reset-author -C HEAD
-  prune-remotes = remote prune origin
   next = !git add . && git rebase --continue
   current-branch = rev-parse --abbrev-ref HEAD
   merged = branch -a --merged
@@ -112,3 +111,5 @@
   # http://travisjeffery.com/b/2012/02/search-a-git-repo-like-a-ninja/
   extendRegexp = true
   lineNumber = true
+[fetch]
+  prune = true
