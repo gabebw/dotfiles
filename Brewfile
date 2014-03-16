@@ -1,6 +1,9 @@
 # Run `brew bundle` to install some helpful (but not essential) programs.
 # https://github.com/mxcl/homebrew/blob/f949b212b3a66fc728104d5a111107911dff5b0f/Library/Contributions/cmd/brew-bundle.rb
 
+# Update Homebrew first
+update
+
 # sed for json
 install jq
 
