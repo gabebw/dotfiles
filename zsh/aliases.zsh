@@ -42,8 +42,13 @@ function p {
   fi
 }
 
+# icopy http://something.com/flip.jpg flip.jpg
 icopy() {
-  scp "$1" i:~/images && rm -fv "$1"
+  url="$1"
+  filename="$2"
+  curl -o "$filename" "$url" && \
+    scp "$filename" i:~/images && \
+    rm -fv "$filename"
 }
 
 serve() {
