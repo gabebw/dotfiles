@@ -17,6 +17,8 @@ nnoremap <Leader>n :40Vexplore<CR>
 " Change ctrl-p.vim binding
 let g:ctrlp_map = '<Leader>t'
 
+nnoremap <Leader>g :Ag<Space>
+
 " Buffer navigation
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
