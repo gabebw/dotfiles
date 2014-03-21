@@ -1,6 +1,3 @@
-filetype plugin indent on
-syntax on
-
 " on opening the file, clear search-highlighting
 autocmd BufReadCmd set nohlsearch
 
