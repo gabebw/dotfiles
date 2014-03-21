@@ -14,9 +14,6 @@ nnoremap <Leader>w :%s/\s\+$//e<CR>
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
 
-" Change ctrl-p.vim binding
-let g:ctrlp_map = '<Leader>t'
-
 nnoremap <Leader>g :Ag<Space>
 
 " Buffer navigation
