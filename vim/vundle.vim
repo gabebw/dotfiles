@@ -35,3 +35,4 @@ Bundle 'kana/vim-textobj-user'
 Bundle 'nelstrom/vim-textobj-rubyblock'
 " Colorscheme
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'thoughtbot/vim-rspec'
