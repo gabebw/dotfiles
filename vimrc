@@ -1,27 +1,24 @@
+" Stolen wholesale from christoomey, whose dotfiles you really should check out:
+" https://github.com/christoomey/dotfiles
+function! s:SourceConfigFilesIn(directory)
+  let directory_splat = '~/.vim/' . a:directory . '/*'
+  for config_file in split(glob(directory_splat), '\n')
+    if filereadable(config_file)
+        execute 'source' config_file
+    endif
+  endfor
+endfunction
+
 set nocompatible
 
-" Leader
+" Vundle goes first
+filetype off " required!
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#rc()
+
+" Leader is <Space>
 let mapleader=" "
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" Vundle goes first
-source ~/.vim/vundle.vim
-
-" Colorscheme needs to be before custom highlight groups in autocommand.vim
+call s:SourceConfigFilesIn('')
+call s:SourceConfigFilesIn('rcplugins')
 colorscheme jellybeans
-
-source ~/.vim/options.vim
-source ~/.vim/mapping.vim
-source ~/.vim/completion.vim
-source ~/.vim/test_runners.vim
-source ~/.vim/rails_shortcuts.vim
-source ~/.vim/statusline.vim
-source ~/.vim/autocommand.vim
-source ~/.vim/tmux.vim
-
-runtime macros/matchit.vim
-let g:ackprg = 'ag --nogroup --nocolor --column'

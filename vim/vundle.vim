@@ -1,9 +1,6 @@
 " Vundle; see https://github.com/gmarik/vundle
 " To install, run :BundleInstall
 " To update, run :BundleInstall!
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
 
 " let Vundle manage Vundle
 Bundle 'gmarik/Vundle.vim'
