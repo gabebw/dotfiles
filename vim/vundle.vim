@@ -5,7 +5,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
-" Bundles:
 " let Vundle manage Vundle
 Bundle 'gmarik/Vundle.vim'
 
@@ -34,6 +33,8 @@ Bundle 'dockyard/vim-easydir'
 Bundle 'itchyny/lightline.vim'
 " Words to avoid in tech writing
 Bundle 'nicholaides/words-to-avoid.vim'
-
-" Colorschemes
+" Allow `cir` to change inside ruby block, etc
+Bundle 'kana/vim-textobj-user'
+Bundle 'nelstrom/vim-textobj-rubyblock'
+" Colorscheme
 Bundle 'nanotech/jellybeans.vim'
