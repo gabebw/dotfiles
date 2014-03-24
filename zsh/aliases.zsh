@@ -47,8 +47,8 @@ icopy() {
   url="$1"
   filename="$2"
   curl -o "$filename" "$url" && \
-    scp "$filename" i:~/images && \
-    rm -fv "$filename"
+    rsync -e ssh --ignore-existing "$filename" i:~/images/ && \
+    rm -f "$filename"
 }
 
 serve() {
