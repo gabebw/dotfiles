@@ -6,7 +6,6 @@
 Bundle 'gmarik/Vundle.vim'
 
 Bundle 'epmatsw/ag.vim'
-Bundle 'tsaleh/vim-matchit'
 Bundle 'tComment'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-cucumber'
