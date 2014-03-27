@@ -5,14 +5,16 @@ autoload -Uz vcs_info
 # run before setting $PS1 each time
 function precmd { vcs_info 'prompt'; }
 # colors
-PR_RESET="%{${reset_color}%}"
-BRANCH="%{$fg[red]%}"
+RESET_COLOR="%{${reset_color}%}"
+BRANCH_COLOR="%{$fg[red]%}"
 PAREN_COLOR="%{$fg[green]%}"
-PAREN_OPEN="${PAREN_COLOR}(%f"
-PAREN_CLOSE="${PAREN_COLOR})%f"
-BASIC_BRANCH="${BRANCH}%b${PR_RESET}" # e.g. "master"
-FMT_BRANCH="${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}" # add parens
+
+PAREN_OPEN="${PAREN_COLOR}(${RESET_COLOR}"
+PAREN_CLOSE="${PAREN_COLOR})${RESET_COLOR}"
+
+BASIC_BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}" # e.g. "master"
+# Note leading space!
+PRETTY_BRANCH=" ${PAREN_OPEN}${BASIC_BRANCH}${PAREN_CLOSE}"
 
 zstyle ':vcs_info:*' enable git
-# Note leading space!
-zstyle ':vcs_info:*' formats " ${FMT_BRANCH}${PR_RESET}"
+zstyle ':vcs_info:*' formats $PRETTY_BRANCH
