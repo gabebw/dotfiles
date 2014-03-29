@@ -6,7 +6,7 @@
 OPTIONS=name:Gabe
 OPTIONS=catname:Whiskers
 OPTIONS=dogname:Bailey
-OPTIONS=horsename:Bingo
+OPTIONS=horsename:Star
 OPTIONS=pettype:dog
 OPTIONS=autopickup
 #OPTIONS=pickup_types:all
