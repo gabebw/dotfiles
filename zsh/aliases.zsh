@@ -45,7 +45,8 @@ function p {
 # icopy http://something.com/flip.jpg flip.jpg
 icopy() {
   url="$1"
-  filename="$2"
+  basename=$(basename "$url")
+  filename="${2:-$basename}"
   curl -o "$filename" "$url" && \
     rsync -e ssh -azh --ignore-existing "$filename" i:~/images/ && \
     rm -f "$filename"
