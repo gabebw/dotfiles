@@ -10,7 +10,6 @@ Bundle 'tComment'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-cucumber'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-haml'
 Bundle 'tpope/vim-rails'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'godlygeek/tabular'
@@ -35,3 +34,5 @@ Bundle 'nelstrom/vim-textobj-rubyblock'
 " Colorscheme
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'gabebw/vim-spec-runner'
+" Distraction-free writing
+Bundle 'junegunn/goyo.vim'
