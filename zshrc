@@ -10,6 +10,7 @@ CORE=(
   editor
   aliases
   path
+  fasd
   options
   vcs
   prompt
