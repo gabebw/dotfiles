@@ -28,6 +28,9 @@ install the_silver_searcher
 # a terminal multiplexer
 install tmux
 
+# Instant terminal sharing: http://tmate.io/
+install tmate
+
 # so copy/paste works in tmux
 install reattach-to-user-namespace
 
@@ -42,6 +45,9 @@ install rbenv-gem-rehash
 
 # Per-project rbenv variables
 install rbenv-vars
+
+# Used in Rails projects
+install phantomjs
 
 # Fast GitHub client
 tap jingweno/gh
