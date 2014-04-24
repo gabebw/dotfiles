@@ -45,7 +45,8 @@ do
   source $BASE/$extra.zsh
 done
 
-source $BASE/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# brew install zsh-syntax-highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH
 

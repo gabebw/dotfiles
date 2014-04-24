@@ -49,6 +49,9 @@ install rbenv-vars
 # Used in Rails projects
 install phantomjs
 
+# Syntax highlighting...for ZSH!
+install zsh-syntax-highlighting
+
 # Fast GitHub client
 tap jingweno/gh
 install gh
