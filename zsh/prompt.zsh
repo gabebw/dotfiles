@@ -1,9 +1,17 @@
 # Must use print (not echo) for ZSH colors to work
-git_branch() { print "${vcs_info_msg_0_}$(git_dirty)"; }
+git_branch() {
+  if [[ "$vcs_info_msg_0_" != '' ]]
+  then
+    print "${vcs_info_msg_0_}$(git_dirty)"
+  fi
+}
 
-# Stolen from oh-my-zsh
+# Stolen from pure.zsh:
+# https://github.com/sindresorhus/pure/blob/master/pure.zsh
 function git_dirty {
-  [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'
+  # check if it's dirty
+  command git diff --quiet --ignore-submodules HEAD &>/dev/null
+  (($? == 1)) && echo ' ✗'
 }
 
 ##########
