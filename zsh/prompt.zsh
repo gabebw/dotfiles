@@ -1,8 +1,10 @@
 # Must use print (not echo) for ZSH colors to work
-git_branch() { print "${vcs_info_msg_0_}$(parse_git_dirty)"; }
+git_branch() { print "${vcs_info_msg_0_}$(git_dirty)"; }
 
 # Stolen from oh-my-zsh
-parse_git_dirty(){ [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'; }
+function git_dirty {
+  [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'
+}
 
 ##########
 # PROMPT #
