@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "Interactively linking dotfiles into ~..."
 ./link-dotfiles.sh
