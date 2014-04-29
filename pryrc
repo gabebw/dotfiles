@@ -1,1 +1,2 @@
+require 'irb'
 load '~/.irbrc'
