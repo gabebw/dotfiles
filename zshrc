@@ -29,7 +29,6 @@ EXTRA=(
   postgres
   haskell
   go
-  # arduino
 )
 
 source $BASE/tmux.zsh
