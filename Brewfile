@@ -53,5 +53,4 @@ install phantomjs
 install zsh-syntax-highlighting
 
 # Fast GitHub client
-tap jingweno/gh
 install gh
