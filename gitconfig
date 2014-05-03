@@ -115,3 +115,5 @@
   lineNumber = true
 [fetch]
   prune = true
+[gh]
+  autoUpdate = never
