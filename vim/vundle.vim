@@ -1,38 +1,44 @@
-" Vundle; see https://github.com/gmarik/vundle
-" To install, run :BundleInstall
-" To update, run :BundleInstall!
+" Vundle; see https://github.com/gmarik/Vundle.vim
+" To install, run :PluginInstall
+" To update, run :PluginInstall!
+
+set rtp+=~/.vim/bundle/Vundle.vim/
+
+call vundle#begin()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'epmatsw/ag.vim'
-Bundle 'tComment'
-Bundle 'ervandew/supertab'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'godlygeek/tabular'
+Plugin 'epmatsw/ag.vim'
+Plugin 'tComment'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-cucumber'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'godlygeek/tabular'
 " This fork of tslime fixes many things.
-Bundle 'jgdavey/tslime.vim'
-Bundle 'endwise.vim'
-Bundle 'rake.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-coffee-script'
-Bundle 'go.vim'
-Bundle 'christoomey/vim-tmux-navigator'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'endwise.vim'
+Plugin 'rake.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-coffee-script'
+Plugin 'go.vim'
+Plugin 'christoomey/vim-tmux-navigator'
 " Trim trailing whitespace on write
-Bundle 'derekprior/vim-trimmer'
-Bundle 'skwp/greplace.vim'
-Bundle 'dockyard/vim-easydir'
-Bundle 'itchyny/lightline.vim'
+Plugin 'derekprior/vim-trimmer'
+Plugin 'skwp/greplace.vim'
+Plugin 'dockyard/vim-easydir'
+Plugin 'itchyny/lightline.vim'
 " Words to avoid in tech writing
-Bundle 'nicholaides/words-to-avoid.vim'
+Plugin 'nicholaides/words-to-avoid.vim'
 " Allow `cir` to change inside ruby block, etc
-Bundle 'kana/vim-textobj-user'
-Bundle 'nelstrom/vim-textobj-rubyblock'
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 " Colorscheme
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'gabebw/vim-spec-runner'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'gabebw/vim-spec-runner'
 " Distraction-free writing
-Bundle 'junegunn/goyo.vim'
+Plugin 'junegunn/goyo.vim'
+
+call vundle#end()

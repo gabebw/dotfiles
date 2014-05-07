@@ -11,20 +11,17 @@ endfunction
 
 set nocompatible
 
-" Vundle goes first
 filetype off " required for Vundle
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
 
 " Leader is <Space>
 let mapleader=" "
-
-" Turn on syntax highlighting and filetype detection
-filetype plugin indent on
 syntax on
 
 " Source the rest of the configuration
 " ------------------------------------
 call s:SourceConfigFilesIn('rcplugins')
 call s:SourceConfigFilesIn('')
+
+" Turn on syntax highlighting and filetype detection (after Vundle)
+filetype plugin indent on
 colorscheme jellybeans
