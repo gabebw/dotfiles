@@ -13,10 +13,15 @@ function g {
 }
 
 alias gp="bundle exec rake && git push"
-# Clone a URL and cd into the directory
+
+# Clone a URL and cd into the directory.
+# Handles the following `git clone` schemes:
+# * git@github.com:thoughtbot/paperclip.git
+# * wgh:thoughtbot/paperclip
+# * tb:paperclip
 function gcl {
   gitpath="$1"
-  directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||')
+  directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||' -e 's/^[a-z]+://')
   git clone "$gitpath" && cd "$directory"
 }
 alias gd="git diff"
