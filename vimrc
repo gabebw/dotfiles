@@ -19,8 +19,8 @@ syntax on
 
 " Source the rest of the configuration
 " ------------------------------------
-call s:SourceConfigFilesIn('rcplugins')
 call s:SourceConfigFilesIn('')
+call s:SourceConfigFilesIn('rcplugins') " after Vundle loads
 
 " Turn on syntax highlighting and filetype detection (after Vundle)
 filetype plugin indent on
