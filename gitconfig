@@ -37,6 +37,7 @@
   current-branch = rev-parse --abbrev-ref HEAD
   merged = branch -a --merged
   pr = !git push -u && gh pull-request
+  pull-requests = !git config --add remote.origin.fetch "+refs/pull/*/head:refs/remotes/origin/pr/*" && git fetch origin
   g = grep --break --heading --line-number
 
   # Typos
