@@ -41,5 +41,6 @@ Plugin 'gabebw/vim-spec-runner'
 " Distraction-free writing
 Plugin 'junegunn/goyo.vim'
 Plugin 'henrik/vim-yaml-flattener'
+Plugin 'bogado/file-line'
 
 call vundle#end()
