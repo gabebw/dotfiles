@@ -8,7 +8,7 @@ alias be="bundle exec"
 alias bi="bundle check || bundle install"
 alias binstubs="bundle --binstubs=./bin/stubs"
 
-alias irb="echo Use pry!"
+alias irb=pry
 
 # ctags
 alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
