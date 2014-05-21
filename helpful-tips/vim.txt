@@ -28,8 +28,3 @@ How do I jump back to a previous cursor position (maintained across files)?
 How do I jump forward to a newer cursor position (maintained across files)?
 <C-i>. <C-i> is the opposite of <C-o>; think of your cursor positions as a list,
 like browser history. <C-o> moves back, <C-i> moves forward.
-
-= cucumber.vim
-If you're on a step line (Given/When/Then) in a cucumber feature file (*.feature), pressing C-] will
-  go to the file where that step is defined. Pressing C-6 will go back to the
-  feature file. (Thanks, Harold)
