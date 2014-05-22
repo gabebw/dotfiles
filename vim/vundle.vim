@@ -41,5 +41,6 @@ Plugin 'gabebw/vim-spec-runner'
 Plugin 'junegunn/goyo.vim'
 Plugin 'henrik/vim-yaml-flattener'
 Plugin 'bogado/file-line'
+Plugin 'junegunn/vim-emoji'
 
 call vundle#end()
