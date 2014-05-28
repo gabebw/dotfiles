@@ -13,7 +13,7 @@ function current-project-path() {
 cdpath=($HOME/thoughtbot/ $HOME/thoughtbot/* $HOME/Projects $HOME/src)
 
 function chpwd {
-  echo $(pwd) >! `current-project-path`
+  echo $(pwd) >! `current-project-path | head -1`
 }
 
 current() {
