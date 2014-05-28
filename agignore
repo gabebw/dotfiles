@@ -15,3 +15,4 @@ bin/stubs
 *.tiff
 *.bmp
 *.svg
+/bin/stubs
