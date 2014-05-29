@@ -19,7 +19,7 @@ on new machines.
 * [Dropbox](https://www.dropbox.com/install)
 * [1Password](https://agilebits.com/onepassword) (from the Mac App Store)
 
-## Questions
+## Any Questions?
 
 I'm happy to answer questions about these dotfiles. Hit me up
 [@gabebw](https://twitter.com/gabebw).
