@@ -1,4 +1,4 @@
-alias current-tmux-session="tmux list-sessions | grep attached | awk '{session=sub(/:/, \"\", \$1); print \$session}'"
+alias current-tmux-session="tmux list-sessions | grep attached | awk '{session=sub(/:/, \"\", \$1); print \$session}' | head -1"
 
 _is_tmux_not_running() {
   [[ -z "$TMUX" ]]
