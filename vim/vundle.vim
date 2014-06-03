@@ -43,4 +43,7 @@ Plugin 'henrik/vim-yaml-flattener'
 Plugin 'bogado/file-line'
 Plugin 'junegunn/vim-emoji'
 
+" For presenting
+Plugin 'mayansmoke'
+
 call vundle#end()
