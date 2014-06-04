@@ -1,5 +1,3 @@
-/views
-
 # Ignore bundles so that :BundleInstall can updating
 /bundle/
 
