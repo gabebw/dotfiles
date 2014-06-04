@@ -56,7 +56,7 @@ compinit searches the $fpath array of directories. Simply add your directory via
 
     fpath=(/my/completion/directory $fpath)
 
-How do I complete $cmd_1 like $cmd_2?
+How do I complete one command like another command?
 
     # complete `g` like `git`
     compdef g=git
@@ -87,8 +87,8 @@ Use via e.g. `setopt correct` or `unsetopt correct`
 
 `SAVEHIST`: The maximum number of history events to save in the history file.
 `HISTSIZE`: The maximum number of events stored in the internal history list. If
-  you use the HIST_EXPIRE_DUPS_FIRST option, setting this value larger than
-  the SAVEHIST size will give you the difference as a cushion for saving
+  you use the `HIST_EXPIRE_DUPS_FIRST` option, setting this value larger than
+  the `SAVEHIST` size will give you the difference as a cushion for saving
   duplicated history events. (i.e., SAVEHIST will then be the number of unique
   events to save)
 
