@@ -15,3 +15,7 @@ Now it's in the OSX global pasteboard (because of the
 
 `C-a s` will run `tmux choose-session`, which gives you a browseable list of all
 sessions.
+
+## A long list of tips
+
+https://gist.github.com/andreyvit/2921703
