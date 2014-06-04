@@ -1,6 +1,4 @@
 set history=50
-set nobackup
-set nowritebackup
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
@@ -25,6 +23,17 @@ set autowrite
 set undofile " Create FILE.un~ files for persistent undo
 silent !mkdir ~/.vim/undodir > /dev/null 2>&1
 set undodir=~/.vim/undodir
+
+" Create backups
+set backup
+set writebackup
+set backupdir=~/.vim/backups
+silent !mkdir ~/.vim/backups > /dev/null 2>&1
+" setting backupskip to this to allow for 'crontab -e' using vim.
+" thanks to: http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-ed
+if has('unix')
+  set backupskip=/tmp/*,/private/tmp/*"
+endif
 
 " Numbers
 " With relativenumber and number set, shows relative number but has current
