@@ -5,7 +5,6 @@ RUBYOPT=rubygems
 
 # Bundler
 alias be="bundle exec"
-alias bi="bundle check || bundle install"
 alias binstubs="bundle --binstubs=./bin/stubs"
 
 alias irb=pry
@@ -25,7 +24,7 @@ alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
 function b {
   if [[ $# == 0 ]]
   then
-    bi && binstubs
+    (bundle check > /dev/null || bundle install) && binstubs
   else
     bundle "$@"
   fi
