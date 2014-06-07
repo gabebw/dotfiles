@@ -42,6 +42,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'henrik/vim-yaml-flattener'
 Plugin 'bogado/file-line'
 Plugin 'junegunn/vim-emoji'
+Plugin 'christoomey/vim-sort-motion'
 
 " For presenting
 Plugin 'mayansmoke'
