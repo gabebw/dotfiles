@@ -24,7 +24,6 @@ function gcl {
   local to_clone_into="$2"
   local directory=""
 
-
   if [[ "$to_clone_into" == "" ]]; then
     directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||' -e 's/^[a-z]+://')
     git clone "$gitpath" && cd "$directory"
