@@ -20,10 +20,19 @@ alias gp="bundle exec rake && git push"
 # * wgh:thoughtbot/paperclip
 # * tb:paperclip
 function gcl {
-  gitpath="$1"
-  directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||' -e 's/^[a-z]+://')
-  git clone "$gitpath" && cd "$directory"
+  local gitpath="$1"
+  local to_clone_into="$2"
+  local directory=""
+
+
+  if [[ "$to_clone_into" == "" ]]; then
+    directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||' -e 's/^[a-z]+://')
+    git clone "$gitpath" && cd "$directory"
+  else
+    git clone "$gitpath" "$to_clone_into" && cd "$to_clone_into"
+  fi
 }
+
 alias gd="git diff"
 alias gs="git show"
 # Grep with grouped output like Ack
