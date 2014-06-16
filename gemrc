@@ -1,2 +1,2 @@
 # Speed up gem installation by skipping docs
-gem: --no-ri --no-rdoc
+gem: --no-document
