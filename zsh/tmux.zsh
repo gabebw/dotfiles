@@ -22,3 +22,6 @@ attach_to_tmux() {
     tmux attach
   fi
 }
+
+# Start a new tmux session in the background (-d)
+alias tnew='TMUX= tmux new -ds'
