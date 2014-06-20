@@ -44,6 +44,7 @@ Plugin 'bogado/file-line'
 Plugin 'junegunn/vim-emoji'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'gabebw/pear_shaped'
+Plugin 'tpope/vim-vinegar'
 
 " For presenting
 Plugin 'mayansmoke'
