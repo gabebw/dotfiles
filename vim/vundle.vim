@@ -46,7 +46,4 @@ Plugin 'christoomey/vim-sort-motion'
 Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
 
-" For presenting
-Plugin 'mayansmoke'
-
 call vundle#end()
