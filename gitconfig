@@ -44,9 +44,9 @@
   pul = pull
 [format]
   # git log uses --pretty format by default, so this changes the default
-  # format.
-  # 4436819 [23 hours ago] One line prompt <Gabe Berke-Williams>
-  pretty = %C(magenta reverse)%h%Creset %Cgreen[%cr]%Creset %s <%an>
+  # format. It looks like this:
+  # 4436819 (HEAD, origin/master, master) Short commit message <Gabe Berke-Williams, 23 hours ago>
+  pretty = %C(magenta reverse)%h%Creset%Cgreen%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
 [color]
   # Color everything.
   ui = auto
