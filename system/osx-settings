@@ -21,6 +21,9 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 echo "Disable the warning when changing a file extension"
 defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
+echo "Finder: Always open everything in column view"
+defaults write com.apple.Finder FXPreferredViewStyle clmv
+
 echo "Make Dock icons of hidden applications translucent"
 defaults write com.apple.dock showhidden -bool true
 
