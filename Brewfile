@@ -51,3 +51,6 @@ install zsh-syntax-highlighting
 
 # Fast GitHub client
 install gh
+
+# Fuzzy-finder for your shell: https://github.com/junegunn/fzf
+install fzf
