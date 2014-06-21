@@ -77,8 +77,6 @@
   enabled = 1
 [credential]
   helper = osxkeychain
-[init]
-  templatedir = ~/.dotfiles/git-template
 [commit]
   template = ~/.dotfiles/git-template/gitmessage
 [grep]
