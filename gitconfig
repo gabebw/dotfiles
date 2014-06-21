@@ -51,39 +51,6 @@
   # format. It looks like this:
   # 4436819 (HEAD, origin/master, master) Short commit message <Gabe Berke-Williams, 23 hours ago>
   pretty = %C(magenta reverse)%h%Creset%Cgreen%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
-[color]
-  # Color everything.
-  ui = auto
-[color "branch"]
-  # What colors should "git branch" show?
-  # default black
-  current = yellow
-  # default yellow
-  local = green
-  # default red
-  remote = cyan
-[color "diff"]
-  # Color syntax: <foreground> <background>
-  # So "normal red" is normal foreground, red background
-  # BUT bold is a modifier, so "bold green red" means
-  #   "bold green" foreground, red background
-  whitespace = red reverse
-  plain = black
-  meta = cyan
-  frag = magenta bold
-  old = red
-  new = green
-  commit = yellow
-[color "status"]
-  # Options:
-  # header: the header text of the status message
-  # added/updated: added but not committed
-  # changed: changed but not added in the index
-  # untracked
-  # nobranch: the color the "no branch" warning is shown in (default red)
-  added = yellow # files deleted with "git rm" are this color too
-  changed = green # deleted items NOT done with "git rm" are this color too
-  untracked = cyan
 [help]
   autocorrect = 1
 [svn]
@@ -122,3 +89,36 @@
   prune = true
 [gh]
   autoUpdate = never
+[color]
+  # Color everything.
+  ui = auto
+[color "branch"]
+  # What colors should "git branch" show?
+  # default black
+  current = yellow
+  # default yellow
+  local = green
+  # default red
+  remote = cyan
+[color "diff"]
+  # Color syntax: <foreground> <background>
+  # So "normal red" is normal foreground, red background
+  # BUT bold is a modifier, so "bold green red" means
+  #   "bold green" foreground, red background
+  whitespace = red reverse
+  plain = black
+  meta = cyan
+  frag = magenta bold
+  old = red
+  new = green
+  commit = yellow
+[color "status"]
+  # Options:
+  # header: the header text of the status message
+  # added/updated: added but not committed
+  # changed: changed but not added in the index
+  # untracked
+  # nobranch: the color the "no branch" warning is shown in (default red)
+  added = yellow # files deleted with "git rm" are this color too
+  changed = green # deleted items NOT done with "git rm" are this color too
+  untracked = cyan
