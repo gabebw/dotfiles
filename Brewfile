@@ -28,9 +28,6 @@ install the_silver_searcher
 # a terminal multiplexer
 install tmux
 
-# Instant terminal sharing: http://tmate.io/
-install tmate
-
 # so copy/paste works in tmux
 install reattach-to-user-namespace
 
