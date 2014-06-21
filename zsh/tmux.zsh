@@ -23,5 +23,20 @@ attach_to_tmux() {
   fi
 }
 
-# Start a new tmux session in the background (-d)
-alias tnew='TMUX= tmux new -ds'
+# Fuzzy-find through directories in $CDPATH, and if a tmux session exists with
+# the same name as the selected directory, switch to it; otherwise create a new
+# session there.
+# Via @christoomey, who's a beast.
+function t {
+  local project
+  local session
+  local sessions
+  project=$(echo "${CDPATH//:/\n}" | while read dir; do find -L "$dir" -not -path '*/\.*' -type d -maxdepth 1 -exec basename {} \;; done | fzf --reverse)
+  sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
+  if echo $sessions | grep -q "$project"; then
+    tmux switch-client -t "$project"
+  else
+    (cd "$project" && TMUX= tmux new-session -d -s "$project")
+    tmux switch-client -t "$project"
+  fi
+ }
