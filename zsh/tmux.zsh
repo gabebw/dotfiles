@@ -33,10 +33,12 @@ function t {
   local sessions
   project=$(echo "${CDPATH//:/\n}" | while read dir; do find -L "$dir" -not -path '*/\.*' -type d -maxdepth 1 -exec basename {} \;; done | fzf --reverse)
   sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
-  if echo $sessions | grep -q "$project"; then
-    tmux switch-client -t "$project"
+  # tmux doesn't allow session names to have dots in them, so replace with `-`
+  session_name="${project//./-}"
+  if echo $sessions | grep -q "$session_name"; then
+    tmux switch-client -t "$session_name"
   else
-    (cd "$project" && TMUX= tmux new-session -d -s "$project")
-    tmux switch-client -t "$project"
+    (cd "$project" && TMUX= tmux new-session -d -s "$session_name")
+    tmux switch-client -t "$session_name"
   fi
  }
