@@ -23,22 +23,59 @@ attach_to_tmux() {
   fi
 }
 
+_tmux_session_exists(){
+  local session_name="$1"
+  sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
+  echo $sessions | grep -q "$session_name"
+}
+
+
+# Create a new tmux session in the fuzzy-found directory.
+# If called with one argument, names the session that.
+# If called with no arguments, names the session after the directory.
+_new_tmux_session_via_fuzzy_finder() {
+  local project
+  local new_session_name
+  project=$(echo "${CDPATH//:/\n}" | while read dir; do find -L "$dir" -not -path '*/\.*' -type d -maxdepth 1 -exec basename {} \;; done | fzf --reverse)
+  # tmux doesn't allow session names to have dots in them, so replace with `-`
+  new_session_name="${project//./-}"
+  if [[ $# == 1 ]]; then
+    new_session_name="${1//./-}"
+  else
+    new_session_name="${project//./-}"
+  fi
+
+  if _tmux_session_exists "$new_session_name"; then
+    tmux switch-client -t "$new_session_name"
+  else
+    (cd "$project" && TMUX= tmux new-session -d -s "$new_session_name")
+    tmux switch-client -t "$new_session_name"
+  fi
+}
+
 # Fuzzy-find through directories in $CDPATH, and if a tmux session exists with
 # the same name as the selected directory, switch to it; otherwise create a new
 # session there.
 # Via @christoomey, who's a beast.
+#
+# You can do `t blog` to connect to the `blog` session, or create a new session
+# named `blog` at a directory of your choosing.
+#
+# You can do just `t` to fuzzy-find a directory, then switch to a session with
+# the same name as that directory (or attach to the existing session).
 function t {
   local project
   local session
   local sessions
-  project=$(echo "${CDPATH//:/\n}" | while read dir; do find -L "$dir" -not -path '*/\.*' -type d -maxdepth 1 -exec basename {} \;; done | fzf --reverse)
   sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
-  # tmux doesn't allow session names to have dots in them, so replace with `-`
-  session_name="${project//./-}"
-  if echo $sessions | grep -q "$session_name"; then
-    tmux switch-client -t "$session_name"
+  if [[ $# == 1 ]]; then
+    local session_to_connect_to="$1"
+    if _tmux_session_exists "$session_to_connect_to"; then
+      tmux switch-client -t "$session_to_connect_to"
+    else
+      _new_tmux_session_via_fuzzy_finder
+    fi
   else
-    (cd "$project" && TMUX= tmux new-session -d -s "$session_name")
-    tmux switch-client -t "$session_name"
+    _new_tmux_session_via_fuzzy_finder
   fi
  }
