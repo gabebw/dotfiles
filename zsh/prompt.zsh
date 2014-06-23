@@ -12,6 +12,49 @@ _blue()                   { echo "$(_color "$1" blue)" }
 
 _full_path()              { echo "$(_blue "%~")" }
 _working_directory()      { echo "$(_blue "%c")" }
+_colored_git_status()     { echo "$(_git_prompt_color "$(_git_status)")" }
+
+_short_colored_git_status() {
+  local letter
+  case $(_git_status) in
+    changed) letter="C";;
+    pending) letter="P";;
+    untracked) letter="U";;
+    unchanged) letter="";;
+  esac
+
+  _git_prompt_color $letter
+}
+
+_git_status() {
+  git_status=$(cat "/tmp/git-status-$$")
+  if [ -n "$(echo $git_status | grep "Changes not staged")" ]; then
+    echo "changed"
+  elif [ -n "$(echo $git_status | grep "Changes to be committed")" ]; then
+    echo "pending"
+  elif [ -n "$(echo $git_status | grep "Untracked files")" ]; then
+    echo "untracked"
+  else
+    echo "unchanged"
+  fi
+}
+
+_git_prompt_color() {
+  if [ -n "$1" ]; then
+    current_git_status=$(_git_status)
+    if [ "changed" = $current_git_status ]; then
+      echo "$(_red $1)"
+    elif [ "pending" = $current_git_status ]; then
+      echo "$(_yellow $1)"
+    elif [ "unchanged" = $current_git_status ]; then
+      echo "$(_green $1)"
+    elif [ "untracked" = $current_git_status ]; then
+      echo "$(_cyan $1)"
+    fi
+  else
+    echo "$1"
+  fi
+}
 
 # Must use print (not echo) for ZSH colors to work
 git_branch() {
@@ -35,5 +78,11 @@ function git_dirty {
   fi
 }
 
-export PROMPT="\$(_working_directory)\$(git_branch) \$(git_dirty)  "
+# precmd is a magic function that's run each time the prompt is shown
+function precmd {
+  vcs_info 'prompt'
+  $(git status 2> /dev/null >! "/tmp/git-status-$$")
+}
+
+export PROMPT="\$(_working_directory) \$(git_branch) \$(_short_colored_git_status) \$(git_dirty)  "
 export RPROMPT="\$(ruby_version)"
