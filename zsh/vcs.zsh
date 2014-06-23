@@ -7,7 +7,7 @@ function precmd { vcs_info 'prompt'; }
 
 # colors
 RESET_COLOR="%{${reset_color}%}"
-BRANCH_COLOR="%{$fg[red]%}"
+BRANCH_COLOR="%{$fg_bold[yellow]%}"
 
 # e.g. "master"
 BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
