@@ -72,7 +72,7 @@ git_branch() {
 
 # Stolen from pure.zsh:
 # https://github.com/sindresorhus/pure/blob/master/pure.zsh
-function git_dirty {
+function _git_dirty {
   # check if it's dirty
   command git diff --quiet --ignore-submodules HEAD &>/dev/null
   if (($? == 1)); then
@@ -88,5 +88,5 @@ function precmd {
   $(git status 2> /dev/null >! "/tmp/git-status-$$")
 }
 
-export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) \$(git_dirty)  "
+export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) \$(_git_dirty)  "
 export RPROMPT="\$(ruby_version)"
