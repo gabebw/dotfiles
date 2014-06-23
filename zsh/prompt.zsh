@@ -1,3 +1,19 @@
+#######################
+#  GIT (branch, vcs)  #
+#######################
+autoload -Uz vcs_info
+
+RESET_COLOR="%{${reset_color}%}"
+BRANCH_COLOR="%{$fg_bold[yellow]%}"
+BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "$BRANCH"
+
+##################
+# Non-git things #
+##################
+
 _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
@@ -88,5 +104,6 @@ function precmd {
   $(git status 2> /dev/null >! "/tmp/git-status-$$")
 }
 
+# OK, now actually set PROMPT and RPROMPT
 export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) \$(_git_dirty)  "
 export RPROMPT="\$(ruby_version)"

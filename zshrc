@@ -12,7 +12,6 @@ CORE=(
   path
   fasd
   options
-  vcs
   prompt
   ruby
   rbenv
