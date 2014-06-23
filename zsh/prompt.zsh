@@ -17,9 +17,9 @@ _colored_git_status()     { echo "$(_git_prompt_color "$(_git_status)")" }
 _short_colored_git_status() {
   local letter
   case $(_git_status) in
-    changed) letter="C";;
-    pending) letter="P";;
-    untracked) letter="U";;
+    changed) letter=" C";;
+    pending) letter=" P";;
+    untracked) letter=" U";;
     unchanged) letter="";;
   esac
 
@@ -84,5 +84,5 @@ function precmd {
   $(git status 2> /dev/null >! "/tmp/git-status-$$")
 }
 
-export PROMPT="\$(_working_directory) \$(git_branch) \$(_short_colored_git_status) \$(git_dirty)  "
+export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) \$(git_dirty)  "
 export RPROMPT="\$(ruby_version)"
