@@ -96,10 +96,15 @@ function _git_dirty {
   fi
 }
 
+
 # precmd is a magic function that's run each time the prompt is shown
 function precmd {
+  # Extracting this to a variable makes it SO much faster. Otherwise `git
+  # commit` took like a second.
+  local git_status_file="/tmp/git-status-$$"
+
   vcs_info 'prompt'
-  $(git status 2> /dev/null >! "/tmp/git-status-$$")
+  $(git status 2> /dev/null >! "$git_status_file")
 }
 
 # OK, now actually set PROMPT and RPROMPT
