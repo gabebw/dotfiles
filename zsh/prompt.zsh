@@ -18,17 +18,15 @@ _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
 
-_separate()               { [[ -n "$1" ]] && echo " $1" }
-_gray()                   { echo "$(_color "$1" grey)" }
-_yellow()                 { echo "$(_color "$1" yellow)" }
-_green()                  { echo "$(_color "$1" green)" }
-_red()                    { echo "$(_color "$1" red)" }
-_cyan()                   { echo "$(_color "$1" cyan)" }
-_blue()                   { echo "$(_color "$1" blue)" }
+_gray()   { echo "$(_color "$1" grey)" }
+_yellow() { echo "$(_color "$1" yellow)" }
+_green()  { echo "$(_color "$1" green)" }
+_red()    { echo "$(_color "$1" red)" }
+_cyan()   { echo "$(_color "$1" cyan)" }
+_blue()   { echo "$(_color "$1" blue)" }
 
-_full_path()              { echo "$(_blue "%~")" }
-_working_directory()      { echo "$(_blue "%c")" }
-_colored_git_status()     { echo "$(_color_based_on_git_status "$(_git_status)")" }
+_full_path()         { echo "$(_blue "%~")" }
+_working_directory() { echo "$(_blue "%c")" }
 
 _short_colored_git_status() {
   local letter
