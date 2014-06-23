@@ -12,7 +12,7 @@ _blue()                   { echo "$(_color "$1" blue)" }
 
 _full_path()              { echo "$(_blue "%~")" }
 _working_directory()      { echo "$(_blue "%c")" }
-_colored_git_status()     { echo "$(_git_prompt_color "$(_git_status)")" }
+_colored_git_status()     { echo "$(_color_based_on_git_status "$(_git_status)")" }
 
 _short_colored_git_status() {
   local letter
@@ -26,7 +26,7 @@ _short_colored_git_status() {
 
   if [[ -n "$letter" ]]; then
     echo -n "$(_blue "$separator")"
-    _git_prompt_color $letter
+    _color_based_on_git_status $letter
   fi
 }
 
@@ -43,7 +43,7 @@ _git_status() {
   fi
 }
 
-_git_prompt_color() {
+_color_based_on_git_status() {
   if [ -n "$1" ]; then
     current_git_status=$(_git_status)
     if [ "changed" = $current_git_status ]; then
