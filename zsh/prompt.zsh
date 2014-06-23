@@ -16,14 +16,18 @@ _colored_git_status()     { echo "$(_git_prompt_color "$(_git_status)")" }
 
 _short_colored_git_status() {
   local letter
+  local separator="/"
   case $(_git_status) in
-    changed) letter=" C";;
-    pending) letter=" P";;
-    untracked) letter=" U";;
+    changed) letter="C";;
+    pending) letter="P";;
+    untracked) letter="U";;
     unchanged) letter="";;
   esac
 
-  _git_prompt_color $letter
+  if [[ -n "$letter" ]]; then
+    echo -n "$(_blue "$separator")"
+    _git_prompt_color $letter
+  fi
 }
 
 _git_status() {
