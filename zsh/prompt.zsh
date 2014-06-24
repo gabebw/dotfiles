@@ -76,7 +76,7 @@ _color_based_on_git_status() {
 
 # Must use print (not echo) for ZSH colors to work
 git_branch() {
-  # vcs_info_msg_0_ is set by the code in vcs.zsh
+  # vcs_info_msg_0_ is set by the vcs_info directives at the top of this file
   local colored_branch_name="$vcs_info_msg_0_"
   if [[ -n "$colored_branch_name" ]]
   then
