@@ -1,5 +1,6 @@
 function! s:Presentation()
-  colorscheme mayansmoke
+  " Turn off lightline, use default
+  set statusline=
 endfunction
 
 command! Presentation :call <SID>Presentation()
