@@ -67,6 +67,9 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 echo "Disable shadow in screenshots"
 defaults write com.apple.screencapture disable-shadow -bool true
 
+echo "Save screenshots to ~/Desktop/screenshots"
+defaults write com.apple.screencapture location ~/Desktop/screenshots
+
 echo "Enable highlight hover effect for the grid view of a stack (Dock)"
 defaults write com.apple.dock mouse-over-hilte-stack -bool true
 
