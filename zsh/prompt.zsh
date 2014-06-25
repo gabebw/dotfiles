@@ -35,6 +35,7 @@ _short_colored_git_status() {
     changed) letter="C";;
     pending) letter="P";;
     staged) letter="S";;
+    untracked) letter="UT" ;;
     unchanged) letter="";;
   esac
 
