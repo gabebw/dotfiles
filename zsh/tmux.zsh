@@ -1,3 +1,4 @@
+# 1) Ensure we're always in a tmux session
 alias current-tmux-session="tmux list-sessions | grep attached | awk '{session=sub(/:/, \"\", \$1); print \$session}' | head -1"
 
 _is_tmux_not_running() {
@@ -22,6 +23,8 @@ attach_to_tmux() {
     tmux attach
   fi
 }
+
+# 2) the `t` function
 
 _tmux_session_exists(){
   local session_name="$1"

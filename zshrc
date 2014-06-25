@@ -1,5 +1,9 @@
 BASE="$HOME/.dotfiles/zsh"
 
+# First, ensure we're in tmux
+source $BASE/tmux.zsh
+attach_to_tmux
+
 CORE=(
   completion
   key_bindings
@@ -29,9 +33,6 @@ EXTRA=(
   haskell
   go
 )
-
-source $BASE/tmux.zsh
-attach_to_tmux
 
 for core in $CORE
 do
