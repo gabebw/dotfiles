@@ -83,18 +83,6 @@ git_branch() {
   fi
 }
 
-# Stolen from pure.zsh:
-# https://github.com/sindresorhus/pure/blob/master/pure.zsh
-function _git_dirty {
-  # check if it's dirty
-  command git diff --quiet --ignore-submodules HEAD &>/dev/null
-  if (($? == 1)); then
-    print "$(_red "✗")"
-  else
-    print "$(_green "✔")"
-  fi
-}
-
 # precmd is a magic function that's run each time the prompt is shown
 function precmd {
   vcs_info 'prompt'
@@ -102,5 +90,5 @@ function precmd {
 }
 
 # OK, now actually set PROMPT and RPROMPT
-export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) \$(_git_dirty)  "
+export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) "
 export RPROMPT="\$(ruby_version)"
