@@ -53,6 +53,15 @@ _new_tmux_session_via_fuzzy_finder() {
   fi
 }
 
+_tmux_try_to_connect_to {
+  local session_to_connect_to="$1"
+  if _tmux_session_exists "$session_to_connect_to"; then
+    tmux switch-client -t "$session_to_connect_to"
+  else
+    _new_tmux_session_via_fuzzy_finder
+  fi
+}
+
 # Fuzzy-find through directories in $CDPATH, and if a tmux session exists with
 # the same name as the selected directory, switch to it; otherwise create a new
 # session there.
@@ -69,12 +78,7 @@ function t {
   local sessions
   sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
   if [[ $# == 1 ]]; then
-    local session_to_connect_to="$1"
-    if _tmux_session_exists "$session_to_connect_to"; then
-      tmux switch-client -t "$session_to_connect_to"
-    else
-      _new_tmux_session_via_fuzzy_finder
-    fi
+    _tmux_try_to_connect_to "$1"
   else
     _new_tmux_session_via_fuzzy_finder
   fi
