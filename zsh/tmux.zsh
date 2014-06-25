@@ -56,7 +56,7 @@ _new_tmux_session_via_fuzzy_finder() {
   fi
 }
 
-_tmux_try_to_connect_to {
+_tmux_try_to_connect_to() {
   local session_to_connect_to="$1"
   if _tmux_session_exists "$session_to_connect_to"; then
     tmux switch-client -t "$session_to_connect_to"
