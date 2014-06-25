@@ -34,7 +34,7 @@ _short_colored_git_status() {
   case $(_git_status) in
     changed) letter="C";;
     pending) letter="P";;
-    untracked) letter="U";;
+    staged) letter="S";;
     unchanged) letter="";;
   esac
 
@@ -49,7 +49,7 @@ _git_status() {
   if [ -n "$(echo $git_status | grep "Changes not staged")" ]; then
     echo "changed"
   elif [ -n "$(echo $git_status | grep "Changes to be committed")" ]; then
-    echo "pending"
+    echo "staged"
   elif [ -n "$(echo $git_status | grep "Untracked files")" ]; then
     echo "untracked"
   else
@@ -60,15 +60,13 @@ _git_status() {
 _color_based_on_git_status() {
   if [ -n "$1" ]; then
     current_git_status=$(_git_status)
-    if [ "changed" = $current_git_status ]; then
-      echo "$(_red $1)"
-    elif [ "pending" = $current_git_status ]; then
-      echo "$(_yellow $1)"
-    elif [ "unchanged" = $current_git_status ]; then
-      echo "$(_green $1)"
-    elif [ "untracked" = $current_git_status ]; then
-      echo "$(_cyan $1)"
-    fi
+
+    case $current_git_status in
+      changed) echo "$(_red $1)" ;;
+      staged) echo "$(_yellow $1)" ;;
+      untracked) echo "$(_cyan $1)" ;;
+      unchanged) echo "$(_green $1)" ;;
+    esac
   else
     echo "$1"
   fi
