@@ -16,3 +16,6 @@ bin/stubs
 *.bmp
 *.svg
 /bin/stubs
+
+# Ignore vim backups in dotfiles
+/vim/backups
