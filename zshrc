@@ -7,8 +7,6 @@ attach_to_tmux
 CORE=(
   completion
   key_bindings
-  # "tmux" needs to be before "navigation" because of current-tmux-session
-  tmux
   navigation
   colors
   editor
