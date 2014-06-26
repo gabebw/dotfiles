@@ -14,6 +14,11 @@ zstyle ':vcs_info:git*' formats "$BRANCH"
 # Non-git things #
 ##################
 
+ruby_version() {
+  local version=`rbenv version-name`
+  print "%{$fg[magenta]%}${version}%{$reset_color%}"
+}
+
 _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }

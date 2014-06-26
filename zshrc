@@ -16,7 +16,6 @@ CORE=(
   options
   prompt
   ruby
-  rbenv
 )
 
 ############################
