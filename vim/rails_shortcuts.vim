@@ -1,7 +1,11 @@
 " Rails.vim
 augroup rails_shortcuts
   autocmd!
-  command! Rroutes :e config/routes.rb
+
+  " I'm sure there's a better way, but I don't know it
+  command! Rroutes :Rinitializer
+  command! RTroutes :RTinitializer
+  command! RSroutes :RSinitializer
 
   autocmd User Rails nnoremap <Leader>m :Rmodel<Space>
   autocmd User Rails nnoremap <Leader>c :Rcontroller<Space>
