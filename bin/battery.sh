@@ -4,7 +4,7 @@ battery_percentage="$(pmset -g batt | sed -E '/^.*[[:space:]]([0-9]+)%.*/!d; s//
 battery_time=$(pmset -g batt | grep Internal | awk '{print $4, $5}' | sed 's/;//')
 message="${battery_percentage}% (${battery_time})"
 
-if [[ $battery_percentage < 20 ]]
+if (( $battery_percentage < 20 ))
 then
   # Print in red if we don't have a lot of battery left
   echo "#[fg=red]" "$message" "#[fg=default]"
