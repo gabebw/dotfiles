@@ -29,3 +29,7 @@ prompt at the bottom of the window. Enter commands there without the `tmux `, so
 ## A long list of tips
 
 https://gist.github.com/andreyvit/2921703
+
+## Even more tips
+
+http://wiki.gentoo.org/wiki/Tmux#Key_Binds
