@@ -31,14 +31,9 @@ EXTRA=(
   go
 )
 
-for core in $CORE
+for file in $CORE $EXTRA
 do
-  source $BASE/$core.zsh
-done
-
-for extra in $EXTRA
-do
-  source $BASE/$extra.zsh
+  source "$BASE/$file.zsh"
 done
 
 # brew install zsh-syntax-highlighting
