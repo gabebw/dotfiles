@@ -1,4 +1,4 @@
-set history=50
+set history=100000
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
@@ -47,10 +47,8 @@ set autoindent
 set copyindent " copy previous indentation on autoindenting
 set showmatch " show matching parenthesis
 
-" Searching
-set ignorecase " ignore case when searching
-set smartcase  " ignore case if search pattern is all lowercase, case-sensitive otherwise
-
+" make searches case-sensitive only if they contain upper-case characters
+set ignorecase smartcase
 
 " Open below and to the right, the same way you read a page
 set splitbelow splitright
