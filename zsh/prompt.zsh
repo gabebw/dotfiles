@@ -86,7 +86,7 @@ git_branch() {
   local colored_branch_name="$vcs_info_msg_0_"
   if [[ -n "$colored_branch_name" ]]
   then
-    print "$colored_branch_name"
+    print " $colored_branch_name"
   fi
 }
 
@@ -97,5 +97,5 @@ function precmd {
 }
 
 # OK, now actually set PROMPT and RPROMPT
-export PROMPT="\$(_working_directory) \$(git_branch)\$(_short_colored_git_status) "
+export PROMPT="\$(_working_directory)\$(git_branch)\$(_short_colored_git_status) "
 export RPROMPT="\$(ruby_version)"
