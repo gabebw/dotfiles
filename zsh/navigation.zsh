@@ -10,7 +10,7 @@ function current-project-path() {
   echo "$TMUX_PROJECT_DIRECTORY/`current-tmux-session`"
 }
 
-cdpath=($HOME/code $HOME/code/*)
+cdpath=($HOME/code $HOME/code/* $HOME/code/thoughtbot/*)
 
 function chpwd {
   echo $(pwd) >! `current-project-path`
