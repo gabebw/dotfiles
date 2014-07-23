@@ -9,8 +9,7 @@ alias binstubs="bundle --binstubs=./bin/stubs"
 
 alias irb=pry
 
-# ctags
-alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
+alias tagit='/usr/local/bin/ctags -R \
   --languages=-javascript \
   --langmap="ruby:+.rake.builder.rjs" \
   --exclude=.git \
@@ -19,7 +18,7 @@ alias tagit='mkdir -p tmp/ && /usr/local/bin/ctags -R \
   --exclude=db \
   --exclude=ext \
   --exclude=tmp \
-  -f ./tmp/tags *'
+  -f ./tags *'
 
 function b {
   if [[ $# == 0 ]]
