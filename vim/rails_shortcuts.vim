@@ -2,10 +2,9 @@
 augroup rails_shortcuts
   autocmd!
 
-  " I'm sure there's a better way, but I don't know it
-  command! Rroutes :Rinitializer
-  command! RTroutes :RTinitializer
-  command! RSroutes :RSinitializer
+  let g:rails_projections = {
+      \ "config/routes.rb": { "command": "routes" }
+  \ }
 
   autocmd User Rails nnoremap <Leader>m :Rmodel<Space>
   autocmd User Rails nnoremap <Leader>c :Rcontroller<Space>
