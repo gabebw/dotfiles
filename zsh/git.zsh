@@ -20,15 +20,20 @@ alias gp="bundle exec rake && git push"
 # * wgh:thoughtbot/paperclip
 # * tb:paperclip
 function gcl {
-  local gitpath="$1"
-  local to_clone_into="$2"
-  local directory=""
-
-  if [[ "$to_clone_into" == "" ]]; then
-    directory=$(echo "$gitpath" | sed -E -e 's/git@github.com://' -e 's/.git$//' -e 's|^[^/]+/||' -e 's/^[a-z]+://')
-    git clone "$gitpath" && cd "$directory"
+  local git_url="$1"
+  local custom_directory="$2"
+  if [[ "$git_url" == tb:* ]]; then
+    # Chop off the `tb:` from `tb:paperclip`
+    local directory="${git_url#tb:}"
   else
-    git clone "$gitpath" "$to_clone_into" && cd "$to_clone_into"
+    local directory="${$(basename $git_url)%.git}"
+  fi
+
+  if [[ -z "$custom_directory" ]]; then
+    git clone "$git_url" && cd "$directory"
+  else
+    git clone "$git_url" "$custom_directory" && \
+      cd "$custom_directory"
   fi
 }
 

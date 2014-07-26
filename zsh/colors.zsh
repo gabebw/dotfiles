@@ -11,4 +11,4 @@ zstyle ':completion:*' list-colors ''
 # Show ls on dark backgrounds well
 unset LSCOLORS
 export LSCOLORS=gxfxcxdxbxegedabagacad
-export LS_COLORS=gxfxcxdxbxegedabagacad
+export LS_COLORS=$LSCOLORS
