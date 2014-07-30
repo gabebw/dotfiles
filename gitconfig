@@ -38,8 +38,10 @@
   next = !git add . && git rebase --continue
   merged = branch -a --merged
   pr = !git push -u && gh pull-request
-  pull-requests = !git config --add remote.origin.fetch "+refs/pull/*/head:refs/remotes/origin/pr/*" && git fetch origin
   g = grep --break --heading --line-number
+
+  # Check out a pull request by number: g co-pr 123
+  co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
 
   # Typos
   pul = pull
