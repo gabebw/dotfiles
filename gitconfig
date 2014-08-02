@@ -87,14 +87,6 @@
 [color]
   # Color everything.
   ui = auto
-[color "branch"]
-  # What colors should "git branch" show?
-  # default black
-  current = yellow
-  # default yellow
-  local = green
-  # default red
-  remote = cyan
 [color "diff"]
   # Color syntax: <foreground> <background>
   # So "normal red" is normal foreground, red background
