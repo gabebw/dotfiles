@@ -2,9 +2,9 @@
 # their session. It is scoped to the session, so new panes in the `foo` session
 # don't auto-cd to the same place as new panes in the `bar` session.
 
-TMUX_PROJECT_DIRECTORY=$HOME/.tmux-project-directory
+TMUX_PROJECT_DIRECTORY="$HOME/.tmux-project-directory"
 
-mkdir -p $TMUX_PROJECT_DIRECTORY
+mkdir -p "$TMUX_PROJECT_DIRECTORY"
 
 function current-project-path() {
   echo "$TMUX_PROJECT_DIRECTORY/`current-tmux-session`"
@@ -13,12 +13,12 @@ function current-project-path() {
 cdpath=($HOME/code $HOME/code/* $HOME/code/thoughtbot/*)
 
 function chpwd {
-  echo $(pwd) >! `current-project-path`
+  echo $(pwd) >! "`current-project-path`"
 }
 
 current() {
-  if [[ -f `current-project-path` ]]; then
-    cd "$(cat `current-project-path`)"
+  if [[ -f "`current-project-path`" ]]; then
+    cd "$(cat "`current-project-path`")"
   fi
 }
 

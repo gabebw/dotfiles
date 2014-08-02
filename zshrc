@@ -41,4 +41,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH
 
+echo "Remember to use j and d"
+
 # Houston, we have liftoff.

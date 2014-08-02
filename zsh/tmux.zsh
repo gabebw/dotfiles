@@ -1,3 +1,4 @@
+####################################
 # 1) Ensure we're always in a tmux session
 alias current-tmux-session="tmux list-sessions | grep attached | awk '{session=sub(/:/, \"\", \$1); print \$session}' | head -1"
 
@@ -24,6 +25,7 @@ attach_to_tmux() {
   fi
 }
 
+####################################
 # 2) the `t` function
 
 _tmux_session_exists(){
@@ -76,10 +78,7 @@ _tmux_try_to_connect_to() {
 # You can do just `t` to fuzzy-find a directory, then switch to a session with
 # the same name as that directory (or attach to the existing session).
 function t {
-  local project
-  local session
-  local sessions
-  sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
+  local sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
   if [[ $# == 1 ]]; then
     _tmux_try_to_connect_to "$1"
   else
