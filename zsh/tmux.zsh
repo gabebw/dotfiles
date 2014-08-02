@@ -25,6 +25,17 @@ attach_to_tmux() {
   fi
 }
 
+# Attach if not in tmux, or switch if we are in tmux
+attach_to_tmux_session() {
+  local session="$1"
+  if _is_tmux_not_running; then
+    tmux attach -t "$1"
+  else
+    tmux switch-client -t "$1"
+  fi
+}
+
+
 ####################################
 # 2) the `t` function
 
@@ -50,18 +61,17 @@ _new_tmux_session_via_fuzzy_finder() {
     new_session_name="${project//./-}"
   fi
 
-  if _tmux_session_exists "$new_session_name"; then
-    tmux switch-client -t "$new_session_name"
-  else
+  if ! _tmux_session_exists "$new_session_name"; then
     (cd "$project" && TMUX= tmux new-session -d -s "$new_session_name")
-    tmux switch-client -t "$new_session_name"
   fi
+
+  attach_to_tmux_session "$new_session_name"
 }
 
 _tmux_try_to_connect_to() {
   local session_to_connect_to="$1"
   if _tmux_session_exists "$session_to_connect_to"; then
-    tmux switch-client -t "$session_to_connect_to"
+    attach_to_tmux_session "$session_to_connect_to"
   else
     _new_tmux_session_via_fuzzy_finder
   fi
