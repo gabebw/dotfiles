@@ -21,8 +21,6 @@
   mnemonicprefix = true
 [alias]
   st = status -sb
-  # Delete branch locally and remotely
-  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   co = checkout
   # Full commit messages without all the junk from `log --pretty=full`
   full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
@@ -48,7 +46,7 @@
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format. It looks like this:
-  # 4436819 (HEAD, origin/master, master) Short commit message <Gabe Berke-Williams, 23 hours ago>
+  # 4436819 (HEAD, origin/master, master) Short commit message [Gabe Berke-Williams, 23 hours ago]
   pretty = %C(magenta reverse)%h%Creset%Cgreen%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
 [help]
   autocorrect = 1
