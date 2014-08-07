@@ -109,3 +109,5 @@
   added = yellow # files deleted with "git rm" are this color too
   changed = green # deleted items NOT done with "git rm" are this color too
   untracked = cyan
+[init]
+  templatedir = ~/.git_template
