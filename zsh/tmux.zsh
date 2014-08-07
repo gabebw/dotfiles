@@ -88,7 +88,6 @@ _tmux_try_to_connect_to() {
 # You can do just `t` to fuzzy-find a directory, then switch to a session with
 # the same name as that directory (or attach to the existing session).
 function t {
-  local sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
   if [[ $# == 1 ]]; then
     _tmux_try_to_connect_to "$1"
   else
