@@ -39,11 +39,13 @@ attach_to_tmux_session() {
 
 # Use `t blog` to connect to the `blog` session, or create a new session named
 # `blog`.
+#
+# With no arguments, lists all tmux sessions.
 function t {
   if (( $# == 1 )); then
     _tmux_try_to_connect_to "$1"
   else
-    _new_tmux_session
+    tmux ls
   fi
  }
 
