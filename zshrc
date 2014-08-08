@@ -2,7 +2,7 @@ BASE="$HOME/.dotfiles/zsh"
 
 # First, ensure we're in tmux
 source $BASE/tmux.zsh
-attach_to_tmux
+ensure_we_are_inside_tmux
 
 CORE=(
   completion
