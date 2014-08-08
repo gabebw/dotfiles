@@ -1,0 +1,5 @@
+#compdef t
+
+if (( CURRENT == 2 )); then
+  compadd $(tmux ls | awk '{ gsub(":", "", $1); print $1; }')
+fi
