@@ -20,6 +20,8 @@
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
 [alias]
+  # Delete branch locally and remotely. Used by `git mm`
+  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   st = status -sb
   co = checkout
   # Full commit messages without all the junk from `log --pretty=full`
