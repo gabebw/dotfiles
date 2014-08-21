@@ -45,5 +45,7 @@ Plugin 'junegunn/vim-emoji'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
+" :Gist
+Plugin 'mattn/gist-vim'
 
 call vundle#end()
