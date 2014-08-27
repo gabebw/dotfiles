@@ -113,3 +113,5 @@
   untracked = cyan
 [init]
   templatedir = ~/.git-template
+[github]
+  user = gabebw
