@@ -1,4 +1,5 @@
-set history=100000
+" Maximum value is 10,000
+set history=10000
 set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
