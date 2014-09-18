@@ -97,5 +97,5 @@ function precmd {
 }
 
 # OK, now actually set PROMPT and RPROMPT
-export PROMPT="\$(_working_directory)\$(git_branch)\$(_short_colored_git_status) "
+export PROMPT="\$(_working_directory)\$(git_branch)\$(_short_colored_git_status) $ "
 export RPROMPT="\$(ruby_version)"
