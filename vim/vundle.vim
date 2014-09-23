@@ -45,6 +45,8 @@ Plugin 'junegunn/vim-emoji'
 Plugin 'christoomey/vim-sort-motion'
 Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-eunuch'
+
 " :Gist
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
