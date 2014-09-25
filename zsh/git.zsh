@@ -12,8 +12,6 @@ function g {
   fi
 }
 
-alias gp="bundle exec rake && git push"
-
 # Clone a URL and cd into the directory.
 # Handles the following `git clone` schemes:
 # * git@github.com:thoughtbot/paperclip.git
@@ -38,7 +36,6 @@ function gcl {
 }
 
 alias gd="git diff"
-alias gs="git show"
 # Grep with grouped output like Ack
 alias gg="git g"
 alias amend="git commit --amend -Chead"
