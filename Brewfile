@@ -40,6 +40,9 @@ install mercurial vim
 # Never run `rbenv rehash` again
 install rbenv-gem-rehash
 
+# Install some gems (like bundler) for every new Ruby
+install rbenv-default-gems
+
 # Per-project rbenv variables
 install rbenv-vars
 

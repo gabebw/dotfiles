@@ -4,6 +4,9 @@ nothing_to_do="true"
 
 for name in *; do
   target="$HOME/.$name"
+  if [ "$name" = "default-gems" ]; then
+    target="$HOME/.rbenv/$name"
+  fi
 
   if [ ! -L "$target" ]; then
     case "$name" in
