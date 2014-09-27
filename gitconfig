@@ -50,8 +50,6 @@
   # format. It looks like this:
   # 4436819 (HEAD, origin/master, master) Short commit message [Gabe Berke-Williams, 23 hours ago]
   pretty = %C(magenta reverse)%h%Creset%Cgreen%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
-[help]
-  autocorrect = 1
 [svn]
   authorsfile = ~/.git-author
 [instaweb]
