@@ -13,7 +13,7 @@ let g:lightline = {
       \ 'component': {
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
       \   'emojipocalypse': '%{emoji#for("sparkles")}',
-      \   'readonly': '%{&filetype=="help" ? "" : &readonly ? emoji#for("lock") :""}',
+      \   'readonly': '%{(&filetype!="help" && &readonly) ? emoji#for("lock") :""}',
       \ },
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
