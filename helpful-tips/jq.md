@@ -20,8 +20,6 @@ To get the IDs:
     "1"
     "2"
 
-## Get values out of an array of hashes
-
 ## Pretty-print JSON (with colors!)
 
 Run it through the "no-op" filter, `.`:
