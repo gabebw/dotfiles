@@ -45,6 +45,7 @@ Plugin 'christoomey/vim-sort-motion'
 Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-surround'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
