@@ -37,13 +37,20 @@ function whois() {
 function al { ls -t | head -n ${1:-10}; }
 
 # icopy http://something.com/flip.jpg flip.jpg
+# or
+# icopy ./something.gif
 icopy() {
-  url="$1"
-  basename=$(basename "$url")
-  filename="${2:-$basename}"
-  curl -o "$filename" "$url" && \
-    rsync -e ssh -azh --ignore-existing "$filename" i:~/images/ && \
-    rm -f "$filename"
+  path_or_url="$1"
+  basename_path=$(basename "$path_or_url")
+  filename="${2:-$basename_path}"
+  if [[ "$path" =~ "^http" ]]; then
+    curl -o "$filename" "$path_or_url" && \
+      rsync -e ssh -azh --ignore-existing "$filename" i:~/images/ && \
+      rm -f "$filename"
+  else
+    # Not a URL
+    rsync -e ssh -azh --ignore-existing "$path_or_url" "i:~/images/$filename"
+  fi
 }
 
 serve() {
