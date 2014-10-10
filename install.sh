@@ -4,7 +4,8 @@ echo "Interactively linking dotfiles into ~..."
 ./link-dotfiles.sh
 
 echo "Installing Homebrew packages..."
-brew bundle
+brew update
+awk '/^[^#]/ { print $2 }' Brewfile | xargs brew install
 
 echo "Installing latest Ruby..."
 rbenv install 2.1.2
