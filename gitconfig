@@ -3,7 +3,7 @@
   email = gabebw@gabebw.com
 [core]
   editor = /usr/local/bin/vim
-  whitespace=trailing-space,cr-at-eol
+  whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
 [merge]
@@ -20,8 +20,6 @@
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
 [alias]
-  # Delete branch locally and remotely. Used by `git mm`
-  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   st = status -sb
   co = checkout
   # Full commit messages without all the junk from `log --pretty=full`
@@ -32,11 +30,12 @@
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
   # out master if it's not a FF merge.
   mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
+  # Delete branch locally and remotely. Used by `git mm`
+  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   up = !git fetch origin && git rebase origin/master
   r = rebase -i origin/master
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
-  merged = branch -a --merged
   pr = !git push -u && gh pull-request
   g = grep --break --heading --line-number
 
@@ -52,8 +51,7 @@
   pretty = %C(magenta reverse)%h%Creset%Cgreen%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
 [svn]
   authorsfile = ~/.git-author
-[instaweb]
-  httpd = webrick
+
 # insteadOf lets you do `git clone gh:thoughtbot/dotfiles`
 [url "git@heroku.com:"]
   insteadOf = heroku:
