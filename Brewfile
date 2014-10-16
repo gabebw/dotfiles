@@ -54,3 +54,9 @@ install zsh-syntax-highlighting
 
 # Fast GitHub client
 install gh
+
+brew tap caskroom/cask
+brew install brew-cask
+
+brew cask install dropbox
+brew cask install google-chrome
