@@ -5,7 +5,9 @@ echo "Interactively linking dotfiles into ~..."
 
 echo "Installing Homebrew packages..."
 brew update
-awk '/^[^#]/ { print $2 }' Brewfile | xargs brew install
+# homebrew/boneyard provides `brew bundle` and `brew services`
+brew tap homebrew/boneyard
+brew bundle
 
 echo "Installing latest Ruby..."
 rbenv install 2.1.2
