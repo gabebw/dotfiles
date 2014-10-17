@@ -2,7 +2,7 @@
   name = Gabe Berke-Williams
   email = gabebw@gabebw.com
 [core]
-  editor = /usr/local/bin/vim
+  editor = $VISUAL
   whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
