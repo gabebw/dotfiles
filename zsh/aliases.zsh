@@ -43,10 +43,12 @@ icopy() {
   path_or_url="$1"
   basename_path=$(basename "$path_or_url")
   filename="${2:-$basename_path}"
-  if [[ "$path" =~ "^http" ]]; then
-    curl -o "$filename" "$path_or_url" && \
-      rsync -e ssh -azh --ignore-existing "$filename" i:~/images/ && \
-      rm -f "$filename"
+  if [[ "$path_or_url" =~ "^http" ]]; then
+    local_filename="$(basename "$filename")"
+    echo $local_filename
+    curl -o "$local_filename" "$path_or_url" && \
+      rsync -e ssh -azh --ignore-existing "$local_filename" "i:~/images/$filename" && \
+      rm -f "$local_filename"
   else
     # Not a URL
     rsync -e ssh -azh --ignore-existing "$path_or_url" "i:~/images/$filename"
