@@ -40,6 +40,7 @@ done
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export PATH
+current
 
 echo "Remember to use j"
 
