@@ -8,6 +8,9 @@ augroup myfiletypes
   au FileType ruby,eruby,yaml set iskeyword+=!,?
   au FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
 
+  " Haskell has 4-space tabs
+  au FileType haskell set shiftwidth=4
+
   " treat extra files like ruby
   au BufRead,BufNewFile *.ru,Gemfile,Guardfile,.simplecov setf ruby
 
