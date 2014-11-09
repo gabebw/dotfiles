@@ -10,7 +10,7 @@ brew tap homebrew/boneyard
 brew bundle
 
 echo "Installing latest Ruby..."
-rbenv install 2.1.2
+rbenv install 2.1.4
 
 echo "Installing Vim packages..."
 git clone git@github.com:gmarik/Vundle.vim.git ./vim/bundle/Vundle.vim
