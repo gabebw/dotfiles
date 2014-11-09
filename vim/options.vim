@@ -66,4 +66,4 @@ set showbreak="@"
 set list listchars=tab:»·,trail:·
 
 " Syntax-highlight languages inside fenced markdown blocks
-let g:markdown_fenced_languages = ['ruby', 'sh']
+let g:markdown_fenced_languages = ['ruby', 'sh', 'javascript']
