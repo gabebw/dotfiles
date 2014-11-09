@@ -21,7 +21,6 @@ syntax on
 " ------------------------------------
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('rcplugins') " after Vundle loads
-call s:SourceConfigFilesIn('rdio')
 
 " Turn on syntax highlighting and filetype detection (after Vundle)
 filetype plugin indent on

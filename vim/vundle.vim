@@ -47,6 +47,7 @@ Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
+Plugin 'gabebw/vim-rdio'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
