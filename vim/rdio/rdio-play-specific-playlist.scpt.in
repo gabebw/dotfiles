@@ -1,0 +1,16 @@
+// vim: filetype=javascript
+
+<%= File.read("./js/findRdioTab.js") %>
+
+var playCurrentPlaylist = "<%= minify_javascript("playCurrentPlaylist.js") %>";
+var selectAndPlayPlaylist = "<%= minify_javascript("selectAndPlayPlaylist.js") %>";
+var defineFunctions = playCurrentPlaylist + selectAndPlayPlaylist;
+
+// The "run" function is automatically run when the file is run, like "main" in
+// some other languages.
+function run(argv){
+  var rdioTab = findRdioTab();
+  var playlistName = argv[0];
+  rdioTab.execute({javascript: defineFunctions});
+  rdioTab.execute({javascript: 'selectAndPlayPlaylist("' + playlistName + '")'})
+}

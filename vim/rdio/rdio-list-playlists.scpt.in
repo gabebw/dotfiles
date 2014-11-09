@@ -1,0 +1,15 @@
+// vim: filetype=javascript
+
+<%= File.read("./js/findRdioTab.js") %>
+
+// The "run" function is automatically run when the file is run, like "main" in
+// some other languages.
+function run(argv) {
+  var rdioTab = findRdioTab();
+  var defineFunctions = "<%= minify_javascript("getPlaylistNames.js") %>";
+  rdioTab.execute({javascript: defineFunctions});
+  var result = rdioTab.execute({javascript: 'getPlaylistNames()'})
+
+  // The return value gets printed to STDOUT.
+  return result.join("\n");
+}
