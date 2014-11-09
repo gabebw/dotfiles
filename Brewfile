@@ -55,6 +55,9 @@ install zsh-syntax-highlighting
 # Fast GitHub client
 install gh
 
+# Fuzzy finder
+install fzf
+
 brew tap caskroom/cask
 brew install brew-cask
 
