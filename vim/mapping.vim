@@ -7,7 +7,7 @@ nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " ReRun last command
-nnoremap <Leader>rr :call Send_to_Tmux("clear\n!-2\n")<CR>
+nnoremap <Leader>rr :VtrSendCommandToRunner !-1<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>

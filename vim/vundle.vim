@@ -16,8 +16,6 @@ Plugin 'ervandew/supertab'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'vim-ruby/vim-ruby'
-" This fork of tslime fixes many things.
-Plugin 'jgdavey/tslime.vim'
 Plugin 'endwise.vim'
 Plugin 'rake.vim'
 Plugin 'kien/ctrlp.vim'
@@ -48,6 +46,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'gabebw/vim-rdio'
+Plugin 'christoomey/vim-tmux-runner'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
