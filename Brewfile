@@ -58,6 +58,10 @@ install gh
 # Fuzzy finder
 install fzf
 
+# `brew services` without the warnings that come from the `brew services` in
+# homebrew/boneyard
+tap gapple/services
+
 brew tap caskroom/cask
 brew install brew-cask
 
