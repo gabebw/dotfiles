@@ -3,7 +3,7 @@
 " To update, run :PluginInstall!
 
 set rtp+=~/.vim/bundle/Vundle.vim/
-set rtp+=/usr/local/Cellar/fzf/0.8.8/
+set rtp+=/usr/local/opt/fzf
 
 call vundle#begin()
 
