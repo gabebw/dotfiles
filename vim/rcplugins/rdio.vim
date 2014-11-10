@@ -1,5 +1,5 @@
 " https://github.com/gabebw/vim-rdio
 
-nnoremap <Leader>rpp :RdioPlayPause<CR>
-nnoremap <Leader>rpl :RdioPlaylists<CR>
+nnoremap <Leader>rp :RdioPlayPause<CR>
+nnoremap <Leader>rl :RdioPlaylists<CR>
 nnoremap <Leader>rn :RdioNext<CR>
