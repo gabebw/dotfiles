@@ -62,11 +62,11 @@ install fzf
 # homebrew/boneyard
 tap gapple/services
 
-brew tap caskroom/cask
-brew install brew-cask
+tap caskroom/cask
+install brew-cask
 
-brew cask install alfred
-brew cask install dropbox
-brew cask install google-chrome
-brew cask install netnewswire
-brew cask install vlc
+cask install alfred
+cask install dropbox
+cask install google-chrome
+cask install netnewswire
+cask install vlc
