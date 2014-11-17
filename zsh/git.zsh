@@ -18,6 +18,11 @@ function g {
 # * wgh:thoughtbot/paperclip
 # * tb:paperclip
 function gcl {
+  # Did "gcl git clone URL", remove the "git clone"
+  if [[ "$1" == "git" && "$2" == "clone" ]]; then
+    shift;
+    shift;
+  fi
   local git_url="$1"
   local custom_directory="$2"
   if [[ "$git_url" == tb:* ]]; then
