@@ -49,6 +49,7 @@ Plugin 'gabebw/vim-rdio'
 Plugin 'christoomey/vim-tmux-runner'
 " Use <C-x><C-u> to complete words from any tmux pane
 Plugin 'wellle/tmux-complete.vim'
+Plugin 'pbrisbin/vim-syntax-shakespeare'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
