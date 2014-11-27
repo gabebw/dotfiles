@@ -9,18 +9,17 @@ function! s:SourceConfigFilesIn(directory)
   endfor
 endfunction
 
+ " both settings required for Vundle
 set nocompatible
+filetype off
 
-filetype off " required for Vundle
-
-" Leader is <Space>
+" Leader is <Space> - must be before s:SourceConfigFilesIn block below
 let mapleader=" "
 
 " Source the rest of the configuration
 " ------------------------------------
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('rcplugins') " after Vundle loads
-
 " Turn on syntax highlighting and filetype detection (after Vundle)
 filetype plugin indent on
 syntax on
