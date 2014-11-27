@@ -15,7 +15,6 @@ filetype off " required for Vundle
 
 " Leader is <Space>
 let mapleader=" "
-syntax on
 
 " Source the rest of the configuration
 " ------------------------------------
@@ -24,4 +23,5 @@ call s:SourceConfigFilesIn('rcplugins') " after Vundle loads
 
 " Turn on syntax highlighting and filetype detection (after Vundle)
 filetype plugin indent on
+syntax on
 colorscheme jellybeans
