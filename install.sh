@@ -9,6 +9,9 @@ brew update
 brew tap homebrew/boneyard
 brew bundle
 
+echo "Installing tmux-resurrect"
+git clone https://github.com/tmux-plugins/tmux-resurrect ./tmux-plugins/tmux-resurrect
+
 echo "Installing latest Ruby..."
 rbenv install 2.1.4
 
