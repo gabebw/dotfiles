@@ -23,6 +23,13 @@ function gcl {
     shift;
     shift;
   fi
+
+  # No arguments provided, assume we should use the clipboard
+  if (( $# == 0 )); then
+    git clone "$(pbpaste)" && cd "$directory"
+    return
+  fi
+
   local git_url="$1"
   local custom_directory="$2"
   if [[ "$git_url" == tb:* ]]; then
