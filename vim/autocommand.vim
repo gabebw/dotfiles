@@ -11,6 +11,9 @@ augroup myfiletypes
   " Haskell has 4-space tabs
   au FileType haskell set shiftwidth=4
 
+  " .step files are Ruby
+  au BufRead,BufNewFile *.step setf ruby
+
   " treat extra files like ruby
   au BufRead,BufNewFile *.ru,Gemfile,Guardfile,.simplecov setf ruby
 
