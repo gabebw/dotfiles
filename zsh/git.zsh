@@ -26,7 +26,7 @@ function gcl {
 
   # No arguments provided, assume we should use the clipboard
   if (( $# == 0 )); then
-    git clone "$(pbpaste)" && cd "$directory"
+    gcl "$(pbpaste)"
     return
   fi
 
