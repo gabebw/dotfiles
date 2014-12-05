@@ -12,9 +12,20 @@ function g {
   fi
 }
 
-# Clone a URL and cd into the directory.
-# Handles the following `git clone` schemes:
+# Clone a git URL and cd into the directory.
+#
+# `gcl URL floo` will clone the URL into a directory named floo, just like
+# `git clone URL floo`.
+#
+# If there's a URL in the clipboard, just do `gcl` without arguments and it will
+# use that.
+#
+# You can even do `gcl git clone URL` and it will act like `gcl URL`.
+#
+# Handles the following `git clone` schemes (search `insteadOf` in gitconfig for
+# explanations of the weird ones):
 # * git@github.com:thoughtbot/paperclip.git
+# * https://github.com/rails/rails.git
 # * wgh:thoughtbot/paperclip
 # * tb:paperclip
 function gcl {
@@ -33,7 +44,7 @@ function gcl {
   local git_url="$1"
   local custom_directory="$2"
   if [[ "$git_url" == tb:* ]]; then
-    # Chop off the `tb:` from `tb:paperclip`
+    # Chop off the `tb:` from `tb:paperclip` since `basename` won't change it.
     local directory="${git_url#tb:}"
   else
     local directory="${$(basename $git_url)%.git}"
