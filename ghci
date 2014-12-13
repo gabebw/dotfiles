@@ -1,3 +1,4 @@
 :set prompt "λ> "
 :set -isrc
 :set -itests
+:set +m
