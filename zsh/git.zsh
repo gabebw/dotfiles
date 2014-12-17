@@ -37,7 +37,7 @@ function gcl {
 
   # No arguments provided, assume we should use the clipboard
   if (( $# == 0 )); then
-    gcl "$(pbpaste)"
+    gcl $(pbpaste)
     return
   fi
 
