@@ -51,9 +51,9 @@ function gcl {
   fi
 
   if [[ -z "$custom_directory" ]]; then
-    git clone "$git_url" && cd "$directory"
+    gh clone "$git_url" && cd "$directory"
   else
-    git clone "$git_url" "$custom_directory" && \
+    gh clone "$git_url" "$custom_directory" && \
       cd "$custom_directory"
   fi
 }
