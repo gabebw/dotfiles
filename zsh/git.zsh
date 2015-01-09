@@ -21,6 +21,14 @@ alias amend-new="git commit --amend"
 alias ga="git add"
 alias gai="git add --interactive"
 
+# `cd` doesn't work in shell scripts because each one runs in its own subshell.
+# So `superclone` returns the name of the directory to `cd` into and we run `cd`
+# as a function in this shell. It's all very silly.
+function gcl {
+  local directory="$(superclone "$@")"
+  cd "$directory"
+}
+
 function gb(){ git checkout -b gbw-$1 $2 }
 
 alias gc="git checkout"

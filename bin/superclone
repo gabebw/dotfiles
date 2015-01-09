@@ -27,7 +27,7 @@ fi
 
 # No arguments provided, assume we should use the clipboard
 if (( $# == 0 )); then
-  gcl $(pbpaste)
+  superclone $(pbpaste)
   return
 fi
 
@@ -42,8 +42,8 @@ else
 fi
 
 if [[ -z "$custom_directory" ]]; then
-  gh clone "$git_url" && cd "$directory"
+  gh clone "$git_url" && echo "$directory"
 else
   gh clone "$git_url" "$custom_directory" && \
-    cd "$custom_directory"
+    echo "$custom_directory"
 fi
