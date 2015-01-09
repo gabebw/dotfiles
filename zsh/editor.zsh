@@ -14,7 +14,7 @@ alias crontab="VISUAL=vim crontab"
 function viw {
   local location=$(which "$1")
   if [[ -f "$location" ]]; then
-    "$VISUAL" "$location"
+    vim "$location"
   else
     echo "$location isn't a file."
   fi
