@@ -14,6 +14,9 @@ augroup myfiletypes
   " .step files are Ruby
   au BufRead,BufNewFile *.step setf ruby
 
+  " .json.jbuilder files are Ruby
+  au BufNewFile,BufRead *.json.jbuilder setf ruby
+
   " treat extra files like ruby
   au BufRead,BufNewFile *.ru,Gemfile,Guardfile,.simplecov setf ruby
 
