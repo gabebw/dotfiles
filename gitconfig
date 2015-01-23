@@ -37,7 +37,7 @@
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
   pr = !git push -u && gh pull-request
-  g = grep --break --heading --line-number
+  g = grep --extended-regexp --break --heading --line-number
 
   # Check out a pull request by number: g co-pr 123
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
