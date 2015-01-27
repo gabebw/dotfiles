@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+# Start foreman (or forego, if it's available) on an unused port.
+# If there's a .foreman file, it tries that port first, then falls back to
+# finding another unused port.
+#
+# If it can't find an unused port at all, prints an error and exits 1.
+#
+# It uses the `is_port_unused` and `find_unused_port` scripts, which are both in
+# this directory.
+
+if command -v forego > /dev/null; then
+  command_name=forego
+else
+  command_name=foreman
+fi
+
+port_from_foreman="$(grep port: .foreman 2>/dev/null| sed 's/port: //')"
+
+if is_port_unused "$port_from_foreman"; then
+  $command_name start -p "$port_from_foreman"
+else
+  if find_unused_port; then
+    $command_name start -p "$(find_unused_port)"
+  else
+    echo "Couldn't find an unused port :("
+    exit 1
+  fi
+fi

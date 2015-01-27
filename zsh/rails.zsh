@@ -11,3 +11,5 @@ alias rrg="be rake routes | grep"
 
 # Database
 alias db-reset="be rake db:drop db:create && migrate"
+
+alias f=start_foreman_on_unused_port
