@@ -28,6 +28,7 @@ EXTRA=(
   hitch
   postgres
   haskell
+  python
   go
 )
 
