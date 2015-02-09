@@ -14,3 +14,7 @@ function db-dump() {
 
 # db-restore DB_NAME
 alias db-restore='pg_restore --verbose --clean --no-acl --no-owner -d'
+
+# This file sticks around when postgres force-quits. Postgres reads it and
+# thinks it's running but it's not.
+alias unfuck-postgres="rm -f /usr/local/var/postgres/postmaster.pid && brew services restart postgres"
