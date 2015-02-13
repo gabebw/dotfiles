@@ -7,9 +7,8 @@ echo "Interactively linking dotfiles into ~..."
 
 echo "Installing Homebrew packages..."
 brew update
-# homebrew/boneyard provides `brew bundle` and `brew services`
-brew tap homebrew/boneyard
-brew bundle
+brew tap homebrew/brewdler
+brew brewdle
 
 echo "Installing tmux-resurrect"
 git clone https://github.com/tmux-plugins/tmux-resurrect ./tmux-plugins/tmux-resurrect

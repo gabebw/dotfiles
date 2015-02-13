@@ -1,72 +1,70 @@
-# Run `brew bundle` to install some helpful (but not essential) programs.
+# Run `brew 'bundle` to install some helpful (but not essential) programs.'
 # https://github.com/mxcl/homebrew/blob/f949b212b3a66fc728104d5a111107911dff5b0f/Library/Contributions/cmd/brew-bundle.rb
 
-# Update Homebrew first
-update
-
 # sed for json
-install jq
+brew 'jq'
 
 # grep for ps
-install pgrep
+brew 'pgrep'
 
 # The recommended way to use Heroku
-install heroku-toolbelt
+brew 'heroku-toolbelt'
 
 # Ruby version manager
-install rbenv
+brew 'rbenv'
 
 # So `rbenv install` works
-install ruby-build
+brew 'ruby-build'
 
 # colorful diffs (alias diff='colordiff -u')
-install colordiff
+brew 'colordiff'
 
 # a better ack/grep
-install the_silver_searcher
+brew 'the_silver_searcher'
 
 # a terminal multiplexer
-install tmux
+brew 'tmux'
 
 # so copy/paste works in tmux
-install reattach-to-user-namespace
+brew 'reattach-to-user-namespace'
 
 # so :Rtags works
-install ctags
+brew 'ctags'
 
 # It's vim
-install mercurial vim
+brew 'mercurial'
+brew 'vim'
 
 # Never run `rbenv rehash` again
-install rbenv-gem-rehash
+brew 'rbenv-gem-rehash'
 
 # Install some gems (like bundler) for every new Ruby
-install rbenv-default-gems
+brew 'rbenv-default-gems'
 
 # Per-project rbenv variables
-install rbenv-vars
+brew 'rbenv-vars'
 
 # Used in Rails projects
-install phantomjs
+brew 'phantomjs'
 
 # Syntax highlighting...for ZSH!
-install zsh-syntax-highlighting
+brew 'zsh-syntax-highlighting'
 
 # Fast GitHub client
-install gh
+brew 'gh'
 
 # Fuzzy finder
-install fzf
+brew 'fzf'
 
-# `brew services` without the warnings that come from the `brew services` in
+# `brew 'services` without the warnings that come from the `brew services` in'
 # homebrew/boneyard
-tap gapple/services
+tap 'gapple/services'
 
-tap caskroom/cask
-install brew-cask
+tap 'caskroom/cask'
+brew 'brew-cask'
 
-cask install alfred
-cask install dropbox
-cask install google-chrome
-cask install netnewswire
-cask install vlc
+cask 'alfred'
+cask 'dropbox'
+cask 'google-chrome'
+cask 'netnewswire'
+cask 'vlc'
