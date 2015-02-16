@@ -25,7 +25,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " Trim trailing whitespace on write
 Plugin 'derekprior/vim-trimmer'
 Plugin 'skwp/greplace.vim'
-Plugin 'dockyard/vim-easydir'
+Plugin 'duggiefresh/vim-easydir'
 Plugin 'itchyny/lightline.vim'
 " Words to avoid in tech writing
 Plugin 'nicholaides/words-to-avoid.vim'
