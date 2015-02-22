@@ -51,6 +51,7 @@ Plugin 'christoomey/vim-tmux-runner'
 Plugin 'wellle/tmux-complete.vim'
 Plugin 'pbrisbin/vim-syntax-shakespeare'
 Plugin 'Keithbsmiley/swift.vim'
+Plugin 'pbrisbin/vim-runfile'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
