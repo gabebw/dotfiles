@@ -62,8 +62,6 @@ set textwidth=80
 " Meta characters
 " Prepended to wrapped lines
 set showbreak="@"
-" Display extra whitespace
-set list listchars=tab:»·,trail:·
 
 " Syntax-highlight languages inside fenced markdown blocks
 let g:markdown_fenced_languages = ['ruby', 'sh', 'javascript', 'lisp', 'scheme']
