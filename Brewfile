@@ -56,6 +56,10 @@ brew 'gh'
 # Fuzzy finder
 brew 'fzf'
 
+# Docker
+brew 'docker'
+cask 'boot2docker'
+
 # `brew 'services` without the warnings that come from the `brew services` in'
 # homebrew/boneyard
 tap 'gapple/services'

@@ -23,6 +23,7 @@ CORE=(
   haskell
   python
   go
+  docker
 )
 
 for file in $CORE
