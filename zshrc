@@ -16,13 +16,6 @@ CORE=(
   options
   prompt
   ruby
-)
-
-############################
-#         EXTRAS           #
-# (non-core functionality) #
-############################
-EXTRA=(
   git
   rails
   hitch
@@ -32,7 +25,7 @@ EXTRA=(
   go
 )
 
-for file in $CORE $EXTRA
+for file in $CORE
 do
   source "$BASE/$file.zsh"
 done
