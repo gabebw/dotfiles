@@ -1,6 +1,6 @@
 ####################################
 # 1) Ensure we're always in a tmux session
-alias current-tmux-session="tmux list-sessions | grep attached | awk '{session=sub(/:/, \"\", \$1); print \$session}' | head -1"
+alias current-tmux-session="tmux display-message -p '#S'"
 
 ensure_we_are_inside_tmux() {
   if _is_tmux_not_running; then
