@@ -7,7 +7,8 @@ TMUX_PROJECT_DIRECTORY="$HOME/.tmux-project-directory"
 mkdir -p "$TMUX_PROJECT_DIRECTORY"
 
 function current-project-path() {
-  echo "$TMUX_PROJECT_DIRECTORY/`current-tmux-session`"
+  current_tmux_session="$(tmux display-message -p '#S')"
+  echo "${TMUX_PROJECT_DIRECTORY}/${current_tmux_session}"
 }
 
 cdpath=($HOME/code $HOME/code/* $HOME/code/whetstone $HOME/code/thoughtbot/*)
