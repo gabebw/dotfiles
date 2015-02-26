@@ -22,5 +22,3 @@ current() {
     cd "$(cat "`current-project-path`")"
   fi
 }
-
-current
