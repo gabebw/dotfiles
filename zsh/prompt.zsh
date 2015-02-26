@@ -31,7 +31,7 @@ _working_directory() { echo "$(_blue "%c")" }
 
 
 ruby_version() {
-  local version=`rbenv version-name`
+  local version="$(rbenv version-name)"
   _magenta "$version"
 }
 

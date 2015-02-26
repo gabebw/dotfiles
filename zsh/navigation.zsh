@@ -14,11 +14,11 @@ function current-project-path() {
 cdpath=($HOME/code $HOME/code/* $HOME/code/whetstone $HOME/code/thoughtbot/*)
 
 function chpwd {
-  echo $(pwd) >! "`current-project-path`"
+  echo "$(pwd)" >! "$(current-project-path)"
 }
 
 current() {
-  if [[ -f "`current-project-path`" ]]; then
+  if [[ -f "$(current-project-path)" ]]; then
     cd "$(cat "`current-project-path`")"
   fi
 }
