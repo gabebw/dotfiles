@@ -7,7 +7,7 @@ nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " ReRun last command
-nnoremap <Leader>rr :VtrSendCommand! !-1<CR>
+nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>w :%s/\s\+$//e<CR>
