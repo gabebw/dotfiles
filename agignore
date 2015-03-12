@@ -16,6 +16,9 @@ bin/stubs
 *.bmp
 *.svg
 /bin/stubs
+# ag --hidden finds files with a leading dot, which includes
+# the .git directory for the current repo. So tell ag to ignore it.
+/.git/
 
 # Ignore vim backups in dotfiles
 /vim/backups
