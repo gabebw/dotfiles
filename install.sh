@@ -10,9 +10,6 @@ brew update
 brew tap homebrew/brewdler
 brew brewdle
 
-echo "Installing tmux-resurrect"
-git clone https://github.com/tmux-plugins/tmux-resurrect ./tmux-plugins/tmux-resurrect
-
 echo "Installing latest Ruby..."
 rbenv install "$latest_ruby_version"
 
