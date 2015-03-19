@@ -26,8 +26,8 @@ _cyan()       { echo "$(_color "$1" cyan)" }
 _blue()       { echo "$(_color "$1" blue)" }
 _magenta()    { echo "$(_color "$1" magenta)" }
 
-_full_path()         { echo "$(_blue "%~")" }
-_working_directory() { echo "$(_blue "%1~")" }
+_full_path() { echo "$(_blue "%~")" }
+_shortened_path() { echo "$(_blue "%2~")" }
 
 ruby_version() {
   local version="$(rbenv version-name)"
@@ -96,5 +96,5 @@ function precmd {
 }
 
 # OK, now actually set PROMPT and RPROMPT
-export PROMPT="\$(_working_directory)\$(git_branch)\$(_short_colored_git_status) $ "
+export PROMPT="\$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
 export RPROMPT="\$(ruby_version)"
