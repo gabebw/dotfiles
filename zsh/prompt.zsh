@@ -18,6 +18,13 @@ _magenta()    { echo "$(_color "$1" magenta)" }
 # Helper functions: path and Ruby version #
 ###########################################
 
+# %2~ means "show the last two components of the path, and show the home
+# directory as ~".
+#
+# Examples:
+#
+# ~/foo/bar is shown as "foo/bar"
+# ~/foo is shown as ~/foo (not /Users/gabe/foo)
 _shortened_path() { echo "$(_blue "%2~")" }
 
 ruby_version() {
