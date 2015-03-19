@@ -2,6 +2,8 @@
 # Colors #
 ###########
 
+autoload -Uz colors && colors
+
 _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
