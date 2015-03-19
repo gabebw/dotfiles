@@ -11,6 +11,14 @@ These are my dotfiles: `~/.*`
 
     $ ./install.sh
 
+## Interesting Bits
+
+My ZSH prompt is fairly well documented, and is self-contained: you can copy it
+into your dotfiles with no changes to test it out. It's in
+[zsh/prompt.zsh][prompt].
+
+[prompt]: /zsh/prompt.zsh
+
 ## Nice to have
 
 These don't relate to my dotfiles at all, but I keep forgetting to install them
