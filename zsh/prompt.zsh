@@ -57,11 +57,11 @@ _short_colored_git_status() {
 
 _git_status() {
   local git_status="$(cat "/tmp/git-status-$$")"
-  if echo "$git_status" | grep -q "Changes not staged" ; then
+  if echo "$git_status" | grep -qF "Changes not staged" ; then
     echo "changed"
-  elif echo "$git_status" | grep -q "Changes to be committed"; then
+  elif echo "$git_status" | grep -qF "Changes to be committed"; then
     echo "staged"
-  elif echo "$git_status" | grep -q "Untracked files"; then
+  elif echo "$git_status" | grep -qF "Untracked files"; then
     echo "untracked"
   else
     echo "unchanged"
