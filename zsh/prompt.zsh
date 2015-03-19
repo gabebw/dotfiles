@@ -27,8 +27,7 @@ _blue()       { echo "$(_color "$1" blue)" }
 _magenta()    { echo "$(_color "$1" magenta)" }
 
 _full_path()         { echo "$(_blue "%~")" }
-_working_directory() { echo "$(_blue "%c")" }
-
+_working_directory() { echo "$(_blue "%1~")" }
 
 ruby_version() {
   local version="$(rbenv version-name)"
