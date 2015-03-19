@@ -46,7 +46,6 @@ BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats "$BRANCH"
 
-
 _short_colored_git_status() {
   local letter
   local separator="/"
