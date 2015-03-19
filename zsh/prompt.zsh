@@ -1,18 +1,6 @@
-#######################
-#  GIT (branch, vcs)  #
-#######################
-autoload -Uz vcs_info
-
-RESET_COLOR="%{${reset_color}%}"
-BRANCH_COLOR="%{$fg_bold[yellow]%}"
-BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
-
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "$BRANCH"
-
-##################
-# Non-git things #
-##################
+##########
+# Colors #
+###########
 
 _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
@@ -26,13 +14,29 @@ _cyan()       { echo "$(_color "$1" cyan)" }
 _blue()       { echo "$(_color "$1" blue)" }
 _magenta()    { echo "$(_color "$1" magenta)" }
 
-_full_path() { echo "$(_blue "%~")" }
+###########################################
+# Helper functions: path and Ruby version #
+###########################################
+
 _shortened_path() { echo "$(_blue "%2~")" }
 
 ruby_version() {
   local version="$(rbenv version-name)"
   _magenta "$version"
 }
+
+#######################
+#  GIT (branch, vcs)  #
+#######################
+autoload -Uz vcs_info
+
+RESET_COLOR="%{${reset_color}%}"
+BRANCH_COLOR="%{$fg_bold[yellow]%}"
+BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "$BRANCH"
+
 
 _short_colored_git_status() {
   local letter
@@ -81,7 +85,7 @@ _color_based_on_git_status() {
 
 # Must use print (not echo) for ZSH colors to work
 git_branch() {
-  # vcs_info_msg_0_ is set by the vcs_info directives at the top of this file
+  # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
   if [[ -n "$colored_branch_name" ]]
   then
@@ -89,12 +93,16 @@ git_branch() {
   fi
 }
 
-# precmd is a magic function that's run each time the prompt is shown
+# `precmd` is a magic function that's run right before the prompt is evaluated
+# on each line.
+# Here, it's used to capture the git status to show in the prompt.
 function precmd {
   vcs_info 'prompt'
   $(git status 2> /dev/null >! "/tmp/git-status-$$")
 }
 
-# OK, now actually set PROMPT and RPROMPT
+###########################################
+# OK, now actually set PROMPT and RPROMPT #
+###########################################
 export PROMPT="\$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
 export RPROMPT="\$(ruby_version)"
