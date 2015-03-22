@@ -105,8 +105,8 @@ git_branch() {
 # on each line.
 # Here, it's used to capture the git status to show in the prompt.
 function precmd {
-  vcs_info 'prompt'
-  $(git status 2> /dev/null >! "/tmp/git-status-$$")
+  vcs_info "prompt"
+  git status 2> /dev/null >! "/tmp/git-status-$$"
 }
 
 ###########################################
