@@ -63,5 +63,10 @@ set textwidth=80
 " Prepended to wrapped lines
 set showbreak="@"
 
+" Terminal.app keeps having a notification and "jumping" on the dock from Vim's
+" bells, and this disables terminal Vim's bells.
+" http://vim.wikia.com/wiki/Disable_beeping
+set noerrorbells visualbell t_vb=
+
 " Syntax-highlight languages inside fenced markdown blocks
 let g:markdown_fenced_languages = ['ruby', 'sh', 'javascript', 'lisp', 'scheme']
