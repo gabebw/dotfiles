@@ -36,7 +36,7 @@
   r = rebase -i origin/master
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
-  pr = !git push -u && gh pull-request
+  pr = !git push -u && hub pull-request
   g = grep --extended-regexp --break --heading --line-number
 
   # Check out a pull request by number: g co-pr 123

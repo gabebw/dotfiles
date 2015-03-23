@@ -46,8 +46,8 @@ else
 fi
 
 if [[ -z "$custom_directory" ]]; then
-  gh clone "$git_url" && echo "$directory"
+  hub clone "$git_url" && echo "$directory"
 else
-  gh clone "$git_url" "$custom_directory" && \
+  hub clone "$git_url" "$custom_directory" && \
     echo "$custom_directory"
 fi

@@ -48,7 +48,7 @@ brew 'phantomjs'
 brew 'zsh-syntax-highlighting'
 
 # Fast GitHub client
-brew 'gh'
+brew 'hub'
 
 # Fuzzy finder
 brew 'fzf'
