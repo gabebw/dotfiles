@@ -19,6 +19,7 @@ let mapleader=" "
 
 " Source the rest of the configuration
 call s:SourceConfigFilesIn('')
+call s:SourceConfigFilesIn('functions')
 call s:SourceConfigFilesIn('rcplugins') " after Vundle loads
 
 " Turn on syntax highlighting and filetype detection.
