@@ -46,6 +46,7 @@ Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'gabebw/vim-rdio'
+" Plugin 'file:///Users/gabe/code/personal/vim-rdio'
 Plugin 'christoomey/vim-tmux-runner'
 " Use <C-x><C-u> to complete words from any tmux pane
 Plugin 'wellle/tmux-complete.vim'
