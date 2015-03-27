@@ -15,15 +15,25 @@ else
   command_name=foreman
 fi
 
-port_from_foreman="$(grep port: .foreman 2>/dev/null| sed 's/port: //')"
-
-if is_port_unused "$port_from_foreman"; then
-  $command_name start -p "$port_from_foreman"
-else
-  if find_unused_port > /dev/null; then
-    $command_name start -p "$(find_unused_port)"
+find_port() {
+  port_from_foreman="$(grep port: .foreman 2>/dev/null| sed 's/port: //')"
+  if is_port_unused "$port_from_foreman"; then
+    echo "$port_from_foreman"
   else
-    echo "Couldn't find an unused port :("
-    exit 1
+    unused_port=$(find_unused_port > /dev/null)
+    if [[ -n "$unused_port" ]]; then
+      echo "$unused_port"
+    else
+      echo "Couldn't find an unused port :("
+      exit 1
+    fi
   fi
-fi
+}
+
+port=$(find_port)
+
+echo
+echo "Starting on port $port"
+echo
+
+$command_name start -p "$port"
