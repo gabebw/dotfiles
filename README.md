@@ -27,6 +27,11 @@ on new machines.
 * [Dropbox](https://www.dropbox.com/install)
 * [1Password](https://agilebits.com/onepassword) (from the Mac App Store)
 
+## Plugin-specific settings and mappings
+
+For plugin-specific settings, check out [the `rcplugins`
+directory](/vim/rcplugins).
+
 ## Any Questions?
 
 I'm happy to answer questions about these dotfiles. Hit me up
