@@ -20,43 +20,30 @@ Plugin 'endwise.vim'
 Plugin 'rake.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-coffee-script'
-Plugin 'go.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 " Trim trailing whitespace on write
 Plugin 'derekprior/vim-trimmer'
-Plugin 'skwp/greplace.vim'
 Plugin 'duggiefresh/vim-easydir'
 Plugin 'itchyny/lightline.vim'
-" Words to avoid in tech writing
 Plugin 'nicholaides/words-to-avoid.vim'
 " Allow `cir` to change inside ruby block, etc
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
-" Colorscheme
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'gabebw/vim-spec-runner'
-" Distraction-free writing
-Plugin 'junegunn/goyo.vim'
-Plugin 'henrik/vim-yaml-flattener'
 Plugin 'bogado/file-line'
 Plugin 'junegunn/vim-emoji'
-Plugin 'christoomey/vim-sort-motion'
-Plugin 'gabebw/pear_shaped'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-surround'
 Plugin 'gabebw/vim-rdio'
 " Plugin 'file:///Users/gabe/code/personal/vim-rdio'
 Plugin 'christoomey/vim-tmux-runner'
-" Use <C-x><C-u> to complete words from any tmux pane
-Plugin 'wellle/tmux-complete.vim'
 Plugin 'pbrisbin/vim-syntax-shakespeare'
 Plugin 'Keithbsmiley/swift.vim'
-Plugin 'pbrisbin/vim-runfile'
 Plugin 'fatih/vim-go'
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-repeat'
-Plugin 'junegunn/vim-easy-align'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
