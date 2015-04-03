@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+# icopy http://something.com/flip.jpg flip.jpg
+# or
+# icopy ./something.gif
+
+function rsync_the_thing() {
+  # Safely rsync,
+  # without overwriting (--ignore-existing)
+  rsync -e ssh -azh --ignore-existing "$@"
+}
+
+path_or_url="$1"
+basename_path=$(basename "$path_or_url")
+filename="${2:-$basename_path}"
+if [[ "$filename" != "$(basename "$filename")" ]]; then
+  # Create any missing directories
+  ssh i "cd images && mkdir -p $(dirname "$filename")"
+fi
+
+if [[ "$path_or_url" =~ "^http" ]]; then
+  local_filename="$(basename "$filename")"
+  echo $local_filename
+  curl -o "$local_filename" "$path_or_url" && \
+    rsync_the_thing "$local_filename" "i:~/images/$filename" && \
+    rm -f "$local_filename"
+else
+  # Not a URL
+  rsync_the_thing "$path_or_url" "i:~/images/$filename"
+fi
+
+echo
+echo "http://i.gabebw.com/$filename"
