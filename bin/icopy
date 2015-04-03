@@ -1,8 +1,10 @@
 #!/bin/zsh
 
-# icopy http://something.com/flip.jpg flip.jpg
+# icopy
+# (no arguments means "download the URL I just copied")
 # or
-# icopy ./something.gif
+# icopy flip.jpg
+# (download the URL in the pasteboard and save as flip.jpg)
 
 function rsync_the_thing() {
   # Safely rsync,
@@ -10,24 +12,32 @@ function rsync_the_thing() {
   rsync -e ssh -azh --ignore-existing "$@"
 }
 
-path_or_url="$1"
-basename_path=$(basename "$path_or_url")
-filename="${2:-$basename_path}"
-if [[ "$filename" != "$(basename "$filename")" ]]; then
-  # Create any missing directories
-  ssh i "cd images && mkdir -p $(dirname "$filename")"
+function create_missing_directories_on_remote_host {
+  local filename="$1"
+  if [[ "$filename" != "$(basename "$filename")" ]]; then
+    ssh i "cd images && mkdir -p $(dirname "$filename")"
+  fi
+}
+
+function is_url {
+  [[ "$1" =~ "^http" ]]
+}
+
+# Always assume we want to download a URL we just copied
+url="$(pbpaste)"
+
+if (( $# == 0 )); then
+  filename_on_server="$(basename "$path_or_url")"
+elif (( $# == 1 )); then
+  filename_on_server="$1"
 fi
 
-if [[ "$path_or_url" =~ "^http" ]]; then
-  local_filename="$(basename "$filename")"
-  echo $local_filename
-  curl -o "$local_filename" "$path_or_url" && \
-    rsync_the_thing "$local_filename" "i:~/images/$filename" && \
-    rm -f "$local_filename"
-else
-  # Not a URL
-  rsync_the_thing "$path_or_url" "i:~/images/$filename"
-fi
+create_missing_directories_on_remote_host "$filename_on_server"
+
+local_filename="$(basename "$filename_on_server")"
+curl -o "$local_filename" "$url" && \
+  rsync_the_thing "$local_filename" "i:~/images/$filename_on_server" && \
+  rm "$local_filename"
 
 echo
-echo "http://i.gabebw.com/$filename"
+echo "http://i.gabebw.com/$filename_on_server"
