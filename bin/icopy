@@ -19,10 +19,6 @@ function create_missing_directories_on_remote_host {
   fi
 }
 
-function is_url {
-  [[ "$1" =~ "^http" ]]
-}
-
 # Always assume we want to download a URL we just copied
 url="$(pbpaste)"
 
