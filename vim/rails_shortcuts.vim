@@ -3,7 +3,8 @@ augroup rails_shortcuts
   autocmd!
 
   let g:rails_projections = {
-      \ "config/routes.rb": { "command": "routes" }
+      \ "config/routes.rb": { "command": "routes" },
+      \ "spec/factories.rb": { "command": "factories" }
   \ }
 
   autocmd User Rails nnoremap <Leader>m :Rmodel<Space>
