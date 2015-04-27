@@ -57,9 +57,8 @@ brew 'fzf'
 brew 'docker'
 cask 'boot2docker'
 
-# `brew 'services` without the warnings that come from the `brew services` in'
-# homebrew/boneyard
-tap 'gapple/services'
+# Lets us do `brew services restart postgres`, etc
+tap 'homebrew/services'
 
 tap 'caskroom/cask'
 brew 'brew-cask'
