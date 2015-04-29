@@ -17,5 +17,8 @@ echo "Installing Vim packages..."
 git clone git@github.com:gmarik/Vundle.vim.git ./vim/bundle/Vundle.vim
 vim +PluginInstall +qa
 
+echo "Disabling non-sandbox cabal installs..."
+echo "require-sandbox: True" >> ~/.cabal/config
+
 echo "If you like what you see in system/osx-settings, run ./system/osx-settings"
 echo "If you're using Terminal.app, check out the terminal-themes directory"
