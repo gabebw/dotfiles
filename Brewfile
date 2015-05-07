@@ -32,14 +32,11 @@ brew 'ctags'
 brew 'mercurial'
 brew 'vim'
 
-# Never run `rbenv rehash` again
-brew 'rbenv-gem-rehash'
+# Manage rubies
+brew 'rbenv'
 
 # Install some gems (like bundler) for every new Ruby
 brew 'rbenv-default-gems'
-
-# Per-project rbenv variables
-brew 'rbenv-vars'
 
 # Used in Rails projects
 brew 'phantomjs'
