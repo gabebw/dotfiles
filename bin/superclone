@@ -9,7 +9,8 @@
 # If there's a URL in the clipboard, just do `gcl` without arguments and it will
 # use that.
 #
-# You can even do `gcl git clone URL` and it will act like `gcl URL`.
+# You can even do `gcl git clone URL`, say if you copy-pasted some instructions,
+# and it will act like `gcl URL`.
 #
 # Handles the following `git clone` schemes (search `insteadOf` in gitconfig for
 # explanations of the weird ones):
