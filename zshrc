@@ -17,18 +17,14 @@ source $BASE'prompt.zsh'
 # (non-core functionality) #
 ############################
 
-# source $BASE'homebrew.zsh'
-# source $BASE'python.zsh'
 source $BASE'erlang.zsh'
 source $BASE'java.zsh'
 source $BASE'git.zsh'
-source $BASE'ruby.zsh'
 source $BASE'rails.zsh'
-source $BASE'rvm.zsh'
 source $BASE'hitch.zsh'
-source $BASE'rbenv.zsh'
-source $BASE'openssl.zsh'
 source $BASE'npm.zsh'
+source $BASE'scala.zsh'
+source $BASE'elixir.zsh'
 
 export PATH
 trim_path
