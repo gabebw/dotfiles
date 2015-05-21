@@ -44,7 +44,6 @@ Plugin 'Keithbsmiley/swift.vim'
 Plugin 'fatih/vim-go'
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-bundler'
 Plugin 'pangloss/vim-javascript'
 
 " :Gist
