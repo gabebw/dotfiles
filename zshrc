@@ -1,34 +1,15 @@
 BASE="$HOME/.dotfiles/zsh"
 
 # First, ensure we're in tmux
-source $BASE/tmux.zsh
+source "$BASE/tmux.zsh"
 ensure_we_are_inside_tmux
 
-CORE=(
-  completion
-  key_bindings
-  navigation
-  colors
-  editor
-  aliases
-  path
-  fasd
-  options
-  prompt
-  ruby
-  git
-  rails
-  hitch
-  postgres
-  haskell
-  python
-  go
-  docker
-)
-
-for file in $CORE
+for file in "$BASE"/*.zsh
 do
-  source "$BASE/$file.zsh"
+  if [[ "$file" != homebrew.zsh && "$file" != tmux.zsh ]]; then
+    # homebrew.zsh is sourced in zshenv for reasons explained in that file
+    source "$file"
+  fi
 done
 
 # brew install zsh-syntax-highlighting
