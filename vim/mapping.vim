@@ -9,8 +9,6 @@ nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
 
-" Remove trailing whitespace
-nnoremap <Leader>w :%s/\s\+$//e<CR>
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
 
