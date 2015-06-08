@@ -9,8 +9,8 @@ nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
 
-" Only
-command O :only|tabonly
+" Only have the current split and tab open
+nnoremap <Leader>o :only\|tabonly<CR>
 
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
