@@ -15,7 +15,7 @@ nnoremap <Leader>o :only\|tabonly<CR>
 " Directory explorer is 40 columns wide
 nnoremap <Leader>n :40Vexplore<CR>
 
-nnoremap <Leader>g :Ag<Space>
+nnoremap <Leader>g :Ag!<Space>
 " K searches for word under cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
 
