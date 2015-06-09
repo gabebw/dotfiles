@@ -16,6 +16,8 @@ nnoremap <Leader>o :only\|tabonly<CR>
 nnoremap <Leader>n :40Vexplore<CR>
 
 nnoremap <Leader>g :Ag<Space>
+" K searches for word under cursor
+nnoremap K :Ag "\b<C-R><C-W>\b"<CR>
 
 " Buffer navigation
 nnoremap <C-j> <C-W>j
