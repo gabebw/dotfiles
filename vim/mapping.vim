@@ -25,8 +25,6 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 nnoremap <C-h> <C-W>h
 
-" Disable K looking stuff up
-nnoremap K <Nop>
 " no ex mode
 map Q <Nop>
 
