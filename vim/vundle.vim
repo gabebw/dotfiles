@@ -45,6 +45,9 @@ Plugin 'fatih/vim-go'
 Plugin 'wting/rust.vim'
 Plugin 'tpope/vim-repeat'
 Plugin 'pangloss/vim-javascript'
+" It does more, but I'm mainly using this because it gives me markdown-aware
+" `gx` so that `gx` works on [Markdown](links).
+Plugin 'christoomey/vim-quicklink'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
