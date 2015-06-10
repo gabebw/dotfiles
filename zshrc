@@ -7,7 +7,7 @@ ensure_we_are_inside_tmux
 for file in "$BASE"/*.zsh
 do
   if [[ "$file" != homebrew.zsh && "$file" != tmux.zsh ]]; then
-    # homebrew.zsh is sourced in zshenv for reasons explained in that file
+    # homebrew.zsh is sourced in zshenv for reasons explained in homebrew.zsh
     source "$file"
   fi
 done
