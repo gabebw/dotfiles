@@ -48,6 +48,7 @@ Plugin 'pangloss/vim-javascript'
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
 Plugin 'christoomey/vim-quicklink'
+Plugin 'tpope/vim-projectionist'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
