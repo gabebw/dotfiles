@@ -17,6 +17,6 @@ setopt autopushd
 setopt extended_history
 
 unsetopt correctall
-# Allow [ or ] whereever you want
+# Allow [ or ] wherever you want
 # (Prevents "zsh: no matches found: ...")
 unsetopt nomatch

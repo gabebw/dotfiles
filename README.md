@@ -1,6 +1,8 @@
 # dotfiles
 
-These are my dotfiles: `~/.*`
+Gabriel Berke-Williams' dotfiles for zsh, ruby, git, and more.
+
+Questions? Comments? Open an issue or tweet @gabebw.
 
 ## Prerequisites
 
@@ -11,28 +13,62 @@ These are my dotfiles: `~/.*`
 
     $ ./install.sh
 
-## Interesting Bits
+It won't touch your existing dotfiles, but will symlink ones that don't exist.
+For example, if you have a `~/.zshrc` but no `~/.zshenv`, then the script will
+add a symlink from `~/.zshenv` to the `zshenv` in this repo.
 
-My ZSH prompt is fairly well documented, and is self-contained: you can copy it
-into your dotfiles with no changes to test it out. It's in
-[zsh/prompt.zsh][prompt].
+## zsh
 
-[prompt]: /zsh/prompt.zsh
+* Look in `/zshenv`, `/zshrc`, `/zsh/colors.zsh`, `/zsh/completion.zsh`,
+  `/zsh/key_bindings.zsh`, `/zsh/navigation.zsh`, `/zsh/options.zsh`,
+  `/zsh/path.zsh`, `/zsh/prompt.zsh`
+* Turn off all beeping
+* Turn off "helpful" command autocorrecting
+* Prevent `zsh: no matches found: ...` error
+* Since (among others) `$HOME/code` is in my `cdpath` (see `navigation.zsh`),
+  and I have `$HOME/code/hello`, I can type `hello` from anywhere to go to
+  there.
+* The prompt shows the current directory, the current git branch, the status of
+  the git branch (changed, staged, clean, etc) and the current Ruby version
+* The prompt is fairly well documented, and is self-contained: you can copy it
+  into your dotfiles with no changes to test it out. It's in
+  [zsh/prompt.zsh][zsh-prompt].
+* Enables pretty colors
+* Enables completions
+* Enables Vi-style editing on the command line, with `Ctrl-r` to search
+  backwards
+* If you've typed `abc` then press the Up arrow, it searches for commands
+  starting with `abc`; same for the Down arrow.
+* Completion for the following commands (in `/zsh/completion-scripts`): `brew`,
+  `rake`, `rspec`, `tmux`, `bundle`
+* Every time a directory changes, save it to a file and go back to the current
+  directory when the shell is opened again. Files are named based on the current
+  tmux session.
 
-## Nice to have
+[zsh-prompt]: /zsh/prompt.zsh
 
-These don't relate to my dotfiles at all, but I keep forgetting to install them
-on new machines.
+## ruby
 
-* [Dropbox](https://www.dropbox.com/install)
-* [1Password](https://agilebits.com/onepassword) (from the Mac App Store)
+Check out `/zsh/ruby.zsh`.
 
-## Plugin-specific settings and mappings
+* alias `irb` to `pry`
+* `be` is `bundle exec`
+* `b` with no arguments runs a faster version of `bundle install` and then
+  installs binstubs.
+* `b` with arguments (like `b install`) acts just like `bundle`
+* `binstubs` installs bundler binstubs to `./bin/stubs`
 
-For plugin-specific settings, check out [the `rcplugins`
-directory](/vim/rcplugins).
+## rails
 
-## Any Questions?
+Check out `/zsh/rails.zsh`.
 
-I'm happy to answer questions about these dotfiles. Hit me up
-[@gabebw](https://twitter.com/gabebw).
+* alias `h` to `heroku`
+* alias `summer` to `spring stop`
+* `rrg something` greps the routes for `something`
+* `f` starts `foreman` on the port specified in `.foreman`, or if that's in
+  use, starts `foreman` on a guaranteed-unused port.
+* `db-reset` drops and resets the database
+
+## Vim
+
+* For Vim-plugin-specific settings, check out `/vim/rcplugins/`.
