@@ -29,7 +29,7 @@
   unstage = reset HEAD
   # Merge current branch into master, only if it's a fast-forward. Doesn't check
   # out master if it's not a FF merge.
-  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
+  mm = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git pull && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
   # Delete branch locally and remotely. Used by `git mm`
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   up = !git fetch origin && git rebase origin/master
