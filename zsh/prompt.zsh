@@ -69,7 +69,7 @@ _git_status() {
     echo "staged"
   elif echo "$git_status" | grep -qF "Untracked files"; then
     echo "untracked"
-  else
+  elif echo "$git_status" | grep -qF "working directory clean"; then
     echo "unchanged"
   fi
 }
