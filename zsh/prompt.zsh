@@ -63,7 +63,7 @@ _short_colored_git_status() {
   esac
 
   if [[ -n "$letter" ]]; then
-    echo " $letter"
+    echo "$letter"
   fi
 }
 
@@ -84,7 +84,7 @@ git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
   if [[ -n "$colored_branch_name" ]]; then
-    echo " $colored_branch_name"
+    echo "$colored_branch_name"
   fi
 }
 
@@ -105,4 +105,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-export PROMPT="\$(ruby_version) \$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
+export PROMPT="\$(ruby_version) \$(_shortened_path) \$(git_branch) \$(_short_colored_git_status) $ "
