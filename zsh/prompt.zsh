@@ -105,5 +105,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-export PROMPT="\$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
-export RPROMPT="\$(ruby_version)"
+export PROMPT="\$(ruby_version) \$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
