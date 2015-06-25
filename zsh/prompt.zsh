@@ -44,7 +44,7 @@ ruby_version() {
 
 autoload -Uz vcs_info
 
-RESET_COLOR="%{${reset_color}%}"
+RESET_COLOR="%{$reset_color%}"
 BRANCH_COLOR="%{$fg_bold[yellow]%}"
 BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
 
