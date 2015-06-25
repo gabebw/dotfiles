@@ -8,13 +8,13 @@ _color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
 
-_gray()       { echo "$(_color "$1" grey)" }
-_yellow()     { echo "$(_color "$1" yellow)" }
-_green()      { echo "$(_color "$1" green)" }
-_red()        { echo "$(_color "$1" red)" }
-_cyan()       { echo "$(_color "$1" cyan)" }
-_blue()       { echo "$(_color "$1" blue)" }
-_magenta()    { echo "$(_color "$1" magenta)" }
+_gray()   { echo "$(_color "$1" grey)" }
+_yellow() { echo "$(_color "$1" yellow)" }
+_green()  { echo "$(_color "$1" green)" }
+_red()    { echo "$(_color "$1" red)" }
+_cyan()   { echo "$(_color "$1" cyan)" }
+_blue()   { echo "$(_color "$1" blue)" }
+_magenta(){ echo "$(_color "$1" magenta)" }
 
 ###########################################
 # Helper functions: path and Ruby version #
