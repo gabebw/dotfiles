@@ -48,7 +48,6 @@ zstyle ':vcs_info:git*' formats "$BRANCH"
 
 _short_colored_git_status() {
   local letter
-  local separator="/"
   # http://www.fileformat.info/info/unicode/char/2713/index.htm
   local checkmark="\u2713"
   case $(_git_status) in
@@ -59,7 +58,7 @@ _short_colored_git_status() {
   esac
 
   if [[ -n "$letter" ]]; then
-    echo "$(_blue "$separator")$letter"
+    echo " $letter"
   fi
 }
 
