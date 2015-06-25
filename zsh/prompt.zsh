@@ -96,9 +96,9 @@ function precmd {
   git status 2> /dev/null >! "/tmp/git-status-$$"
 }
 
-###########################################
-# OK, now actually set PROMPT and RPROMPT #
-###########################################
+###########################
+# Actually set the PROMPT #
+###########################
 
 # prompt_subst allows `$(function)` inside the PROMPT
 # Escape the `$()` like `\$()` so it's not immediately evaluated when this file
