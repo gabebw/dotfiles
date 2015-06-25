@@ -11,7 +11,6 @@ setopt inc_append_history
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt autocd
-setopt prompt_subst
 setopt autopushd
 # Timestamp history entries
 setopt extended_history

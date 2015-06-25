@@ -2,6 +2,8 @@
 # Colors #
 ###########
 
+# autoload docs: http://zsh.sourceforge.net/Doc/Release/Shell-Builtin-Commands.html
+# colors provides `$fg_bold` etc: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Other-Functions
 autoload -Uz colors && colors
 
 _color() {
@@ -30,13 +32,16 @@ _magenta(){ echo "$(_color "$1" magenta)" }
 _shortened_path() { echo "$(_blue "%2~")" }
 
 ruby_version() {
-  local version="$(rbenv version-name)"
+  local version=$(rbenv version-name)
   _magenta "$version"
 }
 
 #######################
 #  GIT (branch, vcs)  #
 #######################
+#
+# vcs_info docs: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
+
 autoload -Uz vcs_info
 
 RESET_COLOR="%{${reset_color}%}"
@@ -75,13 +80,11 @@ _git_status() {
   fi
 }
 
-# Must use print (not echo) for ZSH colors to work
 git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
-  if [[ -n "$colored_branch_name" ]]
-  then
-    print " $colored_branch_name"
+  if [[ -n "$colored_branch_name" ]]; then
+    echo " $colored_branch_name"
   fi
 }
 
@@ -96,5 +99,11 @@ function precmd {
 ###########################################
 # OK, now actually set PROMPT and RPROMPT #
 ###########################################
+
+# prompt_subst allows `$(function)` inside the PROMPT
+# Escape the `$()` like `\$()` so it's not immediately evaluated when this file
+# is sourced but is evaluated every time we need the prompt.
+setopt prompt_subst
+
 export PROMPT="\$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
 export RPROMPT="\$(ruby_version)"
