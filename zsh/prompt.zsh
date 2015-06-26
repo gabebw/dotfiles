@@ -18,6 +18,8 @@ _cyan()   { echo "$(_color "$1" cyan)" }
 _blue()   { echo "$(_color "$1" blue)" }
 _magenta(){ echo "$(_color "$1" magenta)" }
 
+_spaced() { [[ -n "$1" ]] && echo " $1" }
+
 ###########################################
 # Helper functions: path and Ruby version #
 ###########################################
@@ -62,9 +64,7 @@ _short_colored_git_status() {
     unchanged) letter=$(_green $checkmark);;
   esac
 
-  if [[ -n "$letter" ]]; then
-    echo " $letter"
-  fi
+  _spaced "$letter"
 }
 
 _git_status() {
@@ -83,9 +83,7 @@ _git_status() {
 git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
-  if [[ -n "$colored_branch_name" ]]; then
-    echo " $colored_branch_name"
-  fi
+  _spaced "$colored_branch_name"
 }
 
 # `precmd` is a magic function that's run right before the prompt is evaluated
