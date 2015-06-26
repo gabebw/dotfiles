@@ -24,3 +24,7 @@ bin/stubs
 
 # Ignore vim backups in dotfiles
 /vim/backups
+
+# Ignore local JS-related files
+node_modules/
+bower_components/
