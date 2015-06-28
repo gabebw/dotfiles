@@ -59,17 +59,30 @@ _short_colored_git_status() {
   local checkmark="\u2714"
   # http://www.fileformat.info/info/unicode/char/2718/index.htm
   local x_mark="\u2718"
-  # http://www.fileformat.info/info/unicode/char/21e3/index.htm
-  local downwards_arrow="\u21e3"
   case $(_git_status) in
     changed) letter=$(_red $x_mark);;
     staged) letter=$(_yellow "S");;
     untracked) letter=$(_cyan "UT");;
     unchanged) letter=$(_green $checkmark);;
-    behind) letter=$(_cyan $downwards_arrow);;
   esac
 
-  _spaced "$letter"
+  _spaced "${letter}$(_relative_status_symbol)"
+}
+
+# Is this branch ahead/behind its remote tracking branch?
+_relative_status_symbol(){
+  local arrow;
+
+  # http://www.fileformat.info/info/unicode/char/21e3/index.htm
+  local downwards_arrow="\u21e3"
+  # http://www.fileformat.info/info/unicode/char/21e1/index.htm
+  local upwards_arrow="\u21e1"
+  case $(_relative_status) in
+    behind) arrow=$(_cyan $downwards_arrow);;
+    ahead) arrow=$(_cyan $upwards_arrow);;
+  esac
+
+  echo -n "$arrow"
 }
 
 _git_status() {
@@ -82,8 +95,15 @@ _git_status() {
     echo "untracked"
   elif echo "$git_status" | grep -qF "working directory clean"; then
     echo "unchanged"
-  elif echo "$git_status" | grep -qF "Your branch is behind"; then
+  fi
+}
+
+_relative_status(){
+  local git_status="$(cat "/tmp/git-status-$$")"
+  if echo "$git_status" | grep -qF "Your branch is behind"; then
     echo "behind"
+  elif echo "$git_status" | grep -qF "Your branch is ahead"; then
+    echo "ahead"
   fi
 }
 
