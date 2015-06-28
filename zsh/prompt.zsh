@@ -55,8 +55,8 @@ zstyle ':vcs_info:git*' formats "$BRANCH"
 
 _short_colored_git_status() {
   local letter
-  # http://www.fileformat.info/info/unicode/char/2713/index.htm
-  local checkmark="\u2713"
+  # http://www.fileformat.info/info/unicode/char/2714/index.htm
+  local checkmark="\u2714"
   # http://www.fileformat.info/info/unicode/char/2718/index.htm
   local x_mark="\u2718"
   case $(_git_status) in
