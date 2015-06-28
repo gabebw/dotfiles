@@ -108,7 +108,7 @@ _git_relative_branch_status(){
   fi
 }
 
-_git_branch() {
+git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
   _spaced "$colored_branch_name"
@@ -122,7 +122,7 @@ _git_branch() {
 #   branch is behind remote branch
 _full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    _spaced $(_git_branch) $(_git_status_symbol) $(_git_relative_branch_status_symbol)
+    _spaced $(git_branch) $(_git_status_symbol) $(_git_relative_branch_status_symbol)
   fi
 }
 
