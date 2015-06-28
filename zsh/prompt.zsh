@@ -57,8 +57,10 @@ _short_colored_git_status() {
   local letter
   # http://www.fileformat.info/info/unicode/char/2713/index.htm
   local checkmark="\u2713"
+  # http://www.fileformat.info/info/unicode/char/2718/index.htm
+  local x_mark="\u2718"
   case $(_git_status) in
-    changed) letter=$(_red "C");;
+    changed) letter=$(_red $x_mark);;
     staged) letter=$(_yellow "S");;
     untracked) letter=$(_cyan "UT");;
     unchanged) letter=$(_green $checkmark);;
