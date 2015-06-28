@@ -18,7 +18,7 @@ _cyan()   { echo "$(_color "$1" cyan)" }
 _blue()   { echo "$(_color "$1" blue)" }
 _magenta(){ echo "$(_color "$1" magenta)" }
 
-_spaced() { [[ -n "$1" ]] && echo " $1" }
+_spaced() { [[ -n "$1" ]] && echo " $@" }
 
 ###########################################
 # Helper functions: path and Ruby version #
@@ -114,6 +114,12 @@ git_branch() {
   _spaced "$colored_branch_name"
 }
 
+_full_git_status(){
+  if [[ -n "$vcs_info_msg_0_" ]]; then
+    _spaced $(git_branch) $(_git_status_symbol) $(_relative_status_symbol)
+  fi
+}
+
 # `precmd` is a magic function that's run right before the prompt is evaluated
 # on each line.
 # Here, it's used to capture the git status to show in the prompt.
@@ -131,4 +137,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-export PROMPT="\$(ruby_version) \$(_shortened_path)\$(git_branch)\$(_git_status_symbol)\$(_relative_status_symbol) $ "
+export PROMPT="\$(ruby_version) \$(_shortened_path)\$(_full_git_status) $ "
