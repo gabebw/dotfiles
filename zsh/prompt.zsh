@@ -114,6 +114,12 @@ _git_branch() {
   _spaced "$colored_branch_name"
 }
 
+# This shows everything about the current git branch:
+# * branch name
+# * check mark/x mark/letter etc depending on whether branch is dirty, clean,
+#   has staged changes, etc
+# * Up arrow if local branch is ahead of remote branch, or down arrow if local
+#   branch is behind remote branch
 _full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
     _spaced $(_git_branch) $(_git_status_symbol) $(_git_relative_branch_status_symbol)
