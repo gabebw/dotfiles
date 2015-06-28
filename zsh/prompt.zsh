@@ -53,12 +53,13 @@ BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*' formats "$BRANCH"
 
-_short_colored_git_status() {
+_git_status_symbol(){
   local letter
   # http://www.fileformat.info/info/unicode/char/2714/index.htm
   local checkmark="\u2714"
   # http://www.fileformat.info/info/unicode/char/2718/index.htm
   local x_mark="\u2718"
+
   case $(_git_status) in
     changed) letter=$(_red $x_mark);;
     staged) letter=$(_yellow "S");;
@@ -66,7 +67,7 @@ _short_colored_git_status() {
     unchanged) letter=$(_green $checkmark);;
   esac
 
-  _spaced "${letter}$(_relative_status_symbol)"
+  _spaced "$letter"
 }
 
 # Is this branch ahead/behind its remote tracking branch?
@@ -130,4 +131,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-export PROMPT="\$(ruby_version) \$(_shortened_path)\$(git_branch)\$(_short_colored_git_status) $ "
+export PROMPT="\$(ruby_version) \$(_shortened_path)\$(git_branch)\$(_git_status_symbol)\$(_relative_status_symbol) $ "
