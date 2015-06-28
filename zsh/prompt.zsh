@@ -78,7 +78,7 @@ _git_relative_branch_status_symbol(){
   local downwards_arrow="\u21e3"
   # http://www.fileformat.info/info/unicode/char/21e1/index.htm
   local upwards_arrow="\u21e1"
-  case $(_relative_status) in
+  case $(_git_relative_branch_status) in
     behind) arrow=$(_cyan $downwards_arrow);;
     ahead) arrow=$(_cyan $upwards_arrow);;
   esac
