@@ -71,7 +71,7 @@ _git_status_symbol(){
 }
 
 # Is this branch ahead/behind its remote tracking branch?
-_relative_status_symbol(){
+_git_relative_branch_status_symbol(){
   local arrow;
 
   # http://www.fileformat.info/info/unicode/char/21e3/index.htm
@@ -99,7 +99,7 @@ _git_status() {
   fi
 }
 
-_relative_status(){
+_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
   if echo "$git_status" | grep -qF "Your branch is behind"; then
     echo "behind"
@@ -108,7 +108,7 @@ _relative_status(){
   fi
 }
 
-git_branch() {
+_git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
   _spaced "$colored_branch_name"
@@ -116,7 +116,7 @@ git_branch() {
 
 _full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    _spaced $(git_branch) $(_git_status_symbol) $(_relative_status_symbol)
+    _spaced $(_git_branch) $(_git_status_symbol) $(_git_relative_branch_status_symbol)
   fi
 }
 
