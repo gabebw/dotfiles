@@ -46,12 +46,8 @@ prompt_ruby_version() {
 
 autoload -Uz vcs_info
 
-PROMPT_RESET_COLOR="%{$reset_color%}"
-PROMPT_BRANCH_COLOR="%{$fg_bold[yellow]%}"
-PROMPT_BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
-
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "$PROMPT_BRANCH"
+zstyle ':vcs_info:git*' formats $(prompt_yellow "%b")
 
 prompt_git_status_symbol(){
   local letter
