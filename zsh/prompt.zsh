@@ -6,19 +6,19 @@
 # colors provides `$fg_bold` etc: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Other-Functions
 autoload -Uz colors && colors
 
-_color() {
+prompt_color() {
   [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
 
-_gray()   { echo "$(_color "$1" grey)" }
-_yellow() { echo "$(_color "$1" yellow)" }
-_green()  { echo "$(_color "$1" green)" }
-_red()    { echo "$(_color "$1" red)" }
-_cyan()   { echo "$(_color "$1" cyan)" }
-_blue()   { echo "$(_color "$1" blue)" }
-_magenta(){ echo "$(_color "$1" magenta)" }
+prompt_gray()   { echo "$(prompt_color "$1" grey)" }
+prompt_yellow() { echo "$(prompt_color "$1" yellow)" }
+prompt_green()  { echo "$(prompt_color "$1" green)" }
+prompt_red()    { echo "$(prompt_color "$1" red)" }
+prompt_cyan()   { echo "$(prompt_color "$1" cyan)" }
+prompt_blue()   { echo "$(prompt_color "$1" blue)" }
+prompt_magenta(){ echo "$(prompt_color "$1" magenta)" }
 
-_spaced() { [[ -n "$1" ]] && echo " $@" }
+prompt_spaced() { [[ -n "$1" ]] && echo " $@" }
 
 ###########################################
 # Helper functions: path and Ruby version #
@@ -31,11 +31,11 @@ _spaced() { [[ -n "$1" ]] && echo " $@" }
 #
 # ~/foo/bar is shown as "foo/bar"
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
-_shortened_path() { echo "$(_blue "%2~")" }
+prompt_shortened_path() { echo "$(prompt_blue "%2~")" }
 
-ruby_version() {
+prompt_ruby_version() {
   local version=$(rbenv version-name)
-  _magenta "$version"
+  prompt_magenta "$version"
 }
 
 #######################
@@ -46,47 +46,47 @@ ruby_version() {
 
 autoload -Uz vcs_info
 
-RESET_COLOR="%{$reset_color%}"
-BRANCH_COLOR="%{$fg_bold[yellow]%}"
-BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
+PROMPT_RESET_COLOR="%{$reset_color%}"
+PROMPT_BRANCH_COLOR="%{$fg_bold[yellow]%}"
+PROMPT_BRANCH="${BRANCH_COLOR}%b${RESET_COLOR}"
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "$BRANCH"
+zstyle ':vcs_info:git*' formats "$PROMPT_BRANCH"
 
-_git_status_symbol(){
+prompt_git_status_symbol(){
   local letter
   # http://www.fileformat.info/info/unicode/char/2714/index.htm
   local checkmark="\u2714"
   # http://www.fileformat.info/info/unicode/char/2718/index.htm
   local x_mark="\u2718"
 
-  case $(_git_status) in
-    changed) letter=$(_red $x_mark);;
-    staged) letter=$(_yellow "S");;
-    untracked) letter=$(_cyan "UT");;
-    unchanged) letter=$(_green $checkmark);;
+  case $(prompt_git_status) in
+    changed) letter=$(prompt_red $x_mark);;
+    staged) letter=$(prompt_yellow "S");;
+    untracked) letter=$(prompt_cyan "UT");;
+    unchanged) letter=$(prompt_green $checkmark);;
   esac
 
-  _spaced "$letter"
+  prompt_spaced "$letter"
 }
 
 # Is this branch ahead/behind its remote tracking branch?
-_git_relative_branch_status_symbol(){
+prompt_git_relative_branch_status_symbol(){
   local arrow;
 
   # http://www.fileformat.info/info/unicode/char/21e3/index.htm
   local downwards_arrow="\u21e3"
   # http://www.fileformat.info/info/unicode/char/21e1/index.htm
   local upwards_arrow="\u21e1"
-  case $(_git_relative_branch_status) in
-    behind) arrow=$(_cyan $downwards_arrow);;
-    ahead) arrow=$(_cyan $upwards_arrow);;
+  case $(prompt_git_relative_branch_status) in
+    behind) arrow=$(prompt_cyan $downwards_arrow);;
+    ahead) arrow=$(prompt_cyan $upwards_arrow);;
   esac
 
   echo -n "$arrow"
 }
 
-_git_status() {
+prompt_git_status() {
   local git_status="$(cat "/tmp/git-status-$$")"
   if echo "$git_status" | grep -qF "Changes not staged" ; then
     echo "changed"
@@ -99,7 +99,7 @@ _git_status() {
   fi
 }
 
-_git_relative_branch_status(){
+prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
   if echo "$git_status" | grep -qF "Your branch is behind"; then
     echo "behind"
@@ -108,10 +108,10 @@ _git_relative_branch_status(){
   fi
 }
 
-git_branch() {
+prompt_git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
   local colored_branch_name="$vcs_info_msg_0_"
-  _spaced "$colored_branch_name"
+  prompt_spaced "$colored_branch_name"
 }
 
 # This shows everything about the current git branch:
@@ -120,9 +120,9 @@ git_branch() {
 #   has staged changes, etc
 # * Up arrow if local branch is ahead of remote branch, or down arrow if local
 #   branch is behind remote branch
-_full_git_status(){
+prompt_full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    _spaced $(git_branch) $(_git_status_symbol) $(_git_relative_branch_status_symbol)
+    prompt_spaced $(prompt_git_branch) $(prompt_git_status_symbol) $(prompt_git_relative_branch_status_symbol)
   fi
 }
 
@@ -143,4 +143,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-export PROMPT="\$(ruby_version) \$(_shortened_path)\$(_full_git_status) $ "
+export PROMPT="\$(prompt_ruby_version) \$(prompt_shortened_path)\$(prompt_full_git_status) $ "
