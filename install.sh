@@ -14,8 +14,7 @@ echo "Installing latest Ruby..."
 rbenv install "$latest_ruby_version"
 
 echo "Installing Vim packages..."
-git clone git@github.com:gmarik/Vundle.vim.git ./vim/bundle/Vundle.vim
-vim +PluginInstall +qa
+vim +PlugInstall +qa
 
 echo "Disabling non-sandbox cabal installs..."
 echo "require-sandbox: True" >> ~/.cabal/config

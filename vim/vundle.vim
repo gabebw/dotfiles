@@ -1,59 +1,53 @@
-" Vundle; see https://github.com/gmarik/Vundle.vim
-" To install, run :PluginInstall
-" To update, run :PluginInstall!
+" vim-plug: https://github.com/junegunn/vim-plug
 
-set rtp+=~/.vim/bundle/Vundle.vim/
 set rtp+=/usr/local/opt/fzf
 
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
 
-" let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'epmatsw/ag.vim'
-Plugin 'tComment'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'endwise.vim'
-Plugin 'tpope/vim-rake'
-Plugin 'kien/ctrlp.vim'
-Plugin 'vim-coffee-script'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'epmatsw/ag.vim'
+Plug 'tComment'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'endwise.vim'
+Plug 'tpope/vim-rake'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-coffee-script'
+Plug 'christoomey/vim-tmux-navigator'
 " Trim trailing whitespace on write
-Plugin 'derekprior/vim-trimmer'
-Plugin 'duggiefresh/vim-easydir'
-Plugin 'itchyny/lightline.vim'
-Plugin 'nicholaides/words-to-avoid.vim'
+Plug 'derekprior/vim-trimmer'
+Plug 'duggiefresh/vim-easydir'
+Plug 'itchyny/lightline.vim'
+Plug 'nicholaides/words-to-avoid.vim'
 " Allow `cir` to change inside ruby block, etc
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'gabebw/vim-spec-runner'
-Plugin 'bogado/file-line'
-Plugin 'junegunn/vim-emoji'
-Plugin 'tpope/vim-vinegar'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-surround'
-Plugin 'gabebw/vim-rdio'
-" Plugin 'file:///Users/gabe/code/personal/vim-rdio'
-Plugin 'christoomey/vim-tmux-runner'
-Plugin 'pbrisbin/vim-syntax-shakespeare'
-Plugin 'Keithbsmiley/swift.vim'
-Plugin 'fatih/vim-go'
-Plugin 'wting/rust.vim'
-Plugin 'tpope/vim-repeat'
-Plugin 'pangloss/vim-javascript'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'nanotech/jellybeans.vim'
+Plug 'gabebw/vim-spec-runner'
+Plug 'bogado/file-line'
+Plug 'junegunn/vim-emoji'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'gabebw/vim-rdio'
+" Plug 'file:///Users/gabe/code/personal/vim-rdio'
+Plug 'christoomey/vim-tmux-runner'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'Keithbsmiley/swift.vim'
+Plug 'fatih/vim-go'
+Plug 'wting/rust.vim'
+Plug 'tpope/vim-repeat'
+Plug 'pangloss/vim-javascript'
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
-Plugin 'christoomey/vim-quicklink'
-Plugin 'tpope/vim-projectionist'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'slim-template/vim-slim'
+Plug 'christoomey/vim-quicklink'
+Plug 'tpope/vim-projectionist'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'slim-template/vim-slim'
 
 " :Gist
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
 
-call vundle#end()
+call plug#end()
