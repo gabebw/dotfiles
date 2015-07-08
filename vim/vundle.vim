@@ -50,6 +50,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'christoomey/vim-quicklink'
 Plugin 'tpope/vim-projectionist'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'slim-template/vim-slim'
 
 " :Gist
 Plugin 'mattn/webapi-vim'
