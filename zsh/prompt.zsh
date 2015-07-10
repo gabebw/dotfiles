@@ -7,18 +7,18 @@
 autoload -Uz colors && colors
 
 prompt_color() {
-  [[ -n "$1" ]] && echo "%{$fg_bold[$2]%}$1%{$reset_color%}"
+  [[ -n "$1" ]] && print "%{$fg_bold[$2]%}$1%{$reset_color%}"
 }
 
-prompt_gray()   { echo "$(prompt_color "$1" grey)" }
-prompt_yellow() { echo "$(prompt_color "$1" yellow)" }
-prompt_green()  { echo "$(prompt_color "$1" green)" }
-prompt_red()    { echo "$(prompt_color "$1" red)" }
-prompt_cyan()   { echo "$(prompt_color "$1" cyan)" }
-prompt_blue()   { echo "$(prompt_color "$1" blue)" }
-prompt_magenta(){ echo "$(prompt_color "$1" magenta)" }
+prompt_gray()   { print "$(prompt_color "$1" grey)" }
+prompt_yellow() { print "$(prompt_color "$1" yellow)" }
+prompt_green()  { print "$(prompt_color "$1" green)" }
+prompt_red()    { print "$(prompt_color "$1" red)" }
+prompt_cyan()   { print "$(prompt_color "$1" cyan)" }
+prompt_blue()   { print "$(prompt_color "$1" blue)" }
+prompt_magenta(){ print "$(prompt_color "$1" magenta)" }
 
-prompt_spaced() { [[ -n "$1" ]] && echo " $@" }
+prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 
 ###########################################
 # Helper functions: path and Ruby version #
@@ -31,7 +31,7 @@ prompt_spaced() { [[ -n "$1" ]] && echo " $@" }
 #
 # ~/foo/bar is shown as "foo/bar"
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
-prompt_shortened_path() { echo "$(prompt_blue "%2~")" }
+prompt_shortened_path() { print "$(prompt_blue "%2~")" }
 
 prompt_ruby_version() {
   local version=$(rbenv version-name)
@@ -80,28 +80,28 @@ prompt_git_relative_branch_status_symbol(){
     ahead) arrow=$(prompt_cyan $upwards_arrow);;
   esac
 
-  echo -n "$arrow"
+  print -n "$arrow"
 }
 
 prompt_git_status() {
   local git_status="$(cat "/tmp/git-status-$$")"
-  if echo "$git_status" | grep -qF "Changes not staged" ; then
-    echo "changed"
-  elif echo "$git_status" | grep -qF "Changes to be committed"; then
-    echo "staged"
-  elif echo "$git_status" | grep -qF "Untracked files"; then
-    echo "untracked"
-  elif echo "$git_status" | grep -qF "working directory clean"; then
-    echo "unchanged"
+  if print "$git_status" | grep -qF "Changes not staged" ; then
+    print "changed"
+  elif print "$git_status" | grep -qF "Changes to be committed"; then
+    print "staged"
+  elif print "$git_status" | grep -qF "Untracked files"; then
+    print "untracked"
+  elif print "$git_status" | grep -qF "working directory clean"; then
+    print "unchanged"
   fi
 }
 
 prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
-  if echo "$git_status" | grep -qF "Your branch is behind"; then
-    echo "behind"
-  elif echo "$git_status" | grep -qF "Your branch is ahead"; then
-    echo "ahead"
+  if print "$git_status" | grep -qF "Your branch is behind"; then
+    print "behind"
+  elif print "$git_status" | grep -qF "Your branch is ahead"; then
+    print "ahead"
   fi
 }
 
