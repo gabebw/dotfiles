@@ -19,3 +19,5 @@ unsetopt correctall
 # Allow [ or ] wherever you want
 # (Prevents "zsh: no matches found: ...")
 unsetopt nomatch
+
+unsetopt multios
