@@ -3,5 +3,5 @@
 function tr(){
   for num in 1 2 3 4; do
     curl -s http://tinyrobots.thoughtbot.com/sitemap${num}.xml | prettyxml
-  done | ag $@ | sed "s/ *<.?loc> *//g"
+  done | ag $@ | sed "s| *</?loc> *||g"
 }
