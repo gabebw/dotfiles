@@ -26,3 +26,7 @@ map Q <Nop>
 
 " Typo
 nnoremap :Nohl :nohlsearch
+
+" Automatically reselect text after in- or out-denting in visual mode
+xnoremap < <gv
+xnoremap > >gv
