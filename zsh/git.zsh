@@ -20,6 +20,7 @@ alias amend-new="git commit --amend"
 
 alias ga="git add"
 alias gai="git add --interactive"
+alias gcp="git rev-parse HEAD | pbcopy"
 
 # `cd` doesn't work in shell scripts because each one runs in its own subshell.
 # So `superclone` returns the name of the directory to `cd` into and we run `cd`
