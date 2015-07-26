@@ -67,6 +67,3 @@ set showbreak="@"
 " bells, and this disables terminal Vim's bells.
 " http://vim.wikia.com/wiki/Disable_beeping
 set noerrorbells visualbell t_vb=
-
-" Syntax-highlight languages inside fenced markdown blocks
-let g:markdown_fenced_languages = ['ruby', 'sh', 'javascript', 'lisp', 'scheme']
