@@ -29,7 +29,3 @@ function b {
     bundle "$@"
   fi
 }
-
-# RSpec
-alias s=rspec
-compdef s=rspec

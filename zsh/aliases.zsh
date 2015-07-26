@@ -1,8 +1,6 @@
 ###########
 # ALIASES #
 ###########
-alias q="vim ~/.zshrc"
-alias qq="source ~/.zshrc"
 alias cp="cp -iv"
 alias rm="rm -iv"
 alias mv="mv -iv"
@@ -35,10 +33,3 @@ function whois() {
 }
 
 function al { ls -t | head -n ${1:-10}; }
-
-serve() {
-  port="${1:-3000}"
-  echo "Serving on http://localhost:$port"
-  echo "\n\n"
-  ruby -run -e httpd . -p $port
-}

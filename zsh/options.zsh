@@ -20,4 +20,5 @@ unsetopt correctall
 # (Prevents "zsh: no matches found: ...")
 unsetopt nomatch
 
+# https://github.com/gabebw/dotfiles/pull/15
 unsetopt multios
