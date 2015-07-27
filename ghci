@@ -1,4 +1,6 @@
+-- Set the prompt
 :set prompt "λ> "
+-- Allow :load-ing from ./src
 :set -isrc
+-- Allow :load-ing from ./tests
 :set -itests
-:set +m
