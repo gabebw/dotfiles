@@ -45,6 +45,8 @@ Plug 'christoomey/vim-quicklink'
 Plug 'tpope/vim-projectionist'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'slim-template/vim-slim'
+" gives you an `ae` text object, so `gcae` comments whole file
+Plug 'kana/vim-textobj-entire'
 
 " :Gist
 Plug 'mattn/webapi-vim'
