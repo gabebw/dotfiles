@@ -1,0 +1,10 @@
+Name:                   {NAME}
+Version:                0.0.0
+Cabal-Version:          >= 1.10
+Build-Type:             Simple
+
+Library
+  Default-Language:     Haskell2010
+  GHC-Options:          -Wall
+  Exposed-Modules:      {NAME}
+  Build-Depends:        base >= 4 && < 5
