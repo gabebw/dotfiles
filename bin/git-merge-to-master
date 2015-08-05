@@ -12,5 +12,5 @@ update-master
 if [[ $(git rev-parse master) == $(git merge-base HEAD origin/master) ]]; then
   git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1})
 else
-  echo "Non-fastforward, or master behind origin/master"
+  echo 'Non-fastforward - try `git up`'
 fi
