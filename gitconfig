@@ -27,11 +27,8 @@
   # No color, short messages
   basic = log --pretty='%h %s'
   unstage = reset HEAD
-  # Merge current branch into master, only if it's a fast-forward. Doesn't check
-  # out master if it's not a FF merge.
-  merge-to-master = !test `git rev-parse master` = $(git merge-base HEAD master) && git checkout master && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1}) || echo "Non-fastforward"
   mm-safe = !bundle exec rake && git merge-to-master
-  mm = !git merge-to-master
+  mm = merge-to-master
   # Delete branch locally and remotely. Used by `git mm`
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   up = !git fetch origin && git rebase origin/master
