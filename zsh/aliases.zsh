@@ -12,9 +12,6 @@ alias df="df -h"
 alias sed="sed -E"
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
 
-# correctly interpret ASCII color escapes
-alias less="less -R"
-
 alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 

@@ -22,3 +22,11 @@ unsetopt nomatch
 
 # https://github.com/gabebw/dotfiles/pull/15
 unsetopt multios
+
+# i - Vim's smart case
+# j.5 - Center search results
+# K - Quit on CTRL-C
+# M - Longer prompt
+# R - handle ASCII color escapes
+# X - Don't send clear screen signal
+export LESS="ij.5KMRX"
