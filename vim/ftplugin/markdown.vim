@@ -5,5 +5,6 @@ let g:markdown_fenced_languages = [
       \ 'javascript',
       \ 'lisp',
       \ 'scheme',
-      \ 'haskell'
+      \ 'haskell',
+      \ 'vim'
       \ ]
