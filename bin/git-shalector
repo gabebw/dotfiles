@@ -7,10 +7,9 @@ set -e
 target_commit=$(
   git log -75 --color=always | \
   fzf --ansi --no-sort --reverse --tiebreak=index | \
-  sed -E 's/.* ([0-9a-f]{7}) .*/\1/' | \
-  tr -d '\n'
+  awk '{print $1}'
 )
 
 printf "%s" "$target_commit" | pbcopy
 
-print "Commit hash copied ($target_commit)"
+printf "Commit hash copied ($target_commit)\n"
