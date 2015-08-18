@@ -48,6 +48,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'slim-template/vim-slim'
 " gives you an `ae` text object, so `gcae` comments whole file
 Plug 'kana/vim-textobj-entire'
+Plug 'pbrisbin/vim-runfile'
 
 " :Gist
 Plug 'mattn/webapi-vim'
