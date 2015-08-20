@@ -1,6 +1,9 @@
 " on opening the file, clear search-highlighting
 autocmd BufReadCmd set nohlsearch
 
+" If no files given, edit the current directory
+autocmd VimEnter * if empty(argv()) | silent! edit . | endif
+
 augroup myfiletypes
   autocmd!
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
