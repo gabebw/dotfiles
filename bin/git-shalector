@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# Fuzzy-find a git commit
+# Fuzzy-find a git commit.
+# You can use `git shalector master` to select commits from master,
+# otherwise it uses the current branch.
 
 set -e
 
+branch=${1:-$(git rev-parse HEAD)}
+
 target_commit=$(
-  git log -75 --color=always | \
+  git log -75 --color=always "$branch" | \
   fzf --ansi --no-sort --reverse --tiebreak=index | \
   awk '{print $1}'
 )
