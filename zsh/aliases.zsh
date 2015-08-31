@@ -31,3 +31,7 @@ function whois() {
 }
 
 function al { ls -t | head -n ${1:-10}; }
+
+# If piping something in, copy it.
+# If just doing `clip`, paste it.
+function clip { [ -t 0 ] && pbpaste || pbcopy;}
