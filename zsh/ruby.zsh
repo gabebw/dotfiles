@@ -8,8 +8,6 @@ RUBYOPT=rubygems
 alias be="bundle exec"
 alias binstubs="bundle --binstubs=./bin/stubs"
 
-alias irb=pry
-
 alias tagit='/usr/local/bin/ctags -R \
   --languages=-javascript \
   --langmap="ruby:+.rake.builder.rjs" \

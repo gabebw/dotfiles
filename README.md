@@ -51,7 +51,6 @@ add a symlink from `~/.zshenv` to the `zshenv` in this repo.
 
 Check out `/zsh/ruby.zsh`.
 
-* alias `irb` to `pry`
 * `be` is `bundle exec`
 * `b` with no arguments runs a faster version of `bundle install` and then
   installs binstubs.
