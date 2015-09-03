@@ -21,6 +21,12 @@ alias amend-new="git commit --amend"
 alias ga="git add"
 alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | pbcopy"
+alias gc="git checkout"
+alias gcm="git commit -m"
+
+# Checkout branches starting with my initials
+function gb(){ git checkout -b "gbw-$1" "$2" }
+function gbm(){ git checkout -b "gbw-$1" master }
 
 # `cd` doesn't work in shell scripts because each one runs in its own subshell.
 # So `superclone` returns the name of the directory to `cd` into and we run `cd`
@@ -29,11 +35,6 @@ function gcl {
   local directory="$(superclone "$@")"
   cd "$directory"
 }
-
-function gb(){ git checkout -b gbw-$1 $2 }
-
-alias gc="git checkout"
-alias gcm="git commit -m"
 
 # Complete `g` like `git`, etc
 compdef g=git
