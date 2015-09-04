@@ -4,5 +4,3 @@
 :set -isrc
 -- Allow :load-ing from ./tests
 :set -itests
--- Enable OverloadedStrings GHC extension
-:set -XOverloadedStrings
