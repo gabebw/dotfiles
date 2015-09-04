@@ -25,7 +25,13 @@ alias gc="git checkout"
 alias gcm="git commit -m"
 
 # Checkout branches starting with my initials
-function gb(){ git checkout -b "gbw-$1" "$2" }
+function gb(){
+  if (( $# == 2 )); then
+    git checkout -b "gbw-$1" "$2"
+  else
+    git checkout -b "gbw-$1"
+  fi
+}
 function gbm(){ git checkout -b "gbw-$1" master }
 
 # `cd` doesn't work in shell scripts because each one runs in its own subshell.
