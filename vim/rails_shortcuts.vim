@@ -4,7 +4,11 @@ augroup rails_shortcuts
 
   let g:rails_projections = {
       \ "config/routes.rb": { "command": "routes" },
-      \ "spec/factories.rb": { "command": "factories" }
+      \ "spec/factories.rb": { "command": "factories" },
+      \ "app/services/*.rb": {
+      \   "command": "service",
+      \   "test": "spec/services/%s_spec.rb"
+      \ }
   \ }
 
   autocmd User Rails nnoremap <Leader>m :Emodel<Space>
