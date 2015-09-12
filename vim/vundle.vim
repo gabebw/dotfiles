@@ -34,7 +34,6 @@ Plug 'tpope/vim-surround'
 Plug 'gabebw/vim-rdio'
 " Plug 'file:///Users/gabe/code/personal/vim-rdio'
 Plug 'christoomey/vim-tmux-runner'
-Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'Keithbsmiley/swift.vim'
 Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
@@ -49,6 +48,12 @@ Plug 'slim-template/vim-slim'
 " gives you an `ae` text object, so `gcae` comments whole file
 Plug 'kana/vim-textobj-entire'
 Plug 'pbrisbin/vim-runfile'
+
+" Haskell
+Plug 'scrooloose/syntastic'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'Twinside/vim-hoogle'
 
 " :Gist
 Plug 'mattn/webapi-vim'
