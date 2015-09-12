@@ -8,3 +8,6 @@
 
 import Data.List
 import Data.Char
+
+-- cabal install hoogle, then `:hoogle fmap`
+:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
