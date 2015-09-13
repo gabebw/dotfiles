@@ -9,10 +9,6 @@ function! s:SourceConfigFilesIn(directory)
   endfor
 endfunction
 
- " Both settings required for Vundle
-set nocompatible
-filetype off
-
 " Leader is <Space>
 " <Leader> must be set before `s:SourceConfigFilesIn` below
 let mapleader=" "
