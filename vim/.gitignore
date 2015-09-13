@@ -1,6 +1,0 @@
-# Ignore bundles so that :BundleInstall can updating
-/bundle/
-
-# Keep backups folder, but not its contents
-/backups/*
-!/backups/.gitkeep
