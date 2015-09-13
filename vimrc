@@ -19,8 +19,8 @@ call s:SourceConfigFilesIn('functions')
 call s:SourceConfigFilesIn('rcplugins') " after plugins load
 
 " Turn on syntax highlighting and filetype detection.
-" Vundle loads all the extra syntax and ftdetect files, so turn them on after
-" Vundle.
+" vim-plug loads all the extra syntax and ftdetect files, so turn them on after
+" we load plugins.
 filetype plugin indent on
 syntax on
 colorscheme jellybeans
