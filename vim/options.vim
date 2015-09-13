@@ -25,6 +25,11 @@ set undofile " Create FILE.un~ files for persistent undo
 silent !mkdir ~/.vim/undodir > /dev/null 2>&1
 set undodir=~/.vim/undodir
 
+
+" Let mappings and key codes timeout in 100ms
+set ttimeout
+set ttimeoutlen=100
+
 " Create backups
 set backup
 set writebackup
