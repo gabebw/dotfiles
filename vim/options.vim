@@ -11,7 +11,7 @@ set modelines=2   " inspect top/bottom 2 lines for modeline
 set scrolloff=999 " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 
-" Copy to the system clipboard
+" Copy to and paste from the system clipboard
 set clipboard=unnamed
 
 " https://github.com/thoughtbot/dotfiles/pull/170
@@ -25,6 +25,8 @@ set undofile " Create FILE.un~ files for persistent undo
 silent !mkdir ~/.vim/undodir > /dev/null 2>&1
 set undodir=~/.vim/undodir
 
+" Delete comment character when joining commented lines
+set formatoptions+=j
 
 " Let mappings and key codes timeout in 100ms
 set ttimeout
