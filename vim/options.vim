@@ -23,7 +23,6 @@ set autowrite
 
 " Persistent undo
 set undofile " Create FILE.un~ files for persistent undo
-silent !mkdir ~/.vim/undodir > /dev/null 2>&1
 set undodir=~/.vim/undodir
 
 " Delete comment character when joining commented lines
@@ -37,7 +36,6 @@ set ttimeoutlen=100
 set backup
 set writebackup
 set backupdir=~/.vim/backups
-silent !mkdir ~/.vim/backups > /dev/null 2>&1
 " setting backupskip to this to allow for 'crontab -e' using vim.
 " thanks to: http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-ed
 if has('unix')

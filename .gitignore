@@ -20,7 +20,9 @@ emacs-plugins/*
 # Ignore Vim bundles
 vim/bundle/
 
-# Keep backups folder
+# Keep these folders...
 !vim/backups/.gitkeep
-# ...but not its contents
+!vim/undodir/.gitkeep
+# ...but not their contents
 vim/backups/*
+vim/undodir/*
