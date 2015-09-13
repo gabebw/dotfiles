@@ -5,24 +5,24 @@ set rtp+=/usr/local/opt/fzf
 call plug#begin('~/.vim/bundle')
 
 " Ruby/Rails/web development
-Plug 'tpope/vim-rails', { 'for': 'rails' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 " Allow `cir` to change inside ruby block, etc
-Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user' " required for vim-textobj-rubyblock
-Plug 'tpope/vim-rake', { 'for': 'ruby' }
-Plug 'vim-coffee-script', { 'for': 'coffeescript' }
+Plug 'tpope/vim-rake'
+Plug 'vim-coffee-script'
 Plug 'gabebw/vim-spec-runner'
 " Plug '~/code/personal/vim-spec-runner'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'slim-template/vim-slim', { 'for': 'slim' }
+Plug 'slim-template/vim-slim'
 Plug 'tpope/vim-projectionist'
 
 " Language-specific plugins
-Plug 'keith/swift.vim', { 'for': 'swift' }
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'wting/rust.vim', { 'for': 'rust' }
+Plug 'keith/swift.vim'
+Plug 'fatih/vim-go'
+Plug 'wting/rust.vim'
 
 " Plumbing that makes everything nicer, like lightline or git
 Plug 'epmatsw/ag.vim'
@@ -56,16 +56,16 @@ Plug 'gabebw/vim-rdio'
 " Plug 'file:///Users/gabe/code/personal/vim-rdio'
 
 " Markdown
-Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
+Plug 'nicholaides/words-to-avoid.vim'
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
-Plug 'christoomey/vim-quicklink', { 'for': 'markdown' }
+Plug 'christoomey/vim-quicklink'
 
 " Haskell
-Plug 'scrooloose/syntastic', { 'for': 'haskell' }
-Plug 'pbrisbin/vim-syntax-shakespeare', { 'for': 'haskell' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'scrooloose/syntastic'
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'Twinside/vim-hoogle'
 
 " :Gist
 Plug 'mattn/webapi-vim'
