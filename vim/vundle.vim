@@ -20,7 +20,7 @@ Plug 'slim-template/vim-slim', { 'for': 'slim' }
 Plug 'tpope/vim-projectionist'
 
 " Language-specific plugins
-Plug 'Keithbsmiley/swift.vim', { 'for': 'swift' }
+Plug 'keith/swift.vim', { 'for': 'swift' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'wting/rust.vim', { 'for': 'rust' }
 
