@@ -12,9 +12,6 @@ nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
 " Only have the current split and tab open
 nnoremap <Leader>o :only\|tabonly<CR>
 
-" Directory explorer is 40 columns wide
-nnoremap <Leader>n :40Vexplore<CR>
-
 " Buffer navigation
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k

@@ -1,4 +1,3 @@
-" Completion {{{
 " :set wildmenu enables a menu at the bottom of the vim/gvim window.
 set wildmenu
 set wildmode=list:longest,list:full
@@ -14,4 +13,3 @@ set wildmode=list:longest,list:full
 "          the preview window. Only works in combination with "menu" or
 "          "menuone".
 set completeopt=menu,menuone,longest,preview
-" end completion }}}

@@ -4,7 +4,6 @@ set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitigno
 set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
 set cursorline    " highlight the line the cursor is on
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set modelines=2   " inspect top/bottom 2 lines for modeline
