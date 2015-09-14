@@ -11,6 +11,8 @@ endfunction
 
 " Leader is <Space>
 " <Leader> must be set before `s:SourceConfigFilesIn` below
+" because leader is used at the moment mappings are defined.
+" Changing mapleader after a mapping is defined has no effect on the mapping.
 let mapleader=" "
 
 " Source the rest of the configuration
