@@ -50,16 +50,12 @@ brew 'hub'
 # Fuzzy finder
 brew 'fzf'
 
-# Docker
-brew 'docker'
-cask 'boot2docker'
-
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
+# Cask: install binaries
 tap 'caskroom/cask'
 brew 'brew-cask'
-
 cask 'alfred'
 cask 'dropbox'
 cask 'google-chrome'
@@ -67,3 +63,7 @@ cask 'netnewswire'
 cask 'vlc'
 # Use Cask so we get Cargo, too
 cask 'rust'
+
+# Docker
+brew 'docker'
+cask 'boot2docker'
