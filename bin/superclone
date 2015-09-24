@@ -19,7 +19,7 @@
 # * wgh:thoughtbot/paperclip
 # * tb:paperclip
 # * gbw:paperclip
-# * heroku/heroku (so you can clone GitHub repos by username/reponame)
+# * gabebw/dotfiles (clone GitHub repos by username/reponame)
 
 # We did "superclone git clone URL", remove the "git clone"
 if [[ "$1" == "git" && "$2" == "clone" ]]; then
