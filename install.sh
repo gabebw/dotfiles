@@ -7,8 +7,8 @@ echo "Interactively linking dotfiles into ~..."
 
 echo "Installing Homebrew packages..."
 brew update
-brew tap homebrew/brewdler
-brew brewdle
+brew tap homebrew/bundle
+brew bundle
 
 echo "Installing latest Ruby..."
 rbenv install "$latest_ruby_version"
