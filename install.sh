@@ -1,6 +1,6 @@
 #!/bin/sh
 
-latest_ruby_version="2.2.0"
+latest_ruby_version="2.2.3"
 
 echo "Interactively linking dotfiles into ~..."
 ./link-dotfiles.sh
