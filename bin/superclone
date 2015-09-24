@@ -1,16 +1,16 @@
 #! /usr/bin/env zsh
 # set syntax=zsh
 
-# Clone a git URL and cd into the directory.
+# Clone a git URL and cd into the cloned directory.
 #
-# `gcl URL floo` will clone the URL into a directory named floo, just like
-# `git clone URL floo`.
+# `superclone URL floo` will clone the URL into a directory named floo, just
+# like `git clone URL floo`.
 #
-# If there's a URL in the clipboard, just do `gcl` without arguments and it will
-# use that.
+# If there's a URL in the clipboard, just do `superclone` without arguments and
+# it will use that.
 #
-# You can even do `gcl git clone URL`, say if you copy-pasted some instructions,
-# and it will act like `gcl URL`.
+# You can even do `superclone git clone URL`, say if you copy-pasted some
+# instructions, and it will act like `superclone URL`.
 #
 # Handles the following `git clone` schemes (search `insteadOf` in gitconfig for
 # explanations of the weird ones):
@@ -21,7 +21,7 @@
 # * gbw:paperclip
 # * heroku/heroku (so you can clone GitHub repos by username/reponame)
 
-# Did "gcl git clone URL", remove the "git clone"
+# We did "superclone git clone URL", remove the "git clone"
 if [[ "$1" == "git" && "$2" == "clone" ]]; then
   shift;
   shift;
