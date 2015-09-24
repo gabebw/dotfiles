@@ -29,8 +29,8 @@ fi
 
 # No arguments provided, assume we should use the clipboard
 if (( $# == 0 )); then
-  superclone $(pbpaste)
-  return
+  superclone "$(pbpaste)"
+  exit $?
 fi
 
 local git_url="$1"
