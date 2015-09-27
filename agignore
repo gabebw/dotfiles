@@ -22,6 +22,9 @@ bin/stubs
 # Ignore .keep files
 .keep
 
+# Ignore SQL files in spec/fixtures
+/spec/fixtures/*.sql
+
 # Ignore vim backups in dotfiles
 /vim/backups
 
