@@ -24,7 +24,7 @@
 #
 # FAQ
 #
-# Q: Why doesn't superclone `cd` directoy into the directory instead of printing
+# Q: Why doesn't superclone `cd` directly into the directory instead of printing
 #    out the name of the directory?
 #
 # A: `cd` doesn't work in shell scripts because each one runs in its own subshell.
