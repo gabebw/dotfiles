@@ -6,11 +6,12 @@
 # `superclone URL floo` will clone the URL into a directory named floo, just
 # like `git clone URL floo`.
 #
-# If there's a URL in the clipboard, just do `superclone` without arguments and
-# it will use that.
+# If there's a URL in the clipboard, `superclone` without arguments will use
+# that.
 #
 # You can even do `superclone git clone URL`, say if you copy-pasted some
-# instructions, and it will act like `superclone URL`.
+# instructions, and it will ignore the `git clone` and act like `superclone
+# URL`.
 #
 # Handles the following `git clone` schemes (search `insteadOf` in gitconfig for
 # explanations of the weird ones):
