@@ -1,7 +1,7 @@
 #! /usr/bin/env zsh
 # set syntax=zsh
 
-# Clone a git URL and cd into the cloned directory.
+# Clone a git URL and print out the name of the created directory.
 #
 # `superclone URL floo` will clone the URL into a directory named floo, just
 # like `git clone URL floo`.
@@ -21,6 +21,25 @@
 # * tb:paperclip
 # * gbw:paperclip
 # * gabebw/dotfiles (clone GitHub repos by username/reponame)
+#
+# FAQ
+#
+# Q: Why doesn't superclone `cd` directoy into the directory instead of printing
+#    out the name of the directory?
+#
+# A: `cd` doesn't work in shell scripts because each one runs in its own subshell.
+# If this script ran `cd`, the subshell would `cd` into the directory, then
+# exit, and the user's shell would be in the same unchanged directory.
+#
+# So `superclone` returns the name of the directory to `cd` into and another
+# function runs `cd` as a function in this shell. It's all very silly.
+# Example:
+#
+# function git-superclone {
+#   local directory="$(superclone "$@")"
+#   cd "$directory"
+# }
+#
 
 # We did "superclone git clone URL", remove the "git clone"
 if [[ "$1" == "git" && "$2" == "clone" ]]; then
