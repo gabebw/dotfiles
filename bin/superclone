@@ -30,25 +30,20 @@ fi
 # No arguments provided, assume we should use the clipboard
 if (( $# == 0 )); then
   superclone "$(pbpaste)"
-  exit $?
-fi
-
-local git_url="$1"
-local custom_directory="$2"
-
-if [[ "$git_url" == tb:* ]]; then
-  # Chop off the `tb:` from `tb:REPO_NAME` since `basename` won't change it.
-  local directory="${git_url#tb:}"
-elif [[ "$git_url" == gbw:* ]]; then
-  # Chop off the `gbw:` from `gbw:REPO_NAME` since `basename` won't change it.
-  local directory="${git_url#gbw:}"
 else
-  local directory="${$(basename $git_url)%.git}"
-fi
+  git_url="$1"
 
-if [[ -z "$custom_directory" ]]; then
-  hub clone "$git_url" && echo "$directory"
-else
+  if [[ "$git_url" == tb:* ]]; then
+    # Chop off the `tb:` from `tb:REPO_NAME` since `basename` won't change it.
+    directory="${git_url#tb:}"
+  elif [[ "$git_url" == gbw:* ]]; then
+    # Chop off the `gbw:` from `gbw:REPO_NAME` since `basename` won't change it.
+    directory="${git_url#gbw:}"
+  else
+    directory="${$(basename $git_url)%.git}"
+  fi
+
+  custom_directory="${2:-$directory}"
   hub clone "$git_url" "$custom_directory" && \
     echo "$custom_directory"
 fi
