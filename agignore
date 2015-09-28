@@ -21,6 +21,7 @@ bin/stubs
 .git/
 # Ignore .keep files
 .keep
+_fonts.scss
 
 # Ignore SQL files in spec/fixtures
 /spec/fixtures/*.sql
