@@ -23,7 +23,7 @@ function create_missing_directories_on_remote_host {
 url="$(pbpaste)"
 
 if (( $# == 0 )); then
-  filename_on_server="$(basename "$path_or_url")"
+  filename_on_server="$(basename "$url")"
 elif (( $# == 1 )); then
   filename_on_server="$1"
 fi
