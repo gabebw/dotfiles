@@ -14,6 +14,8 @@
 #
 #   upload-image flip.jpg some/other.jpg
 
+set -e
+
 function create_missing_directories_on_remote_host {
   local filename=$1
   if [[ "$filename" != "$(basename "$filename")" ]]; then
@@ -26,4 +28,5 @@ filename_on_server=$(basename "${2:-$1}")
 
 create_missing_directories_on_remote_host "$filename_on_server"
 
-rsync -e ssh -azh --ignore-existing "$local_filename" "i:~/images/$filename_on_server" && echo "http://i.gabebw.com/$filename_on_server"
+rsync -e ssh -azh --ignore-existing "$local_filename" "i:~/images/$filename_on_server"
+echo "http://i.gabebw.com/$filename_on_server"
