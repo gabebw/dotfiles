@@ -1,25 +1,19 @@
 #!/bin/zsh
 
-# icopy
-# (no arguments means "download the URL I just copied")
-# or
-# icopy flip.jpg
-# (download the URL in the pasteboard and save as flip.jpg)
+# Upload the currently-copied image URL to i.gabebw.com
+#
+# USAGE:
+#
+# No arguments means "download the URL I just copied":
+#
+#   icopy
+#
+# Download the URL in the pasteboard and upload as flip.jpg:
+#
+#   icopy flip.jpg
 
-function rsync_the_thing() {
-  # Safely rsync,
-  # without overwriting (--ignore-existing)
-  rsync -e ssh -azh --ignore-existing "$@"
-}
+set -e
 
-function create_missing_directories_on_remote_host {
-  local filename="$1"
-  if [[ "$filename" != "$(basename "$filename")" ]]; then
-    ssh i "cd images && mkdir -p $(dirname "$filename")"
-  fi
-}
-
-# Always assume we want to download a URL we just copied
 url="$(pbpaste)"
 
 if (( $# == 0 )); then
@@ -28,12 +22,8 @@ elif (( $# == 1 )); then
   filename_on_server="$1"
 fi
 
-create_missing_directories_on_remote_host "$filename_on_server"
-
 local_filename="$(basename "$filename_on_server")"
-curl -o "$local_filename" "$url" && \
-  rsync_the_thing "$local_filename" "i:~/images/$filename_on_server" && \
-  rm "$local_filename"
 
-echo
-echo "http://i.gabebw.com/$filename_on_server"
+curl -o "$local_filename" "$url"
+upload-image "$local_filename" "$filename_on_server"
+rm "$local_filename"
