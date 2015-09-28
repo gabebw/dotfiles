@@ -24,8 +24,10 @@ set autowrite
 set undofile " Create FILE.un~ files for persistent undo
 set undodir=~/.vim/undodir
 
-" Delete comment character when joining commented lines
-set formatoptions+=j
+if v:version > 703 || v:version == 703 && has("patch541")
+  " Delete comment character when joining commented lines
+  set formatoptions+=j
+endif
 
 " Let mappings and key codes timeout in 100ms
 set ttimeout
