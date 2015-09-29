@@ -13,14 +13,17 @@
 # instructions, and it will ignore the `git clone` and act like `superclone
 # URL`.
 #
-# Handles the following `git clone` schemes (search `insteadOf` in gitconfig for
+# It can handle the following `git clone` schemes (search `insteadOf` in [my
+# gitconfig] for
 # explanations of the weird ones):
-# * git@github.com:thoughtbot/paperclip.git
-# * https://github.com/rails/rails.git
-# * wgh:thoughtbot/paperclip
-# * tb:paperclip
-# * gbw:paperclip
-# * gabebw/dotfiles (clone GitHub repos by username/reponame)
+# * `git@github.com:thoughtbot/paperclip.git`
+# * `https://github.com/rails/rails.git`
+# * `wgh:thoughtbot/paperclip`
+# * `tb:paperclip`
+# * `gbw:paperclip`
+# * `gabebw/dotfiles` (clone GitHub repos by username/reponame)
+#
+# [my gitconfig]: https://github.com/gabebw/dotfiles/blob/master/gitconfig
 #
 # ## FAQ
 #
@@ -40,7 +43,10 @@
 #       cd "$directory"
 #     }
 
-# We did "superclone git clone URL", remove the "git clone"
+# Stop if any command fails.
+set -e
+
+# We did `superclone git clone URL`, remove the `git clone`
 if [[ "$1" == "git" && "$2" == "clone" ]]; then
   shift;
   shift;
@@ -54,24 +60,25 @@ else
 
   if [[ -e "$2" ]]; then
     # We provided a directory just like `git clone URL DIR`. Use it.
-    custom_directory="$2"
+    directory="$2"
   else
     # We need to turn `git@github.com:gabebw/dotfiles.git` into `dotfiles`.  We
     # also need to turn `gbw:dotfiles` into `dotfiles`.  `basename` works for
-    # the first case,but for the second case, we have to manually strip the
+    # the first case, but for the second case, we have to manually strip the
     # prefix.
     case "$git_url" in
       tb:*)
-        custom_directory="${git_url#tb:}"
+        directory="${git_url#tb:}"
         ;;
       gbw:*)
-        custom_directory="${git_url#gbw:}"
+        directory="${git_url#gbw:}"
         ;;
       *)
-        custom_directory="${$(basename "$git_url")%.git}"
+        directory="${$(basename "$git_url")%.git}"
     esac
   fi
 
-  hub clone "$git_url" "$custom_directory" && \
-    echo "$custom_directory"
+  # At last, clone the git repo into a directory.
+  hub clone "$git_url" "$directory"
+  echo "$directory"
 fi
