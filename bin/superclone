@@ -53,17 +53,25 @@ if (( $# == 0 )); then
 else
   git_url="$1"
 
-  if [[ "$git_url" == tb:* ]]; then
-    # Chop off the `tb:` from `tb:REPO_NAME` since `basename` won't change it.
-    directory="${git_url#tb:}"
-  elif [[ "$git_url" == gbw:* ]]; then
-    # Chop off the `gbw:` from `gbw:REPO_NAME` since `basename` won't change it.
-    directory="${git_url#gbw:}"
+  if [[ -e "$2" ]]; then
+    custom_directory="$2"
   else
-    directory="${$(basename "$git_url")%.git}"
+    # We need to turn "git@github.com:gabebw/dotfiles.git" into "dotfiles".  We
+    # also need to turn "gbw:dotfiles" into "dotfiles".  `basename` works if
+    # there's a slash, but for the second case, we have to manually strip the
+    # prefix.
+    case "$git_url" in
+      tb:*)
+        custom_directory="${git_url#tb:}"
+        ;;
+      gbw:*)
+        custom_directory="${git_url#gbw:}"
+        ;;
+      *)
+        custom_directory="${$(basename "$git_url")%.git}"
+    esac
   fi
 
-  custom_directory="${2:-$directory}"
   hub clone "$git_url" "$custom_directory" && \
     echo "$custom_directory"
 fi
