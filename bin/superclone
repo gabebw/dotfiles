@@ -60,7 +60,7 @@ else
     # Chop off the `gbw:` from `gbw:REPO_NAME` since `basename` won't change it.
     directory="${git_url#gbw:}"
   else
-    directory="${$(basename $git_url)%.git}"
+    directory="${$(basename "$git_url")%.git}"
   fi
 
   custom_directory="${2:-$directory}"
