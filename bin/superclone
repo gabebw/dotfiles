@@ -22,7 +22,7 @@
 # * gbw:paperclip
 # * gabebw/dotfiles (clone GitHub repos by username/reponame)
 #
-# FAQ
+# ## FAQ
 #
 # Q: Why doesn't superclone `cd` directly into the directory instead of printing
 #    out the name of the directory?
@@ -35,11 +35,10 @@
 # function runs `cd` as a function in this shell. It's all very silly.
 # Example:
 #
-# function git-superclone {
-#   local directory="$(superclone "$@")"
-#   cd "$directory"
-# }
-#
+#     function git-superclone {
+#       local directory="$(superclone "$@")"
+#       cd "$directory"
+#     }
 
 # We did "superclone git clone URL", remove the "git clone"
 if [[ "$1" == "git" && "$2" == "clone" ]]; then
@@ -47,18 +46,19 @@ if [[ "$1" == "git" && "$2" == "clone" ]]; then
   shift;
 fi
 
-# No arguments provided, assume we should use the clipboard
+# No arguments provided, assume the URL is in the clipboard.
 if (( $# == 0 )); then
   superclone "$(pbpaste)"
 else
   git_url="$1"
 
   if [[ -e "$2" ]]; then
+    # We provided a directory just like `git clone URL DIR`. Use it.
     custom_directory="$2"
   else
-    # We need to turn "git@github.com:gabebw/dotfiles.git" into "dotfiles".  We
-    # also need to turn "gbw:dotfiles" into "dotfiles".  `basename` works if
-    # there's a slash, but for the second case, we have to manually strip the
+    # We need to turn `git@github.com:gabebw/dotfiles.git` into `dotfiles`.  We
+    # also need to turn `gbw:dotfiles` into `dotfiles`.  `basename` works for
+    # the first case,but for the second case, we have to manually strip the
     # prefix.
     case "$git_url" in
       tb:*)
