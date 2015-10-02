@@ -24,5 +24,5 @@ call s:SourceConfigFilesIn('rcplugins') " after plugins load
 " vim-plug loads all the extra syntax and ftdetect files, so turn them on after
 " we load plugins.
 filetype plugin indent on
-syntax on
+syntax enable
 colorscheme jellybeans
