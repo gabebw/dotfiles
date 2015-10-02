@@ -25,7 +25,7 @@ Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
 
 " Plumbing that makes everything nicer, like lightline or git
-Plug 'epmatsw/ag.vim'
+Plug 'rking/ag.vim'
 Plug 'tComment'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
