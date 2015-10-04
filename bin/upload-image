@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Safely (no overwriting) upload a file to i.gabebw.com
+# Safely (no overwriting) upload a local file to i.gabebw.com
 #
 # Upload ./flip.jpg as flip.jpg:
 #
@@ -10,7 +10,8 @@
 #
 #   upload-image flip.jpg other.jpg
 #
-# Upload ./flip.jpg as some/other.jpg:
+# Upload ./flip.jpg as some/other.jpg and create the `some/` directory if it
+# doesn't exist:
 #
 #   upload-image flip.jpg some/other.jpg
 
@@ -24,7 +25,7 @@ function create_missing_directories_on_remote_host {
 }
 
 local_filename=$1
-filename_on_server=$(basename "${2:-$1}")
+filename_on_server=${2:-"$1"}
 
 create_missing_directories_on_remote_host "$filename_on_server"
 

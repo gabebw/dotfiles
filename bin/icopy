@@ -2,28 +2,61 @@
 
 # Upload the currently-copied image URL to i.gabebw.com
 #
+# Options:
+#
+#   -f local_path: Upload a local file FROM here (if not given, uses copied URL)
+#   -t remote_name: Upload the file TO here, with this name.
+#   -d directory: Upload the file into this directory
+#
 # USAGE:
 #
-# No arguments means "download the URL I just copied":
+# Upload the image whose URL I just copied and keep the same name:
 #
 #   icopy
 #
-# Download the URL in the pasteboard and upload as flip.jpg:
+# Upload a local image named `from.jpg` and upload as `to.jpg`
 #
-#   icopy flip.jpg
+#   icopy -f flip.jpg -t to.jpg
+#
+# Upload the copied image URL and upload as flip.jpg:
+#
+#   icopy -t flip.jpg
+#
+# Upload the image whose URL I just copied into the `cool` directory:
+#
+#   icopy -d cool
 
 set -e
 
-url="$(pbpaste)"
+# Defaults
+directory=""
 
-if (( $# == 0 )); then
-  filename_on_server="$(basename "$url")"
-elif (( $# == 1 )); then
-  filename_on_server="$1"
+while getopts ":t:d:f:" opt; do
+  case $opt in
+    f)
+      local_file=true
+      from="$OPTARG"
+      ;;
+    t)
+      to="$OPTARG"
+      ;;
+    d)
+      directory="$OPTARG"
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ $local_file ]; then
+  upload-image "$from" "${directory}/${to}"
+else
+  url="$(pbpaste)"
+  to=${to:-"$(basename "$url")"}
+  from=icopy_file.image
+  curl --silent --output "$from" "$url"
+  icopy -f "$from" -t "$to" -d "$directory"
+  rm "$from"
 fi
-
-local_filename="$(basename "$filename_on_server")"
-
-curl -o "$local_filename" "$url"
-upload-image "$local_filename" "$filename_on_server"
-rm "$local_filename"
