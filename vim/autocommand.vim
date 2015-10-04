@@ -1,6 +1,11 @@
 " on opening the file, clear search-highlighting
 autocmd BufReadCmd set nohlsearch
 
+" Without this, the next line copies a bunch of netrw settings like `let
+" g:netrw_dirhistmax` to the system clipboard.
+" I never use netrw, so disable its history.
+let g:netrw_dirhistmax = 0
+
 " If no files given, edit the current directory
 autocmd VimEnter * if empty(argv()) | silent! edit . | endif
 
