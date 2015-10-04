@@ -10,6 +10,8 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
+# Copy-pasting `$ python something.py` works
+alias \$=''
 [[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
 
 alias prettyjson="python -m json.tool"
