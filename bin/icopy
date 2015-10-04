@@ -55,7 +55,7 @@ if [ $local_file ]; then
 else
   url="$(pbpaste)"
   to=${to:-"$(basename "$url")"}
-  from=icopy_file.image
+  from="icopy_file-$$.image"
   curl --silent --output "$from" "$url"
   icopy -f "$from" -t "$to" -d "$directory"
   rm "$from"
