@@ -27,7 +27,7 @@ _ensure_tmux_is_running() {
 attach_to_tmux_session() {
   local session="$1"
   if _is_tmux_not_running; then
-    tmux attach -t "$1"
+    tmux attach -d -t "$1"
   else
     tmux switch-client -t "$1"
   fi
