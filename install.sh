@@ -9,6 +9,7 @@ echo "Installing Homebrew packages..."
 brew update
 brew tap homebrew/bundle
 brew bundle
+brew link --force qt5
 
 echo "Installing latest Ruby..."
 rbenv install "$latest_ruby_version"

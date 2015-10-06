@@ -1,6 +1,9 @@
 # sed for json
 brew 'jq'
 
+# Qt5 for capybara-webkit
+brew 'qt5'
+
 # grep for ps
 brew 'pgrep'
 
