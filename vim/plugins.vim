@@ -24,26 +24,36 @@ Plug 'keith/swift.vim'
 Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
 
-" Plumbing that makes everything nicer, like lightline or git
+" Plumbing that makes everything nicer
+" :Ag is like :grep but with `ag`
 Plug 'rking/ag.vim'
+" Easily comment/uncomment lines in many languages
 Plug 'tComment'
+" <Tab> indents or triggers autocomplete, smartly
 Plug 'ervandew/supertab'
+" Git bindings
 Plug 'tpope/vim-fugitive'
+" Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'endwise.vim'
 Plug 'kien/ctrlp.vim'
 " Trim trailing whitespace on write
 Plug 'derekprior/vim-trimmer'
+" When editing deeply/nested/file, auto-create deeply/nested/ dirs
 Plug 'duggiefresh/vim-easydir'
+" Cool statusbar
 Plug 'itchyny/lightline.vim'
+" Colorscheme. Looks great with Tomorrow Night Eighties.terminal theme in this repo.
 Plug 'nanotech/jellybeans.vim'
-Plug 'bogado/file-line'
+" Easily navigate directories
 Plug 'tpope/vim-vinegar'
+" Make working with shell scripts nicer ("vim-unix")
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
+" Make `.` work to repeat plugin actions too
 Plug 'tpope/vim-repeat'
-" gives you an `ae` text object, so `gcae` comments whole file
+" Gives you an `ae` text object, so `gcae` comments whole file
 Plug 'kana/vim-textobj-entire'
-Plug 'pbrisbin/vim-runfile'
+" Access to Vim's powerful undo-tree with :GundoShow
 Plug 'vim-scripts/Gundo'
 " Intelligently reopen files where you left off
 Plug 'dietsche/vim-lastplace'
@@ -53,7 +63,9 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Silly stuff, but I like it
+" Now I can put emoji in my statusbar
 Plug 'junegunn/vim-emoji'
+" Control Rdio from Vim
 Plug 'gabebw/vim-rdio'
 " Plug 'file:///Users/gabe/code/personal/vim-rdio'
 
