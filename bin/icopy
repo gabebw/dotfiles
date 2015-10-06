@@ -53,7 +53,11 @@ done
 [[ -z "$to" ]] && to=$(basename "$from")
 
 if [ $local_file ]; then
-  upload-image "$from" "${directory}/${to}"
+  if [[ -n "$directory" ]]; then
+    upload-image "$from" "${directory}/${to}"
+  else
+    upload-image "$from" "$to"
+  fi
 else
   url="$(pbpaste)"
   to=${to:-"$(basename "$url")"}
