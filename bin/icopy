@@ -54,15 +54,24 @@ done
 
 if [ $local_file ]; then
   if [[ -n "$directory" ]]; then
-    upload-image "$from" "${directory}/${to}"
+    full_to="${directory}/${to}"
   else
-    upload-image "$from" "$to"
+    full_to="$to"
   fi
+
+  print "$from -> $full_to" >&2
+  upload-image "$from" "$full_to"
 else
+  from="icopy_file-$$.image"
   url="$(pbpaste)"
   to=${to:-"$(basename "$url")"}
-  from="icopy_file-$$.image"
+  if [[ -n "$directory" ]]; then
+    full_to="${directory}/${to}"
+  else
+    full_to="$to"
+  fi
+  print "$url -> $full_to" >&2
   curl --silent --output "$from" "$url"
-  icopy -f "$from" -t "$to" -d "$directory"
+  upload-image "$from" "$full_to"
   rm "$from"
 fi
