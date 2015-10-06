@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 latest_ruby_version="2.2.3"
 
 echo "Interactively linking dotfiles into ~..."
@@ -9,6 +11,7 @@ echo "Installing Homebrew packages..."
 brew update
 brew tap homebrew/bundle
 brew bundle
+brew unlink qt || true
 brew link --force qt5
 
 echo "Installing latest Ruby..."
