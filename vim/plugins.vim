@@ -45,6 +45,8 @@ Plug 'tpope/vim-repeat'
 Plug 'kana/vim-textobj-entire'
 Plug 'pbrisbin/vim-runfile'
 Plug 'vim-scripts/Gundo'
+" Intelligently reopen files where you left off
+Plug 'dietsche/vim-lastplace'
 
 " tmux
 Plug 'christoomey/vim-tmux-runner'
