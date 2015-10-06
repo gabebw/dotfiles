@@ -34,7 +34,7 @@ Plug 'ervandew/supertab'
 " Git bindings
 Plug 'tpope/vim-fugitive'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
-Plug 'endwise.vim'
+Plug 'tpope/vim-endwise'
 Plug 'kien/ctrlp.vim'
 " Trim trailing whitespace on write
 Plug 'derekprior/vim-trimmer'
