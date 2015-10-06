@@ -50,6 +50,8 @@ while getopts ":t:d:f:" opt; do
   esac
 done
 
+[[ -z "$to" ]] && to=$(basename "$from")
+
 if [ $local_file ]; then
   upload-image "$from" "${directory}/${to}"
 else
