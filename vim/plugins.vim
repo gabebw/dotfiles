@@ -28,7 +28,7 @@ Plug 'wting/rust.vim'
 " :Ag is like :grep but with `ag`
 Plug 'rking/ag.vim'
 " Easily comment/uncomment lines in many languages
-Plug 'tComment'
+Plug 'tomtom/tcomment_vim'
 " <Tab> indents or triggers autocomplete, smartly
 Plug 'ervandew/supertab'
 " Git bindings
