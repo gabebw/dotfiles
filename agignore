@@ -1,5 +1,6 @@
 log/*.log
-tags
+# ctags file
+/tags
 log/
 tmp/
 doc/
