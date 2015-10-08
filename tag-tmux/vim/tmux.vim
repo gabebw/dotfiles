@@ -1,2 +1,2 @@
-" Zoom into tmux test runner pane. To get back to vim, use <C-a><C-p>
-nnoremap <leader>zr :call system("tmux resize-pane -Z -t 1")<cr>
+" ReRun last command
+nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>

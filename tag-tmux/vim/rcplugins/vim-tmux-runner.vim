@@ -6,3 +6,6 @@ let g:VtrPercentage = 30
 
 " Attach to a specific pane
 nnoremap <leader>va :VtrAttachToPane<CR>
+
+" Zoom into tmux test runner pane. To get back to vim, use <C-a><C-p>
+nnoremap <leader>zr :VtrFocusRunner<CR>

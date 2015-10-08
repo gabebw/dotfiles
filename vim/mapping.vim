@@ -6,9 +6,6 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
-" ReRun last command
-nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
-
 " Only have the current split and tab open
 nnoremap <Leader>o :only\|tabonly<CR>
 
