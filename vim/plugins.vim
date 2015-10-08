@@ -11,6 +11,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'keith/swift.vim'
 Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
+Plug 'vim-scripts/applescript.vim'
 
 " Plumbing that makes everything nicer
 " :Ag is like :grep but with `ag`
