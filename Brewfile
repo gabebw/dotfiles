@@ -66,7 +66,3 @@ cask 'netnewswire'
 cask 'vlc'
 # Use Cask so we get Cargo, too
 cask 'rust'
-
-# Docker
-brew 'docker'
-cask 'boot2docker'
