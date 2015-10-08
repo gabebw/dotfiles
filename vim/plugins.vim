@@ -12,6 +12,7 @@ Plug 'keith/swift.vim'
 Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
 Plug 'vim-scripts/applescript.vim'
+Plug 'vim-scripts/magic.vim'
 
 " Plumbing that makes everything nicer
 " :Ag is like :grep but with `ag`
