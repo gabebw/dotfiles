@@ -2,20 +2,10 @@
 
 set rtp+=/usr/local/opt/fzf
 
-" Ruby/Rails/web development
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-" Allow `cir` to change inside ruby block, etc
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'kana/vim-textobj-user' " required for vim-textobj-rubyblock
-Plug 'tpope/vim-rake'
+" Web development
 Plug 'vim-coffee-script'
-Plug 'gabebw/vim-spec-runner'
-" Plug '~/code/personal/vim-spec-runner'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'slim-template/vim-slim'
-Plug 'tpope/vim-projectionist'
 
 " Language-specific plugins
 Plug 'keith/swift.vim'

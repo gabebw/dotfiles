@@ -16,10 +16,6 @@ echo "Linking dotfiles into ~..."
 # We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
 # backup files that slow it down significantly.
 RCRC=rcrc rcup -v
-ln -sf "$PWD/default-gems" ~/.rbenv/default-gems
-
-echo "Installing latest Ruby..."
-rbenv install --skip-existing "$latest_ruby_version"
 
 echo "Installing Vim packages..."
 vim +PlugInstall +qa
@@ -30,3 +26,7 @@ echo "require-sandbox: True" >> ~/.cabal/config
 echo
 echo "If you like what you see in system/osx-settings, run ./system/osx-settings"
 echo "If you're using Terminal.app, check out the terminal-themes directory"
+
+for setup in tag-*/setup; do
+  source "$setup"
+done

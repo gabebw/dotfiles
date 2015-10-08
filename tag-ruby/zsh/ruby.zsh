@@ -4,6 +4,12 @@
 
 RUBYOPT=rubygems
 
+# rbenv
+PATH=~/.rbenv/shims:$PATH
+
+# Bundler binstubs
+PATH="./bin/stubs:$PATH"
+
 # Bundler
 alias be="bundle exec"
 alias binstubs="bundle --binstubs=./bin/stubs"
