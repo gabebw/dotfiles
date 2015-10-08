@@ -1,24 +1,15 @@
 BASE="$HOME/.zsh"
 
-for file in "$BASE"/before/*.zsh; do
-  source "$file"
-done
-
-for file in "$BASE"/*.zsh
-do
-  if [[ "$file" != homebrew.zsh ]]; then
-    # homebrew.zsh is sourced in zshenv for reasons explained in homebrew.zsh
+load_all_files_in() {
+  for file in "$BASE/$1"/*.zsh; do
     source "$file"
-  fi
-done
+  done
+}
 
-# brew install zsh-syntax-highlighting
+load_all_files_in before
+load_all_files_in ""
+load_all_files_in after
+
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 export PATH
-
-for file in "$BASE"/after/*.zsh; do
-  source "$file"
-done
-
 # Houston, we have liftoff.
