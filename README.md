@@ -23,11 +23,8 @@ It will safely symlink the dotfiles, prompting you if a file already exists
 
 ## zsh
 
-* Look in `/zshenv`, `/zshrc`, `/zsh/colors.zsh`, `/zsh/completion.zsh`,
-  `/zsh/key_bindings.zsh`, `/zsh/navigation.zsh`, `/zsh/options.zsh`,
-  `/zsh/path.zsh`, `/zsh/prompt.zsh`
+* Did you know there's a `$LESS`? Check out `zsh/options.zsh`.
 * Turn off all beeping
-* Turn off "helpful" command autocorrecting
 * Prevent `zsh: no matches found: ...` error
 * Since (among others) `$HOME/code` is in my `cdpath` (see `navigation.zsh`),
   and I have `$HOME/code/hello`, I can type `hello` from anywhere to go to
