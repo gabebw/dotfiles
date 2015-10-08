@@ -56,10 +56,6 @@ Plug 'vim-scripts/Gundo'
 " Intelligently reopen files where you left off
 Plug 'dietsche/vim-lastplace'
 
-" tmux
-Plug 'christoomey/vim-tmux-runner'
-Plug 'christoomey/vim-tmux-navigator'
-
 " Silly stuff, but I like it
 " Now I can put emoji in my statusbar
 Plug 'junegunn/vim-emoji'
