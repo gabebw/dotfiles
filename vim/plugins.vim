@@ -2,8 +2,6 @@
 
 set rtp+=/usr/local/opt/fzf
 
-call plug#begin('~/.vim/bundle')
-
 " Ruby/Rails/web development
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
@@ -75,14 +73,6 @@ Plug 'nicholaides/words-to-avoid.vim'
 " `gx` so that `gx` works on [Markdown](links).
 Plug 'christoomey/vim-quicklink'
 
-" Haskell
-Plug 'scrooloose/syntastic'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'Twinside/vim-hoogle'
-
 " :Gist
 Plug 'mattn/webapi-vim'
 Plug 'mattn/gist-vim'
-
-call plug#end()

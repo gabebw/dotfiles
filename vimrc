@@ -16,6 +16,13 @@ endfunction
 let mapleader=" "
 
 " Source the rest of the configuration
+call plug#begin('~/.vim/bundle')
+source ~/.vim/plugins.vim
+" Load plugins from various tags (~/.vim/plugins/*)
+" For example, tag-haskell/vim/plugins/haskell.vim is linked to
+" ~/.vim/plugins/haskell.vim.
+call s:SourceConfigFilesIn('plugins')
+call plug#end()
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('functions')
 call s:SourceConfigFilesIn('rcplugins') " after plugins load
