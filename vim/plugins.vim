@@ -25,6 +25,7 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
+" Fuzzy-finder
 Plug 'kien/ctrlp.vim'
 " Trim trailing whitespace on write
 Plug 'derekprior/vim-trimmer'

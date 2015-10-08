@@ -44,3 +44,15 @@ Check out `tag-tmux/`.
 ## Haskell
 
 Check out `tag-haskell/`.
+
+## Git
+
+Check out `tag-git/`.
+
+For the other tags, if you don't use e.g. Haskell, you can just not use that
+configuration. Git is different in that it's implicit in a lot of the
+configuration and it doesn't make sense to pull it out.
+
+The `tag-git/` directory stores the most relevant git-specific configuration,
+but should not be considered "all of the Git-related files". For example,
+`zsh/prompt.zsh` assumes you have Git installed and displays the Git status.

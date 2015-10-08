@@ -1,3 +1,3 @@
 EXCLUDES="git-template helpful-tips system README.md Brewfile terminal-themes install.sh default-gems setup"
-SYMLINK_DIRS="bin irbrc.d bundle backups undodir"
-TAGS="haskell ruby tmux"
+SYMLINK_DIRS="irbrc.d bundle backups undodir"
+TAGS="git haskell ruby tmux"
