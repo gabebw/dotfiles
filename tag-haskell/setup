@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -e
+
+echo "Disabling non-sandbox cabal installs..."
+echo "require-sandbox: True" >> ~/.cabal/config

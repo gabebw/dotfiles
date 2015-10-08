@@ -2,8 +2,6 @@
 
 set -e
 
-latest_ruby_version="2.2.3"
-
 echo "Installing Homebrew packages..."
 brew update
 brew tap homebrew/bundle
@@ -19,9 +17,6 @@ RCRC=rcrc rcup -v
 
 echo "Installing Vim packages..."
 vim +PlugInstall +qa
-
-echo "Disabling non-sandbox cabal installs..."
-echo "require-sandbox: True" >> ~/.cabal/config
 
 echo
 echo "If you like what you see in system/osx-settings, run ./system/osx-settings"
