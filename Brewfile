@@ -53,6 +53,8 @@ brew 'hub'
 # Fuzzy finder
 brew 'fzf'
 
+brew 'python3'
+
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
