@@ -4,15 +4,19 @@ set -e
 
 latest_ruby_version="2.2.3"
 
-echo "Interactively linking dotfiles into ~..."
-./link-dotfiles.sh
-
 echo "Installing Homebrew packages..."
 brew update
 brew tap homebrew/bundle
 brew bundle
 brew unlink qt 2>/dev/null || true
 brew link --force qt5
+
+echo "Linking dotfiles into ~..."
+# Before `rcup` runs, there is no ~/.rcrc, so we must tell `rcup` where to look.
+# We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
+# backup files that slow it down significantly.
+RCRC=rcrc rcup -v
+ln -sf "$PWD/default-gems" ~/.rbenv/default-gems
 
 echo "Installing latest Ruby..."
 rbenv install --skip-existing "$latest_ruby_version"

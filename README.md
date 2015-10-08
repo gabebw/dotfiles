@@ -6,16 +6,18 @@ Questions? Comments? Open an issue or tweet @gabebw.
 
 ## Prerequisites
 
-* ZSH. To change your default shell to ZSH: `chsh -s $(which zsh) $USER`
-* [Homebrew](http://brew.sh/).
+* OS X
+* ZSH (to change your default shell to ZSH: `chsh -s $(which zsh) $USER`)
+* [Homebrew](http://brew.sh/)
 
 ## Installation
 
+    $ git clone git@github.com:gabebw/dotfiles.git ~/.dotfiles
+    $ cd ~/.dotfiles
     $ ./install.sh
 
-It won't touch your existing dotfiles, but will symlink ones that don't exist.
-For example, if you have a `~/.zshrc` but no `~/.zshenv`, then the script will
-add a symlink from `~/.zshenv` to the `zshenv` in this repo.
+It will safely symlink the dotfiles, prompting you if a file already exists
+(like if you already have `~/.zshrc`).
 
 ## zsh
 

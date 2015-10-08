@@ -1,0 +1,2 @@
+EXCLUDES="backups undodir git-template helpful-tips system README.md Brewfile basic-cabal-file terminal-themes install.sh default-gems"
+SYMLINK_DIRS="bin irbrc.d vim zsh"

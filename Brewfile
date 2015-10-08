@@ -56,6 +56,10 @@ brew 'fzf'
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
+# thoughtbot stuff like rcm
+tap 'thoughtbot/formulae'
+brew 'rcm'
+
 # Cask: install binaries
 tap 'caskroom/cask'
 brew 'brew-cask'
