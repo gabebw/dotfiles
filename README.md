@@ -4,7 +4,7 @@
 
 Gabriel Berke-Williams' dotfiles for zsh, ruby, git, and more.
 
-Questions? Comments? Open an issue or tweet @gabebw.
+Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw).
 
 ## Prerequisites
 
@@ -23,52 +23,24 @@ It will safely symlink the dotfiles, prompting you if a file already exists
 
 ## zsh
 
-* Did you know there's a `$LESS`? Check out `zsh/options.zsh`.
-* Turn off all beeping
-* Prevent `zsh: no matches found: ...` error
-* Since (among others) `$HOME/code` is in my `cdpath` (see `navigation.zsh`),
-  and I have `$HOME/code/hello`, I can type `hello` from anywhere to go to
-  there.
-* The prompt shows the current directory, the current git branch, the status of
-  the git branch (changed, staged, clean, etc) and the current Ruby version
-* The prompt is fairly well documented, and is self-contained: you can copy it
-  into your dotfiles with no changes to test it out. It's in
-  [zsh/prompt.zsh][zsh-prompt].
-* Enables pretty colors
-* Enables completions
-* Enables Vi-style editing on the command line, with `Ctrl-r` to search
-  backwards
-* If you've typed `abc` then press the Up arrow, it searches for commands
-  starting with `abc`; same for the Down arrow.
-* Completion for the following commands (in `/zsh/completion-scripts`): `brew`,
-  `rake`, `rspec`, `tmux`, `bundle`
-* Every time a directory changes, save it to a file and go back to the current
-  directory when the shell is opened again. Files are named based on the current
-  tmux session.
+Lots of good stuff in `zsh/options.zsh` and `zsh/aliases.zsh`.
+
+The prompt shows the current directory, the current git branch, the status of
+the git branch (changed, staged, clean, etc) and the current Ruby version.  It
+is well-documented, and entirely self-contained: you can copy it into your
+dotfiles with no changes to test it out. It's in [zsh/prompt.zsh][zsh-prompt].
+(It does assume you use rbenv.)
 
 [zsh-prompt]: /zsh/prompt.zsh
 
-## ruby
+## Ruby
 
-Check out `/zsh/ruby.zsh`.
+Check out `tag-ruby/`, which has zsh and vim configuration.
 
-* `be` is `bundle exec`
-* `b` with no arguments runs a faster version of `bundle install` and then
-  installs binstubs.
-* `b` with arguments (like `b install`) acts just like `bundle`
-* `binstubs` installs bundler binstubs to `./bin/stubs`
+## tmux
 
-## rails
+Check out `tag-tmux/`.
 
-Check out `/zsh/rails.zsh`.
+## Haskell
 
-* alias `h` to `heroku`
-* alias `summer` to `spring stop`
-* `rrg something` greps the routes for `something`
-* `f` starts `foreman` on the port specified in `.foreman`, or if that's in
-  use, starts `foreman` on a guaranteed-unused port.
-* `db-reset` drops and resets the database
-
-## Vim
-
-* For Vim-plugin-specific settings, check out `/vim/rcplugins/`.
+Check out `tag-haskell/`.
