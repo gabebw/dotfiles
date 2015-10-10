@@ -18,41 +18,42 @@ Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw
     $ cd ~/.dotfiles
     $ ./install.sh
 
-It will safely symlink the dotfiles, prompting you if a file already exists
-(like if you already have `~/.zshrc`).
+It will install [rcm] and use that to safely symlink the dotfiles, prompting you
+if a file already exists (like if you already have `~/.zshrc`).
 
-## zsh
+[rcm]: http://thoughtbot.github.io/rcm/rcm.7.html
 
-Lots of good stuff in `zsh/options.zsh` and `zsh/aliases.zsh`.
+## Organization
 
-The prompt shows the current directory, the current git branch, the status of
+`rcm` will symlink all files into place, keeping the folder structure relative
+to the tag root. However, non-configuration files and folders like `system/`,
+`Brewfile`, `README.md`, etc will not be linked because they are in the
+`EXCLUDES` section of the [`rcrc`](/rcrc) file.
+
+## Tags
+
+`rcm` has the concept of tags: items under `tag-git/` are in the `git` tag, and
+so on. I'm using it for organization, so that if someone starts using Haskell I
+can point them at all of my Haskell configuration across Vim/Zsh/GHCi, all in
+one place.
+
+## Zsh
+
+Zsh has lots of good stuff in `zsh/options.zsh` and `zsh/aliases.zsh`.
+
+The Zsh prompt is in [`zsh/prompt.zsh`][zsh-prompt].
+It shows the current directory, the current git branch, the status of
 the git branch (changed, staged, clean, etc) and the current Ruby version.  It
 is well-documented, and entirely self-contained: you can copy it into your
-dotfiles with no changes to test it out. It's in [zsh/prompt.zsh][zsh-prompt].
-(It does assume you use rbenv.)
+dotfiles with no changes to test it out. (It does assume you use rbenv.)
 
 [zsh-prompt]: /zsh/prompt.zsh
 
-## Ruby
+## Attribution
 
-Check out `tag-ruby/`, which has zsh and vim configuration.
+Many scripts and configurations have been inspired by or outright stolen from
+my colleagues at [thoughtbot]. Of special note, I've stolen many things from
+[Chris Toomey] and [Gordon Fontenot], among others that I'm sure I'm forgetting.
 
-## tmux
-
-Check out `tag-tmux/`.
-
-## Haskell
-
-Check out `tag-haskell/`.
-
-## Git
-
-Check out `tag-git/`.
-
-For the other tags, if you don't use e.g. Haskell, you can just not use that
-configuration. Git is different in that it's implicit in a lot of the
-configuration and it doesn't make sense to pull it out.
-
-The `tag-git/` directory stores the most relevant git-specific configuration,
-but should not be considered "all of the Git-related files". For example,
-`zsh/prompt.zsh` assumes you have Git installed and displays the Git status.
+[Chris Toomey]: https://github.com/christoomey/dotfiles
+[Gordon Fontenot]: https://github.com/gfontenot/dotfiles
