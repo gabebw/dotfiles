@@ -1,0 +1,47 @@
+#!/bin/zsh
+
+# Start a new Haskell project named $1.
+# It's an executable (not a library) so that `cabal run` is set up, because
+# that's my most common type of project.
+
+set -e
+
+autoload -Uz colors && colors
+
+if [[ -z "$1" ]]; then
+  echo "Usage: huspenders project_name"
+  exit 64
+fi
+
+cabal_init(){
+  cabal init \
+    --non-interactive \
+    --package-name "$1" \
+    --license MIT \
+    --synopsis "This is a synopsis" \
+    --is-executable \
+    --author="Gabe Berke-Williams"
+}
+
+projectname=$1
+cabalfile="${projectname}.cabal"
+print "Cool, creating a project named ${fg_bold[yellow]}${projectname}${reset_color}"
+
+mkdir "$projectname"
+cd "$projectname"
+
+cabal sandbox init
+cabal_init "$projectname"
+# Strip whitespace, because cabal doesn't
+sed -i '' 's/ +$//g' *cabal
+echo 'main = putStrLn "It works!"' > Main.hs
+
+echo ".cabal-sandbox/" >> .gitignore
+echo "cabal.sandbox.config" >> .gitignore
+echo "dist/" >> .gitignore
+git init
+
+# Do an initial compile
+cabal run >/dev/null
+
+print "${fg_bold[green]}cd $projectname, edit Main.hs, run it with \`cabal run\`${reset_color}"
