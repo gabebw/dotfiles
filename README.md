@@ -52,7 +52,7 @@ dotfiles with no changes to test it out. (It does assume you use rbenv.)
 ## Attribution
 
 Many scripts and configurations have been inspired by or outright stolen from
-my colleagues at [thoughtbot]. Of special note, I've stolen many things from
+my colleagues at thoughtbot. Of special note, I've stolen many things from
 [Chris Toomey] and [Gordon Fontenot], among others that I'm sure I'm forgetting.
 
 [Chris Toomey]: https://github.com/christoomey/dotfiles
