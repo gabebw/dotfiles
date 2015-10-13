@@ -8,7 +8,7 @@
 
 import Data.List
 import Data.Char
-import Control.Applicative (pure, (<*>), (*>), (<*))
+import Control.Applicative hiding (some, many)
 import Control.Monad
 import Control.Monad.Writer
 
