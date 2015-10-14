@@ -1,7 +1,7 @@
 ################
 #  COMPLETION  #
 ################
-fpath=(~/.dotfiles/zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
+fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
 
 # https://coderwall.com/p/jpj_6q
