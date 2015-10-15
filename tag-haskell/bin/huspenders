@@ -14,13 +14,16 @@ if [[ -z "$1" ]]; then
 fi
 
 cabal_init(){
+  # blerg, OSX
+  fullname=$(dscacheutil -q user -a name `whoami` | grep gecos | sed 's/gecos: //' )
+
   cabal init \
     --non-interactive \
     --package-name "$1" \
     --license MIT \
     --synopsis "This is a required synopsis" \
     --is-executable \
-    --author="Gabe Berke-Williams" \
+    --author="$fullname" \
     --source-dir=src
 }
 
