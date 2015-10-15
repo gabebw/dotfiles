@@ -14,8 +14,7 @@ if [[ -z "$1" ]]; then
 fi
 
 cabal_init(){
-  # blerg, OSX
-  fullname=$(dscacheutil -q user -a name `whoami` | grep gecos | sed 's/gecos: //' )
+  fullname=$(finger $(whoami) | awk '/Name:/ {print $4" "$5}')
 
   cabal init \
     --non-interactive \
