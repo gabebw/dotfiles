@@ -18,9 +18,10 @@ cabal_init(){
     --non-interactive \
     --package-name "$1" \
     --license MIT \
-    --synopsis "This is a synopsis" \
+    --synopsis "This is a required synopsis" \
     --is-executable \
-    --author="Gabe Berke-Williams"
+    --author="Gabe Berke-Williams" \
+    --source-dir=src
 }
 
 projectname=$1
@@ -34,7 +35,7 @@ cabal sandbox init
 cabal_init "$projectname"
 # Strip whitespace, because cabal doesn't
 sed -i '' 's/ +$//g' *cabal
-echo 'main = putStrLn "It works!"' > Main.hs
+echo 'main = putStrLn "It works!"' > src/Main.hs
 
 echo ".cabal-sandbox/" >> .gitignore
 echo "cabal.sandbox.config" >> .gitignore
@@ -44,4 +45,4 @@ git init
 # Do an initial compile
 cabal run >/dev/null
 
-print "${fg_bold[green]}cd $projectname, edit Main.hs, run it with \`cabal run\`${reset_color}"
+print "${fg_bold[green]}cd $projectname, edit src/Main.hs, run it with \`cabal run\`${reset_color}"
