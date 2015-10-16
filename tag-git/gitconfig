@@ -36,7 +36,8 @@
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
   pr = !git push -u && hub pull-request
-  prf = !git push -fu && hub pull-request
+  prf = !git push -u --force-with-lease && hub pull-request
+  pf = push --force-with-lease
   g = grep --extended-regexp --break --heading --line-number
 
   # Check out a pull request by number: g co-pr 123
