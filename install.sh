@@ -6,6 +6,9 @@ echo "Installing Homebrew packages..."
 brew update
 brew tap homebrew/bundle
 brew bundle
+for brewfile in */Brewfile; do
+  brew bundle --file="$brewfile"
+done
 brew unlink qt 2>/dev/null || true
 brew link --force qt5
 

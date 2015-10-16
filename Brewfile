@@ -10,23 +10,11 @@ brew 'pgrep'
 # The recommended way to use Heroku
 brew 'heroku-toolbelt'
 
-# Ruby version manager
-brew 'rbenv'
-
-# So `rbenv install` works
-brew 'ruby-build'
-
 # colorful diffs (alias diff='colordiff -u')
 brew 'colordiff'
 
 # a better ack/grep
 brew 'the_silver_searcher'
-
-# a terminal multiplexer
-brew 'tmux'
-
-# so copy/paste works in tmux
-brew 'reattach-to-user-namespace'
 
 # so :Rtags works
 brew 'ctags'
@@ -34,12 +22,6 @@ brew 'ctags'
 # It's vim
 brew 'mercurial'
 brew 'vim'
-
-# Manage rubies
-brew 'rbenv'
-
-# Install some gems (like bundler) for every new Ruby
-brew 'rbenv-default-gems'
 
 # Used in Rails projects
 brew 'phantomjs'
@@ -52,11 +34,6 @@ brew 'hub'
 
 # Fuzzy finder
 brew 'fzf'
-
-brew 'python3'
-
-tap 'gabebw/formulae'
-brew 'huspenders'
 
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'

@@ -1,0 +1,9 @@
+# Ruby version manager
+brew 'rbenv'
+
+# So `rbenv install` works
+brew 'ruby-build'
+
+# Install some gems (like bundler) for every new Ruby
+brew 'rbenv-default-gems'
+

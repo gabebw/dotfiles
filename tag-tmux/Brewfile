@@ -1,0 +1,5 @@
+# a terminal multiplexer
+brew 'tmux'
+
+# so copy/paste works in tmux
+brew 'reattach-to-user-namespace'
