@@ -55,6 +55,9 @@ brew 'fzf'
 
 brew 'python3'
 
+tap 'gabebw/formulae'
+brew 'huspenders'
+
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
