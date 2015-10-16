@@ -1,4 +1,4 @@
-# sed for json
+# sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
 # Qt5 for capybara-webkit
