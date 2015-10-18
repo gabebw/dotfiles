@@ -6,4 +6,3 @@ brew 'ruby-build'
 
 # Install some gems (like bundler) for every new Ruby
 brew 'rbenv-default-gems'
-
