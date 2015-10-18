@@ -28,11 +28,28 @@
 
 set -e
 
+usage() {
+  cat <<USAGE
+Usage: icopy [-f local-name.gif] [-t remote-name.gif] [-d remote-directory]
+
+Options:
+
+  -f local_path: Upload a local file FROM here (if not given, uses copied URL)
+  -t remote_name: Upload the file TO here, with this name.
+  -d directory: Upload the file into this directory
+USAGE
+
+  exit 64
+}
+
 # Defaults
 directory=""
 
-while getopts ":t:d:f:" opt; do
+while getopts "t:d:f:h" opt; do
   case $opt in
+    h)
+      usage
+      ;;
     f)
       local_file=true
       from="$OPTARG"
