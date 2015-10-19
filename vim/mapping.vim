@@ -7,7 +7,7 @@ nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " Only have the current split and tab open
-nnoremap <Leader>o :only\|tabonly<CR>
+nnoremap <Leader>o :silent only\|silent tabonly<CR>
 
 " Buffer navigation
 nnoremap <C-j> <C-W>j
