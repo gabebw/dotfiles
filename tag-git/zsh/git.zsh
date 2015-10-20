@@ -26,13 +26,15 @@ alias gcm="git commit -m"
 
 # Checkout branches starting with my initials
 function gb(){
-  if (( $# == 2 )); then
-    git checkout -b "gbw-$1" "$2"
+  branch="gbw-${1#gbw-}"
+  base=$2
+  if [[ -e "$base" ]]; then
+    git checkout -b "$branch" "$base"
   else
-    git checkout -b "gbw-$1"
+    git checkout -b "$branch"
   fi
 }
-function gbm(){ git checkout -b "gbw-$1" master }
+function gbm(){ gb "$1" master }
 
 function gcl {
   local directory="$(superclone "$@")"
