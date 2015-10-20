@@ -12,7 +12,7 @@ alias df="df -h"
 alias sed="sed -E"
 # Copy-pasting `$ python something.py` works
 alias \$=''
-[[ -x $(which colordiff) ]] && alias diff="colordiff -u" || alias diff="diff -u"
+alias diff="colordiff -u"
 alias mkdir="\mkdir -p"
 
 alias prettyjson="python -m json.tool"
