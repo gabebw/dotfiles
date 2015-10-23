@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# Create a simple line graph with gnuplot
+# Create a simple line graph with gnuplot.
+#
+# The input is a file name.
+# The file should have one number per line.
 
 if ! command -v gnuplot > /dev/null; then
   echo "You need to install gnuplot"
