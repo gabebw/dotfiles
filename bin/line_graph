@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Create a simple line graph with gnuplot.
 #
@@ -10,15 +10,17 @@ if ! command -v gnuplot > /dev/null; then
   exit 1
 fi
 
-if [ -z "$1" ]; then
-  echo "Usage: line_graph FILE_NAME"
-  echo "The file should have one number per line"
-  exit 1
+
+if [ $# -ge 1 -a -f "$1" ]; then
+  input="$1"
+else
+  input=$(mktemp -t graph)
+  cat - > "$input"
 fi
 
 read -r -d '' SCRIPT <<SCRIPT
 set terminal dumb;
-plot "$1" with lines title ''
+plot "$input" with lines title ''
 SCRIPT
 
 echo "$SCRIPT" | gnuplot
