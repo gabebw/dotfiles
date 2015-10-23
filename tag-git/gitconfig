@@ -54,15 +54,7 @@
 [svn]
   authorsfile = ~/.git-author
 
-# insteadOf lets you do `git clone gh:thoughtbot/dotfiles`
-[url "git@heroku.com:"]
-  insteadOf = heroku:
-[url "git://github.com/"]
-  # Read-only
-  insteadOf = gh:
-[url "git@github.com:"]
-  # With write access
-  insteadOf = wgh:
+# insteadOf lets you do `git clone tb:dotfiles`
 [url "git@github.com:thoughtbot/"]
   # thoughtbot, with write access
   insteadOf = tb:
