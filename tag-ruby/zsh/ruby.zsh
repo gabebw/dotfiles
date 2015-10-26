@@ -33,3 +33,13 @@ function b {
     bundle "$@"
   fi
 }
+
+# Install capybara-webkit linked against Qt4
+capy4() {
+  gem uninstall -a capybara-webkit && brew link qt --overwrite && b
+}
+
+# Install capybara-webkit linked against Qt5
+capy5() {
+  gem uninstall -a capybara-webkit && brew link qt5 --force --overwrite && b
+}
