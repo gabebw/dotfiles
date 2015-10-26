@@ -6,6 +6,7 @@ set rtp+=/usr/local/opt/fzf
 Plug 'vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'skammer/vim-css-color'
 
 " Language-specific plugins
 Plug 'keith/swift.vim'
