@@ -49,6 +49,9 @@ Plug 'kana/vim-textobj-entire'
 Plug 'vim-scripts/Gundo'
 " Intelligently reopen files where you left off
 Plug 'dietsche/vim-lastplace'
+" Instead of always copying to the system clipboard, use `cp` (plus motions) to
+" copy to the system clipboard. `cP` copies the current line. `cv` pastes.
+Plug 'christoomey/vim-system-copy'
 
 " Silly stuff, but I like it
 " Now I can put emoji in my statusbar

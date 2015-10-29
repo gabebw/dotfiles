@@ -11,9 +11,6 @@ set scrolloff=999 " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 set lazyredraw
 
-" Copy to and paste from the system clipboard
-set clipboard=unnamed
-
 " https://github.com/thoughtbot/dotfiles/pull/170
 " Automatically :write before commands such as :next or :!
 " Saves keystrokes by eliminating writes before running tests, etc
