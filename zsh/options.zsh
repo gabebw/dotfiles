@@ -2,8 +2,8 @@
 #  ZSH options  #
 #################
 HISTFILE=~/.zsh_history
-export HISTSIZE=1000000000000000000
-export SAVEHIST=$HISTSIZE
+HISTSIZE=1000000000000000000
+SAVEHIST=$HISTSIZE
 setopt no_list_beep
 setopt no_beep
 # Append as you type (incrementally) instead of on shell exit
