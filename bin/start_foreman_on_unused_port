@@ -36,4 +36,4 @@ echo
 echo "Starting on port $port"
 echo
 
-$command_name start -p "$port"
+$command_name start -p "$port" "$@"
