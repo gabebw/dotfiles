@@ -646,7 +646,7 @@ function! s:do(pull, force, todo)
     endif
     let installed = has_key(s:update.new, name)
     let updated = installed ? 0 :
-      \ (a:pull && !empty(s:system_chomp('git log --pretty=format:"%h" "HEAD...HEAD@{1}"', spec.dir)))
+      \ (a:pull && index(s:update.errors, name) < 0 && !empty(s:system_chomp('git log --pretty=format:"%h" "HEAD...HEAD@{1}"', spec.dir)))
     if a:force || installed || updated
       execute 'cd' s:esc(spec.dir)
       call append(3, '- Post-update hook for '. name .' ... ')
@@ -1182,6 +1182,17 @@ class Command(object):
       self.proc = subprocess.Popen(self.cmd, cwd=self.cmd_dir, stdout=tfile,
                                    stderr=subprocess.STDOUT, shell=True,
                                    preexec_fn=os.setsid)
+      thrd = thr.Thread(target=(lambda proc: proc.wait()), args=(self.proc,))
+      thrd.start()
+
+      thread_not_started = True
+      while thread_not_started:
+        try:
+          thrd.join(0.1)
+          thread_not_started = False
+        except RuntimeError:
+          pass
+
       while self.alive:
         if G_STOP.is_set():
           raise KeyboardInterrupt
@@ -1196,7 +1207,7 @@ class Command(object):
         if time_diff > self.timeout:
           raise CmdTimedOut(['Timeout!'])
 
-        time.sleep(0.33)
+        thrd.join(0.5)
 
       tfile.seek(0)
       result = [line.decode('utf-8', 'replace').rstrip() for line in tfile]
