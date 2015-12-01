@@ -8,3 +8,5 @@ let g:markdown_fenced_languages = [
       \ 'haskell',
       \ 'vim'
       \ ]
+
+setlocal spell
