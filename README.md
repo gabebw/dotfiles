@@ -2,14 +2,14 @@
 
 ![prompt](https://cloud.githubusercontent.com/assets/257678/10357733/7304816e-6d3a-11e5-98d6-010cd3fc38d4.png)
 
-Gabriel Berke-Williams' dotfiles for zsh, ruby, git, and more.
+Gabriel Berke-Williams' dotfiles for Zsh, ruby, git, and more.
 
 Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw).
 
 ## Prerequisites
 
 * OS X
-* ZSH (to change your default shell to ZSH: `chsh -s $(which zsh) $USER`)
+* Zsh (to change your default shell to Zsh: `chsh -s $(which zsh) $USER`)
 * [Homebrew](http://brew.sh/)
 
 ## Installation
