@@ -6,9 +6,6 @@ autocmd BufReadCmd set nohlsearch
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
-" If no files given, edit the current directory
-autocmd VimEnter * if empty(argv()) | silent! edit . | endif
-
 augroup myfiletypes
   autocmd!
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
