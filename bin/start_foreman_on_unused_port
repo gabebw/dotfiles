@@ -33,7 +33,7 @@ find_port() {
 port=$(find_port)
 
 echo
-echo "Starting on port $port"
+echo ">>> http://localhost:$port"
 echo
 
 $command_name start -p "$port" "$@"
