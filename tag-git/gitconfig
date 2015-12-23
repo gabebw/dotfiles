@@ -40,6 +40,7 @@
   prf = !git push -u --force && hub pull-request
   pf = push --force-with-lease
   g = grep --extended-regexp --break --heading --line-number
+  ss = !git shalector | xargs git show
 
   # Check out a pull request by number: g co-pr 123
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
