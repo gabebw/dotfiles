@@ -14,7 +14,4 @@ target_commit=$(
   awk '{print $1}'
 )
 
-printf "$target_commit" | pbcopy
-
-printf "Commit hash copied ($target_commit)\n" >&2
 printf "$target_commit\n"
