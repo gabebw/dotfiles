@@ -6,5 +6,3 @@ latest_ruby_version="2.2.3"
 
 echo "Installing latest Ruby..."
 rbenv install --skip-existing "$latest_ruby_version"
-
-ln -sf "$PWD/tag-ruby/default-gems" ~/.rbenv/default-gems
