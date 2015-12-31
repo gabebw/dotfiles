@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# Start foreman (or forego, if it's available) on an unused port.
+# Start `heroku local` on an unused port.
 # If there's a .foreman file, it tries that port first, then falls back to
 # finding another unused port.
 #
@@ -8,12 +8,6 @@
 #
 # It uses the `is_port_unused` and `find_unused_port` scripts, which are both in
 # this directory.
-
-if command -v forego > /dev/null; then
-  command_name=forego
-else
-  command_name=foreman
-fi
 
 find_port() {
   port_from_foreman="$(grep port: .foreman 2>/dev/null| sed 's/port: //')"
@@ -36,4 +30,4 @@ echo
 echo ">>> http://localhost:$port"
 echo
 
-$command_name start -p "$port" "$@"
+heroku local -p "$port" "$@"
