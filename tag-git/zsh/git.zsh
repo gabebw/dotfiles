@@ -28,7 +28,7 @@ alias gcm="git commit -m"
 function gb(){
   branch="gbw-${1#gbw-}"
   base=$2
-  if [[ -e "$base" ]]; then
+  if [[ -n "$base" ]]; then
     git checkout -b "$branch" "$base"
   else
     git checkout -b "$branch"
