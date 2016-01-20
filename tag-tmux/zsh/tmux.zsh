@@ -72,7 +72,3 @@ _new_tmux_session_named() {
   TMUX= tmux new-session -d -s "$new_session_name"
   attach_to_tmux_session "$new_session_name"
 }
-
-copy-from-tmux() {
-  tmux show-buffer | pbcopy
-}
