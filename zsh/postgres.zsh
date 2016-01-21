@@ -8,7 +8,7 @@ function db-dump() {
     pg_dump --clean --create -Fc -f database.dump "$1" && echo Wrote to database.dump
   else
     echo "Usage: db-dump DB_NAME"
-    exit 1
+    return 1
   fi
 }
 
