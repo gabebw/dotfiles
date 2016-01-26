@@ -1,11 +1,11 @@
 # Set filetype on editing. Use `\e` to open the editor from `psql`.
 export PSQL_EDITOR="vim -c ':set ft=sql'"
 
-# db-dump DB_NAME
+# db-dump DB_NAME FILENAME
 function db-dump() {
   if (( $# == 1 )); then
-    pg_dump --clean --create --format=custom --file database.dump "$1" && \
-      echo "Wrote to database.dump"
+    pg_dump --clean --create --format=custom --file "$2" "$1" && \
+      echo "Wrote to $2"
   else
     echo "Usage: db-dump DB_NAME"
     return 1
