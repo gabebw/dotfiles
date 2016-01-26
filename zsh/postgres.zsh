@@ -15,7 +15,9 @@ function db-dump() {
 # db-restore DB_NAME FILENAME
 function db-restore() {
   if (( $# == 2 )); then
-    pg_restore --verbose --clean --no-acl --no-owner --dbname "$1" "$2"
+    dropdb "$1" && \
+      createdb "$1" && \
+      pg_restore --verbose --clean --no-acl --no-owner --dbname "$1" "$2"
   else
     echo "Usage: db-restore DB_NAME FILENAME"
     return 1
