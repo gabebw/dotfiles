@@ -3,6 +3,7 @@
 ################
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit
 
 # https://coderwall.com/p/jpj_6q
 # Search through history for previous commands matching everything up to current

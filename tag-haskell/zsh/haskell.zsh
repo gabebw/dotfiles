@@ -9,6 +9,8 @@ fi
 # Just type-check the file. Don't compile it.
 alias hcompile="ghc -fno-code"
 
+command -v stack > /dev/null && eval "$(stack --bash-completion-script stack)"
+
 new-yesod-project() {
   name=$1
   stack new "$1" yesod-postgres
