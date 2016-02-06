@@ -13,7 +13,8 @@ function docker-kickstart(){
   fi
 
   if ! docker-machine ls | grep -Fq default; then
-    docker-machine create --driver virtualbox default
+    # Create a machine with 50GB of storage
+    docker-machine create --driver virtualbox --virtualbox-disk-size=50000 default
   fi
 
   eval "$(docker-machine env default)"
