@@ -7,6 +7,7 @@
   whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
+  pager = diff-highlight | diff-so-fancy | less -R --tabs=1,5
 [merge]
   tool = opendiff
   # Per @jferris: `ff = only` means Git will never implicitly do a merge commit, including while

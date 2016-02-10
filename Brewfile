@@ -26,6 +26,9 @@ brew 'vim'
 # Used in Rails projects
 brew 'phantomjs'
 
+# Just for diff-so-fancy right now
+brew 'node'
+
 # Syntax highlighting...for ZSH!
 brew 'zsh-syntax-highlighting'
 
