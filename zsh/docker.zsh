@@ -17,5 +17,9 @@ function docker-kickstart(){
     docker-machine create --driver virtualbox --virtualbox-disk-size=50000 default
   fi
 
+  if [[ "$(docker-machine status default)" != "Running" ]]; then
+      docker-machine start default
+  fi
+
   eval "$(docker-machine env default)"
 }
