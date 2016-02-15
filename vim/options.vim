@@ -17,6 +17,11 @@ set lazyredraw
 " See :help 'autowrite' for more information
 set autowrite
 
+" When the type of shell script is /bin/sh, assume a POSIX-compatible shell for
+" syntax highlighting purposes.
+" More on why: https://github.com/thoughtbot/dotfiles/pull/471
+let g:is_posix = 1
+
 " Persistent undo
 set undofile " Create FILE.un~ files for persistent undo
 set undodir=~/.vim/undodir
