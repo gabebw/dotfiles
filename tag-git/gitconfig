@@ -28,6 +28,8 @@
   full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
   # No color, short messages
   basic = log --pretty='%h %s'
+  # My default `git log` format without color
+  nocolor = log --pretty='%h%d %s [%an, %cr]'
   unstage = reset HEAD
   mm-safe = !bundle exec rake && git merge-to master
   mm = merge-to master
