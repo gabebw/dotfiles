@@ -5,10 +5,18 @@ augroup rails_shortcuts
   let g:rails_projections = {
       \ "config/routes.rb": { "command": "routes" },
       \ "spec/factories.rb": { "command": "factories" },
+      \ "spec/features/*_spec.rb": { "command": "feature" },
       \ "app/services/*.rb": {
       \   "command": "service",
       \   "test": "spec/services/%s_spec.rb"
-      \ }
+      \ },
+      \ "app/jobs/*_job.rb": {
+      \   "command": "job",
+      \   "template": "class %SJob < ActiveJob::Job\nend",
+      \   "test": [
+      \     "spec/jobs/%s_job_spec.rb"
+      \   ]
+      \ },
   \ }
 
   autocmd User Rails nnoremap <Leader>m :Emodel<Space>
