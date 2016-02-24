@@ -6,7 +6,9 @@ let g:markdown_fenced_languages = [
       \ 'lisp',
       \ 'scheme',
       \ 'haskell',
-      \ 'vim'
+      \ 'vim',
+      \ 'html',
+      \ 'sql'
       \ ]
 
 setlocal spell
