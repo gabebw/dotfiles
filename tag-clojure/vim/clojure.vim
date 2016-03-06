@@ -1,1 +1,0 @@
-au VimEnter *.clj RainbowParenthesesToggle
