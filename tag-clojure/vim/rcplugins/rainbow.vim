@@ -1,4 +1,6 @@
-let g:rainbow_active = 1
+if expand("%:e") ==# 'clj'
+  let g:rainbow_active = 1
+endif
 
 let g:rainbow_conf = {
   \ 'ctermfgs': [
