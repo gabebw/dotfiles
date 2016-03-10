@@ -24,3 +24,6 @@ nnoremap :Nohl :nohlsearch
 " Automatically reselect text after in- or out-denting in visual mode
 xnoremap < <gv
 xnoremap > >gv
+
+" Act like D and C
+nnoremap Y y$
