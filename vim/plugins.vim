@@ -44,8 +44,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 " Make `.` work to repeat plugin actions too
 Plug 'tpope/vim-repeat'
-" Gives you an `ae` text object, so `gcae` comments whole file
-Plug 'kana/vim-textobj-entire'
 " Access to Vim's powerful undo-tree with :GundoShow
 Plug 'vim-scripts/Gundo'
 " Intelligently reopen files where you left off
@@ -53,6 +51,17 @@ Plug 'dietsche/vim-lastplace'
 " Instead of always copying to the system clipboard, use `cp` (plus motions) to
 " copy to the system clipboard. `cP` copies the current line. `cv` pastes.
 Plug 'christoomey/vim-system-copy'
+" gr to "go replace", "*griw to replace word with contents of system clipboard,
+" etc
+Plug 'vim-scripts/ReplaceWithRegister'
+
+" Text objects
+" required for all the vim-textobj-* plugins
+Plug 'kana/vim-textobj-user'
+" `ae` text object, so `gcae` comments whole file
+Plug 'kana/vim-textobj-entire'
+" `l` text object for the current line excluding leading whitespace
+Plug 'kana/vim-textobj-line'
 
 " Silly stuff, but I like it
 " Now I can put emoji in my statusbar
