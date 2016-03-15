@@ -57,9 +57,6 @@ Plug 'christoomey/vim-system-copy'
 " Silly stuff, but I like it
 " Now I can put emoji in my statusbar
 Plug 'junegunn/vim-emoji'
-" Control Rdio from Vim
-Plug 'gabebw/vim-rdio'
-" Plug 'file:///Users/gabe/code/personal/vim-rdio'
 
 " Markdown
 Plug 'nicholaides/words-to-avoid.vim'
