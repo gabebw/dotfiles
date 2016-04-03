@@ -140,4 +140,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-PROMPT="\$(prompt_ruby_version) \$(prompt_shortened_path)\$(prompt_full_git_status) $ "
+PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_full_git_status) $ '
