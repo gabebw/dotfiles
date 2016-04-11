@@ -131,6 +131,16 @@ function precmd {
   git status 2> /dev/null >! "/tmp/git-status-$$"
 }
 
+# Do I have a custom git email set for this git repo? Announce it so I remember
+# to unset it.
+prompt_git_email(){
+  git_email=$(git config user.email)
+  global_git_email=$(git config --global user.email)
+  if [[ "$git_email" != "$global_git_email" ]]; then
+    prompt_red "$(prompt_spaced "[git email: $git_email]")"
+  fi
+}
+
 ###########################
 # Actually set the PROMPT #
 ###########################
@@ -140,4 +150,4 @@ function precmd {
 # is sourced but is evaluated every time we need the prompt.
 setopt prompt_subst
 
-PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_full_git_status) $ '
+PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
