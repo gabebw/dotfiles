@@ -1,9 +1,9 @@
 :set editor vim
 -- Set the prompt
 :set prompt "λ> "
--- Allow :load-ing from ./src
+
+-- Allow :load-ing from these directories (like src)
 :set -isrc
--- Allow :load-ing from ./tests
 :set -itests
 
 import Prelude
@@ -12,7 +12,5 @@ import Control.Applicative hiding (some, many)
 import Control.Monad
 import qualified Data.ByteString as BS hiding (pack)
 import qualified Data.ByteString.Char8 as BS (pack)
+import Data.Text (Text)
 import qualified Data.Text as T
-
--- cabal install hoogle, then `:hoogle fmap`
-:def hoogle \s -> return $ ":! hoogle --count=15 \"" ++ s ++ "\""
