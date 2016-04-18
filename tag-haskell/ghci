@@ -6,6 +6,7 @@
 -- Allow :load-ing from ./tests
 :set -itests
 
+import Prelude
 import Data.Char
 import Control.Applicative hiding (some, many)
 import Control.Monad
