@@ -1,0 +1,26 @@
+#!/bin/sh
+# Open a PR and copy the url to the clipboard
+
+set -e
+
+commit_message_file="$(mktemp -t commit_message_file)"
+
+# Put some space at the top
+echo >> "$commit_message_file"
+
+number_of_commits=$(git rev-list master..HEAD --count)
+
+if [ "$number_of_commits" -eq 1 ]; then
+  git log -1 --format=%B >> "$commit_message_file"
+else
+  git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed 's/^/# /' >> "$commit_message_file"
+fi
+
+# Start vim in insert mode
+vim -c "startinsert" -c "set ft=gitcommit" "$commit_message_file"
+
+message_without_comments="$(egrep -v "^#" "$commit_message_file")"
+
+hub pull-request -m "$message_without_comments" | pbcopy
+
+echo "Pull request URL was copied to the clipboard: $(pbpaste)"
