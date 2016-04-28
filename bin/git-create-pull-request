@@ -13,4 +13,4 @@ git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed 's/^/# /'
 # Start vim in insert mode
 vim -c startinsert "$msg"
 
-hub pull-request -m "$(cat "$msg")" | pbcopy
+hub pull-request -m "$(egrep -v "^#" "$msg")" | pbcopy
