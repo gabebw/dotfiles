@@ -3,8 +3,20 @@
 
 set -e
 
-commit_message_file="$(mktemp -t commit_message_file)"
+on_master() {
+  [ "$(git rev-parse head)" = "$(git rev-parse master)" ]
+}
 
+error() {
+  echo "$@" >&2
+  exit 1
+}
+
+if on_master; then
+  error "You're already on master"
+fi
+
+commit_message_file="$(mktemp -t commit_message_file)"
 number_of_commits=$(git rev-list master..HEAD --count)
 
 if [ "$number_of_commits" -eq 1 ]; then
