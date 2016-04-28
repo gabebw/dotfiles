@@ -1,0 +1,16 @@
+#!/bin/sh
+# Open a PR and copy the url to the clipboard
+
+set -e
+
+msg="$(mktemp -t commitmsg)"
+
+# Put some space at the top
+echo >> $msg
+
+git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed 's/^/# /' >> "$msg"
+
+# Start vim in insert mode
+vim -c startinsert "$msg"
+
+hub pull-request -m "$(cat "$msg")" | pbcopy
