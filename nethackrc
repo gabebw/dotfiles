@@ -47,7 +47,6 @@ OPTIONS=showrace
 OPTIONS=showscore
 OPTIONS=silent
 OPTIONS=sortpack
-OPTIONS=sound
 OPTIONS=sparkle
 OPTIONS=nostandout
 OPTIONS=time
