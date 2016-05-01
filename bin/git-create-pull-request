@@ -26,8 +26,7 @@ else
   git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed 's/^/# /' >> "$commit_message_file"
 fi
 
-# Start vim in insert mode
-vim -c "startinsert" -c "set ft=gitcommit" "$commit_message_file"
+vim -c "set ft=gitcommit" "$commit_message_file"
 
 message_without_comments="$(egrep -v "^#" "$commit_message_file")"
 
