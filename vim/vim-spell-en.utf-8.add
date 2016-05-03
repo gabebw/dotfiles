@@ -40,3 +40,7 @@ Croniker
 quickfix
 PostgreSQL
 Postgres
+Heroku
+FactoryGirl
+ActiveJob
+Procfile
