@@ -7,12 +7,12 @@ RUBYOPT=rubygems
 # rbenv
 PATH=~/.rbenv/shims:$PATH
 
-# Bundler binstubs
-PATH="./bin/stubs:$PATH"
+# Bundler binstubs (bin/stubs is for backwards compatibility with old projects
+# where I generated stubs into bin/stubs)
+PATH="./bin/:./bin/stubs:$PATH"
 
 # Bundler
 alias be="bundle exec"
-alias binstubs="bundle --binstubs=./bin/stubs"
 
 alias tagit='/usr/local/bin/ctags -R \
   --languages=-javascript \
@@ -28,7 +28,7 @@ alias tagit='/usr/local/bin/ctags -R \
 function b {
   if [[ $# == 0 ]]
   then
-    (bundle check > /dev/null || bundle install) && binstubs
+    (bundle check > /dev/null || bundle install) && bundle --binstubs
   else
     bundle "$@"
   fi
