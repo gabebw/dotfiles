@@ -18,6 +18,9 @@ nnoremap <C-h> <C-W>h
 " no ex mode
 map Q <Nop>
 
+" re-select the last pasted text
+nnoremap gV V`]
+
 " Typo
 nnoremap :Nohl :nohlsearch
 
