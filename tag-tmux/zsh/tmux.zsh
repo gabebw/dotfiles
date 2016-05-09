@@ -44,7 +44,7 @@ function t {
   if (( $# == 1 )); then
     _tmux_try_to_connect_to "$1"
   else
-    tmux ls
+    tmux list-sessions -F "#{session_name}"
   fi
  }
 
