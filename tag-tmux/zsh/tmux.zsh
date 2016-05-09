@@ -49,9 +49,7 @@ function t {
  }
 
 _tmux_session_exists(){
-  local session_name="$1"
-  sessions=$(tmux list-sessions | awk -F ':' '{print $1}')
-  echo $sessions | grep -q "$session_name"
+  tmux list-sessions -F "#{session_name}" | egrep -q "^${1}$"
 }
 
 # Try to connect to a session with the given name.
