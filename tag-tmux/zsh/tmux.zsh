@@ -4,8 +4,17 @@
 ensure_we_are_inside_tmux() {
   if _is_tmux_not_running; then
     _ensure_tmux_is_running
-    tmux attach
+    tmux attach -t "$(_most_recent_tmux_session)"
   fi
+}
+
+# Returns the name of the most recent tmux session, sorted by time the session
+# was last attached.
+_most_recent_tmux_session(){
+  tmux list-sessions -F "#{session_last_attached} #{session_name}" | \
+    sort -r | \
+    cut -d' ' -f2 | \
+    head -1
 }
 
 _is_tmux_not_running() {
