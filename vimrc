@@ -32,4 +32,4 @@ call s:SourceConfigFilesIn('rcplugins') " after plugins load
 " we load plugins.
 filetype plugin indent on
 syntax enable
-colorscheme jellybeans
+colorscheme 1989

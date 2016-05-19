@@ -37,6 +37,7 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'itchyny/lightline.vim'
 " Colorscheme. Looks great with Tomorrow Night Eighties.terminal theme in this repo.
 Plug 'nanotech/jellybeans.vim'
+Plug 'sonjapeterson/1989.vim'
 " Easily navigate directories
 Plug 'tpope/vim-vinegar'
 " Make working with shell scripts nicer ("vim-unix")
