@@ -32,6 +32,7 @@ _ensure_tmux_is_running() {
     tmux new -d
   fi
 }
+
 # Attach if not in tmux, or switch if we are in tmux
 attach_to_tmux_session() {
   local session="$1"
@@ -76,6 +77,11 @@ _tmux_try_to_connect_to() {
 # Create a new tmux session with the given name.
 _new_tmux_session_named() {
   local new_session_name="$1"
-  TMUX= tmux new-session -d -s "$new_session_name"
-  attach_to_tmux_session "$new_session_name"
+
+  # Create three windows named vim/scratch/server and jump into the first one
+  TMUX= tmux new-session -d -As "$new_session_name" -n vim
+  tmux new-window -t "$new_session_name" -n scratch
+  tmux new-window -t "$new_session_name" -n server
+  tmux select-window -t "$new_session_name" -n
+  tmux attach -t "$session_name"
 }
