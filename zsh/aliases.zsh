@@ -18,10 +18,6 @@ alias mkdir="\mkdir -p"
 alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 
-alias dotfiles="cd ~/.dotfiles"
-alias dotfiles-update="cd ~/.dotfiles && git checkout master && git pull && git checkout - && cd -"
-alias ghostname=hostname
-
 # Needs to be a function because `alias -` breaks
 function -() { cd - }
 
