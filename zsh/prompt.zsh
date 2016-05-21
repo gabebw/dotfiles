@@ -2,22 +2,40 @@
 # Colors #
 ###########
 
-# autoload docs: http://zsh.sourceforge.net/Doc/Release/Shell-Builtin-Commands.html
-# colors provides `$fg_bold` etc: http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Other-Functions
-autoload -Uz colors && colors
+# Generate colors for all 256 colors
+typeset -AHg fg bg
 
-prompt_color() {
-  [[ -n "$1" ]] && print "%{$fg_bold[$2]%}$1%{$reset_color%}"
+for color in {000..255}; do
+  fg[$color]="%{[38;5;${color}m%}"
+  bg[$color]="%{[48;5;${color}m%}"
+done
+
+ZSH_SPECTRUM_TEXT="What a neat color this is"
+# Show all 256 colors with color number
+spectrum_ls() {
+  for code in {000..255}; do
+    print -P -- "$code: %{$fg[$code]%}$ZSH_SPECTRUM_TEXT%{$reset_color%}"
+  done
 }
 
-prompt_gray()   { print "$(prompt_color "$1" grey)" }
-prompt_yellow() { print "$(prompt_color "$1" yellow)" }
-prompt_green()  { print "$(prompt_color "$1" green)" }
-prompt_red()    { print "$(prompt_color "$1" red)" }
-prompt_cyan()   { print "$(prompt_color "$1" cyan)" }
-prompt_blue()   { print "$(prompt_color "$1" blue)" }
-prompt_magenta(){ print "$(prompt_color "$1" magenta)" }
+# Show all 256 colors, but set the background color, not the foreground
+spectrum_bls() {
+  for code in {000..255}; do
+    print -P -- "$code: %{$bg[$code]%}$ZSH_SPECTRUM_TEXT%{$reset_color%}"
+  done
+}
 
+prompt_color() {
+  [[ -n "$1" ]] && print "%{$fg[$2]%}$1%{$reset_color%}"
+}
+
+prompt_green()  { print "$(prompt_color "$1" 158)" }
+prompt_magenta(){ print "$(prompt_color "$1" 218)" }
+prompt_purple() { print "$(prompt_color "$1" 146)" }
+prompt_red()    { print "$(prompt_color "$1" 197)" }
+prompt_cyan()   { print "$(prompt_color "$1" 159)" }
+prompt_blue()   { print "$(prompt_color "$1" 031)" }
+prompt_yellow() { print "$(prompt_color "$1" 222)" }
 prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 
 ###########################################
@@ -31,7 +49,7 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 #
 # ~/foo/bar is shown as "foo/bar"
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
-prompt_shortened_path() { print "$(prompt_blue "%2~")" }
+prompt_shortened_path() { print "$(prompt_purple "%2~")" }
 
 prompt_ruby_version() {
   local version=$(rbenv version-name)
@@ -47,7 +65,7 @@ prompt_ruby_version() {
 autoload -Uz vcs_info
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats $(prompt_yellow "%b")
+zstyle ':vcs_info:git*' formats $(prompt_blue "%b")
 zstyle ':vcs_info:git*' actionformats $(prompt_red "%b|%a")
 
 prompt_git_status_symbol(){
@@ -60,7 +78,7 @@ prompt_git_status_symbol(){
   case $(prompt_git_status) in
     changed) letter=$(prompt_red $x_mark);;
     staged) letter=$(prompt_yellow "S");;
-    untracked) letter=$(prompt_cyan "UT");;
+    untracked) letter=$(prompt_red "?");;
     unchanged) letter=$(prompt_green $checkmark);;
   esac
 
