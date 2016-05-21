@@ -2,7 +2,7 @@
 # 1) Ensure we're always in a tmux session
 
 ensure_we_are_inside_tmux() {
-  if _is_tmux_not_running; then
+  if _not_in_tmux; then
     _ensure_tmux_is_running
     tmux attach -t "$(_most_recent_tmux_session)"
   fi
@@ -17,16 +17,16 @@ _most_recent_tmux_session(){
     head -1
 }
 
-_is_tmux_not_running() {
+_not_in_tmux() {
   [[ -z "$TMUX" ]]
 }
 
-_is_tmux_session_list_empty() {
+_no_tmux_sessions() {
   [[ -z $(tmux ls) ]]
 }
 
 _ensure_tmux_is_running() {
-  if _is_tmux_session_list_empty; then
+  if _no_tmux_sessions; then
     # Daemonize so it doesn't auto-open the session. We just want something that
     # `tmux attach` can use.
     tmux new -d
@@ -35,7 +35,7 @@ _ensure_tmux_is_running() {
 # Attach if not in tmux, or switch if we are in tmux
 attach_to_tmux_session() {
   local session="$1"
-  if _is_tmux_not_running; then
+  if _not_in_tmux; then
     tmux attach -d -t "$1"
   else
     tmux switch-client -t "$1"
