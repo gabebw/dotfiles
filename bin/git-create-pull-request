@@ -1,5 +1,6 @@
 #!/bin/sh
-# Open a PR and copy the url to the clipboard
+
+# Open a PR, edit the description in Vim, and copy the url to the clipboard
 
 set -e
 
