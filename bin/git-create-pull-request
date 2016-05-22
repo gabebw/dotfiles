@@ -17,7 +17,7 @@ if on_master; then
   error "You're already on master"
 fi
 
-commit_message_file="$(mktemp -t commit_message_file)"
+commit_message_file=$(mktemp -t commit_message_file)
 number_of_commits=$(git rev-list master..HEAD --count)
 
 if [ "$number_of_commits" -eq 1 ]; then
@@ -29,7 +29,7 @@ fi
 
 vim -c "set ft=gitcommit" "$commit_message_file"
 
-message_without_comments="$(egrep -v "^#" "$commit_message_file")"
+message_without_comments=$(egrep -v "^#" "$commit_message_file")
 
 hub pull-request -m "$message_without_comments" | pbcopy
 
