@@ -46,4 +46,7 @@ compdef g=git
 compdef _git gc=git-checkout
 compdef _git ga=git-add
 
-PATH=$PATH:/usr/local/Cellar/diff-so-fancy/*/third_party/diff-highlight
+# Must use `for` so the glob expands. PATH=$PATH:/path/to/*/bin doesn't work.
+for dir in /usr/local/Cellar/diff-so-fancy/*/third_party/diff-highlight; do
+  PATH=$PATH:$dir
+done
