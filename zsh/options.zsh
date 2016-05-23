@@ -31,3 +31,6 @@ unsetopt multios
 # R - handle ASCII color escapes
 # X - Don't send clear screen signal
 export LESS="ij.5FKMRX"
+
+# Show grep results in white text on a red background
+export GREP_COLOR='1;37;41'

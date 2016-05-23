@@ -10,6 +10,12 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
+
+# Use modern regexps for grep, and do show color when `grep` is the final
+# command, but don't when piping to something else, because the added color
+# codes will mess up the expected input.
+alias grep="egrep --color=auto"
+
 # Copy-pasting `$ python something.py` works
 alias \$=''
 alias diff="colordiff -u"
