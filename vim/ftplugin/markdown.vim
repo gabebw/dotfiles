@@ -10,7 +10,8 @@ let g:markdown_fenced_languages = [
       \ 'html',
       \ 'sql',
       \ 'diff',
-      \ 'scss'
+      \ 'scss',
+      \ 'css'
       \ ]
 
 setlocal spell
