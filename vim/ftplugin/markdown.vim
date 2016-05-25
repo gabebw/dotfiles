@@ -1,17 +1,17 @@
 " Syntax-highlight languages inside fenced markdown blocks
 let g:markdown_fenced_languages = [
-      \ 'ruby',
-      \ 'sh',
+      \ 'css',
+      \ 'diff',
+      \ 'haskell',
+      \ 'html',
       \ 'javascript',
       \ 'lisp',
+      \ 'ruby',
       \ 'scheme',
-      \ 'haskell',
-      \ 'vim',
-      \ 'html',
-      \ 'sql',
-      \ 'diff',
       \ 'scss',
-      \ 'css'
+      \ 'sh',
+      \ 'sql',
+      \ 'vim'
       \ ]
 
 setlocal spell
