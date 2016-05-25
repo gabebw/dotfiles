@@ -2,7 +2,7 @@
 set laststatus=2
 
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'Tomorrow_Night_Eighties',
       \ 'active': {
       \   'left': [
       \             ['mode', 'paste'],
