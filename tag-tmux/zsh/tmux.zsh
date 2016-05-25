@@ -20,7 +20,7 @@ _not_in_tmux() {
 }
 
 _no_tmux_sessions() {
-  [[ -z $(tmux ls) ]]
+  [[ -z "$(tmux ls)" ]]
 }
 
 _ensure_tmux_is_running() {
