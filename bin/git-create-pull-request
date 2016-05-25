@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Open a PR, edit the description in Vim, and copy the url to the clipboard
+# Open a PR, edit the description in Vim, copy the url to the clipboard, and
+# open the PR in the browser.
 
 set -e
 
@@ -33,4 +34,4 @@ message_without_comments=$(egrep -v "^#" "$commit_message_file")
 
 hub pull-request -m "$message_without_comments" | pbcopy
 
-echo "Pull request URL was copied to the clipboard: $(pbpaste)"
+open "$(pbpaste)"
