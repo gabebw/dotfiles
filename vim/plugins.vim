@@ -35,8 +35,6 @@ Plug 'derekprior/vim-trimmer'
 Plug 'duggiefresh/vim-easydir'
 " Cool statusbar
 Plug 'itchyny/lightline.vim'
-" Colorscheme. Looks great with Tomorrow Night Eighties.terminal theme in this repo.
-Plug 'nanotech/jellybeans.vim'
 Plug 'sonjapeterson/1989.vim'
 " Easily navigate directories
 Plug 'tpope/vim-vinegar'
