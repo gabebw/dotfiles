@@ -11,12 +11,6 @@ function current-project-path() {
   echo "${TMUX_PROJECT_DIRECTORY}/${current_tmux_session}"
 }
 
-# Use the lowercase version to create as an array, and export the uppercase
-# version. The lowercase version can't be exported, and the uppercase version
-# can't be set to an array.
-cdpath=($HOME/code $HOME/code/* $HOME/code/thoughtbot/*)
-export CDPATH
-
 function chpwd {
   echo "$(pwd)" >! "$(current-project-path)"
 }
