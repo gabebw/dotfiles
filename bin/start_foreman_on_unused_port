@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Start `heroku local` on an unused port.
 # If there's a .foreman file, it tries that port first, then falls back to
@@ -15,7 +15,7 @@ find_port() {
     echo "$port_from_foreman"
   else
     unused_port=$(find_unused_port)
-    if [[ -n "$unused_port" ]]; then
+    if [ -n "$unused_port" ]; then
       echo "$unused_port"
     else
       echo "Couldn't find an unused port :("
