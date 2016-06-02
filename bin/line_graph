@@ -10,12 +10,12 @@ if ! command -v gnuplot > /dev/null; then
   exit 1
 fi
 
-
 if [ $# -ge 1 -a -f "$1" ]; then
   input="$1"
 else
-  input=$(mktemp -t graph)
-  cat - > "$input"
+  echo "Usage: line_graph filename"
+  echo "The file should have one number per line."
+  exit 0
 fi
 
 read -r -d '' SCRIPT <<SCRIPT
