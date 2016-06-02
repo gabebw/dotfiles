@@ -4,9 +4,18 @@ function! s:SourceConfigFilesIn(directory)
   let directory_splat = '~/.vim/' . a:directory . '/*.vim'
   for config_file in split(glob(directory_splat), '\n')
     if filereadable(config_file)
-        execute 'source' config_file
+      execute 'source' config_file
     endif
   endfor
+endfunction
+
+function! s:LoadPlugins()
+  call plug#begin('~/.vim/bundle')
+  source ~/.vim/plugins.vim
+  " Source `~/.vim/plugins/*`
+  " For example, `~/.vim/plugins/haskell.vim` is symlinked to `tag-haskell/vim/plugins/haskell.vim`
+  call s:SourceConfigFilesIn('plugins')
+  call plug#end()
 endfunction
 
 " Leader is <Space>
@@ -15,21 +24,15 @@ endfunction
 " Changing mapleader after a mapping is defined has no effect on the mapping.
 let mapleader=" "
 
-" Source the rest of the configuration
-call plug#begin('~/.vim/bundle')
-source ~/.vim/plugins.vim
-" Load plugins from various tags (~/.vim/plugins/*)
-" For example, tag-haskell/vim/plugins/haskell.vim is linked to
-" ~/.vim/plugins/haskell.vim.
-call s:SourceConfigFilesIn('plugins')
-call plug#end()
+call s:LoadPlugins()
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('functions')
-call s:SourceConfigFilesIn('rcplugins') " after plugins load
+" Must load rcplugins after loading plugins because the files in rcplugins are
+" settings for various plugins.
+call s:SourceConfigFilesIn('rcplugins')
 
-" Turn on syntax highlighting and filetype detection.
-" vim-plug loads all the extra syntax and ftdetect files, so turn them on after
-" we load plugins.
+" vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
+" _after_ loading plugins.
 filetype plugin indent on
 syntax enable
 colorscheme 1989
