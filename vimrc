@@ -27,8 +27,6 @@ let mapleader=" "
 call s:LoadPlugins()
 call s:SourceConfigFilesIn('')
 call s:SourceConfigFilesIn('functions')
-" Must load rcplugins after loading plugins because the files in rcplugins are
-" settings for various plugins.
 call s:SourceConfigFilesIn('rcplugins')
 
 " vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
