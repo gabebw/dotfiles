@@ -1,5 +1,7 @@
-# a terminal multiplexer
-brew 'tmux'
+# always use version 2.0, because 2.1 locks up and 2.2 has weird issues around
+# nested sessions
+tap 'gfontenot/formulae'
+brew 'gfontenot/formulae/tmux20'
 
 # so copy/paste works in tmux
 brew 'reattach-to-user-namespace'
