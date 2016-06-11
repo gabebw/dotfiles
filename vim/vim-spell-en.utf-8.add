@@ -93,3 +93,4 @@ backend
 easy
 nondeterministic
 regexes
+Base64
