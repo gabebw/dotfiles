@@ -13,8 +13,8 @@ function docker-kickstart(){
   fi
 
   if ! docker-machine ls | grep -Fq default; then
-    # Create a machine with 50GB of storage
-    docker-machine create --driver virtualbox --virtualbox-disk-size=50000 --virtualbox-memory 8096 default
+    # Create a machine with 50GB of storage and 4GB of memory
+    docker-machine create --driver virtualbox --virtualbox-disk-size=50000 --virtualbox-memory 4096 default
   fi
 
   if [[ "$(docker-machine status default)" != "Running" ]]; then
