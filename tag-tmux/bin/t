@@ -54,11 +54,9 @@ _tmux_try_to_connect_to(){
 
 # Are we currently connected to the given session?
 _connected_to(){
-  [[ "$1" == "$(_current_tmux_session)" ]]
-}
+  current_tmux_session=$(tmux ls -F '#S #{session_attached}' | grep '1$' | cut -d' ' -f1)
 
-_current_tmux_session(){
-  tmux ls -F '#S #{session_attached}' | grep 1$ | cut -d' ' -f1
+  [[ "$1" == "$current_tmux_session" ]]
 }
 
 if (( $# == 1 )); then
