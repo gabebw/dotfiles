@@ -25,9 +25,14 @@ _tmux_session_exists(){
   tmux list-sessions -F "#{session_name}" | egrep -q "^${1}$"
 }
 
+# tmux doesn't allow . in session names
+_tmux_normalize_session_name(){
+  echo "${1//./-}"
+}
+
 # Create a new tmux session with the given name.
 _new_tmux_session_named() {
-  new_session_name=${1//./-}
+  new_session_name=$1
 
   # Create three windows named vim/scratch/server and jump into the first one
   TMUX='' tmux new-session -d -As "$new_session_name" -n vim
@@ -40,13 +45,16 @@ _new_tmux_session_named() {
 # Try to connect to a tmux session with the given name.
 # If no such session exists, create it first.
 _tmux_try_to_connect_to(){
-  session_to_connect_to=${1//./-}
-
-  if _tmux_session_exists "$session_to_connect_to"; then
-    _attach_to_tmux_session "$session_to_connect_to"
+  if _tmux_session_exists "$1"; then
+    _attach_to_tmux_session "$1"
   else
-    _new_tmux_session_named "$session_to_connect_to"
+    _new_tmux_session_named "$1"
   fi
+}
+
+# Are we currently connected to the given session?
+_connected_to(){
+  [[ "$1" == "$(_current_tmux_session)" ]]
 }
 
 _current_tmux_session(){
@@ -54,15 +62,19 @@ _current_tmux_session(){
 }
 
 if (( $# == 1 )); then
-  _tmux_try_to_connect_to "$1"
+  _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
 else
-  project=$(projects | fzf --reverse)
+  project_directory=$(projects | fzf --reverse)
 
-  if [[ -n "$project" && "$project" != "$(_current_tmux_session)" ]]; then
-    if _tmux_session_exists "$project"; then
-      tmux attach -t "$project"
-    else
-      (cd "$project" && _new_tmux_session_named "$project")
+  if [[ -n "$project_directory" ]]; then
+    session_name=$(_tmux_normalize_session_name "$project_directory")
+
+    if ! _connected_to "$session_name"; then
+      if _tmux_session_exists "$session_name"; then
+        tmux switch-client -t "$session_name"
+      else
+        (cd "$project_directory" && _new_tmux_session_named "$session_name")
+      fi
     fi
   fi
 fi
