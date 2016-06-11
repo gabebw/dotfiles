@@ -3,10 +3,6 @@
   name = Gabe Berke-Williams
   email = gabebw@gabebw.com
 [core]
-  # When core.commentChar is "auto", the comment char starts with '#' as in
-  # default but if it's already in the prepared message, find another char.
-  # This lets you write e.g. `#1 fix` without the line getting removed.
-  commentchar = auto
   editor = vim
   whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
