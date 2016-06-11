@@ -69,7 +69,7 @@ else
 
     if ! _connected_to "$session_name"; then
       if _tmux_session_exists "$session_name"; then
-        tmux switch-client -t "$session_name"
+        _attach_to_tmux_session "$session_name"
       else
         (cd "$project_directory" && _new_tmux_session_named "$session_name")
       fi
