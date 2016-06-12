@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 # Upload the currently-copied image URL to i.gabebw.com
 #
@@ -67,10 +67,10 @@ while getopts "t:d:f:h" opt; do
   esac
 done
 
-[[ -z "$to" ]] && to=$(basename "$from")
+[ -z "$to" ] && to=$(basename "$from")
 
 if [ $local_file ]; then
-  if [[ -n "$directory" ]]; then
+  if [ -n "$directory" ]; then
     full_to="${directory}/${to}"
   else
     full_to="$to"
@@ -80,9 +80,9 @@ if [ $local_file ]; then
   upload-image "$from" "$full_to"
 else
   from="icopy_file-$$.image"
-  url="$(pbpaste)"
+  url=$(pbpaste)
   to=${to:-"$(basename "$url")"}
-  if [[ -n "$directory" ]]; then
+  if [ -n "$directory" ]; then
     full_to="${directory}/${to}"
   else
     full_to="$to"
