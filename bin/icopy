@@ -76,7 +76,7 @@ if [ $local_file ]; then
     full_to="$to"
   fi
 
-  print "$from -> $full_to" >&2
+  echo "$from -> $full_to" >&2
   upload-image "$from" "$full_to"
 else
   from="icopy_file-$$.image"
@@ -87,7 +87,7 @@ else
   else
     full_to="$to"
   fi
-  print "$url -> $full_to" >&2
+  echo "$url -> $full_to" >&2
   curl --silent --output "$from" "$url"
   upload-image "$from" "$full_to"
   rm "$from"
