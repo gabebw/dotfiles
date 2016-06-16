@@ -114,3 +114,9 @@
   templatedir = ~/.git-template
 [github]
   user = gabebw
+[pager]
+  diff = diff-highlight | less
+  log = diff-highlight | less
+  show = diff-highlight | less
+[interactive]
+  diffFilter = diff-highlight
