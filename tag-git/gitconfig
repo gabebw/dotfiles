@@ -77,6 +77,7 @@
   helper = osxkeychain
 [commit]
   template = ~/.git-template/gitmessage
+  verbose = true
 [grep]
   # http://travisjeffery.com/b/2012/02/search-a-git-repo-like-a-ninja/
   extendRegexp = true
