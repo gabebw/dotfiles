@@ -20,7 +20,7 @@ alias amend-new="git commit --amend"
 
 alias ga="git add"
 alias gai="git add --interactive"
-alias gcp="git rev-parse HEAD | pbcopy"
+alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 alias gc="git checkout"
 alias gcm="git commit -m"
 
