@@ -32,3 +32,6 @@ bin/stubs
 # Ignore local JS-related files
 node_modules/
 bower_components/
+
+# This file is huge and messes up the vim quickfix window
+vendor/assets/javascripts/highlight.all.js
