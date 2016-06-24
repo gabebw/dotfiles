@@ -24,7 +24,7 @@
   # Turn on an experimental heuristic that should make the diff easier to read
   compactionHeuristic = true
 [alias]
-  st = status -sb
+  st = status --short --branch
   co = checkout
   # Full commit messages without all the junk from `log --pretty=full`
   full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
