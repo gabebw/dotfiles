@@ -95,3 +95,5 @@ nondeterministic
 regexes
 Base64
 SHA
+Fastly
+CNAME
