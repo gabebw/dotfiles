@@ -21,7 +21,7 @@ _edit_script() {
 }
 
 _definition_field_for_pattern() {
-  definition=$(grep -En "$2" ~/.zshrc ~/.zshenv ~/.zsh/**/*.zsh ~/.other.thing 2>/dev/null)
+  definition=$(grep -En "$2" ~/.zshrc ~/.zshenv ~/.zsh/**/*.zsh 2>/dev/null)
   echo "$definition" | cut -d ":" -f "$1"
 }
 
