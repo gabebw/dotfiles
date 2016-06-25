@@ -41,7 +41,7 @@ _edit_shell_alias() {
 
 viw(){
   if [[ $# == 0 ]]; then
-    echo "No argument given"
+    echo "No argument given" >&2
   else
     command_name="$1"
     case "$(_definition_type "$command_name")" in
