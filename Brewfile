@@ -1,3 +1,5 @@
+# vim: syntax=ruby filetype=ruby
+
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
@@ -45,9 +47,12 @@ brew 'rcm'
 # Install zsh 5.2+ (OS X ships with 5.0) to fix this issue:
 # https://github.com/robbyrussell/oh-my-zsh/issues/4932
 brew 'zsh'
-puts "To use the Homebrew-installed ZSH:"
-puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
-puts "  chsh -s /usr/local/bin/zsh"
+
+if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
+  puts "To use the Homebrew-installed ZSH:"
+  puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
+  puts "  chsh -s /usr/local/bin/zsh"
+end
 
 # Cask: install binaries
 tap 'caskroom/cask'
