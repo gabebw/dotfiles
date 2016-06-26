@@ -17,7 +17,7 @@ if [[ "$(git rev-parse "$1")" == "$(git merge-base HEAD origin/"$1")" ]]; then
   git checkout "$1"
   git merge HEAD@{1}
   git push
-  git bd $(git rev-parse --abbrev-ref @{-1})
+  git bd "$(git rev-parse --abbrev-ref @{-1})"
 else
   echo 'Non-fastforward - try `git up`' >&2
 fi
