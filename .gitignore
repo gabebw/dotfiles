@@ -3,7 +3,8 @@
 *.swp
 
 # Vim undodir
-vim/undodir
+vim/undodir/*
+!vim/undodir/.gitkeep
 
 # Local config
 *.local
