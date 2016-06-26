@@ -1,16 +1,23 @@
 #!/bin/zsh
 
+set -e
+
 # Merge current branch into $1, only if it's a fast-forward.
 # Stays on the same branch if it's not a fast-forwward merge.
 
 function update-branch() {
-  git checkout "$1" && git pull origin "$1" && git checkout -
+  git checkout "$1"
+  git pull origin "$1"
+  git checkout -
 }
 
 update-branch "$1"
 
-if [[ $(git rev-parse "$1") == $(git merge-base HEAD origin/"$1") ]]; then
-  git checkout "$1" && git merge HEAD@{1} && git push && git bd $(git rev-parse --abbrev-ref @{-1})
+if [[ "$(git rev-parse "$1")" == "$(git merge-base HEAD origin/"$1")" ]]; then
+  git checkout "$1"
+  git merge HEAD@{1}
+  git push
+  git bd $(git rev-parse --abbrev-ref @{-1})
 else
   echo 'Non-fastforward - try `git up`' >&2
 fi
