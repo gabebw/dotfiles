@@ -26,5 +26,5 @@ echo "If you like what you see in system/osx-settings, run ./system/osx-settings
 echo "If you're using Terminal.app, check out the terminal-themes directory"
 
 for setup in tag-*/setup; do
-  source "$setup"
+  . "$setup"
 done
