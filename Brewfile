@@ -3,8 +3,10 @@
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
-# Qt5 for capybara-webkit
-brew 'qt5'
+# Qt5.5 for capybara-webkit, because Qt 5.6 doesn't work except with the most
+# recent version
+tap 'homebrew/versions'
+brew 'qt55'
 
 # grep for ps
 brew 'pgrep'
