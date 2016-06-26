@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Installing Git hooks..."
+cp tag-git/post-merge .git/hooks/post-merge
+chmod +x .git/hooks/post-merge

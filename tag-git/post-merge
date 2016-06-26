@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rcup -v | grep -v identical
