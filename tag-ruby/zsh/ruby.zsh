@@ -36,16 +36,18 @@ function b {
 
 # Install capybara-webkit linked against Qt4
 capy4() {
-  gem uninstall -a capybara-webkit && \
-    brew unlink qt qt5 && \
+  brew install qt qt55 && \
+    gem uninstall -a capybara-webkit && \
+    brew unlink qt qt55 && \
     brew link qt --overwrite && \
     b
 }
 
-# Install capybara-webkit linked against Qt5
+# Install capybara-webkit linked against Qt5.5
 capy5() {
-  gem uninstall -a capybara-webkit && \
-    brew unlink qt qt5 && \
-    brew link qt5 --force --overwrite && \
+  brew install qt qt55 && \
+    gem uninstall -a capybara-webkit && \
+    brew unlink qt qt55 && \
+    brew link qt55 --force --overwrite && \
     b
 }
