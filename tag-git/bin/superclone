@@ -58,7 +58,7 @@ if (( $# == 0 )); then
 else
   git_url="$1"
 
-  if [[ -e "$2" ]]; then
+  if [[ -n "$2" ]]; then
     # We provided a directory just like `git clone URL DIR`. Use it.
     directory="$2"
   else
