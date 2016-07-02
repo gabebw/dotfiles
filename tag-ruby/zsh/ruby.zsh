@@ -14,6 +14,15 @@ PATH="./bin/stubs:$PATH"
 alias be="bundle exec"
 alias binstubs="bundle --binstubs=./bin/stubs"
 
+serveit(){
+  if [[ $# != 1 ]]; then
+    echo "Usage: 'serveit public' to serve the public directory"
+  else
+    echo "\n\n>>> http://localhost:9090\n\n"
+    ruby -run -e httpd "$1" -p 9090
+  fi
+}
+
 alias tagit='/usr/local/bin/ctags -R \
   --languages=-javascript \
   --langmap="ruby:+.rake.builder.rjs" \
