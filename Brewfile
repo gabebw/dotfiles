@@ -1,5 +1,8 @@
 # vim: syntax=ruby filetype=ruby
 
+# Lets us do `brew services restart postgres`, etc
+tap 'homebrew/services'
+
 brew 'postgresql', restart_service: :changed
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
@@ -43,9 +46,6 @@ brew 'hub'
 
 # Fuzzy finder
 brew 'fzf'
-
-# Lets us do `brew services restart postgres`, etc
-tap 'homebrew/services'
 
 # thoughtbot stuff like rcm
 tap 'thoughtbot/formulae'
