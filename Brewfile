@@ -9,6 +9,9 @@ brew 'jq'
 # recent version
 tap 'homebrew/versions'
 brew 'qt55'
+# --overwrite: overwrite any Qt4 files that might be there
+# --force: required because qt55 is keg-only
+`brew link --overwrite --force qt55`
 
 # grep for ps
 brew 'pgrep'

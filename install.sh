@@ -9,8 +9,6 @@ brew bundle
 for brewfile in */Brewfile; do
   brew bundle --file="$brewfile"
 done
-brew unlink qt 2>/dev/null || true
-brew link --force qt55
 
 echo "Linking dotfiles into ~..."
 # Before `rcup` runs, there is no ~/.rcrc, so we must tell `rcup` where to look.
