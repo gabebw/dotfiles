@@ -1,5 +1,7 @@
 # vim: syntax=ruby filetype=ruby
 
+brew 'postgresql', restart_service: :changed
+
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
