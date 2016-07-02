@@ -29,5 +29,5 @@ filename_on_server=${2:-"$1"}
 
 create_missing_directories_on_remote_host "$filename_on_server"
 
-rsync -e ssh -azh --ignore-existing "$local_filename" "i:~/images/$filename_on_server"
+rsync -e ssh -azh --ignore-existing "$local_filename" "i:/nginx-data/images/$filename_on_server"
 open "http://i.gabebw.com/$filename_on_server"
