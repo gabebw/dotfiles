@@ -1,16 +1,12 @@
 #!/bin/zsh
 
-# List all directories in $CDPATH that have been modified in the last N days
-# and contain git repositories.
+# List all directories in $CDPATH that contain git repositories.
 
 cdpath_directories() {
-  local days_since_modified=90
-
   echo "${CDPATH//:/\n}" | while read dir; do
     find -L "$dir" \
       -not -path '*/\.*' \
       -type d \
-      -mtime -$days_since_modified \
       -maxdepth 1
   done
 }
