@@ -17,10 +17,12 @@
 
 set -e
 
+IMAGES_DIR=/nginx-data/images
+
 create_missing_directories_on_remote_host() {
   filename=$1
   if [ "$filename" != "$(basename "$filename")" ]; then
-    ssh i "cd images && mkdir -p $(dirname "$filename")"
+    ssh i "cd '$IMAGES_DIR' && mkdir -p '$(dirname "$filename")'"
   fi
 }
 
@@ -29,5 +31,5 @@ filename_on_server=${2:-"$1"}
 
 create_missing_directories_on_remote_host "$filename_on_server"
 
-rsync -e ssh -azh --ignore-existing "$local_filename" "i:/nginx-data/images/$filename_on_server"
+rsync -e ssh -azh --ignore-existing "$local_filename" "i:$IMAGES_DIR/$filename_on_server"
 open "http://i.gabebw.com/$filename_on_server"
