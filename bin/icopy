@@ -6,7 +6,6 @@
 #
 #   -f local_path: Upload a local file FROM here (if not given, uses copied URL)
 #   -t remote_name: Upload the file TO here, with this name.
-#   -d directory: Upload the file into this directory
 #
 # USAGE:
 #
@@ -21,44 +20,32 @@
 # Upload the copied image URL and upload as flip.jpg:
 #
 #   icopy -t flip.jpg
-#
-# Upload the image whose URL I just copied into the `cool` directory:
-#
-#   icopy -d cool
 
 set -e
 
 usage() {
   cat <<USAGE
-Usage: icopy [-f local-name.gif] [-t remote-name.gif] [-d remote-directory]
+Usage: icopy [-f local-name.gif] [-t remote-name.gif]
 
 Options:
 
   -f local_path: Upload a local file FROM here (if not given, uses copied URL)
   -t remote_name: Upload the file TO here, with this name.
-  -d directory: Upload the file into this directory
 USAGE
 
   exit 64
 }
 
-# Defaults
-directory=""
-
-while getopts "t:d:f:h" opt; do
+while getopts "t:f:h" opt; do
   case $opt in
     h)
       usage
       ;;
     f)
-      local_file=true
       from="$OPTARG"
       ;;
     t)
       to="$OPTARG"
-      ;;
-    d)
-      directory="$OPTARG"
       ;;
     :)
       echo "Option -$OPTARG requires an argument." >&2
@@ -67,28 +54,17 @@ while getopts "t:d:f:h" opt; do
   esac
 done
 
-[ -z "$to" ] && to=$(basename "$from")
+if [ -n "$from" ]; then
+  [ -z "$to" ] && to=$(basename "$from")
 
-if [ $local_file ]; then
-  if [ -n "$directory" ]; then
-    full_to="${directory}/${to}"
-  else
-    full_to="$to"
-  fi
-
-  echo "$from -> $full_to" >&2
-  upload-image "$from" "$full_to"
+  echo "$from -> $to" >&2
+  upload-image "$from" "$to"
 else
   from="icopy_file-$$.image"
   url=$(pbpaste)
   to=${to:-"$(basename "$url")"}
-  if [ -n "$directory" ]; then
-    full_to="${directory}/${to}"
-  else
-    full_to="$to"
-  fi
-  echo "$url -> $full_to" >&2
+  echo "$url -> $to" >&2
   curl --silent --output "$from" "$url"
-  upload-image "$from" "$full_to"
+  upload-image "$from" "$to"
   rm "$from"
 fi
