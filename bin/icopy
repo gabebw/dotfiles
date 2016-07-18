@@ -32,8 +32,7 @@ Options:
   -f local_path: Upload a local file FROM here (if not given, uses copied URL)
   -t remote_name: Upload the file TO here, with this name.
 USAGE
-
-  exit 64
+  exit 0
 }
 
 while getopts "t:f:h" opt; do
