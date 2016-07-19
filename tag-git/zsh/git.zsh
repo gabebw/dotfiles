@@ -34,7 +34,7 @@ function gb(){
     git checkout -b "$branch"
   fi
 }
-function gbm(){ gb "$1" master }
+function gbm(){ gb "$1" origin/master }
 
 function gcl {
   local directory="$(superclone "$@")"
