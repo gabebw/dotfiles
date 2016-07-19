@@ -4,9 +4,6 @@
 
 RUBYOPT=rubygems
 
-# rbenv
-PATH=~/.rbenv/shims:$PATH
-
 # Bundler binstubs
 PATH="./bin/stubs:$PATH"
 
