@@ -5,7 +5,7 @@
 alias h=heroku
 
 # Rake
-alias migrate="be rake db:migrate && be rake db:rollback && be rake db:migrate db:test:prepare"
+alias migrate="be rake db:migrate db:rollback db:migrate db:test:prepare"
 alias rrg="be rake routes | grep"
 
 # Database
