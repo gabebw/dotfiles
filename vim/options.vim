@@ -11,6 +11,9 @@ set scrolloff=999 " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 set lazyredraw
 
+" Don't ask me if I want to load changed files. The answer is always 'Yes'
+set autoread
+
 " https://github.com/thoughtbot/dotfiles/pull/170
 " Automatically :write before commands such as :next or :!
 " Saves keystrokes by eliminating writes before running tests, etc
