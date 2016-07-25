@@ -4,4 +4,4 @@ function! Fixup()
   normal! `i
 endfunction
 
-nnoremap <silent> <leader>s :call Fixup()<CR>
+nnoremap <silent> <leader>f :call Fixup()<CR>
