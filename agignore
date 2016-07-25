@@ -1,12 +1,12 @@
-log/*.log
 # ctags file
 /tags
-log/
-tmp/
-doc/
-coverage/
-public/assets/
-bin/stubs
+/log/
+/tmp/
+/doc/
+/coverage/
+/public/assets/
+/bin/stubs
+
 # For Middleman
 /build/
 *.jpg
@@ -16,7 +16,7 @@ bin/stubs
 *.tiff
 *.bmp
 *.svg
-/bin/stubs
+
 # ag --hidden finds files with a leading dot, which includes
 # the .git directory for the current repo. So tell ag to ignore it.
 .git/
@@ -30,8 +30,8 @@ bin/stubs
 /vim/backups
 
 # Ignore local JS-related files
-node_modules/
-bower_components/
+/node_modules/
+/bower_components/
 
 # This file is huge and messes up the vim quickfix window
-vendor/assets/javascripts/highlight.all.js
+/vendor/assets/javascripts/highlight.all.js
