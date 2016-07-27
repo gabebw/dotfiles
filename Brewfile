@@ -69,5 +69,7 @@ cask 'dropbox'
 cask 'google-chrome'
 cask 'netnewswire'
 cask 'vlc'
+# HOMM3
+cask 'wineskin-winery'
 # Use Cask so we get Cargo, too
 cask 'rust'
