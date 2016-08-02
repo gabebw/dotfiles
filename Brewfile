@@ -20,7 +20,7 @@ brew 'qt55'
 brew 'pgrep'
 
 # The recommended way to use Heroku
-brew 'heroku-toolbelt'
+brew 'heroku'
 
 # colorful diffs (alias diff='colordiff -u')
 brew 'colordiff'
