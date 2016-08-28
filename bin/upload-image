@@ -28,6 +28,7 @@ create_missing_directories_on_remote_host() {
 
 local_filename=$1
 filename_on_server=${2:-"$1"}
+filename_on_server=${filename_on_server/~/$HOME}
 
 create_missing_directories_on_remote_host "$filename_on_server"
 
