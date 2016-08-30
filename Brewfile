@@ -3,6 +3,9 @@
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
+# Old versions of some packages
+tap 'homebrew/versions'
+
 brew 'postgresql', restart_service: :changed
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
@@ -54,6 +57,10 @@ brew 'rcm'
 # Install zsh 5.2+ (OS X ships with 5.0) to fix this issue:
 # https://github.com/robbyrussell/oh-my-zsh/issues/4932
 brew 'zsh'
+
+# The latest version of Docker is too new to work with Heroku's Docker registry.
+# Install Docker 1.11 instead, which is old enough to work with Heroku.
+brew 'homebrew/versions/111'
 
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
