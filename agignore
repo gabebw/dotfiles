@@ -13,6 +13,8 @@
 /.git/
 # Ignore vim backups in dotfiles
 /vim/backups/
+# Ignore vim undodir in dotfiles
+/vim/undodir
 # Ignore local JS-related files
 /node_modules/
 /bower_components/
