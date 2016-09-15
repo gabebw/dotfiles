@@ -9,6 +9,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
 
 " Language-specific plugins
+Plug 'sophacles/vim-processing'
 Plug 'keith/swift.vim'
 Plug 'fatih/vim-go'
 Plug 'wting/rust.vim'
