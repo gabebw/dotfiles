@@ -19,4 +19,4 @@ is_a_git_repo(){
   done
 }
 
-cdpath_directories | is_a_git_repo
+cdpath_directories | sort -u | is_a_git_repo
