@@ -11,7 +11,7 @@ alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 # Just print request/response headers
-alias curl-debug="command curl -vH Fastly-debug:1 -o /dev/null"
+alias curl-debug="command curl -vso /dev/null -H Fastly-debug:1"
 alias curl="curl --verbose"
 
 # Use modern regexps for grep, and do show color when `grep` is the final
