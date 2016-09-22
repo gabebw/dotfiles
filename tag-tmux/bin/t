@@ -4,7 +4,8 @@
 # Use `t blog` to connect to the `blog` session, or create a new session named
 # `blog`.
 #
-# With no arguments, fuzzy-finds a session in a directory in $CDPATH.
+# With no arguments, fuzzy-finds a session in a directory in
+# $PROJECT_DIRECTORIES using the `projects` script.
 
 _not_in_tmux(){
   [[ -z "$TMUX" ]]

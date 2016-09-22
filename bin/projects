@@ -1,9 +1,9 @@
 #!/bin/zsh
 
-# List all directories in $CDPATH that contain git repositories.
+# List all directories in $PROJECT_DIRECTORIES that contain git repositories.
 
 cdpath_directories() {
-  echo "${CDPATH//:/\n}" | while read dir; do
+  echo "${PROJECT_DIRECTORIES//:/\n}" | while read dir; do
     find -L "$dir" \
       -not -path '*/\.*' \
       -type d \
@@ -14,7 +14,7 @@ cdpath_directories() {
 is_a_git_repo(){
   while read dir; do
     if [[ -d "$dir/.git" ]]; then
-      basename "$dir"
+      echo "$dir"
     fi
   done
 }
