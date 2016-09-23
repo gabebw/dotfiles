@@ -28,7 +28,7 @@ _tmux_session_exists(){
 
 # tmux doesn't allow . in session names
 _tmux_normalize_session_name(){
-  echo "${1//./-}"
+  basename "${1//./-}"
 }
 
 # Create a new tmux session with the given name.
