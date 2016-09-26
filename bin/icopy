@@ -54,8 +54,13 @@ while getopts "t:f:h" opt; do
 done
 
 if [ -n "$from" ]; then
-  extension=${from##*.}
-  to=${to:-$(basename "$from").$extension}
+  # Only add an extension if it's from the web
+  if [[ "$from" = http* ]]; then
+    extension=${from##*.}
+    to=${to:-$(basename "$from").$extension}
+  else
+    to=${to:-$(basename "$from")}
+  fi
 
   echo "$from -> $to" >&2
   upload-image "$from" "$to"
