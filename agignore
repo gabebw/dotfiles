@@ -34,3 +34,4 @@
 .keep
 # This file is huge and messes up the vim quickfix window
 /vendor/assets/javascripts/highlight.all.js
+.git
