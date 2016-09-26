@@ -30,3 +30,6 @@ vim/undodir/*
 # Ignore the binary version because it will be automatically updated and
 # reloaded when words are added with `zg`
 vim/vim-spell-en.utf-8.add.spl
+
+# Ignore icopy'd files
+icopy-*.image
