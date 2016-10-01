@@ -42,7 +42,6 @@ How do I re-initialize my PATH, so that newly-installed programs show up for aut
     # as a function
     function reinitialize { export PATH=$PATH }
 
-
 You can also use an alias, though I'd recommend against it: `alias
 reinitialize="export PATH=$PATH"`. The alias will be expanded when you source
 the file with the alias, but in this case that doesn't matter since you want
@@ -51,6 +50,7 @@ path since that source time, then the alias will remove those modifications.
 Long story short: go with the function.
 
 ## Completion
+
 How do I make compinit (`autoload compinit && compinit`) find the directory where I store my completion scripts?
 compinit searches the $fpath array of directories. Simply add your directory via:
 
@@ -100,3 +100,9 @@ Try these articles:
 
 * http://zsh.sourceforge.net/Doc/Release/User-Contributions.html#Version-Control-Information
 * http://kriener.org/articles/2009/06/04/zsh-prompt-magic
+
+## To see where all env variables are getting set
+
+    zsh -xl
+
+This also starts a new session.
