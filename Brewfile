@@ -60,7 +60,7 @@ brew 'zsh'
 
 # The latest version of Docker is too new to work with Heroku's Docker registry.
 # Install Docker 1.11 instead, which is old enough to work with Heroku.
-brew 'homebrew/versions/111'
+brew 'homebrew/versions/docker111'
 
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
