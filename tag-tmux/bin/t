@@ -37,9 +37,6 @@ _new_tmux_session_named() {
 
   # Create three windows named vim/scratch/server and jump into the first one
   TMUX='' tmux new-session -d -As "$new_session_name" -n vim
-  tmux new-window -t "$new_session_name" -n scratch
-  tmux new-window -t "$new_session_name" -n server
-  tmux select-window -t "$new_session_name" -n
   _attach_to_tmux_session "$new_session_name"
 }
 
