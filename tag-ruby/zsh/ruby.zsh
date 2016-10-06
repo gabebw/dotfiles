@@ -13,7 +13,7 @@ RUBYOPT=rubygems
 #   zshenv, a lot of other things add $PATH entries before ~/.rbenv/shims. This
 #   is bad because it means that rbenv-installed programs don't have $PATH
 #   primacy anymore.
-PATH=./bin/stubs:~/.rbenv/shims:$PATH
+PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
 
 # Bundler
 alias be="bundle exec"
