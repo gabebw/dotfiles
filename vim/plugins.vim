@@ -17,6 +17,7 @@ Plug 'vim-scripts/applescript.vim'
 Plug 'vim-scripts/magic.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'cespare/vim-toml'
+Plug 'chase/vim-ansible-yaml'
 
 " Plumbing that makes everything nicer
 " :Ag is like :grep but with `ag`
