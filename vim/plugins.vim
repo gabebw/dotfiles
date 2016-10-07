@@ -8,7 +8,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
 
-" Language-specific plugins
+" Syntax-specific plugins
 Plug 'sophacles/vim-processing'
 Plug 'keith/swift.vim'
 Plug 'fatih/vim-go'
@@ -18,6 +18,7 @@ Plug 'vim-scripts/magic.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'cespare/vim-toml'
 Plug 'chase/vim-ansible-yaml'
+Plug 'evanmiller/nginx-vim-syntax'
 
 " Plumbing that makes everything nicer
 " :Ag is like :grep but with `ag`
