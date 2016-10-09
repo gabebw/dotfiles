@@ -4,7 +4,7 @@
 
 # Why set $VISUAL instead of $EDITOR?
 # http://robots.thoughtbot.com/visual-ize-the-future
-export VISUAL="vim -p"
+export VISUAL=vim
 alias vi="$VISUAL"
 alias v="$VISUAL"
 
