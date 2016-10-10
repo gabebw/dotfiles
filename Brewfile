@@ -69,8 +69,6 @@ if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
 end
 
 # Cask: install binaries
-tap 'caskroom/cask'
-brew 'brew-cask'
 cask 'alfred'
 cask 'dropbox'
 cask 'google-chrome'
