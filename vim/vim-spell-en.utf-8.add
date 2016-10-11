@@ -107,3 +107,6 @@ EOT
 FOUT
 params
 Ansible
+nginx
+sudo
+Ansible
