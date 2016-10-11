@@ -19,6 +19,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'cespare/vim-toml'
 Plug 'chase/vim-ansible-yaml'
 Plug 'evanmiller/nginx-vim-syntax'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Plumbing that makes everything nicer
 " :Ag is like :grep but with `ag`
