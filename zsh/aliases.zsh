@@ -14,7 +14,7 @@ alias sed="sed -E"
 alias curl-debug="command curl -vso /dev/null -H Fastly-debug:1"
 alias curl="curl --verbose"
 
-run-until-succeeds(){ until "$@"; do; done }
+run-until-succeeds(){ until "$@"; do; sleep 1; done }
 
 # Use modern regexps for grep, and do show color when `grep` is the final
 # command, but don't when piping to something else, because the added color
