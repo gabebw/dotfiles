@@ -24,7 +24,7 @@ echo "Linking dotfiles into ~..."
 # Before `rcup` runs, there is no ~/.rcrc, so we must tell `rcup` where to look.
 # We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
 # backup files that slow it down significantly.
-RCRC=rcrc rcup -v
+RCRC=rcrc rcup -v -d .
 
 echo "Installing zsh-syntax-highlighting..."
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-plugins/zsh-syntax-highlighting
