@@ -41,9 +41,6 @@ brew 'vim'
 # Used in Rails projects
 brew 'phantomjs'
 
-# Syntax highlighting...for ZSH!
-brew 'zsh-syntax-highlighting'
-
 # Fast GitHub client
 brew 'hub'
 

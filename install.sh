@@ -26,6 +26,9 @@ echo "Linking dotfiles into ~..."
 # backup files that slow it down significantly.
 RCRC=rcrc rcup -v
 
+echo "Installing zsh-syntax-highlighting..."
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-plugins/zsh-syntax-highlighting
+
 echo "Installing Vim packages..."
 vim +PlugInstall +qa
 

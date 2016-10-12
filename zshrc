@@ -12,5 +12,5 @@ load_all_files_in before
 load_all_files_in ""
 load_all_files_in after
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Houston, we have liftoff.
