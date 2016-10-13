@@ -26,3 +26,5 @@ fi
 
 echo "Installing latest Ruby (version $(latest_ruby_version))..."
 rbenv install --skip-existing "$(latest_ruby_version)"
+
+rbenv global "$(latest_ruby_version)"
