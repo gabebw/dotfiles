@@ -22,6 +22,7 @@ function db-restore() {
         --clean \
         --no-acl \
         --no-owner \
+        --jobs `getconf _NPROCESSORS_ONLN` \
         --dbname "$1" \
         "$2"
   else
