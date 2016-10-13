@@ -27,7 +27,9 @@ echo "Linking dotfiles into ~..."
 RCRC=rcrc rcup -v -d .
 
 echo "Installing zsh-syntax-highlighting..."
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-plugins/zsh-syntax-highlighting
+if [ ! -d ~/.zsh-plugins/zsh-syntax-highlighting ]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-plugins/zsh-syntax-highlighting
+fi
 
 echo "Installing Vim packages..."
 vim +PlugInstall +qa

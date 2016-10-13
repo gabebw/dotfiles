@@ -2,11 +2,27 @@
 
 set -e
 
+PATH=~/.rbenv/bin:$PATH
+
 latest_ruby_version(){
   rbenv install --list | \
     awk '!/dev|preview|-rc/ && /^  [0-9]/ { print $1 }' | \
     tail -1
 }
+
+echo "Installing rbenv and plugins..."
+if [ ! -d ~/.rbenv ]; then
+  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+fi
+
+if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
+  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+fi
+
+if [ ! -d ~/.rbenv/plugins/rbenv-default-gems ]; then
+  git clone https://github.com/rbenv/rbenv-default-gems.git \
+    ~/.rbenv/plugins/rbenv-default-gems
+fi
 
 echo "Installing latest Ruby (version $(latest_ruby_version))..."
 rbenv install --skip-existing "$(latest_ruby_version)"
