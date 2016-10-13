@@ -1,9 +1,26 @@
-# Use lowercase `cdpath` because uppercase `CDPATH` can't be set to an array
-for dir in $HOME/code $HOME/code/* $HOME/code/thoughtbot/*; do
-  if [ -d "$dir" ]; then
-    cdpath+=("$d")
+has_subdirs(){
+  if [[ -d "$1" ]]; then
+    [[ "$(find "$1" -type d -maxdepth 0 -empty -exec echo -n empty \;)" != "empty" ]]
+  else
+    return 1
   fi
-done
+}
+
+add_subdirs_to_cdpath(){
+  if has_subdirs "$1"; then
+    for subdir in "$1"/*; do
+      cdpath+=("$subdir")
+    done
+  fi
+}
+
+# Use lowercase `cdpath` because uppercase `CDPATH` can't be set to an array
+if [ -d "$HOME/code" ]; then
+  cdpath+=("$HOME/code")
+  add_subdirs_to_cdpath "$HOME/code"
+fi
+
+add_subdirs_to_cdpath "$HOME/code/thoughtbot"
 
 # Exporting $CDPATH is bad:
 # https://bosker.wordpress.com/2012/02/12/bash-scripters-beware-of-the-cdpath/
