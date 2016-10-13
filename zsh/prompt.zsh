@@ -103,22 +103,22 @@ prompt_git_relative_branch_status_symbol(){
 
 prompt_git_status() {
   local git_status="$(cat "/tmp/git-status-$$")"
-  if print "$git_status" | grep -qF "Changes not staged" ; then
+  if print "$git_status" | command grep -qF "Changes not staged" ; then
     print "changed"
-  elif print "$git_status" | grep -qF "Changes to be committed"; then
+  elif print "$git_status" | command grep -qF "Changes to be committed"; then
     print "staged"
-  elif print "$git_status" | grep -qF "Untracked files"; then
+  elif print "$git_status" | command grep -qF "Untracked files"; then
     print "untracked"
-  elif print "$git_status" | grep -qF "working directory clean"; then
+  elif print "$git_status" | command grep -qF "working directory clean"; then
     print "unchanged"
   fi
 }
 
 prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
-  if print "$git_status" | grep -qF "Your branch is behind"; then
+  if print "$git_status" | command grep -qF "Your branch is behind"; then
     print "behind"
-  elif print "$git_status" | grep -qF "Your branch is ahead"; then
+  elif print "$git_status" | command grep -qF "Your branch is ahead"; then
     print "ahead"
   fi
 }
