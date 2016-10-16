@@ -6,6 +6,13 @@ has_subdirs(){
   fi
 }
 
+add_dir_to_cdpath(){
+  if [ -d "$1" ]; then
+    # Use lowercase `cdpath` because uppercase `CDPATH` can't be set to an array
+    cdpath+=("$1")
+  fi
+}
+
 add_subdirs_to_cdpath(){
   if has_subdirs "$1"; then
     for subdir in "$1"/*; do
@@ -14,12 +21,8 @@ add_subdirs_to_cdpath(){
   fi
 }
 
-# Use lowercase `cdpath` because uppercase `CDPATH` can't be set to an array
-if [ -d "$HOME/code" ]; then
-  cdpath+=("$HOME/code")
-  add_subdirs_to_cdpath "$HOME/code"
-fi
-
+add_dir_to_cdpath "$HOME/code"
+add_subdirs_to_cdpath "$HOME/code"
 add_subdirs_to_cdpath "$HOME/code/thoughtbot"
 
 # Exporting $CDPATH is bad:
