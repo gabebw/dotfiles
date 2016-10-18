@@ -32,6 +32,9 @@ alias mkdir="\mkdir -p"
 alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 
+# Make images smaller
+alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
+
 # Needs to be a function because `alias -` breaks
 function -() { cd - }
 
@@ -50,6 +53,3 @@ function al { ls -t | head -n ${1:-10}; }
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
 function clip { [ -t 0 ] && pbpaste || pbcopy;}
-
-# Make images smaller
-crush() {  /Applications/ImageOptim.app/Contents/MacOS/ImageOptim "$@" }
