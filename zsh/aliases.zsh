@@ -27,6 +27,7 @@ alias prettyjson="python -m json.tool"
 alias prettyxml="xmllint --format -"
 # Make images smaller
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
+alias o=open
 # The `-g` flag means "global", and means that it can go anywhere in a command
 # line and it will be preprocessed in, unlike "regular" aliases.
 alias -g G="| grep "
