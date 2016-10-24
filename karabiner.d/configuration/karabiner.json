@@ -1,27 +1,11 @@
 {
-  "profiles" : [
-    {
-      "name" : "Default profile",
-      "selected" : true,
-      "fn_function_keys" : {
-        "f12" : "volume_up",
-        "f9" : "vk_consumer_next",
-        "f5" : "vk_consumer_play",
-        "f10" : "mute",
-        "f1" : "mute",
-        "f6" : "vk_consumer_illumination_up",
-        "f2" : "volume_down",
-        "f7" : "vk_consumer_previous",
-        "f11" : "volume_down",
-        "f3" : "volume_up",
-        "f8" : "vk_consumer_next",
-        "f4" : "vk_launchpad"
-      },
-      "simple_modifications" : {
-        "left_command" : "left_option",
-        "caps_lock" : "escape",
-        "left_option" : "left_command"
-      }
-    }
-  ]
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": {
+                "caps_lock": "escape"
+            }
+        }
+    ]
 }
