@@ -1,0 +1,18 @@
+#!/bin/sh
+# vim: tw=0
+
+# Xcode 8 breaks Qt: http://stackoverflow.com/questions/33728905/
+xcode_8_or_higher(){
+  xcodebuild -version | head -1 | egrep -q 'Xcode [891]'
+}
+
+if xcode_8_or_higher; then
+  qt_home=$(greadlink -f "$(which qmake)" | sed 's|/bin/qmake||')
+  file="${qt_home}/mkspecs/features/mac/default_pre.prf"
+
+  sed -i "" 's@isEmpty($$list($$system("/usr/bin/xcrun -find xcrun 2>/dev/null")))@isEmpty($$list($$system("/usr/bin/xcrun -find xcodebuild 2>/dev/null")))@' "$file"
+else
+  echo "You are using a version of Xcode lower than 8. Here's what I know:"
+  xcodebuild -version
+  exit 1
+fi
