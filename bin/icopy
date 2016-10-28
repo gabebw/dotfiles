@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
 # Upload the currently-copied image URL to i.gabebw.com
 #
@@ -21,10 +21,13 @@
 #
 #   icopy -t flip
 
-set -e
+require "optparse"
 
-usage() {
-  cat <<USAGE
+from = nil
+to = nil
+
+OptionParser.new do |opts|
+  opts.banner = <<USAGE
 Usage: icopy [-f local-name.gif] [-t remote-name.gif]
 
 Options:
@@ -32,49 +35,48 @@ Options:
   -f local_path: Upload a local file FROM here (if not given, uses copied URL)
   -t remote_name: Upload the file TO here, with this name.
 USAGE
-  exit 0
-}
 
-while getopts "t:f:h" opt; do
-  case $opt in
-    h)
-      usage
-      ;;
-    f)
-      from="$OPTARG"
-      ;;
-    t)
-      to="$OPTARG"
-      ;;
-    :)
-      echo "Option -$OPTARG requires an argument." >&2
-      exit 1
-      ;;
-  esac
-done
+  opts.on("-fFROM", "what to copy from") do |from_value|
+    from = from_value
+  end
 
-if [ -n "$from" ]; then
-  # Only add an extension if it's from the web
-  if [[ "$from" = http* ]]; then
-    extension=${from##*.}
-    to=${to:-$(basename "$from").$extension}
-  else
-    to=${to:-$(basename "$from")}
-  fi
+  opts.on("-tTO", "what to copy to") do |to_value|
+    to = to_value
+  end
 
-  echo "$from -> $to" >&2
-  upload-image "$from" "$to"
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit 0
+  end
+end.parse!
+
+if from
+  to ||= File.basename(from)
+  STDERR.puts "#{from} -> #{to}"
+  `upload-image "#{from}" "#{to}"`
 else
-  from="icopy_file-$$.image"
-  url=$(pbpaste)
-  extension=${url##*.}
-  if [ -n "$to" ]; then
-    to="${to}.${extension}"
-  else
-    to=$(basename "$url")
-  fi
-  echo "$url -> $to" >&2
-  curl --silent --output "$from" "$url"
-  upload-image "$from" "$to"
-  rm "$from"
-fi
+  # Try getting a URL from the clipboard
+  from = `pbpaste`
+  unless from.start_with?("http")
+    STDERR.puts "Error: Looks like you didn't copy a URL"
+    STDERR.puts "Found: #{from}"
+    exit 1
+  end
+
+  if from.nil? || from.strip == ""
+    STDERR.puts "Error: -f parameter is required, or copy a URL"
+    exit 1
+  end
+
+  if !to
+    # Only guess the extension if it's from the web and I didn't specify a
+    # destination
+    extension = File.extname(from)
+    to = File.basename(from)
+  end
+
+  STDERR.puts "#{from} -> #{to}"
+  `curl -so image "#{from}"`
+  `upload-image "image" "#{to}"`
+  `rm image`
+end
