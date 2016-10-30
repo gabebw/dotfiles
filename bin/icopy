@@ -68,11 +68,16 @@ else
     exit 1
   end
 
-  if !to
-    # Only guess the extension if it's from the web and I didn't specify a
-    # destination
+  to ||= File.basename(from)
+
+  unless to.include?(".")
+    # Guess the extension
     extension = File.extname(from)
-    to = File.basename(from)
+    if extension == ""
+      puts "Couldn't guess extension, and none provided"
+      exit 1
+    end
+    to += extension
   end
 
   STDERR.puts "#{from} -> #{to}"
