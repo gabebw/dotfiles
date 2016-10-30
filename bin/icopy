@@ -81,7 +81,7 @@ else
   end
 
   STDERR.puts "#{from} -> #{to}"
-  `curl -so image "#{from}"`
+  `curl -Lso image "#{from}"`
   `upload-image "image" "#{to}"`
   `rm image`
 end
