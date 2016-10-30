@@ -56,14 +56,14 @@ if from
   `upload-image "#{from}" "#{to}"`
 else
   # Try getting a URL from the clipboard
-  from = `pbpaste`
+  from = `pbpaste`.strip
   unless from.start_with?("http")
     STDERR.puts "Error: Looks like you didn't copy a URL"
     STDERR.puts "Found: #{from}"
     exit 1
   end
 
-  if from.nil? || from.strip == ""
+  if from.nil? || from == ""
     STDERR.puts "Error: -f parameter is required, or copy a URL"
     exit 1
   end
