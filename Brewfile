@@ -76,3 +76,5 @@ cask 'vlc'
 cask 'wineskin-winery'
 # Use Cask so we get Cargo, too
 cask 'rust'
+# Keyboard remapping on macOS
+cask 'karabiner-elements'
