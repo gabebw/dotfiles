@@ -126,3 +126,5 @@
   show = diff-highlight | less
 [interactive]
   diffFilter = diff-highlight
+[rebase]
+  autosquash = true
