@@ -6,7 +6,7 @@
 # On success, echoes the port number and exits 0.
 # On failure, prints nothing and exits 1.
 
-for port in 4000 5000 6000 7000 8000 9000; do
+for port in 4000 5000 7000 8000 9000; do
   if is_port_unused "$port"; then
     echo "$port"
     exit 0
