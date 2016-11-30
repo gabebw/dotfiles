@@ -15,3 +15,13 @@ augroup myfiletypes
   au BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
 augroup END
+
+" Open `README.txt:20` on the 20th line
+function! OpenToLineNumber()
+  let filename=expand("%")
+  let parts=split(filename, ":")
+  exec ":e " . parts[0]
+  exec ":" . parts[1]
+  redraw!
+endfunction
+autocmd BufNewFile,BufEnter,BufRead *:* nested call OpenToLineNumber()
