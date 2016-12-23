@@ -14,6 +14,8 @@ setopt autocd
 setopt autopushd
 # Timestamp history entries
 setopt extended_history
+# show a message with the exit code when a command returns with a non-zero exit code
+setopt print_exit_value
 
 unsetopt correctall
 # Allow [ or ] wherever you want
