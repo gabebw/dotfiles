@@ -23,14 +23,6 @@ end
 
 require_rb_files_from(File.join(ENV["HOME"], ".irbrc.d"))
 
-def efind(email)
-  User.find_by(email: email)
-end
-
-def u
-  User.first
-end
-
 class Object
   def interesting_methods
     (methods - Object.new.methods).sort

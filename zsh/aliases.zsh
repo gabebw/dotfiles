@@ -23,7 +23,7 @@ alias dup="pushd dotfiles && git checkout master && git pull && git checkout - &
 alias \$=''
 alias diff="colordiff -u"
 alias mkdir="\mkdir -p"
-alias prettyjson="python -m json.tool"
+alias prettyjson="jq ."
 alias prettyxml="xmllint --format -"
 # Make images smaller
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim

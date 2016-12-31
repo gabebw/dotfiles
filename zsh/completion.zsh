@@ -25,3 +25,8 @@ zstyle ':completion:*:kill:*'   force-list always
 # For example, if you're in foo, then `cd ../f` won't show `cd ../foo` as an
 # option.
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
+
+# Colorful lists of possible autocompletions for `ls`
+# zstyle doesn't understand the BSD-style $LSCOLORS at all, so use Linux-style
+# $LS_COLORS
+zstyle ':completion:*:ls:*:*' list-colors "$LS_COLORS"

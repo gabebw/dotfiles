@@ -17,16 +17,6 @@ PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
 
 # Bundler
 alias be="bundle exec"
-alias binstubs="bundle --binstubs=./bin/stubs"
-
-serveit(){
-  if [[ $# != 1 ]]; then
-    echo "Usage: 'serveit public' to serve the public directory"
-  else
-    echo "\n\n>>> http://localhost:9090\n\n"
-    ruby -run -e httpd "$1" -p 9090
-  fi
-}
 
 alias tagit='/usr/local/bin/ctags -R \
   --languages=-javascript \
@@ -40,9 +30,9 @@ alias tagit='/usr/local/bin/ctags -R \
   -f ./tags *'
 
 function b {
-  if [[ $# == 0 ]]
-  then
-    (bundle check > /dev/null || bundle install) && binstubs
+  if [[ $# == 0 ]]; then
+    (bundle check > /dev/null || bundle install) && \
+      bundle --binstubs=./bin/stubs
   else
     bundle "$@"
   fi
