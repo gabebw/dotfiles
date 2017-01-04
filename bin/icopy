@@ -22,6 +22,7 @@
 #   icopy -t flip
 
 require "optparse"
+require "uri"
 
 from = nil
 to = nil
@@ -72,7 +73,7 @@ else
 
   unless to.include?(".")
     # Guess the extension
-    extension = File.extname(from)
+    extension = File.extname(URI.parse(from).path)
     if extension == ""
       puts "Couldn't guess extension, and none provided"
       exit 1
