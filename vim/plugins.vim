@@ -40,7 +40,6 @@ Plug 'derekprior/vim-trimmer'
 Plug 'duggiefresh/vim-easydir'
 " Cool statusbar
 Plug 'itchyny/lightline.vim'
-Plug 'sonjapeterson/1989.vim'
 " Easily navigate directories
 Plug 'tpope/vim-vinegar'
 " Make working with shell scripts nicer ("vim-unix")

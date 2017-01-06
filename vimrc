@@ -33,4 +33,4 @@ call s:SourceConfigFilesIn('rcplugins')
 " _after_ loading plugins.
 filetype plugin indent on
 syntax enable
-silent! colorscheme 1989
+silent! colorscheme tomorrow-night-80s
