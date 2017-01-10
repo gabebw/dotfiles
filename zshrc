@@ -10,7 +10,6 @@ load_all_files_in() {
 
 load_all_files_in before
 load_all_files_in ""
-load_all_files_in after
 
 source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
