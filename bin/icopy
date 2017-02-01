@@ -27,6 +27,25 @@ require "uri"
 from = nil
 to = nil
 
+def url_from_clipboard
+  url = `pbpaste`.strip
+  unless url.start_with?("http")
+    STDERR.puts "Error: Looks like you didn't copy a URL"
+    STDERR.puts "Found: #{url}"
+    exit 1
+  end
+  url
+end
+
+def guess_extension(from)
+  extension = File.extname(URI.parse(from).path)
+  if extension == ""
+    STDERR.puts "Couldn't guess extension, and none provided"
+    exit 1
+  end
+  extension
+end
+
 OptionParser.new do |opts|
   opts.banner = <<USAGE
 Usage: icopy [-f local-name.gif] [-t remote-name.gif]
@@ -56,14 +75,7 @@ if from
   STDERR.puts "#{from} -> #{to}"
   `upload-image "#{from}" "#{to}"`
 else
-  # Try getting a URL from the clipboard
-  from = `pbpaste`.strip
-  unless from.start_with?("http")
-    STDERR.puts "Error: Looks like you didn't copy a URL"
-    STDERR.puts "Found: #{from}"
-    exit 1
-  end
-
+  from = url_from_clipboard
   if from.nil? || from == ""
     STDERR.puts "Error: -f parameter is required, or copy a URL"
     exit 1
@@ -72,13 +84,7 @@ else
   to ||= File.basename(from)
 
   unless to.include?(".")
-    # Guess the extension
-    extension = File.extname(URI.parse(from).path)
-    if extension == ""
-      puts "Couldn't guess extension, and none provided"
-      exit 1
-    end
-    to += extension
+    to += guess_extension(from)
   end
 
   STDERR.puts "#{from} -> #{to}"
