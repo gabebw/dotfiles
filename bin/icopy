@@ -46,29 +46,33 @@ def guess_extension(from)
   extension
 end
 
-OptionParser.new do |opts|
-  opts.banner = <<USAGE
-Usage: icopy [-f local-name.gif] [-t remote-name.gif]
+if ARGV.size == 1
+  to = ARGV[1]
+else
+  OptionParser.new do |opts|
+    opts.banner = <<USAGE
+  Usage: icopy [-f local-name.gif] [-t remote-name.gif]
 
-Options:
+  Options:
 
-  -f local_path: Upload a local file FROM here (if not given, uses copied URL)
-  -t remote_name: Upload the file TO here, with this name.
+    -f local_path: Upload a local file FROM here (if not given, uses copied URL)
+    -t remote_name: Upload the file TO here, with this name.
 USAGE
 
-  opts.on("-fFROM", "what to copy from") do |from_value|
-    from = from_value
-  end
+    opts.on("-fFROM", "what to copy from") do |from_value|
+      from = from_value
+    end
 
-  opts.on("-tTO", "what to copy to") do |to_value|
-    to = to_value
-  end
+    opts.on("-tTO", "what to copy to") do |to_value|
+      to = to_value
+    end
 
-  opts.on("-h", "--help", "Prints this help") do
-    puts opts
-    exit 0
-  end
-end.parse!
+    opts.on("-h", "--help", "Prints this help") do
+      puts opts
+      exit 0
+    end
+  end.parse!
+end
 
 if from
   to ||= File.basename(from)
