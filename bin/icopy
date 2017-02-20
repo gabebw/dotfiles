@@ -47,7 +47,7 @@ def guess_extension(from)
 end
 
 if ARGV.size == 1
-  to = ARGV[1]
+  to = ARGV[0]
 else
   OptionParser.new do |opts|
     opts.banner = <<USAGE
