@@ -53,3 +53,6 @@ Session.vim
 9
 ]
 [
+
+# Created by squirrel.vim's :Squirrel command
+.squirrel
