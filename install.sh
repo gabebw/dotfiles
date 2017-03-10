@@ -11,6 +11,13 @@ is_linux(){
 }
 
 if is_osx; then
+  echo "Checking for Homebrew..."
+  if ! command -v brew > /dev/null; then
+    echo "Please install Homebrew. Instructions are at https://brew.sh/"
+    echo "After you're done, rerun this script."
+    exit 1
+  fi
+
   echo "Installing Homebrew packages..."
   brew update
   brew tap homebrew/bundle
@@ -18,6 +25,11 @@ if is_osx; then
   for brewfile in */Brewfile; do
     brew bundle --file="$brewfile"
   done
+fi
+
+if ! echo $SHELL | grep -Fq zsh; then
+  echo "Your shell is not Zsh. Changing it to Zsh..."
+  chsh -s $(which zsh) $USER
 fi
 
 echo "Linking dotfiles into ~..."

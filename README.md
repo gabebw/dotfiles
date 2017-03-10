@@ -2,13 +2,9 @@
 
 Gabriel Berke-Williams' dotfiles for Zsh, ruby, git, and more.
 
+They assume you're using OSX.
+
 Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw).
-
-## Prerequisites
-
-* OS X
-* Zsh (to change your default shell to Zsh: `chsh -s $(which zsh) $USER`)
-* [Homebrew](http://brew.sh/)
 
 ## Installation
 
