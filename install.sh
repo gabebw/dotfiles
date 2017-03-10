@@ -29,7 +29,7 @@ fi
 
 if ! echo $SHELL | grep -Fq zsh; then
   echo "Your shell is not Zsh. Changing it to Zsh..."
-  chsh -s $(which zsh) $USER
+  chsh -s $(which zsh)
 fi
 
 echo "Linking dotfiles into ~..."
