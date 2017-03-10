@@ -9,10 +9,13 @@
 # It uses the `is_port_unused` and `find_unused_port` scripts, which are both in
 # this directory.
 
+port_from_foreman(){
+  grep port: .foreman | sed 's/port: //'
+}
+
 find_port() {
-  port_from_foreman="$(grep port: .foreman 2>/dev/null| sed 's/port: //')"
-  if is_port_unused "$port_from_foreman"; then
-    echo "$port_from_foreman"
+  if [ -f .foreman ] && is_port_unused $(port_from_foreman); then
+    port_from_foreman
   else
     unused_port=$(find_unused_port)
     if [ -n "$unused_port" ]; then
