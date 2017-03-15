@@ -109,7 +109,7 @@ prompt_git_status() {
     print "staged"
   elif print "$git_status" | command grep -qF "Untracked files"; then
     print "untracked"
-  elif print "$git_status" | command grep -qF "working directory clean"; then
+  elif print "$git_status" | command grep -qF "working tree clean"; then
     print "unchanged"
   fi
 }
