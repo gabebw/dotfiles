@@ -82,7 +82,7 @@ prompt_git_status_symbol(){
     unchanged) letter=$(prompt_green $checkmark);;
   esac
 
-  prompt_spaced "$letter"
+  print "$letter"
 }
 
 # Is this branch ahead/behind its remote tracking branch?
@@ -125,8 +125,8 @@ prompt_git_relative_branch_status(){
 
 prompt_git_branch() {
   # vcs_info_msg_0_ is set by the `zstyle vcs_info` directives
-  local colored_branch_name="$vcs_info_msg_0_"
-  prompt_spaced "$colored_branch_name"
+  # It is the colored branch name.
+  print "$vcs_info_msg_0_"
 }
 
 # This shows everything about the current git branch:
@@ -137,7 +137,7 @@ prompt_git_branch() {
 #   branch is behind remote branch
 prompt_full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    prompt_spaced $(prompt_git_branch) $(prompt_git_status_symbol) $(prompt_git_relative_branch_status_symbol)
+    prompt_spaced "$(prompt_git_branch) $(prompt_git_status_symbol) $(prompt_git_relative_branch_status_symbol)"
   fi
 }
 
