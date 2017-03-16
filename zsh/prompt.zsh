@@ -70,16 +70,14 @@ zstyle ':vcs_info:git*' actionformats $(prompt_red "%b|%a")
 
 prompt_git_status_symbol(){
   local letter
-  # http://www.fileformat.info/info/unicode/char/2714/index.htm
-  local checkmark="\u2714"
-  # http://www.fileformat.info/info/unicode/char/2718/index.htm
-  local x_mark="\u2718"
+  local clean="👍"
+  local dirty="🙅"
 
   case $(prompt_git_status) in
-    changed) letter=$(prompt_red $x_mark);;
+    changed) letter=$dirty;;
     staged) letter=$(prompt_yellow "S");;
     untracked) letter=$(prompt_red "?");;
-    unchanged) letter=$(prompt_green $checkmark);;
+    unchanged) letter=$clean;;
   esac
 
   print "$letter"
