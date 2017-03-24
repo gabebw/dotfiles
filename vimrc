@@ -96,6 +96,8 @@ Plug 'christoomey/vim-system-copy'
 " such file: README.md:10"
 Plug 'bogado/file-line'
 
+Plug 'flazz/vim-colorschemes'
+
 " Text objects
 " required for all the vim-textobj-* plugins
 Plug 'kana/vim-textobj-user'
@@ -458,4 +460,4 @@ runtime macros/matchit.vim
 " _after_ loading plugins.
 filetype plugin indent on
 syntax enable
-silent! colorscheme tomorrow-night-80s
+silent! colorscheme l80snight
