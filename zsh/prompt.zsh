@@ -72,11 +72,13 @@ prompt_git_status_symbol(){
   local letter
   local clean="👍"
   local dirty="🙅"
+  local untracked="❓"
+  local staged="⚡️"
 
   case $(prompt_git_status) in
     changed) letter=$dirty;;
-    staged) letter=$(prompt_yellow "S");;
-    untracked) letter=$(prompt_red "?");;
+    staged) letter=$staged;;
+    untracked) letter=$untracked;;
     unchanged) letter=$clean;;
   esac
 
@@ -86,17 +88,15 @@ prompt_git_status_symbol(){
 # Is this branch ahead/behind its remote tracking branch?
 prompt_git_relative_branch_status_symbol(){
   local arrow;
+  local downwards_arrow="⬇️"
+  local upwards_arrow="⬆️"
 
-  # http://www.fileformat.info/info/unicode/char/21e3/index.htm
-  local downwards_arrow="\u21e3"
-  # http://www.fileformat.info/info/unicode/char/21e1/index.htm
-  local upwards_arrow="\u21e1"
   case $(prompt_git_relative_branch_status) in
     behind) arrow=$(prompt_cyan $downwards_arrow);;
     ahead) arrow=$(prompt_cyan $upwards_arrow);;
   esac
 
-  print -n "$arrow"
+  [[ -n "$arrow" ]] && print -n "  $arrow"
 }
 
 prompt_git_status() {
@@ -135,7 +135,7 @@ prompt_git_branch() {
 #   branch is behind remote branch
 prompt_full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    prompt_spaced "$(prompt_git_branch) $(prompt_git_status_symbol) $(prompt_git_relative_branch_status_symbol)"
+    prompt_spaced "$(prompt_git_branch) $(prompt_git_status_symbol)$(prompt_git_relative_branch_status_symbol) "
   fi
 }
 
