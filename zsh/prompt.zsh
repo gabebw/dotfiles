@@ -70,7 +70,7 @@ zstyle ':vcs_info:git*' actionformats $(prompt_red "%b|%a")
 
 prompt_git_status_symbol(){
   local letter
-  local clean="👍"
+  local clean="✅"
   local dirty="🙅"
   local untracked="❓"
   local staged="⚡️"
