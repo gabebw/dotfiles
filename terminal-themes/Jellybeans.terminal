@@ -154,6 +154,8 @@
 	Y2hpdmVy0RcYVHJvb3SAAQgRGiMtMjc7QUhOW2KPkZOYo6y0t8DS1doAAAAAAAABAQAA
 	AAAAAAAZAAAAAAAAAAAAAAAAAAAA3A==
 	</data>
+	<key>Bell</key>
+	<false/>
 	<key>CursorColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -199,10 +201,27 @@
 	dmVy0RcYVHJvb3SAAQgRGiMtMjc7QUhOW2KMjpCVoKmxtL3P0tcAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>VisualBell</key>
+	<false/>
 	<key>columnCount</key>
 	<integer>90</integer>
 	<key>name</key>
 	<string>Jellybeans</string>
+	<key>noWarnProcesses</key>
+	<array>
+		<dict>
+			<key>ProcessName</key>
+			<string>screen</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>tmux</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>zsh</string>
+		</dict>
+	</array>
 	<key>rowCount</key>
 	<integer>50</integer>
 	<key>type</key>
