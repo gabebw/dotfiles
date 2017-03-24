@@ -16,7 +16,7 @@ let s:window = "4d5057"
 hi clear
 syntax reset
 
-let g:colors_name = "ladiesnight"
+let g:colors_name = "l80snight"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
   " Returns an approximate grey index for the given grey level
