@@ -1,6 +1,4 @@
-################
-#  COMPLETION  #
-################
+# Completion {{{
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit
@@ -26,3 +24,4 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 # zstyle doesn't understand the BSD-style $LSCOLORS at all, so use Linux-style
 # $LS_COLORS
 zstyle ':completion:*:ls:*:*' list-colors "$LS_COLORS"
+# }}}

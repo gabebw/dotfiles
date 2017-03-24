@@ -1,6 +1,6 @@
-###########
-# ALIASES #
-###########
+################
+# ALIASES {{{  #
+################
 alias qq="cd . && source ~/.zshrc"
 alias cp="cp -iv"
 alias rm="rm -iv"
@@ -50,3 +50,4 @@ al() { ls -t | head -n ${1:-10}; }
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
+# }}}

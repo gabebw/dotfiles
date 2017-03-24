@@ -1,1 +1,0 @@
-export PYTHONSTARTUP=~/.pythonstartup
