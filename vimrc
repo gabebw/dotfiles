@@ -202,9 +202,7 @@ set completeopt=menu,menuone,longest,preview
 nnoremap <Leader>cd :cd %:p:h <CR>
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
-nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
-nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
-nnoremap <Leader>v :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
+nnoremap <Leader>e :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
@@ -218,11 +216,20 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 nnoremap <C-h> <C-W>h
 
+" Movement
+" move vertically by _visual_ line
+nnoremap j gj
+nnoremap k gk
+
 " no ex mode
 map Q <Nop>
 
 " re-select the last pasted text
 nnoremap gV V`]
+
+" edit vimrc/zshrc and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Typo
 nnoremap :Nohl :nohlsearch
