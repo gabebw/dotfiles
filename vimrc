@@ -52,6 +52,7 @@ Plug 'evanmiller/nginx-vim-syntax'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'slim-template/vim-slim'
 
+" Arduino
 Plug 'stevearc/vim-arduino'
 
 " Clojure
@@ -86,8 +87,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 " Make `.` work to repeat plugin actions too
 Plug 'tpope/vim-repeat'
-" Access to Vim's powerful undo-tree with :GundoShow
-Plug 'vim-scripts/Gundo'
 " Intelligently reopen files where you left off
 Plug 'dietsche/vim-lastplace'
 " Instead of always copying to the system clipboard, use `cp` (plus motions) to
