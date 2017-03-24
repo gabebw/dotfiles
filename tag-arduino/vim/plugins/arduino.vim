@@ -1,1 +1,0 @@
-Plug 'stevearc/vim-arduino'
