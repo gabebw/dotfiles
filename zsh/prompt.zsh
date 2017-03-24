@@ -96,6 +96,8 @@ prompt_git_relative_branch_status_symbol(){
     ahead) arrow=$(prompt_cyan $upwards_arrow);;
   esac
 
+  # Yeah, there's an extra space in here. Without it, the emoji in
+  # `prompt_git_status_symbol` overlap with the emoji from this method.
   [[ -n "$arrow" ]] && print -n "  $arrow"
 }
 
