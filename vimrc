@@ -72,8 +72,6 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
-" Fuzzy-finder
-Plug 'ctrlpvim/ctrlp.vim'
 " Trim trailing whitespace on write
 Plug 'derekprior/vim-trimmer'
 " When editing deeply/nested/file, auto-create deeply/nested/ dirs
@@ -345,15 +343,9 @@ nnoremap <Leader>g :Ag!<Space>
 " K searches for word under cursor
 nnoremap K :Ag! "\b<C-R>=expand("<cword>")<CR>\b"<CR>
 
-" ctrlp.vim
+" FZF
 " -----------------
-" Change ctrl-p.vim binding
-let g:ctrlp_map = '<Leader>t'
-" Make CtrlP use ag for listing the files. Way faster and no useless files.
-" Without --hidden, it never finds .travis.yml since it starts with a dot.
-let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
-" Disable caching, ag is fast enough
-let g:ctrlp_use_caching = 0
+nnoremap <Leader>t :FZF<CR>
 
 " gist.vim
 " -----------------
