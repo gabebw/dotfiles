@@ -37,5 +37,5 @@ export LESS="ij.5FKMRX"
 # Show grep results in white text on a red background
 export GREP_COLOR='1;37;41'
 
-" Use ag so that FZF ignores gitignored files
+# Use ag so that FZF ignores gitignored files
 export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
