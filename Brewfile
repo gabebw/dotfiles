@@ -6,7 +6,6 @@ tap 'homebrew/services'
 # Old versions of some packages
 tap 'homebrew/versions'
 
-brew 'postgresql', restart_service: :changed
 brew 'coreutils'
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
