@@ -10,7 +10,6 @@ let mapleader=" "
 " PLUGINS {{{
 " ===========================================================================
 
-set rtp+=/usr/local/opt/fzf
 
 " vim-plug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/bundle')
@@ -62,6 +61,8 @@ Plug 'luochen1990/rainbow'
 Plug 'tpope/vim-fireplace'
 
 " Plumbing that makes everything nicer
+" Fuzzy-finder
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 " :Ag is like :grep but with `ag`
 Plug 'rking/ag.vim'
 " Easily comment/uncomment lines in many languages
