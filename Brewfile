@@ -57,7 +57,7 @@ brew 'zsh'
 
 # The latest version of Docker is too new to work with Heroku's Docker registry.
 # Install Docker 1.11 instead, which is old enough to work with Heroku.
-brew 'homebrew/versions/docker111'
+brew 'docker@1.11'
 
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
@@ -73,7 +73,7 @@ cask 'netnewswire'
 cask 'vlc'
 # HOMM3
 cask 'wineskin-winery'
-# Use Cask so we get Cargo, too
+# Install via Cask, not Homebrew, so Cargo is installed
 cask 'rust'
 # Keyboard remapping on macOS
 cask 'karabiner-elements'
