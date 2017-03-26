@@ -176,8 +176,10 @@ augroup END
 " ============================================================================
 " COMPLETION {{{
 " ===========================================================================
-" :set wildmenu enables a menu at the bottom of the vim/gvim window.
-set wildmenu
+" The wild* settings are for _command_ (like `:color<TAB>`) completion, not for
+" completion of words in files.
+set wildmenu " enable a menu near the Vim command line
+set wildignorecase " ignore case when completing file names and directories
 set wildmode=list:longest,list:full
 
 " completeopt values (default: "menu,preview")
