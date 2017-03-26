@@ -45,6 +45,7 @@ fi
 # }}}
 
 # Aliases {{{
+alias q="vim ~/.zshrc"
 alias qq="cd . && source ~/.zshrc"
 alias cp="cp -iv"
 alias rm="rm -iv"
@@ -66,7 +67,7 @@ alias dup="pushd dotfiles && git checkout master && git pull && git checkout - &
 # Copy-pasting `$ python something.py` works
 alias \$=''
 alias diff="colordiff -u"
-alias mkdir="\mkdir -p"
+alias mkdir="command mkdir -p"
 alias prettyjson="jq ."
 alias prettyxml="xmllint --format -"
 # Make images smaller
