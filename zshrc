@@ -142,8 +142,10 @@ export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
 
 # $PATH {{{
 
-# Homebrew
-PATH="/usr/local/bin:$PATH"
+if is_osx; then
+  # Add Homebrew to the path. This must be above rbenv path stuff.
+  PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
 
 # Heroku standalone client
 PATH="/usr/local/heroku/bin:$PATH"
@@ -155,6 +157,18 @@ PATH=$PATH:/usr/local/share/npm/bin
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 PATH=$HOME/.bin:$PATH
+
+# The goal here is:
+# * ./bin/stubs is before rbenv shims
+# * ~/.rbenv/shims is before /usr/local/bin etc
+# * I don't know why it has to be in this order but putting shims before stubs
+#   breaks stubs ("You have activated the wrong version of rake" error)
+# * Yes, `rbenv init` adds ~/.rbenv/shims to the $PATH, but because it runs in
+#   zshenv, a lot of other things add $PATH entries before ~/.rbenv/shims. This
+#   is bad because it means that rbenv-installed programs don't have $PATH
+#   primacy anymore.
+PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
+
 # }}}
 
 # Color {{{
@@ -555,17 +569,6 @@ alias f=start_foreman_on_unused_port
 
 export RUBYOPT=rubygems
 
-# The goal here is:
-# * ./bin/stubs is before rbenv shims
-# * ~/.rbenv/shims is before /usr/local/bin etc
-# * I don't know why it has to be in this order but putting shims before stubs
-#   breaks stubs ("You have activated the wrong version of rake" error)
-# * Yes, `rbenv init` adds ~/.rbenv/shims to the $PATH, but because it runs in
-#   zshenv, a lot of other things add $PATH entries before ~/.rbenv/shims. This
-#   is bad because it means that rbenv-installed programs don't have $PATH
-#   primacy anymore.
-PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
-
 # Bundler
 alias be="bundle exec"
 
@@ -652,7 +655,6 @@ if is_osx; then
   # Opt out of sending Homebrew information to Google Analytics
   # https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
   export HOMEBREW_NO_ANALYTICS=1
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 # }}}
 
