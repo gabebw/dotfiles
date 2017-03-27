@@ -34,14 +34,13 @@ brew 'the_silver_searcher'
 # so :Rtags works
 brew 'ctags'
 
-# It's vim
-brew 'mercurial'
+# My favorite editor
 brew 'vim'
 
 # Used in Rails projects
 brew 'phantomjs'
 
-# Fast GitHub client
+# Fast GitHub client, used in git-create-pull-request
 brew 'hub'
 
 # Fuzzy finder
