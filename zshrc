@@ -63,7 +63,7 @@ alias curl="curl --verbose"
 # codes will mess up the expected input.
 alias grep="egrep --color=auto"
 # dup = "dotfiles update"
-alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd"
+alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd && qq"
 # Copy-pasting `$ python something.py` works
 alias \$=''
 alias diff="colordiff -u"
