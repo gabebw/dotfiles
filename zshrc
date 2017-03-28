@@ -277,6 +277,9 @@ export PROJECT_DIRECTORIES=$CDPATH
 # Prompt colors {{{
 #-------------------
 
+# This is just to get $reset_color, since we generate $fg and $bg ourselves.
+autoload colors && colors
+
 # Generate colors for all 256 colors
 typeset -AHg fg bg
 
