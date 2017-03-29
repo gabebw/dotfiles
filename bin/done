@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+spotify pause
+sleep 1
+say "All done"
+spotify play
