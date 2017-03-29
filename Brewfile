@@ -8,6 +8,10 @@ tap 'homebrew/versions'
 
 brew 'coreutils'
 
+# Command-line Spotify interface
+# https://github.com/hnarayanan/shpotify
+brew 'shpotify'
+
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 

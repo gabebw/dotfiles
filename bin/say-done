@@ -3,6 +3,6 @@
 set -e
 
 spotify pause
-sleep 1
+sleep 3
 say "All done"
 spotify play
