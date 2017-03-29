@@ -208,6 +208,8 @@ nnoremap <Leader>e :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
+" Mnemonic: sgf = "split gf"
+nnoremap sgf :split<CR>gf<CR>
 
 " Only have the current split and tab open
 nnoremap <Leader>o :silent only\|silent tabonly<CR>
