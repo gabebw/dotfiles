@@ -365,8 +365,10 @@ prompt_git_relative_branch_status_symbol(){
   local arrow;
   local downwards_arrow="⬇️"
   local upwards_arrow="⬆️"
+  local sideways_arrow="↔️"
 
   case $(prompt_git_relative_branch_status) in
+    ahead_behind) arrow=$(prompt_cyan $sideways_arrow);;
     behind) arrow=$(prompt_cyan $downwards_arrow);;
     ahead) arrow=$(prompt_cyan $upwards_arrow);;
   esac
@@ -391,7 +393,9 @@ prompt_git_status() {
 
 prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
-  if print "$git_status" | command grep -qF "Your branch is behind"; then
+  if print "$git_status" | command grep -qF "have diverged"; then
+    print "ahead_behind"
+  elif print "$git_status" | command grep -qF "Your branch is behind"; then
     print "behind"
   elif print "$git_status" | command grep -qF "Your branch is ahead"; then
     print "ahead"
