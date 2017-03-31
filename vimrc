@@ -204,7 +204,7 @@ set completeopt=menu,menuone,longest,preview
 nnoremap <Leader>cd :cd %:p:h <CR>
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
-nnoremap <Leader>e :vsplit <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
+nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
