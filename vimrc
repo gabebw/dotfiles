@@ -72,8 +72,6 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
-" Trim trailing whitespace on write
-Plug 'derekprior/vim-trimmer'
 " When editing deeply/nested/file, auto-create deeply/nested/ dirs
 Plug 'duggiefresh/vim-easydir'
 " Cool statusbar
@@ -360,7 +358,7 @@ let g:gist_post_private = 1
 
 " vim-trimmer
 " -----------------
-let g:trimmer_blacklist = ["conf"]
+let g:trimmer_repeated_lines_blacklist = ["conf"]
 
 " vim-tmux-runner
 " -----------------
