@@ -23,6 +23,7 @@
 
 require "optparse"
 require "uri"
+require "tempfile"
 
 from = nil
 to = nil
@@ -43,7 +44,8 @@ def guess_extension(from)
     STDERR.puts "Couldn't guess extension, and none provided"
     exit 1
   end
-  extension
+  # Twitter has URLs that end in `.jpg:large`
+  extension.sub(/:large$/, "")
 end
 
 if ARGV.size == 1
@@ -91,8 +93,9 @@ else
     to += guess_extension(from)
   end
 
+  temporary_file_name = Tempfile.new.path
   STDERR.puts "#{from} -> #{to}"
-  `curl -Lso image "#{from}"`
-  `upload-image "image" "#{to}"`
+  `curl -Lso "#{temporary_file_name}" "#{from}"`
+  `upload-image "#{temporary_file_name}" "#{to}"`
   `rm image`
 end
