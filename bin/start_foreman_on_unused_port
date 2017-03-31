@@ -28,9 +28,15 @@ find_port() {
 }
 
 port=$(find_port)
+url="http://localhost:$port"
+
+# Wait 5 seconds, then open the URL.
+# The `&` means "run this in the background", so it's sleeping/opening in a
+# background thread while actually starting the server in the main thread.
+(sleep 5; open "$url") &
 
 echo
-echo ">>> http://localhost:$port"
+echo ">>> $url"
 echo
 
 heroku local -p "$port" "$@"
