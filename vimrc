@@ -10,8 +10,6 @@ let mapleader=" "
 " PLUGINS {{{
 " ===========================================================================
 
-source ~/.vim/plugins/squirrel.vim
-
 " vim-plug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/bundle')
 " Web development
