@@ -27,6 +27,6 @@ function! s:TrimRepeatedBlankLines()
   %s#\($\n\s*\)\+\%$##e
   if &filetype ==? 'ruby'
     " Remove blank lines between "end"s in ruby
-    %s/end\n\n\(\s*end\)/end\r\1/g
+    %s/end\n\n\(\s*end\)/end\r\1/e
   endif
 endfunction
