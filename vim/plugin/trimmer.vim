@@ -6,13 +6,13 @@ endif
 
 augroup vimTrimmer
   autocmd!
-  autocmd BufWritePre * call s:Trim(g:trimmer_repeated_lines_blacklist)
+  autocmd BufWritePre * call s:Trim()
 augroup END
 
-function! s:Trim(blacklist)
+function! s:Trim()
   let l:pos = getpos('.')
   call s:TrimTrailingWhitespace()
-  if index(a:blacklist, &filetype) < 0
+  if index(g:trimmer_repeated_lines_blacklist, &filetype) < 0
     call s:TrimRepeatedBlankLines()
   endif
   call setpos('.', l:pos)
@@ -25,4 +25,8 @@ endfunction
 function! s:TrimRepeatedBlankLines()
   %s/\n\{3,}/\r\r/e
   %s#\($\n\s*\)\+\%$##e
+  if &filetype ==? 'ruby'
+    " Remove blank lines between "end"s in ruby
+    %s/end\n\n\(\s*end\)/end\r\1/g
+  endif
 endfunction
