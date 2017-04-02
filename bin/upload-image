@@ -32,5 +32,5 @@ filename_on_server=${filename_on_server/~/$HOME}
 
 create_missing_directories_on_remote_host "$filename_on_server"
 
-rsync -e ssh -azh --ignore-existing "$local_filename" "i:$IMAGES_DIR/$filename_on_server"
+rsync -e ssh -azh --ignore-existing --chmod=ug=rw,o=r "$local_filename" "i:$IMAGES_DIR/$filename_on_server"
 open "http://i.gabebw.com/$filename_on_server"
