@@ -370,9 +370,9 @@ prompt_git_relative_branch_status_symbol(){
 
   case $(prompt_git_relative_branch_status) in
     up_to_date) arrow=$good ;;
-    ahead_behind) arrow=$(prompt_cyan $sideways_arrow);;
-    behind) arrow=$(prompt_cyan $downwards_arrow);;
-    ahead) arrow=$(prompt_cyan $upwards_arrow);;
+    ahead_behind) arrow=$sideways_arrow ;;
+    behind) arrow=$downwards_arrow ;;
+    ahead) arrow=$upwards_arrow ;;
   esac
 
   # Yeah, there's an extra space in here. Without it, the emoji in
