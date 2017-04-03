@@ -38,11 +38,20 @@ def url_from_clipboard
   url
 end
 
-def guess_extension(from)
-  extension = File.extname(URI.parse(from).path)
+def guess_extension(from, temp_file_path)
+  extension = File.extname(URI.parse(from).path).sub(/^\./, "")
   if extension == ""
-    STDERR.puts "Couldn't guess extension, and none provided"
-    exit 1
+    file_output = `file "#{temp_file_path}"`.strip
+    if file_output.include?("JPEG image data")
+      extension = "jpg"
+    elsif file_output.include?("PNG image data")
+      extension = "png"
+    elsif file_output.include?("GIF image data")
+      extension = "gif"
+    else
+      STDERR.puts "Couldn't guess extension, and none provided"
+      exit 1
+    end
   end
   # Twitter has URLs that end in `.jpg:large`
   extension.sub(/:large$/, "")
@@ -88,14 +97,14 @@ else
   end
 
   to ||= File.basename(from)
-
+  temporary_file_name = Tempfile.new.path
+  `curl -Lso "#{temporary_file_name}" "#{from}"`
   unless to.include?(".")
-    to += guess_extension(from)
+    to += "." + guess_extension(from, temporary_file_name)
   end
 
-  temporary_file_name = Tempfile.new.path
   STDERR.puts "#{from} -> #{to}"
-  `curl -Lso "#{temporary_file_name}" "#{from}"`
+
   `upload-image "#{temporary_file_name}" "#{to}"`
   `rm image`
 end
