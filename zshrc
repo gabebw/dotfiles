@@ -366,7 +366,7 @@ prompt_git_relative_branch_status_symbol(){
   local downwards_arrow="⬇️"
   local upwards_arrow="⬆️"
   local sideways_arrow="↔️"
-  local good="✅ "
+  local good="✅"
 
   case $(prompt_git_relative_branch_status) in
     up_to_date) arrow=$good ;;
