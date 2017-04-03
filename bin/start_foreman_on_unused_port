@@ -30,11 +30,6 @@ find_port() {
 port=$(find_port)
 url="http://localhost:$port"
 
-# Wait a few seconds, then open the URL.
-# The `&` means "run this in the background", so it's sleeping/opening in a
-# background thread while actually starting the server in the main thread.
-(sleep 8; open "$url") &
-
 echo
 echo ">>> $url"
 echo
