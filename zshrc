@@ -397,8 +397,9 @@ prompt_git_status() {
 
 prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
+  local branch_name=$(git rev-parse --abbrev-ref HEAD)
 
-  if ! git config --get "branch.${vcs_info_msg_0_}.merge"; then
+  if ! git config --get "branch.${branch_name}.merge"; then
     print "not_tracking"
   elif print "$git_status" | command grep -qF "up-to-date"; then
     print "up_to_date"
