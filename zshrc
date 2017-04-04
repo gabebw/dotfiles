@@ -367,8 +367,10 @@ prompt_git_relative_branch_status_symbol(){
   local upwards_arrow="⬆️"
   local sideways_arrow="↔️"
   local good="✅"
+  local question_mark="❓"
 
   case $(prompt_git_relative_branch_status) in
+    not_tracking) symbol=$question_mark ;;
     up_to_date) symbol=$good ;;
     ahead_behind) symbol=$sideways_arrow ;;
     behind) symbol=$downwards_arrow ;;
@@ -395,7 +397,10 @@ prompt_git_status() {
 
 prompt_git_relative_branch_status(){
   local git_status="$(cat "/tmp/git-status-$$")"
-  if print "$git_status" | command grep -qF "up-to-date"; then
+
+  if ! git config --get "branch.${vcs_info_msg_0_}.merge"; then
+    print "not_tracking"
+  elif print "$git_status" | command grep -qF "up-to-date"; then
     print "up_to_date"
   elif print "$git_status" | command grep -qF "have diverged"; then
     print "ahead_behind"
