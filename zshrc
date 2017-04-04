@@ -362,22 +362,22 @@ prompt_git_status_symbol(){
 
 # Is this branch ahead/behind its remote tracking branch?
 prompt_git_relative_branch_status_symbol(){
-  local arrow;
+  local symbol;
   local downwards_arrow="⬇️"
   local upwards_arrow="⬆️"
   local sideways_arrow="↔️"
   local good="✅"
 
   case $(prompt_git_relative_branch_status) in
-    up_to_date) arrow=$good ;;
-    ahead_behind) arrow=$sideways_arrow ;;
-    behind) arrow=$downwards_arrow ;;
-    ahead) arrow=$upwards_arrow ;;
+    up_to_date) symbol=$good ;;
+    ahead_behind) symbol=$sideways_arrow ;;
+    behind) symbol=$downwards_arrow ;;
+    ahead) symbol=$upwards_arrow ;;
   esac
 
   # Yeah, there's an extra space in here. Without it, the emoji in
   # `prompt_git_status_symbol` overlap with the emoji from this method.
-  [[ -n "$arrow" ]] && print -n "  $arrow"
+  [[ -n "$symbol" ]] && print -n "  $symbol"
 }
 
 prompt_git_status() {
