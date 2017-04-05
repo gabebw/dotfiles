@@ -106,5 +106,4 @@ else
   STDERR.puts "#{from} -> #{to}"
 
   `upload-image "#{temporary_file_name}" "#{to}"`
-  `rm image`
 end
