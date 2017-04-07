@@ -414,14 +414,12 @@ let g:lightline = {
       \ 'active': {
       \   'left': [
       \             ['mode', 'paste'],
-      \             ['emojipocalypse'],
       \             ['fugitive', 'readonly', 'myfilename', 'modified']
       \           ]
       \ },
       \ 'component': {
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-      \   'emojipocalypse': '%{emoji#for("sparkles")}',
-      \   'readonly': '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}',
+      \   'readonly': '%{(&filetype!="help" && &readonly) ? "RO" : ""}',
       \ },
       \ 'component_function': {
       \   'myfilename': 'LightLineFilename',
