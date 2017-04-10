@@ -1,4 +1,3 @@
-# vim: set foldmethod=marker foldlevel=0:
 # First, ensure we're in tmux so that we get into tmux as soon as possible
 # instead of doing it after everything else loads.
 # tmux {{{
