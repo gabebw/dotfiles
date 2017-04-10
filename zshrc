@@ -611,21 +611,12 @@ b(){
   fi
 }
 
-# Install capybara-webkit linked against Qt4
-capy4() {
-  brew install qt qt55 && \
-    gem uninstall -a capybara-webkit && \
-    brew unlink qt qt55 && \
-    brew link qt --overwrite && \
-    b
-}
-
 # Install capybara-webkit linked against Qt5.5
 capy5() {
-  brew install qt qt55 && \
+  brew install --force qt@5.5 && \
     gem uninstall -a capybara-webkit && \
-    brew unlink qt qt55 && \
-    brew link qt55 --force --overwrite && \
+    brew unlink qt@5.5 && \
+    brew link --force --overwrite qt@5.5 && \
     b
 }
 # }}}
