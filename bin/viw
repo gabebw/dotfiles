@@ -10,6 +10,7 @@
 #     $ viw myalias
 #     $ viw git-merge-to
 
+source ~/.zshrc
 _handle_unknown_command() {
   echo "\"$1\" is not recognized as a script, function, or alias" >&2
   return 1
