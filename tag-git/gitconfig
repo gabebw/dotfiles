@@ -75,6 +75,11 @@
   # Push current branch (and ONLY current branch) even if you've never pushed it
   # before.
   default = current
+[status]
+  # In `git status`, show all files underneath a new directory when the
+  # directory is untracked. Or, in other words, don't show untracked directories
+  # as a single line.
+  showUntrackedFiles = all
 [rerere]
   enabled = 1
 [credential]
@@ -127,3 +132,6 @@
   diffFilter = diff-highlight
 [rebase]
   autosquash = true
+  # Automatically stash before rebasing. This makes it possible to rebase with
+  # changes in the repo.
+  autostash = true
