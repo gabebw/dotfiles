@@ -46,6 +46,9 @@
   next = !git add . && git rebase --continue
   pr = !git push -u && git create-pull-request
   prf = !git push -u --force && git create-pull-request
+  # The advantage of --force-with-lease over --force is that it won't push if
+  # you haven't already seen the ref you're overwriting. It avoids the race
+  # condition of accidentally "push -f"ing over a commit you haven't seen.
   pf = push --force-with-lease
   g = grep --extended-regexp --break --heading --line-number
   ss = !git shalector | xargs git show
