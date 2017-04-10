@@ -582,7 +582,7 @@ alias h=heroku
 alias migrate="be rake db:migrate db:test:prepare"
 alias remigrate="migrate db:rollback && be rake db:migrate db:test:prepare"
 alias rrg="be rake routes | grep"
-alias db-reset="be rake db:drop db:create db:migrate db:test:prepare"
+alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
 alias f=start_foreman_on_unused_port
 alias unfuck-gemfile="git checkout HEAD -- Gemfile.lock"
 
