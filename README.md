@@ -33,15 +33,7 @@ one place.
 
 ## Zsh
 
-Zsh has lots of good stuff in `zsh/options.zsh` and `zsh/aliases.zsh`.
-
-The Zsh prompt is in [`zsh/prompt.zsh`][zsh-prompt].
-It shows the current directory, the current git branch, the status of
-the git branch (changed, staged, clean, etc) and the current Ruby version.  It
-is well-documented, and entirely self-contained: you can copy it into your
-dotfiles with no changes to test it out. (It does assume you use rbenv.)
-
-[zsh-prompt]: /zsh/prompt.zsh
+All of the Zsh configuration is in [`zshrc`](/zshrc).
 
 ## Attribution
 
