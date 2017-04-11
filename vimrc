@@ -148,15 +148,19 @@ augroup rails_shortcuts
       \ "config/routes.rb": { "command": "routes" },
       \ "spec/factories.rb": { "command": "factories" },
       \ "spec/features/*_spec.rb": { "command": "feature" },
+      \ "config/locales/en/*.yml": {
+      \   "command": "tran",
+      \   "template": "en:\n  {underscore|plural}:\n    ",
+      \ },
       \ "app/services/*.rb": {
       \   "command": "service",
-      \   "test": "spec/services/%s_spec.rb"
+      \   "test": "spec/services/{}_spec.rb"
       \ },
       \ "app/jobs/*_job.rb": {
       \   "command": "job",
-      \   "template": "class %SJob < ActiveJob::Job\nend",
+      \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\nend",
       \   "test": [
-      \     "spec/jobs/%s_job_spec.rb"
+      \     "spec/jobs/{}_job_spec.rb"
       \   ]
       \ },
   \ }
