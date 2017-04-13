@@ -73,7 +73,13 @@ alias prettyxml="xmllint --format -"
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
-alias o=open
+o(){
+  if [ -d "$1" ]; then
+    open -a Preview "$1"
+  else
+    open "$1"
+  fi
+}
 # Get rid of Messages.app's fake unread message badge
 unfuck-messages(){ killall Dock }
 # The `-g` flag means "global", and means that it can go anywhere in a command
