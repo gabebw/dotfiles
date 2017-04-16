@@ -29,8 +29,8 @@ brew 'pgrep'
 # The recommended way to use Heroku
 brew 'heroku'
 
-# colorful diffs (alias diff='colordiff -u')
-brew 'colordiff'
+# Use version 3.4+ for colorful diffs with --color
+brew 'diffutils'
 
 # a better ack/grep
 brew 'the_silver_searcher'

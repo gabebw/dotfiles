@@ -65,7 +65,7 @@ alias grep="egrep --color=auto"
 alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd && qq"
 # Copy-pasting `$ python something.py` works
 alias \$=''
-alias diff="colordiff -u"
+alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
 alias prettyjson="jq ."
 alias prettyxml="xmllint --format -"
