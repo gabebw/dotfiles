@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+# It'd be great if Zsh understood UTF-8 so that this could be a simple `tr`
+# alias, but noooo
+
+result = ARGV.join(" ").tr("abcdefghijklmnopqrstuvwxyz", "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ")
+if STDOUT.isatty
+  puts result
+else
+  print result
+end
