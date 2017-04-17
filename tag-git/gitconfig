@@ -45,7 +45,7 @@
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
   pr = !git push -u && git create-pull-request
-  prf = !git push -u --force && git create-pull-request
+  prf = !git pf -u && git create-pull-request
   # The advantage of --force-with-lease over --force is that it won't push if
   # you haven't already seen the ref you're overwriting. It avoids the race
   # condition of accidentally "push -f"ing over a commit you haven't seen.
