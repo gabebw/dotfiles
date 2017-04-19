@@ -68,6 +68,7 @@ alias \$=''
 alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
 alias prettyjson="jq ."
+# xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
 # Make images smaller
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
