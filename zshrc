@@ -587,6 +587,7 @@ new-yesod-project() {
 
 alias h=heroku
 alias migrate="be rake db:migrate db:test:prepare"
+alias rollback="be rake db:rollback"
 alias remigrate="migrate db:rollback && be rake db:migrate db:test:prepare"
 alias rrg="be rake routes | grep"
 alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
