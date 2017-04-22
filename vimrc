@@ -1,6 +1,9 @@
 " vim: set foldmethod=marker foldlevel=0:
 " The folding settings above make the {{{ and }}} sections fold up.
 
+" Disable Vi compatibility.
+set nocompatible
+
 " Leader is <Space>. Set it early because leader is used at the moment mappings
 " are defined. Changing mapleader after a mapping is defined has no effect on
 " the mapping.
