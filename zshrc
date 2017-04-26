@@ -194,6 +194,11 @@ autoload -U bashcompinit && bashcompinit
 # Try to match as-is then match case-insensitively
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# Automatically recognize and complete commands that have been installed since
+# the last time the zshrc was sourced.
+# https://wiki.voidlinux.eu/Zsh#Persistent_rehash
+zstyle ':completion:*' rehash true
+
 # When you paste a <Tab>, don't try to auto-complete
 zstyle ':completion:*' insert-tab pending
 
