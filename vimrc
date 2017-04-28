@@ -133,6 +133,13 @@ autocmd BufReadCmd set nohlsearch
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
+" Highlight the current line, only for the buffer with focus
+augroup CursorLine
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
 augroup vimrc
   autocmd!
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
@@ -261,7 +268,6 @@ set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitigno
 set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
-set cursorline    " highlight the line the cursor is on
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set modelines=2   " inspect top/bottom 2 lines for modeline
 set scrolloff=999 " When scrolling, keep cursor in the middle
