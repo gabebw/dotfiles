@@ -4,8 +4,8 @@
 # alias, but noooo
 
 result = ARGV.join(" ").tr("abcdefghijklmnopqrstuvwxyz", "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ")
-if STDOUT.isatty
-  puts result
-else
-  print result
+IO.popen("pbcopy", "w") do |clipboard|
+  clipboard.print(result)
 end
+
+puts "OK, done and copied to clipboard"
