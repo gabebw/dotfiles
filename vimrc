@@ -16,7 +16,7 @@ let mapleader=" "
 " vim-plug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/bundle')
 " Web development
-Plug 'vim-coffee-script'
+Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
