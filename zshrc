@@ -501,7 +501,6 @@ function gb(){
   else
     git checkout -b "$branch"
   fi
-  git push -u origin "$branch"
 }
 function gbm(){ gb "$1" origin/master }
 
