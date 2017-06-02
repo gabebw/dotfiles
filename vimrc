@@ -87,7 +87,7 @@ Plug 'tpope/vim-surround'
 " Make `.` work to repeat plugin actions too
 Plug 'tpope/vim-repeat'
 " Intelligently reopen files where you left off
-Plug 'dietsche/vim-lastplace'
+Plug 'farmergreg/vim-lastplace'
 " Instead of always copying to the system clipboard, use `cp` (plus motions) to
 " copy to the system clipboard. `cP` copies the current line. `cv` pastes.
 Plug 'christoomey/vim-system-copy'
