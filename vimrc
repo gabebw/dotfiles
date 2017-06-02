@@ -257,6 +257,8 @@ nnoremap Y y$
 
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
+nnoremap <Leader>vs :VtrSendCommand!<Space>
+nnoremap <Leader>vd :VtrSendCtrlD<CR>
 " }}}
 
 " ============================================================================
