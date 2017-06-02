@@ -15,6 +15,9 @@ brew 'shpotify'
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
+# This installs Cargo, too
+brew 'rust'
+
 # Qt5.5 for capybara-webkit, because Qt 5.6 doesn't work except with the most
 # recent version
 tap 'homebrew/versions'
@@ -76,7 +79,5 @@ cask 'netnewswire'
 cask 'vlc'
 # HOMM3
 cask 'wineskin-winery'
-# Install via Cask, not Homebrew, so Cargo is installed
-cask 'rust'
 # Keyboard remapping on macOS
 cask 'karabiner-elements'
