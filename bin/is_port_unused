@@ -6,8 +6,4 @@
 
 port="$1"
 
-! lsof -iTCP -sTCP:LISTEN -n -P -F n | \
-  egrep '^n' | \
-  sed -E -e 's/^n//' -e 's/^.*:([0-9]+)$/\1/' | \
-  sort -u | \
-  grep -qF "$port"
+! lsof -iTCP:"$port" -sTCP:LISTEN > /dev/null
