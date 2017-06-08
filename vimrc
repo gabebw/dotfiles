@@ -374,7 +374,7 @@ let g:gist_post_private = 1
 
 " vim-trimmer
 " -----------------
-let g:trimmer_repeated_lines_blacklist = ["conf"]
+let g:trimmer_repeated_lines_blacklist = ["conf", "python"]
 
 " vim-tmux-runner
 " -----------------
