@@ -222,7 +222,7 @@ nnoremap vgf :vsplit<CR>gf<CR>
 nnoremap sgf :split<CR>gf<CR>
 
 " Only have the current split and tab open
-nnoremap <Leader>o :silent only\|silent tabonly<CR>
+nnoremap <Leader>o :silent only<CR>
 
 " Buffer navigation
 nnoremap <C-j> <C-W>j
