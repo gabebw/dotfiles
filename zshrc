@@ -67,6 +67,7 @@ alias dup="pushd dotfiles && git checkout master && git pull && git checkout - &
 alias \$=''
 alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
+alias serialnumber="ioreg -l | grep IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g'"
 alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
