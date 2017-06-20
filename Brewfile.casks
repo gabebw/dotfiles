@@ -1,0 +1,12 @@
+# Cask: install binaries.
+# These are in a separate file so that install.sh can let installing these casks
+# "fail" when the apps are actually already installed.
+cask 'alfred'
+cask 'dropbox'
+cask 'google-chrome'
+cask 'netnewswire'
+cask 'vlc'
+# HOMM3
+cask 'wineskin-winery'
+# Keyboard remapping on macOS
+cask 'karabiner-elements'

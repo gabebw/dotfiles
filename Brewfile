@@ -70,14 +70,3 @@ if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
   puts "  chsh -s /usr/local/bin/zsh"
 end
-
-# Cask: install binaries
-cask 'alfred'
-cask 'dropbox'
-cask 'google-chrome'
-cask 'netnewswire'
-cask 'vlc'
-# HOMM3
-cask 'wineskin-winery'
-# Keyboard remapping on macOS
-cask 'karabiner-elements'
