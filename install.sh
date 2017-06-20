@@ -30,7 +30,11 @@ fi
 
 if ! echo $SHELL | grep -Fq zsh; then
   echo "Your shell is not Zsh. Changing it to Zsh..."
-  chsh -s $(which zsh)
+  new_shell=$(which zsh)
+  # $(which zsh) is a new shell that didn't come with the system, so tell the
+  # system about it by adding it to /etc/shells
+  echo "$new_shell" | sudo tee -a /etc/shells
+  chsh -s "$new_shell"
 fi
 
 echo "Linking dotfiles into ~..."
