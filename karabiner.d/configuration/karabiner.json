@@ -23,9 +23,7 @@
             },
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": {
-                "caps_lock": "escape"
-            },
+            "simple_modifications": {},
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "keyboard_type": "ansi"
