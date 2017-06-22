@@ -27,7 +27,7 @@ if [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
 else
   echo > "$commit_message_file"
-  git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed "s/^/$commentchar /" >> "$commit_message_file"
+  git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD >> "$commit_message_file"
 fi
 
 vim -c "set ft=gitcommit" "$commit_message_file"
