@@ -38,8 +38,9 @@ tags
 # https://github.com/sstephenson/rbenv-vars
 .rbenv-vars
 
-# Vim session files
+# Vim files
 Session.vim
+.vimrc.local
 
 # I keep committing single-numbered files somehow. Stop it.
 1

@@ -477,3 +477,7 @@ runtime macros/matchit.vim
 filetype plugin indent on
 syntax enable
 silent! colorscheme l80snight
+
+if filereadable('.vimrc.local')
+  source .vimrc.local
+endif
