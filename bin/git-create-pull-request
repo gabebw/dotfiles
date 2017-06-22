@@ -21,17 +21,17 @@ fi
 
 commit_message_file=$(mktemp -t commit_message_file)
 number_of_commits=$(git rev-list master..HEAD --count)
+commentchar=$(git config --get core.commentchar || echo -n "#")
 
 if [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
 else
   echo > "$commit_message_file"
-  git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed 's/^/# /' >> "$commit_message_file"
+  git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD | sed "s/^/$commentchar /" >> "$commit_message_file"
 fi
 
 vim -c "set ft=gitcommit" "$commit_message_file"
-
-message_without_comments=$(egrep -v "^#" "$commit_message_file")
+message_without_comments=$(egrep -v "^${commentchar}" "$commit_message_file")
 
 if hub pull-request -m "$message_without_comments" | pbcopy; then
   open "$(pbpaste)"
