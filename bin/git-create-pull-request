@@ -25,8 +25,15 @@ commentchar=$(git config --get core.commentchar || echo -n "#")
 
 if [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
+  if [ -r PULL_REQUEST_TEMPLATE ]; then
+    cat PULL_REQUEST_TEMPLATE >> "$commit_message_file"
+  fi
 else
-  echo > "$commit_message_file"
+  echo "[Descriptive title goes here]" > "$commit_message_file"
+  echo >> "$commit_message_file"
+  if [ -r PULL_REQUEST_TEMPLATE ]; then
+    cat PULL_REQUEST_TEMPLATE >> "$commit_message_file"
+  fi
   git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD >> "$commit_message_file"
 fi
 
