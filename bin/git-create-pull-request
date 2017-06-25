@@ -21,7 +21,7 @@ fi
 
 commit_message_file=$(mktemp -t commit_message_file)
 number_of_commits=$(git rev-list master..HEAD --count)
-commentchar=$(git config --get core.commentchar || echo -n "#")
+commentchar=$(git config --get core.commentchar || printf "#")
 
 if [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
