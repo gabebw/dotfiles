@@ -242,7 +242,18 @@ map Q <Nop>
 nnoremap gV V`]
 
 " edit vimrc/zshrc and load vimrc bindings
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
+function! EditMyVimrc()
+  let new_empty_file = line('$') == 1 && getline(1) == '' && bufname('%') == ''
+  if bufname('%') ==# $MYVIMRC
+    " Already editing vimrc, do nothing
+  elseif new_empty_file
+    " If this is an empty file, just replace it with the vimrc
+    edit $MYVIMRC
+  else
+    vsplit $MYVIMRC
+  endif
+endfunction
+nnoremap <leader>ev :call EditMyVimrc()<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Typo
