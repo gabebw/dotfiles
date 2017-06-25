@@ -65,6 +65,9 @@ brew 'zsh'
 # Install Docker 1.11 instead, which is old enough to work with Heroku.
 brew 'docker@1.11'
 
+# Fast, hip replacement for grep
+brew 'ripgrep'
+
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
   puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"

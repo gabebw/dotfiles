@@ -65,8 +65,6 @@ Plug 'tpope/vim-fireplace'
 " Plumbing that makes everything nicer
 " Fuzzy-finder
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-" :Ag is like :grep but with `ag`
-Plug 'rking/ag.vim'
 " Easily comment/uncomment lines in many languages
 Plug 'tomtom/tcomment_vim'
 " <Tab> indents or triggers autocomplete, smartly
@@ -221,6 +219,13 @@ nnoremap vgf :vsplit<CR>gf<CR>
 " Mnemonic: sgf = "split gf"
 nnoremap sgf :split<CR>gf<CR>
 
+" Searching
+" -----------------
+command! -nargs=+ NewGrep execute 'silent grep! <args>' | copen 10 | redraw!
+nnoremap <Leader>g :NewGrep<Space>
+" K searches for word under cursor
+nnoremap K :NewGrep "\b<C-R>=expand("<cword>")<CR>\b"<CR>
+
 " Only have the current split and tab open
 nnoremap <Leader>o :silent only<CR>
 
@@ -359,17 +364,19 @@ set noerrorbells visualbell t_vb=
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
+
+" Use ripgrep if it's installed, otherwise fall back to grep
+if executable("rg")
+  set grepprg=rg\ --hidden\ --glob\ '!.git'\ --vimgrep\ --with-filename
+  set grepformat=%f:%l:%c:%m
+else
+  set grepprg=grep\ -rnH
+endif
 " }}}
 
 " ============================================================================
 " PLUGINS {{{
 " ===========================================================================
-
-" ag.vim
-" -----------------
-nnoremap <Leader>g :Ag!<Space>
-" K searches for word under cursor
-nnoremap K :Ag! "\b<C-R>=expand("<cword>")<CR>\b"<CR>
 
 " FZF
 " -----------------
