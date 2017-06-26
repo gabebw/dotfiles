@@ -20,6 +20,7 @@ Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
+Plug 'tpope/vim-rhubarb'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
