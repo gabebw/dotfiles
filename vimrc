@@ -222,7 +222,7 @@ nnoremap sgf :split<CR>gf<CR>
 
 " Searching
 " -----------------
-command! -nargs=+ NewGrep execute 'silent grep! <args>' | copen 10 | redraw!
+command! -nargs=+ -complete=file -bar NewGrep silent! grep! <args> | copen 10 | redraw!
 nnoremap <Leader>g :NewGrep<Space>
 " K searches for word under cursor
 nnoremap K :NewGrep "\b<C-R>=expand("<cword>")<CR>\b"<CR>
