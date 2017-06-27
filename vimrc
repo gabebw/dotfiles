@@ -256,7 +256,7 @@ function! EditMyVimrc()
     " If this is an empty file, just replace it with the vimrc
     edit $MYVIMRC
   else
-    vsplit $MYVIMRC
+    tabedit $MYVIMRC
   endif
 endfunction
 nnoremap <leader>ev :call EditMyVimrc()<CR>
