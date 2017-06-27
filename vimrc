@@ -225,7 +225,7 @@ nnoremap sgf :split<CR>gf<CR>
 command! -nargs=+ -complete=file -bar NewGrep silent! grep! <args> | copen 10 | redraw!
 nnoremap <Leader>g :NewGrep<Space>
 " K searches for word under cursor
-nnoremap K :NewGrep "\b<C-R>=expand("<cword>")<CR>\b"<CR>
+nnoremap K :NewGrep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Only have the current split and tab open
 nnoremap <Leader>o :silent only<CR>
