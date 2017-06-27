@@ -248,19 +248,20 @@ map Q <Nop>
 nnoremap gV V`]
 
 " edit vimrc/zshrc and load vimrc bindings
-function! EditMyVimrc()
+function! MaybeTabedit(file)
   let new_empty_file = line('$') == 1 && getline(1) == '' && bufname('%') == ''
-  if bufname('%') ==# $MYVIMRC
+  if bufname('%') ==# a:file
     " Already editing vimrc, do nothing
   elseif new_empty_file
-    " If this is an empty file, just replace it with the vimrc
-    edit $MYVIMRC
+    " If this is an empty file, just replace it with the file to edit
+    execute 'edit ' . a:file
   else
-    tabedit $MYVIMRC
+    execute 'tabedit ' . a:file
   endif
 endfunction
-nnoremap <leader>ev :call EditMyVimrc()<CR>
+nnoremap <leader>ev :call MaybeTabedit($MYVIMRC)<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>q :call MaybeTabedit('$HOME/.zshrc')<CR>
 
 " Typo
 nnoremap :Nohl :nohlsearch
