@@ -29,7 +29,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
-Plug 'gabebw/vim-spec-runner'
+Plug 'gabebw/vim-spec-runner', { 'branch': 'gbw-check-for-zeus.sock' }
 
 " tmux
 Plug 'christoomey/vim-tmux-runner'
