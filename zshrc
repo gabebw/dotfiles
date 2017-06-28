@@ -365,20 +365,20 @@ zstyle ':vcs_info:git*' formats $(prompt_blue "%b")
 zstyle ':vcs_info:git*' actionformats $(prompt_red "%b|%a")
 
 prompt_git_status_symbol(){
-  local letter
+  local symbol
   local clean=$(prompt_green ✔)
   local dirty=$(prompt_red ✘)
   local untracked=$(prompt_cyan '?')
   local staged=$(prompt_yellow ⭑)
 
   case $(prompt_git_status) in
-    changed) letter=$dirty;;
-    staged) letter=$staged;;
-    untracked) letter=$untracked;;
-    unchanged) letter=$clean;;
+    changed) symbol=$dirty;;
+    staged) symbol=$staged;;
+    untracked) symbol=$untracked;;
+    unchanged) symbol=$clean;;
   esac
 
-  print "$letter"
+  print "$symbol"
 }
 
 # Is this branch ahead/behind its remote tracking branch?
