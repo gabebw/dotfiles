@@ -1,3 +1,5 @@
+# Instruct tools like ripgrep, ag, etc what to ignore when searching
+
 ## Directories
 
 /bin/stubs

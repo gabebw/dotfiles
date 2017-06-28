@@ -369,7 +369,7 @@ set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 
 " Use ripgrep if it's installed, otherwise fall back to grep
 if executable("rg")
-  set grepprg=rg\ --hidden\ -j4\ --glob\ '!.git'\ --vimgrep\ --with-filename\ --smart-case
+  set grepprg=rg\ --hidden\ -j4\ --glob\ '!.git'\ --vimgrep\ --with-filename\ --smart-case\ --ignore-file\ ~/.searchignore
   set grepformat=%f:%l:%c:%m
 else
   set grepprg=grep\ -rnH
