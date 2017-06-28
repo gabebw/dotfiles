@@ -366,10 +366,10 @@ zstyle ':vcs_info:git*' actionformats $(prompt_red "%b|%a")
 
 prompt_git_status_symbol(){
   local letter
-  local clean="✅"
-  local dirty="🙅"
-  local untracked="❓"
-  local staged="⚡️"
+  local clean=$(prompt_green ✔)
+  local dirty=$(prompt_red ✘)
+  local untracked=$(prompt_cyan '?')
+  local staged=$(prompt_yellow ⭑)
 
   case $(prompt_git_status) in
     changed) letter=$dirty;;
@@ -384,11 +384,11 @@ prompt_git_status_symbol(){
 # Is this branch ahead/behind its remote tracking branch?
 prompt_git_relative_branch_status_symbol(){
   local symbol;
-  local downwards_arrow="⬇️"
-  local upwards_arrow="⬆️"
-  local sideways_arrow="↔️"
-  local good="✅"
-  local question_mark="❓"
+  local downwards_arrow=$(prompt_cyan ↓)
+  local upwards_arrow=$(prompt_cyan ↑)
+  local sideways_arrow=$(prompt_red ⇔)
+  local good=$(prompt_green ✓)
+  local question_mark=$(prompt_yellow ?)
 
   case $(prompt_git_relative_branch_status) in
     not_tracking) symbol=$question_mark ;;
@@ -398,9 +398,7 @@ prompt_git_relative_branch_status_symbol(){
     ahead) symbol=$upwards_arrow ;;
   esac
 
-  # Yeah, there's an extra space in here. Without it, the emoji in
-  # `prompt_git_status_symbol` overlap with the emoji from this method.
-  [[ -n "$symbol" ]] && print -n "  $symbol"
+  prompt_spaced "$symbol"
 }
 
 prompt_git_status() {
@@ -447,7 +445,7 @@ prompt_git_branch() {
 #   branch is behind remote branch
 prompt_full_git_status(){
   if [[ -n "$vcs_info_msg_0_" ]]; then
-    prompt_spaced "$(prompt_git_branch) $(prompt_git_status_symbol)$(prompt_git_relative_branch_status_symbol) "
+    prompt_spaced "$(prompt_git_branch) $(prompt_git_status_symbol)$(prompt_git_relative_branch_status_symbol)"
   fi
 }
 
