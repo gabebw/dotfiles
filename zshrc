@@ -387,7 +387,7 @@ prompt_git_relative_branch_status_symbol(){
   local downwards_arrow=$(prompt_cyan ↓)
   local upwards_arrow=$(prompt_cyan ↑)
   local sideways_arrow=$(prompt_red ⇔)
-  local good=$(prompt_green ✓)
+  local good=$(prompt_green ✔)
   local question_mark=$(prompt_yellow ?)
 
   case $(prompt_git_relative_branch_status) in
