@@ -1,0 +1,38 @@
+#!/bin/sh
+
+# Show my n (default 10) most-used commands.
+
+# Set this so that sed, sort, etc don't choke on "illegal byte sequences".
+LANG=C
+LC_ALL=C
+
+# Some commands are often used with subcommands (eg `git`).
+# This awk script prints those by themselves AND with their first argument (so
+# "git" and "git checkout"). This lets the command by itself be counted in stats
+# as well as having the command + subcommand be counted.
+awkscript='{
+  split("spring git brew h g b gem staging production rbenv cabal stack", dictionary);
+
+  # Invert the dictionary so we can see if any keys match $1. I wish awk had
+  # standard arrays instead of only associative arrays.
+  for(key in dictionary)
+    has_subcommands[dictionary[key]] = "whatever"
+
+  if ($1 in has_subcommands) {
+    print $1
+    print $1 " " $2;
+  } else
+    print $1
+}'
+
+# A single line in my ~/.zsh_history looks like this:
+# : 1498715001:0;viw most-used
+egrep '^:' ~/.zsh_history | \
+  sed -E 's/^[: 0-9]+;//' | \
+  awk "$awkscript" | \
+  sort | \
+  uniq -c | \
+  sort -nr | \
+  egrep -v ' (rm|cd|mv|ls|cat|curl|cp)$' | \
+  head -n "${1:-10}" | \
+  nl
