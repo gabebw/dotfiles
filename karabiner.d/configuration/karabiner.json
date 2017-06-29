@@ -6,6 +6,12 @@
     },
     "profiles": [
         {
+            "complex_modifications": {
+                "parameters": {
+                    "basic.to_if_alone_timeout_milliseconds": 1000
+                },
+                "rules": []
+            },
             "devices": [],
             "fn_function_keys": {
                 "f1": "display_brightness_decrement",
@@ -23,7 +29,9 @@
             },
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": {},
+            "simple_modifications": {
+                "caps_lock": "escape"
+            },
             "virtual_hid_keyboard": {
                 "caps_lock_delay_milliseconds": 0,
                 "keyboard_type": "ansi"
