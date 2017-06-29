@@ -230,12 +230,6 @@ nnoremap K :NewGrep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 " Only have the current split and tab open
 nnoremap <Leader>o :silent only<CR>
 
-" Buffer navigation
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-nnoremap <C-h> <C-W>h
-
 " Movement
 " move vertically by _visual_ line
 nnoremap j gj
