@@ -222,10 +222,10 @@ nnoremap sgf :split<CR>gf<CR>
 
 " Searching
 " -----------------
-command! -nargs=+ -complete=file -bar NewGrep silent! grep! <args> | copen 10 | redraw!
-nnoremap <Leader>g :NewGrep<Space>
+command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
+nnoremap <Leader>g :Grep<Space>
 " K searches for word under cursor
-nnoremap K :NewGrep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
+nnoremap K :Grep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
