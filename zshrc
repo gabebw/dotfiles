@@ -511,6 +511,7 @@ function gb(){
   fi
 }
 function gbm(){ gb "$1" origin/master }
+function gbi(){ gbm "IXP-$1" }
 
 function gcl {
   local directory="$(superclone "$@")"
