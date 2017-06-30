@@ -45,7 +45,7 @@ _edit_based_on_pattern() {
 }
 
 _edit_shell_function() {
-  _edit_based_on_pattern "(^function $1)|(^$1\(\))"
+  _edit_based_on_pattern "(^function $1[ {()])|(^$1\(\))"
 }
 
 _edit_shell_alias() {
