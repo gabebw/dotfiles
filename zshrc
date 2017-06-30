@@ -598,6 +598,7 @@ new-yesod-project() {
 # Ruby/Rails {{{
 
 alias h=heroku
+alias hsso="heroku login --sso"
 alias migrate="be rake db:migrate db:test:prepare"
 alias rollback="be rake db:rollback"
 alias remigrate="migrate db:rollback && be rake db:migrate db:test:prepare"
