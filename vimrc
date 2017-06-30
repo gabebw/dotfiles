@@ -227,7 +227,7 @@ nnoremap <Leader>g :NewGrep<Space>
 " K searches for word under cursor
 nnoremap K :NewGrep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
-" Only have the current split and tab open
+" Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
 
 " Movement
