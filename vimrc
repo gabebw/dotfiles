@@ -372,8 +372,12 @@ set noerrorbells visualbell t_vb=
 set complete+=kspell
 set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 
-" Use ripgrep if it's installed, otherwise fall back to grep
-if executable("rg")
+if executable("ag")
+  " The silver searcher
+  set grepprg=ag\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+elseif executable("rg")
+  " ripgrep
   set grepprg=rg\ --hidden\ --vimgrep\ --with-filename\ --ignore-file\ ~/.searchignore
   set grepformat=%f:%l:%c:%m
 else
