@@ -71,6 +71,9 @@ brew 'ripgrep'
 # Official AWS CLI
 brew 'awscli'
 
+# Like search, but more elastic
+brew 'elasticsearch'
+
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
   puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
