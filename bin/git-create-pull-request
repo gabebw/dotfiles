@@ -19,21 +19,32 @@ if on_master; then
   error "You're already on master"
 fi
 
+find_pull_request_template(){
+  for template in PULL_REQUEST_TEMPLATE* .github/PULL_REQUEST_TEMPLATE*; do
+    if [ -r "$template" ]; then
+      printf "$template"
+      break
+    fi
+  done
+}
+
 commit_message_file=$(mktemp -t commit_message_file)
 number_of_commits=$(git rev-list master..HEAD --count)
 commentchar=$(git config --get core.commentchar || printf "#")
+pull_request_template=$(find_pull_request_template)
 
 if [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
-  if [ -r PULL_REQUEST_TEMPLATE ]; then
-    cat PULL_REQUEST_TEMPLATE >> "$commit_message_file"
+  if [ -n "$pull_request_template" ]; then
+    cat "$pull_request_template" >> "$commit_message_file"
   fi
 else
   echo "[Descriptive title goes here]" > "$commit_message_file"
   echo >> "$commit_message_file"
-  if [ -r PULL_REQUEST_TEMPLATE ]; then
-    cat PULL_REQUEST_TEMPLATE >> "$commit_message_file"
+  if [ -n "$pull_request_template" ]; then
+    cat "$pull_request_template" >> "$commit_message_file"
   fi
+  echo >> "$commit_message_file"
   git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD >> "$commit_message_file"
 fi
 
