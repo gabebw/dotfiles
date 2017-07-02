@@ -75,6 +75,8 @@ alias prettyxml="xmllint --format -"
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
+alias youtube-dl="command youtube-dl --no-mtime"
+
 o(){
   if [ -d "$1" ]; then
     open -a Preview "$1"
