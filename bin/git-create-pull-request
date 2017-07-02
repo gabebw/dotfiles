@@ -7,11 +7,11 @@ set -e
 set -o pipefail
 
 on_master() {
-  [ "$(git rev-parse --abbrev-ref head)" = "master" ]
+  [ "$(git rev-parse HEAD)" = "$(git rev-parse master)" ]
 }
 
 error() {
-  echo "$@" >&2
+  echo "\n!!! $@" >&2
   exit 1
 }
 
