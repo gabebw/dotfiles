@@ -145,7 +145,6 @@ augroup vimrc
   " and not leave the "!"
   au FileType ruby,eruby,yaml set iskeyword+=!,?
   au FileType ruby,eruby,yaml set isfname=_,-,48-57,A-Z,a-z,/
-  au FileType sh set iskeyword+=$
   au BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
 augroup END
