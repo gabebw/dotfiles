@@ -224,9 +224,20 @@ nnoremap sgf :split<CR>gf<CR>
 " Searching
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
+function! SearchForWordUnderCursor()
+  let word_under_cursor = expand('<cword>')
+  " Sometimes the word under the cursor includes punctuation, in which case
+  " '\bWORD!\b' will fail because \b is a word boundary and we have non-word
+  " characters in WORD. So, remove them. This results in a less-precise match
+  " (it'll find WORD as well as WORD!, for example), but is better than getting
+  " zero results.
+  let searchable_word = substitute(word_under_cursor, '[$!?]', '', 'g')
+  " two single quotes in a row = one single quote, like \' in other languages
+  execute 'Grep ''\b' . searchable_word . '\b'''
+endfunction
+
+nnoremap K :call SearchForWordUnderCursor()<CR>
 nnoremap <Leader>g :Grep<Space>
-" K searches for word under cursor
-nnoremap K :Grep '\b<C-R>=expand("<cword>")<CR>\b'<CR>
 
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
