@@ -29,7 +29,7 @@ find_pull_request_template(){
 }
 
 commit_message_file=$(mktemp -t commit_message_file)
-number_of_commits=$(git rev-list master..HEAD --count)
+number_of_commits=$(git rev-list origin/master..HEAD --count)
 commentchar=$(git config --get core.commentchar || printf "#")
 pull_request_template=$(find_pull_request_template)
 
@@ -45,7 +45,7 @@ else
     cat "$pull_request_template" >> "$commit_message_file"
   fi
   echo >> "$commit_message_file"
-  git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" master..HEAD >> "$commit_message_file"
+  git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
 fi
 
 vim -c "set ft=gitcommit" "$commit_message_file"
