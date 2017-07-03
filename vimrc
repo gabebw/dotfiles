@@ -378,6 +378,9 @@ endif
 " FZF
 " -----------------
 nnoremap <Leader>t :FZF<CR>
+" This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
+" FZF commands and not have to remember 'Colors' and 'History/' etc.
+let g:fzf_command_prefix = 'Fzf'
 
 " gist.vim
 " -----------------
