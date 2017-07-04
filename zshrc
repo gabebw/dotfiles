@@ -81,7 +81,7 @@ o(){
   if [ -d "$1" ]; then
     open -a Preview "$1"
   else
-    open "$1"
+    open "$@"
   fi
 }
 # Get rid of Messages.app's fake unread message badge
