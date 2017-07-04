@@ -66,3 +66,6 @@ Session.vim
 
 # Created by squirrel.vim's :Squirrel command
 .squirrel
+
+# From the Haskell Stack tool
+.stack-work
