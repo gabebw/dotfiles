@@ -76,6 +76,8 @@ alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 alias youtube-dl="command youtube-dl --no-mtime"
+# Pipe to this to quote filenames with spaces
+alias quote="sed 's/.*/\"&\"/'"
 
 o(){
   if [ -d "$1" ]; then
