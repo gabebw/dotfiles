@@ -37,5 +37,5 @@
 # This file is huge and messes up the vim quickfix window
 highlight.all.js
 highlight.pack.js
-select2.js
+vendor/assets/javascript/select2.js
 .git
