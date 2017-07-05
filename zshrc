@@ -78,6 +78,7 @@ alias exif-remove="exiftool -all= "
 alias youtube-dl="command youtube-dl --no-mtime"
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
+alias epoch="date -r"
 
 o(){
   if [ -d "$1" ]; then
