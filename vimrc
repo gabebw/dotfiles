@@ -215,6 +215,11 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
+" By default, gx uses "<cfile>", which only reads up til the first dot:
+" https://github.com -> https://github
+" This remaps gx to instead use "<cWORD>", which uses a full WORD.
+nnoremap gx :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>', 0)<CR>
+
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
 " Mnemonic: sgf = "split gf"
