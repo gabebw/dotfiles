@@ -80,6 +80,7 @@ alias youtube-dl="command youtube-dl --no-mtime"
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
 alias ag="ag --path-to-ignore ~/.searchignore"
+tcd(){ (cd "$1" && t "$1") }
 
 o(){
   if [ -d "$1" ]; then
@@ -233,6 +234,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:ls:*:*' list-colors "$LS_COLORS"
 
 # Complete the command on the left like the command on the right
+compdef tcd=cd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
