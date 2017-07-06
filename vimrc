@@ -132,6 +132,13 @@ autocmd BufReadCmd set nohlsearch
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
+" By default, gx uses "<cfile>", which only reads up til the first dot:
+" https://github.com/hey/there -> https://github
+" http://activeadmin.info/docs/3-index-pages.html -> 'activeadmin' or '.html'
+" depending on where your cursor is.
+" This tells gx to instead use "<cWORD>", which uses a full WORD.
+let g:netrw_gx = "<cWORD>"
+
 " Highlight the current line, only for the buffer with focus
 augroup CursorLine
   autocmd!
@@ -214,11 +221,6 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
-
-" By default, gx uses "<cfile>", which only reads up til the first dot:
-" https://github.com -> https://github
-" This remaps gx to instead use "<cWORD>", which uses a full WORD.
-nnoremap gx :call netrw#BrowseX('<C-R>=expand("<cWORD>")<CR>', 0)<CR>
 
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
