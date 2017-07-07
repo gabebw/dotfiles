@@ -79,7 +79,7 @@ alias youtube-dl="command youtube-dl --no-mtime --no-overwrites"
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
-alias ag="ag --width 100"
+alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
 tcd(){ (cd "$1" && t "$1") }
 
@@ -158,8 +158,8 @@ export LESS="ij.5FKMRX"
 export GREP_COLOR='1;37;41'
 
 # Note that these FZF options are used by fzf.vim automatically! Yay!
-# Use ag so that FZF ignores gitignored files
-export FZF_DEFAULT_COMMAND='ag --hidden -g ""'
+# Use a separate tool to smartly ignore files
+export FZF_DEFAULT_COMMAND='rg --hidden --files'
 # Jellybeans theme: https://github.com/junegunn/fzf/wiki/Color-schemes
 export FZF_DEFAULT_OPTS='--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 --color info:183,prompt:110,spinner:107,pointer:167,marker:215

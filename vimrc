@@ -372,20 +372,8 @@ set noerrorbells visualbell t_vb=
 set complete+=kspell
 set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 
-if executable("ag")
-  " The silver searcher
-  " Here, `--vimgrep` is replaced with the equivalent options
-  " `--nogroup --nocolor -column` because `--vimgrep` and `--width` don't
-  " interact well: https://github.com/ggreer/the_silver_searcher/issues/1077
-  set grepprg=ag\ --nogroup\ --nocolor\ --column\ --width\ 100
-  set grepformat=%f:%l:%c:%m
-elseif executable("rg")
-  " ripgrep
-  set grepprg=rg\ --hidden\ --vimgrep\ --with-filename\ --ignore-file\ ~/.searchignore
-  set grepformat=%f:%l:%c:%m
-else
-  set grepprg=grep\ -rnH
-endif
+set grepprg=rg\ --hidden\ --vimgrep\ --with-filename\ --max-columns\ 200
+set grepformat=%f:%l:%c:%m
 " }}}
 
 " ============================================================================
@@ -398,7 +386,6 @@ nnoremap <Leader>t :FZF<CR>
 " This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
-let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 " gist.vim
 " -----------------

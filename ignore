@@ -1,4 +1,5 @@
-# Instruct tools like ripgrep, ag, etc what to ignore when searching
+# Instruct tools like ripgrep (but not ag, which currently doesn't read from
+# ~/.ignore) what to ignore when searching.
 
 ## Directories
 
@@ -10,16 +11,10 @@
 /log/
 /public/assets/
 /tmp/
-# ag --hidden finds files with a leading dot, which includes
-# the .git directory for the current repo. So tell ag to ignore it.
-/.git/
-# Ignore vim backups in dotfiles
-/vim/backups/
-# Ignore vim undodir in dotfiles
-/vim/undodir
 # Ignore local JS-related files
 /node_modules/
 /bower_components/
+.git/
 
 ## Files
 
@@ -38,4 +33,3 @@
 highlight.all.js
 highlight.pack.js
 vendor/assets/javascript/select2.js
-.git

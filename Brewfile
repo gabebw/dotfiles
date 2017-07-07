@@ -34,9 +34,6 @@ brew 'heroku'
 # Use version 3.4+ for colorful diffs with --color
 brew 'diffutils'
 
-# a better ack/grep
-brew 'the_silver_searcher'
-
 # so :Rtags works
 brew 'ctags'
 
