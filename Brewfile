@@ -55,6 +55,7 @@ brew 'fzf'
 # thoughtbot stuff like rcm
 tap 'thoughtbot/formulae'
 brew 'rcm'
+brew 'parity'
 
 # Install zsh 5.2+ (OS X ships with 5.0) to fix this issue:
 # https://github.com/robbyrussell/oh-my-zsh/issues/4932
