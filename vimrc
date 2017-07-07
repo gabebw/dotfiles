@@ -374,7 +374,10 @@ set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 
 if executable("ag")
   " The silver searcher
-  set grepprg=ag\ --vimgrep\ --path-to-ignore\ ~/.searchignore\ --width\ 100
+  " Here, `--vimgrep` is replaced with the equivalent options
+  " `--nogroup --nocolor -column` because `--vimgrep` and `--width` don't
+  " interact well: https://github.com/ggreer/the_silver_searcher/issues/1077
+  set grepprg=ag\ --nogroup\ --nocolor\ --column\ --path-to-ignore\ ~/.searchignore\ --width\ 100
   set grepformat=%f:%l:%c:%m
 elseif executable("rg")
   " ripgrep
