@@ -132,13 +132,6 @@ autocmd BufReadCmd set nohlsearch
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
-" By default, gx uses "<cfile>", which only reads up til the first dot:
-" https://github.com/hey/there -> https://github
-" http://activeadmin.info/docs/3-index-pages.html -> 'activeadmin' or '.html'
-" depending on where your cursor is.
-" This tells gx to instead use "<cWORD>", which uses a full WORD.
-let g:netrw_gx = "<cWORD>"
-
 " Highlight the current line, only for the buffer with focus
 augroup CursorLine
   autocmd!
