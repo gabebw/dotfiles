@@ -79,7 +79,7 @@ alias youtube-dl="command youtube-dl --no-mtime"
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
-alias ag="ag --width 100 --path-to-ignore ~/.searchignore"
+alias ag="ag --width 100"
 tcd(){ (cd "$1" && t "$1") }
 
 o(){
