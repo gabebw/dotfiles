@@ -508,7 +508,7 @@ runtime macros/matchit.vim
 " _after_ loading plugins.
 filetype plugin indent on
 syntax enable
-silent! colorscheme l80snight
+silent! colorscheme tomorrow-night-80s
 
 if filereadable('.vimrc.local')
   source .vimrc.local
