@@ -75,7 +75,7 @@ alias prettyxml="xmllint --format -"
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
-alias youtube-dl="command youtube-dl --no-mtime"
+alias youtube-dl="command youtube-dl --no-mtime --no-overwrites"
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
