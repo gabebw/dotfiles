@@ -512,7 +512,16 @@ alias amend-new="git commit --amend"
 alias ga="git add"
 alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
-alias gc="git checkout"
+gc(){
+  if [[ $# == 0 ]]; then
+    local branch=$(git branch --color=always |\
+      fzf --reverse --ansi --tac |\
+      sed -E 's/^\*?[ \t]*//')
+    git checkout "$branch"
+  else
+    git checkout "$@"
+  fi
+}
 alias gcm="git commit -m"
 
 # Checkout branches starting with my initials
