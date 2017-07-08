@@ -80,6 +80,7 @@ alias youtube-dl="command youtube-dl --no-mtime"
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
 alias ag="ag --width 100"
+alias rcup="command rcup -v | grep -v identical"
 tcd(){ (cd "$1" && t "$1") }
 
 o(){
