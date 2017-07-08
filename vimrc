@@ -275,8 +275,8 @@ nnoremap :Nohl :nohlsearch
 xnoremap < <gv
 xnoremap > >gv
 
-" Act like D and C
-nnoremap Y y$
+" Big Yank to clipboard
+nnoremap Y cpiW
 
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
