@@ -167,7 +167,7 @@ augroup rails_shortcuts
       \ },
       \ "app/jobs/*_job.rb": {
       \   "command": "job",
-      \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\nend",
+      \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
       \   "test": [
       \     "spec/jobs/{}_job_spec.rb"
       \   ]
