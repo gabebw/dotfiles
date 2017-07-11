@@ -42,6 +42,7 @@
   bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   up = !git fetch origin && git rebase origin/master
   r = rebase -i origin/master
+  cp = cherry-pick
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
   pr = !git push -u && git create-pull-request
