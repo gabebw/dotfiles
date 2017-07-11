@@ -479,13 +479,16 @@ prompt_git_email(){
   global_git_email=$(git config --global user.email)
   git_name=$(git config user.name)
   global_git_name=$(git config --global user.name)
+  x=""
 
   if [[ "$git_email" != "$global_git_email" ]]; then
-    prompt_red "$(prompt_spaced "[git email: $git_email]")"
+    x=" $(prompt_red "[git email: $git_email]")"
   fi
+
   if [[ "$git_name" != "$global_git_name" ]]; then
-    prompt_red "$(prompt_spaced "[git name: $git_name]")"
+    x="${x} $(prompt_red "[git name: $git_name]")"
   fi
+  print "$x"
 }
 # }}}
 
