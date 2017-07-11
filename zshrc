@@ -82,7 +82,7 @@ alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
 tcd(){ (cd "$1" && t "$1") }
-vdot(){ vim ~/."$1" }
+vdot(){ vim "$@" }
 
 o(){
   if [ -d "$1" ]; then
