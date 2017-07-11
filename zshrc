@@ -82,6 +82,7 @@ alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
 tcd(){ (cd "$1" && t "$1") }
+vdot(){ vim ~/."$1" }
 
 o(){
   if [ -d "$1" ]; then
@@ -245,6 +246,11 @@ compdef tcd=cd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
+_vdot(){
+  # -P = "prefix", so it knows to add that if you don't type it
+  compadd -P /Users/gabe/. $(ls ~/.* | sed -E "s|/Users/gabe/\.||g")
+}
+compdef _vdot vdot
 # }}}
 
 # Key bindings {{{
