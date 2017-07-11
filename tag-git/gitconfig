@@ -30,7 +30,7 @@
   # "cherry-pick previous", e.g. the head of the branch we just left
   cpp = cherry-pick HEAD@{1}
   # Full commit messages without all the junk from `log --pretty=full`
-  full = show --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
+  full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
   # No color, short messages
   basic = log --pretty='%h %s'
   # My default `git log` format without color
