@@ -295,7 +295,7 @@ set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
 set modelines=2   " inspect top/bottom 2 lines for modeline
-set scrolloff=999 " When scrolling, keep cursor in the middle
+set scrolloff=1   " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 set colorcolumn=+0 " Set to the textwidth
 
