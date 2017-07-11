@@ -477,8 +477,14 @@ function precmd {
 prompt_git_email(){
   git_email=$(git config user.email)
   global_git_email=$(git config --global user.email)
+  git_name=$(git config user.name)
+  global_git_name=$(git config --global user.name)
+
   if [[ "$git_email" != "$global_git_email" ]]; then
     prompt_red "$(prompt_spaced "[git email: $git_email]")"
+  fi
+  if [[ "$git_name" != "$global_git_name" ]]; then
+    prompt_red "$(prompt_spaced "[git name: $git_name]")"
   fi
 }
 # }}}
