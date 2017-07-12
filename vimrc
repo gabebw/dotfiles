@@ -151,28 +151,6 @@ augroup END
 " vim-rails + vim-projectionist
 augroup rails_shortcuts
   autocmd!
-
-  let g:rails_projections = {
-      \ "config/routes.rb": { "command": "routes" },
-      \ "spec/factories.rb": { "command": "factories" },
-      \ "spec/features/*_spec.rb": { "command": "feature" },
-      \ "config/locales/en/*.yml": {
-      \   "command": "tran",
-      \   "template": "en:\n  {underscore|plural}:\n    ",
-      \ },
-      \ "app/services/*.rb": {
-      \   "command": "service",
-      \   "test": "spec/services/{}_spec.rb"
-      \ },
-      \ "app/jobs/*_job.rb": {
-      \   "command": "job",
-      \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
-      \   "test": [
-      \     "spec/jobs/{}_job_spec.rb"
-      \   ]
-      \ },
-  \ }
-
   autocmd User Rails nnoremap <Leader>m :Emodel<Space>
   autocmd User Rails nnoremap <Leader>c :Econtroller<Space>
   autocmd User Rails nnoremap <Leader>v :Eview<Space>
@@ -382,6 +360,29 @@ nnoremap <Leader>t :FZF<CR>
 " This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
+
+" rails.vim
+"----------
+let g:rails_projections = {
+    \ "config/routes.rb": { "command": "routes" },
+    \ "spec/factories.rb": { "command": "factories" },
+    \ "spec/features/*_spec.rb": { "command": "feature" },
+    \ "config/locales/en/*.yml": {
+    \   "command": "tran",
+    \   "template": "en:\n  {underscore|plural}:\n    ",
+    \ },
+    \ "app/services/*.rb": {
+    \   "command": "service",
+    \   "test": "spec/services/{}_spec.rb"
+    \ },
+    \ "app/jobs/*_job.rb": {
+    \   "command": "job",
+    \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
+    \   "test": [
+    \     "spec/jobs/{}_job_spec.rb"
+    \   ]
+    \ },
+\ }
 
 " gist.vim
 " -----------------
