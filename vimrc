@@ -177,9 +177,6 @@ augroup rails_shortcuts
   autocmd User Rails nnoremap <Leader>c :Econtroller<Space>
   autocmd User Rails nnoremap <Leader>v :Eview<Space>
   autocmd User Rails nnoremap <Leader>u :Eunittest<Space>
-
-  " Exclude Javascript files in :Rtags via rails.vim due to warnings when parsing
-  let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 augroup END
 " }}}
 
