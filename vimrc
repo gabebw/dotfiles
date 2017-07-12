@@ -189,6 +189,9 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 
+" Why 3? Because <C-^> is almost `:e #<CR>` and Shift-3 is #.
+nnoremap <Leader>3 <C-^>
+
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf<CR>
 " Mnemonic: sgf = "split gf"
