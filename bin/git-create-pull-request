@@ -37,13 +37,15 @@ number_of_commits=$(git rev-list origin/master..HEAD --count)
 commentchar=$(git config --get core.commentchar || printf "#")
 pull_request_template=$(find_pull_request_template)
 
+echo "# vim: nospell" >> "$commit_message_file"
+
 if [ "$number_of_commits" -eq 1 ]; then
-  git log -1 --format=%B > "$commit_message_file"
+  git log -1 --format=%B >> "$commit_message_file"
   if [ -n "$pull_request_template" ]; then
     cat "$pull_request_template" >> "$commit_message_file"
   fi
 else
-  echo "[Descriptive title goes here]" > "$commit_message_file"
+  echo "[Descriptive title goes here]" >> "$commit_message_file"
   echo >> "$commit_message_file"
   if [ -n "$pull_request_template" ]; then
     cat "$pull_request_template" >> "$commit_message_file"
