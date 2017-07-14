@@ -28,6 +28,10 @@ find_pull_request_template(){
   done
 }
 
+ixp_ticket_number(){
+  git rev-parse --abbrev-ref HEAD | sed 's/gbw-//'
+}
+
 commit_message_file=$(mktemp -t commit_message_file)
 number_of_commits=$(git rev-list origin/master..HEAD --count)
 commentchar=$(git config --get core.commentchar || printf "#")
@@ -46,6 +50,11 @@ else
   fi
   echo >> "$commit_message_file"
   git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
+fi
+
+# Hired
+if grep -Fq insert_jira_issue_number "$commit_message_file"; then
+  sed -i '' "s/insert_jira_issue_number/$(ixp_ticket_number)/g" "$commit_message_file"
 fi
 
 vim -c "set ft=gitcommit" "$commit_message_file"
