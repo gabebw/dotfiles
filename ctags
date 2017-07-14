@@ -21,3 +21,4 @@
 --langmap=js:.js
 --langmap=js:+.jsx
 --regex-js=/[ \t.]([A-Z][A-Z0-9._$]+)[ \t]*[=:][ \t]*([0-9"'\[\{]|null)/\1/n,constant/
+--python-kinds=-i
