@@ -3,8 +3,8 @@
 if (( CURRENT == 2 )); then
   compadd $(
     # -X = "don't read psqlrc", so that the output format never changes
-    # (specifically, `\x auto` will display different output depending on terminal
-    # width.)
+    # (specifically, `\x auto` in my psqlrc will display different output
+    # depending on terminal width, and I don't want that here.)
     psql -Xl | \
       # Remove header lines
       sed '1,3d' | \
