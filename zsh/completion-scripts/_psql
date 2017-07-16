@@ -1,0 +1,16 @@
+#compdef psql
+
+if (( CURRENT == 2 )); then
+  compadd $(
+    # -X = "don't read psqlrc", so that the output format never changes
+    # (specifically, `\x auto` will display different output depending on terminal
+    # width.)
+    psql -Xl | \
+      # Remove header lines
+      sed '1,3d' | \
+      # Remove row count and internal tables
+      egrep -v 'rows)|template\d|postgres' | \
+      # Filter to lines with at least one character (so non-empty lines), and
+      # print the first word on each of those lines.
+      awk '/.+/ { print $1 }')
+fi
