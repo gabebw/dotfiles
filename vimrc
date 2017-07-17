@@ -413,6 +413,8 @@ nnoremap <leader>zr :VtrFocusRunner<CR>
 " vim-spec-runner
 " -----------------
 let g:spec_runner_dispatcher = 'VtrSendCommand! {command}'
+nnoremap <Leader>l :RunFocusedSpec<CR>:redraw!<CR>
+nnoremap <Leader>a :RunCurrentSpecFile<CR>:redraw!<CR>
 
 " luochen1990/rainbow
 " -----------------
