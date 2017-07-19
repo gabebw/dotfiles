@@ -3,15 +3,23 @@
 .DS_Store
 Thumbs.db
 
+# Vim files
+Session.vim
+.vimrc.local
 # Vim swap files
 *.sw[po]
 # Vim persistent undo files
 *.un~
+# Created by squirrel.vim's :Squirrel command
+.squirrel
+
 # Created by _rake autocomplete function
 .rake_tasks
 
 # rbenv
 .rbenv-version
+# https://github.com/sstephenson/rbenv-vars
+.rbenv-vars
 
 # Zeus gem
 custom_plan.rb
@@ -35,13 +43,6 @@ tags
 :w
 .foreman
 
-# https://github.com/sstephenson/rbenv-vars
-.rbenv-vars
-
-# Vim files
-Session.vim
-.vimrc.local
-
 # I keep committing single-numbered files somehow. Stop it.
 1
 2
@@ -63,9 +64,6 @@ Session.vim
 !7/
 !8/
 !9/
-
-# Created by squirrel.vim's :Squirrel command
-.squirrel
 
 # From the Haskell Stack tool
 .stack-work
