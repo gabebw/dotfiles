@@ -79,6 +79,8 @@ youtube-dl(){
   url=${1:-$(pbpaste)}
   command youtube-dl --no-mtime --no-overwrites "$url"
 }
+# Files created today
+alias today=$'mdfind -onlyin . \'kMDItemFSCreationDate>$time.today\' | quote'
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
