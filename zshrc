@@ -615,12 +615,6 @@ PATH=$PATH:$GOPATH/bin
 
 # Python {{{
 export PYTHONSTARTUP=~/.pythonstartup
-
-# Tell Virtualenv to store its data in ~/.virtualenvs
-if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
-  export WORKON_HOME=~/.virtualenvs
-  source /usr/local/bin/virtualenvwrapper.sh
-fi
 # }}}
 
 # Haskell {{{
