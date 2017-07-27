@@ -86,6 +86,7 @@ alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
+it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t "$1") }
 vdot(){ vim "$@" }
 
