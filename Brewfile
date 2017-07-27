@@ -6,6 +6,12 @@ tap 'homebrew/services'
 # Old versions of some packages
 tap 'homebrew/versions'
 
+# It me
+tap 'gabebw/formulae'
+
+# Find my most-used CLI commands
+brew 'most-used'
+
 brew 'coreutils'
 
 # Command-line Spotify interface
