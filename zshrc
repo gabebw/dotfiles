@@ -518,7 +518,7 @@ PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prom
 # With arguments: acts like `git`
 function g {
   if [[ $# > 0 ]]; then
-    git $@
+    git "$@"
   else
     git st
   fi
