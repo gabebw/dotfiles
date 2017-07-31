@@ -576,7 +576,7 @@ compdef _git ga=git-add
 # exits, which doesn't help me very much.
 #
 # https://docs.docker.com/machine/get-started/
-function docker-kickstart(){
+docker-kickstart(){
   if ! command -v docker-compose > /dev/null; then
     brew install docker-compose
   fi
@@ -621,7 +621,16 @@ export PYTHONSTARTUP=~/.pythonstartup
 if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
   export VIRTUALENVWRAPPER_PYTHON=`which python2`
   export WORKON_HOME=~/.virtualenvs
-  source /usr/local/bin/virtualenvwrapper.sh
+
+  mkvirtualenv(){
+    source /usr/local/bin/virtualenvwrapper.sh
+    mkvirtualenv "$@"
+  }
+
+  workon(){
+    source /usr/local/bin/virtualenvwrapper.sh
+    workon "$@"
+  }
 fi
 # }}}
 
