@@ -57,6 +57,16 @@ if is_osx; then
   echo "If you're using Terminal.app, check out the terminal-themes directory"
 fi
 
+if is_osx; then
+  if ! system_profiler SPFontsDataType | rg 'Full Name: Iosevka$'; then
+    open fonts/iosevka*
+  end
+
+  if ! system_profiler SPFontsDataType | rg 'Full Name: Inconsolata Regular'; then
+    open fonts/Inconsolata*
+  end
+fi
+
 for setup in tag-*/setup; do
   . "$setup"
 done
