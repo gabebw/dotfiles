@@ -205,9 +205,9 @@ PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
 
 # }}}
 
-# http://zsh.sourceforge.net/Doc/Release/Completion-System.html
-zmodload -i zsh/complist
 # Completion {{{
+# http://zsh.sourceforge.net/Doc/Release/Completion-System.html
+# zmodload -i zsh/complist
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
 # Now zsh understands bash completion files. Wild!
