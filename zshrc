@@ -322,27 +322,11 @@ export PROJECT_DIRECTORIES=$CDPATH
 autoload colors && colors
 
 # Generate colors for all 256 colors
-typeset -AHg fg bg
+typeset -AHg fg
 
 for color in {000..255}; do
   fg[$color]="%{[38;5;${color}m%}"
-  bg[$color]="%{[48;5;${color}m%}"
 done
-
-ZSH_SPECTRUM_TEXT="What a neat color this is"
-# Show all 256 colors with color number
-spectrum_ls() {
-  for code in {000..255}; do
-    print -P -- "$code: %{$fg[$code]%}$ZSH_SPECTRUM_TEXT%{$reset_color%}"
-  done
-}
-
-# Show all 256 colors, but set the background color, not the foreground
-spectrum_bls() {
-  for code in {000..255}; do
-    print -P -- "$code: %{$bg[$code]%}$ZSH_SPECTRUM_TEXT%{$reset_color%}"
-  done
-}
 
 prompt_color() {
   [[ -n "$1" ]] && print "%{$fg[$2]%}$1%{$reset_color%}"
