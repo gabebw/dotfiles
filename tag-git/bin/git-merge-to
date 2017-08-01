@@ -11,6 +11,14 @@ function update-branch() {
   git checkout -
 }
 
+target_branch=$(git rev-parse --abbrev-ref "$1")
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ "$target_branch" == "$current_branch" ]]; then
+  echo "You're already on branch $target_branch"
+  exit 1
+fi
+
 update-branch "$1"
 
 if [[ "$(git rev-parse "$1")" == "$(git merge-base HEAD origin/"$1")" ]]; then
