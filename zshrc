@@ -205,15 +205,8 @@ PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
 
 # }}}
 
-# Color {{{
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 zmodload -i zsh/complist
-
-# Show ls on dark backgrounds well
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
-# }}}
-
 # Completion {{{
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
@@ -245,7 +238,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 # Colorful lists of possible autocompletions for `ls`
 # zstyle doesn't understand the BSD-style $LSCOLORS at all, so use Linux-style
 # $LS_COLORS
-zstyle ':completion:*:ls:*:*' list-colors "$LS_COLORS"
+zstyle ':completion:*:ls:*:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
 # Complete the command on the left like the command on the right
 compdef tcd=cd
