@@ -253,7 +253,7 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Big Yank to clipboard
-nnoremap Y cpiW
+nnoremap Y "*yiW
 
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
