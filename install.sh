@@ -24,10 +24,10 @@ if is_osx; then
   echo "Installing Homebrew packages..."
   brew update
   brew tap homebrew/bundle
-  brew bundle --file=Brewfile
-  brew bundle --file=Brewfile.casks || true
+  brew bundle -v --file=Brewfile
+  brew bundle -v --file=Brewfile.casks || true
   for brewfile in */Brewfile; do
-    brew bundle --file="$brewfile"
+    brew bundle --file="$brewfile" || true
   done
 fi
 
