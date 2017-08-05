@@ -29,6 +29,11 @@ if is_osx; then
   for brewfile in */Brewfile; do
     brew bundle --file="$brewfile" || true
   done
+
+  echo "Checking for command-line tools..."
+  if ! command -v xcodebuild > /dev/null; then
+    xcode-select --install
+  fi
 fi
 
 if ! echo $SHELL | grep -Fq zsh; then
