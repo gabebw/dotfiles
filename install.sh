@@ -10,11 +10,14 @@ is_linux(){
   [ "$(uname -s)" = Linux ]
 }
 
+echo "> Please enter your password to install necessary tools."
+# Get some sudo credentials at the beginning in case the user goes away
+sudo -v
+
 if is_osx; then
   echo "Checking for Homebrew..."
   if ! command -v brew > /dev/null; then
-    echo "Please install Homebrew. Instructions are at https://brew.sh/"
-    echo "After you're done, rerun this script."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     exit 1
   fi
 
