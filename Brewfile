@@ -78,6 +78,8 @@ brew 'awscli'
 brew 'elasticsearch'
 
 brew 'youtube-dl'
+# youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
+brew 'ffmpeg'
 
 if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
   puts "To use the Homebrew-installed ZSH:"
