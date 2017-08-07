@@ -93,7 +93,7 @@ Plug 'christoomey/vim-system-copy'
 " `vim README.md:10` opens README.md at the 10th line, rather than saying "No
 " such file: README.md:10"
 Plug 'bogado/file-line'
-
+Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 
 " Text objects
