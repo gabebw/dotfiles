@@ -75,9 +75,9 @@ alias prettyxml="xmllint --format -"
 alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
-youtube-dl(){
+y(){
   url=${1:-$(pbpaste)}
-  command youtube-dl --no-mtime --no-overwrites "$url"
+  youtube-dl --no-mtime --no-overwrites "$url"
 }
 # Files created today
 alias today=$'mdfind -onlyin . \'kMDItemFSCreationDate>$time.today\' | quote'
