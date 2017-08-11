@@ -95,6 +95,7 @@ Plug 'christoomey/vim-system-copy'
 Plug 'bogado/file-line'
 Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
+Plug 'sjl/gundo.vim'
 
 " Text objects
 " required for all the vim-textobj-* plugins
