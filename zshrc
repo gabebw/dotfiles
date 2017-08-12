@@ -256,7 +256,7 @@ compdef staging=heroku
 compdef production=heroku
 _vdot(){
   # -P = "prefix", so it knows to add that if you don't type it
-  compadd -P /Users/gabe/. $(ls ~/.* | sed -E "s|/Users/gabe/\.||g")
+  compadd -P /Users/gabe/. $(ls -d ~/.* | sed -E "s|/Users/gabe/\.||g")
 }
 compdef _vdot vdot
 # }}}
