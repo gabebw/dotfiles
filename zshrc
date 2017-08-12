@@ -520,7 +520,7 @@ gc(){
   if [[ $# == 0 ]]; then
     local branch=$(git branch -a --color=always |\
       fzf --reverse --ansi --tac |\
-      sed -E 's/^\*?[ \t]*//')
+      sed -E -e 's/^\*?[ \t]*//' -e 's@^remotes/[a-z]+/@@')
     [[ -n "$branch" ]] && git checkout "$branch" || true
   else
     git checkout "$@"
