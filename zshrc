@@ -190,6 +190,9 @@ PATH=$PATH:/usr/local/share/npm/bin
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
+# Haskell
+PATH=~/.local/bin:$PATH
+
 PATH=$HOME/.bin:$PATH
 
 # The goal here is:
