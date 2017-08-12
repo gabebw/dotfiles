@@ -76,8 +76,11 @@ alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 y(){
-  url=${1:-$(pbpaste)}
-  youtube-dl --no-mtime --no-overwrites "$url"
+  if [[ $# == 0 ]]; then
+    youtube-dl --no-mtime --no-overwrites "$(pbpaste)"
+  else
+    youtube-dl --no-mtime --no-overwrites "$@"
+  fi
 }
 # Files created today
 alias today=$'mdfind -onlyin . \'kMDItemFSCreationDate>$time.today\' | quote'
