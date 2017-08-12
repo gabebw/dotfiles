@@ -1,0 +1,15 @@
+#!/bin/bash
+# Delete branch locally and remotely. Used by `git mm`
+
+set -e
+
+if [[ $# == 0 ]]; then
+  branch=$(git branch --color=always | \
+      fzf --reverse --ansi --tac | \
+      sed -E -e 's/^\*?[ \t]*//')
+else
+  branch="$1"
+fi
+
+git branch -D "$branch"
+git push origin :"$branch"

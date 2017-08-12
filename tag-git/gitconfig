@@ -38,8 +38,6 @@
   unstage = reset HEAD
   mm-safe = !bundle exec rake && git merge-to master
   mm = merge-to master
-  # Delete branch locally and remotely. Used by `git mm`
-  bd = !sh -c 'git branch -D $1 && git push origin :$1' -
   up = !git fetch origin && git rebase origin/master
   r = rebase -i origin/master
   cp = cherry-pick
