@@ -83,7 +83,10 @@ y(){
   fi
 }
 # Files created today
-alias today=$'mdfind -onlyin . \'kMDItemFSCreationDate>$time.today\' | quote'
+today(){
+  local query='kMDItemFSCreationDate>$time.today && kMDItemContentType != public.folder'
+  mdfind -onlyin . query | quote
+}
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
