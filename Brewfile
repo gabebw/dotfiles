@@ -49,6 +49,9 @@ brew 'phantomjs'
 # Fast GitHub client, used in git-create-pull-request
 brew 'hub'
 
+# Don't install completions, in favor of using Zsh's (better) git completions
+brew 'git', args: ['--without-completions']
+
 # Fuzzy finder
 brew 'fzf'
 
@@ -56,10 +59,6 @@ brew 'fzf'
 tap 'thoughtbot/formulae'
 brew 'rcm'
 brew 'parity'
-
-# Install zsh 5.2+ (OS X ships with 5.0) to fix this issue:
-# https://github.com/robbyrussell/oh-my-zsh/issues/4932
-brew 'zsh'
 
 # The latest version of Docker is too new to work with Heroku's Docker registry.
 # Install Docker 1.11 instead, which is old enough to work with Heroku.
@@ -77,9 +76,3 @@ brew 'elasticsearch'
 brew 'youtube-dl'
 # youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
 brew 'ffmpeg'
-
-if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
-  puts "To use the Homebrew-installed ZSH:"
-  puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
-  puts "  chsh -s /usr/local/bin/zsh"
-end
