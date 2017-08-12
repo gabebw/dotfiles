@@ -547,7 +547,6 @@ function gcl {
 }
 
 # Complete `g` like `git`, etc
-alias __git-checkout_main=_git_checkout
 compdef g=git
 compdef _git gc=git-checkout
 compdef _git ga=git-add
