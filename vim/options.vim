@@ -8,6 +8,8 @@ if version >= 703 " 703 = Vim 7.3
     set undodir=~/.vim/undodir
   endif
 endif
+scriptencoding utf-8
+set encoding=utf-8
 set number " non-relative line numbers
 set numberwidth=3 " minimum
 set ruler  " show cursor position all the time
