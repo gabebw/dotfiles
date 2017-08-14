@@ -521,7 +521,7 @@ alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gc(){
   if [[ $# == 0 ]]; then
-    local branch=$(git branch -a |\
+    local branch=$(git branch |\
       grep -v HEAD |\
       sed -E 's/^\*?[ \t]*//' |\
       fzf --reverse --ansi --tac |\
