@@ -521,9 +521,10 @@ alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gc(){
   if [[ $# == 0 ]]; then
-    local branch=$(git branch -a --color=always |\
+    local branch=$(git branch -a |\
+      sed -E 's/^\*?[ \t]*//' |\
       fzf --reverse --ansi --tac |\
-      sed -E -e 's/^\*?[ \t]*//' -e 's@^remotes/[a-z]+/@@')
+      sed -E 's@^remotes/[a-z]+/@@')
     [[ -n "$branch" ]] && git checkout "$branch" || true
   else
     git checkout "$@"
