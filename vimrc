@@ -29,7 +29,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
-Plug 'gabebw/vim-spec-runner'
+Plug 'janko-m/vim-test'
 
 " tmux
 Plug 'christoomey/vim-tmux-runner'
@@ -411,11 +411,11 @@ nnoremap <leader>va :VtrAttachToPane<CR>
 " Zoom into tmux test runner pane. To get back to vim, use <C-a><C-p>
 nnoremap <leader>zr :VtrFocusRunner<CR>
 
-" vim-spec-runner
+" Test running
 " -----------------
-let g:spec_runner_dispatcher = 'VtrSendCommand! {command}'
-nnoremap <Leader>l :RunFocusedSpec<CR>:redraw!<CR>
-nnoremap <Leader>a :RunCurrentSpecFile<CR>:redraw!<CR>
+let test#strategy = 'vtr'
+nnoremap <Leader>l :TestNearest<CR>:redraw!<CR>
+nnoremap <Leader>a :TestFile<CR>:redraw!<CR>
 
 " luochen1990/rainbow
 " -----------------
