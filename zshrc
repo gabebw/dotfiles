@@ -82,13 +82,13 @@ y(){
     youtube-dl --no-mtime --no-overwrites "$@"
   fi
 }
+# Pipe to this to quote filenames with spaces
+alias quote="sed 's/.*/\"&\"/'"
 # Files created today
 today(){
   local query='kMDItemFSCreationDate>$time.today && kMDItemContentType != public.folder'
   mdfind -onlyin . query | quote
 }
-# Pipe to this to quote filenames with spaces
-alias quote="sed 's/.*/\"&\"/'"
 alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
