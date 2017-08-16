@@ -85,10 +85,13 @@ y(){
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/.*/\"&\"/'"
 # Files created today
-today(){
-  local query='kMDItemFSCreationDate>$time.today && kMDItemContentType != public.folder'
+alias today="days 0"
+# Created in last n days
+days(){
+  local query="kMDItemFSCreationDate>\$time.today(-$1) && kMDItemContentType != public.folder"
   mdfind -onlyin . "$query" | quote
 }
+alias topen='today | xargs open'
 alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
