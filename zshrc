@@ -538,6 +538,10 @@ alias gcm="git commit -m"
 
 # Checkout branches starting with my initials
 function gb(){
+  if [[ $# == 0 ]]; then
+    echo "No branch name :(" >&2
+    return 1
+  fi
   branch="gbw-${1#gbw-}"
   base=$2
   if [[ -n "$base" ]]; then
