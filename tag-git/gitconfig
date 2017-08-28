@@ -61,8 +61,7 @@
 [format]
   # git log uses --pretty format by default, so this changes the default
   # format. It looks like this:
-  # 4436819 (HEAD, origin/master, master) Short commit message [Gabe Berke-Williams, 23 hours ago]
-  pretty = %C(magenta reverse)%h%Creset%C(auto)%d %Creset%C(blue)%s %C(magenta)[%an, %cr]
+  pretty = %C(magenta reverse)%h%C(reset) %C(blue)%s %C(magenta)[%an, %cr]%C(auto)%d
 [svn]
   authorsfile = ~/.git-author
 
