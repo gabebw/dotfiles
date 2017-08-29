@@ -6,16 +6,6 @@
 set -e
 set -o pipefail
 
-inreplace(){
-  local file=$1
-  local needle=$2
-  local replacement=$3
-
-  if grep -Fq "$needle" "$file"; then
-    sed -i '' "s/$needle/$replacement/g" "$file"
-  fi
-}
-
 on_master() {
   [ "$(git rev-parse HEAD)" = "$(git rev-parse master)" ]
 }
@@ -38,8 +28,13 @@ find_pull_request_template(){
   done
 }
 
-hired_ticket_number(){
-  git rev-parse --abbrev-ref HEAD | sed -E 's/gbw-([A-Z]+-[0-9]+).*/\1/'
+is_hired(){
+  [ "$(basename "$(pwd)")" = "hired" ]
+}
+
+link_to_hired_ticket_number(){
+  local number=$(git rev-parse --abbrev-ref HEAD | sed -E 's/gbw-([A-Z]+-[0-9]+).*/\1/')
+  echo "Ticket: [https://hiredteam.atlassian.net/browse/${number}](${number})"
 }
 
 commit_message_file=$(mktemp -t commit_message_file)
@@ -47,7 +42,13 @@ number_of_commits=$(git rev-list origin/master..HEAD --count)
 commentchar=$(git config --get core.commentchar || printf "#")
 pull_request_template=$(find_pull_request_template)
 
-if [ "$number_of_commits" -eq 1 ]; then
+if is_hired; then
+  cat "$pull_request_template" >> "$commit_message_file"
+  echo "$(link_to_hired_ticket_number)" >> "$commit_message_file"
+  echo "\nbot review me @hired/internal-xp" >> "$commit_message_file"
+  echo >> "$commit_message_file"
+  git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
+elif [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
   if [ -n "$pull_request_template" ]; then
     cat "$pull_request_template" >> "$commit_message_file"
@@ -61,10 +62,6 @@ else
   echo >> "$commit_message_file"
   git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
 fi
-
-# Hired
-inreplace "$commit_message_file" insert_jira_issue_number "$(hired_ticket_number)"
-inreplace "$commit_message_file" insert_github_name_or_group @kevindjacobson
 
 vim -c "set ft=gitcommit" "$commit_message_file"
 message_without_comments=$(egrep -v "^${commentchar}" "$commit_message_file")
