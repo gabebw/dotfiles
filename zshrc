@@ -194,7 +194,7 @@ fi
 PATH="/usr/local/heroku/bin:$PATH"
 
 # Node
-PATH=$PATH:/usr/local/share/npm/bin
+PATH=$PATH:/usr/local/share/npm/bin:node_modules/.bin
 
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
