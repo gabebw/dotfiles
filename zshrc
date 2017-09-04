@@ -759,8 +759,9 @@ EOF
 # created (i.e., after all zle -N calls and after running compinit), because it
 # has to know about them to highlight them.
 source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# show a message with the exit code when a command returns with a non-zero exit code
-# However, zsh-syntax-highlighting also somehow unsets the `print_exit_value`
-# ZSH option, so set it after sourcing zsh-syntax-highlighting.
-# options here so it sticks.
+
+# `print_exit_value` shows a message with the exit code when a command returns
+# with a non-zero exit code.
+# However, zsh-syntax-highlighting somehow unsets this options option, so we
+# must set it after sourcing zsh-syntax-highlighting.
 setopt print_exit_value
