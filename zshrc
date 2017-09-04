@@ -101,7 +101,11 @@ vdot(){ vim "$@" }
 
 o(){
   if [ -d "$1" ]; then
-    open -a Preview "$1"
+    if [[ -n "$(find "$1" -maxdepth 1 -name '*.mp4' -print -quit)" ]]; then
+      open "$1"/*
+    else
+      open -a Preview "$1"
+    fi
   else
     open "$@"
   fi
