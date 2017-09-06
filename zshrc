@@ -56,7 +56,6 @@ alias df="df -h"
 alias sed="sed -E"
 # Just print request/response headers
 alias curl-debug="command curl -vso /dev/null -H Fastly-debug:1"
-alias curl="curl --verbose"
 # Use modern regexps for grep, and do show color when `grep` is the final
 # command, but don't when piping to something else, because the added color
 # codes will mess up the expected input.
