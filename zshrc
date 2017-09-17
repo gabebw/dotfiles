@@ -275,6 +275,19 @@ compdef _vdot vdot
 # other `bindkey`s after it to override anything you like.
 bindkey -v
 
+# Open current command in Vim
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^v" edit-command-line
+
+# Copy the most recent command to the clipboard
+_pbcopy_last_command(){
+  fc -ln -1 | pbcopy && \
+    tmux display-message "Previous command copied to clipboard"
+}
+zle -N pbcopy-last-command _pbcopy_last_command
+bindkey '^x^x' pbcopy-last-command
+
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl
 fuzzy-history() {
