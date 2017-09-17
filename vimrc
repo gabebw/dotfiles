@@ -96,6 +96,7 @@ Plug 'bogado/file-line'
 Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 
 " Text objects
 " required for all the vim-textobj-* plugins
@@ -364,6 +365,10 @@ nnoremap <Leader>t :FZF<CR>
 " This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
+
+" easytags
+" ----------
+let g:easytags_async = 1
 
 " rails.vim
 "----------
