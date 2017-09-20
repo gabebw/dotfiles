@@ -34,7 +34,7 @@ is_hired(){
 
 link_to_hired_ticket_number(){
   local number=$(git rev-parse --abbrev-ref HEAD | sed -E 's/gbw-([A-Z]+-[0-9]+).*/\1/')
-  echo "Ticket: [https://hiredteam.atlassian.net/browse/${number}](${number})"
+  echo "Ticket: [${number}](https://hiredteam.atlassian.net/browse/${number})"
 }
 
 commit_message_file=$(mktemp -t commit_message_file)
