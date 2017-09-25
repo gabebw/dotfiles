@@ -542,11 +542,11 @@ alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gc(){
   if [[ $# == 0 ]]; then
-    local branch=$(git branch |\
+    local branch=$(git branch -a |\
       grep -v HEAD |\
-      sed -E 's/^\*?[ \t]*//' |\
-      fzf --reverse --ansi --tac |\
-      sed -E 's@^remotes/[a-z]+/@@')
+      sed -E -e 's|remotes/[a-z]+/||' -e 's/^\*?[ \t]*//' |\
+      sort -u |\
+      fzf --reverse --ansi --tac)
     [[ -n "$branch" ]] && git checkout "$branch" || true
   else
     git checkout "$@"
