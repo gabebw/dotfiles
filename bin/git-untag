@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Too many git tags? This script is for you!
+
+# Remove all tags _locally_ (won't affect remote)
+git tag -l | xargs git tag -d
+
+# Stop fetching tags from origin (only for this repo)
+git config --local remote.origin.tagOpts '--no-tags'
