@@ -6,4 +6,4 @@
 git tag -l | xargs git tag -d
 
 # Stop fetching tags from origin (only for this repo)
-git config --local remote.origin.tagOpts '--no-tags'
+git config --local remote.origin.tagOpt '--no-tags'
