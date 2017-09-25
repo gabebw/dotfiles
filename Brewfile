@@ -76,3 +76,6 @@ brew 'elasticsearch'
 brew 'youtube-dl'
 # youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
 brew 'ffmpeg'
+
+# I love `sponge` so much.
+brew 'moreutils'
