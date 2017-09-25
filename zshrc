@@ -54,8 +54,8 @@ alias du="du -cksh"
 alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
-# Just print request/response headers
-alias curl-debug="command curl -vso /dev/null -H Fastly-debug:1"
+# Just print request/response headers, ignoring ~/.curlrc
+alias curl-debug="command curl --disable -vsSo /dev/null -H Fastly-debug:1"
 # Search for the string anywhere in the command name, not just in the executable
 alias pgrep='command pgrep -f'
 # Use modern regexps for grep, and do show color when `grep` is the final
