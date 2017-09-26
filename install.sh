@@ -64,11 +64,11 @@ fi
 if is_osx; then
   if ! system_profiler SPFontsDataType | rg 'Full Name: Iosevka$'; then
     open fonts/iosevka*
-  end
+  fi
 
   if ! system_profiler SPFontsDataType | rg 'Full Name: Inconsolata Regular'; then
     open fonts/Inconsolata*
-  end
+  fi
 fi
 
 for setup in tag-*/setup; do
