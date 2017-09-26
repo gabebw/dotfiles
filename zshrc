@@ -137,10 +137,6 @@ al() { ls -t | head -n ${1:-10}; }
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
 
-# Takes in text with one number per line and sums them.
-# Usage: cat numbers.txt | sum
-sum() { paste -sd+ - | bc }
-
 # }}}
 
 # Options {{{

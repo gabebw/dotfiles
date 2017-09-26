@@ -79,3 +79,6 @@ brew 'ffmpeg'
 
 # I love `sponge` so much.
 brew 'moreutils'
+
+# Provides `numsum`, among others.
+brew 'num-utils'
