@@ -99,6 +99,7 @@ alias rcup="command rcup -v | grep -v identical"
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t "$1") }
 vdot(){ vim "$@" }
+alias xo='xargs open'
 
 o(){
   if [ -d "$1" ]; then
