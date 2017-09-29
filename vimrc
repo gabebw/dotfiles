@@ -509,6 +509,6 @@ filetype plugin indent on
 syntax enable
 silent! colorscheme tomorrow-night-80s
 
-if filereadable('.vimrc.local')
+if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local
 endif

@@ -100,6 +100,7 @@ it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t "$1") }
 vdot(){ vim "$@" }
 alias xo='xargs open'
+alias trust='mkdir -p .git/safe'
 
 o(){
   if [ -d "$1" ]; then
@@ -196,7 +197,7 @@ fi
 PATH="/usr/local/heroku/bin:$PATH"
 
 # Node
-PATH=$PATH:/usr/local/share/npm/bin:node_modules/.bin
+PATH=$PATH:/usr/local/share/npm/bin
 
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -644,7 +645,7 @@ fi
 # }}}
 
 # Haskell {{{
-PATH="./.cabal-sandbox/bin:$HOME/.cabal/bin:$PATH"
+PATH="./.git/safe/../../.cabal-sandbox/bin:$HOME/.cabal/bin:$PATH"
 
 command -v stack > /dev/null && eval "$(stack --bash-completion-script stack)"
 
