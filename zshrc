@@ -130,7 +130,7 @@ whois() {
   command whois $(echo "$1" | sed -E -e 's|^https?://||' -e 's|/.*$||g')
 }
 
-al() { ls -t | head -n ${1:-10}; }
+al() { ls -tU | head -n ${1:-10}; }
 
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
