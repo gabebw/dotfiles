@@ -73,16 +73,14 @@ alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
 # Make images smaller
-alias crush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
+alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
-y(){
-  if [[ $# == 0 ]]; then
-    youtube-dl --no-mtime --no-overwrites "$(pbpaste)"
-  else
-    youtube-dl --no-mtime --no-overwrites "$@"
-  fi
+alias youtube-dl-safe="youtube-dl --no-mtime --no-overwrites"
+y-fallback(){
+  youtube-dl-safe "$@" || youtube-dl-safe --external-downloader curl "$@"
 }
+y(){ y-fallback "${@:-"$(pbpaste)"}" }
 # Pipe to this to quote filenames with spaces
 alias quote="sed 's/^[^\"].*/\"&\"/'"
 # Files created today
@@ -92,14 +90,13 @@ days(){
   local query="kMDItemFSCreationDate>\$time.today(-$1) && kMDItemContentType != public.folder"
   mdfind -onlyin . "$query" | quote
 }
-alias topen='today | xargs open'
 alias epoch="date -r"
 alias rg="command rg --max-columns 200"
 alias rcup="command rcup -v | grep -v identical"
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t "$1") }
 vdot(){ vim "$@" }
-alias xo='xargs open'
+alias xo='quote | xargs open'
 alias trust='mkdir -p .git/safe'
 
 o(){
