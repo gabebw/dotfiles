@@ -84,7 +84,7 @@ y(){
   fi
 }
 # Pipe to this to quote filenames with spaces
-alias quote="sed 's/.*/\"&\"/'"
+alias quote="sed 's/^[^\"].*/\"&\"/'"
 # Files created today
 alias today="days 0"
 # Created in last n days
