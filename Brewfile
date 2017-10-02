@@ -60,10 +60,6 @@ tap 'thoughtbot/formulae'
 brew 'rcm'
 brew 'parity'
 
-# The latest version of Docker is too new to work with Heroku's Docker registry.
-# Install Docker 1.11 instead, which is old enough to work with Heroku.
-brew 'docker@1.11'
-
 # Fast, hip replacement for grep
 brew 'ripgrep'
 
