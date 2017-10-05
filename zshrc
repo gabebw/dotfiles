@@ -136,6 +136,7 @@ al() { ls -tU | head -n ${1:-10}; }
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
 
+source ~/.aliases
 # }}}
 
 # Options {{{
