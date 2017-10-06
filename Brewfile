@@ -21,6 +21,9 @@ brew 'shpotify'
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
+# sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
+brew 'xmlstarlet'
+
 # Qt5.5 for capybara-webkit, because Qt 5.6 doesn't work except with the most
 # recent version
 brew 'qt@5.5'
