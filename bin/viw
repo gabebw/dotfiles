@@ -13,6 +13,7 @@
 source ~/.zshrc
 _handle_unknown_command() {
   echo "\"$1\" is not recognized as a script, function, or alias" >&2
+  echo "(searched in $(_search_paths))"
   return 1
 }
 
@@ -37,22 +38,36 @@ _edit_script() {
 }
 
 _definition_field_for_pattern() {
-  definition=$(grep -En "$2" ~/.zshrc ~/.zshenv ~/.zsh/**/*.zsh 2>/dev/null)
-  echo "$definition" | cut -d ":" -f "$1"
+  _grep_for_definition -n "$2" | cut -d ":" -f "$1"
 }
 
-_edit_based_on_pattern() {
-  file=$(_definition_field_for_pattern 1 "$1")
-  line=$(_definition_field_for_pattern 2 "$1")
-  vim "$file" "+$line"
+_search_paths(){
+  echo ~/.zshrc ~/.zshenv ~/.aliases
+}
+
+_grep_for_definition(){
+  grep -E "$@" $(_search_paths) 2>/dev/null
+}
+
+_edit_based_on_pattern(){
+  local pattern=$1
+  local command_name=$2
+
+  if _grep_for_definition -q "$pattern"; then
+    file=$(_definition_field_for_pattern 1 "$pattern")
+    line=$(_definition_field_for_pattern 2 "$pattern")
+    vim "$file" "+$line"
+  else
+    _handle_unknown_command "$command_name"
+  fi
 }
 
 _edit_shell_function() {
-  _edit_based_on_pattern "(^function $1[ {()])|(^$1\(\))"
+  _edit_based_on_pattern "(^function $1[ {()])|(^$1\(\))" "$1"
 }
 
 _edit_shell_alias() {
-  _edit_based_on_pattern "alias $1="
+  _edit_based_on_pattern "alias $1=" "$1"
 }
 
 if [[ $# == 0 ]]; then
