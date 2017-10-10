@@ -459,6 +459,8 @@ let g:rainbow_conf = {
 " ===========================================================================
 " always display status line
 set laststatus=2
+" Don't show `-- INSERT --` below the statusbar since it's in the statusbar
+set noshowmode
 
 let g:lightline = {
       \ 'colorscheme': 'darcula',
