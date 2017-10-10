@@ -401,6 +401,12 @@ let g:gist_clip_command = 'pbcopy'
 " Post privately by default
 let g:gist_post_private = 1
 
+" fugitive
+" --------
+" Get a direct link to the current line (with specific commit included!) and
+" copy it to the system clipboard
+nnoremap <Leader>gc :.Gbrowse! -<CR>
+
 " vim-trimmer
 " -----------------
 let g:trimmer_repeated_lines_blacklist = ["conf", "python"]
