@@ -1,1 +1,3 @@
 plug.vim
+/vim/undodir
+/vim/backups
