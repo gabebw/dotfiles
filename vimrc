@@ -461,17 +461,15 @@ let g:rainbow_conf = {
 set laststatus=2
 
 let g:lightline = {
-      \ 'colorscheme': 'Tomorrow_Night_Eighties',
+      \ 'colorscheme': 'darcula',
       \ 'active': {
       \   'left': [
       \             ['mode', 'paste'],
-      \             ['emojipocalypse'],
       \             ['fugitive', 'readonly', 'myfilename', 'modified']
       \           ]
       \ },
       \ 'component': {
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-      \   'emojipocalypse': '%{emoji#for("sparkles")}',
       \   'readonly': '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}',
       \ },
       \ 'component_function': {
