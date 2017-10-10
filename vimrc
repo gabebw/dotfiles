@@ -418,9 +418,13 @@ nnoremap <leader>zr :VtrFocusRunner<CR>
 
 " Test running
 " -----------------
-let test#strategy = 'vtr'
 nnoremap <Leader>l :TestNearest<CR>:redraw!<CR>
 nnoremap <Leader>a :TestFile<CR>:redraw!<CR>
+let test#strategy = 'vtr'
+let test#ruby#rspec#options = {
+      \ 'nearest': '--format documentation',
+      \ 'file':    '--format documentation',
+      \ }
 
 " luochen1990/rainbow
 " -----------------
