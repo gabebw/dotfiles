@@ -624,6 +624,7 @@ docker-kickstart(){
 # Why set $VISUAL instead of $EDITOR?
 # http://robots.thoughtbot.com/visual-ize-the-future
 export VISUAL=vim
+export EDITOR=$VISUAL
 alias vi="$VISUAL"
 alias v="$VISUAL"
 
@@ -793,6 +794,12 @@ void draw() {
 EOF
   vim "$1/$1.pde"
 }
+# }}}
+
+# tmuxinator {{{
+source ~/.zsh/completion-scripts/_tmuxinator
+compdef _tmuxinator tmuxinator mux
+alias mux=tmuxinator
 # }}}
 
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
