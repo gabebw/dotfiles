@@ -486,7 +486,8 @@ let g:lightline = {
       \ 'component_visible_condition': {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ }
+      \ },
+      \ 'tabline': { 'right': [] }
 \ }
 
 function! LightLineFilename()
