@@ -468,27 +468,24 @@ set laststatus=2
 " Don't show `-- INSERT --` below the statusbar since it's in the statusbar
 set noshowmode
 
-let g:lightline = {
-      \ 'colorscheme': 'darcula',
-      \ 'active': {
-      \   'left': [
-      \             ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'myfilename', 'modified']
-      \           ]
-      \ },
-      \ 'component': {
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-      \   'readonly': '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}',
-      \ },
-      \ 'component_function': {
-      \   'myfilename': 'LightLineFilename',
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'tabline': { 'right': [] }
-\ }
+let g:lightline = {}
+let g:lightline.component = {}
+let g:lightline.component_function = {}
+let g:lightline.component_visible_condition = {}
+let g:lightline.tabline = {}
+
+let g:lightline.colorscheme = 'darcula'
+let g:lightline.active = {}
+let g:lightline.active.left = [
+      \ ['mode', 'paste'],
+      \ ['fugitive', 'readonly', 'myfilename', 'modified']
+      \ ]
+let g:lightline.component.fugitive = '%{exists("*fugitive#head")?fugitive#head():""}'
+let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}'
+let g:lightline.component_function.myfilename = 'LightLineFilename'
+let g:lightline.component_visible_condition.readonly = '(&filetype!="help"&& &readonly)'
+let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head") && ""!=fugitive#head())'
+let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineFilename()
   let git_root = fnamemodify(fugitive#extract_git_dir(expand("%:p")), ":h")
