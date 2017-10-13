@@ -1,0 +1,2 @@
+" Quickfix
+setlocal norelativenumber
