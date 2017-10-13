@@ -374,6 +374,7 @@ let g:easytags_async = 1
 "----------
 let g:rails_projections = {
     \ "config/routes.rb": { "command": "routes" },
+    \ "spec/factories/*.rb": { "command": "factories" },
     \ "spec/factories.rb": { "command": "factories" },
     \ "spec/features/*_spec.rb": { "command": "feature" },
     \ "config/locales/en/*.yml": {
