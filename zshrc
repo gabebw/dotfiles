@@ -107,7 +107,11 @@ o(){
       open -a Preview "$1"
     fi
   else
-    open "$@"
+    if [[ $# == 0 ]]; then
+      open *.*
+    else
+      open "$@"
+    fi
   fi
 }
 # Get rid of Messages.app's fake unread message badge
