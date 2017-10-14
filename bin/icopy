@@ -63,7 +63,9 @@ def guess_extension!(from, temp_file_path)
 end
 
 def with_extension!(from, to, path)
-  unless to.include?(".")
+  if to.include?(".")
+    to
+  else
     to += "." + guess_extension!(from, path)
   end
 end
