@@ -82,5 +82,8 @@ brew 'ffmpeg'
 # I love `sponge` so much.
 brew 'moreutils'
 
+# gsed lets you use newlines
+brew 'gnu-sed'
+
 # Provides `numsum`, among others.
 brew 'num-utils'

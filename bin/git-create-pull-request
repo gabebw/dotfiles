@@ -28,6 +28,11 @@ find_pull_request_template(){
   done
 }
 
+# "##" starts with a comment character so replace with alternate markdown style
+replace_markdown_h2(){
+  gsed -E 's/## (.+)/\1\n-------------/g'
+}
+
 is_hired(){
   [ "$(basename "$(pwd)")" = "hired" ]
 }
@@ -44,20 +49,20 @@ pull_request_template=$(find_pull_request_template)
 
 if is_hired; then
   cat "$pull_request_template" >> "$commit_message_file"
-  echo "$(link_to_hired_ticket_number)" >> "$commit_message_file"
+  echo "\n$(link_to_hired_ticket_number)" >> "$commit_message_file"
   echo "\nbot review me @hired/internal-xp" >> "$commit_message_file"
   echo >> "$commit_message_file"
   git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
 elif [ "$number_of_commits" -eq 1 ]; then
   git log -1 --format=%B > "$commit_message_file"
   if [ -n "$pull_request_template" ]; then
-    cat "$pull_request_template" >> "$commit_message_file"
+    replace_markdown_h2 "$pull_request_template" >> "$commit_message_file"
   fi
 else
   echo "[Descriptive title goes here]" > "$commit_message_file"
   echo >> "$commit_message_file"
   if [ -n "$pull_request_template" ]; then
-    cat "$pull_request_template" >> "$commit_message_file"
+    replace_markdown_h2 "$pull_request_template" >> "$commit_message_file"
   fi
   echo >> "$commit_message_file"
   git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
