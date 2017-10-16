@@ -39,6 +39,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'Twinside/vim-hoogle'
+Plug 'nbouscal/vim-stylish-haskell'
 
 " Syntax
 Plug 'sophacles/vim-processing'

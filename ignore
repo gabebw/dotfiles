@@ -16,6 +16,10 @@
 /bower_components/
 .git/
 
+# Haskell
+.cabal-sandbox
+.stack-work
+
 ## Files
 
 # ctags file
@@ -29,7 +33,8 @@
 *.svg
 /spec/fixtures/*.sql
 .keep
-# This file is huge and messes up the vim quickfix window
+
+# Huge JS files that mess up the vim quickfix window
 highlight.all.js
 highlight.pack.js
 vendor/assets/javascript/select2.js
