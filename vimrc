@@ -98,6 +98,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
+Plug 'w0rp/ale'
 
 " Text objects
 " required for all the vim-textobj-* plugins
@@ -359,6 +360,25 @@ set grepformat=%f:%l:%c:%m
 " ============================================================================
 " PLUGIN OPTIONS {{{
 " ===========================================================================
+
+" Ale
+" --------
+
+augroup Ale
+  autocmd!
+  " ALE linting events
+  if exists('*ale#Lint')
+    set updatetime=1000
+    let g:ale_lint_on_text_changed = 0
+    autocmd CursorHold * call ale#Lint()
+    autocmd CursorHoldI * call ale#Lint()
+    autocmd InsertEnter * call ale#Lint()
+    autocmd InsertLeave * call ale#Lint()
+  endif
+augroup END
+" Move between linting errors
+nnoremap ]r :ALENextWrap<CR>
+nnoremap [r :ALEPreviousWrap<CR>
 
 " FZF
 " -----------------
