@@ -511,6 +511,25 @@ set shiftwidth=2
 set expandtab
 " }}}
 
+" ============================================================================
+" FUNCTIONS {{{
+" ===========================================================================
+function! s:EnsureNothingConflictsWithGrep()
+  " I type `<Leader>g` to pop up `:Grep ` then quickly start typing my search
+  " term. When (e.g.) `<Leader>gc` exists, I have to pause after `<Leader>g`
+  " when I'm searching for a term that starts with 'c'. That's hard to remember,
+  " so instead I'm ensuring that I never conflic with grep.
+  let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+        \ 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+  for letter in alphabet
+    if !empty(maparg('<Leader>g'.letter, 'n'))
+      echoerr 'You mapped something to <Leader>g'.letter.', which will mess up grep'
+    endif
+  endfor
+endfunction
+" }}}
+
 runtime macros/matchit.vim
 
 " vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
@@ -522,3 +541,5 @@ silent! colorscheme Tomorrow-Night-Bright
 if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local
 endif
+
+call s:EnsureNothingConflictsWithGrep()
