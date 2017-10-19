@@ -51,7 +51,7 @@ Plug 'vim-scripts/magic.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'cespare/vim-toml'
 Plug 'chase/vim-ansible-yaml'
-Plug 'evanmiller/nginx-vim-syntax'
+Plug 'chr4/nginx.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'slim-template/vim-slim'
 
