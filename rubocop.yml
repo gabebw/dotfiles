@@ -8,6 +8,7 @@ AllCops:
   - "db/**/*"
   DisplayCopNames: false
   StyleGuideCopsOnly: false
+  TargetRubyVersion: 2.4
 Rails:
   Enabled: true
 Style/AndOr:
@@ -771,6 +772,10 @@ Layout/IndentHash:
   SupportedStyles:
   - special_inside_parentheses
   - consistent
+Style/ConditionalAssignment:
+  Enabled: false
+Layout/IndentHeredoc:
+  Enabled: false
 Layout/MultilineMethodCallIndentation:
   Description: Checks indentation of method calls with the dot operator
     that span more than one line.
