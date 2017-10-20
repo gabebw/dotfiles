@@ -60,7 +60,7 @@ _connected_to(){
 if (( $# == 1 )); then
   _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
 else
-  project_directory=$(projects | fzf --reverse)
+  project_directory=$(projects | fzf-tmux --reverse)
 
   if [[ -n "$project_directory" ]]; then
     session_name=$(_tmux_normalize_session_name "$project_directory")
