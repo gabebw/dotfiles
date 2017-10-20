@@ -1,86 +1,296 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
-# Open a PR, edit the description in Vim, copy the url to the clipboard, and
-# open the PR in the browser.
+# This script:
+# * creates a file with all of the commits since origin/master
+# * intelligently reflows each commit's body to not have linebreaks (so that
+#   the PR looks better on GitHub, which keeps hard linebreaks)
+# * opens the file in Vim for further editing
+# * creates a PR with that description
+# * copies the PR's url to the clipboard
+# * opens the PR in the browser
+#
+# Whew!
 
-set -e
-set -o pipefail
+require "open3"
+require "redcarpet"
+require "tempfile"
 
-on_master() {
-  [ "$(git rev-parse HEAD)" = "$(git rev-parse master)" ]
-}
+# An arbitrary string that's unlikely to occur in commits, used in the `git log`
+# format so that we can split on it later.
+COMMIT_MARKER = "---MARKER---".freeze
 
-error() {
-  echo "\n!!! $@" >&2
+# Intelligently removes hard line breaks:
+# * Doesn't touch code blocks
+# * Reflows paragraphs
+# * Reflows list items while preserving nested lists
+# * Reflows blockquotes
+class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
+  def block_code(code, language)
+    <<~CODE
+    ```#{language}
+    #{code.strip}
+    ```
+
+    CODE
+  end
+
+  def block_quote(quote)
+    "\n> #{unwrapped(quote.strip)}"
+  end
+
+  def block_html(raw_html)
+    raw_html
+  end
+
+  def footnotes(content)
+    content
+  end
+
+  def footnote_def(content, number)
+    content
+  end
+
+  def header(text, header_level)
+    marker = "#" * header_level
+    "#{marker} #{text}\n\n"
+  end
+
+  def hrule
+    "--------------------------"
+  end
+
+  def list(contents, list_type)
+    "#{contents}\n"
+  end
+
+  def list_item(text, list_type)
+    marker = case list_type
+             when :unordered
+               "*"
+             when :ordered
+               "1."
+             end
+    text.gsub!(/^(\*|\d\.)\s*(?<body>[^\n]+\n)/) do
+      body = Regexp.last_match[:body]
+      "  #{marker} #{unwrapped(body)}\n"
+    end
+    text = text.gsub(/\n(?!\s+#{Regexp.escape(marker)})/, " ").strip
+    "#{marker} #{text}\n"
+  end
+
+  def paragraph(text)
+    "#{unwrapped(text)}\n\n"
+  end
+
+  def table(header, body)
+    header_boundary = header.gsub(/[^|]/, "-")
+    "#{header}\n#{header_boundary}\n#{body}\n"
+  end
+
+  def table_row(content)
+    "|#{content}"
+  end
+
+  def table_cell(content, alignment)
+    " #{content} |"
+  end
+
+  private
+
+  def unwrapped(text)
+    text.strip.gsub("\n", " ").strip
+  end
+end
+
+class Markdown
+  def initialize
+    @renderer = Redcarpet::Markdown.new(
+      RenderMarkdownWithOneLineParagraphs,
+      fenced_code_blocks: true,
+      tables: true,
+    )
+  end
+
+  def render(text)
+    renderer.render(text)
+  end
+
+  private
+
+  attr_reader :renderer
+end
+
+class PRTemplate
+  def possible_body
+    if pull_request_template
+      "\n" + reformat(pull_request_template)
+    else
+      ""
+    end
+  end
+
+  private
+
+  def pull_request_template
+    if pull_request_template_path
+      File.read(pull_request_template_path)
+    end
+  end
+
+  def pull_request_template_path
+    @pull_request_template_path = files.detect { |file| File.readable?(file) }
+  end
+
+  def files
+    Dir["PULL_REQUEST_TEMPLATE*", ".github/PULL_REQUEST_TEMPLATE*"]
+  end
+
+  def reformat(text)
+    Markdown.new.render(text).strip
+  end
+end
+
+class CommitMessageBuilder
+  def initialize(repo)
+    @number_of_commits = repo.number_of_commits
+    @pr_template = PRTemplate.new
+    @repo = repo
+  end
+
+  def build
+    # Reflow each commit message, since reflowing the entire text leads to weird
+    # results.
+    markdown = Markdown.new
+    message = commit_message.split(/^#{COMMIT_MARKER}/).
+      map { |commit| markdown.render(commit) }.
+      join("--- ")
+  end
+
+  private
+
+  attr_reader :number_of_commits, :pr_template, :repo
+
+  def commit_message
+    if hired?
+      hired_commit_message
+    elsif number_of_commits == 1
+      single_commit_message
+    else
+      multi_commit_message
+    end
+  end
+
+  def hired?
+    File.basename(Dir.pwd) == "hired"
+  end
+
+  def multi_commit_message
+    <<~MESSAGE
+      # Descriptive title goes here
+      #{pr_template.possible_body}
+      #{repo.fancy_log_of_all_commits_since_master}
+    MESSAGE
+  end
+
+  def single_commit_message
+    <<~MESSAGE
+      #{repo.first_commit_full_message}
+      #{pr_template.possible_body}
+    MESSAGE
+  end
+
+  def hired_commit_message
+    commit_message = <<~MSG
+      #{repo.first_commit_subject}
+      #{pr_template.possible_body}
+      #{link_to_hired_ticket_number}
+
+      bot review me @hired/internal-xp
+    MSG
+    commit_message.sub(/^Purpose of PR\n[-]+\n/, "\\0#{hired_commits_body}")
+  end
+
+  def hired_commits_body
+    if number_of_commits == 1
+      "\n" + repo.first_commit_body
+    else
+      "\n" + repo.fancy_log_of_all_commits_since_master
+    end
+  end
+
+  def link_to_hired_ticket_number
+    number = repo.current_branch.sub(/gbw-([A-Z]+-[0-9]+).*/, '\1')
+    "Ticket: [#{number}](https://hiredteam.atlassian.net/browse/#{number})"
+  end
+end
+
+class Repo
+  def initialize
+    @current_branch = git("rev-parse --abbrev-ref HEAD")
+  end
+
+  attr_reader :current_branch
+
+  def fancy_log_of_all_commits_since_master
+    fancy_format = "#{COMMIT_MARKER}%n(%aN, %ar)%n%n%w(78)%s%n%+b"
+    git "log --format='#{fancy_format}' origin/master..HEAD"
+  end
+
+  def number_of_commits
+    git("rev-list origin/master..HEAD --count").to_i
+  end
+
+  def first_commit_subject
+    git "log -1 --format=%s"
+  end
+
+  def first_commit_body
+    git "log -1 --format=%b"
+  end
+
+  def first_commit_full_message
+    git "log -1 --format=%B"
+  end
+
+  def on_master?
+    current_branch == "master"
+  end
+
+  private
+
+  def git(command)
+    run "git #{command}"
+  end
+
+  def run(command)
+    `#{command}`.strip
+  end
+end
+
+repo = Repo.new
+
+if repo.on_master?
+  STDERR.puts "\n!!! You're already on master"
   exit 1
-}
+end
 
-if on_master; then
-  error "You're already on master"
-fi
+commit_message_file = Tempfile.new("commit_message_file")
+commit_message = CommitMessageBuilder.new(repo).build
+File.open(commit_message_file, "w") { |f| f.write(commit_message) }
 
-find_pull_request_template(){
-  for template in PULL_REQUEST_TEMPLATE* .github/PULL_REQUEST_TEMPLATE*; do
-    if [ -r "$template" ]; then
-      printf "$template"
-      break
-    fi
-  done
-}
-
-# "##" starts with a comment character so replace with alternate markdown style
-replace_markdown_h2(){
-  gsed -E "$@" -e 's/## (.+)/\1\n-------------/g'
-}
-
-is_hired(){
-  [ "$(basename "$(pwd)")" = "hired" ]
-}
-
-link_to_hired_ticket_number(){
-  local number=$(git rev-parse --abbrev-ref HEAD | sed -E 's/gbw-([A-Z]+-[0-9]+).*/\1/')
-  echo "Ticket: [${number}](https://hiredteam.atlassian.net/browse/${number})"
-}
-
-commit_message_file=$(mktemp -t commit_message_file)
-number_of_commits=$(git rev-list origin/master..HEAD --count)
-commentchar=$(git config --get core.commentchar || printf "#")
-pull_request_template=$(find_pull_request_template)
-
-if is_hired; then
-  if [ "$number_of_commits" -eq 1 ]; then
-    git log -1 --format=%s >> "$commit_message_file"
-    echo >> "$commit_message_file"
-  fi
-  cat "$pull_request_template" >> "$commit_message_file"
-  if [ "$number_of_commits" -eq 1 ]; then
-    gsed -E -i "s/## Purpose of PR/&\n$(git log -1 --format=%b)/" "$commit_message_file"
-  fi
-  replace_markdown_h2 -i "$commit_message_file"
-  echo "\n$(link_to_hired_ticket_number)" >> "$commit_message_file"
-  echo "\nbot review me @hired/internal-xp" >> "$commit_message_file"
-  if [ "$number_of_commits" -ne 1 ]; then
-    echo >> "$commit_message_file"
-    git log --format="%h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
-  fi
-elif [ "$number_of_commits" -eq 1 ]; then
-  git log -1 --format=%B > "$commit_message_file"
-  if [ -n "$pull_request_template" ]; then
-    replace_markdown_h2 "$pull_request_template" >> "$commit_message_file"
-  fi
+if system("vim -c 'set ft=gitcommit' '#{commit_message_file.path}'")
+  hub_pull_request = "hub pull-request -F '#{commit_message_file.path}'"
+  Open3.popen3(hub_pull_request) do |_input, out, err, thread|
+    if thread.value.exitstatus == 0
+      url = out.read
+      system("open '#{url}'")
+    else
+      STDERR.puts "!!! `#{hub_pull_request}` failed:"
+      STDERR.puts err.read
+    end
+  end
 else
-  echo "[Descriptive title goes here]" > "$commit_message_file"
-  echo >> "$commit_message_file"
-  if [ -n "$pull_request_template" ]; then
-    replace_markdown_h2 "$pull_request_template" >> "$commit_message_file"
-  fi
-  echo >> "$commit_message_file"
-  git log --format="$commentchar %h (%aN, %ar)%n%w(78,3,3)%s%n%+b" origin/master..HEAD >> "$commit_message_file"
-fi
-
-vim -c "set ft=gitcommit" "$commit_message_file"
-message_without_comments=$(egrep -v "^${commentchar}" "$commit_message_file")
-
-if hub pull-request -m "$message_without_comments" | pbcopy; then
-  open "$(pbpaste)"
-fi
+  # Vim exited abnormally, which always means I did it intentionally with `:cq`
+  # and don't want to create the PR.
+  puts "OK, not creating PR :)"
+end
