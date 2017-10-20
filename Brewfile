@@ -87,3 +87,7 @@ brew 'gnu-sed'
 
 # Provides `numsum`, among others.
 brew 'num-utils'
+
+# https://tldr.sh/
+# Man pages, but with practical examples.
+brew 'tldr'
