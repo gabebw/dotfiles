@@ -381,6 +381,7 @@ nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 highlight clear ALEStyleError
 highlight clear ALEError
+highlight clear ALEWarning
 
 " FZF
 " -----------------
