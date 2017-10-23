@@ -133,3 +133,5 @@ ActiveAdmin
 Monkeypatch
 Webpack
 JS
+Clojure
+REPL
