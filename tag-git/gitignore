@@ -37,6 +37,8 @@ zeus.json
 
 # ctags file
 tags
+# ..but don't ignore a tags/ directory
+!tags/
 
 # Sometimes random files get created. Ignore them.
 '
