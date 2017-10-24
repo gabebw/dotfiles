@@ -15,12 +15,12 @@ let mapleader=" "
 
 " vim-plug: https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/bundle')
-" Web development
+
+" JavaScript
 Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
-Plug 'tpope/vim-rhubarb'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -73,6 +73,10 @@ Plug 'tomtom/tcomment_vim'
 Plug 'ervandew/supertab'
 " Git bindings
 Plug 'tpope/vim-fugitive'
+" The Hub to vim-fugitive's git
+Plug 'tpope/vim-rhubarb'
+" :Gist
+Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
 " When editing deeply/nested/file, auto-create deeply/nested/ dirs
@@ -117,10 +121,6 @@ Plug 'nicholaides/words-to-avoid.vim'
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
 Plug 'christoomey/vim-quicklink'
-
-" :Gist
-Plug 'mattn/webapi-vim'
-Plug 'mattn/gist-vim'
 
 call plug#end()
 " }}}
