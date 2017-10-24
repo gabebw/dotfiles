@@ -207,7 +207,7 @@ class CommitMessageBuilder
 
       bot review me @hired/internal-xp
     MSG
-    commit_message.sub(/^Purpose of PR\n[-]+\n/, "\\0#{hired_commits_body}")
+    commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}")
   end
 
   def hired_commits_body
