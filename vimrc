@@ -112,10 +112,6 @@ Plug 'kana/vim-textobj-entire'
 " `l` text object for the current line excluding leading whitespace
 Plug 'kana/vim-textobj-line'
 
-" Silly stuff, but I like it
-" Now I can put emoji in my statusbar
-Plug 'junegunn/vim-emoji'
-
 " Markdown
 Plug 'nicholaides/words-to-avoid.vim'
 " It does more, but I'm mainly using this because it gives me markdown-aware
@@ -508,7 +504,7 @@ let g:lightline.active.left = [
       \ ['fugitive', 'readonly', 'myfilename', 'modified']
       \ ]
 let g:lightline.component.fugitive = '%{exists("*fugitive#head")?fugitive#head():""}'
-let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? emoji#for("lock") : ""}'
+let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}'
 let g:lightline.component_function.myfilename = 'LightLineFilename'
 let g:lightline.component_visible_condition.readonly = '(&filetype!="help"&& &readonly)'
 let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head") && ""!=fugitive#head())'
