@@ -203,6 +203,7 @@ class CommitMessageBuilder
     commit_message = <<~MSG
       #{repo.first_commit_subject}
       #{pr_template.possible_body}
+
       #{link_to_hired_ticket_number}
 
       bot review me @hired/internal-xp
