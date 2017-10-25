@@ -78,9 +78,12 @@ alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 alias exif-remove="exiftool -all= "
 alias youtube-dl-safe="youtube-dl --no-mtime --no-overwrites"
 y-fallback(){
-  youtube-dl-safe "$@" || youtube-dl-safe --external-downloader curl "$@"
+  youtube-dl-safe \
+    --ignore-errors \
+    --external-downloader curl \
+    "${@:-"$(pbpaste)"}"
 }
-y(){ y-fallback "${@:-"$(pbpaste)"}" }
+y(){ youtube-dl-safe --ignore-errors "${@:-"$(pbpaste)"}" }
 # Pipe to this to quote filenames with spaces
 alias quote="sed \"s/^[^'].*/'&'/\""
 # Files created today
