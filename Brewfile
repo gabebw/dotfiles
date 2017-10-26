@@ -91,3 +91,7 @@ brew 'num-utils'
 # https://tldr.sh/
 # Man pages, but with practical examples.
 brew 'tldr'
+
+brew 'node'
+brew 'yarn'
+brew 'nvm'
