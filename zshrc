@@ -84,8 +84,8 @@ y-fallback(){
     "${@:-"$(pbpaste)"}"
 }
 y(){ youtube-dl-safe --ignore-errors "${@:-"$(pbpaste)"}" }
-# Pipe to this to quote filenames with spaces
-alias quote="sed \"s/^[^'].*/'&'/\""
+# Pipe to this to quote filenames
+alias quote="ruby -r shellwords -e 'puts STDIN.read.each_line.map(&:strip).map(&:shellescape)'"
 # Files created today
 alias today="days 0"
 # Created in last n days
