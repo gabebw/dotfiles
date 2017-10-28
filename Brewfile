@@ -95,3 +95,7 @@ brew 'tldr'
 brew 'node'
 brew 'yarn'
 brew 'nvm'
+
+brew 'parallel'
+# Overwrite the `parallel` from moreutils
+`brew link --overwrite parallel`
