@@ -30,9 +30,6 @@ brew 'https://raw.githubusercontent.com/EricChiang/pup/master/pup.rb'
 # Qt5.5 for capybara-webkit, because Qt 5.6 doesn't work except with the most
 # recent version
 brew 'qt@5.5'
-# --overwrite: overwrite any Qt4 files that might be there
-# --force: required because Qt is keg-only
-`brew link --overwrite --force qt@5.5`
 
 # grep for ps
 brew 'pgrep'
@@ -97,5 +94,3 @@ brew 'yarn'
 brew 'nvm'
 
 brew 'parallel'
-# Overwrite the `parallel` from moreutils
-`brew link --overwrite parallel`
