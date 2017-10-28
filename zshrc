@@ -223,7 +223,7 @@ is_osx(){
 }
 
 if is_osx; then
-  # Add Homebrew to the path. This must be above rbenv path stuff.
+  # Add Homebrew to the path.
   PATH=/usr/local/bin:/usr/local/sbin:$PATH
 fi
 
@@ -238,25 +238,6 @@ PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
 # add them to the front so we always get Python 3.
 PATH=/usr/local/opt/python/libexec/bin:$PATH
 
-# NVM
-boot_nvm(){
-  local nvm_sh="/usr/local/opt/nvm/nvm.sh"
-  export NVM_DIR="$HOME/.nvm"
-  mkdir -p "$NVM_DIR"
-  if [[ -r "$nvm_sh" ]]; then
-    # nvm is incompatible with NPM's `prefix` option, but that option keeps
-    # getting set, so just always delete it.
-    npm config delete prefix
-    . "$nvm_sh"
-  fi
-}
-
-if [[ "$(basename "$PWD")" == "hired" ||
-      "$(basename "$PWD")" == "hubot" ]]; then
-  boot_nvm
-  nvm use &>/dev/null
-fi
-
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
@@ -265,12 +246,6 @@ PATH=~/.local/bin:$PATH
 
 PATH=$HOME/.bin:$PATH
 
-# The goal here is:
-# * ./bin/stubs is before rbenv shims
-# * ~/.rbenv/shims is before /usr/local/bin etc
-# * I don't know why it has to be in this order but putting shims before stubs
-#   breaks stubs ("You have activated the wrong version of rake" error)
-eval "$(rbenv init - --no-rehash)"
 PATH=./bin/stubs:$PATH
 
 # }}}
@@ -280,6 +255,8 @@ PATH=./bin/stubs:$PATH
 # zmodload -i zsh/complist
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
+# Now zsh understands bash completion files. Wild!
+autoload -U bashcompinit && bashcompinit
 
 # Try to match as-is then match case-insensitively
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -395,6 +372,14 @@ add_subdirs_to_cdpath "$HOME/code/work"
 export PROJECT_DIRECTORIES=$CDPATH
 # }}}
 
+# asdf version manager (ruby, node, etc)
+# I truly do not want to deal with the hassle of GPG, so don't fail to install
+# when GPG isn't set up.
+export NODEJS_CHECK_SIGNATURES=no
+for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
+  [[ -r "$f" ]] && . "$f"
+done
+
 # Prompt {{{
 
 # Prompt colors {{{
@@ -444,7 +429,7 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 prompt_shortened_path(){ prompt_purple "%2~" }
 
 prompt_ruby_version() {
-  local version=$(rbenv version-name)
+  local version=$(asdf current ruby 2>/dev/null | awk '{print $1}')
   prompt_magenta "$version"
 }
 # }}}
@@ -719,8 +704,6 @@ if command -v stack > /dev/null; then
     # Delete this function so it only loads completion once.
     unfunction stack
 
-    # Now zsh understands bash completion files. Wild!
-    autoload -U bashcompinit && bashcompinit
     eval "$(stack --bash-completion-script stack)"
 
     # Run the actual command I wanted to run.

@@ -1,30 +1,33 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
-PATH=~/.rbenv/bin:$PATH
+if ! asdf plugin-list | grep -qF ruby; then
+  echo 'Installing ASDF Ruby plugin...'
+  asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+fi
+
+if command -v rbenv &>/dev/null; then
+  echo 'Migrating from rbenv -> asdf...'
+
+  if rbenv versions 2>/dev/null | grep -qFv system; then
+    echo 'Migrating rubies from rbenv -> asdf...'
+    mkdir -p /usr/local/opt/asdf/installs/ruby
+    mv ~/.rbenv/versions/* /usr/local/opt/asdf/installs/ruby/
+  fi
+
+  echo 'Removing ~/.rbenv...'
+  rm -rf ~/.rbenv
+
+  echo 'Uninstalling rbenv...'
+  brew uninstall rbenv-default-gems
+  brew uninstall rbenv
+fi
 
 latest_ruby_version(){
-  rbenv install --list | \
-    awk '!/dev|preview|-rc/ && /^  [0-9]/ { print $1 }' | \
-    tail -1
+  asdf list-all ruby | grep -vE 'preview|rc' | tail -1
 }
 
-echo "Installing rbenv and plugins..."
-if [ ! -d ~/.rbenv ]; then
-  git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-fi
-
-if [ ! -d ~/.rbenv/plugins/ruby-build ]; then
-  git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-fi
-
-if [ ! -d ~/.rbenv/plugins/rbenv-default-gems ]; then
-  git clone https://github.com/rbenv/rbenv-default-gems.git \
-    ~/.rbenv/plugins/rbenv-default-gems
-fi
-
 echo "Installing latest Ruby (version $(latest_ruby_version))..."
-rbenv install --skip-existing "$(latest_ruby_version)"
-
-rbenv global "$(latest_ruby_version)"
+asdf install ruby "$(latest_ruby_version)"
+asdf global ruby "$(latest_ruby_version)"

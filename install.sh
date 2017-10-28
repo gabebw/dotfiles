@@ -88,3 +88,5 @@ for setup in tag-*/setup; do
   info "Running setup for ${dir#tag-}..."
   . "$setup"
 done
+
+asdf install

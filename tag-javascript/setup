@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+if ! asdf plugin-list | grep -qF nodejs; then
+  echo 'Installing ASDF NodeJS plugin...'
+  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+fi
+
+if command -v nvm &>/dev/null; then
+  echo 'Migrating from NVM -> asdf...'
+
+  echo 'Uninstalling NVM...'
+  brew uninstall nvm
+fi
+
+echo 'Installing NodeJS...'
+asdf install nodejs 8.6.0
+asdf global nodejs 8.6.0

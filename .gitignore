@@ -25,3 +25,6 @@ vim/vim-spell-en.utf-8.add.spl
 
 # Ignore old version of vim-plug (created by `:PlugUpgrade`)
 plug.vim.old
+
+# ASDF stores versions for all tools in this file
+tool-versions

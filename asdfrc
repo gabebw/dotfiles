@@ -1,0 +1,3 @@
+# Read `.ruby-version` file for asdf-ruby,
+# `.node-version`/`.nvmrc` file for asdf-node, etc
+legacy_version_file = yes

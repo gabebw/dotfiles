@@ -100,7 +100,9 @@ brew 'tldr'
 
 brew 'node'
 brew 'yarn'
-brew 'nvm'
 
 # a Postgres pager
 brew 'pspg'
+
+# asdf version manager: https://github.com/asdf-vm/asdf
+brew 'asdf'

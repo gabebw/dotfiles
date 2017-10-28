@@ -2,4 +2,4 @@
 setlocal regexpengine=1
 
 " Don't make Vim traverse $PATH to find Ruby
-let g:ruby_path = "$HOME/.rbenv/shims"
+let g:ruby_path = "/usr/local/opt/asdf/shims"
