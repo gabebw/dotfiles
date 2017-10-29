@@ -193,6 +193,10 @@ export FZF_DEFAULT_OPTS='--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 
 # $PATH {{{
 
+is_osx(){
+  [ "$(uname -s)" = Darwin ]
+}
+
 if is_osx; then
   # Add Homebrew to the path. This must be above rbenv path stuff.
   PATH=/usr/local/bin:/usr/local/sbin:$PATH
