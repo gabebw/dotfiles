@@ -223,11 +223,8 @@ PATH=$HOME/.bin:$PATH
 # * ~/.rbenv/shims is before /usr/local/bin etc
 # * I don't know why it has to be in this order but putting shims before stubs
 #   breaks stubs ("You have activated the wrong version of rake" error)
-# * Yes, `rbenv init` adds ~/.rbenv/shims to the $PATH, but because it runs in
-#   zshenv, a lot of other things add $PATH entries before ~/.rbenv/shims. This
-#   is bad because it means that rbenv-installed programs don't have $PATH
-#   primacy anymore.
-PATH=./bin/stubs:~/.rbenv/shims:~/.rbenv/bin:$PATH
+eval "$(rbenv init -)"
+PATH=./bin/stubs:$PATH
 
 # }}}
 
