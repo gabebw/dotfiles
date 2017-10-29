@@ -10,10 +10,6 @@ is_linux(){
   [ "$(uname -s)" = Linux ]
 }
 
-echo "> Please enter your password to install necessary tools."
-# Get some sudo credentials at the beginning in case the user goes away
-sudo -v
-
 if is_osx; then
   echo "Checking for Homebrew..."
   if ! command -v brew > /dev/null; then
