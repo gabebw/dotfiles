@@ -464,7 +464,7 @@ prompt_git_relative_branch_status(){
 
   if ! git config --get "branch.${branch_name}.merge" > /dev/null; then
     print "not_tracking"
-  elif print "$git_status" | command grep -qF "up-to-date"; then
+  elif print "$git_status" | command grep -qF "up to date"; then
     print "up_to_date"
   elif print "$git_status" | command grep -qF "have diverged"; then
     print "ahead_behind"
