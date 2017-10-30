@@ -420,6 +420,7 @@ prompt_git_status_symbol(){
     staged) symbol=$staged;;
     untracked) symbol=$untracked;;
     unchanged) symbol=$clean;;
+    *) symbol=ugh;;
   esac
 
   print "$symbol"
