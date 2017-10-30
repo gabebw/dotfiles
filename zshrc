@@ -440,6 +440,7 @@ prompt_git_relative_branch_status_symbol(){
     ahead_behind) symbol=$sideways_arrow ;;
     behind) symbol=$downwards_arrow ;;
     ahead) symbol=$upwards_arrow ;;
+    *) symbol="ugh"
   esac
 
   prompt_spaced "$symbol"
