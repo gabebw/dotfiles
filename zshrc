@@ -414,12 +414,14 @@ prompt_git_status_symbol(){
   local dirty=$(prompt_red ✘)
   local untracked=$(prompt_cyan '?')
   local staged=$(prompt_yellow ⭑)
+  local conflicts=$(prompt_red '!')
 
   case $(prompt_git_status) in
     changed) symbol=$dirty;;
     staged) symbol=$staged;;
     untracked) symbol=$untracked;;
     unchanged) symbol=$clean;;
+    conflicts) symbol=$conflicts;;
     *) symbol=ugh;;
   esac
 
@@ -457,6 +459,8 @@ prompt_git_status() {
     print "untracked"
   elif print "$git_status" | command grep -qF "working tree clean"; then
     print "unchanged"
+  elif print "$git_status" | command grep -qF "Unmerged paths"; then
+    print "conflicts"
   fi
 }
 
