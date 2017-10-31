@@ -227,7 +227,23 @@ PATH=$HOME/.bin:$PATH
 # * ~/.rbenv/shims is before /usr/local/bin etc
 # * I don't know why it has to be in this order but putting shims before stubs
 #   breaks stubs ("You have activated the wrong version of rake" error)
-eval "$(rbenv init -)"
+PATH=$HOME/.rbenv/shims:$PATH
+export RBENV_SHELL=zsh
+source '/Users/gabe/.rbenv/libexec/../completions/rbenv.zsh'
+rbenv(){
+  local command
+  command="$1"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell)
+    eval "$(rbenv "sh-$command" "$@")";;
+  *)
+    command rbenv "$command" "$@";;
+  esac
+}
 PATH=./bin/stubs:$PATH
 
 # }}}
