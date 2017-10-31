@@ -253,8 +253,6 @@ PATH=./bin/stubs:$PATH
 # zmodload -i zsh/complist
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
 autoload -U compinit && compinit
-# Now zsh understands bash completion files. Wild!
-autoload -U bashcompinit && bashcompinit
 
 # Try to match as-is then match case-insensitively
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -659,7 +657,19 @@ fi
 # Haskell {{{
 PATH="./.git/safe/../../.cabal-sandbox/bin:$HOME/.cabal/bin:$PATH"
 
-command -v stack > /dev/null && eval "$(stack --bash-completion-script stack)"
+if command -v stack > /dev/null; then
+  stack(){
+    # Delete this function so it only loads completion once.
+    unfunction stack
+
+    # Now zsh understands bash completion files. Wild!
+    autoload -U bashcompinit && bashcompinit
+    eval "$(stack --bash-completion-script stack)"
+
+    # Run the actual command I wanted to run.
+    stack "$@"
+  }
+fi
 
 new-yesod-project() {
   name=$1
