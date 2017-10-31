@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker
+" vim: foldmethod=marker foldlevel=1
 " The folding settings above make the {{{ and }}} sections fold up.
 
 " Disable Vi compatibility.
