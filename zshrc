@@ -518,7 +518,9 @@ prompt_full_git_status(){
 # Here, it's used to capture the git status to show in the prompt.
 function precmd {
   vcs_info
-  git status 2> /dev/null >! "/tmp/git-status-$$"
+  if [[ -n "$vcs_info_msg_0_" ]]; then
+    git status 2> /dev/null >! "/tmp/git-status-$$"
+  fi
 }
 
 # Do I have a custom git email set for this git repo? Announce it so I remember
