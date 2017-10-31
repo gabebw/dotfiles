@@ -455,6 +455,10 @@ let test#ruby#rspec#options = {
       \ 'file':    '--format documentation',
       \ }
 
+" vim-ruby
+" -----------------
+let ruby_no_expensive = 1
+
 " luochen1990/rainbow
 " -----------------
 if expand("%:e") ==# 'clj'
