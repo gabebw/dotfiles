@@ -1,4 +1,9 @@
 def fg_boot
-  require 'factory_girl_rails'
-  include FactoryGirl::Syntax::Methods
+  begin
+    require 'factory_girl_rails'
+    include FactoryGirl::Syntax::Methods
+  rescue LoadError
+    require 'factory_bot_rails'
+    include FactoryBot::Syntax::Methods
+  end
 end
