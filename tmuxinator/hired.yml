@@ -53,3 +53,4 @@ windows:
   - scratch:
   - server: b && be rails server
   - webpack: yarn && ./bin/webpack-dev-server
+  - rails_console: be rails console
