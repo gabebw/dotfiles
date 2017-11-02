@@ -137,7 +137,15 @@ whois() {
   command whois $(echo "$1" | sed -E -e 's|^https?://||' -e 's|/.*$||g')
 }
 
-al() { ls -tU | head -n ${1:-10}; }
+al() {
+  if [[ $# == 0 ]]; then
+    ls -tU | head -n 10
+  elif [[ $# == 1 && $1 =~ '^[0-9]+$' ]]; then
+    ls -tU | head -n "$1"
+  else
+    ls -tU "$@" | head -n 30
+  fi
+}
 
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
