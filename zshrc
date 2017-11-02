@@ -566,9 +566,9 @@ alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gc(){
   if [[ $# == 0 ]]; then
-    local branch=$(git branch -a |\
-      grep -v HEAD |\
-      sed -E -e 's|remotes/[a-z]+/||' -e 's/^\*?[ \t]*//' |\
+    local branch=$(git branch --all --verbose --verbose --color=always |\
+      rg -v 'remotes/origin/(HEAD|master)' |\
+      sed -E -e 's/^\*?[ \t]*//' |\
       sort -u |\
       fzf --reverse --ansi --tac)
     [[ -n "$branch" ]] && git checkout "$branch" || true
