@@ -462,7 +462,7 @@ let ruby_no_expensive = 1
 
 " vim-jsx
 " -------
-"  Don't require a .jsx extension
+" Don't require a .jsx extension
 let g:jsx_ext_required = 0
 
 " luochen1990/rainbow
