@@ -566,12 +566,16 @@ alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gc(){
   if [[ $# == 0 ]]; then
-    local branch=$(git branch --all --verbose --verbose --color=always |\
+    local selection=$(git branch --all --verbose --verbose --color=always |\
       rg -v 'remotes/origin/(HEAD|master)' |\
       sed -E -e 's/^\*?[ \t]*//' |\
       sort -u |\
       fzf --reverse --ansi --tac)
-    [[ -n "$branch" ]] && git checkout "$branch" || true
+    if [[ -n "$selection" ]];  then
+      branch=$(echo "$selection" | sed -e 's@^remotes/origin/@@' -e 's/  .*$//')
+      git checkout "$branch"
+    fi
+    true
   else
     git checkout "$@"
   fi
