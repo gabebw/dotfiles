@@ -19,6 +19,7 @@ call plug#begin('~/.vim/bundle')
 " JavaScript
 Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
 
@@ -458,6 +459,11 @@ let test#ruby#rspec#options = {
 " vim-ruby
 " -----------------
 let ruby_no_expensive = 1
+
+" vim-jsx
+" -------
+"  Don't require a .jsx extension
+let g:jsx_ext_required = 0
 
 " luochen1990/rainbow
 " -----------------
