@@ -91,7 +91,7 @@ alias today="days 0"
 # Created in last n days
 days(){
   local query="kMDItemFSCreationDate>\$time.today(-$1) && kMDItemContentType != public.folder"
-  mdfind -onlyin . "$query" | quote
+  mdfind -onlyin . "$query"
 }
 alias epoch="date -r"
 alias rcup="command rcup -v | grep -v identical"
