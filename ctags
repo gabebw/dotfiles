@@ -22,6 +22,8 @@
 --exclude=tmp
 --exclude=node_modules
 --exclude=vendor
+--exclude=public/javascripts/i18n
+--exclude=public/packs
 
 --languages=-javascript
 --langdef=js
