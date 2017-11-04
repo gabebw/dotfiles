@@ -216,11 +216,13 @@ PATH="/usr/local/heroku/bin:$PATH"
 # Node
 PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
 # NVM
-mkdir -p ~/.nvm
-export NVM_DIR="$HOME/.nvm"
-nvm_sh="/usr/local/opt/nvm/nvm.sh"
-[[ -r "$nvm_sh" ]] && . "$nvm_sh"
-unset nvm_sh
+if [[ "$(basename "$PWD")" == "hired" ]]; then
+  mkdir -p ~/.nvm
+  export NVM_DIR="$HOME/.nvm"
+  nvm_sh="/usr/local/opt/nvm/nvm.sh"
+  [[ -r "$nvm_sh" ]] && . "$nvm_sh"
+  unset nvm_sh
+fi
 
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
