@@ -1,0 +1,22 @@
+#!/bin/sh
+# vim: textwidth=0
+
+# `spotify status` (from https://github.com/hnarayanan/shpotify) returns the
+# following:
+#
+#  Spotify is currently playing.
+#  Artist: Lewis Capaldi
+#  Album: Bruises
+#  Track: Bruises
+#  Position: 2:07 / 3:38
+#
+# That's way too long for a tmux status line (and take 0.75-1 seconds), so this
+# script uses osascript directly to return the following string in about 0.3
+# seconds:
+#
+# Bruises by Lewis Capaldi
+
+artist=$(osascript -e 'tell application "Spotify" to artist of current track as string')
+track=$(osascript -e 'tell application "Spotify" to name of current track as string')
+
+printf "%s by %s" "$track" "$artist"
