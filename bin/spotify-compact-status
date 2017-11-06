@@ -15,8 +15,14 @@
 # seconds:
 #
 # Bruises by Lewis Capaldi
+#
+# If Spotify isn't running, it prints an empty string.
 
-artist=$(osascript -e 'tell application "Spotify" to artist of current track as string')
-track=$(osascript -e 'tell application "Spotify" to name of current track as string')
-
-printf "%s by %s" "$track" "$artist"
+applescript='
+var spotify = Application("Spotify");
+if (spotify.running()) {
+  track = spotify.currentTrack();
+  track.name() + " by " + track.artist();
+}
+'
+osascript -l JavaScript -e "$applescript"
