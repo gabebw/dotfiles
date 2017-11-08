@@ -23,6 +23,8 @@ _definition_type() {
     echo "alias"
   elif [[ "$arg_type_string" == *"is a shell function"* ]]; then
     echo "function"
+  elif [[ "$arg_type_string" == *"is a shell builtin"* ]]; then
+    echo "builtin"
   elif [[ "$arg_type_string" == *"is an autoload shell function"* ]]; then
     # Can't edit these, but they do show up in `which`, so short-circuit here
     echo "not found"
@@ -77,6 +79,7 @@ else
   case "$(_definition_type "$command_name")" in
     "alias") _edit_shell_alias "$command_name";;
     "function") _edit_shell_function "$command_name";;
+    "builtin") print "$command_name is a shell builtin";;
     "script") _edit_script "$command_name";;
     "not found") _handle_unknown_command "$command_name"
   esac
