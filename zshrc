@@ -453,6 +453,7 @@ prompt_git_relative_branch_status_symbol(){
     ahead_behind) symbol=$sideways_arrow ;;
     behind) symbol=$downwards_arrow ;;
     ahead) symbol=$upwards_arrow ;;
+    upstream_gone) symbol="[upstream gone]" ;;
     *) symbol="ugh"
   esac
 
@@ -488,6 +489,8 @@ prompt_git_relative_branch_status(){
     print "behind"
   elif print "$git_status" | command grep -qF "Your branch is ahead"; then
     print "ahead"
+  elif print "$git_status" | command grep -qF "upstream is gone"; then
+    print "upstream_gone"
   fi
 }
 
