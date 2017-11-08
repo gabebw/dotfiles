@@ -379,7 +379,7 @@ for color in {000..255}; do
 done
 
 prompt_color() {
-  [[ -n "$1" ]] && print "%{$fg[$2]%}$1%{$reset_color%}"
+  print "%{$fg[$2]%}$1%{$reset_color%}"
 }
 
 prompt_green()  { print "$(prompt_color "$1" 158)" }
