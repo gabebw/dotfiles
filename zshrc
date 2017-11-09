@@ -573,15 +573,25 @@ alias amend-new="git commit --amend"
 alias ga="git add"
 alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
+select-git-branch(){
+  git branch --verbose --verbose --color=always "$@" |\
+    rg -v 'remotes/origin/(HEAD|master)' |\
+    sed -E -e 's/^\*?[ \t]*//' |\
+    sort -u |\
+    fzf --reverse --ansi --tac |\
+    sed -e 's@^remotes/origin/@@' -e 's/  .*$//'
+}
+gcr(){
+  local branch=$(select-git-branch --all)
+  if [[ -n "$branch" ]]; then
+    git checkout "$branch"
+  fi
+  true
+}
 gc(){
   if [[ $# == 0 ]]; then
-    local selection=$(git branch --all --verbose --verbose --color=always |\
-      rg -v 'remotes/origin/(HEAD|master)' |\
-      sed -E -e 's/^\*?[ \t]*//' |\
-      sort -u |\
-      fzf --reverse --ansi --tac)
-    if [[ -n "$selection" ]];  then
-      branch=$(echo "$selection" | sed -e 's@^remotes/origin/@@' -e 's/  .*$//')
+    local branch=$(select-git-branch)
+    if [[ -n "$branch" ]]; then
       git checkout "$branch"
     fi
     true
