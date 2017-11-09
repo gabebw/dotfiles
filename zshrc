@@ -368,27 +368,38 @@ export PROJECT_DIRECTORIES=$CDPATH
 # Prompt colors {{{
 #-------------------
 
-# This is just to get $reset_color, since we generate $fg and $bg ourselves.
-autoload colors && colors
-
-# Generate colors for all 256 colors
 typeset -AHg fg
+typeset -Hg reset_color
+fg=(
+  green 158
+  magenta 218
+  purple 146
+  red 197
+  cyan 159
+  blue 031
+  yellow 222
+)
 
-for color in {000..255}; do
-  fg[$color]="%{[38;5;${color}m%}"
+# Add escape codes to the hex codes above
+for k in ${(k)fg}; do
+  # "\e[38;5;" means "set the following color as the foreground color"
+  fg[$k]="\e[38;5;${fg[$k]}m"
 done
+# This is always defined as the "default foreground color", which might be white
+# on a dark background or black on a white background.
+reset_color="\e[39m"
 
 prompt_color() {
   print "%{$fg[$2]%}$1%{$reset_color%}"
 }
 
-prompt_green()  { print "$(prompt_color "$1" 158)" }
-prompt_magenta(){ print "$(prompt_color "$1" 218)" }
-prompt_purple() { print "$(prompt_color "$1" 146)" }
-prompt_red()    { print "$(prompt_color "$1" 197)" }
-prompt_cyan()   { print "$(prompt_color "$1" 159)" }
-prompt_blue()   { print "$(prompt_color "$1" 031)" }
-prompt_yellow() { print "$(prompt_color "$1" 222)" }
+prompt_green()  { prompt_color "$1" green }
+prompt_magenta(){ prompt_color "$1" magenta }
+prompt_purple() { prompt_color "$1" purple }
+prompt_red()    { prompt_color "$1" red }
+prompt_cyan()   { prompt_color "$1" cyan }
+prompt_blue()   { prompt_color "$1" blue }
+prompt_yellow() { prompt_color "$1" yellow }
 prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 # }}}
 
