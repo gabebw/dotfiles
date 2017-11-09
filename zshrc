@@ -389,10 +389,7 @@ done
 # on a dark background or black on a white background.
 reset_color="\e[39m"
 
-prompt_color() {
-  print "%{$fg[$2]%}$1%{$reset_color%}"
-}
-
+prompt_color()  { print "%{$fg[$2]%}$1%{$reset_color%}" }
 prompt_green()  { prompt_color "$1" green }
 prompt_magenta(){ prompt_color "$1" magenta }
 prompt_purple() { prompt_color "$1" purple }
@@ -412,7 +409,7 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 #
 # ~/foo/bar is shown as "foo/bar"
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
-prompt_shortened_path() { print "$(prompt_purple "%2~")" }
+prompt_shortened_path(){ prompt_purple "%2~" }
 
 prompt_ruby_version() {
   local version=$(rbenv version-name)
@@ -459,49 +456,43 @@ prompt_git_relative_branch_status_symbol(){
   local question_mark=$(prompt_yellow \?)
 
   case $(prompt_git_relative_branch_status) in
-    not_tracking) symbol=$question_mark ;;
-    up_to_date) symbol=$good ;;
-    ahead_behind) symbol=$sideways_arrow ;;
-    behind) symbol=$downwards_arrow ;;
-    ahead) symbol=$upwards_arrow ;;
-    upstream_gone) symbol="[upstream gone]" ;;
-    *) symbol="ugh"
+    not_tracking) symbol=$question_mark;;
+    up_to_date) symbol=$good;;
+    ahead_behind) symbol=$sideways_arrow;;
+    behind) symbol=$downwards_arrow;;
+    ahead) symbol=$upwards_arrow;;
+    upstream_gone) symbol="[upstream gone]";;
+    *) symbol=ugh
   esac
 
   prompt_spaced "$symbol"
 }
 
 prompt_git_status() {
-  local git_status="$(cat "/tmp/git-status-$$")"
-  if print "$git_status" | command grep -qF "Changes not staged" ; then
-    print "changed"
-  elif print "$git_status" | command grep -qF "Changes to be committed"; then
-    print "staged"
-  elif print "$git_status" | command grep -qF "Untracked files"; then
-    print "untracked"
-  elif print "$git_status" | command grep -qF "working tree clean"; then
-    print "unchanged"
-  elif print "$git_status" | command grep -qF "Unmerged paths"; then
-    print "conflicts"
-  fi
+  local git_status=$(cat "/tmp/git-status-$$")
+  case "$git_status" in
+  *"Changes not staged"*) print "changed";;
+  *"Changes to be committed"*) print "staged";;
+  *"Untracked files"*) print "untracked";;
+  *"working tree clean"*) print "unchanged";;
+  *"Unmerged paths"*) print "conflicts";;
+  esac
 }
 
 prompt_git_relative_branch_status(){
-  local git_status="$(cat "/tmp/git-status-$$")"
+  local git_status=$(cat "/tmp/git-status-$$")
   local branch_name=$(git rev-parse --abbrev-ref HEAD)
 
   if ! git config --get "branch.${branch_name}.merge" > /dev/null; then
     print "not_tracking"
-  elif print "$git_status" | command grep -qE "up.to.date"; then
-    print "up_to_date"
-  elif print "$git_status" | command grep -qF "have diverged"; then
-    print "ahead_behind"
-  elif print "$git_status" | command grep -qF "Your branch is behind"; then
-    print "behind"
-  elif print "$git_status" | command grep -qF "Your branch is ahead"; then
-    print "ahead"
-  elif print "$git_status" | command grep -qF "upstream is gone"; then
-    print "upstream_gone"
+  else
+    case "$git_status" in
+      *up?to?date*) print "up_to_date";;
+      *"have diverged"*) print "ahead_behind";;
+      *"Your branch is behind"*) print "behind";;
+      *"Your branch is ahead"*) print "ahead";;
+      *"upstream is gone") print "upstream_gone";;
+    esac
   fi
 }
 
@@ -689,7 +680,7 @@ if command -v stack > /dev/null; then
 fi
 
 new-yesod-project() {
-  name=$1
+  local name=$1
   stack new "$1" yesod-postgres
   cd "$1"
   stack install yesod-bin cabal-install --install-ghc && \
@@ -761,7 +752,7 @@ function db-restore() {
         --clean \
         --no-acl \
         --no-owner \
-        --jobs `getconf _NPROCESSORS_ONLN` \
+        --jobs $(getconf _NPROCESSORS_ONLN) \
         --dbname "$1" \
         "$2"
   else
