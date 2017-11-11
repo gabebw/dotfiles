@@ -705,7 +705,7 @@ alias h=heroku
 alias hsso="heroku login --sso"
 alias migrate="be rake db:migrate db:test:prepare"
 alias rollback="be rake db:rollback"
-alias remigrate="rake db:rollback && rake db:migrate db:test:prepare"
+alias remigrate="migrate && rake db:rollback && migrate"
 alias rrg="be rake routes | grep"
 alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
 alias f=start_foreman_on_unused_port
