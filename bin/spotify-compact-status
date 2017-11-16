@@ -1,5 +1,5 @@
 #!/usr/bin/osascript -l JavaScript
-// vim: textwidth=0 syntax=javascript
+// vim: textwidth=0 filetype=javascript
 
 // `spotify status` (from https://github.com/hnarayanan/shpotify) returns the
 // following:
