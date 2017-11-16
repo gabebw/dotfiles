@@ -94,3 +94,6 @@ brew 'yarn'
 brew 'nvm'
 
 brew 'parallel'
+
+# a Postgres pager
+brew 'pspg'
