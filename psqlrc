@@ -12,6 +12,13 @@
 \set QUIET 1
 \pset null '[NULL]'
 
+-- Pretty lines and borders around result tables
+-- http://okbob.blogspot.com/2014/10/styles-for-unicode-borders-are-merged.html
+\pset border 2
+\pset linestyle unicode
+\pset unicode_header_linestyle double
+\pset unicode_column_linestyle double
+
 -- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
 
 \set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
