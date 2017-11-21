@@ -39,12 +39,6 @@ if is_osx; then
     quietly_brew_bundle "$brewfile"
   done
 
-  # moreutils contains a `parallel` command, and Homebrew unlinks it when it
-  # sees the conflict. Relink them both.
-  brew link --overwrite parallel
-  brew link --overwrite moreutils
-  # --overwrite: overwrite any Qt4 files that might be there
-  # --force: required because Qt is keg-only
   brew link --overwrite --force qt@5.5 &>/dev/null
 
   info "Checking for command-line tools..."
