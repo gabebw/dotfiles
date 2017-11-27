@@ -26,11 +26,19 @@ var statesToIcons = {
   paused: paused,
   stopped: stopped
 }
-var spotify = Application("Spotify");
 
-if (spotify.running()) {
+function namesOfRunningApplications(){
+  var systemEvents = Application('System Events');
+  return systemEvents.applicationProcesses().map(function(x) { return x.name() });
+}
+
+if (namesOfRunningApplications().indexOf('Spotify') > -1) {
+  var spotify = Application("Spotify");
+
   // stopped / playing / paused
   var state = spotify.playerState();
   var track = spotify.currentTrack();
-  statesToIcons[state] + " " + track.name() + " by " + track.artist();
+  if (track) {
+    statesToIcons[state] + " " + track.name() + " by " + track.artist();
+  }
 }
