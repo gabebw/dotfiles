@@ -18,8 +18,19 @@
 //
 // If Spotify isn't running, it prints an empty string.
 
+var playing = "▶";
+var paused = "❙❙";
+var stopped = "◼";
+var statesToIcons = {
+  playing: playing,
+  paused: paused,
+  stopped: stopped
+}
 var spotify = Application("Spotify");
+
 if (spotify.running()) {
-  track = spotify.currentTrack();
-  track.name() + " by " + track.artist();
+  // stopped / playing / paused
+  var state = spotify.playerState();
+  var track = spotify.currentTrack();
+  statesToIcons[state] + " " + track.name() + " by " + track.artist();
 }
