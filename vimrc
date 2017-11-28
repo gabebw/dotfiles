@@ -449,8 +449,8 @@ nnoremap <leader>zr :VtrFocusRunner<CR>
 
 " Test running
 " -----------------
-nnoremap <Leader>l :TestNearest<CR>:redraw!<CR>
-nnoremap <Leader>a :TestFile<CR>:redraw!<CR>
+nnoremap <Leader>l :w<CR>:TestNearest<CR>:redraw!<CR>
+nnoremap <Leader>a :w<CR>:TestFile<CR>:redraw!<CR>
 let test#strategy = 'vtr'
 let test#ruby#rspec#options = {
       \ 'nearest': '--format documentation',
