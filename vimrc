@@ -86,7 +86,8 @@ Plug 'duggiefresh/vim-easydir'
 " Cool statusbar
 Plug 'itchyny/lightline.vim'
 " Easily navigate directories
-Plug 'tpope/vim-vinegar'
+" Use a fork until this is fixed: https://github.com/tpope/vim-vinegar/issues/87
+Plug 'gabebw/vim-vinegar', { 'branch': 'gbw-fix-for-vim-vinegar-issue-87' }
 " Make working with shell scripts nicer ("vim-unix")
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
