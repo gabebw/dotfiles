@@ -368,10 +368,8 @@ augroup Ale
   " ALE linting events
   if exists('*ale#Lint')
     set updatetime=1000
-    let g:ale_lint_on_text_changed = 0
+    let g:ale_lint_on_text_changed = 'never'
     autocmd CursorHold * call ale#Lint()
-    autocmd CursorHoldI * call ale#Lint()
-    autocmd InsertEnter * call ale#Lint()
     autocmd InsertLeave * call ale#Lint()
   endif
 augroup END
