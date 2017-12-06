@@ -11,6 +11,7 @@
 --    Type "help" for help.
 \set QUIET 1
 \pset null '[NULL]'
+\timing
 
 -- Pretty lines and borders around result tables
 -- http://okbob.blogspot.com/2014/10/styles-for-unicode-borders-are-merged.html
