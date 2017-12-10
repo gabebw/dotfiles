@@ -123,6 +123,8 @@ Plug 'nicholaides/words-to-avoid.vim'
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
 Plug 'christoomey/vim-quicklink'
+" Make `gx` work on 'gabebw/dotfiles' too
+Plug 'gabebw/vim-github-link-opener'
 
 call plug#end()
 " }}}
