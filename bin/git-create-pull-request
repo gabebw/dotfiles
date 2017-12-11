@@ -2,6 +2,7 @@
 
 # This script:
 # * creates a file with all of the commits since origin/master
+# * Adds the pull request template (if it exists) above the list of commits
 # * intelligently reflows each commit's body to not have linebreaks (so that
 #   the PR looks better on GitHub, which keeps hard linebreaks)
 # * opens the file in Vim for further editing
