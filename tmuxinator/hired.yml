@@ -54,3 +54,4 @@ windows:
   - server: b && be rails server
   - webpack: yarn && ./bin/webpack-dev-server
   - rails_console: be rails console
+  - worker: foreman start -f Procfile.dev worker=1,indexer=1
