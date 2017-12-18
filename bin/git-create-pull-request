@@ -164,7 +164,8 @@ class CommitMessageBuilder
     markdown = Markdown.new
     message = commit_message.split(/^#{COMMIT_MARKER}/).
       map { |commit| markdown.render(commit) }.
-      join("--- ")
+      join("--- ").
+      strip
   end
 
   private
@@ -204,11 +205,13 @@ class CommitMessageBuilder
     commit_message = <<~MSG
       #{repo.first_commit_subject}
       #{pr_template.possible_body}
-
-      #{link_to_hired_ticket_number}
-
-      bot review me @hired/internal-xp
     MSG
+
+    if link_to_hired_ticket_number
+      commit_message << "\n" << link_to_hired_ticket_number
+    end
+
+    commit_message << "\n" << "bot review me @hired/internal-xp"
     commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}")
   end
 
@@ -221,8 +224,10 @@ class CommitMessageBuilder
   end
 
   def link_to_hired_ticket_number
-    number = repo.current_branch.sub(/gbw-([A-Z]+-[0-9]+).*/, '\1')
-    "Ticket: [#{number}](https://hiredteam.atlassian.net/browse/#{number})"
+    if repo.current_branch =~ /-[0-9]+/
+      number = repo.current_branch.sub(/gbw-([A-Z]+-[0-9]+).*/, '\1')
+      "Ticket: [#{number}](https://hiredteam.atlassian.net/browse/#{number})"
+    end
   end
 end
 
