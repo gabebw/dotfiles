@@ -212,7 +212,7 @@ class CommitMessageBuilder
     end
 
     commit_message << "\n\nbot review me @hired/internal-xp"
-    commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}")
+    commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}\n")
   end
 
   def hired_commits_body
