@@ -208,10 +208,10 @@ class CommitMessageBuilder
     MSG
 
     if link_to_hired_ticket_number
-      commit_message << "\n" << link_to_hired_ticket_number
+      commit_message << "\n#{link_to_hired_ticket_number}"
     end
 
-    commit_message << "\n" << "bot review me @hired/internal-xp"
+    commit_message << "\n\nbot review me @hired/internal-xp"
     commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}")
   end
 
