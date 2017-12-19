@@ -591,7 +591,7 @@ select-git-branch(){
     sed -E -e 's/^\*?[ \t]*//' |\
     sort -u |\
     fzf --reverse --ansi --tac |\
-    sed -e 's@^remotes/origin/@@' -e 's/  .*$//'
+    sed -e 's@^remotes/origin/@@' -e 's/ .*$//'
 }
 gcr(){
   local branch=$(select-git-branch --all)
