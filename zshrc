@@ -71,6 +71,7 @@ curl-debug(){
 alias pgrep='command pgrep -f'
 # dup = "dotfiles update"
 alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd && qq"
+alias ...="cd ../.."
 # Copy-pasting `$ python something.py` works
 alias \$=''
 alias diff="command diff --color=auto -u"
