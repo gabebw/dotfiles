@@ -69,10 +69,6 @@ curl-debug(){
 }
 # Search for the string anywhere in the command name, not just in the executable
 alias pgrep='command pgrep -f'
-# Use modern regexps for grep, and do show color when `grep` is the final
-# command, but don't when piping to something else, because the added color
-# codes will mess up the expected input.
-alias grep="egrep --color=auto"
 # dup = "dotfiles update"
 alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd && qq"
 # Copy-pasting `$ python something.py` works
@@ -201,6 +197,10 @@ export LESS="ij.5FKMRX"
 
 # Show grep results in white text on a red background
 export GREP_COLOR='1;37;41'
+# Use modern regexps for grep, and do show color when `grep` is the final
+# command, but don't when piping to something else, because the added color
+# codes will mess up the expected input.
+export GREP_OPTIONS="--extended-regexp --color=auto"
 
 # Note that these FZF options are used by fzf.vim automatically! Yay!
 # Use a separate tool to smartly ignore files
