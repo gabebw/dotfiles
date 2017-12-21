@@ -10,126 +10,6 @@ set nocompatible
 let mapleader=" "
 
 " ============================================================================
-" PLUGINS {{{
-" ===========================================================================
-
-" vim-plug: https://github.com/junegunn/vim-plug
-call plug#begin('~/.vim/bundle')
-
-" JavaScript
-Plug 'vim-scripts/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'briancollins/vim-jst'
-
-" Ruby/Rails
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-" Allow `cir` to change inside ruby block, etc
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-projectionist'
-Plug 'janko-m/vim-test'
-
-" tmux
-Plug 'christoomey/vim-tmux-runner'
-Plug 'christoomey/vim-tmux-navigator'
-
-" Haskell
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'Twinside/vim-hoogle'
-Plug 'nbouscal/vim-stylish-haskell'
-
-" Syntax
-Plug 'sophacles/vim-processing'
-Plug 'keith/swift.vim'
-if v:version > 704 || has('patch1689')
-  " vim-go only works on versions >= 7.4.1689
-  Plug 'fatih/vim-go'
-endif
-Plug 'wting/rust.vim'
-Plug 'vim-scripts/applescript.vim'
-Plug 'vim-scripts/magic.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'cespare/vim-toml'
-Plug 'chase/vim-ansible-yaml'
-Plug 'chr4/nginx.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'slim-template/vim-slim'
-
-" Arduino
-Plug 'stevearc/vim-arduino'
-
-" Clojure
-Plug 'guns/vim-clojure-static'
-Plug 'luochen1990/rainbow'
-" Remember to have a `lein repl` open in order for this to connect!
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-classpath'
-
-" Plumbing that makes everything nicer
-" Fuzzy-finder
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-" Easily comment/uncomment lines in many languages
-Plug 'tomtom/tcomment_vim'
-" <Tab> indents or triggers autocomplete, smartly
-Plug 'ervandew/supertab'
-" Git bindings
-Plug 'tpope/vim-fugitive'
-" The Hub to vim-fugitive's git
-Plug 'tpope/vim-rhubarb'
-" :Gist
-Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
-" Auto-add `end` in Ruby, `endfunction` in Vim, etc
-Plug 'tpope/vim-endwise'
-" When editing deeply/nested/file, auto-create deeply/nested/ dirs
-Plug 'duggiefresh/vim-easydir'
-" Cool statusbar
-Plug 'itchyny/lightline.vim'
-" Easily navigate directories
-" Use a fork until this is fixed: https://github.com/tpope/vim-vinegar/issues/87
-Plug 'gabebw/vim-vinegar', { 'branch': 'gbw-fix-for-vim-vinegar-issue-87' }
-" Make working with shell scripts nicer ("vim-unix")
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
-" Make `.` work to repeat plugin actions too
-Plug 'tpope/vim-repeat'
-" Intelligently reopen files where you left off
-Plug 'farmergreg/vim-lastplace'
-" Instead of always copying to the system clipboard, use `cp` (plus motions) to
-" copy to the system clipboard. `cP` copies the current line. `cv` pastes.
-Plug 'christoomey/vim-system-copy'
-" `vim README.md:10` opens README.md at the 10th line, rather than saying "No
-" such file: README.md:10"
-Plug 'bogado/file-line'
-Plug 'christoomey/vim-sort-motion'
-Plug 'flazz/vim-colorschemes'
-Plug 'sjl/gundo.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
-Plug 'w0rp/ale'
-
-" Text objects
-" required for all the vim-textobj-* plugins
-Plug 'kana/vim-textobj-user'
-" `ae` text object, so `gcae` comments whole file
-Plug 'kana/vim-textobj-entire'
-" `l` text object for the current line excluding leading whitespace
-Plug 'kana/vim-textobj-line'
-
-" Markdown
-Plug 'nicholaides/words-to-avoid.vim'
-" It does more, but I'm mainly using this because it gives me markdown-aware
-" `gx` so that `gx` works on [Markdown](links).
-Plug 'christoomey/vim-quicklink'
-" Make `gx` work on 'gabebw/dotfiles' too
-Plug 'gabebw/vim-github-link-opener'
-
-call plug#end()
-" }}}
-
-" ============================================================================
 " AUTOCOMMANDS {{{
 " ===========================================================================
 " on opening the file, clear search-highlighting
@@ -564,6 +444,125 @@ function! s:EnsureNothingConflictsWithGrep()
     endif
   endfor
 endfunction
+" }}}
+
+" ============================================================================
+" PLUGINS {{{
+" ===========================================================================
+" vim-plug: https://github.com/junegunn/vim-plug
+call plug#begin('~/.vim/bundle')
+
+" JavaScript
+Plug 'vim-scripts/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'briancollins/vim-jst'
+
+" Ruby/Rails
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+" Allow `cir` to change inside ruby block, etc
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-projectionist'
+Plug 'janko-m/vim-test'
+
+" tmux
+Plug 'christoomey/vim-tmux-runner'
+Plug 'christoomey/vim-tmux-navigator'
+
+" Haskell
+Plug 'pbrisbin/vim-syntax-shakespeare'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'Twinside/vim-hoogle'
+Plug 'nbouscal/vim-stylish-haskell'
+
+" Syntax
+Plug 'sophacles/vim-processing'
+Plug 'keith/swift.vim'
+if v:version > 704 || has('patch1689')
+  " vim-go only works on versions >= 7.4.1689
+  Plug 'fatih/vim-go'
+endif
+Plug 'wting/rust.vim'
+Plug 'vim-scripts/applescript.vim'
+Plug 'vim-scripts/magic.vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'cespare/vim-toml'
+Plug 'chase/vim-ansible-yaml'
+Plug 'chr4/nginx.vim'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'slim-template/vim-slim'
+
+" Arduino
+Plug 'stevearc/vim-arduino'
+
+" Clojure
+Plug 'guns/vim-clojure-static'
+Plug 'luochen1990/rainbow'
+" Remember to have a `lein repl` open in order for this to connect!
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-classpath'
+
+" Plumbing that makes everything nicer
+" Fuzzy-finder
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+" Easily comment/uncomment lines in many languages
+Plug 'tomtom/tcomment_vim'
+" <Tab> indents or triggers autocomplete, smartly
+Plug 'ervandew/supertab'
+" Git bindings
+Plug 'tpope/vim-fugitive'
+" The Hub to vim-fugitive's git
+Plug 'tpope/vim-rhubarb'
+" :Gist
+Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
+" Auto-add `end` in Ruby, `endfunction` in Vim, etc
+Plug 'tpope/vim-endwise'
+" When editing deeply/nested/file, auto-create deeply/nested/ dirs
+Plug 'duggiefresh/vim-easydir'
+" Cool statusbar
+Plug 'itchyny/lightline.vim'
+" Easily navigate directories
+" Use a fork until this is fixed: https://github.com/tpope/vim-vinegar/issues/87
+Plug 'gabebw/vim-vinegar', { 'branch': 'gbw-fix-for-vim-vinegar-issue-87' }
+" Make working with shell scripts nicer ("vim-unix")
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+" Make `.` work to repeat plugin actions too
+Plug 'tpope/vim-repeat'
+" Intelligently reopen files where you left off
+Plug 'farmergreg/vim-lastplace'
+" Instead of always copying to the system clipboard, use `cp` (plus motions) to
+" copy to the system clipboard. `cP` copies the current line. `cv` pastes.
+Plug 'christoomey/vim-system-copy'
+" `vim README.md:10` opens README.md at the 10th line, rather than saying "No
+" such file: README.md:10"
+Plug 'bogado/file-line'
+Plug 'christoomey/vim-sort-motion'
+Plug 'flazz/vim-colorschemes'
+Plug 'sjl/gundo.vim'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
+Plug 'w0rp/ale'
+
+" Text objects
+" required for all the vim-textobj-* plugins
+Plug 'kana/vim-textobj-user'
+" `ae` text object, so `gcae` comments whole file
+Plug 'kana/vim-textobj-entire'
+" `l` text object for the current line excluding leading whitespace
+Plug 'kana/vim-textobj-line'
+
+" Markdown
+Plug 'nicholaides/words-to-avoid.vim'
+" It does more, but I'm mainly using this because it gives me markdown-aware
+" `gx` so that `gx` works on [Markdown](links).
+Plug 'christoomey/vim-quicklink'
+" Make `gx` work on 'gabebw/dotfiles' too
+Plug 'gabebw/vim-github-link-opener'
+
+call plug#end()
 " }}}
 
 runtime macros/matchit.vim
