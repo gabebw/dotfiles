@@ -149,11 +149,11 @@ whois() {
 
 al() {
   if [[ $# == 0 ]]; then
-    ls -tU | head -n 10
+    ls -t | head -n 10
   elif [[ $# == 1 && $1 =~ '^[0-9]+$' ]]; then
-    ls -tU | head -n "$1"
+    ls -t | head -n "$1"
   else
-    ls -tU "$@" | head -n 30
+    ls -t "$@" | head -n 30
   fi
 }
 
