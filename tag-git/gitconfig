@@ -18,6 +18,8 @@
   # workflow, and I retrace my steps.
   ff = only
 [diff]
+  tool = kitty
+  guitool = kitty.gui
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
   mnemonicprefix = true
@@ -26,6 +28,13 @@
   # Show moved lines differently from added/deleted lines
   # https://twitter.com/SmileyKeith/status/946789768506912773
   colorMoved = zebra
+[difftool]
+  prompt = false
+  trustExitCode = true
+[difftool "kitty"]
+  cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+  cmd = kitty kitty +kitten diff $LOCAL $REMOTE
 [alias]
   ls = !git log -S "$(pbpaste)"
   st = status --short --branch
