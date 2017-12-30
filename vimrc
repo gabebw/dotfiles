@@ -458,6 +458,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql'] }
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
