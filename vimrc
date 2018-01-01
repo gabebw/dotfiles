@@ -532,6 +532,7 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'chr4/nginx.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'slim-template/vim-slim'
+Plug 'shmup/vim-sql-syntax'
 
 " Arduino
 Plug 'stevearc/vim-arduino'
