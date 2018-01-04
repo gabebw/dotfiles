@@ -529,7 +529,7 @@ Plug 'duggiefresh/vim-easydir'
 Plug 'itchyny/lightline.vim'
 " Easily navigate directories
 " Use a fork until this is fixed: https://github.com/tpope/vim-vinegar/issues/87
-Plug 'gabebw/vim-vinegar', { 'branch': 'gbw-fix-for-vim-vinegar-issue-87' }
+Plug 'tpope/vim-vinegar'
 " Make working with shell scripts nicer ("vim-unix")
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
