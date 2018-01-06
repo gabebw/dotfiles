@@ -23,6 +23,9 @@
   mnemonicprefix = true
   # Turn on an experimental heuristic that should make the diff easier to read
   compactionHeuristic = true
+  # Show moved lines differently from added/deleted lines
+  # https://twitter.com/SmileyKeith/status/946789768506912773
+  colorMoved = zebra
 [alias]
   st = status --short --branch
   co = checkout
