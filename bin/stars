@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+# Usage: `stars 3 5` prints out 3/5 stars.
+
+empty="☆"
+full="★"
+
+num_filled=$1
+num_total=$2
+num_empty=$(( $2 - $1 ))
+
+(repeat $num_filled { echo -n "$full" }
+repeat $num_empty { echo -n "$empty" }
+echo) | pbcopy
+
+echo "Copied ${num_filled}/${num_total} stars!"
