@@ -230,7 +230,8 @@ PATH="/usr/local/heroku/bin:$PATH"
 # Node
 PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
 # NVM
-if [[ "$(basename "$PWD")" == "hired" ]]; then
+if [[ "$(basename "$PWD")" == "hired" ||
+      "$(basename "$PWD")" == "hubot" ]]; then
   mkdir -p ~/.nvm
   export NVM_DIR="$HOME/.nvm"
   nvm_sh="/usr/local/opt/nvm/nvm.sh"
