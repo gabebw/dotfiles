@@ -576,6 +576,9 @@ filetype plugin indent on
 syntax enable
 silent! colorscheme Tomorrow-Night-Bright
 
+hi clear SpellBad
+hi SpellBad cterm=underline ctermfg=red
+
 if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local
 endif
