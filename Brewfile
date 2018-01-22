@@ -70,7 +70,7 @@ brew 'ripgrep'
 brew 'awscli'
 
 # Like search, but more elastic
-brew 'elasticsearch'
+brew 'elasticsearch@5.6'
 
 brew 'youtube-dl'
 # youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
