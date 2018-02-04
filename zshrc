@@ -725,8 +725,6 @@ alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create d
 alias f=start_foreman_on_unused_port
 alias unfuck-gemfile="git checkout HEAD -- Gemfile.lock"
 
-export RUBYOPT=rubygems
-
 # Bundler
 alias be="bundle exec"
 
