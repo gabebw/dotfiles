@@ -235,7 +235,12 @@ if [[ "$(basename "$PWD")" == "hired" ||
   mkdir -p ~/.nvm
   export NVM_DIR="$HOME/.nvm"
   nvm_sh="/usr/local/opt/nvm/nvm.sh"
-  [[ -r "$nvm_sh" ]] && . "$nvm_sh"
+  if [[ -r "$nvm_sh" ]]; then
+    # nvm is incompatible with NPM's `prefix` option, but that option keeps
+    # getting set, so just always delete it.
+    npm config delete prefix
+    . "$nvm_sh"
+  fi
   unset nvm_sh
 fi
 
