@@ -229,19 +229,23 @@ PATH="/usr/local/heroku/bin:$PATH"
 
 # Node
 PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
+
 # NVM
-if [[ "$(basename "$PWD")" == "hired" ||
-      "$(basename "$PWD")" == "hubot" ]]; then
-  mkdir -p ~/.nvm
+boot_nvm(){
+  local nvm_sh="/usr/local/opt/nvm/nvm.sh"
   export NVM_DIR="$HOME/.nvm"
-  nvm_sh="/usr/local/opt/nvm/nvm.sh"
+  mkdir -p "$NVM_DIR"
   if [[ -r "$nvm_sh" ]]; then
     # nvm is incompatible with NPM's `prefix` option, but that option keeps
     # getting set, so just always delete it.
     npm config delete prefix
     . "$nvm_sh"
   fi
-  unset nvm_sh
+}
+
+if [[ "$(basename "$PWD")" == "hired" ||
+      "$(basename "$PWD")" == "hubot" ]]; then
+  boot_nvm
 fi
 
 # Postgres.app
