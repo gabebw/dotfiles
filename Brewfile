@@ -9,6 +9,10 @@ tap 'homebrew/versions'
 # It me
 tap 'gabebw/formulae'
 
+# https://unused.codes/
+tap 'joshuaclayton/formulae'
+brew 'unused'
+
 # Find my most-used CLI commands
 brew 'most-used'
 
