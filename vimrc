@@ -81,9 +81,11 @@ nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
 nnoremap <Leader>3 <C-^>
 
 " Mnemonic: vgf = "vsplit gf"
-nnoremap vgf :vsplit<CR>gf<CR>
+nnoremap vgf :vsplit<CR>gf
 " Mnemonic: sgf = "split gf"
-nnoremap sgf :split<CR>gf<CR>
+nnoremap sgf :split<CR>gf
+" Mnemonic: tgf = "tab gf"
+nnoremap tgf <C-w>gf
 
 " Searching
 " -----------------
