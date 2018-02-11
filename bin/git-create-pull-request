@@ -164,7 +164,7 @@ class CommitMessageBuilder
     markdown = Markdown.new
     message = commit_message.split(/^#{COMMIT_MARKER}/).
       map { |commit| markdown.render(commit) }.
-      join("--- ").
+      join("---------------------\n"). # turns into an <hr>
       strip
   end
 
