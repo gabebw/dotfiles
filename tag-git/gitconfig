@@ -27,6 +27,7 @@
   # https://twitter.com/SmileyKeith/status/946789768506912773
   colorMoved = zebra
 [alias]
+  ls = !git log -S "$(pbpaste)"
   st = status --short --branch
   co = checkout
   cm = commit -av
