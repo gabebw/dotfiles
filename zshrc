@@ -153,7 +153,7 @@ al() {
   elif [[ $# == 1 && $1 =~ '^[0-9]+$' ]]; then
     ls -t | head -n "$1"
   else
-    ls -t "$@" | head -n 30
+    ls -t "$@" | head -n 10
   fi
 }
 
