@@ -1,3 +1,12 @@
+--exclude=bower_components
+--exclude=db
+--exclude=log
+--exclude=tmp
+--exclude=node_modules
+--exclude=vendor
+--exclude=public/javascripts/i18n
+--exclude=public/packs
+
 --regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
 --regex-ruby=/^[ \t]*attr_(reader|writer|accessor) (:[a-z0-9_]+, )*:([a-z0-9_]+)/\3/A,attr/
 --regex-ruby=/^[ \t]*scope[ \t]*:([a-zA-Z0-9_]+)/\1/
@@ -15,15 +24,6 @@
 --regex-Elixir=/^[ \t]*defprotocol[ \t]+([A-Z][a-zA-Z0-9_]*\.)*([A-Z][a-zA-Z0-9_?!]*)/\2/p,protocols,protocols (defprotocol...)/
 --regex-Elixir=/^[ \t]*Record\.defrecord[ \t]+:([a-zA-Z0-9_]+)/\1/r,records,records (defrecord...)/
 --regex-Elixir=/^[ \t]*test[ \t]+\"([a-z_][a-zA-Z0-9_?! ]*)\"*/\1/t,tests,tests (test ...)/
-
---exclude=bower_components
---exclude=db
---exclude=log
---exclude=tmp
---exclude=node_modules
---exclude=vendor
---exclude=public/javascripts/i18n
---exclude=public/packs
 
 --languages=-javascript
 --langdef=js
