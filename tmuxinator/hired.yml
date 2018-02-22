@@ -54,4 +54,4 @@ windows:
   - server: b && be rails server
   - webpack: yarn && ./bin/webpack-dev-server
   - rails_console: be rails console
-  - worker: foreman start -f Procfile.dev worker=1,indexer=1
+  - worker: bundle exec sidekiq -c 10 -C config/sidekiq.yml -q elastic,1 -q deliver_new_candidates_email,1

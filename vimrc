@@ -300,6 +300,10 @@ let g:rails_projections = {
     \   "command": "service",
     \   "test": "spec/services/{}_spec.rb"
     \ },
+    \ "script/datamigrate/*.rb": {
+    \   "command": "datamigrate",
+    \   "template": "#!/usr/bin/env rails runner\n\n",
+    \ },
     \ "app/jobs/*_job.rb": {
     \   "command": "job",
     \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
