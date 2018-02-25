@@ -114,7 +114,7 @@ alias trust='mkdir -p .git/safe'
 
 o(){
   if [ -d "$1" ]; then
-    if [[ -n "$(find "$1" -maxdepth 1 -name '*.mp4' -print -quit)" ]]; then
+    if [[ -n "$(find "$1" -maxdepth 1 -name '*.mp4' -o -name '*.flv' -print -quit)" ]]; then
       open "$1"/*
     else
       open -a Preview "$1"
