@@ -96,7 +96,7 @@ y(){
   youtube-dl-safe --ignore-errors "${@:-"$(pbpaste)"}"
 }
 # Pipe to this to quote filenames
-alias quote="ruby -r shellwords -e 'puts STDIN.read.each_line.map(&:strip).map(&:shellescape)'"
+alias quote="ruby -r shellwords -e 'puts STDIN.map { |l| l.strip.shellescape }'"
 # Files created today
 alias today="days 0"
 # Created in last n days
