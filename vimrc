@@ -95,7 +95,8 @@ nnoremap tgf <C-w>gf
 "
 " To fix this, use `<cword>` to select the word under the cursor and go to it
 " directly.
-nnoremap <C-]> :execute('tag ' . expand('<cword>'))<CR>
+nnoremap <C-]>      :tag <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-W><C-]> :stag <C-R>=expand("<cword>")<CR><CR>
 
 " Searching
 " -----------------
