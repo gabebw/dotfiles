@@ -300,7 +300,7 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:ls:*:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43'
 
 # Complete the command on the left like the command on the right
-compdef tcd=cd
+compdef '_files -/' tcd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
