@@ -84,7 +84,9 @@ alias prettyxml="xmllint --format -"
 alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
-alias youtube-dl-safe="youtube-dl --no-mtime --no-overwrites"
+# Prefer ffmpeg because avconv gives these errors:
+#   ERROR: av_interleaved_write_frame(): Invalid argument
+alias youtube-dl-safe="youtube-dl --no-mtime --no-overwrites --prefer-ffmpeg"
 y-fallback(){
   youtube-dl-safe \
     --ignore-errors \
@@ -93,6 +95,7 @@ y-fallback(){
 }
 y(){
   echo "${@:-"$(pbpaste)"}"
+  print -s "youtube-dl-safe --ignore-errors ${@:-"$(pbpaste)"}"
   youtube-dl-safe --ignore-errors "${@:-"$(pbpaste)"}"
 }
 # Pipe to this to quote filenames
