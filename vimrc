@@ -267,11 +267,10 @@ augroup Ale
   if exists('*ale#Lint')
     set updatetime=1000
     let g:ale_lint_on_text_changed = 'never'
+    let g:ale_linters = {}
     " Run everything except rails_best_practices, which runs multiple processes
     " and keeps all of my CPU cores at 100%.
-    let g:ale_linters = {
-    \   'ruby': ['brakeman', 'reek', 'rubocop', 'ruby'],
-    \}
+    let g:ale_linters['ruby'] = ['brakeman', 'reek', 'rubocop', 'ruby']
     autocmd CursorHold * call ale#Lint()
     autocmd InsertLeave * call ale#Lint()
   endif
