@@ -476,6 +476,11 @@ endfunction
 call plug#begin('~/.vim/bundle')
 
 " JavaScript
+" To format JS or CSS, add `// @format` at the top:
+" https://prettier.io/docs/en/vim.html#vim-prettier
+Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'for': ['javascript', 'typescript'] }
 Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
