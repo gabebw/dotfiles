@@ -7,7 +7,7 @@ set nocompatible
 " Leader is <Space>. Set it early because leader is used at the moment mappings
 " are defined. Changing mapleader after a mapping is defined has no effect on
 " the mapping.
-let mapleader=" "
+let mapleader=' '
 
 " ============================================================================
 " AUTOCOMMANDS {{{
@@ -75,7 +75,7 @@ set completeopt=menu,menuone,longest,preview
 nnoremap <Leader>cd :cd %:p:h <CR>
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
-nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"), ' ') . "/" <CR>
+nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
 " Why 3? Because <C-^> is almost `:e #<CR>` and Shift-3 is #.
 nnoremap <Leader>3 <C-^>
@@ -95,8 +95,8 @@ nnoremap tgf <C-w>gf
 "
 " To fix this, use `<cword>` to select the word under the cursor and go to it
 " directly.
-nnoremap <C-]>      :tag <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-W><C-]> :stag <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-]>      :tag <C-R>=expand('<cword>')<CR><CR>
+nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 
 " Searching
 " -----------------
@@ -195,7 +195,7 @@ let g:is_posix = 1
 set undofile " Create FILE.un~ files for persistent undo
 set undodir=~/.vim/undodir
 
-if v:version > 703 || v:version == 703 && has("patch541")
+if v:version > 703 || v:version == 703 && has('patch541')
   " Delete comment character when joining commented lines
   set formatoptions+=j
 endif
@@ -239,7 +239,7 @@ set textwidth=80
 
 " Meta characters
 " Prepended to wrapped lines
-set showbreak="@"
+set showbreak='@'
 
 " Terminal.app keeps having a notification and "jumping" on the dock from Vim's
 " bells, and this disables terminal Vim's bells.
@@ -299,27 +299,27 @@ let g:easytags_async = 1
 " rails.vim
 "----------
 let g:rails_projections = {
-    \ "config/routes.rb": { "command": "routes" },
-    \ "spec/factories/*.rb": { "command": "factories" },
-    \ "spec/factories.rb": { "command": "factories" },
-    \ "spec/features/*_spec.rb": { "command": "feature" },
-    \ "config/locales/en/*.yml": {
-    \   "command": "tran",
-    \   "template": "en:\n  {underscore|plural}:\n    ",
+    \ 'config/routes.rb': { 'command': 'routes' },
+    \ 'spec/factories/*.rb': { 'command': 'factories' },
+    \ 'spec/factories.rb': { 'command': 'factories' },
+    \ 'spec/features/*_spec.rb': { 'command': 'feature' },
+    \ 'config/locales/en/*.yml': {
+    \   'command': 'tran',
+    \   'template': 'en:\n  {underscore|plural}:\n    ',
     \ },
-    \ "app/services/*.rb": {
-    \   "command": "service",
-    \   "test": "spec/services/{}_spec.rb"
+    \ 'app/services/*.rb': {
+    \   'command': 'service',
+    \   'test': 'spec/services/{}_spec.rb'
     \ },
-    \ "script/datamigrate/*.rb": {
-    \   "command": "datamigrate",
-    \   "template": "#!/usr/bin/env rails runner\n\n",
+    \ 'script/datamigrate/*.rb': {
+    \   'command': 'datamigrate',
+    \   'template': '#!/usr/bin/env rails runner\n\n',
     \ },
-    \ "app/jobs/*_job.rb": {
-    \   "command": "job",
-    \   "template": "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
-    \   "test": [
-    \     "spec/jobs/{}_job_spec.rb"
+    \ 'app/jobs/*_job.rb': {
+    \   'command': 'job',
+    \   'template': 'class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend',
+    \   'test': [
+    \     'spec/jobs/{}_job_spec.rb'
     \   ]
     \ },
 \ }
@@ -341,12 +341,12 @@ command! GitLink silent! .Gbrowse! -
 " vim-trimmer
 " -----------------
 " filetypes, check with :set ft?
-let g:trimmer_repeated_lines_blacklist = ["conf", "python", "eruby.yaml"]
+let g:trimmer_repeated_lines_blacklist = ['conf', 'python', 'eruby.yaml']
 
 " vim-tmux-runner
 " -----------------
 " Open runner pane to the right, not to the bottom
-let g:VtrOrientation = "h"
+let g:VtrOrientation = 'h'
 " Take up this percentage of the screen
 let g:VtrPercentage = 30
 " Attach to a specific pane
@@ -375,7 +375,7 @@ let g:jsx_ext_required = 0
 
 " luochen1990/rainbow
 " -----------------
-if expand("%:e") ==# 'clj'
+if expand('%:e') ==# 'clj'
   let g:rainbow_active = 1
 endif
 
@@ -429,14 +429,14 @@ let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head"
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineFilename()
-  let git_root = fnamemodify(fugitive#extract_git_dir(expand("%:p")), ":h")
+  let git_root = fnamemodify(fugitive#extract_git_dir(expand('%:p')), ':h')
 
-  if expand("%:t") == ""
-    return "[No Name]"
-  elseif git_root != "" && git_root != "."
-    return substitute(expand("%:p"), git_root . "/", "", "")
+  if expand('%:t') == ''
+    return '[No Name]'
+  elseif git_root != '' && git_root != '.'
+    return substitute(expand('%:p'), git_root . '/', '', '')
   else
-    return expand("%:p")
+    return expand('%:p')
   endif
 endfunction
 " }}}
