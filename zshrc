@@ -233,6 +233,11 @@ PATH="/usr/local/heroku/bin:$PATH"
 # Node
 PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
 
+# Python
+# Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
+# add them to the front so we always get Python 3.
+PATH=/usr/local/opt/python/libexec/bin:$PATH
+
 # NVM
 boot_nvm(){
   local nvm_sh="/usr/local/opt/nvm/nvm.sh"
