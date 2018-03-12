@@ -11,6 +11,6 @@ num_empty=$(( $2 - $1 ))
 
 (repeat $num_filled { echo -n "$full" }
 repeat $num_empty { echo -n "$empty" }
-echo) | pbcopy
+echo) | xargs echo -n | pbcopy
 
 echo "Copied ${num_filled}/${num_total} stars!"
