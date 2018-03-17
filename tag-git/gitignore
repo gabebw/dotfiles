@@ -46,26 +46,10 @@ tags
 .foreman
 
 # I keep committing single-numbered files somehow. Stop it.
-1
-2
-3
-4
-5
-6
-7
-8
-9
+[1-9]
 ]
 # Don't ignore directories
-!1/
-!2/
-!3/
-!4/
-!5/
-!6/
-!7/
-!8/
-!9/
+![1-9]/
 
 # From the Haskell Stack tool
 .stack-work
