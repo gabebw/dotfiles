@@ -109,8 +109,14 @@ function! SearchForWordUnderCursor()
   " (it'll find WORD as well as WORD!, for example), but is better than getting
   " zero results.
   let searchable_word = substitute(word_under_cursor, '[$!?]', '', 'g')
-  " two single quotes in a row = one single quote, like \' in other languages
-  execute 'Grep ''\b' . searchable_word . '\b'''
+  if searchable_word =~? '^\s\+$' || len(searchable_word) == 0
+    " All whitespace or empty, don't search for it because there will be
+    " thousands of (useless) results.
+    echo 'Not searching for whitespace or empty string'
+  else
+    " two single quotes in a row = one single quote, like \' in other languages
+    execute 'Grep ''\b' . shellescape(searchable_word) . '\b'''
+  end
 endfunction
 
 nnoremap K :call SearchForWordUnderCursor()<CR>
