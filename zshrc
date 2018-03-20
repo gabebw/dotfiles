@@ -110,7 +110,7 @@ days(){
 alias epoch="date -r"
 alias rcup="command rcup -v | grep -v identical"
 it(){ icopy -t tumblr/"${*// /-}" }
-tcd(){ (cd "$1" && t "$1") }
+tcd(){ (cd "$1" && t $(basename "$1")) }
 vdot(){ vim "$@" }
 alias xo='quote | xargs open'
 alias trust='mkdir -p .git/safe'
