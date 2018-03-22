@@ -647,7 +647,14 @@ function gb(){
   fi
 }
 function gbm(){ gb "$1" origin/master }
-function gbi(){ gbm "IXP-$1" }
+function gbi(){
+  if [[ $# == 0 ]]; then
+    echo "No branch name :(" >&2
+    return 1
+  else
+    gbm "IXP-$1"
+  fi
+}
 
 function gcl {
   local directory="$(superclone "$@")"
