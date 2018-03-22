@@ -1,7 +1,8 @@
-function! Fixup()
+function! ReplacePickWith(command)
   normal! mi
-  silent! 2,$s/^pick/fixup/e
+  execute 'silent! 2,$s/^[^# ]\+/' . a:command . '/e'
   normal! `i
 endfunction
 
-nnoremap <silent> <leader>f :call Fixup()<CR>
+nnoremap <silent> <leader>f :call ReplacePickWith('fixup')<CR>
+nnoremap <silent> <leader>s :call ReplacePickWith('squash')<CR>
