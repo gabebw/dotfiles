@@ -125,7 +125,6 @@ Style/IfUnlessModifier:
   Description: Favor modifier if/unless usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier
   Enabled: false
-  MaxLineLength: 80
 Style/LambdaCall:
   Description: Use lambda.call(...) instead of lambda.(...).
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#proc-call
@@ -330,7 +329,6 @@ Style/WhileUntilModifier:
   Description: Favor modifier while/until usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#while-as-a-modifier
   Enabled: false
-  MaxLineLength: 80
 Style/WordArray:
   Description: Use %w or %W for arrays of words.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#percent-w
@@ -931,10 +929,6 @@ Layout/SpaceAroundOperators:
   Enabled: true
 Layout/SpaceAroundKeyword:
   Description: Put a space before the modifier keyword.
-  Enabled: true
-Layout/SpaceInsideBrackets:
-  Description: No spaces after [ or before ].
-  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-spaces-braces
   Enabled: true
 Layout/SpaceInsideParens:
   Description: No spaces after ( or before ).
