@@ -41,8 +41,11 @@ function! s:TrimRepeatedBlankLines()
   %s/\n\{3,}/\r\r/e
   %s#\($\n\s*\)\+\%$##e
   if &filetype ==? 'ruby'
-    " Remove blank lines between "end"s in ruby
+    " Remove blank lines between `end`s
     %s/end\n\n\(\s*end\)/end\r\1/e
+
+    " Remove blank line after `do`
+    %s/do\n\n/do\r/e
   endif
 endfunction
 
