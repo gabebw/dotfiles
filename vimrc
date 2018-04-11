@@ -545,6 +545,9 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'tomtom/tcomment_vim'
 " <Tab> indents or triggers autocomplete, smartly
 Plug 'ervandew/supertab'
+" Cool commands and syntax highlighting for Vim. The GitHub version is a little ahead of the
+" official Vim versions, so use the GitHub version.
+Plug 'tpope/vim-git'
 " Git bindings
 Plug 'tpope/vim-fugitive'
 " The Hub to vim-fugitive's git
