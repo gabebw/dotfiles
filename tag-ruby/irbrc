@@ -4,15 +4,6 @@ require "irb/completion"
 require "time"
 require "date"
 
-begin
-  # awesome_print everything.
-  # Wrap in a begin/end block
-  # so it doesn't crash when Gemfile doesn't have awesome_printh
-  require "awesome_print"
-  AwesomePrint.irb!
-rescue LoadError
-end
-
 IRB.conf[:AUTO_INDENT] = true
 
 def require_rb_files_from(dir)
