@@ -254,6 +254,7 @@ boot_nvm(){
 if [[ "$(basename "$PWD")" == "hired" ||
       "$(basename "$PWD")" == "hubot" ]]; then
   boot_nvm
+  nvm use &>/dev/null
 fi
 
 # Postgres.app
