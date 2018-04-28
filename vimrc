@@ -626,13 +626,22 @@ filetype plugin indent on
 syntax enable
 silent! colorscheme Tomorrow-Night-Bright
 
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=red
-" Make some things italic
-hi! Comment term=italic cterm=italic gui=italic
-hi! Constant term=italic cterm=italic gui=italic
-hi! link gitCommitComment Comment
-hi! link gitCommitHeader Comment
+function! s:BetterColorschemeSettings()
+  hi clear SpellBad
+  hi SpellBad cterm=underline ctermfg=red
+  " Make some things italic
+  hi! Comment term=italic cterm=italic gui=italic
+  hi! Constant term=italic cterm=italic gui=italic
+  hi! link gitCommitComment Comment
+  hi! link gitCommitHeader Comment
+endfunction
+
+augroup Colorscheme
+  au!
+  " Run these settings whenever colorscheme changes, in order to re-overwrite
+  " whatever the colorscheme sets
+  autocmd ColorScheme * call <SID>BetterColorschemeSettings()
+augroup END
 
 if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local
