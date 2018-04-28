@@ -315,6 +315,13 @@ let g:easytags_async = 1
 "----------
 let g:rails_projections = {
     \ 'config/routes.rb': { 'command': 'routes' },
+    \ 'app/admin/*.rb': {
+    \   'command': 'admin',
+    \   'alternate': 'spec/controllers/admin/{singular}_controller_spec.rb',
+    \ },
+    \ 'spec/controllers/admin/*_controller_spec.rb': {
+    \   'alternate': 'app/admin/{plural}.rb',
+    \ },
     \ 'spec/factories/*.rb': { 'command': 'factories' },
     \ 'spec/factories.rb': { 'command': 'factories' },
     \ 'spec/features/*_spec.rb': { 'command': 'feature' },
