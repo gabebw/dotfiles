@@ -183,6 +183,10 @@ set scrolloff=1   " When scrolling, keep cursor in the middle
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 set colorcolumn=+0 " Set to the textwidth
 
+" Enforce italics
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
 " Don't ask me if I want to load changed files. The answer is always 'Yes'
 set autoread
 
@@ -617,6 +621,11 @@ silent! colorscheme Tomorrow-Night-Bright
 
 hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=red
+" Make some things italic
+hi! Comment term=italic cterm=italic gui=italic
+hi! Constant term=italic cterm=italic gui=italic
+hi! link gitCommitComment Comment
+hi! link gitCommitHeader Comment
 
 if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local

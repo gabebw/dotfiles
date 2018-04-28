@@ -190,6 +190,8 @@ unsetopt nomatch
 # https://github.com/gabebw/dotfiles/pull/15
 unsetopt multios
 
+export TERM=xterm-256color-italic
+
 # i - Vim's smart case
 # j.5 - Center search results
 # F - Quit if the content is <1 screen
