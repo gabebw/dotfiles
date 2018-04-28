@@ -12,7 +12,7 @@ tap 'gabebw/formulae'
 # https://unused.codes/
 tap 'joshuaclayton/formulae'
 # Don't use ag, I use rg
-brew 'unused', '--without-ag'
+brew 'unused', args: ['--without-ag']
 
 # Find my most-used CLI commands
 brew 'most-used'
