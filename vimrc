@@ -264,6 +264,11 @@ set grepformat=%f:%l:%c:%m
 " PLUGIN OPTIONS {{{
 " ===========================================================================
 
+" gundo
+" -----
+" Without this, Gundo won't run because Python 2 isn't installed.
+let g:gundo_prefer_python3 = 1
+
 " Ale
 " --------
 
