@@ -83,12 +83,9 @@ fi
 
 # Installs to ~/.terminfo
 info "Installing italics-capable terminfo files..."
-if ! toe | grep -qF xterm-256color-italic; then
-  tic terminfo/xterm-256color-italic.terminfo
-fi
-
-if ! toe | grep -qF tmux-256color-italic; then
-  tic -x terminfo/tmux-256color-italic.terminfo
+if ! toe | grep -qF xterm-256color; then
+  mkdir -p ~/.terminfo
+  cp -r terminfo/78 ~/.terminfo/
 fi
 
 info "Running all setup scripts..."
