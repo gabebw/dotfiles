@@ -636,9 +636,10 @@ function! s:BetterColorschemeSettings()
   hi! link gitCommitHeader Comment
 endfunction
 
+call <SID>BetterColorschemeSettings()
 augroup Colorscheme
   au!
-  " Run these settings whenever colorscheme changes, in order to re-overwrite
+  " Re-run these settings whenever colorscheme changes, in order to re-overwrite
   " whatever the colorscheme sets
   autocmd ColorScheme * call <SID>BetterColorschemeSettings()
 augroup END
