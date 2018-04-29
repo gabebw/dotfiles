@@ -15,5 +15,5 @@ if command -v nvm &>/dev/null; then
 fi
 
 echo 'Installing NodeJS...'
-asdf install nodejs 8.6.0
-asdf global nodejs 8.6.0
+asdf install nodejs 8.10.0
+asdf global nodejs 8.10.0
