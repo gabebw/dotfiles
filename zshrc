@@ -428,9 +428,20 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
 prompt_shortened_path(){ prompt_purple "%2~" }
 
+# "2.5.1   (set by /Users/gabe/.tool-versions)" -> "2.5.1"
+# "version 2.4.3 is not installed for ruby" -> "!!2.4.3 not installed"
+# anything else -> don't change it
+prompt_pretty_asdf_version(){
+  local version=$(asdf current ruby 2>&1)
+  case "$version" in
+    *'set by'*) awk '{print $1}' <<<"$version";;
+    *'not installed'*) sed 's/version (.+) is not installed.*/!!\1 not installed/' <<<"$version";;
+    *) print "$version";;
+  esac
+}
+
 prompt_ruby_version() {
-  local version=$(asdf current ruby 2>/dev/null | awk '{print $1}')
-  prompt_magenta "$version"
+  prompt_magenta "$(prompt_pretty_asdf_version)"
 }
 # }}}
 
