@@ -615,6 +615,10 @@ Plug 'christoomey/vim-quicklink'
 " Make `gx` work on 'gabebw/dotfiles' too
 Plug 'gabebw/vim-github-link-opener'
 
+if filereadable($HOME . '/.vimrc.bundles.local')
+  source $HOME/.vimrc.bundles.local
+endif
+
 call plug#end()
 " }}}
 
@@ -646,6 +650,10 @@ augroup END
 
 if filereadable('.git/safe/../../.vimrc.local')
   source .vimrc.local
+endif
+
+if filereadable($HOME . '/.vimrc.local')
+  source $HOME/.vimrc.local
 endif
 
 call s:EnsureNothingConflictsWithGrep()

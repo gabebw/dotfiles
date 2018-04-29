@@ -28,3 +28,8 @@ plug.vim.old
 
 # ASDF stores versions for all tools in this file
 tool-versions
+
+.vimrc.local
+.vimrc.bundles.local
+.tmux.conf.local
+.gitconfig.local

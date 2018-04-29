@@ -141,3 +141,5 @@
   # Automatically stash before rebasing. This makes it possible to rebase with
   # changes in the repo.
   autostash = true
+[include]
+  path = ~/.gitconfig.local
