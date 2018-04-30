@@ -10,18 +10,15 @@ fi
 if command -v rbenv &>/dev/null; then
   echo 'Migrating from rbenv -> asdf...'
 
-  if rbenv versions 2>/dev/null | grep -qFv system; then
-    echo 'Migrating rubies from rbenv -> asdf...'
-    mkdir -p /usr/local/opt/asdf/installs/ruby
-    mv ~/.rbenv/versions/* /usr/local/opt/asdf/installs/ruby/
-  fi
-
   echo 'Removing ~/.rbenv...'
   rm -rf ~/.rbenv
 
   echo 'Uninstalling rbenv...'
-  brew uninstall rbenv-default-gems
-  brew uninstall rbenv
+  for package in rbenv-default-gems rbenv; do
+    if brew list | rg -q "^${package}$"; then
+      brew uninstall "$package"
+    fi
+  done
 fi
 
 latest_ruby_version(){

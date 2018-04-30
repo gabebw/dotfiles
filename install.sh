@@ -88,6 +88,10 @@ if ! toe | grep -qF xterm-256color; then
   cp -r terminfo/78 ~/.terminfo/
 fi
 
+# Load asdf (before setup scripts) in case it's the first time installing it
+export NODEJS_CHECK_SIGNATURES=no
+source /usr/local/opt/asdf/asdf.sh
+
 info "Running all setup scripts..."
 for setup in tag-*/setup; do
   dir=$(basename "$(dirname "$setup")")
