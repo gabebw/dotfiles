@@ -83,7 +83,7 @@ fi
 
 # Installs to ~/.terminfo
 info "Installing italics-capable terminfo files..."
-if ! toe | grep -qF xterm-256color; then
+if ! [ -f ~/.terminfo/78/xterm-256color ]; then
   mkdir -p ~/.terminfo
   cp -r terminfo/78 ~/.terminfo/
 fi
