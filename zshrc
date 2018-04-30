@@ -192,12 +192,13 @@ unsetopt multios
 
 # i - Vim's smart case
 # j.5 - Center search results
+# n - Don't use line numbers, which makes less run more slowly on very large (eg log) files
 # F - Quit if the content is <1 screen
 # K - Quit on CTRL-C
 # M - Longer prompt
 # R - handle ASCII color escapes
 # X - Don't send clear screen signal
-export LESS="ij.5FKMRX"
+export LESS="ij.5nFKMRX"
 
 # Show grep results in white text on a red background
 export GREP_COLOR='1;37;41'
