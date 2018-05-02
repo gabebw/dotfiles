@@ -3,6 +3,8 @@
 # This script:
 # * creates a file with all of the commits since origin/master
 # * Adds the pull request template (if it exists) above the list of commits
+# * Uses `HIRED_DEFAULT_REVIEWER_FILE_NAME` to find a default reviewer for Hired
+#   repos
 # * intelligently reflows each commit's body to not have linebreaks (so that
 #   the PR looks better on GitHub, which keeps hard linebreaks)
 # * opens the file in Vim for further editing
@@ -152,6 +154,8 @@ class PRTemplate
 end
 
 class CommitMessageBuilder
+  HIRED_DEFAULT_REVIEWER_FILE_NAME = '.hired-default-reviewer'
+
   def initialize(repo)
     @number_of_commits = repo.number_of_commits
     @pr_template = PRTemplate.new
@@ -173,12 +177,19 @@ class CommitMessageBuilder
   attr_reader :number_of_commits, :pr_template, :repo
 
   def commit_message
-    if hired?
+    message = if hired?
       hired_commit_message
     elsif number_of_commits == 1
       single_commit_message
     else
       multi_commit_message
+    end
+
+    if File.exist?(HIRED_DEFAULT_REVIEWER_FILE_NAME)
+      reviewer = File.read(HIRED_DEFAULT_REVIEWER_FILE_NAME).strip.sub(/^@/, '')
+      message + "\n\nbot review me @#{reviewer}"
+    else
+      message
     end
   end
 
@@ -211,7 +222,6 @@ class CommitMessageBuilder
       commit_message << "\n#{link_to_hired_ticket_number}"
     end
 
-    commit_message << "\n\nbot review me @hired/internal-xp"
     commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}\n")
   end
 
