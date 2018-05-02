@@ -1,4 +1,4 @@
 DOTFILES_DIRS=$HOME/code/personal/dotfiles
-EXCLUDES="helpful-tips system README.md Brewfile terminal-themes install.sh setup fonts tmp terminfo"
+EXCLUDES="helpful-tips system README.md Brewfile terminal-themes install.sh setup fonts tmp terminfo slack-themes"
 SYMLINK_DIRS="irbrc.d bundle backups undodir"
 TAGS="arduino clojure git haskell python ruby tmux"
