@@ -294,9 +294,6 @@ augroup END
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
-highlight clear ALEStyleError
-highlight clear ALEError
-highlight clear ALEWarning
 
 " FZF
 " -----------------
@@ -632,6 +629,9 @@ silent! colorscheme Tomorrow-Night-Bright
 
 function! s:BetterColorschemeSettings()
   hi clear SpellBad
+  hi clear ALEStyleError
+  hi clear ALEError
+  hi clear ALEWarning
   hi SpellBad cterm=underline ctermfg=red
   " Make some things italic
   hi! Comment term=italic cterm=italic gui=italic
