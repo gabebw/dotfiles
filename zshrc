@@ -377,7 +377,7 @@ export PROJECT_DIRECTORIES=$CDPATH
 # I truly do not want to deal with the hassle of GPG, so don't fail to install
 # when GPG isn't set up.
 export NODEJS_CHECK_SIGNATURES=no
-for f in /usr/local/etc/bash_completion.d/asdf.bash; do
+for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
   [[ -r "$f" ]] && . "$f"
 done
 
