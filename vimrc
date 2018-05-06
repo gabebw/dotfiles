@@ -273,6 +273,10 @@ set grepformat=%f:%l:%c:%m
 " Without this, Gundo won't run because Python 2 isn't installed.
 let g:gundo_prefer_python3 = 1
 
+" peekaboo
+" --------
+let g:peekaboo_window	= 'vert bo 50new'
+
 " Ale
 " --------
 
@@ -593,6 +597,9 @@ Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 Plug 'w0rp/ale'
+" Easily inspect registers exactly when you need them
+" https://github.com/junegunn/vim-peekaboo
+Plug 'junegunn/vim-peekaboo'
 
 " Text objects
 " required for all the vim-textobj-* plugins
