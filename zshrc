@@ -832,7 +832,7 @@ processing-new(){
   mkdir "$1"
   cat >> "$1/$1.pde" <<EOF
 void setup() {
-  size(640,360);
+  size(640, 360);
 }
 
 void draw() {
