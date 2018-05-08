@@ -138,7 +138,7 @@ alias -g G="| grep "
 alias -g ONE="| awk '{ print \$1}'"
 
 run-until-succeeds(){ until "$@"; do; sleep 1; done }
-announce(){ $@ ; spotify pause && say "Done!" && spotify play }
+announce(){ zsh -ic "$@"; spotify pause && say "Done!" && spotify play }
 
 # `-` by itself will act like `cd -`. Needs to be a function because `alias -`
 # breaks.
