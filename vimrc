@@ -472,7 +472,7 @@ set expandtab
 " }}}
 
 " ============================================================================
-" FUNCTIONS {{{
+" FUNCTIONS and COMMANDS {{{
 " ===========================================================================
 function! s:EnsureNothingConflictsWithGrep()
   " I type `<Leader>g` to pop up `:Grep ` then quickly start typing my search
@@ -488,6 +488,8 @@ function! s:EnsureNothingConflictsWithGrep()
     endif
   endfor
 endfunction
+
+command! CopyPath :let @+ = expand('%:p')
 " }}}
 
 " ============================================================================
