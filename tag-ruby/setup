@@ -22,7 +22,7 @@ if command -v rbenv &>/dev/null; then
 fi
 
 latest_ruby_version(){
-  asdf list-all ruby | grep -vE 'preview|rc' | tail -1
+  asdf list-all ruby | grep -E '^[0-9]' | grep -vE 'preview|rc|dev'
 }
 
 echo "Installing latest Ruby (version $(latest_ruby_version))..."
