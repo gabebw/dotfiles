@@ -20,6 +20,11 @@ autocmd BufReadCmd set nohlsearch
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
+" Auto-source vimrc when it's changed
+augroup vimrc
+  autocmd BufWritePost vimrc,$MYVIMRC nested if expand("%") !~ 'fugitive' | source % | endif
+augroup END
+
 " Highlight the current line, only for the buffer with focus
 augroup CursorLine
   autocmd!
