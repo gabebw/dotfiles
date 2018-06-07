@@ -1,5 +1,4 @@
-# Instruct tools like ripgrep (but not ag, which currently doesn't read from
-# ~/.ignore) what to ignore when searching.
+# Instruct tools like ripgrep what to ignore when searching.
 
 ## Directories
 
