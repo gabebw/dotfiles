@@ -255,7 +255,13 @@ PATH=./bin/stubs:$PATH
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # zmodload -i zsh/complist
 fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+# completion: use cache if updated within 24h
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
+  compinit -d $HOME/.zcompdump
+else
+  compinit -C
+fi
 # Now zsh understands bash completion files. Wild!
 autoload -U bashcompinit && bashcompinit
 
