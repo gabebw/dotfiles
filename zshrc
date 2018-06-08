@@ -86,17 +86,14 @@ alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 alias exif-remove="exiftool -all= "
 # Prefer ffmpeg because avconv gives these errors:
 #   ERROR: av_interleaved_write_frame(): Invalid argument
-alias youtube-dl-safe="youtube-dl --no-mtime --no-overwrites --prefer-ffmpeg"
+alias youtube-dl-safe="youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg"
 y-fallback(){
-  youtube-dl-safe \
-    --ignore-errors \
-    --external-downloader curl \
-    "${@:-"$(pbpaste)"}"
+  youtube-dl-safe --external-downloader curl "${@:-"$(pbpaste)"}"
 }
 y(){
   echo "${@:-"$(pbpaste)"}"
-  print -s "youtube-dl-safe --ignore-errors '${@:-"$(pbpaste)"}'"
-  youtube-dl-safe --ignore-errors "${@:-"$(pbpaste)"}"
+  print -s "youtube-dl-safe '${@:-"$(pbpaste)"}'"
+  youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
 # Pipe to this to quote filenames
 alias quote="ruby -r shellwords -e 'puts STDIN.map { |l| l.strip.shellescape }'"
