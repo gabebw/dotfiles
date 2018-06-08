@@ -295,10 +295,8 @@ commit_message_file = Tempfile.new("commit_message_file")
 commit_message = CommitMessageBuilder.new(repo).build
 File.open(commit_message_file, "w") { |f| f.write(commit_message) }
 
-if system("vim -c 'set ft=gitcommit' '#{commit_message_file.path}'")
-  hub_pull_request = "hub pull-request -o -F '#{commit_message_file.path}'"
-  system(hub_pull_request)
-else
+hub_pull_request = "hub pull-request -e -o -F '#{commit_message_file.path}'"
+if ! system(hub_pull_request)
   # Vim exited abnormally, which always means I did it intentionally with `:cq`
   # and don't want to create the PR.
   puts "OK, not creating PR :)"
