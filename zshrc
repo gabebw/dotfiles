@@ -111,6 +111,7 @@ tcd(){ (cd "$1" && t $(basename "$1")) }
 vdot(){ vim "$@" }
 alias xo='quote | xargs open'
 alias trust='mkdir -p .git/safe'
+findall(){ find . -iname "*$@*" }
 
 o(){
   if [ -d "$1" ]; then
