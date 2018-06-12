@@ -165,7 +165,7 @@ xnoremap < <gv
 xnoremap > >gv
 
 " Big Yank to clipboard
-nnoremap Y "*yiW
+nnoremap Y "*yiw
 
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
