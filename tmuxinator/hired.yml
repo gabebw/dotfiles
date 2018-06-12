@@ -22,7 +22,7 @@ root: ~/code/work/hired
 # on_project_stop: command
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-pre_window: nvm use --delete-prefix --silent
+# pre_window: nvm use --delete-prefix --silent
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
