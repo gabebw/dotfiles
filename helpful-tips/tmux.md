@@ -8,8 +8,7 @@ It works like in Vim:
 * `v` to start copying
 * `y` to copy and exit copy mode
 
-Now it's in the OSX global pasteboard (because of the
-`reattach-to-user-namespace` package), so you can do `Cmd-v` or `pbpaste`.
+Now it's in the OSX global pasteboard, so you can do `Cmd-v` or `pbpaste`.
 
 ## Choose sessions from a dropdown
 
