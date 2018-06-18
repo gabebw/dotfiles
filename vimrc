@@ -606,6 +606,7 @@ Plug 'w0rp/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Text objects
 " required for all the vim-textobj-* plugins
