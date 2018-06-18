@@ -654,7 +654,7 @@ function gbi(){
     echo "No branch name :(" >&2
     return 1
   else
-    gbm "IXP-$1"
+    gbm "IXP-${*// /-}"
   fi
 }
 
