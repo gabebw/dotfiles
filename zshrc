@@ -104,7 +104,15 @@ days(){
   local query="kMDItemFSCreationDate>\$time.today(-$1) && kMDItemContentType != public.folder"
   mdfind -onlyin . "$query"
 }
-alias epoch="date -r"
+epoch(){
+  if [[ $# == 0 ]]; then
+    # Print the current epoch
+    date +%s
+  else
+    # Parse the given epoch
+    date -r "$1"
+  fi
+}
 alias rcup="command rcup -v | grep -v identical"
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t $(basename "$1")) }
