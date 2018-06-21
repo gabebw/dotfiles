@@ -54,8 +54,16 @@ class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
   end
 
   def header(text, header_level)
-    marker = "#" * header_level
-    "#{marker} #{text}\n\n"
+    # Avoid prefixing with "#" because `hub` will remove lines with that prefix.
+    if header_level == 1
+      "#{text}\n===========\n\n"
+    elsif header_level == 2
+      "#{text}\n-----------\n\n"
+    else
+      # Not sure what else to do here, honestly.
+      marker = "#" * header_level
+      "#{marker} #{text}\n\n"
+    end
   end
 
   def hrule
@@ -222,7 +230,7 @@ class CommitMessageBuilder
       commit_message << "\n#{link_to_hired_ticket_number}"
     end
 
-    commit_message.sub(/^## Purpose of PR\n/, "\\0#{hired_commits_body}\n")
+    commit_message.sub(/^Purpose of PR\n\-*\n/, "\\0#{hired_commits_body}\n")
   end
 
   def hired_commits_body
