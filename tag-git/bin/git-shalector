@@ -14,4 +14,5 @@ target_commit=$(
   awk '{print $1}'
 )
 
-printf "$target_commit\n"
+echo "$target_commit" | pbcopy
+echo "$target_commit"
