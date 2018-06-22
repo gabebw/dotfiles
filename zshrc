@@ -141,7 +141,9 @@ unfuck-messages(){ killall Dock }
 # The `-g` flag means "global", and means that it can go anywhere in a command
 # line and it will be preprocessed in, unlike "regular" aliases.
 alias -g G="| grep "
-alias -g ONE="| awk '{ print \$1}'"
+
+# Get word N (up to N = 9) from a line
+word(){ awk "{ print \$$1 }" }
 
 run-until-succeeds(){ until "$@"; do; sleep 1; done }
 announce(){ zsh -ic "$@"; spotify pause && say "Done!" && spotify play }
