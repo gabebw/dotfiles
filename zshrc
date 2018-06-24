@@ -607,7 +607,7 @@ function g {
   fi
 }
 
-alias gd="git difftool --no-symlinks --dir-diff"
+alias gd="git diff"
 # Grep with grouped output like Ack
 alias gg="git g"
 alias amend="git commit --amend -Chead"
