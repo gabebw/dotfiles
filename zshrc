@@ -230,40 +230,6 @@ export FZF_DEFAULT_OPTS='--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 '
 # }}}
 
-# $PATH {{{
-
-is_osx(){
-  [ "$(uname -s)" = Darwin ]
-}
-
-if is_osx; then
-  # Add Homebrew to the path.
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
-fi
-
-# Heroku standalone client
-PATH="/usr/local/heroku/bin:$PATH"
-
-# Node
-PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
-
-# Python
-# Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
-# add them to the front so we always get Python 3.
-PATH=/usr/local/opt/python/libexec/bin:$PATH
-
-# Postgres.app
-PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-
-# Haskell
-PATH=~/.local/bin:$PATH
-
-PATH=$HOME/.bin:$PATH
-
-PATH=./bin/stubs:$PATH
-
-# }}}
-
 # Completion {{{
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # zmodload -i zsh/complist
@@ -315,6 +281,40 @@ _vdot(){
   compadd -P "${HOME}." $(ls -d "$HOME"/.* | sed -E "s|$HOME\.||g")
 }
 compdef _vdot vdot
+# }}}
+
+# $PATH {{{
+
+is_osx(){
+  [ "$(uname -s)" = Darwin ]
+}
+
+if is_osx; then
+  # Add Homebrew to the path.
+  PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
+
+# Heroku standalone client
+PATH="/usr/local/heroku/bin:$PATH"
+
+# Node
+PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
+
+# Python
+# Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
+# add them to the front so we always get Python 3.
+PATH=/usr/local/opt/python/libexec/bin:$PATH
+
+# Postgres.app
+PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+# Haskell
+PATH=~/.local/bin:$PATH
+
+PATH=$HOME/.bin:$PATH
+
+PATH=./bin/stubs:$PATH
+
 # }}}
 
 # Key bindings {{{
