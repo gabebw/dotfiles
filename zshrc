@@ -113,7 +113,12 @@ epoch(){
     date -r "$1"
   fi
 }
-alias rcup="command rcup -v | grep -v identical"
+rcup(){
+  if ! command rcup -v | grep -v identical; then
+    true
+  fi
+}
+
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t $(basename "$1")) }
 vdot(){ vim "$@" }
