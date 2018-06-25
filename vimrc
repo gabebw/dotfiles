@@ -34,6 +34,9 @@ augroup vimrc
   au FileType ruby,eruby,yaml set iskeyword+=!,?
   au BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
+
+  " Re-source vimrc whenever it changes
+  autocmd BufWritePost vimrc,$MYVIMRC nested if expand("%") !~ 'fugitive' | source % | endif
 augroup END
 
 " vim-rails + vim-projectionist
