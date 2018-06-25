@@ -285,6 +285,16 @@ compdef _vdot vdot
 
 # $PATH {{{
 
+# asdf version manager (ruby, node, etc)
+# Load asdf early so that we can override it (e.g. by prepending `./bin/stubs`)
+# later.
+# I truly do not want to deal with the hassle of GPG, so don't fail to install
+# when GPG isn't set up.
+export NODEJS_CHECK_SIGNATURES=no
+for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
+  [[ -r "$f" ]] && . "$f"
+done
+
 is_osx(){
   [ "$(uname -s)" = Darwin ]
 }
@@ -391,14 +401,6 @@ add_subdirs_to_cdpath "$HOME/code/work"
 # So, export PROJECT_DIRECTORIES instead, but set it to $CDPATH
 export PROJECT_DIRECTORIES=$CDPATH
 # }}}
-
-# asdf version manager (ruby, node, etc)
-# I truly do not want to deal with the hassle of GPG, so don't fail to install
-# when GPG isn't set up.
-export NODEJS_CHECK_SIGNATURES=no
-for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
-  [[ -r "$f" ]] && . "$f"
-done
 
 # Prompt {{{
 
