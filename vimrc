@@ -477,6 +477,17 @@ set expandtab
 " ============================================================================
 " FUNCTIONS and COMMANDS {{{
 " ===========================================================================
+function! StripTrailingNewline(string)
+    return substitute(a:string, '\n\+$', '', '')
+endfunction
+
+function! ExpandShortGitShaIntoFullGitSha()
+  let short_sha = expand("<cword>")
+  let full_sha = StripTrailingNewline(system('git rev-parse ' . short_sha))
+  " Delete and replace SHA
+  exec 'normal! ciw' . full_sha
+endfunction
+
 function! s:EnsureNothingConflictsWithGrep()
   " I type `<Leader>g` to pop up `:Grep ` then quickly start typing my search
   " term. When (e.g.) `<Leader>gc` exists, I have to pause after `<Leader>g`
