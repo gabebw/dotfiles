@@ -285,6 +285,16 @@ compdef _vdot vdot
 
 # $PATH {{{
 
+is_osx(){
+  [ "$(uname -s)" = Darwin ]
+}
+
+if is_osx; then
+  # Add Homebrew to the path.
+  # Must be _before_ asdf so that /usr/local/bin/ruby isn't first in the $PATH.
+  PATH=/usr/local/bin:/usr/local/sbin:$PATH
+fi
+
 # asdf version manager (ruby, node, etc)
 # Load asdf early so that we can override it (e.g. by prepending `./bin/stubs`)
 # later.
@@ -294,15 +304,6 @@ export NODEJS_CHECK_SIGNATURES=no
 for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
   [[ -r "$f" ]] && . "$f"
 done
-
-is_osx(){
-  [ "$(uname -s)" = Darwin ]
-}
-
-if is_osx; then
-  # Add Homebrew to the path.
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
-fi
 
 # Heroku standalone client
 PATH="/usr/local/heroku/bin:$PATH"
