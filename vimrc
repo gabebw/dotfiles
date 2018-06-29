@@ -80,6 +80,9 @@ nnoremap <Leader>cd :cd %:p:h <CR>
 " Toggle quickfix
 nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 
+" clipboard
+nmap cl cpil
+
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
