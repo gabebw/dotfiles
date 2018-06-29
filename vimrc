@@ -77,6 +77,9 @@ set completeopt=menu,menuone,longest,preview
 " Change the current working directory to the directory that the current file you are editing is in.
 nnoremap <Leader>cd :cd %:p:h <CR>
 
+" Toggle quickfix
+nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
+
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
@@ -479,6 +482,11 @@ set expandtab
 " ===========================================================================
 function! StripTrailingNewline(string)
     return substitute(a:string, '\n\+$', '', '')
+endfunction
+
+function! QuickFixIsOpen()
+  let l:result = filter(getwininfo(), 'v:val.quickfix && !v:val.loclist')
+  return !empty(l:result)
 endfunction
 
 function! ExpandShortGitShaIntoFullGitSha()
