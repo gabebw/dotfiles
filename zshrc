@@ -92,7 +92,7 @@ y-fallback(){
 }
 y(){
   echo "${@:-"$(pbpaste)"}"
-  print -s "youtube-dl-safe '${@:-"$(pbpaste)"}'"
+  print -s "youtube-dl-safe ${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
 # Pipe to this to quote filenames
