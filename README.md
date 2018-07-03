@@ -39,7 +39,9 @@ All of the Zsh configuration is in [`zshrc`](/zshrc).
 
 Many scripts and configurations have been inspired by or outright stolen from
 my colleagues at thoughtbot. Of special note, I've stolen many things from
-[Chris Toomey] and [Gordon Fontenot], among others that I'm sure I'm forgetting.
+[Chris Toomey], [Gordon Fontenot], and [Teo Ljungberg], among others that I'm
+sure I'm forgetting.
 
 [Chris Toomey]: https://github.com/christoomey/dotfiles
 [Gordon Fontenot]: https://github.com/gfontenot/dotfiles
+[Teo Ljungberg]: https://github.com/teoljungberg/dotfiles
