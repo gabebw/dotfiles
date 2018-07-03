@@ -1,2 +1,20 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+# run a command after `git pull` if a specified file was changed
+# Run `chmod +x post-merge` to make it executable then put it into `.git/hooks/`.
+
+check_run() {
+  # Grep through changed files
+  git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | \
+    grep --quiet "$1" && \
+    eval "$2"
+}
+
+# Install new packages after `git pull` if these files changed
+check_run Gemfile "bundle"
+check_run Gemfile.lock "bundle"
+check_run package.json "yarn"
+check_run Yarn "yarn"
+
+# Update ctags
 .git/hooks/ctags >/dev/null 2>&1 &
