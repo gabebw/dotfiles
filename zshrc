@@ -681,6 +681,14 @@ function gcl {
   cd "$directory"
 }
 
+src(){
+  local here=$PWD
+  cd ~/code/src
+  gcl "$1"
+  cd "$here"
+  tcd "$HOME/code/src/$(basename "$1")"
+}
+
 # Complete `g` like `git`, etc
 compdef g=git
 compdef _git gc=git-checkout
