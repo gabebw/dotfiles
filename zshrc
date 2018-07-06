@@ -309,7 +309,7 @@ done
 PATH="/usr/local/heroku/bin:$PATH"
 
 # Node
-PATH=$PATH:/usr/local/share/npm/bin:.git/safe/../../node_modules/.bin/
+PATH=$PATH:$(npm --global bin 2>/dev/null):.git/safe/../../node_modules/.bin/
 
 # Python
 # Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so

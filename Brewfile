@@ -98,9 +98,6 @@ brew 'num-utils'
 # Man pages, but with practical examples.
 brew 'tldr'
 
-brew 'node'
-brew 'yarn'
-
 # a Postgres pager
 brew 'pspg'
 
