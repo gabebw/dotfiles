@@ -77,6 +77,9 @@ set completeopt=menu,menuone,longest,preview
 " Change the current working directory to the directory that the current file you are editing is in.
 nnoremap <Leader>cd :cd %:p:h <CR>
 
+" Switch between the last two files
+nnoremap <Leader><Leader> <C-^>
+
 " Toggle quickfix
 nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 
