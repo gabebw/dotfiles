@@ -11,10 +11,9 @@ check_run() {
 }
 
 # Install new packages after `git pull` if these files changed
-check_run Gemfile "bundle"
 check_run Gemfile.lock "bundle"
 check_run package.json "yarn"
-check_run Yarn "yarn"
+check_run yarn.lock "yarn"
 
 # Update ctags
 .git/hooks/ctags >/dev/null 2>&1 &
