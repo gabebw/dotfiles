@@ -1,0 +1,8 @@
+#!/bin/sh
+
+git branch --verbose --verbose --color=always "$@" |\
+  rg -v 'remotes/origin/(HEAD|master)' |\
+  sed -E -e 's/^\*?[ \t]*//' |\
+  sort -u |\
+  fzf --reverse --ansi --tac |\
+  sed -e 's@^remotes/origin/@@' -e 's/ .*$//'

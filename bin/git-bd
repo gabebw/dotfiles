@@ -4,9 +4,7 @@
 set -e
 
 if [[ $# == 0 ]]; then
-  branch=$(git branch --color=always | \
-      fzf --reverse --ansi --tac | \
-      sed -E -e 's/^\*?[ \t]*//')
+  branch=$(select-git-branch)
 else
   branch="$1"
 fi
