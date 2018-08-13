@@ -36,7 +36,7 @@ _definition_type() {
 }
 
 _edit_script() {
-  vim "$(which "$1")"
+  vim "$(readlink "$(which "$1")")"
 }
 
 _definition_field_for_pattern() {
@@ -58,7 +58,7 @@ _edit_based_on_pattern(){
   if _grep_for_definition -q "$pattern"; then
     file=$(_definition_field_for_pattern 1 "$pattern")
     line=$(_definition_field_for_pattern 2 "$pattern")
-    vim "$file" "+$line"
+    vim "$(readlink "$file")" "+$line"
   else
     _handle_unknown_command "$command_name"
   fi
