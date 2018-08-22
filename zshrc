@@ -177,6 +177,16 @@ al() {
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
 
+# Cut out a segment of a video
+cut-video(){
+  if [[ $# != 4 ]]; then
+    echo "Cut a video from 1hr-1hr30m and output to OUT.mp4:"
+    echo "    cut VIDEO.mp4 1:00:00 1:30:00 OUT.mp4"
+  else
+    ffmpeg -i "$1" -ss "$2" -to "$3" -async 1 "$4" && echo "Output to $4"
+  fi
+}
+
 [[ -r ~/.aliases ]] && source ~/.aliases
 # }}}
 
