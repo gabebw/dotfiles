@@ -110,15 +110,35 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 " Searching
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
+
+function! CharacterUnderCursor()
+  return nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
+endfunction
+
+function! SearchableWordNearCursor()
+  " <cword> tries a little too hard to find a word.
+  " Given this (cursor at |):
+  " hello | there
+  " Then the <cword> is `there`.
+  " Thus, we use `CharacterUnderCursor` (which is precise) to determine if we're
+  " on a word at all.
+  if CharacterUnderCursor() =~? '^\s$'
+    return ''
+  else
+    let word_under_cursor = expand('<cword>')
+    " Sometimes the word under the cursor includes punctuation, in which case
+    " '\bWORD!\b' will fail because \b is a word boundary and we have non-word
+    " characters in WORD. So, remove them. This results in a less-precise match
+    " (it'll find WORD as well as WORD!, for example), but is better than getting
+    " zero results.
+    return substitute(word_under_cursor, '[$!?]', '', 'g')
+  endif
+endfunction
+
 function! SearchForWordUnderCursor()
-  let word_under_cursor = expand('<cword>')
-  " Sometimes the word under the cursor includes punctuation, in which case
-  " '\bWORD!\b' will fail because \b is a word boundary and we have non-word
-  " characters in WORD. So, remove them. This results in a less-precise match
-  " (it'll find WORD as well as WORD!, for example), but is better than getting
-  " zero results.
-  let searchable_word = substitute(word_under_cursor, '[$!?]', '', 'g')
-  if searchable_word =~? '^\s\+$' || len(searchable_word) == 0
+  let searchable_word = SearchableWordNearCursor()
+
+  if len(searchable_word) == 0
     " All whitespace or empty, don't search for it because there will be
     " thousands of (useless) results.
     echo 'Not searching for whitespace or empty string'
