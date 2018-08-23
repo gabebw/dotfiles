@@ -87,9 +87,6 @@ alias exif-remove="exiftool -all= "
 # Prefer ffmpeg because avconv gives these errors:
 #   ERROR: av_interleaved_write_frame(): Invalid argument
 alias youtube-dl-safe="youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg"
-y-fallback(){
-  youtube-dl-safe --external-downloader curl "${@:-"$(pbpaste)"}"
-}
 y(){
   echo "${@:-"$(pbpaste)"}"
   print -s "youtube-dl-safe ${@:-"$(pbpaste)"}"
@@ -140,14 +137,11 @@ o(){
     fi
   fi
 }
-# Get rid of Messages.app's fake unread message badge
-unfuck-messages(){ killall Dock }
 
 # Get word N (up to N = 9) from a line
 word(){ awk "{ print \$$1 }" }
 
 run-until-succeeds(){ until "$@"; do; sleep 1; done }
-announce(){ zsh -ic "$@"; spotify pause && say "Done!" && spotify play }
 
 # `-` by itself will act like `cd -`. Needs to be a function because `alias -`
 # breaks.
