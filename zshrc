@@ -241,8 +241,6 @@ if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
 else
   compinit -C
 fi
-# Now zsh understands bash completion files. Wild!
-autoload -U bashcompinit && bashcompinit
 
 # Try to match as-is then match case-insensitively
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -712,6 +710,9 @@ if command -v stack > /dev/null; then
   stack(){
     # Delete this function so it only loads completion once.
     unfunction stack
+
+    # Now zsh understands bash completion files. Wild!
+    autoload -U bashcompinit && bashcompinit
 
     eval "$(stack --bash-completion-script stack)"
 
