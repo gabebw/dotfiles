@@ -666,7 +666,7 @@ compdef _git ga=git-add
 export VISUAL=vim
 export EDITOR=$VISUAL
 alias vi="$VISUAL"
-alias v="$VISUAL"
+v(){ $VISUAL "$(fzf)" }
 
 # Remove vim flags for crontab -e
 alias crontab="VISUAL=vim crontab"
