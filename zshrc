@@ -76,7 +76,7 @@ alias ...="cd ../.."
 alias \$=''
 alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
-alias serialnumber="ioreg -l | grep IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g'"
+alias serialnumber="ioreg -l | rg IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g'"
 alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
@@ -114,7 +114,7 @@ epoch(){
   fi
 }
 rcup(){
-  if ! command rcup -v | grep -v identical; then
+  if ! command rcup -v | rg -v identical; then
     true
   fi
 }
@@ -218,13 +218,6 @@ unsetopt multios
 # R - handle ASCII color escapes
 # X - Don't send clear screen signal
 export LESS="ij.5nFKMRX"
-
-# Show grep results in white text on a red background
-export GREP_COLOR='1;37;41'
-# Use modern regexps for grep, and do show color when `grep` is the final
-# command, but don't when piping to something else, because the added color
-# codes will mess up the expected input.
-export GREP_OPTIONS="--extended-regexp --color=auto"
 
 # Note that these FZF options are used by fzf.vim automatically! Yay!
 # Use a separate tool to smartly ignore files
@@ -735,7 +728,7 @@ alias hsso="heroku login --sso"
 alias migrate="be rake db:migrate db:test:prepare"
 alias rollback="be rake db:rollback"
 alias remigrate="migrate && rake db:rollback && migrate"
-alias rrg="be rake routes | grep"
+alias rrg="be rake routes | rg"
 alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
 alias unfuck-gemfile="git checkout HEAD -- Gemfile.lock"
 
