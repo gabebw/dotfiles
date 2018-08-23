@@ -32,6 +32,7 @@
 *.svg
 /spec/fixtures/*.sql
 .keep
+.gitkeep
 
 # Huge JS files that mess up the vim quickfix window
 highlight.all.js
