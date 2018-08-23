@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Print number of branches per author
-
-git for-each-ref --sort=-authorname --format="%(authorname)" refs/remotes | uniq -c | sort -r

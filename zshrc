@@ -121,7 +121,6 @@ rcup(){
 
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t $(basename "$1")) }
-vdot(){ vim "$@" }
 alias xo='quote | xargs open'
 alias trust='mkdir -p .git/safe'
 findall(){ find . -iname "*$@*" }
@@ -143,9 +142,6 @@ o(){
 }
 # Get rid of Messages.app's fake unread message badge
 unfuck-messages(){ killall Dock }
-# The `-g` flag means "global", and means that it can go anywhere in a command
-# line and it will be preprocessed in, unlike "regular" aliases.
-alias -g G="| grep "
 
 # Get word N (up to N = 9) from a line
 word(){ awk "{ print \$$1 }" }
@@ -286,11 +282,6 @@ compdef '_files -/' tcd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
-_vdot(){
-  # -P = "prefix", so it knows to add that if you don't type it
-  compadd -P "${HOME}." $(ls -d "$HOME"/.* | sed -E "s|$HOME\.||g")
-}
-compdef _vdot vdot
 HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup
 [[ -f "$HEROKU_AC_ZSH_SETUP_PATH" ]] && source "$HEROKU_AC_ZSH_SETUP_PATH"
 # }}}
@@ -350,14 +341,6 @@ bindkey -v
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^v" edit-command-line
-
-# Copy the most recent command to the clipboard
-_pbcopy_last_command(){
-  fc -ln -1 | pbcopy && \
-    tmux display-message "Previous command copied to clipboard"
-}
-zle -N pbcopy-last-command _pbcopy_last_command
-bindkey '^x^x' pbcopy-last-command
 
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl
@@ -607,9 +590,9 @@ prompt_git_email(){
 }
 # }}}
 
-# prompt_subst allows `$(function)` inside the PROMPT
-# Escape the `$()` like `\$()` so it's not immediately evaluated when this file
-# is sourced but is evaluated every time we need the prompt.
+# prompt_subst allows `$(function)` inside the PROMPT, which will be re-evaluated
+# whenever the prompt is displayed. Don't put the PROMPT in double quotes, which
+# will immediately evaluate the "$(code)".
 setopt prompt_subst
 
 PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
@@ -685,24 +668,10 @@ function gcl {
   cd "$directory"
 }
 
-src(){
-  local here=$PWD
-  cd ~/code/src
-  gcl "$1"
-  cd "$here"
-  tcd "$HOME/code/src/$(basename "$1")"
-}
-
 # Complete `g` like `git`, etc
 compdef g=git
 compdef _git gc=git-checkout
 compdef _git ga=git-add
-# }}}
-
-# Docker {{{
-docker-kickstart(){
-  echo "Run Docker for Mac: https://www.docker.com/docker-mac"
-}
 # }}}
 
 # Editor {{{
@@ -756,15 +725,6 @@ if command -v stack > /dev/null; then
     stack "$@"
   }
 fi
-
-new-yesod-project() {
-  local name=$1
-  stack new "$1" yesod-postgres
-  cd "$1"
-  stack install yesod-bin cabal-install --install-ghc && \
-    stack build && \
-    echo "Run the server: stack exec -- yesod devel"
-}
 # }}}
 
 # Ruby/Rails {{{
@@ -776,7 +736,6 @@ alias rollback="be rake db:rollback"
 alias remigrate="migrate && rake db:rollback && migrate"
 alias rrg="be rake routes | grep"
 alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
-alias f=start_foreman_on_unused_port
 alias unfuck-gemfile="git checkout HEAD -- Gemfile.lock"
 
 # Bundler
@@ -793,14 +752,6 @@ b(){
   fi
 }
 
-# Install capybara-webkit linked against Qt5.5
-capy5() {
-  brew install --force qt@5.5 && \
-    gem uninstall -a capybara-webkit && \
-    brew unlink qt@5.5 && \
-    brew link --force --overwrite qt@5.5 && \
-    b
-}
 # }}}
 
 # Postgres {{{
@@ -848,33 +799,6 @@ if is_osx; then
   # https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
   export HOMEBREW_NO_ANALYTICS=1
 fi
-# }}}
-
-# Processing {{{
-# Create a new (Java) processing sketch
-processing-new(){
-  if [[ -d "$1" ]]; then
-    echo "Already exists"
-    return 1
-  fi
-
-  if [[ "$1" == *.* ]]; then
-    echo "No dots allowed in the name"
-    return 1
-  fi
-
-  mkdir "$1"
-  cat >> "$1/$1.pde" <<EOF
-void setup() {
-  size(640, 360);
-}
-
-void draw() {
-  background(255);
-}
-EOF
-  vim "$1/$1.pde"
-}
 # }}}
 
 # tmuxinator {{{
