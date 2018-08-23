@@ -291,6 +291,8 @@ _vdot(){
   compadd -P "${HOME}." $(ls -d "$HOME"/.* | sed -E "s|$HOME\.||g")
 }
 compdef _vdot vdot
+HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup
+[[ -f "$HEROKU_AC_ZSH_SETUP_PATH" ]] && source "$HEROKU_AC_ZSH_SETUP_PATH"
 # }}}
 
 # $PATH {{{
