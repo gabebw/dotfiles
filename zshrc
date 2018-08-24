@@ -724,7 +724,7 @@ alias migrate="be rake db:migrate db:test:prepare"
 alias rollback="be rake db:rollback"
 alias remigrate="migrate && rake db:rollback && migrate"
 alias rrg="be rake routes | rg"
-alias db-reset="DISABLE_DATABASE_ENVIRONMENT_CHECK=1 be rake db:drop db:create db:migrate db:test:prepare"
+alias db-reset="be rake db:drop db:create db:migrate db:test:prepare"
 alias unfuck-gemfile="git checkout HEAD -- Gemfile.lock"
 
 # Bundler
