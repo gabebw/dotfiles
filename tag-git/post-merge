@@ -3,15 +3,25 @@
 # This is the post-merge hook for _this dotfiles repo_.
 # It gets copied in by the `tag-git/setup` script.
 
+files_filtered_by(){
+  git diff-tree --diff-filter="$1" -r --name-only --no-commit-id ORIG_HEAD HEAD
+}
+
 # If COPY_ALWAYS is set, then there are some copied (not symlinked) files and so
 # we always run rcup because we need to update them with `rcup`. They won't
 # automatically change when files in my dotfiles change.
 if ! grep -qF COPY_ALWAYS ~/.rcrc; then
-  added_files=$(git diff-tree --diff-filter=A -r --name-only --no-commit-id ORIG_HEAD HEAD)
+  added_files=$(files_filtered_by A)
+  removed_files=$(files_filtered_by D)
+
+  if [ -n "$removed_files" ]; then
+    rcdn
+    echo 'Some files were deleted, so I ran `rcdn`'
+  fi
 
   if [ -n "$added_files" ]; then
     echo ">>> Running rcup..."
-    rcup -v | grep -v identical
+    RCRC=rcrc rcup -v | grep -v identical
   else
     echo "No new files, not running rcup"
   fi
