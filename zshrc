@@ -1,10 +1,6 @@
-# First, ensure we're in tmux so that we get into tmux as soon as possible
-# instead of doing it after everything else loads.
 # tmux {{{
-# Ensure we're always in a tmux session
-ensure_we_are_inside_tmux() {
-  if _not_in_tmux; then
-    _ensure_tmux_is_running
+connect_to_most_recent_tmux_session() {
+  if _not_in_tmux && _any_tmux_sessions; then
     tmux attach -t "$(_most_recent_tmux_session)"
   fi
 }
@@ -22,16 +18,8 @@ _not_in_tmux() {
   [[ -z "$TMUX" ]]
 }
 
-_no_tmux_sessions() {
-  [[ -z "$(tmux ls)" ]]
-}
-
-_ensure_tmux_is_running() {
-  if _no_tmux_sessions; then
-    # Daemonize so it doesn't auto-open the session. We just want something that
-    # `tmux attach` can use.
-    tmux new -d
-  fi
+_any_tmux_sessions() {
+  [[ -n "$(tmux ls 2>/dev/null)" ]]
 }
 
 inside_ssh(){
@@ -39,7 +27,7 @@ inside_ssh(){
 }
 
 if ! inside_ssh; then
-  ensure_we_are_inside_tmux
+  connect_to_most_recent_tmux_session
 fi
 # }}}
 
@@ -574,6 +562,13 @@ prompt_git_email(){
   fi
   print "$x"
 }
+
+prompt_tmux_status(){
+  if _not_in_tmux; then
+    prompt_red '[!t] '
+  fi
+}
+
 # }}}
 
 # prompt_subst allows `$(function)` inside the PROMPT, which will be re-evaluated
@@ -581,7 +576,7 @@ prompt_git_email(){
 # will immediately evaluate the "$(code)".
 setopt prompt_subst
 
-PROMPT='$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
+PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
 # }}}
 
 # Git {{{
