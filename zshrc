@@ -215,7 +215,12 @@ export FZF_DEFAULT_OPTS='--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 # Completion {{{
 # http://zsh.sourceforge.net/Doc/Release/Completion-System.html
 # zmodload -i zsh/complist
-fpath=(~/.zsh/completion-scripts /usr/local/share/zsh/site-functions $fpath)
+fpath=(
+  ~/.zsh/completion-scripts
+  /usr/local/share/zsh/site-functions
+  /usr/local/opt/heroku/libexec/node_modules/@heroku-cli/plugin-autocomplete/autocomplete/zsh
+  $fpath
+)
 autoload -Uz compinit && compinit
 # completion: use cache if updated within 24h
 if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
@@ -256,8 +261,6 @@ compdef '_files -/' tcd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
-HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup
-[[ -f "$HEROKU_AC_ZSH_SETUP_PATH" ]] && source "$HEROKU_AC_ZSH_SETUP_PATH"
 # }}}
 
 # $PATH {{{
