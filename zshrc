@@ -782,6 +782,10 @@ if is_osx; then
   # Opt out of sending Homebrew information to Google Analytics
   # https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
   export HOMEBREW_NO_ANALYTICS=1
+  # If it's been more than this number of seconds since Homebrew was last
+  # updated, automatically run `brew update` before `brew install`.
+  # 604800 is 1 week in seconds (60 * 60 * 24 * 7).
+  export HOMEBREW_AUTO_UPDATE_SECS=604800
 fi
 # }}}
 
