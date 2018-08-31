@@ -1,8 +1,12 @@
 #!/bin/sh
 
-git branch --verbose --verbose --color=always "$@" |\
-  rg -v 'remotes/origin/(HEAD|master)' |\
-  sed -E -e 's/^\*?[ \t]*//' |\
-  sort -u |\
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+git branch --color=always "$@" |\
+  sed -E -e 's/^[ \t]*//' |\
+  sed -E -e 's@^remotes/@@' |\
+  rg -v '^\*' |\
+  rg -v "remotes/origin/${current_branch}" |\
+  sort |\
   fzf --reverse --ansi --tac |\
   sed -e 's@^remotes/origin/@@' -e 's/ .*$//'
