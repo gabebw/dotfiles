@@ -262,6 +262,10 @@ compdef viw=which
 compdef staging=heroku
 compdef production=heroku
 
+if [ -f /usr/local/etc/bash_completion.d/um-completion.sh ]; then
+  . /usr/local/etc/bash_completion.d/um-completion.sh
+fi
+
 # Show dots when autocompleting, so that I know it's doing something when
 # autocompletion takes a long time.
 expand-or-complete-with-dots() {

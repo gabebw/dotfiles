@@ -106,3 +106,6 @@ brew 'asdf'
 
 # cat, but smarter
 brew 'bat'
+
+# Personal manpages, written in Markdown
+brew 'um'
