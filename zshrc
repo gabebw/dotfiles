@@ -261,6 +261,17 @@ compdef '_files -/' tcd
 compdef viw=which
 compdef staging=heroku
 compdef production=heroku
+
+# Show dots when autocompleting, so that I know it's doing something when
+# autocompletion takes a long time.
+expand-or-complete-with-dots() {
+  echo -n "..."
+  zle expand-or-complete
+  zle redisplay
+}
+zle -N expand-or-complete-with-dots
+# ^I is the <Tab> key
+bindkey "^I" expand-or-complete-with-dots
 # }}}
 
 # $PATH {{{
