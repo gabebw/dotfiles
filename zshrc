@@ -661,7 +661,11 @@ compdef _git ga=git-add
 export VISUAL=vim
 export EDITOR=$VISUAL
 alias vi="$VISUAL"
-v(){ $VISUAL "$(fzf)" }
+v(){
+  local files
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview='bat --color=always {}'))
+  [[ -n "$files" ]] && $VISUAL "${files[@]}"
+}
 
 # Remove vim flags for crontab -e
 alias crontab="VISUAL=vim crontab"

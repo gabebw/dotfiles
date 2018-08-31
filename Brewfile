@@ -103,3 +103,6 @@ brew 'pspg'
 
 # asdf version manager: https://github.com/asdf-vm/asdf
 brew 'asdf'
+
+# cat, but smarter
+brew 'bat'
