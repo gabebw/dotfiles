@@ -17,6 +17,10 @@ _handle_unknown_command() {
   return 1
 }
 
+_follow_symlink(){
+  readlink "$1" || print "$1"
+}
+
 _definition_type() {
   arg_type_string=$(type -a "$1")
   if [[ "$arg_type_string" == *"is an alias"* ]]; then
@@ -36,7 +40,7 @@ _definition_type() {
 }
 
 _edit_script() {
-  vim "$(readlink "$(which "$1")")"
+  vim "$(_follow_symlink "$(which "$1")")"
 }
 
 _definition_field_for_pattern() {
@@ -58,7 +62,7 @@ _edit_based_on_pattern(){
   if _grep_for_definition -q "$pattern"; then
     file=$(_definition_field_for_pattern 1 "$pattern")
     line=$(_definition_field_for_pattern 2 "$pattern")
-    vim "$(readlink "$file")" "+$line"
+    vim "$(_follow_symlink "$file")" "+$line"
   else
     _handle_unknown_command "$command_name"
   fi
