@@ -7,6 +7,16 @@ files_filtered_by(){
   git diff-tree --diff-filter="$1" -r --name-only --no-commit-id ORIG_HEAD HEAD
 }
 
+run_rcup(){
+  echo ">>> Running rcup..."
+  RCRC=rcrc rcup -v | grep -v identical
+}
+
+run_rcdn(){
+  rcdn
+  echo 'Some files were deleted, so I ran `rcdn`'
+}
+
 # If COPY_ALWAYS is set, then there are some copied (not symlinked) files and so
 # we always run rcup because we need to update them with `rcup`. They won't
 # automatically change when files in my dotfiles change.
@@ -15,14 +25,13 @@ if ! grep -qF COPY_ALWAYS ~/.rcrc; then
   removed_files=$(files_filtered_by D)
 
   if [ -n "$removed_files" ]; then
-    rcdn
-    echo 'Some files were deleted, so I ran `rcdn`'
-  fi
-
-  if [ -n "$added_files" ]; then
-    echo ">>> Running rcup..."
-    RCRC=rcrc rcup -v | grep -v identical
+    run_rcdn
+    run_rcup
   else
-    echo "No new files, not running rcup"
+    if [ -n "$added_files" ]; then
+      run_rcup
+    else
+      echo "No new files, not running rcup"
+    fi
   fi
 fi
