@@ -108,4 +108,4 @@ brew 'asdf'
 brew 'bat'
 
 # Personal manpages, written in Markdown
-brew 'um'
+brew 'sinclairtarget/wst/um'
