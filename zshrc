@@ -108,6 +108,7 @@ it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t $(basename "$1")) }
 alias xo='quote | xargs open'
 alias trust='mkdir -p .git/safe'
+alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
 
 o(){
