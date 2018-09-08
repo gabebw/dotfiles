@@ -6,16 +6,12 @@ tap 'homebrew/services'
 # Old versions of some packages
 tap 'homebrew/versions'
 
-# It me
-tap 'gabebw/formulae'
-
 # https://unused.codes/
-tap 'joshuaclayton/formulae'
 # Don't use ag, I use rg
-brew 'unused', args: ['--without-ag']
+brew 'joshuaclayton/formulae/unused', args: ['--without-ag']
 
 # Find my most-used CLI commands
-brew 'most-used'
+brew 'gabebw/formulae/most-used'
 
 brew 'coreutils'
 
