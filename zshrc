@@ -809,6 +809,9 @@ if is_osx; then
   # updated, automatically run `brew update` before `brew install`.
   # 604800 is 1 week in seconds (60 * 60 * 24 * 7).
   export HOMEBREW_AUTO_UPDATE_SECS=604800
+
+  # Always cleanup after upgrading
+  export HOMEBREW_UPGRADE_CLEANUP=1
 fi
 # }}}
 
