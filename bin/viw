@@ -18,7 +18,11 @@ _handle_unknown_command() {
 }
 
 _follow_symlink(){
-  readlink "$1" || print "$1"
+  if [[ -L "$1" ]]; then
+    readlink "$1"
+  else
+    print "$1"
+  fi
 }
 
 _definition_type() {
