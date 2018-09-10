@@ -143,3 +143,5 @@
   autostash = true
 [include]
   path = ~/.gitconfig.local
+[branch]
+  sort = -committerdate
