@@ -98,6 +98,7 @@ epoch(){
     date -r "$1"
   fi
 }
+alias install-command-line-tools='xcode-select --install'
 rcup(){
   if ! command rcup -v | rg -v identical; then
     true
