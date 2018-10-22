@@ -610,7 +610,7 @@ function g {
   fi
 }
 
-alias gd="git diff"
+alias gd="git diff --word-diff"
 # Grep with grouped output like Ack
 alias gg="git g"
 alias amend="git commit --amend -Chead"
