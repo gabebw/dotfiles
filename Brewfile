@@ -51,9 +51,6 @@ brew 'ctags'
 # My favorite editor
 brew 'vim'
 
-# Used in Rails projects
-brew 'phantomjs'
-
 # Fast GitHub client, used in git-create-pull-request
 brew 'hub'
 
