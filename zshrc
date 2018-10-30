@@ -278,6 +278,9 @@ expand-or-complete-with-dots() {
 zle -N expand-or-complete-with-dots
 # ^I is the <Tab> key
 bindkey "^I" expand-or-complete-with-dots
+
+# Completion for Kitty: https://sw.kovidgoyal.net/kitty/
+kitty + complete setup zsh | source /dev/stdin
 # }}}
 
 # $PATH {{{
