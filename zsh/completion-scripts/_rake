@@ -5,12 +5,14 @@ file=.rake_tasks
 # Rake task completion
 # Via: http://weblog.rubyonrails.org/2006/3/9/fast-rake-task-completion-for-zsh
 _rake_does_task_list_need_generating () {
-  if [[ ! -f "$file" ]]; then
-    return 0
-  else
+  if [[ -s "$file" ]]; then
+    # File exists and isn't empty
     accurate=$(stat -f%m "$file")
     changed=$(stat -f%m Rakefile)
     return $(expr $accurate '>=' $changed)
+  else
+    # File doesn't exist or is empty
+    return 0
   fi
 }
 
