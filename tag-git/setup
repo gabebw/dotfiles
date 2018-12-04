@@ -3,5 +3,5 @@
 set -e
 
 echo "Installing Git hooks..."
-cp tag-git/post-merge .git/hooks/post-merge
+cp tag-git/hooks/dotfiles-post-merge .git/hooks/post-merge
 chmod +x .git/hooks/post-merge
