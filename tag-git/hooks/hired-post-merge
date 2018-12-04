@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# To install this file, run `chmod +x post-merge` to make it executable then put
+# it into `.git/hooks/` in your local clone of the Hired repo.
+
+# `check_run` will run a command after `git pull` if a specified file was
+# changed.
+# Usage: `check_run FILE_NAME "command to run"`
+check_run() {
+  # Grep through changed files
+  git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | \
+    grep --quiet "$1" && \
+    eval "$2"
+}
+
+# Install any new packages (both Ruby and JS).
+check_run Gemfile.lock "bundle"
+check_run package.json "yarn"
+check_run yarn.lock "yarn"
+
+# Run migrations and clean fixtures (so they don't get stale) if there are DB
+# changes.
+#
+# Q: Why not regenerate the fixtures, rather than just removing them?
+# A: Removing them is faster than regenerating them, and will force a rebuild of
+#    the fixtures on the next test run. Thus, fixtures will be regenerated
+#    exactly when they're needed, but until that point, there's no waiting for
+#    fixtures to rebuild.
+check_run db/schema.rb "rails db:migrate spec:fixture_builder:clean"
+
+# Update ctags
+# https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+if [[ -x .git/hooks/ctags ]]; then
+  .git/hooks/ctags >/dev/null 2>&1 &
+fi
