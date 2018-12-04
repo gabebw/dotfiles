@@ -1,12 +1,14 @@
 #compdef rake
 
+file=.rake_tasks
+
 # Rake task completion
 # Via: http://weblog.rubyonrails.org/2006/3/9/fast-rake-task-completion-for-zsh
 _rake_does_task_list_need_generating () {
-  if [[ ! -f .rake_tasks ]]; then
+  if [[ ! -f "$file" ]]; then
     return 0
   else
-    accurate=$(stat -f%m .rake_tasks)
+    accurate=$(stat -f%m "$file")
     changed=$(stat -f%m Rakefile)
     return $(expr $accurate '>=' $changed)
   fi
@@ -15,8 +17,8 @@ _rake_does_task_list_need_generating () {
 _rake() {
   if [ -f Rakefile ]; then
     if _rake_does_task_list_need_generating; then
-      rake --silent --tasks 2>/dev/null | cut -d " " -f 2 > .rake_tasks
+      rake --silent --tasks 2>/dev/null | cut -d " " -f 2 > "$file"
     fi
-    compadd $(cat .rake_tasks)
+    compadd $(cat "$file")
   fi
 }
