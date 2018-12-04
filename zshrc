@@ -280,7 +280,9 @@ zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 
 # Completion for Kitty: https://sw.kovidgoyal.net/kitty/
-kitty + complete setup zsh | source /dev/stdin
+if command -v kitty >/dev/null; then
+  kitty + complete setup zsh | source /dev/stdin
+fi
 # }}}
 
 # $PATH {{{
