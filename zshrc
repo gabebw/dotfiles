@@ -758,7 +758,7 @@ alias tagit='/usr/local/bin/ctags -R'
 
 b(){
   if [[ $# == 0 ]]; then
-    (bundle check > /dev/null || bundle install) && \
+    (bundle check > /dev/null || bundle install --jobs=4) && \
       bundle --quiet --binstubs=./bin/stubs
   else
     bundle "$@"
