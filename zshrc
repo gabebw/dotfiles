@@ -322,8 +322,9 @@ PATH=/usr/local/opt/python/libexec/bin:$PATH
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # Haskell
+PATH=$HOME/.cabal/bin:$PATH
 PATH=~/.local/bin:$PATH
-
+PATH=./.git/safe/../../.cabal-sandbox/bin:$PATH
 PATH=$HOME/.bin:$PATH
 
 PATH=./bin/stubs:$PATH
@@ -722,8 +723,6 @@ fi
 # }}}
 
 # Haskell {{{
-PATH="./.git/safe/../../.cabal-sandbox/bin:$HOME/.cabal/bin:$PATH"
-
 if command -v stack > /dev/null; then
   stack(){
     # Delete this function so it only loads completion once.
