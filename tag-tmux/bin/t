@@ -32,11 +32,13 @@ _tmux_normalize_session_name(){
 }
 
 # Create a new tmux session with the given name.
+# It's created in the background (`-d`) so it can be created when already in
+# another tmux session.
 _new_tmux_session_named() {
   new_session_name=$1
 
-  # Create three windows named vim/scratch/server and jump into the first one
-  TMUX='' tmux new-session -d -As "$new_session_name" -n vim
+  # -A means "attach if this already exists, otherwise create it"
+  tmux new-session -d -As "$new_session_name"
   _attach_to_tmux_session "$new_session_name"
 }
 
