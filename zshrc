@@ -477,7 +477,7 @@ prompt_git_status_symbol(){
   local clean=$(prompt_green ✔)
   local dirty=$(prompt_red ✘)
   local untracked=$(prompt_cyan '?')
-  local staged=$(prompt_yellow ⭑)
+  local staged=$(prompt_yellow S)
   local conflicts=$(prompt_red '!')
 
   case $(prompt_git_status) in
