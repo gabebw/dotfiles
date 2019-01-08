@@ -514,8 +514,20 @@ prompt_git_relative_branch_status_symbol(){
   prompt_spaced "$symbol"
 }
 
+prompt_git_raw_status(){
+  # Get the cached status from /tmp/git-status-$$ if possible.
+  # Otherwise, fall back to running `git status`.
+  # The cached status won't be there after returning to the terminal after some
+  # time away (since /tmp gets cleared). When the cached status file isn't
+  # there, it shows `ugh` in the prompt, even though it could figure out the
+  # status.
+  #
+  # To avoid that false status, fall back to running `git status`.
+  cat /tmp/git-status-$$ 2>/dev/null || git status 2>/dev/null
+}
+
 prompt_git_status() {
-  local git_status=$(cat "/tmp/git-status-$$")
+  local git_status=$(prompt_git_raw_status)
   case "$git_status" in
   *"Changes not staged"*) print "changed";;
   *"Changes to be committed"*) print "staged";;
@@ -526,7 +538,7 @@ prompt_git_status() {
 }
 
 prompt_git_relative_branch_status(){
-  local git_status=$(cat "/tmp/git-status-$$")
+  local git_status=$(prompt_git_raw_status)
   local branch_name=$(git rev-parse --abbrev-ref HEAD)
 
   if ! git config --get "branch.${branch_name}.merge" > /dev/null; then
