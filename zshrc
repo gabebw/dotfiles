@@ -80,8 +80,8 @@ y(){
   print -s "youtube-dl-safe ${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
-# Pipe to this to quote filenames
-alias quote="ruby -r shellwords -e 'puts STDIN.map { |l| l.strip.shellescape }'"
+null_terminate_filenames(){ perl -pe 's/\n/\0/' }
+
 # Files created today
 alias today="days 0"
 # Created in last n days
@@ -107,7 +107,7 @@ rcup(){
 
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ (cd "$1" && t $(basename "$1")) }
-alias xo='quote | xargs open'
+xo(){ null_terminate_filenames | xargs -o -0 ${1:-open} }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
