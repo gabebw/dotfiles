@@ -537,7 +537,7 @@ prompt_git_relative_branch_status(){
       *"have diverged"*) print "ahead_behind";;
       *"Your branch is behind"*) print "behind";;
       *"Your branch is ahead"*) print "ahead";;
-      *"upstream is gone") print "upstream_gone";;
+      *"upstream is gone"*) print "upstream_gone";;
     esac
   fi
 }
