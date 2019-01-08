@@ -113,9 +113,14 @@ alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
 
 o(){
-  if [ -d "$1" ]; then
-    if [[ -n "$(find "$1" -type f -print -quit -maxdepth 1 -name '*.mp4' -or -name '*.flv')" ]]; then
-      open "$1"/*
+  if [[ -d "$1" ]]; then
+    # Order matters (ugh):
+    # * `-print -quit` needs to be at the end
+    # * `-type` and the `-name` clauses need to be next to each other
+    if [[ -n "$(find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -print -quit)" ]]; then
+      # \+ means the results are concatenated and the command is executed once
+      # with all found results.
+      find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -exec open {} \+
     else
       open -a Preview "$1"
     fi
