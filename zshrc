@@ -692,6 +692,8 @@ v(){
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview='bat --color=always {}'))
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
 }
+# Grep immediately on opening vim
+gv(){ vim -c ":Grep $@" }
 
 # Remove vim flags for crontab -e
 alias crontab="VISUAL=vim crontab"
