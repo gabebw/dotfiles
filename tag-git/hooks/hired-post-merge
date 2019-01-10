@@ -7,6 +7,7 @@
 # changed.
 # Usage: `check_run FILE_NAME "command to run"`
 check_run() {
+  echo "Running $2"
   # Grep through changed files
   git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | \
     grep --quiet "$1" && \
