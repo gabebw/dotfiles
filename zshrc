@@ -111,6 +111,7 @@ xo(){ null_terminate_filenames | xargs -o -0 ${1:-open} }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
+alias xee="open -a Xee³"
 
 o(){
   if [[ -d "$1" ]]; then
@@ -122,7 +123,7 @@ o(){
       # with all found results.
       find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -exec open {} \+
     else
-      open -a Preview "$1"
+      xee "$1"
     fi
   else
     if [[ $# == 0 ]]; then
