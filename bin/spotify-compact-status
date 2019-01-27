@@ -32,7 +32,11 @@ function namesOfRunningApplications(){
   return systemEvents.applicationProcesses().map(function(x) { return x.name() });
 }
 
-if (namesOfRunningApplications().indexOf('Spotify') > -1) {
+function spotifyIsRunning(){
+  return namesOfRunningApplications().indexOf('Spotify') > -1;
+}
+
+if (spotifyIsRunning()) {
   var spotify = Application("Spotify");
 
   // stopped / playing / paused
