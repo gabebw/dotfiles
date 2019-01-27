@@ -253,6 +253,8 @@ if has('unix')
   set backupskip=/tmp/*,/private/tmp/*"
 endif
 
+set listchars=tab:>-,trail:~
+
 " Numbers
 " With relativenumber and number set, shows relative number but has current
 " number on current line.
