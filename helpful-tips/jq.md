@@ -26,3 +26,10 @@ Run it through the "no-op" filter, `.`:
 
     echo $json | jq .
 
+## Get keys
+
+    echo $json | jq 'keys'
+
+Or to get keys as part of a jq expression:
+
+    echo $json | jq '.users | keys'
