@@ -711,7 +711,14 @@ v(){
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
 }
 # Grep immediately on opening vim
-gv(){ vim -c ":Grep $@" }
+gv(){
+  if [[ $# != 1 ]]; then
+    echo "Usage: gv THING_TO_GREP_FOR" >&2
+    return 64
+  else
+    vim -c ":Grep $@"
+  fi
+}
 
 # Remove vim flags for crontab -e
 alias crontab="VISUAL=vim crontab"
