@@ -679,14 +679,18 @@ function gb(){
   fi
 }
 function gbm(){ gb "$1" origin/master }
-function gbi(){
+git-branch-with-prefix(){
+  local prefix=$1
+  shift
   if [[ $# == 0 ]]; then
     echo "No branch name :(" >&2
     return 1
   else
-    gbm "IXP-${*// /-}"
+    gbm "${prefix}-${*// /-}"
   fi
 }
+gbi(){ git-branch-with-prefix IXP $* }
+gbf(){ git-branch-with-prefix FW $* }
 
 function gcl {
   local directory="$(superclone "$@")"
