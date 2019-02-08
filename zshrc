@@ -680,13 +680,11 @@ function gb(){
 }
 function gbm(){ gb "$1" origin/master }
 git-branch-with-prefix(){
-  local prefix=$1
-  shift
   if [[ $# == 0 ]]; then
     echo "No branch name :(" >&2
     return 1
   else
-    gbm "${prefix}-${*// /-}"
+    gbm "${*// /-}"
   fi
 }
 gbi(){ git-branch-with-prefix IXP $* }
