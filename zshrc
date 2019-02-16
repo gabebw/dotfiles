@@ -123,6 +123,8 @@ o(){
       # with all found results.
       find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -exec open {} \+
     else
+      # Unfortunately, Xee doesn't set kMDItemLastUsedDate on files when you
+      # open their containing directory.
       xee "$1"
     fi
   else
