@@ -80,7 +80,6 @@ y(){
   print -s "youtube-dl-safe ${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
-null_terminate_filenames(){ perl -pe 's/\n/\0/' }
 
 # Files created today
 alias today="days 0"
@@ -107,6 +106,7 @@ rcup(){
 
 it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ [[ $# == 1 ]] && (cd "$1" && t $(basename "$1")) }
+null_terminate_filenames(){ perl -pe 's/\n/\0/' }
 xo(){ null_terminate_filenames | xargs -o -0 ${1:-open} }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
