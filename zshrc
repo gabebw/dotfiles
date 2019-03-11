@@ -211,6 +211,10 @@ unsetopt multios
 # X - Don't send clear screen signal
 export LESS="ij.5nFKMRX"
 
+# Make Zsh's builtin `time` print output like `time` in Bash and every other
+# system.
+export TIMEFMT=$'\nreal\t%*E\nuser\t%*U\nsys\t%*S'
+
 # Note that these FZF options are used by fzf.vim automatically! Yay!
 # Use a separate tool to smartly ignore files
 export FZF_DEFAULT_COMMAND='rg --hidden --files --ignore-file ~/.ignore'
