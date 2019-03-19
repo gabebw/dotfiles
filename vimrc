@@ -110,6 +110,7 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 " Searching
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
+command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' <args> | copen 10 | redraw!
 
 function! CharacterUnderCursor()
   return nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
