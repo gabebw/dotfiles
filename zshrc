@@ -695,6 +695,7 @@ git-branch-with-prefix(){
 }
 gbi(){ git-branch-with-prefix IXP $* }
 gbf(){ git-branch-with-prefix FW $* }
+hbc(){ hub browse -- commit/"$1" }
 
 function gcl {
   local directory="$(superclone "$@")"
