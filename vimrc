@@ -394,7 +394,8 @@ command! GitLink silent! .Gbrowse! -
 " vim-trimmer
 " -----------------
 " filetypes, check with :set ft?
-let g:trimmer_repeated_lines_blacklist = ['conf', 'python', 'eruby.yaml']
+let g:trimmer_repeated_lines_blacklist_file_types = ['conf', 'python', 'eruby.yaml']
+let g:trimmer_repeated_lines_blacklist_file_base_names = ['schema.rb']
 
 " vim-tmux-runner
 " -----------------

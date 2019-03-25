@@ -5,8 +5,12 @@
 " g:disable_trimmer - Set to 1 to disable the plugin. Mostly used by Enable() and
 "                     Disable() and not really meant to be always set.
 
-if !exists('g:trimmer_repeated_lines_blacklist')
-  let g:trimmer_repeated_lines_blacklist = []
+if !exists('g:trimmer_repeated_lines_blacklist_file_types')
+  let g:trimmer_repeated_lines_blacklist_file_types = []
+endif
+
+if !exists('g:trimmer_repeated_lines_blacklist_file_base_names')
+  let g:trimmer_repeated_lines_blacklist_file_base_names = []
 endif
 
 augroup vimTrimmer
@@ -26,7 +30,9 @@ function! s:Trim()
   if ! get(g:, 'disable_trimmer')
     let l:pos = getpos('.')
     call s:TrimTrailingWhitespace()
-    if index(g:trimmer_repeated_lines_blacklist, &filetype) < 0
+    let l:is_blacklisted_file_type = index(g:trimmer_repeated_lines_blacklist_file_types, &filetype) >= 0
+    let l:is_blacklisted_file_name = index(g:trimmer_repeated_lines_blacklist_file_base_names, expand('%:t')) >= 0
+    if ! is_blacklisted_file_type && ! is_blacklisted_file_name
       call s:TrimRepeatedBlankLines()
     endif
     call setpos('.', l:pos)
