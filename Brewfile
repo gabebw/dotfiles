@@ -3,9 +3,6 @@
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
-# Old versions of some packages
-tap 'homebrew/versions'
-
 # https://unused.codes/
 # Don't use ag, I use rg
 brew 'joshuaclayton/formulae/unused', args: ['--without-ag']
@@ -31,10 +28,6 @@ brew 'https://raw.githubusercontent.com/EricChiang/pup/master/pup.rb'
 # sed (and more) for CSV
 # More: https://robots.thoughtbot.com/csvkit-brings-the-unix-philosophy-to-csv
 brew 'csvkit'
-
-# Qt5.5 for capybara-webkit, because Qt 5.6 doesn't work except with the most
-# recent version
-brew 'qt@5.5'
 
 # grep for ps
 brew 'pgrep'

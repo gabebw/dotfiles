@@ -39,8 +39,6 @@ if is_osx; then
     quietly_brew_bundle "$brewfile"
   done
 
-  brew link --overwrite --force qt@5.5 &>/dev/null
-
   info "Checking for command-line tools..."
   if ! command -v xcodebuild > /dev/null; then
     xcode-select --install
