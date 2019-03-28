@@ -329,6 +329,7 @@ PATH=$PATH:.git/safe/../../node_modules/.bin/
 # Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
 # add them to the front so we always get Python 3.
 PATH=/usr/local/opt/python/libexec/bin:$PATH
+PATH=/usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/bin:$PATH
 
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
