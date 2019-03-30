@@ -34,6 +34,10 @@
 .keep
 .gitkeep
 
+# Search these hidden directories even if I don't pass `--hidden`
+!.circleci/
+!.github/
+
 # Huge JS files that mess up the vim quickfix window
 highlight.all.js
 highlight.pack.js
