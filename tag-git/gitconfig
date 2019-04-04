@@ -147,3 +147,5 @@
   path = ~/.gitconfig.local
 [branch]
   sort = -committerdate
+[hub]
+  protocol = https
