@@ -93,5 +93,9 @@ brew 'asdf'
 # cat, but smarter
 brew 'bat'
 
+# An extension to Git to help it work with large files
+# https://git-lfs.github.com
+brew 'git-lfs'
+
 # Personal manpages, written in Markdown
 brew 'sinclairtarget/wst/um'
