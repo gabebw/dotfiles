@@ -1,4 +1,6 @@
-# Tmux tips
+# tmux --
+{:data-section="shell"}
+{:data-date="April 15, 2019"}
 
 ## Copy/paste
 

@@ -1,4 +1,9 @@
-## Get values out of an array of hashes
+# jq -- sed for JSON
+{:data-section="shell"}
+{:data-date="April 15, 2019"}
+{:data-extra="Um Pages"}
+
+## FIND VALUES IN ARRAY OF HASHES
 
 Given this:
 
@@ -20,13 +25,13 @@ To get the IDs:
     "1"
     "2"
 
-## Pretty-print JSON (with colors!)
+## PRETTY-PRINT (WITH COLOR)
 
 Run it through the "no-op" filter, `.`:
 
     echo $json | jq .
 
-## Get keys
+## GET KEYS
 
     echo $json | jq 'keys'
 
