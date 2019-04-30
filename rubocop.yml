@@ -556,7 +556,7 @@ Style/EvenOdd:
   Description: Favor the use of Fixnum#even? && Fixnum#odd?
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#predicate-methods
   Enabled: false
-Style/FlipFlop:
+Lint/FlipFlop:
   Description: Checks for flip flops
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-flip-flops
   Enabled: false
