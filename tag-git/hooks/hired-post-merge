@@ -10,14 +10,13 @@ check_run() {
   echo "Running $2"
   # Grep through changed files
   git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | \
-    grep --quiet "$1" && \
+    grep -E --quiet "$1" && \
     eval "$2 &"
 }
 
 # Install any new packages (both Ruby and JS).
 check_run Gemfile.lock "bundle"
-check_run package.json "yarn"
-check_run yarn.lock "yarn"
+check_run "package.json|yarn.lock" "yarn"
 
 # Run migrations and clean fixtures (so they don't get stale) if there are DB
 # changes.
