@@ -97,5 +97,8 @@ brew 'bat'
 # https://git-lfs.github.com
 brew 'git-lfs'
 
+# Simple graphs with `bin/line_graph`
+brew 'gnuplot'
+
 # Personal manpages, written in Markdown
 brew 'sinclairtarget/wst/um'
