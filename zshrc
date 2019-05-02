@@ -163,6 +163,16 @@ al() {
   fi
 }
 
+alr() {
+  if [[ $# == 0 ]]; then
+    ls -t -r | head -n 10
+  elif [[ $# == 1 && $1 =~ '^[0-9]+$' ]]; then
+    ls -t -r | head -n "$1"
+  else
+    ls -t -r "$@" | head -n 10
+  fi
+}
+
 # If piping something in, copy it.
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
