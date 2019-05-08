@@ -870,6 +870,11 @@ compdef _tmuxinator tmuxinator mux
 alias mux=tmuxinator
 # }}}
 
+if is_osx; then
+  # Set up SSH helper (mostly for Git)
+  ssh-add -K ~/.ssh/id_rsa 2> /dev/null
+fi
+
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
 # created (i.e., after all zle -N calls and after running compinit), because it
 # has to know about them to highlight them.
