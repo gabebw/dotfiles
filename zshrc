@@ -704,6 +704,8 @@ git-branch-with-prefix(){
 gbi(){ git-branch-with-prefix IXP $* }
 gbf(){ git-branch-with-prefix FW $* }
 hbc(){ hub browse -- commit/"$1" }
+# Sum numbers (1 per line) from STDIN
+sum(){ paste -s -d+ - | bc }
 
 function gcl {
   local directory="$(superclone "$@")"
