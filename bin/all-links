@@ -1,0 +1,70 @@
+#!/bin/bash
+
+# Get all links from any running browsers.
+# Supports Safari, Firefox, and Chrome.
+#
+# Requirements:
+# * ripgrep (brew install ripgrep)
+# * chrome-cli (brew install chrome-cli)
+# * Python (usually built-in)
+
+set -e
+
+is_running(){
+  ps x | rg -v rg | rg -q "$1"
+}
+
+all-safari-links(){
+  # Only check for Safari links if Safari is running, because the Applescript
+  # will open Safari and we don't want do do that if Safari isn't already
+  # running.
+  if is_running Safari.app; then
+    osascript -l JavaScript <<EOL
+      app = Application('Safari');
+      tabs = [];
+      for(var i = 0; i < app.windows.length; i++){
+        window = app.windows[i];
+        for(var j = 0; j < window.tabs.length; j++){
+          tab = window.tabs[j];
+          tabs.push(tab.url());
+        }
+      }
+      // console.log prints to STDERR, so just return a string, which goes to
+      // STDOUT
+      tabs.join("\n")
+EOL
+  fi
+}
+
+all-chrome-links(){
+  if is_running 'Google Chrome.app'; then
+    chrome-cli list links | sed -E 's/^.+ (.+)/\1/' | rg -v '^view-source:'
+  fi
+}
+
+# https://gist.githubusercontent.com/tmonjalo/33c4402b0d35f1233020bf427b5539fa/raw/191ceae5d5a73feee10e0c26559f38094ce0e617/list-fftabs.py
+all-firefox-links(){
+  if is_running Firefox.app; then
+    python -c "
+      import sys
+      import pathlib
+      import lz4.block
+      import json
+
+      path = pathlib.Path.home().joinpath('Library/Application Support/Firefox/Profiles')
+      files = path.glob('*default*/sessionstore-backups/recovery.js*')
+
+      for f in files:
+          b = f.read_bytes()
+          if b[:8] == b'mozLz40\0':
+              b = lz4.block.decompress(b[8:])
+          j = json.loads(b)
+          for w in j['windows']:
+              for t in w['tabs']:
+                  i = t['index'] - 1
+                  print(t['entries'][i]['url'])
+    "
+  fi
+}
+
+(all-safari-links; all-chrome-links; all-firefox-links) | sort -u
