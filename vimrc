@@ -558,6 +558,7 @@ Plug 'briancollins/vim-jst'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql'] }
+Plug 'leafgarland/typescript-vim'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
