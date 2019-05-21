@@ -810,6 +810,17 @@ b(){
   fi
 }
 
+bstart(){
+  brew services start elasticsearch@5.6
+  brew services start redis
+  open /Applications/Postgres.app
+}
+
+bstop(){
+  brew services stop elasticsearch@5.6
+  brew services bstop redis
+}
+
 # }}}
 
 # Postgres {{{
