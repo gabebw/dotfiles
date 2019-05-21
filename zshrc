@@ -818,7 +818,7 @@ bstart(){
 
 bstop(){
   brew services stop elasticsearch@5.6
-  brew services bstop redis
+  brew services stop redis
 }
 
 # }}}
