@@ -5,9 +5,11 @@ tap 'homebrew/services'
 
 # https://unused.codes/
 # Don't use ag, I use rg
-brew 'joshuaclayton/formulae/unused', args: ['--without-ag']
+tap 'joshuaclayton/formulae'
+brew 'joshuaclayton/formulae/unused'
 
 # Find my most-used CLI commands
+tap 'gabebw/formulae'
 brew 'gabebw/formulae/most-used'
 
 brew 'coreutils'
