@@ -4,13 +4,8 @@
 tap 'homebrew/services'
 
 # https://unused.codes/
-# Don't use ag, I use rg
 tap 'joshuaclayton/formulae'
-brew 'joshuaclayton/formulae/unused'
-
-# Find my most-used CLI commands
-tap 'gabebw/formulae'
-brew 'gabebw/formulae/most-used'
+brew 'unused'
 
 brew 'coreutils'
 
@@ -49,8 +44,7 @@ brew 'vim'
 # Fast GitHub client, used in git-create-pull-request
 brew 'hub'
 
-# Don't install completions, in favor of using Zsh's (better) git completions
-brew 'git', args: ['--without-completions']
+brew 'git'
 
 # Fuzzy finder
 brew 'fzf'

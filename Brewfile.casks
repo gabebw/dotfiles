@@ -10,5 +10,3 @@ cask 'netnewswire'
 cask 'vlc'
 # HOMM3
 cask 'wineskin-winery'
-# Keyboard remapping on macOS
-cask 'karabiner-elements'
