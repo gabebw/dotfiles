@@ -73,13 +73,13 @@ alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 youtube-dl-safe(){
+  print -s "youtube-dl-safe $@"
   # Prefer ffmpeg because avconv gives these errors:
   #   ERROR: av_interleaved_write_frame(): Invalid argument
   echo "$@" | xargs -P 5 -n 1 youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue
 }
 y(){
   echo "${@:-"$(pbpaste)"}"
-  print -s "youtube-dl-safe ${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
 
