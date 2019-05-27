@@ -23,7 +23,7 @@ _attach_to_tmux_session() {
 }
 
 _tmux_session_exists(){
-  tmux list-sessions -F "#{session_name}" 2>/dev/null | egrep -q "^${1}$"
+  tmux has-session -t "=${1}" 2>/dev/null
 }
 
 # tmux doesn't allow . in session names
