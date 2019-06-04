@@ -114,6 +114,9 @@ alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
 alias xee="open -a Xee³"
+if [[ -r ~/.rgrc ]]; then
+  export RIPGREP_CONFIG_PATH=~/.rgrc
+fi
 
 o(){
   if [[ -d "$1" ]]; then
