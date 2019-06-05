@@ -207,6 +207,8 @@ setopt autocd
 setopt autopushd
 # Timestamp history entries
 setopt extended_history
+# Case-insensitive globbing
+setopt nocaseglob
 
 unsetopt correctall
 # Allow [ or ] wherever you want
