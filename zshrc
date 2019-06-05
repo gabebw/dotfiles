@@ -113,6 +113,7 @@ xo(){ null_terminate_filenames | xargs -o -0 ${1:-open} }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
+alias fd='command fd --type file'
 alias xee="open -a Xee³"
 if [[ -r ~/.rgrc ]]; then
   export RIPGREP_CONFIG_PATH=~/.rgrc
