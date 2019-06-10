@@ -308,6 +308,7 @@ zstyle ':completion:*:ls:*:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;4
 # Complete the command on the left like the command on the right
 compdef '_files -/' tcd
 compdef viw=which
+compdef find-location-of=which
 compdef staging=heroku
 compdef production=heroku
 
