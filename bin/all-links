@@ -37,7 +37,7 @@ EOL
 }
 
 all-chrome-links(){
-  if is_running 'Google Chrome.app'; then
+  if is_running 'Google Chrome$'; then
     chrome-cli list links | sed -E 's/^.+ (.+)/\1/' | rg -v '^view-source:'
   fi
 }
