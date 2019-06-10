@@ -190,8 +190,6 @@ cut-video(){
     ffmpeg -i "$1" -ss "$2" -to "$3" -async 1 "$4" && echo "Output to $4"
   fi
 }
-
-[[ -r ~/.aliases ]] && source ~/.aliases
 # }}}
 
 # Options {{{
@@ -904,3 +902,5 @@ source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # However, zsh-syntax-highlighting somehow unsets this options option, so we
 # must set it after sourcing zsh-syntax-highlighting.
 setopt print_exit_value
+
+[[ -r ~/.aliases ]] && source ~/.aliases
