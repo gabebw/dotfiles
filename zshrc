@@ -190,6 +190,25 @@ cut-video(){
     ffmpeg -i "$1" -ss "$2" -to "$3" -async 1 "$4" && echo "Output to $4"
   fi
 }
+
+unopened(){
+  search_spotlight_files \
+    "(kMDItemLastUsedDate != '*') && (kMDItemContentType != 'public.folder')"
+}
+
+opened(){
+  search_spotlight_files \
+    "(kMDItemLastUsedDate == '*') && (kMDItemContentType != 'public.folder')"
+}
+
+# Search for files in current directory
+# Breaks (shows zero results no matter what) if the current directory is
+# excluded in Spotlight privacy preferences, because this function relies on
+# `mdfind`.
+search_spotlight_files(){
+  # `-onlyin .` will recurse
+  mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl)$'
+}
 # }}}
 
 # Options {{{
