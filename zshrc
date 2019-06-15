@@ -844,6 +844,11 @@ bstop(){
   brew services stop redis
 }
 
+# Serve the current directory at localhost:8000
+serveit(){
+  ruby -run -ehttpd . -p8000
+}
+
 # }}}
 
 # Postgres {{{
