@@ -26,7 +26,7 @@ check_run "package.json|yarn.lock" "yarn"
 #    the fixtures on the next test run. Thus, fixtures will be regenerated
 #    exactly when they're needed, but until that point, there's no waiting for
 #    fixtures to rebuild.
-check_run db/schema.rb "rails db:migrate spec:fixture_builder:clean"
+check_run db/structure.sql "rails db:migrate spec:fixture_builder:clean"
 
 # Update ctags
 # https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
