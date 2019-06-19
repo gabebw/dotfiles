@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [[ $# != 1 ]]; then
+  echo "Usage: whose path/to/file" >&2
+  exit 64
+fi
+
+printf "# Finding out who wrote %s\n\n" "$1"
+echo "# Commits by author:"
+git shortlog -n -s "$1" | cat
+printf "\n\n# Lines in current version by author:\n"
+git ls-tree -r -z --name-only HEAD -- "$1" | \
+  xargs -0 -n1 git blame --line-porcelain HEAD | \
+  sed -n 's/^author //p' | \
+  sort | \
+  uniq -c | \
+  sort -nr
