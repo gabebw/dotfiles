@@ -726,7 +726,16 @@ git-branch-with-prefix(){
 }
 gbi(){ git-branch-with-prefix IXP $* }
 gbf(){ git-branch-with-prefix FW $* }
-hbc(){ hub browse -- commit/"$1" }
+hbc(){
+  if [[ $# -ge 1 ]]; then
+    hub browse -- commit/"$1"
+  else
+    local branch=$(git-shalector)
+    if [[ -n "$branch" ]]; then
+      hub browse -- commit/"$branch"
+    fi
+  fi
+}
 # Sum numbers (1 per line) from STDIN
 sum(){ paste -s -d+ - | bc }
 
