@@ -2,10 +2,6 @@
 
 set -e
 
-# Use this since alacritty isn't necessarily installed yet, and we need a
-# working terminal.
-export TERM=xterm-256color
-
 yellow() {
   tput setaf 3
   echo "$*"
