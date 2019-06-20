@@ -3,14 +3,14 @@
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
-#env:
+env:
   # TERM variable
   #
   # This value is used to set the `$TERM` environment variable for
   # each instance of Alacritty. If it is not present, alacritty will
   # check the local terminfo database and use 'alacritty' if it is
   # available, otherwise 'xterm-256color' is used.
-  #TERM: xterm-256color
+  TERM: alacritty
 
 window:
   startup_mode: Maximized
@@ -82,21 +82,21 @@ tabspaces: 8
 font:
   # Normal (roman) font face
   normal:
-    family: Iosevka Term Medium
+    family: Iosevka Term
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Medium
 
   # Bold font face
   bold:
-    family: Iosevka Term Medium
+    family: Iosevka Term
     # The `style` can be specified to pick a specific face.
     style: Bold
 
   # Italic font face
   italic:
-    family: Iosevka Term Medium Italic
+    family: Iosevka Term
     # The `style` can be specified to pick a specific face.
-    #style: Italic
+    style: Medium Italic
 
   # Point size
   size: 18.0

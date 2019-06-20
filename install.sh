@@ -2,6 +2,10 @@
 
 set -e
 
+# Use this since alacritty isn't necessarily installed yet, and we need a
+# working terminal.
+export TERM=xterm-256color
+
 yellow() {
   tput setaf 3
   echo "$*"
@@ -80,10 +84,11 @@ if is_osx; then
 fi
 
 # Installs to ~/.terminfo
-info "Installing italics-capable terminfo files..."
-if ! [ -f ~/.terminfo/78/xterm-256color ]; then
-  mkdir -p ~/.terminfo
-  cp -r terminfo/78 ~/.terminfo/
+echo "Installing italics-capable terminfo files..."
+if ! [[ -r ~/.terminfo/61/alacritty ]]; then
+  alacritty_terminfo=$(mktemp)
+  curl -o "$alacritty_terminfo" https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
+  tic -xe alacritty,alacritty-direct "$alacritty_terminfo"
 fi
 
 # Load asdf (before setup scripts) in case it's the first time installing it
