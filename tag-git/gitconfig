@@ -52,7 +52,7 @@
   # The advantage of --force-with-lease over --force is that it won't push if
   # you haven't already seen the ref you're overwriting. It avoids the race
   # condition of accidentally "push -f"ing over a commit you haven't seen.
-  pf = push --force-with-lease
+  pf = push --force-with-lease --set-upstream
   g = grep --extended-regexp --break --heading --line-number
   ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
