@@ -192,8 +192,14 @@ cut-video(){
 }
 
 unopened(){
-  search_spotlight_files \
-    "(kMDItemLastUsedDate != '*') && (kMDItemContentType != 'public.folder')"
+  if [[ $# == 0 ]]; then
+    search_spotlight_files \
+      "(kMDItemLastUsedDate != '*') && (kMDItemContentType != 'public.folder')"
+  else
+    search_spotlight_files \
+      "(kMDItemLastUsedDate != '*') && (kMDItemContentType != 'public.folder')" |
+      head -n "$1"
+  fi
 }
 
 opened(){
