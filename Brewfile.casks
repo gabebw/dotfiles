@@ -7,6 +7,7 @@ cask 'alfred'
 cask 'dropbox'
 cask 'google-chrome'
 cask 'netnewswire'
+cask 'ngrok'
 cask 'vlc'
 # HOMM3
 cask 'wineskin-winery'
