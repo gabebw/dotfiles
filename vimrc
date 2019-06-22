@@ -698,6 +698,15 @@ filetype plugin indent on
 syntax enable
 silent! colorscheme Tomorrow-Night-Bright
 
+function! SyntaxItem()
+  " https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+  " highest / transparent / lowest
+  return 'hi<' .
+        \ synIDattr(synID(line('.'), col('.'), 1), 'name') . '> trans<' .
+        \ synIDattr(synID(line('.'), col('.'), 0), 'name') . '> lo<' .
+        \ synIDattr(synIDtrans(synID(line('.'), col('.'), 1)), 'name') . '>'
+endfunction
+
 function! s:BetterColorschemeSettings()
   hi clear SpellBad
   hi clear ALEStyleError
