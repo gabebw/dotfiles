@@ -704,6 +704,8 @@ function! s:BetterColorschemeSettings()
   hi clear ALEError
   hi clear ALEWarning
   hi SpellBad cterm=underline ctermfg=red
+  " Highlight ruby TODO etc in red
+  hi rubyTodo cterm=underline ctermfg=red
   " Make some things italic
   hi! Comment term=italic cterm=italic gui=italic
   hi! Constant term=italic cterm=italic gui=italic
