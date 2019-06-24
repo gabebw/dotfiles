@@ -84,7 +84,8 @@ nnoremap <Leader><Leader> <C-^>
 nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 
 " clipboard
-nmap cl cpil
+nnoremap cl "+yy
+nnoremap cv "+p
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
