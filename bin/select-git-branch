@@ -3,7 +3,7 @@
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 git branch --sort=-committerdate --color=always "$@" |\
-  sed -E -e 's/^[ \t]*//' |\
+  sed -E -e 's/^[[:space:]]*//' |\
   sed -E -e 's@^remotes/@@' |\
   rg -v '^\*' |\
   rg -v "remotes/origin/${current_branch}" |\
