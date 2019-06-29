@@ -58,7 +58,7 @@ curl-debug(){
 # Search for the string anywhere in the command name, not just in the executable
 alias pgrep='command pgrep -f'
 # dup = "dotfiles update"
-alias dup="pushd dotfiles && git checkout master && git pull && git checkout - && popd && qq"
+alias dup="pushd dotfiles && git checkout master &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
 alias ...="cd ../.."
 # Copy-pasting `$ python something.py` works
 alias \$=''
