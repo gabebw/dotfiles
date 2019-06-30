@@ -110,6 +110,9 @@ it(){ icopy -t tumblr/"${*// /-}" }
 tcd(){ [[ $# == 1 ]] && (cd "$1" && t $(basename "$1")) }
 null_terminate_filenames(){ perl -pe 's/\n/\0/' }
 xo(){ null_terminate_filenames | xargs -o -0 ${@:-open} }
+# seamlessly do `xargs mv` and have it work the way you want.
+# `-J` requires BSD xargs, which is on OS X.
+xmv(){ null_terminate_filenames | xargs -0 -J % mv % "$@" }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
