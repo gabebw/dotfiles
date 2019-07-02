@@ -399,7 +399,8 @@ let g:gist_post_private = 1
 " --------
 " Get a direct link to the current line (with specific commit included!) and
 " copy it to the system clipboard
-command! GitLink silent! .Gbrowse! -
+command! GitLink silent! .Gbrowse!
+command! GitLinkFile silent! 0Gbrowse!
 " Open the commit hash under the cursor, in GitHub
 autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w><CR>
 
