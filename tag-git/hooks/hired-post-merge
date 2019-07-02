@@ -15,7 +15,7 @@ check_run() {
 }
 
 # Install any new packages (both Ruby and JS).
-check_run Gemfile.lock "bundle"
+check_run Gemfile.lock "bundle check > /dev/null || bundle install --jobs=4"
 check_run "package.json|yarn.lock" "yarn"
 
 # Run migrations and clean fixtures (so they don't get stale) if there are DB
