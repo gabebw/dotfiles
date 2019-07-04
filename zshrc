@@ -715,7 +715,7 @@ alias gcm="git commit -m"
 
 # Checkout branches starting with my initials
 function gb(){
-  if [[ $# == 0 ]]; then
+  if [[ -z "$1" ]]; then
     echo "No branch name :(" >&2
     return 1
   fi
