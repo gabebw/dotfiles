@@ -73,10 +73,22 @@ alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 youtube-dl-safe(){
-  print -s "youtube-dl-safe ${@:q}"
+  # Allow passing arguments in; without this, xargs treats the arguments as
+  # URLs. This block assumes all arguments are at the beginning, and stops
+  # reading when it sees something that's not an argument.
+  local args=()
+  for arg in "$@"; do
+    if [[ "$arg" =~ "^-" ]]; then
+      args+=("$arg")
+      shift
+    else
+      break
+    fi
+  done
+  print -s "youtube-dl-safe ${args:q} ${@:q}"
   # Prefer ffmpeg because avconv gives these errors:
   #   ERROR: av_interleaved_write_frame(): Invalid argument
-  echo "$@" | xargs -P 5 -n 1 youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue
+  echo "$@" | xargs -P 5 -n 1 youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args
 }
 y(){
   echo "${@:-"$(pbpaste)"}"
