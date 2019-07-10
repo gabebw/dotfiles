@@ -408,7 +408,7 @@ autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w>
 " -----------------
 " filetypes, check with :set ft?
 let g:trimmer_repeated_lines_blacklist_file_types = ['conf', 'python', 'eruby.yaml']
-let g:trimmer_repeated_lines_blacklist_file_base_names = ['schema.rb']
+let g:trimmer_repeated_lines_blacklist_file_base_names = ['schema.rb', 'structure.sql']
 
 " vim-tmux-runner
 " -----------------
