@@ -604,7 +604,9 @@ prompt_git_status() {
 
 prompt_git_relative_branch_status(){
   local git_status=$(prompt_git_raw_status)
-  local branch_name=$(git rev-parse --abbrev-ref HEAD)
+  # Calling `git rev-parse HEAD` in a brand-new repository without any commits
+  # prints a long error message. Suppress it by redirecting STDERR.
+  local branch_name=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
   if ! git config --get "branch.${branch_name}.merge" > /dev/null; then
     print "not_tracking"
