@@ -98,3 +98,6 @@ brew 'gnuplot'
 
 # Personal manpages, written in Markdown
 brew 'sinclairtarget/wst/um'
+
+# Rust
+brew 'rustup-init'

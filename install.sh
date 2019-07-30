@@ -43,6 +43,9 @@ if is_osx; then
   if ! command -v xcodebuild > /dev/null; then
     xcode-select --install
   fi
+
+  info "Installing rust..."
+  rustup-init
 fi
 
 if ! echo "$SHELL" | grep -Fq zsh; then

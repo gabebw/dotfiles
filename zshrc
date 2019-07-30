@@ -390,6 +390,9 @@ PATH=$HOME/.bin:$PATH
 
 PATH=./bin/stubs:$PATH
 
+# Rust
+source $HOME/.cargo/env
+
 # }}}
 
 # Key bindings {{{

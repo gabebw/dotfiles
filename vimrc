@@ -598,7 +598,7 @@ if v:version > 704 || has('patch1689')
   " vim-go only works on versions >= 7.4.1689
   Plug 'fatih/vim-go'
 endif
-Plug 'wting/rust.vim'
+Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/applescript.vim'
 Plug 'vim-scripts/magic.vim'
 Plug 'elixir-lang/vim-elixir'
