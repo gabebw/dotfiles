@@ -14,9 +14,7 @@ info(){
 }
 
 quietly_brew_bundle(){
-  brew bundle --file="$1" | \
-    grep -vE '^(Using |Homebrew Bundle complete)' || \
-    true
+  brew bundle --file="$1" | grep -vE '^(Using |Homebrew Bundle complete)'
 }
 
 is_osx(){
@@ -35,9 +33,11 @@ if is_osx; then
 
   info "Installing Homebrew packages..."
   brew tap homebrew/bundle
-  for brewfile in Brewfile Brewfile.casks */Brewfile; do
+  for brewfile in Brewfile */Brewfile; do
     quietly_brew_bundle "$brewfile"
   done
+  # Brewfile.casks exits 1 sometimes but didn't actually fail
+  quietly_brew_bundle Brewfile.casks || true
 
   info "Checking for command-line tools..."
   if ! command -v xcodebuild > /dev/null; then
