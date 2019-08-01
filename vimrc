@@ -578,7 +578,7 @@ Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 " Allow `cir` to change inside ruby block, etc
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-rake'
+Plug 'tpope/vim-rake', { 'for': ['ruby'] }
 Plug 'tpope/vim-projectionist'
 Plug 'janko-m/vim-test'
 
@@ -589,7 +589,7 @@ Plug 'christoomey/vim-tmux-navigator'
 " Haskell
 Plug 'pbrisbin/vim-syntax-shakespeare'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'Twinside/vim-hoogle'
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 
 " Syntax
 Plug 'sophacles/vim-processing'
@@ -614,11 +614,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'stevearc/vim-arduino'
 
 " Clojure
-Plug 'guns/vim-clojure-static'
-Plug 'luochen1990/rainbow'
+Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
+Plug 'luochen1990/rainbow', { 'for': 'clojure' }
 " Remember to have a `lein repl` open in order for this to connect!
-Plug 'tpope/vim-fireplace'
-Plug 'tpope/vim-classpath'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-classpath', { 'for': 'clojure' }
 
 " Plumbing that makes everything nicer
 " Fuzzy-finder
@@ -676,10 +676,10 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-line'
 
 " Markdown
-Plug 'nicholaides/words-to-avoid.vim'
+Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
-Plug 'christoomey/vim-quicklink'
+Plug 'christoomey/vim-quicklink', { 'for': 'markdown' }
 " Make `gx` work on 'gabebw/dotfiles' too
 Plug 'gabebw/vim-github-link-opener'
 
