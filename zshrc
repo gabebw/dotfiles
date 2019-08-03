@@ -175,8 +175,10 @@ whois() {
 al() {
   if [[ $# == 0 ]]; then
     ls -t | head -n 10
-  elif [[ $# == 1 && $1 =~ '^[0-9]+$' ]]; then
-    ls -t | head -n "$1"
+  elif [[ $1 =~ '^[0-9]+$' ]]; then
+    local num="$1"
+    shift
+    ls -t "$@" | head -n "$num"
   else
     ls -t "$@" | head -n 10
   fi
