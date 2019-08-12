@@ -293,7 +293,7 @@ fpath=(
   /usr/local/opt/heroku/libexec/node_modules/@heroku-cli/plugin-autocomplete/autocomplete/zsh
   $fpath
 )
-autoload -Uz compinit && compinit
+autoload -Uz compinit
 # completion: use cache if updated within 24h
 if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
   compinit -d $HOME/.zcompdump
