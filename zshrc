@@ -871,9 +871,12 @@ b(){
 }
 
 bstart(){
-  brew services start elasticsearch@5.6
-  brew services start redis
+  brew services start elasticsearch@5.6 &
+  brew services start redis &
   open /Applications/Postgres.app
+  # Clear the screen after async processes finish
+  echo
+  echo
 }
 
 bstop(){
