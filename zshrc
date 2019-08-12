@@ -146,7 +146,7 @@ o(){
     else
       # Unfortunately, Xee doesn't set kMDItemLastUsedDate on files when you
       # open their containing directory.
-      xee "$1"
+      xee "$@"
     fi
   else
     if [[ $# == 0 ]]; then
