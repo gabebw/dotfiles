@@ -298,7 +298,11 @@ autoload -Uz compinit
 if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
   compinit -d $HOME/.zcompdump
 else
-  compinit -C
+  # Without redirecting output, it prints a lot of lines like this:
+  #   "^A\"-\"^C\" self-inser" undefined-key
+  #   "^D\" list-choice" undefined-key
+  #   "^E\"-\"^F\" self-inser" undefined-key
+  compinit -C >/dev/null
 fi
 
 # Try to match as-is then match case-insensitively
