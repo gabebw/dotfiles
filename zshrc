@@ -790,7 +790,7 @@ export EDITOR=$VISUAL
 alias vi="$VISUAL"
 v(){
   local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview='bat --color=always {}'))
+  files=($(IFS=$'\n' fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview='bat --color=always {}'))
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
 }
 # Grep immediately on opening vim
