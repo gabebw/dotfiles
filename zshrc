@@ -789,9 +789,11 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 alias vi="$VISUAL"
 v(){
+  local old_IFS=$IFS
   local files
-  files=($(IFS=$'\n' fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview='bat --color=always {}'))
+  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
+  IFS=$old_IFS
 }
 # Grep immediately on opening vim
 gv(){
