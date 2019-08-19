@@ -53,7 +53,7 @@
   # you haven't already seen the ref you're overwriting. It avoids the race
   # condition of accidentally "push -f"ing over a commit you haven't seen.
   pf = push --force-with-lease --set-upstream
-  g = grep --extended-regexp --break --heading --line-number
+  g = grep --extended-regexp --break --heading --line-number --show-function
   ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
 
