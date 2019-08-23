@@ -46,6 +46,9 @@ if is_osx; then
 
   info "Installing rust..."
   rustup-init
+
+  info "Installing lister..."
+  cargo install --git https://github.com/gabebw/rust-lister
 fi
 
 if ! echo "$SHELL" | grep -Fq zsh; then
