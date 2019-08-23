@@ -172,17 +172,7 @@ whois() {
   command whois $(echo "$1" | sed -E -e 's|^https?://||' -e 's|/.*$||g')
 }
 
-al() {
-  if [[ $# == 0 ]]; then
-    ls -t | head -n 10
-  elif [[ $1 =~ '^[0-9]+$' ]]; then
-    local num="$1"
-    shift
-    ls -t "$@" | head -n "$num"
-  else
-    ls -t "$@" | head -n 10
-  fi
-}
+alias al=lister
 
 alr() {
   if [[ $# == 0 ]]; then
