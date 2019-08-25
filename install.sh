@@ -49,6 +49,9 @@ if is_osx; then
 
   info "Installing lister..."
   cargo install --git https://github.com/gabebw/rust-lister
+
+  info "Installing Firefox open URL printer..."
+  cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
 fi
 
 if ! echo "$SHELL" | grep -Fq zsh; then
