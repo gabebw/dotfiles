@@ -46,24 +46,24 @@ all-chrome-links(){
 all-firefox-links(){
   if is_running Firefox.app; then
     python -c "
-      import sys
-      import pathlib
-      import lz4.block
-      import json
+import sys
+import pathlib
+import lz4.block
+import json
 
-      path = pathlib.Path.home().joinpath('Library/Application Support/Firefox/Profiles')
-      files = path.glob('*default*/sessionstore-backups/recovery.js*')
+path = pathlib.Path.home().joinpath('Library/Application Support/Firefox/Profiles')
+files = path.glob('*default*/sessionstore-backups/recovery.js*')
 
-      for f in files:
-          b = f.read_bytes()
-          if b[:8] == b'mozLz40\0':
-              b = lz4.block.decompress(b[8:])
-          j = json.loads(b)
-          for w in j['windows']:
-              for t in w['tabs']:
-                  i = t['index'] - 1
-                  print(t['entries'][i]['url'])
-    "
+for f in files:
+    b = f.read_bytes()
+    if b[:8] == b'mozLz40\0':
+        b = lz4.block.decompress(b[8:])
+    j = json.loads(b)
+    for w in j['windows']:
+        for t in w['tabs']:
+            i = t['index'] - 1
+            print(t['entries'][i]['url'])
+"
   fi
 }
 
