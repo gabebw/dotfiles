@@ -6,7 +6,7 @@
 # Requirements:
 # * ripgrep (brew install ripgrep)
 # * chrome-cli (brew install chrome-cli)
-# * Python (usually built-in)
+# * https://github.com/gabebw/rust-firefox-all-open-urls
 
 set -e
 
