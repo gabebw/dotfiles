@@ -45,3 +45,6 @@ __snapshots__
 highlight.all.js
 highlight.pack.js
 vendor/assets/javascript/select2.js
+
+# Rust
+Cargo.lock
