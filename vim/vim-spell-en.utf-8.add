@@ -170,3 +170,4 @@ datamigration
 DDL
 Select2
 CompanyNote
+DelayedJob
