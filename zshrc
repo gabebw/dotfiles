@@ -88,8 +88,7 @@ youtube-dl-safe(){
   print -s "youtube-dl-safe ${args:q} ${@:q}"
   # Prefer ffmpeg because avconv gives these errors:
   #   ERROR: av_interleaved_write_frame(): Invalid argument
-  echo "$@" | xargs -P 5 -n 1 youtube-dl --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args
-}
+  echo "$@" | xargs -P 5 -n 1 youtube-dl --no-check-certificate --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args }
 y(){
   echo "${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
