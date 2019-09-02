@@ -597,10 +597,6 @@ Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 " Syntax
 Plug 'sophacles/vim-processing'
 Plug 'keith/swift.vim'
-if v:version > 704 || has('patch1689')
-  " vim-go only works on versions >= 7.4.1689
-  Plug 'fatih/vim-go'
-endif
 Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/applescript.vim'
 Plug 'vim-scripts/magic.vim'
