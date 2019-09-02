@@ -132,7 +132,7 @@ alias xee="open -a Xee³"
 if [[ -r ~/.rgrc ]]; then
   export RIPGREP_CONFIG_PATH=~/.rgrc
 fi
-export BAT_THEME=l337
+export BAT_THEME=1337
 
 o(){
   if [[ -d "$1" ]]; then
