@@ -7,6 +7,10 @@ tap 'homebrew/services'
 tap 'joshuaclayton/formulae'
 brew 'unused'
 
+tap 'gabebw/formulae'
+# sed for HTML: https://github.com/gabebw/candle
+brew 'candle'
+
 brew 'coreutils'
 
 # Command-line Spotify interface
@@ -18,9 +22,6 @@ brew 'jq'
 
 # sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
 brew 'xmlstarlet'
-
-# sed for html: https://github.com/ericchiang/pup
-brew 'https://raw.githubusercontent.com/EricChiang/pup/master/pup.rb'
 
 # sed (and more) for CSV
 # More: https://robots.thoughtbot.com/csvkit-brings-the-unix-philosophy-to-csv
