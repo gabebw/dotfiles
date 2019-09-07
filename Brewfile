@@ -52,7 +52,9 @@ brew 'fzf'
 
 # thoughtbot stuff like rcm
 tap 'thoughtbot/formulae'
+# rcm: dotfile management
 brew 'rcm'
+# parity: useful tools for Heroku development/staging/production
 brew 'parity'
 
 # Fast, hip replacement for grep
