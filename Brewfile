@@ -102,3 +102,6 @@ brew 'sinclairtarget/wst/um'
 
 # Rust
 brew 'rustup-init'
+
+# Visualize the current directory as a tree, descending into all sub-directories
+brew 'tree'
