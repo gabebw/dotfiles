@@ -923,10 +923,6 @@ function db-restore() {
     return 1
   fi
 }
-
-# This file sticks around when postgres force-quits. Postgres reads it and
-# thinks it's running but it's not.
-alias unfuck-postgres="rm -f /usr/local/var/postgres/postmaster.pid && brew services restart postgres"
 # }}}
 
 # Homebrew {{{
