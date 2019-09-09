@@ -784,7 +784,8 @@ alias vi="$VISUAL"
 v(){
   local old_IFS=$IFS
   local files
-  IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --exit-0))
+  IFS=$'\n'
+  files=($(fzf-tmux --query="$1" --multi --exit-0))
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
   IFS=$old_IFS
 }
