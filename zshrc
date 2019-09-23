@@ -769,6 +769,15 @@ function gcl {
   cd "$directory"
 }
 
+# Clone and start a new tmux session about it
+# Usage: clone personal hired/hubot
+clone(){
+  pushd "$1"
+  gcl "$2"
+  tcd "$PWD"
+  popd
+}
+
 # Complete `g` like `git`, etc
 compdef g=git
 compdef _git gc=git-checkout
