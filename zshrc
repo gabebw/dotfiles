@@ -880,15 +880,14 @@ b(){
 }
 
 bstart(){
-  brew services start elasticsearch@5.6 &
-  brew services start redis &
+  brew services start elasticsearch@5.6
+  brew services start redis
+  brew services start memcached
   open /Applications/Postgres.app
-  # Clear the screen after async processes finish
-  echo
-  echo
 }
 
 bstop(){
+  brew services start memcached
   brew services stop elasticsearch@5.6
   brew services stop redis
 }
