@@ -887,7 +887,7 @@ bstart(){
 }
 
 bstop(){
-  brew services start memcached
+  brew services stop memcached
   brew services stop elasticsearch@5.6
   brew services stop redis
 }
