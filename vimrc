@@ -406,6 +406,9 @@ command! GitLink silent! .Gbrowse!
 command! GitLinkFile silent! 0Gbrowse!
 " Open the commit hash under the cursor, in GitHub
 autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w><CR>
+" Prevent Fugitive from raising an error about .git/tags by telling it to
+" explicitly check .git/tags
+set tags^=./.git/tags
 
 " vim-trimmer
 " -----------------
