@@ -127,7 +127,7 @@ xmv(){ null_terminate_filenames | xargs -0 -J % mv % "$@" }
 alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
 findall(){ find . -iname "*$@*" }
-alias fd='command fd --type file'
+alias fd='command fd --no-ignore --ignore-case --full-path --type file'
 alias xee="open -a Xee³"
 if [[ -r ~/.rgrc ]]; then
   export RIPGREP_CONFIG_PATH=~/.rgrc
@@ -172,7 +172,14 @@ whois() {
   command whois $(echo "$1" | sed -E -e 's|^https?://||' -e 's|/.*$||g')
 }
 
-alias al=lister
+al(){
+  if [[ -d "$1" ]]; then
+    # for convenience
+    lister 10 "$1"
+  else
+    lister "$@"
+  fi
+}
 
 alr() {
   if [[ $# == 0 ]]; then
