@@ -18,7 +18,7 @@ all-safari-links(){
   # Only check for Safari links if Safari is running, because the Applescript
   # will open Safari and we don't want do do that if Safari isn't already
   # running.
-  if is_running Safari.app; then
+  if is_running /Applications/Safari.app; then
     osascript -l JavaScript <<EOL
       app = Application('Safari');
       tabs = [];
