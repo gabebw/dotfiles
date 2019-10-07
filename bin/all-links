@@ -44,7 +44,7 @@ all-chrome-links(){
 
 all-firefox-links(){
   if is_running Firefox.app; then
-    firefox-open-urls-parser
+    firefox-all-open-urls
   fi
 }
 
