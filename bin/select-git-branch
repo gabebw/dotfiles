@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Only 1 branch
-if [ "$(git branch | wc -l | xargs echo)" = 1 ]; then
+if [ "$(git branch "$@" | wc -l | xargs echo)" = 1 ]; then
   echo "select-git-branch: There's only one git branch, exiting." >&2
   exit 1
 fi
