@@ -1,0 +1,20 @@
+_complete-first-tag-argument() {
+  if (( CURRENT == 2 )); then
+    # First argument
+    compadd $(tag -u | cut -f2)
+  fi
+}
+
+_complete-first-and-second-tag-argument() {
+  if (( CURRENT == 2 )) || (( CURRENT == 3 )); then
+    # First or second argument
+    compadd $(tag -u | cut -f2)
+  fi
+}
+
+_complete-second-tag-argument() {
+  if (( CURRENT == 3 )); then
+    # First or second argument
+    compadd $(tag -u | cut -f2)
+  fi
+}
