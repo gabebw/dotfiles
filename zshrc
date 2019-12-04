@@ -153,7 +153,12 @@ o(){
     fi
   else
     if [[ $# == 0 ]]; then
-      open *.*
+      # Are there any images in this directory?
+      if [[ -n *.{png,jpg}(#qN) ]]; then
+        xee .
+      else
+        open *.*
+      fi
     else
       open "$@"
     fi
@@ -250,6 +255,7 @@ setopt autopushd
 setopt extended_history
 # Case-insensitive globbing
 setopt nocaseglob
+setopt extended_glob
 
 unsetopt correctall
 # Allow [ or ] wherever you want
