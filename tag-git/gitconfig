@@ -7,7 +7,6 @@
   whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
-  pager = delta --dark
 [merge]
   tool = opendiff
   # Per @jferris: `ff = only` means Git will never implicitly do a merge commit, including while
@@ -132,8 +131,6 @@
   templatedir = ~/.git-template
 [github]
   user = gabebw
-[interactive]
-  diffFilter = delta --dark
 [rebase]
   autosquash = true
   # Automatically stash before rebasing. This makes it possible to rebase with

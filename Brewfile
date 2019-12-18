@@ -107,6 +107,3 @@ brew 'rustup-init'
 
 # Visualize the current directory as a tree, descending into all sub-directories
 brew 'tree'
-
-# https://github.com/dandavison/delta
-brew 'git-delta'
