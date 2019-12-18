@@ -213,6 +213,22 @@ cut-video(){
   fi
 }
 
+gif2mp4(){
+  if [[ $# -ne 2 ]]; then
+    echo "Usage: gif2mp4 INPUT.gif OUTPUT.mp4" >&2
+    return 1
+  fi
+
+  local gif=$1
+  local output_mp4=$2
+  ffmpeg \
+    -i "$gif" \
+    -movflags faststart \
+    -pix_fmt yuv420p \
+    -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" \
+    "$output_mp4"
+}
+
 unopened(){
   if [[ $# == 0 ]]; then
     search_spotlight_files \
