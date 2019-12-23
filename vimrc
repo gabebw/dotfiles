@@ -612,9 +612,6 @@ Plug 'slim-template/vim-slim'
 Plug 'shmup/vim-sql-syntax'
 Plug 'hashivim/vim-terraform'
 
-" Arduino
-Plug 'stevearc/vim-arduino'
-
 " Clojure
 Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
 Plug 'luochen1990/rainbow', { 'for': 'clojure' }
