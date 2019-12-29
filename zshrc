@@ -142,10 +142,10 @@ o(){
     # Order matters (ugh):
     # * `-print -quit` needs to be at the end
     # * `-type` and the `-name` clauses need to be next to each other
-    if [[ -n "$(find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -print -quit)" ]]; then
+    if [[ -n "$(find "$1" -type f \( -name '*.mp4' -or -name '*.flv' -or -name '*.mov' \) -print -quit)" ]]; then
       # \+ means the results are concatenated and the command is executed once
       # with all found results.
-      find "$1" -type f \( -name '*.mp4' -or -name '*.flv' \) -exec open {} \+
+      find "$1" -type f \( -name '*.mp4' -or -name '*.flv' -or -name '*.mov' \) -exec open {} \+
     else
       # Unfortunately, Xee doesn't set kMDItemLastUsedDate on files when you
       # open their containing directory.
