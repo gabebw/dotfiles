@@ -23,9 +23,8 @@ brew 'jq'
 # sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
 brew 'xmlstarlet'
 
-# sed (and more) for CSV
-# More: https://robots.thoughtbot.com/csvkit-brings-the-unix-philosophy-to-csv
-brew 'csvkit'
+# Slice and dice your CSV
+brew 'xsv'
 
 # grep for ps
 brew 'pgrep'
