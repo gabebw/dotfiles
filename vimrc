@@ -331,7 +331,7 @@ augroup Ale
   " Run everything except rails_best_practices, which runs multiple processes
   " and keeps all of my CPU cores at 100%.
   let g:ale_linters.ruby = ['brakeman', 'reek', 'rubocop', 'ruby']
-  let g:ale_linters = {'rust': ['cargo']}
+  let g:ale_linters.rust = ['cargo']
   let g:ale_rust_cargo_use_clippy = 1
 
   let g:ale_linters.javascript = ['eslint']
