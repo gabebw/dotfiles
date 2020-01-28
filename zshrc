@@ -423,7 +423,7 @@ PATH=$HOME/.bin:$PATH
 PATH=./bin/stubs:$PATH
 
 # Rust
-source $HOME/.cargo/env
+[[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
 
 # }}}
 
