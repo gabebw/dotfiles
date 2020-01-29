@@ -502,7 +502,7 @@ let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head"
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineFilename()
-  let git_root = fnamemodify(fugitive#extract_git_dir(expand('%:p')), ':h')
+  let git_root = fnamemodify(FugitiveExtractGitDir(expand('%:p')), ':h')
 
   if expand('%:t') == ''
     return '[No Name]'
