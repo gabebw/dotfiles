@@ -670,6 +670,7 @@ Plug 'w0rp/ale'
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'tpope/vim-abolish'
 
 " Text objects
 " required for all the vim-textobj-* plugins
