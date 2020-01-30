@@ -348,7 +348,12 @@ nnoremap [r :ALEPreviousWrap<CR>
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
 
-nnoremap <Leader>t :FZF<CR>
+command! -bang -nargs=? -complete=dir FilesWithPreview
+     \ call fzf#vim#files(<q-args>,
+     \   fzf#vim#with_preview(),
+     \   <bang>0)
+
+nnoremap <Leader>t :FilesWithPreview<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 
 " easytags
