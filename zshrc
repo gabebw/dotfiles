@@ -932,6 +932,10 @@ serveit(){
 
 # }}}
 
+# JavaScript {{{
+alias cra=create-react-app
+# }}}
+
 # Postgres {{{
 # Set filetype on editing. Use `\e` to open the editor from `psql`.
 export PSQL_EDITOR="vim -c ':set ft=sql'"
