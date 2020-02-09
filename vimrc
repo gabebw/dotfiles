@@ -319,6 +319,10 @@ let g:gundo_prefer_python3 = 1
 " --------
 let g:peekaboo_window	= 'vert bo 50new'
 
+" To format JS or CSS, add `// @format` at the top:
+" https://github.com/prettier/vim-prettier#configuration
+let g:prettier#autoformat = 1
+
 " Ale
 " --------
 
@@ -577,8 +581,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
-" To format JS or CSS, add `// @format` at the top:
-" https://prettier.io/docs/en/vim.html#vim-prettier
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql'] }
