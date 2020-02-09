@@ -18,7 +18,7 @@ _complete-first-and-second-tag-argument() {
 
 _complete-second-tag-argument() {
   if (( CURRENT == 3 )); then
-    # First or second argument
+    # Second argument
     compadd $(tag -u | cut -f2)
   else
     _files "$@"
