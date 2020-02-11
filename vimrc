@@ -322,6 +322,7 @@ let g:peekaboo_window	= 'vert bo 50new'
 " To format JS or CSS, add `// @format` at the top:
 " https://github.com/prettier/vim-prettier#configuration
 let g:prettier#autoformat = 1
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
 " Ale
 " --------
