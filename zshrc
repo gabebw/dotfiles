@@ -969,7 +969,7 @@ function db-restore() {
 # Homebrew {{{
 if is_osx; then
   # Opt out of sending Homebrew information to Google Analytics
-  # https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
+  # https://docs.brew.sh/Analytics
   export HOMEBREW_NO_ANALYTICS=1
   # If it's been more than this number of seconds since Homebrew was last
   # updated, automatically run `brew update` before `brew install`.
