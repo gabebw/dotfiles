@@ -406,6 +406,10 @@ PATH="/usr/local/heroku/bin:$PATH"
 # Node
 PATH=$PATH:.git/safe/../../node_modules/.bin/
 
+# This is a hack because Yarn globals don't get shimmed by ASDF.
+# Here's the issue: https://github.com/asdf-vm/asdf-nodejs/issues/42
+PATH=$(yarn global bin):$PATH
+
 # Python
 # Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
 # add them to the front so we always get Python 3.

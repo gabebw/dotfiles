@@ -319,11 +319,6 @@ let g:gundo_prefer_python3 = 1
 " --------
 let g:peekaboo_window	= 'vert bo 50new'
 
-" To format JS or CSS, add `// @format` at the top:
-" https://github.com/prettier/vim-prettier#configuration
-let g:prettier#autoformat = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
-
 " Ale
 " --------
 
@@ -337,9 +332,13 @@ augroup Ale
   " and keeps all of my CPU cores at 100%.
   let g:ale_linters.ruby = ['brakeman', 'reek', 'rubocop', 'ruby']
   let g:ale_linters.rust = ['cargo']
+  let g:ale_linters.javascript = ['eslint']
   let g:ale_rust_cargo_use_clippy = 1
 
-  let g:ale_linters.javascript = ['eslint']
+  let g:ale_fixers = {}
+  let g:ale_fixers.javascript = ['prettier']
+  let g:ale_fixers.css = ['prettier']
+
   autocmd CursorHold * call ale#Queue(0)
   autocmd InsertLeave * call ale#Queue(0)
 augroup END
@@ -582,9 +581,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'briancollins/vim-jst'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'scss', 'json', 'graphql'] }
 Plug 'leafgarland/typescript-vim'
 
 " Ruby/Rails
