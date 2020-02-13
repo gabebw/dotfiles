@@ -345,6 +345,7 @@ augroup END
 " Move between linting errors
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
+nnoremap <Leader>x :ALEFix<CR>
 
 " FZF
 " -----------------
