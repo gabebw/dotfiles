@@ -21,7 +21,7 @@ source ~/.zshrc
 
 _handle_unknown_command() {
   echo "\"$1\" is not recognized as a script, function, or alias" >&2
-  echo "(searched in $(_search_paths))"
+  echo "(searched in $(_search_paths))" >&2
   exit 1
 }
 

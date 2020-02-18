@@ -10,4 +10,11 @@
 #     $ viw myalias
 #     $ viw git-merge-to
 
-vim "$(find-location-of "$1")"
+set -e
+# `set -e` makes this line `exit 1` (correctly) when `find-location-of` exits 1.
+# Unfortunately, `vim $(find-location-of "$1")` does NOT exit early, and tries
+# to actually run `vim`.
+# So we store it to this temp variable and then run `vim` on it once we get
+# past this line.
+result=$(find-location-of "$1")
+vim "$result"
