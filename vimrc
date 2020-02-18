@@ -85,6 +85,7 @@ nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
+nnoremap <Leader>ve :vsp <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
 " Mnemonic: vgf = "vsplit gf"
 nnoremap vgf :vsplit<CR>gf
@@ -204,8 +205,6 @@ nnoremap Y "*yiw
 
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
-nnoremap <Leader>vs :VtrSendCommand!<Space>
-nnoremap <Leader>vd :VtrSendCtrlD<CR>
 " }}}
 
 " ============================================================================
