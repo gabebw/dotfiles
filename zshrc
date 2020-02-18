@@ -937,7 +937,8 @@ serveit(){
 # }}}
 
 # JavaScript {{{
-alias cra=create-react-app
+alias cra="npx create-react-app"
+alias yarn="command yarn --ignore-engines"
 # }}}
 
 # Postgres {{{
