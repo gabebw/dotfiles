@@ -758,26 +758,11 @@ Layout/EmptyLinesAroundModuleBody:
   SupportedStyles:
   - empty_lines
   - no_empty_lines
-Layout/IndentFirstArgument:
-  Description: Checks the indentation of the first parameter in a method call.
-  Enabled: true
-  EnforcedStyle: special_for_inner_method_call_in_parentheses
-  SupportedStyles:
-  - consistent
-  - special_for_inner_method_call
-  - special_for_inner_method_call_in_parentheses
 Layout/IndentationWidth:
   Description: Use 2 spaces for indentation.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#spaces-indentation
   Enabled: true
   Width: 2
-Layout/IndentFirstHashElement:
-  Description: Checks the indentation of the first key in a hash literal.
-  Enabled: true
-  EnforcedStyle: special_inside_parentheses
-  SupportedStyles:
-  - special_inside_parentheses
-  - consistent
 Style/ConditionalAssignment:
   Enabled: false
 Layout/IndentHeredoc:
@@ -876,9 +861,6 @@ Layout/EndOfLine:
   Enabled: true
 Layout/IndentationConsistency:
   Description: Keep indentation straight.
-  Enabled: true
-Layout/IndentFirstArrayElement:
-  Description: Checks the indentation of the first element in an array literal.
   Enabled: true
 Layout/LeadingCommentSpace:
   Description: Comments should start with a space.
