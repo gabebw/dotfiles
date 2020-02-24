@@ -337,6 +337,7 @@ augroup Ale
   let g:ale_fixers = {}
   let g:ale_fixers.javascript = ['prettier']
   let g:ale_fixers.css = ['prettier']
+  let g:ale_fixers.ruby = ['rubocop']
 
   autocmd CursorHold * call ale#Queue(0)
   autocmd InsertLeave * call ale#Queue(0)
