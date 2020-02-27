@@ -753,8 +753,6 @@ gc(){
     local branch=$(select-git-branch)
     if [[ -n "$branch" ]]; then
       git checkout "$branch"
-    else
-      echo "No branch selected (maybe there are no other branches?)" >&2
     fi
     true
   else
