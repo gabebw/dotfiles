@@ -796,8 +796,9 @@ hbc(){
     fi
   fi
 }
+join-with(){ paste -sd "$1" - }
 # Sum numbers (1 per line) from STDIN
-sum(){ paste -s -d+ - | bc }
+sum(){ join-with "+" | bc }
 
 function gcl {
   local directory="$(superclone "$@")"
