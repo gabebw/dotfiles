@@ -254,6 +254,7 @@ search_spotlight_files(){
   # `-onlyin .` will recurse
   mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl|download)$'
 }
+words=/usr/share/dict/words
 # }}}
 
 # Options {{{
