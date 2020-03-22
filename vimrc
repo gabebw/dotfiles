@@ -177,6 +177,14 @@ map Q <Nop>
 " re-select the last pasted text
 nnoremap gV V`]
 
+function! MyPaste()
+  set paste
+  let buffer = @+
+  silent exe "normal! o" . buffer
+  set nopaste
+endfunction
+nnoremap cv :call MyPaste()<CR>
+
 " edit vimrc/zshrc and load vimrc bindings
 function! MaybeTabedit(file)
   let new_empty_file = line('$') == 1 && getline(1) == '' && bufname('%') == ''
