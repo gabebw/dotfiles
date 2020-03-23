@@ -38,6 +38,9 @@
 !.circleci/
 !.github/
 
+# JS
+yarn.lock
+package-lock.json
 # Jest snapshots
 __snapshots__
 

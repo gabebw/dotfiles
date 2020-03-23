@@ -108,7 +108,7 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 " Searching
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
-command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' <args> | copen 10 | redraw!
+command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' --glob '!*.test.tsx' <args> | copen 10 | redraw!
 
 function! FindLocationOf(needle)
   let l:path_and_line_number = split(system('find-location-of ' . a:needle), ':')
@@ -344,6 +344,8 @@ augroup Ale
 
   let g:ale_fixers = {}
   let g:ale_fixers.javascript = ['prettier']
+  let g:ale_fixers.typescript = ['prettier']
+  let g:ale_fixers.typescriptreact = ['prettier']
   let g:ale_fixers.css = ['prettier']
   let g:ale_fixers.ruby = ['rubocop']
 
