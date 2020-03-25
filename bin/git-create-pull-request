@@ -3,8 +3,6 @@
 # This script:
 # * creates a file with all of the commits since origin/master
 # * Adds the pull request template (if it exists) above the list of commits
-# * Uses `HIRED_DEFAULT_REVIEWER_FILE_NAME` to find a default reviewer for Hired
-#   repos
 # * intelligently reflows each commit's body to not have linebreaks (so that
 #   the PR looks better on GitHub, which keeps hard linebreaks)
 # * opens the file in Vim for further editing
@@ -162,8 +160,6 @@ class PRTemplate
 end
 
 class CommitMessageBuilder
-  HIRED_DEFAULT_REVIEWER_FILE_NAME = '.hired-default-reviewer'
-
   def initialize(repo)
     @number_of_commits = repo.number_of_commits
     @pr_template = PRTemplate.new
@@ -185,24 +181,11 @@ class CommitMessageBuilder
   attr_reader :number_of_commits, :pr_template, :repo
 
   def commit_message
-    message = if hired?
-      hired_commit_message
-    elsif number_of_commits == 1
+    if number_of_commits == 1
       single_commit_message
     else
       multi_commit_message
     end
-
-    if File.exist?(HIRED_DEFAULT_REVIEWER_FILE_NAME)
-      reviewer = File.read(HIRED_DEFAULT_REVIEWER_FILE_NAME).strip.sub(/^@/, '')
-      message + "\n\nbot review me @#{reviewer}"
-    else
-      message
-    end
-  end
-
-  def hired?
-    File.basename(Dir.pwd) == "hired"
   end
 
   def multi_commit_message
@@ -218,34 +201,6 @@ class CommitMessageBuilder
       #{repo.first_commit_full_message}
       #{pr_template.possible_body}
     MESSAGE
-  end
-
-  def hired_commit_message
-    commit_message = <<~MSG
-      #{repo.first_commit_subject}
-      #{pr_template.possible_body}
-    MSG
-
-    if link_to_hired_ticket_number
-      commit_message << "\n#{link_to_hired_ticket_number}"
-    end
-
-    commit_message.sub(/^Purpose of PR\n\-*\n/, "\\0#{hired_commits_body}\n")
-  end
-
-  def hired_commits_body
-    if number_of_commits == 1
-      "\n" + repo.first_commit_body
-    else
-      "\n" + repo.fancy_log_of_all_commits_since_master
-    end
-  end
-
-  def link_to_hired_ticket_number
-    if repo.current_branch =~ /-[0-9]+/
-      number = repo.current_branch.sub(/gbw-([A-Z]+-[0-9]+).*/, '\1')
-      "Ticket: [#{number}](https://hiredteam.atlassian.net/browse/#{number})"
-    end
   end
 end
 
