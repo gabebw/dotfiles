@@ -59,3 +59,7 @@ tmp/unused
 
 # Used in git-create-pull-request
 .hired-default-reviewer
+
+# JS
+# Next.js
+.next/
