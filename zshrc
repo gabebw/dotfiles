@@ -57,6 +57,7 @@ curl-debug(){
 }
 # Search for the string anywhere in the command name, not just in the executable
 alias pgrep='command pgrep -f'
+alias split-on-spaces='tr " " "\n"'
 # dup = "dotfiles update"
 alias dup="pushd dotfiles && git checkout master &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
 alias ...="cd ../.."
@@ -804,6 +805,14 @@ sum(){ join-with "+" | bc }
 function gcl {
   local directory="$(superclone "$@")"
   cd "$directory"
+}
+
+new-project(){
+  printf "Project name? "
+  read project_name
+  pushd personal
+  mkdir "$project_name" && tcd "./$project_name"
+  popd
 }
 
 # Clone and start a new tmux session about it
