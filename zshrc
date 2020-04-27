@@ -810,6 +810,7 @@ function gcl {
 new-project(){
   printf "Project name? "
   read project_name
+  project_name=${project_name// /-}
   pushd personal
   mkdir "$project_name" && tcd "./$project_name"
   popd
