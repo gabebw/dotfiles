@@ -183,7 +183,8 @@ function! MyPaste()
   silent exe "normal! o" . buffer
   set nopaste
 endfunction
-nnoremap cv :call MyPaste()<CR>
+autocmd VimEnter * nunmap cv
+autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
 
 " edit vimrc/zshrc and load vimrc bindings
 function! MaybeTabedit(file)
