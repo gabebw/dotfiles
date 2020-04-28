@@ -349,6 +349,10 @@ augroup Ale
   set updatetime=1000
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_linters = {}
+
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+
   " Run everything except rails_best_practices, which runs multiple processes
   " and keeps all of my CPU cores at 100%.
   let g:ale_linters.ruby = ['brakeman', 'reek', 'rubocop', 'ruby']
@@ -747,6 +751,10 @@ function! s:BetterColorschemeSettings()
   hi clear ALEStyleError
   hi clear ALEError
   hi clear ALEWarning
+
+  highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
   hi SpellBad cterm=underline ctermfg=red
   " Highlight ruby TODO etc in red
   hi rubyTodo cterm=underline ctermfg=red
