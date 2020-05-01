@@ -534,14 +534,22 @@ let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head"
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineFilename()
-  let git_root = fnamemodify(FugitiveExtractGitDir(expand('%:p')), ':h')
+  let filename = resolve(expand('%:p'))
+  let git_root = fnamemodify(FugitiveExtractGitDir(filename), ':h')
 
   if expand('%:t') == ''
     return '[No Name]'
   elseif git_root != '' && git_root != '.'
-    return substitute(expand('%:p'), git_root . '/', '', '')
+    let path = substitute(filename, git_root . '/', '', '')
+    " If it starts with a slash, it's outside of this directory (for example, a
+    " dotfile in ~/.vimrc that's really in ~/code/personal/dotfiles/vimrc
+    if FugitiveGitPath(expand('%'))[0] ==# '/'
+      return path . ' @ ' . git_root
+    else
+      return path
+    endif
   else
-    return expand('%:p')
+    return filename
   endif
 endfunction
 " }}}
