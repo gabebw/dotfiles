@@ -1,0 +1,46 @@
+{
+  "editor.fontFamily": "'Iosevka Term', Inconsolata, Menlo, Monaco, 'Courier New', monospace",
+  "telemetry.enableCrashReporter": false,
+  "telemetry.enableTelemetry": false,
+  "editor.fontSize": 18,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.minimap.enabled": false,
+  "files.trimTrailingWhitespace": true,
+  "git.rebaseWhenSync": true,
+  "git.supportCancellation": true,
+  "git.autoStash": true,
+  "editor.autoClosingBrackets": "never",
+  "git.confirmForcePush": false,
+  "files.insertFinalNewline": true,
+  "git.allowForcePush": true,
+  "github.customPullRequestDescription": "gitEditor",
+  "github.preferedMergeMethod": "rebase",
+  "githubPullRequests.defaultMergeMethod": "squash",
+  "githubPullRequests.telemetry.enabled": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "openInGitHub.defaultBranch": "master",
+  "vim.leader": "<space>",
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "gitlab.instanceUrl": "https://gitlab.grammarly.io/",
+  "search.exclude": {
+    "**/*.ipynb": true,
+    "denali/": true
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "gitlens.views.repositories.location": "scm",
+  "gitlens.views.fileHistory.location": "explorer",
+  "gitlens.views.lineHistory.location": "explorer",
+  "gitlens.views.compare.location": "gitlens",
+  "gitlens.views.search.location": "gitlens",
+  "gitlens.advanced.telemetry.enabled": false,
+  "gitlens.blame.highlight.locations": [
+    "gutter",
+    "overview"
+  ],
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.startupEditor": "newUntitledFile"
+}

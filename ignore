@@ -47,3 +47,5 @@ vendor/assets/javascript/select2.js
 
 # Rust
 Cargo.lock
+
+!.vscode/

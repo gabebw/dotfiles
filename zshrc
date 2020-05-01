@@ -26,7 +26,9 @@ inside_ssh(){
   [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
 }
 
-if ! inside_ssh; then
+in_vs_code(){ [[ "$TERM_PROGRAM" == "vscode" ]] }
+
+if ! inside_ssh && ! in_vs_code; then
   connect_to_most_recent_tmux_session
 fi
 # }}}
