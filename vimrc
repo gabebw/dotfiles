@@ -47,6 +47,17 @@ augroup rails_shortcuts
   autocmd User Rails nnoremap <Leader>v :Eview<Space>
   autocmd User Rails nnoremap <Leader>u :Eunittest<Space>
 augroup END
+
+" Don't let netrw override <C-l> to move between tmux panes
+" https://github.com/christoomey/vim-tmux-navigator/issues/189
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+  nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
+endfunction
 " }}}
 
 " ============================================================================
