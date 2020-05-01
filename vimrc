@@ -523,6 +523,13 @@ set laststatus=2
 " Don't show `-- INSERT --` below the statusbar since it's in the statusbar
 set noshowmode
 
+command! LightlineReload call LightlineReload()
+function! LightlineReload()
+  call lightline#init()
+  call lightline#colorscheme()
+  call lightline#update()
+endfunction
+
 let g:lightline = {}
 let g:lightline.component = {}
 let g:lightline.component_function = {}
@@ -534,6 +541,9 @@ let g:lightline.active = {}
 let g:lightline.active.left = [
       \ ['mode', 'paste'],
       \ ['fugitive', 'readonly', 'myfilename', 'modified']
+      \ ]
+let g:lightline.active.right = [
+      \ [ 'filetype'],
       \ ]
 let g:lightline.component.fugitive = '%{exists("*fugitive#head")?fugitive#head():""}'
 let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}'
@@ -784,4 +794,7 @@ if filereadable($HOME . '/.vimrc.local')
   source $HOME/.vimrc.local
 endif
 
+" This means we can edit the Vimrc and have lightline pick up the changes every
+" time
+LightlineReload
 call s:EnsureNothingConflictsWithGrep()
