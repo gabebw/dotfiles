@@ -608,6 +608,7 @@ endfunction
 
 command! CopyPath :let @+ = expand('%:p')
 command! Gpr :Git create-pull-request
+command! -nargs=1 Gbranch :Git checkout -b
 " }}}
 
 " ============================================================================
