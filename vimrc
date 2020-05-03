@@ -359,6 +359,7 @@ augroup Ale
   let g:ale_fixers.typescript = ['prettier']
   let g:ale_fixers.typescriptreact = ['prettier']
   let g:ale_fixers.css = ['prettier']
+  let g:ale_fixers.scss = ['prettier']
   let g:ale_fixers.ruby = ['rubocop']
 
   autocmd CursorHold * call ale#Queue(0)
