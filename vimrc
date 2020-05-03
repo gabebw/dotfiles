@@ -376,15 +376,6 @@ nnoremap <Leader>x :ALEFix<CR>
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
 
-" vsplit by default (with Enter)
-" deets:
-" https://github.com/junegunn/fzf.vim/blob/4cf475b753/autoload/fzf/vim.vim#L236-L243
-let g:fzf_action = {
-    \ 'ctrl-t': 'tab split',
-    \ 'ctrl-x': 'split',
-    \ 'ctrl-m': 'edit',
-    \ 'enter': 'vsplit' }
-
 command! -bang -nargs=? -complete=dir FilesWithPreview
      \ call fzf#vim#files(<q-args>,
      \   fzf#vim#with_preview(),
