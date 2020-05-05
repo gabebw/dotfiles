@@ -620,11 +620,8 @@ command! -nargs=1 Gbranch :Git checkout -b
 call plug#begin('~/.vim/bundle')
 
 " JavaScript
-Plug 'vim-scripts/vim-coffee-script'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'briancollins/vim-jst'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
 
 " Ruby/Rails
@@ -640,32 +637,11 @@ Plug 'janko-m/vim-test'
 Plug 'christoomey/vim-tmux-runner'
 Plug 'christoomey/vim-tmux-navigator'
 
-" Haskell
-Plug 'pbrisbin/vim-syntax-shakespeare'
-Plug 'neovimhaskell/haskell-vim'
-Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
-
 " Syntax
-Plug 'sophacles/vim-processing'
-Plug 'keith/swift.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/applescript.vim'
-Plug 'vim-scripts/magic.vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'cespare/vim-toml'
-Plug 'chase/vim-ansible-yaml'
-Plug 'chr4/nginx.vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'slim-template/vim-slim'
 Plug 'shmup/vim-sql-syntax'
-Plug 'hashivim/vim-terraform'
-
-" Clojure
-Plug 'guns/vim-clojure-static', { 'for': 'clojure' }
-Plug 'luochen1990/rainbow', { 'for': 'clojure' }
-" Remember to have a `lein repl` open in order for this to connect!
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'tpope/vim-classpath', { 'for': 'clojure' }
+Plug 'tpope/vim-git'
 
 " Plumbing that makes everything nicer
 " Fuzzy-finder
@@ -674,9 +650,6 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'tomtom/tcomment_vim'
 " <Tab> indents or triggers autocomplete, smartly
 Plug 'ervandew/supertab'
-" Cool commands and syntax highlighting for Vim. The GitHub version is a little ahead of the
-" official Vim versions, so use the GitHub version.
-Plug 'tpope/vim-git'
 " Git bindings
 Plug 'tpope/vim-fugitive'
 " The Hub to vim-fugitive's git
@@ -712,8 +685,6 @@ Plug 'w0rp/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'tpope/vim-abolish'
 
 " Text objects
 " required for all the vim-textobj-* plugins
