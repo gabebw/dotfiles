@@ -327,6 +327,10 @@ set grepformat=%f:%l:%c:%m
 " PLUGIN OPTIONS {{{
 " ===========================================================================
 
+" Supertab
+" Tell Supertab to start completions at the top of the list, not the bottom.
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 " gundo
 " -----
 " Without this, Gundo won't run because Python 2 isn't installed.
