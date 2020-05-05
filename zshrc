@@ -725,10 +725,10 @@ PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_shortened_path)$(pr
 # Git {{{
 
 # By itself: run `git status`
-# With arguments: acts like `hub`
+# With arguments: acts like `git`
 function g {
   if [[ $# > 0 ]]; then
-    hub "$@"
+    git "$@"
   else
     git st
   fi
