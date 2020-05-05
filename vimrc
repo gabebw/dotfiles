@@ -206,7 +206,7 @@ function! MaybeTabedit(file)
     execute 'tabedit ' . a:file
   endif
 endfunction
-nnoremap <leader>ev :call MaybeTabedit($MYVIMRC)<CR>
+nnoremap <leader>ev :call MaybeTabedit(resolve($MYVIMRC))<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>q :call MaybeTabedit('$HOME/.zshrc')<CR>
 
