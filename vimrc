@@ -196,17 +196,18 @@ autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
 
 " edit vimrc/zshrc and load vimrc bindings
 function! MaybeTabedit(file)
+  let real_file = resolve(a:file)
   let new_empty_file = line('$') == 1 && getline(1) == '' && bufname('%') == ''
-  if bufname('%') ==# a:file
-    " Already editing vimrc, do nothing
+  if bufname('%') ==# real_file
+    " Already editing this file, do nothing
   elseif new_empty_file
     " If this is an empty file, just replace it with the file to edit
-    execute 'edit ' . a:file
+    execute 'edit ' . real_file
   else
-    execute 'tabedit ' . a:file
+    execute 'tabedit ' . real_file
   endif
 endfunction
-nnoremap <leader>ev :call MaybeTabedit(resolve($MYVIMRC))<CR>
+nnoremap <leader>ev :call MaybeTabedit($MYVIMRC)<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>q :call MaybeTabedit('$HOME/.zshrc')<CR>
 
