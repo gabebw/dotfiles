@@ -185,9 +185,6 @@ nnoremap k gk
 " no ex mode
 map Q <Nop>
 
-" re-select the last pasted text
-nnoremap gV V`]
-
 function! MyPaste()
   set paste
   let buffer = @+
