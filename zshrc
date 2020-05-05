@@ -837,6 +837,7 @@ compdef _git ga=git-add
 export VISUAL=vim
 export EDITOR=$VISUAL
 alias vi="$VISUAL"
+alias ev="vim '$(readlink ~/.vimrc)'"
 v(){
   local old_IFS=$IFS
   local files
