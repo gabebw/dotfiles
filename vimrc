@@ -539,12 +539,26 @@ let g:lightline.active.left = [
 let g:lightline.active.right = [
       \ [ 'filetype'],
       \ ]
-let g:lightline.component.fugitive = '%{exists("*fugitive#head")?fugitive#head():""}'
 let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}'
+let g:lightline.component_function.fugitive = 'LightLineGitBranch'
 let g:lightline.component_function.myfilename = 'LightLineFilename'
 let g:lightline.component_visible_condition.readonly = '(&filetype!="help"&& &readonly)'
 let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head") && ""!=fugitive#head())'
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
+
+function! LightLineGitBranch()
+  if exists("*fugitive#head")
+    let branch = fugitive#head()
+    if len(branch) > 13
+      " Long branch names get truncated
+      return '...' . branch[-10:-1]
+    else
+      return ""
+    endif
+  else
+    return ""
+  endif
+endfunction
 
 function! LightLineFilename()
   let filename = resolve(expand('%:p'))
