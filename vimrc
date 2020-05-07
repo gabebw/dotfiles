@@ -701,7 +701,7 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
