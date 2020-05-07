@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Prettify Haskell code
-# https://github.com/jaspervdj/stylish-haskell
-stack install stylish-haskell

@@ -27,9 +27,7 @@ to the tag root. However, non-configuration files and folders like `system/`,
 ## Tags
 
 `rcm` has the concept of tags: items under `tag-git/` are in the `git` tag, and
-so on. I'm using it for organization, so that if someone starts using Haskell I
-can point them at all of my Haskell configuration across Vim/Zsh/GHCi, all in
-one place.
+so on. I'm using it for organization.
 
 ## Zsh
 

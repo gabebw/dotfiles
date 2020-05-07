@@ -421,12 +421,7 @@ PATH=/usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/b
 # Postgres.app
 PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
-# Haskell
-PATH=$HOME/.cabal/bin:$PATH
-PATH=~/.local/bin:$PATH
-PATH=./.git/safe/../../.cabal-sandbox/bin:$PATH
 PATH=$HOME/.bin:$PATH
-
 PATH=./bin/stubs:$PATH
 
 # Rust

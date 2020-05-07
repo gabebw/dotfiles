@@ -15,10 +15,6 @@
 /bower_components/
 .git/
 
-# Haskell
-.cabal-sandbox
-.stack-work
-
 ## Files
 
 # ctags file
