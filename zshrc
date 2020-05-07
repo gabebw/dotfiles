@@ -885,23 +885,6 @@ if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
 fi
 # }}}
 
-# Haskell {{{
-if command -v stack > /dev/null; then
-  stack(){
-    # Delete this function so it only loads completion once.
-    unfunction stack
-
-    # Now zsh understands bash completion files. Wild!
-    autoload -U bashcompinit && bashcompinit
-
-    eval "$(stack --bash-completion-script stack)"
-
-    # Run the actual command I wanted to run.
-    stack "$@"
-  }
-fi
-# }}}
-
 # Ruby/Rails {{{
 
 alias h=heroku
