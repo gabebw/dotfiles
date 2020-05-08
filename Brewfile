@@ -45,6 +45,7 @@ brew 'pgrep'
 brew 'ripgrep'
 brew 'tree'
 brew 'vim'
+brew 'hexyl'
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'

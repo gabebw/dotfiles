@@ -73,6 +73,7 @@ alias prettyxml="xmllint --format -"
 alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
+alias hexdump=hexyl
 youtube-dl-safe(){
   # Allow passing arguments in; without this, xargs treats the arguments as
   # URLs. This block assumes all arguments are at the beginning, and stops
