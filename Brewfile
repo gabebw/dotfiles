@@ -29,10 +29,6 @@ brew 'candle'
 
 brew 'coreutils'
 
-# Command-line Spotify interface
-# https://github.com/hnarayanan/shpotify
-brew 'shpotify'
-
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
@@ -78,25 +74,12 @@ brew 'ripgrep'
 # Official AWS CLI
 brew 'awscli'
 
-# Like search, but more elastic
-brew 'elasticsearch@5.6'
-
 brew 'youtube-dl'
 # youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
 brew 'ffmpeg'
 
 # I love `sponge` so much.
 brew 'moreutils'
-
-# gsed lets you use newlines
-brew 'gnu-sed'
-
-# Provides `numsum`, among others.
-brew 'num-utils'
-
-# https://tldr.sh/
-# Man pages, but with practical examples.
-brew 'tldr'
 
 # a Postgres pager
 brew 'pspg'
@@ -106,10 +89,6 @@ brew 'asdf'
 
 # cat, but smarter
 brew 'bat'
-
-# An extension to Git to help it work with large files
-# https://git-lfs.github.com
-brew 'git-lfs'
 
 # Simple graphs with `bin/line_graph`
 brew 'gnuplot'
