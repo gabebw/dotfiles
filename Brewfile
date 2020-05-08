@@ -31,8 +31,6 @@ tap 'gabebw/formulae'
 # sed for HTML: https://github.com/gabebw/candle
 brew 'candle'
 
-brew 'coreutils'
-
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
