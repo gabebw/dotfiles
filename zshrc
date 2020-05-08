@@ -382,15 +382,9 @@ bindkey "^I" expand-or-complete-with-dots
 
 # $PATH {{{
 
-is_osx(){
-  [ "$(uname -s)" = Darwin ]
-}
-
-if is_osx; then
-  # Add Homebrew to the path.
-  # Must be _before_ asdf so that /usr/local/bin/ruby isn't first in the $PATH.
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
-fi
+# Add Homebrew to the path.
+# Must be _before_ asdf so that /usr/local/bin/ruby isn't first in the $PATH.
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # asdf version manager (ruby, node, etc)
 # Load asdf early so that we can override it (e.g. by prepending `./bin/stubs`)
@@ -983,18 +977,16 @@ function db-restore() {
 # }}}
 
 # Homebrew {{{
-if is_osx; then
-  # Opt out of sending Homebrew information to Google Analytics
-  # https://docs.brew.sh/Analytics
-  export HOMEBREW_NO_ANALYTICS=1
-  # If it's been more than this number of seconds since Homebrew was last
-  # updated, automatically run `brew update` before `brew install`.
-  # 604800 is 1 week in seconds (60 * 60 * 24 * 7).
-  export HOMEBREW_AUTO_UPDATE_SECS=604800
+# Opt out of sending Homebrew information to Google Analytics
+# https://docs.brew.sh/Analytics
+export HOMEBREW_NO_ANALYTICS=1
+# If it's been more than this number of seconds since Homebrew was last
+# updated, automatically run `brew update` before `brew install`.
+# 604800 is 1 week in seconds (60 * 60 * 24 * 7).
+export HOMEBREW_AUTO_UPDATE_SECS=604800
 
-  # Always cleanup after installing or upgrading
-  export HOMEBREW_INSTALL_CLEANUP=1
-fi
+# Always cleanup after installing or upgrading
+export HOMEBREW_INSTALL_CLEANUP=1
 # }}}
 
 # tmuxinator {{{
@@ -1003,10 +995,8 @@ compdef _tmuxinator tmuxinator mux
 alias mux=tmuxinator
 # }}}
 
-if is_osx; then
-  # Set up SSH helper (mostly for Git)
-  ssh-add -K ~/.ssh/id_rsa 2> /dev/null
-fi
+# Set up SSH helper (mostly for Git)
+ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
 # created (i.e., after all zle -N calls and after running compinit), because it

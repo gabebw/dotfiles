@@ -17,42 +17,32 @@ quietly_brew_bundle(){
   brew bundle --file="$1" | grep -vE '^(Using |Homebrew Bundle complete)'
 }
 
-is_osx(){
-  [ "$(uname -s)" = Darwin ]
-}
-
-is_linux(){
-  [ "$(uname -s)" = Linux ]
-}
-
-if is_osx; then
-  info "Installing Homebrew if not already installed..."
-  if ! command -v brew > /dev/null; then
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-
-  info "Installing Homebrew packages..."
-  brew tap homebrew/bundle
-  for brewfile in Brewfile */Brewfile; do
-    quietly_brew_bundle "$brewfile"
-  done
-  # Brewfile.casks exits 1 sometimes but didn't actually fail
-  quietly_brew_bundle Brewfile.casks || true
-
-  info "Checking for command-line tools..."
-  if ! command -v xcodebuild > /dev/null; then
-    xcode-select --install
-  fi
-
-  info "Installing rust..."
-  rustup-init
-
-  info "Installing lister..."
-  cargo install --git https://github.com/gabebw/rust-lister
-
-  info "Installing Firefox open URL printer..."
-  cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
+info "Installing Homebrew if not already installed..."
+if ! command -v brew > /dev/null; then
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+info "Installing Homebrew packages..."
+brew tap homebrew/bundle
+for brewfile in Brewfile */Brewfile; do
+  quietly_brew_bundle "$brewfile"
+done
+# Brewfile.casks exits 1 sometimes but didn't actually fail
+quietly_brew_bundle Brewfile.casks || true
+
+info "Checking for command-line tools..."
+if ! command -v xcodebuild > /dev/null; then
+  xcode-select --install
+fi
+
+info "Installing rust..."
+rustup-init
+
+info "Installing lister..."
+cargo install --git https://github.com/gabebw/rust-lister
+
+info "Installing Firefox open URL printer..."
+cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
 
 if ! echo "$SHELL" | grep -Fq zsh; then
   info "Your shell is not Zsh. Changing it to Zsh..."
@@ -73,19 +63,15 @@ fi
 info "Installing Vim packages..."
 vim +PlugInstall +qa
 
-if is_osx; then
-  info "If you like what you see in system/osx-settings, run ./system/osx-settings"
-  info "If you're using Terminal.app, check out the terminal-themes directory"
-fi
+info "If you like what you see in system/osx-settings, run ./system/osx-settings"
+info "If you're using Terminal.app, check out the terminal-themes directory"
 
 info "Installing fonts..."
-if is_osx; then
-  brew tap caskroom/fonts
-  brew cask install font-iosevka
+brew tap caskroom/fonts
+brew cask install font-iosevka
 
-  if ! system_profiler SPFontsDataType | grep -q 'Inconsolata-Regular'; then
-    open fonts/Inconsolata*
-  fi
+if ! system_profiler SPFontsDataType | grep -q 'Inconsolata-Regular'; then
+  open fonts/Inconsolata*
 fi
 
 # Installs to ~/.terminfo
