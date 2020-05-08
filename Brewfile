@@ -3,7 +3,6 @@
 # Install things from the Mac App Store. To get a list of your current apps:
 # `mas list`.
 brew 'mas'
-
 mas 'AdGuard for Safari', id: 1440147259
 mas 'Amphetamine', id: 937984704
 mas 'Day One', id: 1055511498
@@ -20,6 +19,12 @@ tap 'caskroom/fonts'
 cask 'font-iosevka'
 cask 'font-inconsolata'
 
+tap 'thoughtbot/formulae'
+# rcm: dotfile management
+brew 'rcm'
+# parity: useful tools for Heroku development/staging/production
+brew 'parity'
+
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
@@ -31,6 +36,16 @@ tap 'gabebw/formulae'
 # sed for HTML: https://github.com/gabebw/candle
 brew 'candle'
 
+brew 'bat'
+brew 'fzf'
+brew 'git'
+brew 'heroku'
+brew 'hub'
+brew 'pgrep'
+brew 'ripgrep'
+brew 'tree'
+brew 'vim'
+
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew 'jq'
 
@@ -40,41 +55,11 @@ brew 'xmlstarlet'
 # Slice and dice your CSV
 brew 'xsv'
 
-# grep for ps
-brew 'pgrep'
-
-# The recommended way to use Heroku
-brew 'heroku'
-
-# Use version 3.4+ for colorful diffs with --color
+# macOS ships with version 2.8. Get version 3.4+ so `diff --color` works.
 brew 'diffutils'
 
 # so :Rtags works
 brew 'ctags'
-
-# My favorite editor
-brew 'vim'
-
-# Fast GitHub client, used in git-create-pull-request
-brew 'hub'
-
-brew 'git'
-
-# Fuzzy finder
-brew 'fzf'
-
-# thoughtbot stuff like rcm
-tap 'thoughtbot/formulae'
-# rcm: dotfile management
-brew 'rcm'
-# parity: useful tools for Heroku development/staging/production
-brew 'parity'
-
-# Fast, hip replacement for grep
-brew 'ripgrep'
-
-# Official AWS CLI
-brew 'awscli'
 
 brew 'youtube-dl'
 # youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
@@ -89,9 +74,6 @@ brew 'pspg'
 # asdf version manager: https://github.com/asdf-vm/asdf
 brew 'asdf'
 
-# cat, but smarter
-brew 'bat'
-
 # Simple graphs with `bin/line_graph`
 brew 'gnuplot'
 
@@ -100,6 +82,3 @@ brew 'sinclairtarget/wst/um'
 
 # Rust
 brew 'rustup-init'
-
-# Visualize the current directory as a tree, descending into all sub-directories
-brew 'tree'
