@@ -17,6 +17,11 @@ quietly_brew_bundle(){
   brew bundle --file="$1" | grep -vE '^(Using |Homebrew Bundle complete)'
 }
 
+info "Checking for command-line tools..."
+if ! command -v xcodebuild > /dev/null; then
+  xcode-select --install
+fi
+
 info "Installing Homebrew if not already installed..."
 if ! command -v brew > /dev/null; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -29,11 +34,6 @@ for brewfile in Brewfile */Brewfile; do
 done
 # Brewfile.casks exits 1 sometimes but didn't actually fail
 quietly_brew_bundle Brewfile.casks || true
-
-info "Checking for command-line tools..."
-if ! command -v xcodebuild > /dev/null; then
-  xcode-select --install
-fi
 
 info "Installing rust..."
 rustup-init
