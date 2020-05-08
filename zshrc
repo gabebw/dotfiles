@@ -1005,8 +1005,8 @@ source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # `print_exit_value` shows a message with the exit code when a command returns
 # with a non-zero exit code.
-# However, zsh-syntax-highlighting somehow unsets this options option, so we
-# must set it after sourcing zsh-syntax-highlighting.
+# However, zsh-syntax-highlighting somehow unsets this option, so we must set it
+# after sourcing zsh-syntax-highlighting.
 setopt print_exit_value
 
 [[ -r ~/.aliases ]] && source ~/.aliases
