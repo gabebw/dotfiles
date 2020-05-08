@@ -1,5 +1,21 @@
 # vim: syntax=ruby filetype=ruby
 
+# Install things from the Mac App Store. To get a list of your current apps:
+# `mas list`.
+brew 'mas'
+
+mas 'AdGuard for Safari', id: 1440147259
+mas 'Amphetamine', id: 937984704
+mas 'Day One', id: 1055511498
+mas 'Deliveries', id: 924726344
+mas 'Divvy', id: 413857545
+mas 'Fantastical', id: 975937182
+mas 'Instapaper', id: 1481302432
+mas 'Monosnap', id: 540348655
+mas 'Slack', id: 803453959
+mas 'The Unarchiver', id: 425424353
+mas 'Things', id: 904280696
+
 # Lets us do `brew services restart postgres`, etc
 tap 'homebrew/services'
 
