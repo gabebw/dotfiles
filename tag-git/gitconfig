@@ -74,8 +74,6 @@
 [url "git@github.com:thoughtbot/"]
   # thoughtbot, with write access
   insteadOf = tb:
-[url "git@github.com:hired/"]
-  insteadOf = hired:
 [url "git@github.com:gabebw/"]
   # moi, with write access
   insteadOf = gbw:

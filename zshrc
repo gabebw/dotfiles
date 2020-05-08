@@ -806,7 +806,7 @@ new-project(){
 }
 
 # Clone and start a new tmux session about it
-# Usage: clone personal hired/hubot
+# Usage: clone personal gabebw/dotfiles
 clone(){
   pushd "$1"
   gcl "$2"

@@ -14,14 +14,8 @@ if command -v nvm &>/dev/null; then
   brew uninstall nvm
 fi
 
-if brew list yarn &>/dev/null; then
-  echo "Uninstalling Homebrew's Yarn because we can't use a specific version..."
-  brew uninstall yarn
-fi
-
 echo 'Installing NodeJS and Yarn...'
-# Hired's version of Node
-asdf install nodejs 8.10.0
-asdf global nodejs 8.10.0
-# Hired's version of Yarn
-npm install -g https://yarnpkg.com/downloads/1.6.0/yarn-v1.6.0.tar.gz
+node_version=14.2.0
+asdf install nodejs "$node_version"
+asdf global nodejs "$node_version"
+brew install yarn
