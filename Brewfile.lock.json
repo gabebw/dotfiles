@@ -320,7 +320,7 @@
         }
       },
       "youtube-dl": {
-        "version": "2020.05.03",
+        "version": "2020.05.08",
         "bottle": false
       },
       "ffmpeg": {
@@ -542,15 +542,32 @@
       },
       "thoughtbot/formulae": {
         "revision": "001833cb2c9d79296f2bdcd4caded62828640eff"
+      },
+      "caskroom/fonts": {
+        "revision": "2997a377d214b56d9f5ee864bea6b5c7f2581ca6"
+      }
+    },
+    "cask": {
+      "font-iosevka": {
+        "version": "2.3.3",
+        "options": {
+          "full_name": "font-iosevka"
+        }
+      },
+      "font-inconsolata": {
+        "version": "latest",
+        "options": {
+          "full_name": "font-inconsolata"
+        }
       }
     }
   },
   "system": {
     "macos": {
       "mojave": {
-        "HOMEBREW_VERSION": "2.2.15-31-g29abc81",
+        "HOMEBREW_VERSION": "2.2.15-35-g11f50cf",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "88b65a0c80366208e1e16f1266b13c946d32b5af",
+        "Homebrew/homebrew-core": "632b9c46b6663694e3d3ac536a5cd55184956b19",
         "CLT": "10.3.0.0.1.1562985497",
         "Xcode": "11.3.1",
         "macOS": "10.14.6"
