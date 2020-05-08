@@ -66,14 +66,6 @@ vim +PlugInstall +qa
 info "If you like what you see in system/osx-settings, run ./system/osx-settings"
 info "If you're using Terminal.app, check out the terminal-themes directory"
 
-info "Installing fonts..."
-brew tap caskroom/fonts
-brew cask install font-iosevka
-
-if ! system_profiler SPFontsDataType | grep -q 'Inconsolata-Regular'; then
-  open fonts/Inconsolata*
-fi
-
 # Installs to ~/.terminfo
 echo "Installing italics-capable terminfo files..."
 if ! [[ -r ~/.terminfo/61/alacritty ]]; then
