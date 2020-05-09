@@ -23,7 +23,7 @@ if ("" !== document.getSelection().toString()) {
   d = "";
 }
 
-if (location.hostname.match(/imdb.com|theoutline.com/)) {
+if (location.hostname.match(/imdb.com|theoutline.com|twitter.com/)) {
   url = withoutQueryParams;
 } else if (location.href.match(/youtube.com\/watch/)) {
   var u = new URL(location);
