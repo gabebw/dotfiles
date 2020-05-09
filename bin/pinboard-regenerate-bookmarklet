@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Usage:
+# pinboard-regenerate-bookmarklet
+# It will put it in your clipboard.
+
+set -eo pipefail
+
+if ! command -v uglifyjs &>/dev/null; then
+  # Redirect into stderr so we can always run `pbpaste` without fear
+  npm install -g uglify-js &>2
+fi
+
+if [ ! -t 1 ]; then
+  # We're piping this script to something
+  echo "No need to pipe this to anything else!" >&2
+  echo "Just run the script and it'll be in your clipboard." >&2
+  exit 1
+fi
+
+uglifyjs --compress --mangle -- ~/.pinboard-bookmarklet.js | ruby -r uri -e 'puts "javascript:#{URI.encode(ARGF.read)}"' | pbcopy
+echo "Done! Now it's in your clipboard :-)"

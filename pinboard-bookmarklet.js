@@ -11,11 +11,8 @@
 //   parameters and extra junk
 //
 // To convert to something you can use as a bookmarklet URL, this file must be
-// uglified then URI-encoded. To do that:
-//
-//    $ npm install -g uglify-js
-//    $ uglifyjs --compress --mangle -- pinboard-bookmarklet.js | ruby -r uri -e 'puts "javascript:#{URI.encode(ARGF.read)}"' | pbcopy
-//
+// uglified then URI-encoded. To do that, run
+// `bin/pinboard-renegerate-bookmarklet`.
 
 url = location.href;
 withoutQueryParams = location.protocol + "//" + location.hostname + location.pathname;
