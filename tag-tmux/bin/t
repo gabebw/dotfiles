@@ -70,7 +70,7 @@ if (( $# == 1 )); then
   _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
 else
   if $USE_FZF_TMUX; then
-    project_directory=$(projects | fzf-tmux --reverse)
+    project_directory=$(projects | fzf-tmux --reverse -d '85%')
   else
     project_directory=$(projects | fzf --reverse)
   fi
