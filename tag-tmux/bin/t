@@ -7,6 +7,13 @@
 # With no arguments, fuzzy-finds a session in a directory in
 # $PROJECT_DIRECTORIES using the `projects` script.
 
+if [[ "$1" == "with-tmux" ]]; then
+  USE_FZF_TMUX=true
+  shift
+else
+  USE_FZF_TMUX=false
+fi
+
 _not_in_tmux(){
   [[ -z "$TMUX" ]]
 }
@@ -62,7 +69,11 @@ _connected_to(){
 if (( $# == 1 )); then
   _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
 else
-  project_directory=$(projects | fzf-tmux --reverse)
+  if $USE_FZF_TMUX; then
+    project_directory=$(projects | fzf-tmux --reverse)
+  else
+    project_directory=$(projects | fzf --reverse)
+  fi
 
   if [[ -n "$project_directory" ]]; then
     session_name=$(_tmux_normalize_session_name "$project_directory")
