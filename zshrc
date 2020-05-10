@@ -751,7 +751,17 @@ gc(){
     git checkout "$@"
   fi
 }
-alias gcm="git commit -m"
+gcm(){
+  commit_message=$1
+  commit_message_length=$(wc -c <<< "$commit_message" | xargs echo -n)
+  echo $commit_message_length
+  if [[ "$commit_message_length" -gt 50 ]]; then
+    echo "Commit message length ($commit_message_length) > 50, not committing" >&2
+    return 1
+  else
+    git commit -m "$commit_message"
+  fi
+}
 
 # Checkout branches starting with my initials
 function gb(){
