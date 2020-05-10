@@ -33,3 +33,5 @@ tool-versions
 .vimrc.bundles.local
 .tmux.conf.local
 .gitconfig.local
+
+Brewfile.lock.json
