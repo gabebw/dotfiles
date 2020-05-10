@@ -15,10 +15,6 @@ mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
 
-tap "caskroom/fonts"
-cask "font-iosevka"
-cask "font-inconsolata"
-
 tap "thoughtbot/formulae"
 # rcm: dotfile management
 brew "rcm"

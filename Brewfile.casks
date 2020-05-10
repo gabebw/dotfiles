@@ -2,6 +2,10 @@
 # These are in a separate file so that install.sh can let installing these casks
 # "fail" when the apps are actually already installed.
 
+tap "caskroom/fonts"
+cask "font-iosevka"
+cask "font-inconsolata"
+
 cask "alacritty"
 cask "alfred"
 cask "dropbox"
