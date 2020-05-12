@@ -822,9 +822,17 @@ new-project(){
   printf "Project name? "
   read project_name
   project_name=${project_name// /-}
-  pushd personal
+  pushd personal >/dev/null
+  if [[ -d "$project_name" ]]; then
+    echo "!! Project directory with that name already exists" >&2
+    return 1
+  fi
+  if [[ -f "$project_name" ]]; then
+    echo "!! Project FILE with that name already exists" >&2
+    return 1
+  fi
   mkdir "$project_name" && tcd "./$project_name"
-  popd
+  popd >/dev/null
 }
 
 # Clone and start a new tmux session about it
