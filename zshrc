@@ -478,7 +478,7 @@ add_dir_to_cdpath(){
 add_subdirs_to_cdpath(){
   if has_subdirs "$1"; then
     for subdir in "$1"/*/; do
-      cdpath+=("$subdir")
+      cdpath+=("${subdir%/}")
     done
   fi
 }
