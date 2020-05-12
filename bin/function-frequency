@@ -1,0 +1,18 @@
+#!/bin/zsh
+
+# Print out how many times each function defined in ~/.zshrc and ~/.zshenv has
+# ever been called.
+#
+
+for name in $(rg --trim -I '[a-z_-]+\(\)|function [a-z_-]+' ~/.zshrc ~/.zshenv | \
+    rg -v '\s*#' | \
+    sed -E -e 's/([a-z_-]+)\(\).+/\1/' -e 's/.*function ([a-z_-]+).*/\1/'); do
+
+  # Each line in ~/.zsh_history is like this:
+  # : 1589320856:0;tail -1 ~/.zsh_history | pbcopy
+  # So by searching for a `;` (beginning the line, or somewhere in the middle
+  # like `a; b; c`) or a `|` (it's being piped to), we can be fairly certain
+  # that it's not a false match.
+  count=$(rg "[;|]\s*${name}( |$)" ~/.zsh_history | wc -l | xargs echo)
+  echo "$count $name"
+done | sort -nr
