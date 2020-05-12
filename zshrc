@@ -754,9 +754,8 @@ gc(){
   fi
 }
 gcm(){
-  commit_message=$1
-  commit_message_length=$(wc -c <<< "$commit_message" | xargs echo -n)
-  echo $commit_message_length
+  local commit_message=$1
+  local commit_message_length=$(wc -c <<< "$commit_message" | xargs echo -n)
   if [[ "$commit_message_length" -gt 50 ]]; then
     echo "Commit message length ($commit_message_length) > 50, not committing" >&2
     return 1
@@ -771,8 +770,8 @@ function gb(){
     echo "No branch name :(" >&2
     return 1
   fi
-  branch="gbw-${1#gbw-}"
-  base=$2
+  local branch="gbw-${1#gbw-}"
+  local base=$2
   if [[ -n "$base" ]]; then
     git checkout -b "$branch" "$base"
   else
@@ -820,7 +819,7 @@ function gcl-fuzzy {
 new-project(){
   printf "Project name? "
   read project_name
-  project_name=${project_name// /-}
+  local project_name=${project_name// /-}
   pushd personal >/dev/null
   if [[ -d "$project_name" ]]; then
     echo "!! Project directory with that name already exists" >&2
@@ -858,9 +857,8 @@ alias vi="$VISUAL"
 alias ev="vim '$(readlink ~/.vimrc)'"
 v(){
   local old_IFS=$IFS
-  local files
   IFS=$'\n'
-  files=($(fzf-tmux --query="$1" --multi --exit-0))
+  local files=($(fzf-tmux --query="$1" --multi --exit-0))
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
   IFS=$old_IFS
 }
@@ -951,10 +949,11 @@ serveit(){
 # JavaScript {{{
 cra(){
   local projectname=$1
+  local do_prompt
   if npx create-react-app --template typescript "$@"; then
     pushd "$projectname"
     # Save old value
-    [[ -e "$(setopt | rg rmstar)" ]] && local do_prompt=true || local do_prompt=false
+    [[ -e "$(setopt | rg rmstar)" ]] && do_prompt=true || do_prompt=false
     # Turn off Zsh prompt:
     # zsh: sure you want to delete all 8 files in DIR [yn]?
     setopt rm_star_silent
