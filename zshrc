@@ -457,9 +457,9 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # cdpath {{{
 has_subdirs(){
   if [[ -d "$1" ]]; then
-    result=0
+    result=1
     for whatever in "$1"/*/; do
-      result=1
+      result=0
       break
     done
     return $result
