@@ -787,8 +787,6 @@ git-branch-with-prefix(){
     gbm "${*// /-}"
   fi
 }
-gbi(){ git-branch-with-prefix IXP $* }
-gbf(){ git-branch-with-prefix FW $* }
 hbc(){
   if [[ $# -ge 1 ]]; then
     hub browse -- commit/"$1"
