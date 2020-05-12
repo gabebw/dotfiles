@@ -457,7 +457,12 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 # cdpath {{{
 has_subdirs(){
   if [[ -d "$1" ]]; then
-    [[ "$(find "$1" -type d -maxdepth 0 -empty -exec echo -n empty \;)" != "empty" ]]
+    result=0
+    for whatever in "$1"/*/; do
+      result=1
+      break
+    done
+    return $result
   else
     return 1
   fi
@@ -472,7 +477,7 @@ add_dir_to_cdpath(){
 
 add_subdirs_to_cdpath(){
   if has_subdirs "$1"; then
-    for subdir in "$1"/*; do
+    for subdir in "$1"/*/; do
       cdpath+=("$subdir")
     done
   fi
