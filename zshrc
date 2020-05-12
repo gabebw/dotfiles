@@ -862,6 +862,12 @@ v(){
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
   IFS=$old_IFS
 }
+# "vim recent", a quick and dirty version of https://github.com/rupa/v
+vr(){
+  local file=$(awk '/^>/ { sub(/^> /, "") ; print }' ~/.viminfo | fzf)
+  vim "${file/\~/$HOME}"
+}
+
 # Grep immediately on opening vim
 gv(){
   if [[ $# != 1 ]]; then
