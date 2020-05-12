@@ -813,7 +813,6 @@ function gcl-fuzzy {
   local user=${1?}
   shift
   local repo=$(recent-repos-owned-by "$user" | fzf)
-  echo $repo
   local directory="$(superclone "$@" "$repo")"
   cd "$directory"
 }
