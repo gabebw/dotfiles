@@ -55,11 +55,6 @@ info "Linking dotfiles into ~..."
 # backup files that slow it down significantly.
 RCRC=rcrc rcup -d .
 
-info "Installing zsh-syntax-highlighting..."
-if [ ! -d ~/.zsh-plugins/zsh-syntax-highlighting ]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.zsh-plugins/zsh-syntax-highlighting
-fi
-
 info "Installing Vim packages..."
 vim +PlugInstall +qa
 

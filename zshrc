@@ -1009,7 +1009,7 @@ ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
 # created (i.e., after all zle -N calls and after running compinit), because it
 # has to know about them to highlight them.
-source ~/.zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # `print_exit_value` shows a message with the exit code when a command returns
 # with a non-zero exit code.

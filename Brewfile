@@ -79,3 +79,5 @@ brew "sinclairtarget/wst/um"
 
 # Rust
 brew "rustup-init"
+
+brew "zsh-syntax-highlighting"
