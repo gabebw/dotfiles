@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Gets the 30 most-recently-created repos under a given user, excluding forks.
+
+set -eo pipefail
+
+if [[ -z "$1" ]]; then
+  echo "Usage: $0 USERNAME" >&2
+  exit 1
+fi
+
+user=$1
+hub api -t graphql -f query="{
+  user(login: \"$user\") {
+    repositories(first: 30, isFork: false, ownerAffiliations: OWNER, orderBy: {field: CREATED_AT, direction: DESC}) {
+      nodes {
+        nameWithOwner
+      }
+    }
+  }
+}" | cut -f2
