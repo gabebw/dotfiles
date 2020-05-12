@@ -1023,6 +1023,9 @@ ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 # zsh-syntax-highlighting must be sourced after all custom widgets have been
 # created (i.e., after all zle -N calls and after running compinit), because it
 # has to know about them to highlight them.
+# More on ZSH_HIGHLIGHT_HIGHLIGHTERS:
+# https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [[ -r ~/.aliases ]] && source ~/.aliases
