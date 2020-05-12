@@ -926,19 +926,6 @@ b(){
   fi
 }
 
-bstart(){
-  brew services start elasticsearch@5.6
-  brew services start redis
-  brew services start memcached
-  open /Applications/Postgres.app
-}
-
-bstop(){
-  brew services stop memcached
-  brew services stop elasticsearch@5.6
-  brew services stop redis
-}
-
 # Serve the current directory at localhost:8000
 serveit(){
   ruby -run -ehttpd . -p8000
