@@ -276,6 +276,7 @@ setopt extended_history
 # Case-insensitive globbing
 setopt nocaseglob
 setopt extended_glob
+setopt print_exit_value
 
 unsetopt correctall
 # Allow [ or ] wherever you want
@@ -1010,11 +1011,5 @@ ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 # created (i.e., after all zle -N calls and after running compinit), because it
 # has to know about them to highlight them.
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# `print_exit_value` shows a message with the exit code when a command returns
-# with a non-zero exit code.
-# However, zsh-syntax-highlighting somehow unsets this option, so we must set it
-# after sourcing zsh-syntax-highlighting.
-setopt print_exit_value
 
 [[ -r ~/.aliases ]] && source ~/.aliases
