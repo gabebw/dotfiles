@@ -485,7 +485,6 @@ add_subdirs_to_cdpath(){
 
 add_dir_to_cdpath "$HOME/code"
 add_subdirs_to_cdpath "$HOME/code"
-add_subdirs_to_cdpath "$HOME/code/thoughtbot"
 add_subdirs_to_cdpath "$HOME/code/work"
 
 # Exporting $CDPATH is bad:
