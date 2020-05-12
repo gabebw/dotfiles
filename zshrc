@@ -366,6 +366,7 @@ compdef staging=heroku
 compdef production=heroku
 
 if [ -f /usr/local/etc/bash_completion.d/um-completion.sh ]; then
+  autoload -Uz bashcompinit
   . /usr/local/etc/bash_completion.d/um-completion.sh
 fi
 
