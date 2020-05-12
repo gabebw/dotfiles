@@ -1,1 +1,1 @@
- set iskeyword+=$
+ setlocal iskeyword+=$
