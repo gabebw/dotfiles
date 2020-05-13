@@ -7,13 +7,6 @@ if ! asdf plugin-list | grep -qF nodejs; then
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 fi
 
-if command -v nvm &>/dev/null; then
-  echo 'Migrating from NVM -> asdf...'
-
-  echo 'Uninstalling NVM...'
-  brew uninstall nvm
-fi
-
 echo 'Installing NodeJS and Yarn...'
 node_version=14.2.0
 asdf install nodejs "$node_version"
