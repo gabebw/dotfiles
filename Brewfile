@@ -11,6 +11,8 @@ mas "Divvy", id: 413857545
 mas "Fantastical", id: 975937182
 mas "Instapaper", id: 1481302432
 mas "Monosnap", id: 540348655
+mas "Paprika Recipe Manager 3", id: 1303222628
+mas "Pixelmator", id: 407963104
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
