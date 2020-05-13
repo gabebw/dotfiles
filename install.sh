@@ -58,8 +58,10 @@ RCRC=rcrc rcup -d .
 info "Installing Vim packages..."
 vim +PlugInstall +qa
 
-info "If you like what you see in system/osx-settings, run ./system/osx-settings"
-info "If you're using Terminal.app, check out the terminal-themes directory"
+info "Creating ~/Desktop/screenshots so screenshots can be saved there..."
+mkdir -p ~/Desktop/screenshots
+
+./system/osx-settings
 
 # Installs to ~/.terminfo
 echo "Installing italics-capable terminfo files..."
