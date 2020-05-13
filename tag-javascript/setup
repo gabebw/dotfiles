@@ -11,4 +11,6 @@ echo 'Installing NodeJS and Yarn...'
 node_version=14.2.0
 asdf install nodejs "$node_version"
 asdf global nodejs "$node_version"
-brew install yarn
+if ! brew list | grep -qF yarn; then
+  brew install yarn
+fi
