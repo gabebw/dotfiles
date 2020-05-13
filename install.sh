@@ -16,13 +16,17 @@ quietly_brew_bundle(){
   brew bundle --file="$1" | (grep -vE '^(Using |Homebrew Bundle complete)' || true)
 }
 
+command_does_not_exist(){
+  ! command -v "$1" > /dev/null
+}
+
 info "Checking for command-line tools..."
-if ! command -v xcodebuild > /dev/null; then
+if command_does_not_exist xcodebuild; then
   xcode-select --install
 fi
 
 info "Installing Homebrew (if not already installed)..."
-if ! command -v brew > /dev/null; then
+if command_does_not_exist brew; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
@@ -38,10 +42,14 @@ info "Installing rust..."
 rustup-init -y
 
 info "Installing lister..."
-cargo install --git https://github.com/gabebw/rust-lister
+if command_does_not_exist lister; then
+  cargo install --git https://github.com/gabebw/rust-lister
+fi
 
 info "Installing Firefox open URL printer..."
-cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
+if command_does_not_exist firefox-all-open-urls; then
+  cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
+fi
 
 if ! echo "$SHELL" | grep -Fq zsh; then
   info "Your shell is not Zsh. Changing it to Zsh..."
