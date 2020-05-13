@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eo pipefail
 
 yellow() {
   tput setaf 3
@@ -9,12 +9,11 @@ yellow() {
 }
 
 info(){
-  echo
-  yellow "$@"
+  yellow "=== $@"
 }
 
 quietly_brew_bundle(){
-  brew bundle --file="$1" | grep -vE '^(Using |Homebrew Bundle complete)'
+  brew bundle --file="$1" | (grep -vE '^(Using |Homebrew Bundle complete)' || true)
 }
 
 info "Checking for command-line tools..."
@@ -22,7 +21,7 @@ if ! command -v xcodebuild > /dev/null; then
   xcode-select --install
 fi
 
-info "Installing Homebrew if not already installed..."
+info "Installing Homebrew (if not already installed)..."
 if ! command -v brew > /dev/null; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
@@ -36,7 +35,7 @@ done
 quietly_brew_bundle Brewfile.casks || true
 
 info "Installing rust..."
-rustup-init
+rustup-init -y
 
 info "Installing lister..."
 cargo install --git https://github.com/gabebw/rust-lister

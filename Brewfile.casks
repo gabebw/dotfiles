@@ -15,5 +15,3 @@ cask "ngrok"
 cask "vlc"
 # Postgres.app
 cask 'postgres'
-# HOMM3
-cask "wineskin-winery"
