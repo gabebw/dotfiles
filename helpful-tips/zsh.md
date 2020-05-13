@@ -1,10 +1,20 @@
+Safely iterate through output from a shell command using \n as the separator?
+
+    command_with_output | while read -r one_line_of_output; do
+      echo "$one_line_of_output"
+    done
+
+This is better than `for one_line_of_output in $(command_with_output)` because
+the `for` loop will do word splitting. A line of output with a space in it will
+become two items.
+
 How do I change my shell to ZSH?
 
     chsh -s /bin/zsh
 
 Where can I find awesome 'zshrc's?
 
-http://dotfiles.org/.zshrc (and check out the rest of the site too)
+<http://dotfiles.org/.zshrc> (and check out the rest of the site too)
 
 Search backward through history: Ctrl-R
 
