@@ -572,9 +572,9 @@ function! LightLineFilename()
     return '[No Name]'
   elseif git_root != '' && git_root != '.'
     let path = substitute(filename, git_root . '/', '', '')
-    " If it starts with a slash, it's outside of this directory (for example, a
-    " dotfile in ~/.vimrc that's really in ~/code/personal/dotfiles/vimrc
-    if FugitiveGitPath(expand('%'))[0] ==# '/'
+    " Check if the git root is in another directory, like a dotfile in ~/.vimrc
+    " that's really in ~/code/personal/dotfiles/vimrc
+    if FugitiveReal(expand('%')) !~# '^'.getcwd()
       return path . ' @ ' . git_root
     else
       return path
