@@ -565,7 +565,8 @@ function! LightLineGitBranch()
 endfunction
 
 function! LightLineFilename()
-  let filename = resolve(expand('%:p'))
+  let unfollowed_symlink_filename = expand('%:p')
+  let filename = resolve(unfollowed_symlink_filename)
   let git_root = fnamemodify(FugitiveExtractGitDir(filename), ':h')
 
   if expand('%:t') == ''
@@ -574,7 +575,7 @@ function! LightLineFilename()
     let path = substitute(filename, git_root . '/', '', '')
     " Check if the git root is in another directory, like a dotfile in ~/.vimrc
     " that's really in ~/code/personal/dotfiles/vimrc
-    if FugitiveReal(expand('%')) !~# '^'.getcwd()
+    if FugitivePath(filename) !=# unfollowed_symlink_filename
       return path . ' @ ' . git_root
     else
       return path
