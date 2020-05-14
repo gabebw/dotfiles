@@ -2,6 +2,12 @@
 
 set -eo pipefail
 
+green() {
+  tput setaf 2
+  echo "$*"
+  tput sgr0
+}
+
 yellow() {
   tput setaf 3
   echo "$*"
@@ -9,7 +15,7 @@ yellow() {
 }
 
 info(){
-  yellow "=== $@"
+  green "=== $@"
 }
 
 quietly_brew_bundle(){
@@ -90,3 +96,5 @@ for setup in tag-*/setup; do
 done
 
 asdf install
+
+green "== Success!"
