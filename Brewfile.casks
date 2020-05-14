@@ -26,3 +26,4 @@ cask "postgres" # Postgres.app
 cask "spotify"
 cask "vlc"
 cask "xee"
+cask "zoomus"
