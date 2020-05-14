@@ -19,9 +19,13 @@ info(){
   green "=== $@"
 }
 
+stay_awake_while(){
+  caffeinate -dims "$@"
+}
+
 quietly_brew_bundle(){
   local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed'
-  brew bundle --verbose --file="$1" | (grep -vE "$regex" || true)
+  stay_awake_while brew bundle --verbose --file="$1" | (grep -vE "$regex" || true)
 }
 
 command_does_not_exist(){
@@ -30,12 +34,12 @@ command_does_not_exist(){
 
 info "Checking for command-line tools..."
 if command_does_not_exist xcodebuild; then
-  xcode-select --install
+  stay_awake_while xcode-select --install
 fi
 
 info "Installing Homebrew (if not already installed)..."
 if command_does_not_exist brew; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  stay_awake_while /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 info "Installing Homebrew packages..."
@@ -49,16 +53,16 @@ quietly_brew_bundle Brewfile.casks || true
 brew pin postgresql
 
 info "Installing rust..."
-rustup-init -y > /dev/null
+stay_awake_while rustup-init -y > /dev/null
 
 info "Installing lister..."
 if command_does_not_exist lister; then
-  cargo install --git https://github.com/gabebw/rust-lister
+  stay_awake_while cargo install --git https://github.com/gabebw/rust-lister
 fi
 
 info "Installing Firefox open URL printer..."
 if command_does_not_exist firefox-all-open-urls; then
-  cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
+  stay_awake_while cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
 fi
 
 if ! echo "$SHELL" | grep -Fq zsh; then
@@ -70,7 +74,7 @@ info "Linking dotfiles into ~..."
 # Before `rcup` runs, there is no ~/.rcrc, so we must tell `rcup` where to look.
 # We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
 # backup files that slow it down significantly.
-RCRC=rcrc rcup -d .
+stay_awake_while RCRC=rcrc rcup -d .
 
 info "Installing Vim packages..."
 vim +PlugInstall +qa
@@ -78,13 +82,13 @@ vim +PlugInstall +qa
 info "Creating ~/Desktop/screenshots so screenshots can be saved there..."
 mkdir -p ~/Desktop/screenshots
 
-./system/osx-settings
+stay_awake_while ./system/osx-settings
 
 # Installs to ~/.terminfo
 echo "Installing italics-capable terminfo files..."
 if ! [[ -r ~/.terminfo/61/alacritty ]]; then
   alacritty_terminfo=$(mktemp)
-  curl -o "$alacritty_terminfo" https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
+  stay_awake_while curl -o "$alacritty_terminfo" https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
   tic -xe alacritty,alacritty-direct "$alacritty_terminfo"
 fi
 
@@ -99,6 +103,6 @@ for setup in tag-*/setup; do
   . "$setup"
 done
 
-asdf install
+stay_awake_while asdf install
 
 green "== Success!"
