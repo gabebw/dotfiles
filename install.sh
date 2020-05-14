@@ -39,7 +39,7 @@ done
 quietly_brew_bundle Brewfile.casks || true
 
 info "Installing rust..."
-rustup-init -y
+rustup-init -y > /dev/null
 
 info "Installing lister..."
 if command_does_not_exist lister; then
