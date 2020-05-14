@@ -149,6 +149,7 @@ if [[ -r ~/.rgrc ]]; then
   export RIPGREP_CONFIG_PATH=~/.rgrc
 fi
 export BAT_CONFIG_PATH="~/.config/bat/config"
+alias cat=bat
 
 o(){
   if [[ -d "$1" ]]; then
