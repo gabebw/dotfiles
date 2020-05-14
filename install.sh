@@ -1,4 +1,5 @@
 #!/bin/bash
+# vim: set tw=0
 
 set -eo pipefail
 
@@ -19,7 +20,8 @@ info(){
 }
 
 quietly_brew_bundle(){
-  brew bundle --file="$1" | (grep -vE '^(Using |Homebrew Bundle complete)' || true)
+  local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed'
+  brew bundle --verbose --file="$1" | (grep -vE "$regex" || true)
 }
 
 command_does_not_exist(){
