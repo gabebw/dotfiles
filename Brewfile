@@ -35,15 +35,16 @@ tap "gabebw/formulae"
 brew "candle"
 
 brew "bat"
+brew "fd"
 brew "fzf"
 brew "git"
 brew "heroku"
+brew "hexyl"
 brew "hub"
 brew "pgrep"
 brew "ripgrep"
 brew "tree"
 brew "vim"
-brew "hexyl"
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew "jq"
