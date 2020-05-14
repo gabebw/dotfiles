@@ -12,7 +12,7 @@ fi
 user=$1
 hub api -t graphql -f query="{
   user(login: \"$user\") {
-    repositories(first: 30, isFork: false, ownerAffiliations: OWNER, orderBy: {field: CREATED_AT, direction: DESC}) {
+    repositories(first: 30, isFork: false, ownerAffiliations: OWNER, orderBy: {field: PUSHED_AT, direction: DESC}) {
       nodes {
         nameWithOwner
       }
