@@ -13,7 +13,10 @@ let mapleader=' '
 " AUTOCOMMANDS {{{
 " ===========================================================================
 " on opening the file, clear search-highlighting
-autocmd BufReadCmd set nohlsearch
+augroup Highlighting
+  autocmd!
+  autocmd BufReadCmd set nohlsearch
+augroup END
 
 " Without this, the next line copies a bunch of netrw settings like `let
 " g:netrw_dirhistmax` to the system clipboard.
@@ -31,8 +34,8 @@ augroup vimrc
   autocmd!
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
   " and not leave the "!"
-  au FileType ruby,eruby,yaml set iskeyword+=!,?
-  au BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
+  autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
+  autocmd BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
 
   " Re-source vimrc whenever it changes
@@ -191,8 +194,12 @@ function! MyPaste()
   silent exe "normal! o" . buffer
   set nopaste
 endfunction
-autocmd VimEnter * nunmap cv
-autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
+
+augroup Pasting
+  autocmd!
+  autocmd VimEnter * nunmap cv
+  autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
+augroup END
 
 " edit vimrc/zshrc and load vimrc bindings
 function! MaybeTabedit(file)
@@ -443,8 +450,12 @@ let g:gist_post_private = 1
 " copy it to the system clipboard
 command! GitLink silent .Gbrowse!
 command! GitLinkFile silent 0Gbrowse!
-" Open the commit hash under the cursor, in GitHub
-autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w><CR>
+
+augroup Fugitive
+  autocmd!
+  " Open the commit hash under the cursor, in GitHub
+  autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w><CR>
+augroup END
 " Prevent Fugitive from raising an error about .git/tags by telling it to
 " explicitly check .git/tags
 set tags^=./.git/tags
