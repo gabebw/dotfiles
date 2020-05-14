@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tmux has-session -t "=${1}" 2>/dev/null

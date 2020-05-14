@@ -120,7 +120,18 @@ rcup(){
 }
 
 it(){ icopy -t tumblr/"${*// /-}" }
-tcd(){ [[ $# == 1 ]] && (cd "$1" && t $(basename "$1")) }
+tcd(){
+  local directory
+  local session_name
+  if [[ $# == 1 ]]; then
+    directory=$1
+    session_name=$(basename "$1")
+  elif [[ $# == 2 ]]; then
+    directory=$1
+    session_name=$2
+  fi
+  (cd "$directory" && t "$session_name")
+}
 null_terminate_filenames(){ perl -pe 's/\n/\0/' }
 xo(){ null_terminate_filenames | xargs -o -0 "${@:-open}" }
 # [xo] with an [a]pp
@@ -802,8 +813,17 @@ join-with(){ paste -sd "$1" - }
 sum(){ join-with "+" | bc }
 
 function gcl {
-  local directory="$(superclone "$@")"
-  cd "$directory"
+  # if you do `local directory=$(superclone "$@")`, it will not pick up the
+  # `superclone` return code and $? will always be 0 because it successfully
+  # assigned the variable. The solution is to separate `local` onto its own
+  # line.
+  local directory
+  directory=$(superclone "$@")
+  if [[ $? -eq 0 ]]; then
+    cd "$directory"
+  else
+    return 1
+  fi
 }
 
 function gcl-fuzzy {
@@ -832,12 +852,22 @@ new-project(){
 }
 
 # Clone and start a new tmux session about it
-# Usage: clone personal gabebw/dotfiles
+# Usage: clone personal gabebw/dotfiles [gabebw-dotfiles]
 clone(){
-  pushd "$1"
-  gcl "$2"
-  tcd "$PWD"
-  popd
+  local directory=$1
+  local session_name
+  pushd "$directory" >/dev/null
+  shift
+  if gcl "$@"; then
+    # Name the session after the current directory
+    session_name=$(basename "$PWD")
+    if tmux-session-exists "$session_name"; then
+      session_name="${session_name}-new"
+    fi
+    tcd "$PWD" "$session_name"
+    popd >/dev/null
+  fi
+  popd >/dev/null
 }
 
 # Complete `g` like `git`, etc

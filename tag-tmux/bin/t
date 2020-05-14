@@ -29,10 +29,6 @@ _attach_to_tmux_session() {
   fi
 }
 
-_tmux_session_exists(){
-  tmux has-session -t "=${1}" 2>/dev/null
-}
-
 # tmux doesn't allow . in session names
 _tmux_normalize_session_name(){
   basename "${1//./-}"
@@ -52,7 +48,7 @@ _new_tmux_session_named() {
 # Try to connect to a tmux session with the given name.
 # If no such session exists, create it first.
 _tmux_try_to_connect_to(){
-  if _tmux_session_exists "$1"; then
+  if tmux-session-exists "$1"; then
     _attach_to_tmux_session "$1"
   else
     _new_tmux_session_named "$1"
@@ -79,7 +75,7 @@ else
     session_name=$(_tmux_normalize_session_name "$project_directory")
 
     if ! _connected_to "$session_name"; then
-      if _tmux_session_exists "$session_name"; then
+      if tmux-session-exists "$session_name"; then
         _attach_to_tmux_session "$session_name"
       else
         (cd "$project_directory" && _new_tmux_session_named "$session_name")
