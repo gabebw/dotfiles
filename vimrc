@@ -374,6 +374,7 @@ augroup Ale
   let g:ale_fixers.css = ['prettier']
   let g:ale_fixers.scss = ['prettier']
   let g:ale_fixers.ruby = ['rubocop']
+  let g:ale_fixers.rust = ['rustfmt']
 
   autocmd CursorHold * call ale#Queue(0)
   autocmd InsertLeave * call ale#Queue(0)
