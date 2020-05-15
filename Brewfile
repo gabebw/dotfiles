@@ -43,6 +43,7 @@ brew "hexyl"
 brew "hub"
 brew "pgrep"
 brew "ripgrep"
+brew "tag"
 brew "tree"
 brew "vim"
 
