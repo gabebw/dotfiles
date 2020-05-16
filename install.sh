@@ -30,8 +30,10 @@ stay_awake_while(){
 }
 
 quietly_brew_bundle(){
-  local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed'
-  stay_awake_while brew bundle --verbose --file="$1" | (grep -vE "$regex" || true)
+  local brewfile=$1
+  shift
+  local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed|Verifying SHA-256|==> (Downloading|Purging)|Already downloaded:|No SHA-256'
+  stay_awake_while brew bundle --file="$brewfile" "$@" | (grep -vE "$regex" || true)
 }
 
 command_does_not_exist(){
@@ -52,7 +54,7 @@ info "Installing Homebrew packages..."
 brew tap homebrew/bundle
 brew install mas 2>/dev/null
 for brewfile in Brewfile */Brewfile; do
-  quietly_brew_bundle "$brewfile"
+  quietly_brew_bundle "$brewfile" --verbose
 done
 
 app_store_id=$(mas account || true)
