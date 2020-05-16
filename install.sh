@@ -103,7 +103,7 @@ info "Linking dotfiles into ~..."
 # We need the rcrc because it tells `rcup` to ignore thousands of useless Vim
 # backup files that slow it down significantly.
 export RCRC=rcrc
-stay_awake_while rcrc rcup -d .
+stay_awake_while rcup -d .
 
 info "Installing Vim packages..."
 vim +PlugInstall +qa
