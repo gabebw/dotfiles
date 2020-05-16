@@ -134,6 +134,10 @@ done
 
 stay_awake_while asdf install
 
+mkdir -p ~/code/work
+mkdir -p ~/code/personal
+mkdir -p ~/code/src
+
 green "== Success!"
 
 yellow "== Post-install instructions =="
