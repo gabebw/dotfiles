@@ -3,20 +3,26 @@
 
 set -eo pipefail
 
-green() {
-  tput setaf 2
+color() {
+  local colornumber="$1"
+  shift
+  tput setaf "$colornumber"
   echo "$*"
   tput sgr0
 }
 
-yellow() {
-  tput setaf 3
-  echo "$*"
-  tput sgr0
-}
+# blue = 4
+# magenta = 5
+red(){ color 1 "$*"; }
+green(){ color 2 "$*"; }
+yellow(){ color 3 "$*"; }
 
 info(){
   green "=== $@"
+}
+
+error(){
+  red "!! $@"
 }
 
 stay_awake_while(){
@@ -44,9 +50,27 @@ fi
 
 info "Installing Homebrew packages..."
 brew tap homebrew/bundle
+brew install mas 2>/dev/null
 for brewfile in Brewfile */Brewfile; do
   quietly_brew_bundle "$brewfile"
 done
+
+app_store_id=$(mas account || true)
+desired_app_store_id="gabebw@gabebw.com"
+if [[ "$app_store_id" == "$desired_app_store_id" ]]; then
+  quietly_brew_bundle Brewfile.mas
+else
+  if mas account &>/dev/null; then
+    error "You are signed in to the App Store as $app_store_id."
+    error "Sign out and re-sign in as $desired_app_store_id"
+  else
+    error "You are not signed in to the App Store."
+    error "Sign in as $desired_app_store_id"
+  fi
+  error "(This won't affect your iCloud account.)"
+  exit 1
+fi
+
 # Brewfile.casks exits 1 sometimes but didn't actually fail
 quietly_brew_bundle Brewfile.casks || true
 # Pin postgresql since I use Postgres.app and we only need it as a dependency
