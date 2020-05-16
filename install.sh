@@ -138,3 +138,4 @@ green "== Success!"
 
 yellow "== Post-install instructions =="
 yellow "1. Remap Caps Lock to Escape in the Keyboard prefpane"
+yellow "2. Set up top right Hot Corner -> Desktop in Desktop & Screen Saver prefpane"
