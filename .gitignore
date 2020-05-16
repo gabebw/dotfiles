@@ -34,4 +34,4 @@ tool-versions
 .tmux.conf.local
 .gitconfig.local
 
-Brewfile.lock.json
+Brewfile*.lock.json
