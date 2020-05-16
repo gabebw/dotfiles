@@ -1,5 +1,5 @@
 #!/bin/bash
-# vim: set tw=0
+# vim: tw=0
 
 set -eo pipefail
 
