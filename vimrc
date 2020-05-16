@@ -535,9 +535,12 @@ set noshowmode
 
 command! LightlineReload call LightlineReload()
 function! LightlineReload()
-  call lightline#init()
-  call lightline#colorscheme()
-  call lightline#update()
+  " Don't run this if Lightline hasn't been installed yet
+  if exists('*lightline#init')
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+  endif
 endfunction
 
 let g:lightline = {}
