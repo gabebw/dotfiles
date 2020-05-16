@@ -106,3 +106,6 @@ done
 stay_awake_while asdf install
 
 green "== Success!"
+
+yellow "== Post-install instructions =="
+yellow "1. Remap Caps Lock to Escape in the Keyboard prefpane"
