@@ -33,7 +33,7 @@ quietly_brew_bundle(){
   local brewfile=$1
   shift
   local regex='(^Using )|Homebrew Bundle complete|Skipping install of|It is not currently installed|Verifying SHA-256|==> (Downloading|Purging)|Already downloaded:|No SHA-256'
-  stay_awake_while brew bundle --file="$brewfile" "$@" | (grep -vE "$regex" || true)
+  stay_awake_while brew bundle --no-lock --file="$brewfile" "$@" | (grep -vE "$regex" || true)
 }
 
 command_does_not_exist(){
