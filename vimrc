@@ -685,6 +685,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/applescript.vim'
 Plug 'shmup/vim-sql-syntax'
 Plug 'tpope/vim-git'
+Plug 'cespare/vim-toml'
 
 " Plumbing that makes everything nicer
 " Fuzzy-finder
