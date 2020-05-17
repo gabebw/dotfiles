@@ -1,5 +1,6 @@
 " Syntax-highlight languages inside fenced markdown blocks
 let g:markdown_fenced_languages = [
+      \ 'bash',
       \ 'css',
       \ 'diff',
       \ 'haskell',
@@ -7,11 +8,13 @@ let g:markdown_fenced_languages = [
       \ 'javascript',
       \ 'lisp',
       \ 'ruby',
+      \ 'rust',
       \ 'scheme',
       \ 'scss',
       \ 'sh',
       \ 'sql',
-      \ 'vim'
+      \ 'vim',
+      \ 'zsh',
       \ ]
 
 setlocal spell
