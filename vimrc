@@ -101,13 +101,6 @@ nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 nnoremap <Leader>ve :vsp <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
-" Mnemonic: vgf = "vsplit gf"
-nnoremap vgf :vsplit<CR>gf
-" Mnemonic: sgf = "split gf"
-nnoremap sgf :split<CR>gf
-" Mnemonic: tgf = "tab gf"
-nnoremap tgf <C-w>gf
-
 " OK, so, in this comment, | is where the Vim cursor is.
 " Given this situation:
 "     user.fo|o!
@@ -726,6 +719,7 @@ Plug 'dense-analysis/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
+Plug 'preservim/nerdtree'
 
 " Text objects
 " required for all the vim-textobj-* plugins
