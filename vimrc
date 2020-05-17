@@ -731,6 +731,7 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-line'
 
 " Markdown
+Plug 'tpope/vim-markdown'
 Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
 " It does more, but I'm mainly using this because it gives me markdown-aware
 " `gx` so that `gx` works on [Markdown](links).
