@@ -5,7 +5,7 @@
 # Specify desired highlighting theme (e.g. "TwoDark").
 # To preview all themes on a given file:
 # bat --list-themes | fzf --preview="bat --theme={} --color=always /path/to/file"
---theme="OneHalfDark"
+--theme="TwoDark"
 
 # Enable this to use italic text on the terminal.
 --italic-text=always
