@@ -114,7 +114,7 @@ epoch(){
 }
 alias install-command-line-tools='xcode-select --install'
 rcup(){
-  if ! command rcup -v | rg -v identical; then
+  if ! command rcup -v | grep -v identical; then
     true
   fi
 }
