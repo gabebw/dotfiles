@@ -70,7 +70,6 @@ else
     error "Sign in as $desired_app_store_id"
   fi
   error "(This won't affect your iCloud account.)"
-  exit 1
 fi
 
 # Brewfile.casks exits 1 sometimes but didn't actually fail
