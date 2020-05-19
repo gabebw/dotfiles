@@ -853,8 +853,12 @@ new-project(){
 }
 
 # Clone and start a new tmux session about it
-# Usage: clone personal gabebw/dotfiles [gabebw-dotfiles]
 clone(){
+  if [[ $# < 2 ]]; then
+    echo "Please provide a directory and a repo name" >&2
+    echo "Usage: clone personal gabebw/dotfiles [gabebw-dotfiles]" >&2
+    return 1
+  fi
   local directory=$1
   local session_name
   pushd "$directory" >/dev/null
