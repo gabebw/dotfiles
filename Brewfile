@@ -18,6 +18,7 @@ tap "gabebw/formulae"
 brew "candle"
 
 brew "bat"
+brew "chrome-cli"
 brew "fd"
 brew "fzf"
 brew "git"
