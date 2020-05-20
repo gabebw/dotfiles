@@ -39,7 +39,7 @@ augroup vimrc
   autocmd VimResized * wincmd =
 
   " Re-source vimrc whenever it changes
-  autocmd BufWritePost vimrc,$MYVIMRC nested if expand("%") !~ 'fugitive' | source % | endif
+  autocmd BufWritePost vimrc,$MYVIMRC,.vimrc.bundles.local nested if expand("%") !~ 'fugitive' | source % | endif
 augroup END
 
 " vim-rails + vim-projectionist
