@@ -790,7 +790,7 @@ function gb(){
     git checkout -b "$branch"
   fi
 }
-function gbm(){ gb "$1" origin/master }
+function gbm(){ git checkout -b "$1" origin/master }
 git-branch-with-prefix(){
   if [[ $# == 0 ]]; then
     echo "No branch name :(" >&2
