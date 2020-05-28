@@ -10,7 +10,7 @@ brew "parity"
 tap "homebrew/services"
 
 # https://unused.codes/
-tap "joshuaclayton/formulae"
+tap "unused-code/formulae"
 brew "unused"
 
 tap "gabebw/formulae"
