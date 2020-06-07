@@ -132,7 +132,7 @@ tcd(){
   fi
   (cd "$directory" && t "$session_name")
 }
-null_terminate_filenames(){ perl -pe 's/\n/\0/' }
+null_terminate_filenames(){ tr '\n' '\0' }
 xo(){ null_terminate_filenames | xargs -o -0 "${@:-open}" }
 # [xo] with an [a]pp
 xoa(){ xo open -a "$1" }
