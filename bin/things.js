@@ -29,5 +29,5 @@ function run(arguments){
   var results = project.toDos().map(function(t){
     return { name: t.name(), notes: t.notes()};
   });
-  return JSON.stringify(results);
+  return JSON.stringify(results, null, 2);
 }
