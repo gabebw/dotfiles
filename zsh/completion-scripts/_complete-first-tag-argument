@@ -1,3 +1,7 @@
+_complete-all-tag-arguments() {
+  compadd $(tag -u | cut -f2)
+}
+
 _complete-first-tag-argument() {
   if (( CURRENT == 2 )); then
     # First argument
