@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# Print out every file matching a pattern, turn it into its basename so we can
+# run `uniq -c` and count it no matter where it is, use rg/sed to remove cruft
+# from `uniq -c`, then pass the basename back into `mdfind` to print out where
+# the duplicate files actually are.
+# The pattern can be like '*.txt' (in quotes so it doesn't expand in the shell).
+# Only searches (recursively) in the current directory.
+
+pattern=$1
+mdfind -0 -onlyin . "kMDItemDisplayName == $pattern" | \
+  xargs -0 basename | \
+  sort | \
+  uniq -c | \
+  sort -n | \
+  rg -v '^  +1 ' | \
+  sed -E 's/^ +[0-9]+ //g' | \
+  tr '\n' '\0' | \
+  xargs -0 -n 1 sh -c 'for arg do echo "== DUPE =="; mdfind -onlyin . -name "$arg"; echo; done' _
