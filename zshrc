@@ -1049,6 +1049,25 @@ compdef _tmuxinator tmuxinator mux
 alias mux=tmuxinator
 # }}}
 
+# custom TIL script, with completion {{{
+TIL_DIRECTORY="/Users/gabe/code/personal/today-i-learned/"
+_complete-first-file-argument() {
+  if (( CURRENT == 2 )); then
+    # Only complete first argument
+    _files -W "$TIL_DIRECTORY"
+  fi
+}
+# Usage: til how to do something -> open up Markdown file with that name
+til(){
+  local filename=$*
+  filename=${filename// /-}
+  mkdir -p "$(basename "${TIL_DIRECTORY}/${filename}")"
+  vim "${TIL_DIRECTORY}/${filename}.md"
+  echo "Don't forget to commit your file!"
+}
+compdef _complete-first-file-argument til
+# }}}
+
 # Set up SSH helper (mostly for Git)
 ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 
