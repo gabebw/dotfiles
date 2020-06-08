@@ -61,3 +61,4 @@ tmp/unused
 # JS
 # Next.js
 .next/
+node_modules/
