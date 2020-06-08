@@ -10,3 +10,8 @@ if [[ -r ~/.terminfo/61/alacritty ]]; then
 else
   export TERM=xterm-256color
 fi
+
+for dir in /Users/gabe/.asdf/installs/nodejs/*; do
+  PATH="${dir}/.npm/bin:$PATH"
+done
+export PATH
