@@ -127,6 +127,9 @@ tcd(){
   local session_name
   if [[ $# == 1 ]]; then
     directory=$1
+    if [[ "$directory" == "." ]]; then
+      directory=$(greadlink -f "$directory")
+    fi
     session_name=$(basename "$1")
   elif [[ $# == 2 ]]; then
     directory=$1
