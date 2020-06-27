@@ -61,7 +61,7 @@ curl-debug(){
 alias pgrep='command pgrep -f'
 alias split-on-spaces='tr " " "\n"'
 # dup = "dotfiles update"
-alias dup="pushd dotfiles && git checkout master &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
+alias dup="pushd dotfiles && git checkout main &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
 alias ...="cd ../.."
 # Copy-pasting `$ python something.py` works
 alias \$=''
@@ -736,7 +736,12 @@ PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_shortened_path)$(pr
 # By itself: run `git status`
 # With arguments: acts like `git`
 function g {
-  if [[ $# > 0 ]]; then
+  if [[ $1 == init ]]; then
+    # Use "main", not "master"
+    git "$@"
+    git checkout -b main
+    git branch -d master
+  elif [[ $# > 0 ]]; then
     git "$@"
   else
     git st
@@ -795,7 +800,9 @@ function gb(){
     git checkout -b "$branch"
   fi
 }
-function gbm(){ git checkout -b "$1" origin/master }
+function gbm(){
+  git master-to-main-wrapper checkout -b "$1" "origin/%BRANCH%"
+}
 git-branch-with-prefix(){
   if [[ $# == 0 ]]; then
     echo "No branch name :(" >&2

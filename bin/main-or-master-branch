@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# Check if we should use the `main` or `master` branch for this repo.
+# Prefer `main` to `master`.
+
+if git show-ref --quiet origin/main || git rev-parse main &>/dev/null; then
+  echo main
+else
+  echo master
+fi

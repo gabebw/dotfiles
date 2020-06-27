@@ -37,10 +37,10 @@
   # My default `git log` format without color
   nocolor = log --pretty='%h%d %s [%an, %cr]'
   unstage = reset HEAD
-  mm-safe = !bundle exec rake && git merge-to master
-  mm = merge-to master
-  up = !git fetch origin && git rebase origin/master
-  r = rebase -i origin/master
+  mm-safe = !bundle exec rake && git merge-to main
+  mm = master-to-main-wrapper merge-to %BRANCH%
+  up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
+  r = master-to-main-wrapper rebase -i origin/%BRANCH%
   cp = cherry-pick
   # "cherry-pick previous", e.g. the head of the branch we just left
   cpp = cherry-pick HEAD@{1}

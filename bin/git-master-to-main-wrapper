@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+
+# Usage: instead of
+#
+#     git rebase -i master
+#
+# run this:
+#
+#     git master-to-main-wrapper rebase -i %BRANCH%
+#
+# It will replace the literal string `%BRANCH%` with "main" (preferred) or
+# "master" depending on what the current repository uses.
+
+command=$*
+branchname=$(main-or-master-branch)
+replaced_commands=$(echo $command | sed "s/%BRANCH%/$branchname/g")
+# sh_glob ignores special meaning of parentheses so that fancy logs like this
+# work: `git master-to-main-wrapper log --format='%w(78)%s%n%+b'`
+zsh -c "setopt sh_glob; git ${replaced_commands}"

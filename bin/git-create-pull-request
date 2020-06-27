@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 # This script:
-# * creates a file with all of the commits since origin/master
+# * creates a file with all of the commits since origin/main
 # * Adds the pull request template (if it exists) above the list of commits
 # * intelligently reflows each commit's body to not have linebreaks (so that
 #   the PR looks better on GitHub, which keeps hard linebreaks)
@@ -192,7 +192,7 @@ class CommitMessageBuilder
     <<~MESSAGE
       # Descriptive title goes here
       #{pr_template.possible_body}
-      #{repo.fancy_log_of_all_commits_since_master}
+      #{repo.fancy_log_of_all_commits_since_main}
     MESSAGE
   end
 
@@ -211,13 +211,13 @@ class Repo
 
   attr_reader :current_branch
 
-  def fancy_log_of_all_commits_since_master
+  def fancy_log_of_all_commits_since_main
     fancy_format = "#{COMMIT_MARKER}%n(%aN, %ar)%n%n%w(78)%s%n%+b"
-    git "log --format='#{fancy_format}' origin/master..HEAD"
+    git "master-to-main-wrapper log --format='#{fancy_format}' origin/%BRANCH%..HEAD"
   end
 
   def number_of_commits
-    git("rev-list origin/master..HEAD --count").to_i
+    git("master-to-main-wrapper rev-list origin/%BRANCH%..HEAD --count").to_i
   end
 
   def first_commit_subject
@@ -232,8 +232,12 @@ class Repo
     git "log -1 --format=%B"
   end
 
-  def on_master?
+  def on_master_branch?
     current_branch == "master"
+  end
+
+  def on_main_branch?
+    current_branch == "main"
   end
 
   private
@@ -249,8 +253,8 @@ end
 
 repo = Repo.new
 
-if repo.on_master?
-  STDERR.puts "\n!!! You're already on master"
+if repo.on_main_branch? || repo.on_master_branch?
+  STDERR.puts "\n!!! You're already on #{current_branch}"
   exit 1
 end
 
