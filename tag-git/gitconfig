@@ -37,7 +37,7 @@
   # My default `git log` format without color
   nocolor = log --pretty='%h%d %s [%an, %cr]'
   unstage = reset HEAD
-  mm-safe = !bundle exec rake && git merge-to main
+  mm-safe = !bundle exec rake && git master-to-main-wrapper merge-to %BRANCH%
   mm = master-to-main-wrapper merge-to %BRANCH%
   up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
   r = master-to-main-wrapper rebase -i origin/%BRANCH%
