@@ -10,4 +10,4 @@ else
 fi
 
 git branch -D "$branch"
-git push origin :"$branch"
+git push --no-verify origin :"$branch"
