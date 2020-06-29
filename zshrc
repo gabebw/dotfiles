@@ -71,6 +71,7 @@ alias serialnumber="ioreg -l | rg IOPlatformSerialNumber | cut -d= -f2 | sed 's/
 alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
+alias prettyjavascript="prettier --stdin-filepath=any-name-here.js"
 # Make images smaller
 alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
