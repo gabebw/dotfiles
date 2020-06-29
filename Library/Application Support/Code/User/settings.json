@@ -42,5 +42,12 @@
   ],
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.startupEditor": "newUntitledFile",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["g", "r"],
+      "commands": ["editor.action.goToReferences"]
+    }
+  ],
+  "breadcrumbs.enabled": true
 }
