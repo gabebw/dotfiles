@@ -34,6 +34,7 @@ fi
 # }}}
 
 # Aliases {{{
+alias va="vim ~/.aliases"
 q(){ vim "$(readlink ~/.zshrc)" }
 alias qq="cd . && source ~/.zshrc"
 alias cp="cp -iv"
