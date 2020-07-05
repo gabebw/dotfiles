@@ -990,7 +990,7 @@ serveit(){
 cra(){
   local projectname=$1
   local do_prompt
-  if npx create-react-app --template typescript "$@"; then
+  if yarn create react-app --template typescript "$@"; then
     pushd "$projectname"
     # Save old value
     [[ -e "$(setopt | rg rmstar)" ]] && do_prompt=true || do_prompt=false
