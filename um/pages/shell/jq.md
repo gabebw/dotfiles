@@ -25,6 +25,19 @@ To get the IDs:
     "1"
     "2"
 
+## RECURSIVE DESCENT
+
+If you have a giant nested JSON blob and don't want to painstakingly figure out
+the path to get a specific key, let the `..` operator do it for you:
+
+    curl -A 'ua' https://www.reddit.com/r/food/new.json | jq '..|.permalink?'
+
+## SELECT NON-NULL ITEMS
+
+Pipe to 'select(.)':
+
+    jq 'whatever | goes | here | select(.)'
+
 ## PRETTY-PRINT (WITH COLOR)
 
 Run it through the "no-op" filter, `.`:
