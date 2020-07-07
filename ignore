@@ -49,3 +49,4 @@ vendor/assets/javascript/select2.js
 Cargo.lock
 
 !.vscode/
+!.env
