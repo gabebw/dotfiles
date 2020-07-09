@@ -1,6 +1,6 @@
 # Pry handles history itself
 if defined?(Pry)
-  Pry.config.history.file = "#{ENV["HOME"]}/.irb-save-history"
+  Pry.config.history_file = "#{ENV["HOME"]}/.irb-save-history"
 else
   IRB.conf[:USE_READLINE] = true
 
