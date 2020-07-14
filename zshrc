@@ -1076,6 +1076,7 @@ til(){
   local filename=$*
   filename=${filename// /-}
   mkdir -p "$(basename "${TIL_DIRECTORY}/${filename}")"
+  echo "# $*\n" > "${TIL_DIRECTORY}/${filename}.md"
   vim "${TIL_DIRECTORY}/${filename}.md"
   echo "Don't forget to commit your file!"
 }
