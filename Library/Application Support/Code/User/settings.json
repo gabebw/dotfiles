@@ -49,5 +49,12 @@
       "commands": ["editor.action.goToReferences"]
     }
   ],
-  "breadcrumbs.enabled": true
+  "breadcrumbs.enabled": true,
+  "cSpell.userWords": [
+    "Gbutton",
+    "Gdocs",
+    "Hoverable",
+    "gnar",
+    "grammarly"
+  ]
 }
