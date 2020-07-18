@@ -73,3 +73,6 @@ brew "sinclairtarget/wst/um"
 brew "rustup-init"
 
 brew "zsh-syntax-highlighting"
+
+# watch COMMAND runs COMMAND on a regular cadence
+brew "watch"
