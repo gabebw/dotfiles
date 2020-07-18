@@ -573,7 +573,7 @@ function! LightLineGitBranch()
       " Long branch names get truncated
       return '...' . branch[-10:-1]
     else
-      return ""
+      return branch
     endif
   else
     return ""
