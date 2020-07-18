@@ -577,7 +577,7 @@ function! LightLineGitBranch()
       return branch
     endif
   else
-    return ""
+    return "[Couldn't get fugitive branch]"
   endif
 endfunction
 
