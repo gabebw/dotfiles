@@ -567,11 +567,12 @@ let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head"
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineGitBranch()
+  let l:max = 25
   if exists("*fugitive#head")
     let branch = fugitive#head()
-    if len(branch) > 13
+    if len(branch) > l:max
       " Long branch names get truncated
-      return '...' . branch[-10:-1]
+      return branch[0:l:max-3] . '...'
     else
       return branch
     endif
