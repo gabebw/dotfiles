@@ -788,13 +788,13 @@ gcm(){
   fi
 }
 
-# Checkout branches starting with my initials
+# Check out a Git branch
 function gb(){
   if [[ -z "$1" ]]; then
     echo "No branch name :(" >&2
     return 1
   fi
-  local branch="gbw-${1#gbw-}"
+  local branch="$1"
   local base=$2
   if [[ -n "$base" ]]; then
     git checkout -b "$branch" "$base"
