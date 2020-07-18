@@ -2,3 +2,4 @@ bundler <2
 awesome_print
 tmuxinator
 redcarpet
+prettier

@@ -374,7 +374,7 @@ augroup Ale
   let g:ale_fixers.typescriptreact = ['prettier']
   let g:ale_fixers.css = ['prettier']
   let g:ale_fixers.scss = ['prettier']
-  let g:ale_fixers.ruby = ['rubocop']
+  let g:ale_fixers.ruby = ['ruby_prettier']
   let g:ale_fixers.rust = ['rustfmt']
 
   autocmd CursorHold * call ale#Queue(0)
@@ -748,6 +748,7 @@ endif
 call plug#end()
 " }}}
 
+source $HOME/.vim/ale/fixers/ruby_prettier.vim
 runtime macros/matchit.vim
 
 " vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
