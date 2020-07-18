@@ -751,6 +751,7 @@ function g {
 }
 
 alias gd="git diff"
+alias gdm="git master-to-main-wrapper diff %BRANCH%"
 # Grep with grouped output like Ack
 alias gg="git g"
 alias amend="git commit --amend -Chead"
