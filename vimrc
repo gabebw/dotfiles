@@ -369,6 +369,7 @@ augroup Ale
 
   let g:ale_fixers = {}
   let g:ale_fixers.javascript = ['prettier']
+  let g:ale_fixers.javascriptreact = ['prettier']
   let g:ale_fixers.typescript = ['prettier']
   let g:ale_fixers.typescriptreact = ['prettier']
   let g:ale_fixers.css = ['prettier']
