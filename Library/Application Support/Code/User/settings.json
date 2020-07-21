@@ -58,5 +58,6 @@
     "grammarly"
   ],
   "prettier.packageManager": "yarn",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "vsicons.dontShowNewVersionMessage": true
 }
