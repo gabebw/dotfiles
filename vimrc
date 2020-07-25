@@ -365,6 +365,7 @@ augroup Ale
   let g:ale_linters.ruby = ['brakeman', 'reek', 'rubocop', 'ruby']
   let g:ale_linters.rust = ['cargo']
   let g:ale_linters.javascript = ['eslint']
+  let g:ale_linters.typescript = ['eslint']
   let g:ale_rust_cargo_use_clippy = 1
 
   let g:ale_fixers = {}
