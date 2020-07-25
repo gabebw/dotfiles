@@ -56,5 +56,7 @@
     "Hoverable",
     "gnar",
     "grammarly"
-  ]
+  ],
+  "prettier.packageManager": "yarn",
+  "editor.formatOnSave": true
 }
