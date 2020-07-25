@@ -739,7 +739,7 @@ Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
 " `gx` so that `gx` works on [Markdown](links).
 Plug 'christoomey/vim-quicklink', { 'for': 'markdown' }
 " Make `gx` work on 'gabebw/dotfiles' too
-Plug 'gabebw/vim-github-link-opener'
+Plug 'gabebw/vim-github-link-opener', { 'branch': 'main' }
 
 if filereadable($HOME . '/.vimrc.bundles.local')
   source $HOME/.vimrc.bundles.local
