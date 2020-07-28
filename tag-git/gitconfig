@@ -56,7 +56,7 @@
   ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
   compare = hub compare
-  current-branch = rev-parse --abbrev-ref HEAD
+  current-branch = branch --show-current
 
   # Check out a pull request by number: g co-pr 123
   co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
