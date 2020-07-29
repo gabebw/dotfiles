@@ -61,5 +61,6 @@
   "editor.formatOnSave": true,
   "vsicons.dontShowNewVersionMessage": true,
   "emmet.showAbbreviationSuggestions": false,
-  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"]
+  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
+  "autoimport.doubleQuotes": true
 }
