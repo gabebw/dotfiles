@@ -59,5 +59,7 @@
   ],
   "prettier.packageManager": "yarn",
   "editor.formatOnSave": true,
-  "vsicons.dontShowNewVersionMessage": true
+  "vsicons.dontShowNewVersionMessage": true,
+  "emmet.showAbbreviationSuggestions": false,
+  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"]
 }
