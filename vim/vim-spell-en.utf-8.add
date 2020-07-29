@@ -188,3 +188,4 @@ useEffect
 requestAnimationFrame
 setTimeout
 Honeybadger
+ESLint
