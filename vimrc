@@ -378,6 +378,8 @@ augroup Ale
   let g:ale_fixers.ruby = ['standardrb']
   let g:ale_fixers.rust = ['rustfmt']
 
+  let g:ale_fix_on_save = 1
+
   autocmd CursorHold * call ale#Queue(0)
   autocmd InsertLeave * call ale#Queue(0)
 augroup END
