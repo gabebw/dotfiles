@@ -62,4 +62,8 @@
   "vsicons.dontShowNewVersionMessage": true,
   "emmet.showAbbreviationSuggestions": false,
   "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"]
+  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
+  "[rust]": {
+    "editor.defaultFormatter": "statiolake.vscode-rustfmt"
+  }
 }
