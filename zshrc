@@ -203,8 +203,7 @@ whois() {
 
 al(){
   if [[ -d "$1" ]]; then
-    # for convenience
-    lister 10 "$1"
+    lister -n 10 -s modified "$1"
   else
     lister "$@"
   fi
