@@ -143,7 +143,7 @@ if command_does_not_exist code; then
   error "Open VS Code and run: Install code command in \$PATH"
 else
   for extension in $(cat vscode/extensions); do
-    code --install extension "$extension"
+    code --install-extension "$extension"
   done
 fi
 
