@@ -115,6 +115,7 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 " Searching
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 | redraw!
+command! -nargs=+ -complete=file -bar GrepRegex silent! grep! <args> | copen 10 | redraw!
 command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' --glob '!*.test.tsx' <args> | copen 10 | redraw!
 
 function! FindLocationOf(needle)
@@ -163,7 +164,7 @@ function! SearchForWordUnderCursor()
     echo 'Not searching for whitespace or empty string'
   else
     " two single quotes in a row = one single quote, like \' in other languages
-    execute 'Grep ''\b' . shellescape(searchable_word) . '\b'''
+    execute 'GrepRegex ''\b' . shellescape(searchable_word) . '\b'''
   end
 endfunction
 
