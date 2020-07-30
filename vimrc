@@ -490,10 +490,11 @@ let test#ruby#rspec#options = {
 " -----------------
 let ruby_no_expensive = 1
 
-" vim-jsx
+" JSX
 " -------
 " Don't require a .jsx extension
 let g:jsx_ext_required = 0
+" let g:vim_jsx_pretty_highlight_close_tag = 1
 
 " luochen1990/rainbow
 " -----------------
