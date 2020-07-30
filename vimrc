@@ -114,7 +114,7 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 
 " Searching
 " -----------------
-command! -nargs=+ -complete=file -bar Grep silent! grep! <args> | copen 10 | redraw!
+command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 | redraw!
 command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' --glob '!*.test.tsx' <args> | copen 10 | redraw!
 
 function! FindLocationOf(needle)
