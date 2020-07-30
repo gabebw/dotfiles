@@ -658,6 +658,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
