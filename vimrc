@@ -51,6 +51,28 @@ augroup rails_shortcuts
   autocmd User Rails nnoremap <Leader>u :Eunittest<Space>
 augroup END
 
+augroup Javascript
+  " https://thoughtbot.com/blog/modern-typescript-and-react-development-in-vim#highlighting-for-large-files
+  " Keep highlighting in sync (at a performance cost)
+  autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+  autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
+augroup END
+
+augroup Coc
+  nnoremap <silent> gh :call CocAction('doHover')<CR>
+
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gr <Plug>(coc-references)
+
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> [r <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]r <Plug>(coc-diagnostic-next)
+
+  nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+  nmap <leader>. <Plug>(coc-codeaction)
+  nmap <leader>rn <Plug>(coc-rename)
+augroup END
+
 " Don't let netrw override <C-l> to move between tmux panes
 " https://github.com/christoomey/vim-tmux-navigator/issues/189
 augroup netrw_mapping
@@ -344,43 +366,24 @@ let g:peekaboo_window	= 'vert bo 50new'
 " Ale
 " --------
 
-augroup Ale
-  autocmd!
-  " ALE linting events
-  set updatetime=1000
-  let g:ale_lint_on_text_changed = 'never'
-  let g:ale_linters = {}
+" Ale is just used for fixing and CoC handles linting
+let g:ale_fixers = {}
+let g:ale_fixers.css = ['prettier']
+let g:ale_fixers.scss = ['prettier']
+let g:ale_fixers.ruby = ['standardrb']
+let g:ale_fixers.rust = ['rustfmt']
+let g:ale_fix_on_save = 1
 
-  let g:ale_sign_error = '✘'
-  let g:ale_sign_warning = '⚠'
-
-  " Run everything except rails_best_practices, which runs multiple processes
-  " and keeps all of my CPU cores at 100%.
-  let g:ale_linters.ruby = ['brakeman', 'reek', 'rubocop', 'ruby']
-  let g:ale_linters.rust = ['cargo']
-  let g:ale_linters.javascript = ['eslint']
-  let g:ale_linters.typescript = ['eslint']
-  let g:ale_rust_cargo_use_clippy = 1
-
-  let g:ale_fixers = {}
-  let g:ale_fixers.javascript = ['prettier']
-  let g:ale_fixers.javascriptreact = ['prettier']
-  let g:ale_fixers.typescript = ['prettier']
-  let g:ale_fixers.typescriptreact = ['prettier']
-  let g:ale_fixers.css = ['prettier']
-  let g:ale_fixers.scss = ['prettier']
-  let g:ale_fixers.ruby = ['standardrb']
-  let g:ale_fixers.rust = ['rustfmt']
-
-  let g:ale_fix_on_save = 1
-
-  autocmd CursorHold * call ale#Queue(0)
-  autocmd InsertLeave * call ale#Queue(0)
-augroup END
-" Move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
-nnoremap <Leader>x :ALEFix<CR>
+" CoC
+" --------
+" CoC will automatically install these plugins
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-prettier',
+  \ 'coc-eslint'
+  \ ]
+" Prevent stuttering when CoC adds/removes signs in a buffer
+set signcolumn=yes
 
 " FZF
 " -----------------
@@ -667,6 +670,9 @@ Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
+" Intellisense
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 " Ruby/Rails
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
@@ -773,12 +779,6 @@ endfunction
 
 function! s:BetterColorschemeSettings()
   hi clear SpellBad
-  hi clear ALEStyleError
-  hi clear ALEError
-  hi clear ALEWarning
-
-  highlight ALEErrorSign ctermbg=NONE ctermfg=red
-  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
   hi SpellBad cterm=underline ctermfg=red
   " Highlight ruby TODO etc in red

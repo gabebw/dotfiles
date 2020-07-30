@@ -1,0 +1,34 @@
+{
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.jumpCommand": "edit",
+  "coc.source.around.disableSyntaxes": ["Comment", "String", "typescriptComment"],
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.errorSign": "✘",
+  "diagnostic.hintSign": "💡",
+  "diagnostic.infoSign": "ⓘ",
+  "diagnostic.maxWindowHeight": 40,
+  "diagnostic.signOffset": 999999,
+  "diagnostic.warningSign": "⚠",
+  "eslint.autoFixOnSave": true,
+  "eslint.filetypes": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "prettier.disableSuccessMessage": true,
+  "prettier.requireConfig": true,
+  "signature.maxWindowHeight": 40,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "suggest.floatEnable": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "workspace.ignoredFiletypes": ["gitcommit"]
+}
