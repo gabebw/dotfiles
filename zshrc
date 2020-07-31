@@ -798,7 +798,7 @@ gcm(){
     ticket_number=$(echo "$branch" | sed -E 's/^(EXT-[0-9]+).*/\1/g')
     commit_message="$ticket_number $commit_message"
   fi
-  local commit_message_length=$(wc -c <<< "$commit_message" | xargs echo -n)
+  local commit_message_length=$(echo -n "$commit_message" | wc -c | xargs echo -n)
   if [[ "$commit_message_length" -gt 50 ]]; then
     echo "Commit message length ($commit_message_length) > 50, not committing" >&2
     return 1
