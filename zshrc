@@ -791,7 +791,7 @@ gc(){
   fi
 }
 gcm(){
-  local commit_message=$1
+  local commit_message=$@
   local branch=$(git current-branch )
   if [[ "$branch" =~ '^EXT-' ]]; then
     # Grab JIRA ticket name and prefix it to the commit
