@@ -387,6 +387,12 @@ nnoremap <Leader>x :ALEFix<CR>
 " This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
 " FZF commands and not have to remember 'Colors' and 'History/' etc.
 let g:fzf_command_prefix = 'Fzf'
+" Ctrl-M is Enter: open in tabs by default
+let g:fzf_action = {
+  \ 'ctrl-m': 'tabedit',
+  \ 'ctrl-o': 'edit',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
 command! -bang -nargs=? -complete=dir FilesWithPreview
      \ call fzf#vim#files(<q-args>,
