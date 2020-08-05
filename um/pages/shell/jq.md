@@ -3,6 +3,44 @@
 {:data-date="April 15, 2019"}
 {:data-extra="Um Pages"}
 
+## Re-shape an array of hashes
+
+Given this:
+
+    { "topLevel": [ { "sub": "a" }, { "sub": "b" } ] }
+
+To get this:
+
+    [{ "letter": "a" }, { "letter": "b" }]
+
+Do this:
+
+    jq '[ .topLevel[] | { letter: .sub } ]'
+
+## Cast a value to a number with `tonumber`
+
+Given this:
+
+    [{ "price": "40" }, { "price": "25" }]
+
+To get this:
+
+    [{ "price": 40 }, { "price": 25 }]
+
+Do this:
+
+    jq '[.[] | { price: (.price|tonumber) }]'
+
+## Sort by a key
+
+Given this:
+
+    [{ "price": 40 }, { "price": 25 } ]
+
+To sort ascending by price, do this:
+
+    jq 'sort_by(.price)'
+
 ## FIND VALUES IN ARRAY OF HASHES
 
 Given this:
