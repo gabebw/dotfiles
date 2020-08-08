@@ -2,15 +2,8 @@
 
 set -e
 
-if ! asdf plugin-list | grep -qF nodejs; then
-  echo 'Installing ASDF NodeJS plugin...'
-  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-fi
-
-echo 'Installing NodeJS and Yarn...'
-node_version=14.2.0
-asdf install nodejs "$node_version"
-asdf global nodejs "$node_version"
+echo 'Installing latest NodeJS and Yarn...'
+volta install node
 if ! brew list | grep -qF yarn; then
   brew install yarn
 fi

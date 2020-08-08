@@ -60,8 +60,12 @@ brew "moreutils"
 # a Postgres pager
 brew "pspg"
 
-# asdf version manager: https://github.com/asdf-vm/asdf
-brew "asdf"
+# rbenv version manager for Ruby
+brew "rbenv"
+brew "rbenv-default-gems"
+
+# Volta version manager for Node
+brew "volta"
 
 # Simple graphs with `bin/line_graph`
 brew "gnuplot"

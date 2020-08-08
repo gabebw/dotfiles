@@ -113,6 +113,13 @@ mkdir -p ~/Desktop/screenshots
 
 stay_awake_while ./system/osx-settings
 
+if command -v asdf &>/dev/null || [[ -d ~/.asdf ]]; then
+  echo 'Removing asdf...'
+
+  rm -rf ~/.asdf || true
+  brew uninstall asdf || true
+fi
+
 # Installs to ~/.terminfo
 echo "Installing italics-capable terminfo files..."
 if ! [[ -r ~/.terminfo/61/alacritty ]]; then
@@ -121,9 +128,10 @@ if ! [[ -r ~/.terminfo/61/alacritty ]]; then
   tic -xe alacritty,alacritty-direct "$alacritty_terminfo"
 fi
 
-# Load asdf (before setup scripts) in case it's the first time installing it
-export NODEJS_CHECK_SIGNATURES=no
-source /usr/local/opt/asdf/asdf.sh
+# Load Volta and rbenv (before setup scripts) in case it's the first time installing them
+eval "$(rbenv init -)"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 info "Running all setup scripts..."
 for setup in tag-*/setup; do
@@ -131,8 +139,6 @@ for setup in tag-*/setup; do
   info "Running setup for ${dir#tag-}..."
   . "$setup"
 done
-
-stay_awake_while asdf install
 
 mkdir -p ~/code/work
 mkdir -p ~/code/personal

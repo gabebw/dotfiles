@@ -404,18 +404,7 @@ bindkey "^I" expand-or-complete-with-dots
 # $PATH {{{
 
 # Add Homebrew to the path.
-# Must be _before_ asdf so that /usr/local/bin/ruby isn't first in the $PATH.
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-# asdf version manager (ruby, node, etc)
-# Load asdf early so that we can override it (e.g. by prepending `./bin/stubs`)
-# later.
-# I truly do not want to deal with the hassle of GPG, so don't fail to install
-# when GPG isn't set up.
-export NODEJS_CHECK_SIGNATURES=no
-for f in /usr/local/opt/asdf/asdf.sh /usr/local/etc/bash_completion.d/asdf.bash; do
-  [[ -r "$f" ]] && . "$f"
-done
 
 # Heroku standalone client
 PATH="/usr/local/heroku/bin:$PATH"
@@ -438,6 +427,12 @@ PATH=./bin/stubs:$PATH
 # Rust
 [[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
 
+# rbenv
+eval "$(rbenv init -)"
+
+# Volta
+export VOLTA_HOME="$HOME/.volta"
+PATH="$VOLTA_HOME/bin:$PATH"
 # }}}
 
 # Key bindings {{{
@@ -559,20 +554,26 @@ prompt_spaced() { [[ -n "$1" ]] && print " $@" }
 # ~/foo is shown as ~/foo (not /Users/gabe/foo)
 prompt_shortened_path(){ prompt_purple "%2~" }
 
-# "2.5.1   (set by /Users/gabe/.tool-versions)" -> "2.5.1"
-# "version 2.4.3 is not installed for ruby" -> "!!2.4.3 not installed"
-# anything else -> don't change it
-prompt_pretty_asdf_version(){
-  local version=$(asdf current ruby 2>&1)
+# "2.7.1" -> "2.7.1"
+# "rbenv: version `2.6.6' is not installed (set by /Users/gabe/.ruby-version)" -> "!!2.6.6 not installed"
+prompt_pretty_uncolored_ruby_version(){
+  local version=$(rbenv version-name 2>&1)
   case "$version" in
-    *'set by'*) awk '{print $1}' <<<"$version";;
-    *'not installed'*) sed 's/version (.+) is not installed.*/!!\1 not installed/' <<<"$version";;
+    *'not installed'*) sed 's/.*version .(.+). is not installed.*/!!\1 not installed/' <<<"$version";;
     *) print "$version";;
   esac
 }
 
 prompt_ruby_version() {
-  prompt_magenta "$(prompt_pretty_asdf_version)"
+  prompt_magenta "$(prompt_pretty_uncolored_ruby_version)"
+}
+
+prompt_node_version(){
+  local v="$(volta list --format plain | sed 's/.*node@([0-9.]+).*/\1/g')"
+  if [[ -n "$v" ]]; then
+    # Note the space after the variable
+    prompt_blue "$v "
+  fi
 }
 # }}}
 
@@ -729,7 +730,7 @@ prompt_tmux_status(){
 # will immediately evaluate the "$(code)".
 setopt prompt_subst
 
-PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
+PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_node_version)$(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
 # }}}
 
 # Git {{{
