@@ -729,7 +729,6 @@ Plug 'dense-analysis/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
-Plug 'preservim/nerdtree'
 
 " Text objects
 " required for all the vim-textobj-* plugins
