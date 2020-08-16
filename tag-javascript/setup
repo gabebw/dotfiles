@@ -4,6 +4,5 @@ set -e
 
 echo 'Installing latest NodeJS and Yarn...'
 volta install node
-if ! brew list | grep -qF yarn; then
-  brew install yarn
-fi
+volta install prettier
+volta install yarn

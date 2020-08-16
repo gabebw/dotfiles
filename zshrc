@@ -570,7 +570,7 @@ prompt_ruby_version() {
 }
 
 prompt_node_version(){
-  local v="$(volta list --format plain | sed 's/.*node@([0-9.]+).*/\1/g')"
+  local v="$(volta list --format plain | rg '^runtime' | sed 's/.*node@([0-9.]+).*/\1/g')"
   if [[ -n "$v" ]]; then
     # Note the space after the variable
     prompt_blue "$v "
