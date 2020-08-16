@@ -196,3 +196,6 @@ jq
 on
 sourcemaps
 Webpacker
+iframes
+iframe
+VSCode
