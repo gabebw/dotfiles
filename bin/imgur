@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+# Download a whole imgur album in one go.
+
+set -e
+
+# Get $0 here because calling $0 inside `usage()` returns "usage"
+SCRIPTNAME="$(basename $0)"
+
+usage(){
+  echo "Usage:\n\t$SCRIPTNAME https://imgur.com/a/cZBAH"
+  exit 0
+}
+
+if [[ $# != 1 ]]; then
+  usage
+fi
+
+url="$1"
+# directory is like "cZBAH"
+directory=$(basename "$url")
+temp=$(mktemp)
+curl -s -o "$temp" "${url}/zip"
+unzip "$temp" -d "$directory"
+rm "$temp"
