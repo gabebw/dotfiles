@@ -36,10 +36,7 @@
   "gitlens.views.compare.location": "gitlens",
   "gitlens.views.search.location": "gitlens",
   "gitlens.advanced.telemetry.enabled": false,
-  "gitlens.blame.highlight.locations": [
-    "gutter",
-    "overview"
-  ],
+  "gitlens.blame.highlight.locations": ["gutter", "overview"],
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.startupEditor": "newUntitledFile",
@@ -50,18 +47,11 @@
     }
   ],
   "breadcrumbs.enabled": true,
-  "cSpell.userWords": [
-    "Gbutton",
-    "Gdocs",
-    "Hoverable",
-    "gnar",
-    "grammarly"
-  ],
+  "cSpell.userWords": ["Gbutton", "Gdocs", "Hoverable", "gnar", "grammarly"],
   "prettier.packageManager": "yarn",
   "editor.formatOnSave": true,
   "vsicons.dontShowNewVersionMessage": true,
   "emmet.showAbbreviationSuggestions": false,
-  "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"]
   "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
   "[rust]": {
     "editor.defaultFormatter": "statiolake.vscode-rustfmt"
