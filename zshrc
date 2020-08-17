@@ -873,8 +873,12 @@ function gcl-fuzzy {
 }
 
 new-project(){
-  printf "Project name? "
-  read project_name
+  if [[ $# == 0 ]]; then
+    printf "Project name? "
+    read project_name
+  else
+    project_name=$1
+  fi
   local project_name=${project_name// /-}
   pushd personal >/dev/null
   if [[ -d "$project_name" ]]; then
