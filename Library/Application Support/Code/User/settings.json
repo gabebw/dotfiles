@@ -55,5 +55,7 @@
   "emmet.excludeLanguages": ["markdown", "typescriptreact", "typescript"],
   "[rust]": {
     "editor.defaultFormatter": "statiolake.vscode-rustfmt"
-  }
+  },
+  "editor.tabSize": 2,
+  "rust.clippy_preference": "on"
 }
