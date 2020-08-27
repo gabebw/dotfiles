@@ -1,19 +1,32 @@
 #!/usr/bin/env zsh
 
+# Finds duplicate files based on their basename. For example, these files would
+# be considered duplicates:
+#
+# 1.txt
+# foo/bar/1.txt
+#
+# Here's how it works:
 # Print out every file matching a pattern, turn it into its basename so we can
-# run `uniq -c` and count it no matter where it is, use rg/sed to remove cruft
-# from `uniq -c`, then pass the basename back into `mdfind` to print out where
-# the duplicate files actually are.
-# The pattern can be like '*.txt' (in quotes so it doesn't expand in the shell).
+# run `uniq -c` and count it no matter where it is, use rg to filter out results
+# with only a single (non-duplicate) file, sed to remove cruft from `uniq -c`,
+# then pass the basename back into `mdfind` to print out where the duplicate
+# files actually are.
+#
 # Only searches (recursively) in the current directory.
 
+# The pattern can be like '*.txt' (in quotes so it doesn't expand in the shell).
 pattern=$1
+
 mdfind -0 -onlyin . "kMDItemDisplayName == $pattern" | \
   xargs -0 basename | \
   sort | \
   uniq -c | \
   sort -n | \
+  # Filter out filenames with only 1 result
   rg -v '^  +1 ' | \
+  # Remove leading whitespace and the duplicate count
   sed -E 's/^ +[0-9]+ //g' | \
+  # Null-terminate for `xargs -0`
   tr '\n' '\0' | \
-  xargs -0 -n 1 sh -c 'for arg do echo "== DUPE =="; mdfind -onlyin . -name "$arg"; echo; done' _
+  xargs -0 -n 1 sh -c 'for arg do echo "== DUPE =="; mdfind -onlyin . -name "$arg"; done' _
