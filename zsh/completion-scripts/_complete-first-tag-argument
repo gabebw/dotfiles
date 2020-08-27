@@ -1,11 +1,11 @@
 _complete-all-tag-arguments() {
-  compadd $(tag -u | cut -f2)
+  compadd $(adorn list-tags | word 1)
 }
 
 _complete-first-tag-argument() {
   if (( CURRENT == 2 )); then
     # First argument
-    compadd $(tag -u | cut -f2)
+    compadd $(adorn list-tags | word 1)
   else
     _files "$@"
   fi
@@ -14,7 +14,7 @@ _complete-first-tag-argument() {
 _complete-first-and-second-tag-argument() {
   if (( CURRENT == 2 )) || (( CURRENT == 3 )); then
     # First or second argument
-    compadd $(tag -u | cut -f2)
+    compadd $(adorn list-tags | word 1)
   else
     _files "$@"
   fi
@@ -23,7 +23,7 @@ _complete-first-and-second-tag-argument() {
 _complete-second-tag-argument() {
   if (( CURRENT == 3 )); then
     # Second argument
-    compadd $(tag -u | cut -f2)
+    compadd $(adorn list-tags | word 1)
   else
     _files "$@"
   fi
