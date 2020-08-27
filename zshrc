@@ -1098,8 +1098,11 @@ _complete-first-file-argument() {
     _files -W "$TIL_DIRECTORY"
   fi
 }
-# Usage: til how to do something -> open up Markdown file with that name
 til(){
+  if [[ $# == 0 ]]; then
+    echo "Usage: til how to do something"
+    return 0;
+  fi
   local filename=$*
   filename=${filename// /-}
   mkdir -p "$(basename "${TIL_DIRECTORY}/${filename}")"
