@@ -57,5 +57,6 @@
     "editor.defaultFormatter": "statiolake.vscode-rustfmt"
   },
   "editor.tabSize": 2,
-  "rust.clippy_preference": "on"
+  "rust.clippy_preference": "on",
+  "ruby.format": "rufo"
 }
