@@ -3,4 +3,3 @@ setlocal spell
 setlocal colorcolumn=51
 
 nnoremap <buffer> gE :call ExpandShortGitShaIntoFullGitSha()<CR>
-silent CocDisable

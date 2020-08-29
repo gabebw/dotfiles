@@ -58,21 +58,6 @@ augroup Javascript
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 augroup END
 
-augroup Coc
-  nnoremap <silent> gh :call CocAction('doHover')<CR>
-
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gr <Plug>(coc-references)
-
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> [r <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]r <Plug>(coc-diagnostic-next)
-
-  nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
-  nmap <leader>. <Plug>(coc-codeaction)
-  nmap <leader>rn <Plug>(coc-rename)
-augroup END
-
 " Don't let netrw override <C-l> to move between tmux panes
 " https://github.com/christoomey/vim-tmux-navigator/issues/189
 augroup netrw_mapping
@@ -366,24 +351,13 @@ let g:peekaboo_window	= 'vert bo 50new'
 " Ale
 " --------
 
-" Ale is just used for fixing and CoC handles linting
+" Ale is just used for fixing
 let g:ale_fixers = {}
 let g:ale_fixers.css = ['prettier']
 let g:ale_fixers.scss = ['prettier']
 let g:ale_fixers.ruby = ['standardrb']
 let g:ale_fixers.rust = ['rustfmt']
 let g:ale_fix_on_save = 1
-
-" CoC
-" --------
-" CoC will automatically install these plugins
-let g:coc_global_extensions = [
-  \ 'coc-tsserver',
-  \ 'coc-prettier',
-  \ 'coc-eslint'
-  \ ]
-" Prevent stuttering when CoC adds/removes signs in a buffer
-set signcolumn=yes
 
 " FZF
 " -----------------
@@ -669,9 +643,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
-
-" Intellisense
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
