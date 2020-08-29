@@ -68,7 +68,7 @@ alias ...="cd ../.."
 alias \$=''
 alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
-alias serialnumber="ioreg -l | rg IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g'"
+alias serialnumber="ioreg -l | rg IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g' | tee /dev/tty | pbcopy; echo '(Copied for you)'"
 alias cpuname="sysctl -n machdep.cpu.brand_string"
 alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
