@@ -23,6 +23,7 @@ cask "muzzle"
 cask "netnewswire"
 cask "ngrok"
 cask "postgres" # Postgres.app
+cask "qlstephen" # quicklook plain text files
 cask "spotify"
 cask "vlc"
 cask "xee"

@@ -40,6 +40,13 @@ command_does_not_exist(){
   ! command -v "$1" > /dev/null
 }
 
+make_qlstephen_work_on_catalina(){
+  xattr -cr ~/Library/QuickLook/QLStephen.qlgenerator
+  qlmanage -r
+  qlmanage -r cache
+  killall Finder
+}
+
 info "Checking for command-line tools..."
 if command_does_not_exist xcodebuild; then
   stay_awake_while xcode-select --install
@@ -76,6 +83,8 @@ fi
 quietly_brew_bundle Brewfile.casks || true
 # Pin postgresql since I use Postgres.app and we only need it as a dependency
 brew pin postgresql
+
+make_qlstephen_work_on_catalina
 
 info "Installing rust..."
 stay_awake_while rustup-init -y > /dev/null
