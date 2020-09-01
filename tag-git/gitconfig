@@ -111,7 +111,7 @@
   # BUT bold is a modifier, so "bold green red" means
   #   "bold green" foreground, red background
   whitespace = red reverse
-  plain = black
+  plain = brightblack
   meta = cyan
   frag = magenta bold
   old = red
