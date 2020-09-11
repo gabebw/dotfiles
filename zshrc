@@ -144,6 +144,7 @@ tcd(){
 }
 null_terminate_filenames(){ tr '\n' '\0' }
 xo(){ null_terminate_filenames | xargs -o -0 "${@:-open}" }
+xo1(){ null_terminate_filenames | xargs -n1 -o -0 "${@:-open}" }
 # [xo] with an [a]pp
 xoa(){ xo open -a "$1" }
 ffprobe(){ command ffprobe -v quiet -print_format json -show_format -show_streams "$@" }
