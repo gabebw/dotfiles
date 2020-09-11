@@ -59,5 +59,9 @@
   "editor.tabSize": 2,
   "rust.clippy_preference": "on",
   "ruby.format": "rufo",
-  "explorer.confirmDragAndDrop": false
+  "explorer.confirmDragAndDrop": false,
+  "rust-client.engine": "rust-analyzer",
+  "rust-analyzer.callInfo.full": false,
+  "rust-analyzer.inlayHints.parameterHints": false,
+  "window.zoomLevel": 0
 }
