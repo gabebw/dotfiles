@@ -723,7 +723,7 @@ prompt_git_email(){
 }
 
 prompt_tmux_status(){
-  if _not_in_tmux; then
+  if _not_in_tmux && ! in_vs_code; then
     prompt_red '[!t] '
   fi
 }
