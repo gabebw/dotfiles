@@ -743,25 +743,7 @@ PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_node_version)$(prom
 # By itself: run `git status`
 # With arguments: acts like `git`
 function g {
-  if [[ $1 == init ]]; then
-    # This seems like a reasonable assumption: `git init directory-name`
-    local directory=$2
-
-    git "$@"
-
-    # Use "main", not "master"
-    pushd "$directory" >/dev/null
-    if [[ "$(git current-branch)" == main ]]; then
-      echo ">> You're on the main branch because init.defaultBranch worked"
-      echo ">> Maybe delete the whole \$1 == init thing if it's always worked?"
-    else
-      echo "!! You're on $(git current-branch), not main" >&2
-      echo "!! Fixing it for you now"
-      git checkout -b main
-      git branch -d master
-    fi
-    popd >/dev/null
-  elif [[ $# > 0 ]]; then
+  if [[ $# > 0 ]]; then
     git "$@"
   else
     git st
