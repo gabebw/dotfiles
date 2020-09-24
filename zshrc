@@ -431,6 +431,7 @@ PATH=./bin/stubs:$PATH
 
 # Rust
 [[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
+alias ci="cargo install --path . --force"
 
 # rbenv
 eval "$(rbenv init -)"
