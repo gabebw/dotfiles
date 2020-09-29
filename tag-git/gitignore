@@ -62,3 +62,8 @@ tmp/unused
 # Next.js
 .next/
 node_modules/
+
+# Yalc generates folders inside of projects after linking
+# https://github.com/whitecolor/yalc
+.yalc/
+yalc.lock
