@@ -1,3 +1,5 @@
+# vim: foldmethod=marker
+
 # Prompt colors {{{
 #-------------------
 
