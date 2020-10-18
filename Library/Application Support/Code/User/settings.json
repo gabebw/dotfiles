@@ -65,10 +65,10 @@
   "rust-analyzer.inlayHints.parameterHints": false,
   "window.zoomLevel": 0,
   "rust-analyzer.checkOnSave.command": "clippy",
+  "rust-analyzer.updates.askBeforeDownload": false,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "window.zoomLevel": 0,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
