@@ -58,10 +58,6 @@ curl-debug(){
     "$@" \
     2>&1
 }
-# Search for the string anywhere in the command name, not just in the executable
-alias pgrep='command pgrep -f'
-alias split-on-spaces='tr " " "\n"'
-# dup = "dotfiles update"
 alias dup="pushd dotfiles && git checkout main &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
 alias ...="cd ../.."
 # Copy-pasting `$ python something.py` works
@@ -69,13 +65,10 @@ alias \$=''
 alias diff="command diff --color=auto -u"
 alias mkdir="command mkdir -p"
 alias serialnumber="ioreg -l | rg IOPlatformSerialNumber | cut -d= -f2 | sed 's/[ \"]//g' | tee /dev/tty | pbcopy; echo '(Copied for you)'"
-alias cpuname="sysctl -n machdep.cpu.brand_string"
 alias prettyjson="jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml="xmllint --format -"
 alias prettyjavascript="prettier --stdin-filepath=any-name-here.js"
-# Make images smaller
-alias pngcrush=/Applications/ImageOptim.app/Contents/MacOS/ImageOptim
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 alias hexdump=hexyl
@@ -103,13 +96,6 @@ y(){
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
 
-# Files created today
-alias today="days 0"
-# Created in last n days
-days(){
-  local query="kMDItemFSCreationDate>\$time.today(-$1) && kMDItemContentType != public.folder"
-  mdfind -onlyin . "$query"
-}
 epoch(){
   if [[ $# == 0 ]]; then
     # Print the current epoch
@@ -119,7 +105,6 @@ epoch(){
     date -r "$1"
   fi
 }
-alias install-command-line-tools='xcode-select --install'
 rcup(){
   if ! command rcup -v | grep -v identical; then
     true
@@ -147,14 +132,8 @@ xo(){ null_terminate_filenames | xargs -o -0 "${@:-open}" }
 xo1(){ null_terminate_filenames | xargs -n1 -o -0 "${@:-open}" }
 # [xo] with an [a]pp
 xoa(){ xo open -a "$1" }
-ffprobe(){ command ffprobe -v quiet -print_format json -show_format -show_streams "$@" }
 
-# seamlessly do `xargs mv` and have it work the way you want.
-# `-J` requires BSD xargs, which is on OS X.
-xmv(){ null_terminate_filenames | xargs -0 -J % mv % "$@" }
-alias trust='mkdir -p .git/safe'
 alias htop="command htop --sort-key=PERCENT_CPU"
-findall(){ find . -iname "*$@*" }
 alias fd='command fd --no-ignore --ignore-case --full-path --type file'
 alias xee="open -a Xee³"
 if [[ -r ~/.rgrc ]]; then
@@ -194,8 +173,6 @@ o(){
 # Get word N (up to N = 9) from a line
 word(){ awk "{ print \$$1 }" }
 
-run-until-succeeds(){ until "$@"; do; sleep 1; done }
-
 # `-` by itself will act like `cd -`. Needs to be a function because `alias -`
 # breaks.
 function -() { cd - }
@@ -228,33 +205,6 @@ alr() {
 # If just doing `clip`, paste it.
 clip() { [ -t 0 ] && pbpaste || pbcopy;}
 
-# Cut out a segment of a video
-cut-video(){
-  if [[ $# != 4 ]]; then
-    echo "Cut a video from 1hr-1hr30m and output to OUT.mp4:"
-    echo "    cut VIDEO.mp4 1:00:00 1:30:00 OUT.mp4"
-    return 1
-  else
-    ffmpeg -i "$1" -ss "$2" -to "$3" -async 1 "$4" && echo "Output to $4"
-  fi
-}
-
-gif2mp4(){
-  if [[ $# -ne 2 ]]; then
-    echo "Usage: gif2mp4 INPUT.gif OUTPUT.mp4" >&2
-    return 1
-  fi
-
-  local gif=$1
-  local output_mp4=$2
-  ffmpeg \
-    -i "$gif" \
-    -movflags faststart \
-    -pix_fmt yuv420p \
-    -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" \
-    "$output_mp4"
-}
-
 unopened(){
   if [[ $# == 0 ]]; then
     search_spotlight_files \
@@ -279,15 +229,14 @@ search_spotlight_files(){
   # `-onlyin .` will recurse
   mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl|download)$'
 }
-words=/usr/share/dict/words
 # }}}
 
 # Options {{{
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000000000000000
 SAVEHIST=$HISTSIZE
-setopt no_list_beep
-setopt no_beep
+unsetopt list_beep
+unsetopt beep
 # Append as you type (incrementally) instead of on shell exit
 setopt inc_append_history
 setopt hist_ignore_all_dups
@@ -297,7 +246,7 @@ setopt autopushd
 # Timestamp history entries
 setopt extended_history
 # Case-insensitive globbing
-setopt nocaseglob
+unsetopt caseglob
 setopt extended_glob
 setopt print_exit_value
 
@@ -447,7 +396,7 @@ PATH="$VOLTA_HOME/bin:$PATH"
 # other `bindkey`s after it to override anything you like.
 bindkey -v
 
-# Open current command in Vim
+# Ctrl-V to open current command in Vim
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^v" edit-command-line
@@ -530,13 +479,10 @@ function g {
 
 alias gd="git diff"
 alias gdm="git master-to-main-wrapper diff origin/%BRANCH%"
-# Grep with grouped output like Ack
-alias gg="git g"
 alias amend="git commit --amend -Chead"
 alias amend-new="git commit --amend"
 
 alias ga="git add"
-alias gai="git add --interactive"
 alias gcp="git rev-parse HEAD | xargs echo -n | pbcopy"
 gcr(){
   local branch=$(select-git-branch --all)
@@ -626,14 +572,6 @@ function gcl {
   fi
 }
 
-function gcl-fuzzy {
-  local user=${1?}
-  shift
-  local repo=$(recent-repos-owned-by "$user" | fzf)
-  local directory="$(superclone "$@" "$repo")"
-  cd "$directory"
-}
-
 new-project(){
   if [[ $# == 0 ]]; then
     printf "Project name? "
@@ -698,11 +636,6 @@ v(){
   [[ -n "$files" ]] && $VISUAL "${files[@]}"
   IFS=$old_IFS
 }
-# "vim recent", a quick and dirty version of https://github.com/rupa/v
-vr(){
-  local file=$(awk '/^>/ { sub(/^> /, "") ; print }' ~/.viminfo | fzf)
-  vim "${file/\~/$HOME}"
-}
 
 # Grep immediately on opening vim
 gv(){
@@ -718,35 +651,9 @@ gv(){
 alias crontab="VISUAL=vim crontab"
 # }}}
 
-# Go {{{
-export GOPATH=$HOME/.go
-PATH=$PATH:$GOPATH/bin
-# }}}
-
-# Python {{{
-export PYTHONSTARTUP=~/.pythonstartup
-
-# Tell Virtualenv to store its data in ~/.virtualenvs
-if [ -x /usr/local/bin/virtualenvwrapper.sh ]; then
-  export VIRTUALENVWRAPPER_PYTHON=`which python2`
-  export WORKON_HOME=~/.virtualenvs
-
-  mkvirtualenv(){
-    source /usr/local/bin/virtualenvwrapper.sh
-    mkvirtualenv "$@"
-  }
-
-  workon(){
-    source /usr/local/bin/virtualenvwrapper.sh
-    workon "$@"
-  }
-fi
-# }}}
-
 # Ruby/Rails {{{
 
 alias h=heroku
-alias hsso="heroku login --sso"
 alias migrate="be rake db:migrate db:test:prepare"
 alias rollback="be rake db:rollback"
 alias remigrate="migrate && rake db:rollback && migrate"
@@ -766,11 +673,6 @@ b(){
   else
     bundle "$@"
   fi
-}
-
-# Serve the current directory at localhost:8000
-serveit(){
-  ruby -run -ehttpd . -p8000
 }
 
 # }}}
@@ -844,12 +746,6 @@ export HOMEBREW_AUTO_UPDATE_SECS=604800
 
 # Always cleanup after installing or upgrading
 export HOMEBREW_INSTALL_CLEANUP=1
-# }}}
-
-# tmuxinator {{{
-source ~/.zsh/completion-scripts/_tmuxinator
-compdef _tmuxinator tmuxinator mux
-alias mux=tmuxinator
 # }}}
 
 # custom TIL script, with completion {{{
