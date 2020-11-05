@@ -649,7 +649,7 @@ Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 " Allow `cir` to change inside ruby block, etc
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-rake', { 'for': ['ruby'] }
+Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
 Plug 'janko-m/vim-test'
 
