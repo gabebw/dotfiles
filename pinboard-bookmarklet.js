@@ -15,15 +15,27 @@
 // `bin/pinboard-renegerate-bookmarklet`.
 
 url = location.href;
-withoutQueryParams = location.protocol + "//" + location.hostname + location.pathname;
+withoutQueryParams =
+  location.protocol + "//" + location.hostname + location.pathname;
 
 if ("" !== document.getSelection().toString()) {
-  d = "<blockquote>" + document.getSelection().toString().trim() + "</blockquote>";
+  d =
+    "<blockquote>" +
+    document.getSelection().toString().trim() +
+    "</blockquote>";
 } else {
   d = "";
 }
 
-if (location.hostname.match(/imdb.com|theoutline.com|twitter.com|tiktok.com/)) {
+hostsWithoutQueryParams = [
+  "imdb.com",
+  "theoutline.com",
+  "twitter.com",
+  "tiktok.com",
+  "nytimes.com",
+];
+
+if (hostsWithoutQueryParams.indexOf(location.hostname) !== -1) {
   url = withoutQueryParams;
 } else if (location.href.match(/youtube.com\/watch/)) {
   var u = new URL(location);
@@ -33,4 +45,13 @@ if (location.hostname.match(/imdb.com|theoutline.com|twitter.com|tiktok.com/)) {
     url += "&t=" + time;
   }
 }
-open("https://pinboard.in/add?url="+encodeURIComponent(url)+"&description="+encodeURIComponent(d)+"&title="+encodeURIComponent(document.title),"Pinboard","toolbar=no,width=700,height=350");
+open(
+  "https://pinboard.in/add?url=" +
+    encodeURIComponent(url) +
+    "&description=" +
+    encodeURIComponent(d) +
+    "&title=" +
+    encodeURIComponent(document.title),
+  "Pinboard",
+  "toolbar=no,width=700,height=350"
+);
