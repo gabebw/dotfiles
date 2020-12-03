@@ -35,7 +35,8 @@ hostsWithoutQueryParams = [
   "nytimes.com",
 ];
 
-if (hostsWithoutQueryParams.indexOf(location.hostname) !== -1) {
+const hostnameWithoutLeadingWWW = location.hostname.replace(/^www./, "");
+if (hostsWithoutQueryParams.indexOf(hostnameWithoutLeadingWWW) !== -1) {
   url = withoutQueryParams;
 } else if (location.href.match(/youtube.com\/watch/)) {
   var u = new URL(location);
