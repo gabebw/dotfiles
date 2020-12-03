@@ -18,5 +18,7 @@ if [ ! -t 1 ]; then
   exit 1
 fi
 
-uglifyjs --compress --mangle -- ~/.pinboard-bookmarklet.js | ruby -r uri -e 'puts "javascript:#{URI.encode(ARGF.read)}"' | pbcopy
+uglifyjs --compress --mangle -- ~/.pinboard-bookmarklet.js | \
+  ruby -W0 -r uri -e 'puts "javascript:#{URI.encode(ARGF.read)}"' | \
+  pbcopy
 echo "Done! Now it's in your clipboard :-)"
