@@ -74,5 +74,8 @@
   },
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
-  }
+  },
+  "explorer.confirmDelete": false,
+  "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
+  "javascript.updateImportsOnFileMove.enabled": "always"
 }
