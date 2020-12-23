@@ -63,7 +63,7 @@
   "rust-client.engine": "rust-analyzer",
   "rust-analyzer.callInfo.full": false,
   "rust-analyzer.inlayHints.parameterHints": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": -2,
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.updates.askBeforeDownload": false,
   "[javascript]": {
@@ -77,5 +77,6 @@
   },
   "explorer.confirmDelete": false,
   "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
-  "javascript.updateImportsOnFileMove.enabled": "always"
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorTheme": "Default Dark+"
 }
