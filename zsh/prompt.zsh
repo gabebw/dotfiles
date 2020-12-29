@@ -67,6 +67,13 @@ prompt_node_version(){
     prompt_blue "$v "
   fi
 }
+
+# Only show code versions if we're in a path that includes the string "/code/"
+prompt_code_versions(){
+  if [[ "$(pwd)" =~ "/code/" ]]; then
+    echo -n "$(prompt_ruby_version) $(prompt_node_version) "
+  fi
+}
 # }}}
 
 # Git-related prompt stuff {{{
@@ -222,4 +229,4 @@ prompt_tmux_status(){
 # will immediately evaluate the "$(code)".
 setopt prompt_subst
 
-PROMPT='$(prompt_tmux_status)$(prompt_ruby_version) $(prompt_node_version)$(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
+PROMPT='%D{%H:%M:%S%p} $(prompt_tmux_status)$(prompt_code_versions)$(prompt_shortened_path)$(prompt_git_email)$(prompt_full_git_status) $ '
