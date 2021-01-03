@@ -71,7 +71,7 @@ prompt_node_version(){
 # Only show code versions if we're in a path that includes the string "/code/"
 prompt_code_versions(){
   if [[ "$(pwd)" =~ "/code/" ]]; then
-    echo -n "$(prompt_ruby_version) $(prompt_node_version) "
+    echo -n "$(prompt_ruby_version) $(prompt_node_version)"
   fi
 }
 # }}}
