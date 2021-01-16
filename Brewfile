@@ -58,7 +58,6 @@ brew "ffmpeg"
 brew "moreutils"
 
 # a Postgres pager
-brew "pspg"
 
 # rbenv version manager for Ruby
 brew "rbenv"

@@ -35,5 +35,4 @@
 \set HISTCONTROL ignoredups
 \set COMP_KEYWORD_CASE upper
 
-\setenv PAGER 'pspg --no-mouse -X -s5'
 \unset QUIET
