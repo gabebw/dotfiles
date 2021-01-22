@@ -58,6 +58,9 @@ curl-debug(){
     "$@" \
     2>&1
 }
+curl-with-javascript(){
+  NODE_PATH="$(yarn global dir)/node_modules/" node ~/.bin/curl-with-javascript.js "$1"
+}
 alias dup="pushd dotfiles && git checkout main &>/dev/null && git pull && git checkout - &>/dev/null && popd && qq"
 alias ...="cd ../.."
 # Copy-pasting `$ python something.py` works

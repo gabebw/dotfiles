@@ -6,3 +6,4 @@ echo 'Installing latest NodeJS and Yarn...'
 volta install node
 volta install prettier
 volta install yarn
+yarn global add playwright@1.8.0
