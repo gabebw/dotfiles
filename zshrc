@@ -230,7 +230,7 @@ opened(){
 # `mdfind`.
 search_spotlight_files(){
   # `-onlyin .` will recurse
-  mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl|download)$'
+  mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl|download|epub)$'
 }
 # }}}
 
