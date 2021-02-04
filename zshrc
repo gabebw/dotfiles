@@ -558,6 +558,8 @@ hbc(){
   fi
 }
 join-with(){ paste -sd "$1" - }
+# turn "a b c" into "a\nb\nc"
+split-on-spaces(){ tr ' ' '\n' }
 # Sum numbers (1 per line) from STDIN
 sum(){ join-with "+" | bc }
 
