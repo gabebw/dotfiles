@@ -78,5 +78,9 @@
   "explorer.confirmDelete": false,
   "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Default Dark+"
+  "workbench.colorTheme": "Default Dark+",
+  "rust-analyzer.assist.importMergeBehavior": "none",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
