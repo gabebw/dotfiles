@@ -549,7 +549,7 @@ let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineGitBranch()
   let l:max = 25
-  if exists("*fugitive#head")
+  if exists("*fugitive#head") && "" != fugitive#head()
     let branch = fugitive#head()
     if len(branch) > l:max
       " Long branch names get truncated
@@ -558,7 +558,7 @@ function! LightLineGitBranch()
       return branch
     endif
   else
-    return "[Couldn't get fugitive branch]"
+    return ""
   endif
 endfunction
 
