@@ -1,0 +1,65 @@
+# ANSI colors for fg:NUMBER
+# https://i.stack.imgur.com/KTSQa.png
+
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+format = """
+$time\
+$ruby\
+$nodejs\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+\\$ """
+
+[time]
+disabled = false
+format = "[$time]($style) "
+style = "#888888"
+use_12hr = true
+
+[ruby]
+format = "[($version )]($style)"
+style = "fg:218" # pink
+
+[nodejs]
+format = "[($version )]($style)"
+style = "fg:031" # dark blue
+
+[directory]
+# Show 1 parent directory
+truncation_length = 2
+# A lovely grayish-purple
+style = "fg:146"
+format = "[$path]($style) "
+# When in a Git repo, keep showing parent directories
+truncate_to_repo = false
+
+[git_branch]
+format = "[($branch )]($style)"
+style = "fg:031" # dark blue
+
+[git_state]
+cherry_pick = "[🍒 PICKING](bold fg:197)" # red
+
+[git_status]
+format = """
+($conflicted\
+$stashed\
+$deleted\
+$renamed\
+$modified\
+$staged\
+$untracked )\
+($ahead_behind )""" # purple
+stashed = "[stash](bold fg:222)" # yellow
+staged = "[S](bold fg:222)" # yellow
+conflicted = "[=](bold fg:197)" # red
+untracked = "[?](bold fg:159)" # cyan
+modified = "[!](bold fg:222)" # yellow
+deleted = "[✘](bold fg:197)" # red
+behind = "[↓](bold fg:159)" # cyan
+ahead = "[↑](bold fg:159)" # cyan
+diverged = "[⇔](bold fg:197)" # red

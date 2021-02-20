@@ -465,7 +465,7 @@ export PROJECT_DIRECTORIES=$CDPATH
 # }}}
 
 # Prompt {{{
-source ~/.zsh/prompt.zsh
+eval "$(starship init zsh)"
 # }}}
 
 # Git {{{

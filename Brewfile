@@ -79,3 +79,6 @@ brew "zsh-syntax-highlighting"
 
 # watch COMMAND runs COMMAND on a regular cadence
 brew "watch"
+
+# Prompt: https://starship.rs
+brew "starship"
