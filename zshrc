@@ -505,20 +505,27 @@ gc(){
     git checkout "$@"
   fi
 }
+
+# With no arguments: "git checkout [main | master]"
+# With arguments: "git commit" with the arguments as the message
 gcm(){
   local commit_message=$@
   local branch=$(git current-branch )
-  if [[ "$branch" =~ '^EXT-' ]]; then
-    # Grab JIRA ticket name and prefix it to the commit
-    ticket_number=$(echo "$branch" | sed -E 's/^(EXT-[0-9]+).*/\1/g')
-    commit_message="$ticket_number $commit_message"
-  fi
-  local commit_message_length=$(echo -n "$commit_message" | wc -c | xargs echo -n)
-  if [[ "$commit_message_length" -gt 50 ]]; then
-    echo "Commit message length ($commit_message_length) > 50, not committing" >&2
-    return 1
+  if [[ "$#" == 0 ]]; then
+    git master-to-main-wrapper checkout %BRANCH%
   else
-    git commit -m "$commit_message"
+    if [[ "$branch" =~ '^EXT-' ]]; then
+      # Grab JIRA ticket name and prefix it to the commit
+      ticket_number=$(echo "$branch" | sed -E 's/^(EXT-[0-9]+).*/\1/g')
+      commit_message="$ticket_number $commit_message"
+    fi
+    local commit_message_length=$(echo -n "$commit_message" | wc -c | xargs echo -n)
+    if [[ "$commit_message_length" -gt 50 ]]; then
+      echo "Commit message length ($commit_message_length) > 50, not committing" >&2
+      return 1
+    else
+      git commit -m "$commit_message"
+    fi
   fi
 }
 
