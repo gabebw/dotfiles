@@ -25,6 +25,10 @@
   # Show moved lines differently from added/deleted lines
   # https://twitter.com/SmileyKeith/status/946789768506912773
   colorMoved = zebra
+
+  # Turn off all prefixes so that I can Cmd-Click a path in the VS Code
+  # terminal. `i/tag-git/gitconfig` won't resolve, but `tag-git/gitconfig` will.
+  noprefix = true
 [alias]
   ls = !git log -S "$(pbpaste)"
   st = status --short --branch
