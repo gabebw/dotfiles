@@ -14,7 +14,7 @@ run_rcup(){
 
 run_rcdn(){
   rcdn
-  echo 'Some files were deleted, so I ran `rcdn`'
+  echo '>>> Some files were deleted, so I ran `rcdn`'
 }
 
 # If COPY_ALWAYS is set, then there are some copied (not symlinked) files and so
@@ -31,7 +31,7 @@ if ! grep -qF COPY_ALWAYS ~/.rcrc; then
     if [ -n "$added_files" ]; then
       run_rcup
     else
-      echo "No new files, not running rcup"
+      echo ">>> No new files, not running rcup"
     fi
   fi
 fi
