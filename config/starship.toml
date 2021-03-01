@@ -7,7 +7,7 @@ add_newline = false
 format = """
 $time\
 $ruby\
-$nodejs\
+${custom.nodejs}\
 $directory\
 $git_branch\
 $git_state\
@@ -23,10 +23,6 @@ use_12hr = true
 [ruby]
 format = "[($version )]($style)"
 style = "fg:218" # pink
-
-[nodejs]
-format = "[($version )]($style)"
-style = "fg:031" # dark blue
 
 [directory]
 # Show 1 parent directory
@@ -63,3 +59,15 @@ deleted = "[✘](bold fg:197)" # red
 behind = "[↓](bold fg:159)" # cyan
 ahead = "[↑](bold fg:159)" # cyan
 diverged = "[⇔](bold fg:197)" # red
+
+[custom.nodejs]
+description = "Custom NodeJS"
+# Using Volta (with post-processing) is slower than just doing `node --version`
+command = "node --version"
+files = ["package.json", ".node-version", "yarn.lock"]
+directories = ["node_modules"]
+# Unlike the standard nodejs module, it intentionally does not check for
+# *.js or *.ts since that triggers too often
+extensions = []
+format = "[($output )]($style)"
+style = "fg:031" # dark blue
