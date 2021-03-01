@@ -82,3 +82,6 @@ brew "watch"
 
 # Prompt: https://starship.rs
 brew "starship"
+
+# Git Large File Support
+brew "git-lfs"
