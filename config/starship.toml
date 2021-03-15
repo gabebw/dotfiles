@@ -25,7 +25,7 @@ format = "[($version )]($style)"
 style = "fg:218" # pink
 
 [directory]
-# Show 1 parent directory
+# Show 1 parent directory (setting to 0 means no truncation)
 truncation_length = 2
 # A lovely grayish-purple
 style = "fg:146"
