@@ -144,6 +144,7 @@ if [[ -r ~/.rgrc ]]; then
 fi
 export BAT_CONFIG_PATH="~/.config/bat/config"
 alias cat=bat
+alias less=bat
 
 o(){
   if [[ -d "$1" ]]; then
