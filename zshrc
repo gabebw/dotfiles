@@ -715,7 +715,6 @@ cra(){
     tcd "$projectname"
   fi
 }
-alias yarn="command yarn --ignore-engines"
 # }}}
 
 # Postgres {{{
