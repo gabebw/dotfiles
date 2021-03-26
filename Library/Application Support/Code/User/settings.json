@@ -63,7 +63,6 @@
   "rust-client.engine": "rust-analyzer",
   "rust-analyzer.callInfo.full": false,
   "rust-analyzer.inlayHints.parameterHints": false,
-  "window.zoomLevel": -1,
   "rust-analyzer.checkOnSave.command": "clippy",
   "rust-analyzer.updates.askBeforeDownload": false,
   "[javascript]": {
