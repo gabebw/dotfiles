@@ -796,7 +796,11 @@ ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 # has to know about them to highlight them.
 # More on ZSH_HIGHLIGHT_HIGHLIGHTERS:
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [[  -z "$ZSH_HIGHLIGHT_HIGHLIGHTERS" ]]; then
+  # Only source Zsh Syntax Highlighting once, otherwise we can run into
+  # a "maximum nested function level reached" error
+  ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 [[ -r ~/.aliases ]] && source ~/.aliases
