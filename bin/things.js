@@ -2,7 +2,7 @@
 // vim: filetype=javascript
 
 /*
- * Usage: things.js PROJECT_NAME
+ * Usage: things.js PROJECT_NAME | Inbox
  * Prints out the name and notes for every todo in that project.
  *
  * Prints results in JSON, so to get the name of each item, use `jq`:
@@ -25,7 +25,14 @@ function run(arguments){
   }
 
   var t = Application("Things3");
-  var project = t.projects.byName(projectName);
+  var project;
+
+  if(projectName.toLowerCase() === "inbox"){
+    // Inbox is actually a "list", not a "project"
+    project = t.lists.byName("Inbox");
+  } else {
+    project = t.projects.byName(projectName);
+  }
   var results = project.toDos().map(function(t){
     return { name: t.name(), notes: t.notes()};
   });
