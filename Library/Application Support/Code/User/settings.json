@@ -48,7 +48,6 @@
   ],
   "breadcrumbs.enabled": true,
   "cSpell.userWords": ["Gbutton", "Gdocs", "Hoverable", "gnar", "grammarly"],
-  "prettier.packageManager": "yarn",
   "editor.formatOnSave": true,
   "vsicons.dontShowNewVersionMessage": true,
   "emmet.showAbbreviationSuggestions": false,
@@ -77,7 +76,7 @@
   "explorer.confirmDelete": false,
   "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Dracula",
+  "workbench.colorTheme": "Jellybeans",
   "rust-analyzer.assist.importMergeBehavior": "none",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
