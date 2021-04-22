@@ -1,5 +1,4 @@
 {
-  "preferSingleQuotes": false,
-  "inlineConditionals": false,
-  "inlineLoops": false
+  "singleQuote": false,
+  "trailingComma": "none"
 }
