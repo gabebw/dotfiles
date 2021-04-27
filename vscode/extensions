@@ -2,10 +2,13 @@ bodil.prettier-toml
 bungcip.better-toml
 castwide.solargraph
 dbaeumer.vscode-eslint
+DotJoshJohnson.xml
+dracula-theme.theme-dracula
 eamodio.gitlens
 esbenp.prettier-vscode
 gamunu.vscode-yarn
 gerane.Theme-TomorrowNightBright
+gerane.Theme-TomorrowNightEighties
 GitHub.vscode-pull-request-github
 GitLab.gitlab-workflow
 KnisterPeter.vscode-github
@@ -17,7 +20,7 @@ rebornix.ruby
 rust-lang.rust
 statiolake.vscode-rustfmt
 sysoev.language-stylus
+usernamehw.errorlens
 vscode-icons-team.vscode-icons
 vscodevim.vim
 wingrunr21.vscode-ruby
-DotJoshJohnson.xml
