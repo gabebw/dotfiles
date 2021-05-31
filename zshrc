@@ -486,7 +486,7 @@ function g {
   fi
 }
 
-alias gd="git diff"
+alias gd="git diff --word-diff=color"
 alias gdm="git master-to-main-wrapper diff origin/%BRANCH%"
 alias amend="git commit --amend -Chead"
 alias amend-new="git commit --amend"
