@@ -205,31 +205,32 @@ class CommitMessageBuilder
 end
 
 class Repo
-  def initialize
-    @current_branch = git("rev-parse --abbrev-ref HEAD")
+  def initialize(git)
+    @git = git
+    @current_branch = git.current_branch
   end
 
-  attr_reader :current_branch
+  attr_reader :current_branch, :git
 
   def fancy_log_of_all_commits_since_main
     fancy_format = "#{COMMIT_MARKER}%n(%aN, %ar)%n%n%w(78)%s%n%+b"
-    git "master-to-main-wrapper log --format='#{fancy_format}' origin/%BRANCH%..HEAD"
+    git.run "master-to-main-wrapper log --format='#{fancy_format}' origin/%BRANCH%..HEAD"
   end
 
   def number_of_commits
-    git("master-to-main-wrapper rev-list origin/%BRANCH%..HEAD --count").to_i
+    git.run("master-to-main-wrapper rev-list origin/%BRANCH%..HEAD --count").to_i
   end
 
   def first_commit_subject
-    git "log -1 --format=%s"
+    git.run "log -1 --format=%s"
   end
 
   def first_commit_body
-    git "log -1 --format=%b"
+    git.run "log -1 --format=%b"
   end
 
   def first_commit_full_message
-    git "log -1 --format=%B"
+    git.run "log -1 --format=%B"
   end
 
   def on_master_branch?
@@ -239,22 +240,24 @@ class Repo
   def on_main_branch?
     current_branch == "main"
   end
+end
 
-  private
-
-  def git(command)
-    run "git #{command}"
+class Git
+  def current_branch
+    run "rev-parse --abbrev-ref HEAD"
   end
 
   def run(command)
-    `#{command}`.strip
+    `git #{command}`.strip
   end
 end
 
-repo = Repo.new
+git = Git.new
+
+repo = Repo.new(git)
 
 if repo.on_main_branch? || repo.on_master_branch?
-  STDERR.puts "\n!!! You're already on #{current_branch}"
+  warn "\n!!! You're already on #{git.current_branch}"
   exit 1
 end
 
