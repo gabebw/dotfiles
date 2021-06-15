@@ -408,6 +408,12 @@ bindkey -v
 # Ctrl-V to open current command in Vim
 autoload -z edit-command-line
 zle -N edit-command-line
+# Unbind the keymap we create (^v) as well as an already-existing keymap (^V,
+# capitalized) so that we avoid this message after re-sourcing zshrc and hitting
+# "Escape" to move into Vim mode:
+# starship_zle-keymap-select-wrapped:1: maximum nested function level reached; increase FUNCNEST?
+bindkey -r "^V"
+bindkey -r "^v"
 bindkey "^v" edit-command-line
 
 # Fuzzy match against history, edit selected value
