@@ -1,3 +1,4 @@
 .headers ON
 .mode column
 .nullvalue [NULL]
+.width 80
