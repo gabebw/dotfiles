@@ -77,7 +77,7 @@
   "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
   "prettier.configPath": "~/.prettierrc.json",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "workbench.colorTheme": "Jellybeans",
+  "workbench.colorTheme": "Dracula",
   "rust-analyzer.assist.importMergeBehavior": "none",
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
