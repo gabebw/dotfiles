@@ -9,10 +9,6 @@ brew "parity"
 # Lets us do `brew services restart postgres`, etc
 tap "homebrew/services"
 
-# https://unused.codes/
-tap "unused-code/formulae"
-brew "unused"
-
 tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
