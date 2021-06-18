@@ -86,5 +86,6 @@
     "editor.defaultFormatter": "HookyQR.beautify"
   },
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
-  "importSorter.importStringConfiguration.quoteMark": "double"
+  "importSorter.importStringConfiguration.quoteMark": "double",
+  "window.zoomLevel": -2
 }
