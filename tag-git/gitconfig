@@ -166,7 +166,7 @@
 [delta]
     plus-style = "syntax #012800"
     minus-style = "syntax #340001"
-    syntax-theme = Coldark-Dark
+    syntax-theme = 1337
     navigate = true
     line-numbers = true
 [interactive]
