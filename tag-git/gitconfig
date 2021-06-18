@@ -158,3 +158,16 @@
   ff = only
 [advice]
   detachedHead = false
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[delta]
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+    syntax-theme = Coldark-Dark
+    navigate = true
+    line-numbers = true
+[interactive]
+    diffFilter = delta --color-only

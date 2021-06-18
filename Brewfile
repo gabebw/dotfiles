@@ -34,6 +34,7 @@ brew "ripgrep"
 brew "tag"
 brew "tree"
 brew "vim"
+brew "git-delta"
 
 # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
 brew "jq"
