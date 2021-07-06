@@ -75,7 +75,6 @@
   },
   "explorer.confirmDelete": false,
   "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
-  "prettier.configPath": "~/.prettierrc.json",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorTheme": "Dracula",
   "rust-analyzer.assist.importMergeBehavior": "none",
@@ -87,5 +86,5 @@
   },
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.quoteMark": "double",
-  "window.zoomLevel": -2
+  "window.zoomLevel": -1
 }
