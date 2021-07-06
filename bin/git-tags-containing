@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Find all tags containing the given filename
+
+set -e
+
+filename=$1
+
+git for-each-ref 'refs/tags/*' | while read rev type name; do
+  [ -n "$(git ls-tree $rev -- "$filename")" ] && echo "$name"
+done | sed -e 's/^refs\/tags\///'
