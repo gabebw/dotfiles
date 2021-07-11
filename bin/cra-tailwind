@@ -1,0 +1,52 @@
+#!/usr/bin/env zsh
+#
+# Create a React app with Tailwind
+
+set -eo pipefail
+
+if ! cra "$1"; then
+  echo "Oops, something went wrong"
+  return 1
+fi
+
+cd "$1"
+yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat 'postcss@^7' 'autoprefixer@^9'
+yarn add @craco/craco
+for script in start build test; do
+  sed -i '' "s/react-scripts $script/craco $script/" package.json
+done
+
+cat > craco.config.js <<-EOF
+module.exports = {
+style: {
+  postcss: {
+    plugins: [
+      require('tailwindcss'),
+      require('autoprefixer'),
+    ],
+  },
+},
+}
+EOF
+
+# Generate `tailwind.config.js`
+npx tailwindcss-cli@latest init
+
+# Configure purge option with all component paths so Tailwind can tree-shake
+# unused styles in production builds
+sed -i '' \
+  "s@purge: \[\]@purge: \['./src/**/*.\{js,jsx,ts,tsx\}', './public/index.html']@" \
+  tailwind.config.js
+
+cat > src/index.css <<-EOF
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+EOF
+
+# Ensure we are importing CSS
+echo "import './index.css';" >> src/index.tsx
+
+git commit -am "Set up Tailwind"
+
+echo "OK, now run: code $projectname"
