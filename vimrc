@@ -348,17 +348,6 @@ let g:gundo_prefer_python3 = 1
 " --------
 let g:peekaboo_window	= 'vert bo 50new'
 
-" Ale
-" --------
-
-" Ale is just used for fixing
-let g:ale_fixers = {}
-let g:ale_fixers.css = ['prettier']
-let g:ale_fixers.scss = ['prettier']
-let g:ale_fixers.rust = ['rustfmt']
-let g:ale_fix_on_save = 1
-let g:ale_linters = {}
-
 " FZF
 " -----------------
 " This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
@@ -702,7 +691,6 @@ Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
-Plug 'dense-analysis/ale'
 " Easily inspect registers exactly when you need them
 " https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
