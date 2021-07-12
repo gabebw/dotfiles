@@ -47,7 +47,7 @@ EOF
 # Ensure we are importing CSS
 echo "import './index.css';" >> src/index.tsx
 
-npx prettier *.config.js src/index.tsx
+npx prettier -w *.config.js src/index.tsx
 
 git add .
 git commit -m "Set up Tailwind"
