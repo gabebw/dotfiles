@@ -1,13 +1,13 @@
 #!/usr/bin/env zsh
-#
+
 # Create a React app with Tailwind
+# It automates the instructions here:
+# https://tailwindcss.com/docs/guides/create-react-app
 
 set -eo pipefail
 
-if ! cra "$1"; then
-  echo "Oops, something went wrong"
-  return 1
-fi
+# Create a standard CRA app first, without Tailwind
+cra "$1"
 
 cd "$1"
 yarn add --dev tailwindcss@npm:@tailwindcss/postcss7-compat 'postcss@^7' 'autoprefixer@^9'
@@ -47,6 +47,11 @@ EOF
 # Ensure we are importing CSS
 echo "import './index.css';" >> src/index.tsx
 
-git commit -am "Set up Tailwind"
+npx prettier *.config.js src/index.tsx
 
-echo "OK, now run: code $projectname"
+git add .
+git commit -m "Set up Tailwind"
+
+echo "\n\n\n\n\n"
+echo ">>> Success!"
+echo ">>> Now run: code $1"
