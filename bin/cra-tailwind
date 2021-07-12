@@ -44,8 +44,10 @@ cat > src/index.css <<-EOF
 @tailwind utilities;
 EOF
 
-# Ensure we are importing CSS
-echo "import './index.css';" >> src/index.tsx
+# Ensure we are importing CSS. Add the line after "import ReactDOM".
+sed -i '' '/import ReactDOM/a\
+import "./index.css";
+' src/index.tsx
 
 npx prettier -w *.config.js src/index.tsx
 
