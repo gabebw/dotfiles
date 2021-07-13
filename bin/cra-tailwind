@@ -6,6 +6,11 @@
 
 set -eo pipefail
 
+if [[ $# == 0 ]]; then
+  echo "You must provide a name for the project" >&2
+  exit 1
+fi
+
 # Create a standard CRA app first, without Tailwind
 cra "$1"
 
