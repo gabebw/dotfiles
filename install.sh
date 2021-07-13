@@ -143,7 +143,7 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 info "Running all setup scripts..."
-for setup in tag-*/setup; do
+for setup in tag-*/setup vscode/setup; do
   dir=$(basename "$(dirname "$setup")")
   info "Running setup for ${dir#tag-}..."
   . "$setup"
@@ -152,18 +152,6 @@ done
 mkdir -p ~/code/work
 mkdir -p ~/code/personal
 mkdir -p ~/code/src
-
-# Install extensions
-if command_does_not_exist code; then
-  error "Open VS Code and run: Install code command in \$PATH"
-else
-  for extension in $(cat vscode/extensions); do
-    code --install-extension "$extension"
-  done
-fi
-
-# Repeated keys in VSCode _won't_ pop up the accent/umlaut menu
-defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 green "== Success!"
 
