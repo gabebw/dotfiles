@@ -114,7 +114,7 @@ epoch(){
   fi
 }
 rcup(){
-  if ! command rcup -v | grep -v identical; then
+  if ! command rcup -fv | grep -v identical; then
     true
   fi
 }
