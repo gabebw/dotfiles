@@ -787,4 +787,10 @@ if [[  -z "$ZSH_HIGHLIGHT_HIGHLIGHTERS" ]]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# Run in dotfiles repo
+sort-vscode-settings() {
+  local f="./Library/Application Support/Code/User/settings.json"
+  jq --sort-keys < "$f" | sponge "$f"
+}
+
 [[ -r ~/.aliases ]] && source ~/.aliases
