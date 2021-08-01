@@ -115,6 +115,7 @@
     }
   ],
   "vim.useSystemClipboard": true,
+  "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vsicons.dontShowNewVersionMessage": true,
   "window.zoomLevel": -1,
   "workbench.colorTheme": "Dracula",

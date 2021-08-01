@@ -1,15 +1,15 @@
 DotJoshJohnson.xml
-DotJoshJohnson.xml
 GitHub.vscode-pull-request-github
 GitLab.gitlab-workflow
 HookyQR.beautify
 KnisterPeter.vscode-github
+asvetliakov.vscode-neovim
 bodil.prettier-toml
 bungcip.better-toml
 castwide.solargraph
 dbaeumer.vscode-eslint
 dracula-theme.theme-dracula
-dracula-theme.theme-dracula
+dunstontc.viml
 eamodio.gitlens
 esbenp.prettier-vscode
 gamunu.vscode-yarn
@@ -23,5 +23,4 @@ statiolake.vscode-rustfmt
 sysoev.language-stylus
 usernamehw.errorlens
 vscode-icons-team.vscode-icons
-vscodevim.vim
 wingrunr21.vscode-ruby

@@ -82,3 +82,6 @@ brew "starship"
 
 # Git Large File Support
 brew "git-lfs"
+
+# Neovim, so I can use Vim in VS Code
+brew "neovim"
