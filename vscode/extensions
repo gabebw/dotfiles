@@ -19,7 +19,6 @@ matklad.rust-analyzer
 mbessey.vscode-rufo
 mike-co.import-sorter
 rebornix.ruby
-rust-lang.rust
 statiolake.vscode-rustfmt
 sysoev.language-stylus
 usernamehw.errorlens
