@@ -3,8 +3,37 @@
 # This is the post-merge hook for _this dotfiles repo_.
 # It gets copied in by the `tag-git/setup` script.
 
+# You can change these to something else to test this script locally.
+OLD_REVISION=ORIG_HEAD
+NEW_REVISION=HEAD
+
 files_filtered_by(){
-  git diff-tree --diff-filter="$1" -r --name-only --no-commit-id ORIG_HEAD HEAD
+  git diff-tree \
+    --diff-filter="$1" \
+    -r \
+    --name-only \
+    --no-commit-id \
+    "$OLD_REVISION" "$NEW_REVISION"
+}
+
+# Return all added lines in a given file.
+# Does not handle spaces - you'll need to pass `--null` to `rg` so it
+# null-terminates, then do `while read` or something.
+lines_matching_in_diff_of(){
+  local file=$1
+  local pattern=$2
+  if files_filtered_by M | grep -qF "$file"; then
+    git diff "$OLD_REVISION" "$NEW_REVISION" "$file" | \
+      rg -v -- "^(---|\+\+\+) $file" | \
+      rg "$pattern"
+  fi
+}
+
+added_lines_in(){
+  lines_matching_in_diff_of "$1" '^\+' | sed 's/^\+//'
+}
+removed_lines_in(){
+  lines_matching_in_diff_of "$1" '^\-' | sed 's/^\-//'
 }
 
 run_rcup(){
@@ -38,3 +67,18 @@ else
     fi
   fi
 fi
+
+# Install VS Code extensions when they're added to the list.
+for extension in $(added_lines_in vscode/extensions); do
+  code --install-extension "$extension"
+done
+
+# Uninstall VS Code extensions when they're removed from the list.
+# Doesn't remove it if it's still in the vscode/extensions file. This can happen
+# if I removed a duplicate line, for example.
+for extension in $(removed_lines_in vscode/extensions); do
+  if ! rg "$extension" vscode/extensions; then
+    # Not a dupe, remove it
+    code --uninstall-extension "$extension"
+  fi
+done
