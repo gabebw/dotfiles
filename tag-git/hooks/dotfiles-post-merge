@@ -20,7 +20,10 @@ run_rcdn(){
 # If COPY_ALWAYS is set, then there are some copied (not symlinked) files and so
 # we always run rcup because we need to update them with `rcup`. They won't
 # automatically change when files in my dotfiles change.
-if ! grep -qF COPY_ALWAYS ~/.rcrc; then
+if grep -qF COPY_ALWAYS ~/.rcrc; then
+  run_rcdn
+  run_rcup
+else
   added_files=$(files_filtered_by A)
   removed_files=$(files_filtered_by D)
 
