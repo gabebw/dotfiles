@@ -17,15 +17,15 @@ files_filtered_by(){
 }
 
 # Return all added lines in a given file.
-# Does not handle spaces - you'll need to pass `--null` to `rg` so it
+# Does not handle spaces - you'll need to pass `--null` to `grep` so it
 # null-terminates, then do `while read` or something.
 lines_matching_in_diff_of(){
   local file=$1
   local pattern=$2
   if files_filtered_by M | grep -qF "$file"; then
     git diff "$OLD_REVISION" "$NEW_REVISION" "$file" | \
-      rg -v -- "^(---|\+\+\+) $file" | \
-      rg "$pattern"
+      grep -Ev -- "^(---|\+\+\+) $file" | \
+      grep -E "$pattern"
   fi
 }
 
