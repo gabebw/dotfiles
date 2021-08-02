@@ -77,7 +77,7 @@ done
 # Doesn't remove it if it's still in the vscode/extensions file. This can happen
 # if I removed a duplicate line, for example.
 for extension in $(removed_lines_in vscode/extensions); do
-  if ! rg "$extension" vscode/extensions; then
+  if ! grep -qF "$extension" vscode/extensions; then
     # Not a dupe, remove it
     code --uninstall-extension "$extension"
   fi
