@@ -17,4 +17,7 @@ if exists('g:vscode')
 
   nnoremap gr <Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>
   nnoremap gR <Cmd>call VSCodeNotify('editor.action.rename')<CR>
+
+  " Search for word under cursor
+  nnoremap K <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 endif
