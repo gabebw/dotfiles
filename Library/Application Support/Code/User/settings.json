@@ -97,6 +97,10 @@
     "**/*.ipynb": true,
     "denali/": true
   },
+  "stylusSupremacy.alwaysUseExtends": true,
+  "stylusSupremacy.insertBraces": false,
+  "stylusSupremacy.insertColons": false,
+  "stylusSupremacy.insertSemicolons": false,
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "typescript.format.enable": false,
