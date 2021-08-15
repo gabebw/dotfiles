@@ -1,4 +1,4 @@
-Safely iterate through output from a shell command using \n as the separator?
+## Safely iterate through output from a shell command using \n as the separator?
 
     command_with_output | while read -r one_line_of_output; do
       echo "$one_line_of_output"
@@ -8,45 +8,50 @@ This is better than `for one_line_of_output in $(command_with_output)` because
 the `for` loop will do word splitting. A line of output with a space in it will
 become two items.
 
-How do I change my shell to ZSH?
+## How do I change my shell to ZSH?
 
     chsh -s /bin/zsh
 
-Where can I find awesome 'zshrc's?
+## Where can I find awesome 'zshrc's?
 
 <http://dotfiles.org/.zshrc> (and check out the rest of the site too)
 
-Search backward through history: Ctrl-R
+## Search backward through history
 
-Modify the most recent command:
+Ctrl-R
+
+## Modify the most recent command
 
     r search=replace
     # example
     $ mkdir my_dir
     $ r mkdir=cd # this runs "cd my_dir"
 
-Open an editor ($EDITOR) to edit the last command:
+## Open an editor ($EDITOR) to edit the last command
 
     fc
 
-Print an ASCII calendar:
+## Print an ASCII calendar
 
     cal # or ncal
 
-hashing: hash -d HASH=directory, then "cd ~HASH"
+## Hashing
+
+`hash -d HASH=directory`, then `cd ~HASH`
+
 - Do not use ~ in the directory, either. Use /Users/gabe/.
 - more info: http://michael-prokop.at/blog/2008/12/01/mikas-advent-calendar-day-1/
 
-How do I unset a function?
+## How do I unset a function?
 
     unfunction <function-name>
 
-How do I do a named hexdump, with "nul" instead of hexdump -C's "0"?
+## How do I do a named hexdump, with "nul" instead of hexdump -C's "0"?
 
     # Also: man od
     od -a
 
-How do I re-initialize my PATH, so that newly-installed programs show up for autocomplete?
+## How do I re-initialize my PATH, so that newly-installed programs show up for autocomplete?
 
     export PATH=$PATH
     # as a function
@@ -66,7 +71,7 @@ compinit searches the $fpath array of directories. Simply add your directory via
 
     fpath=(/my/completion/directory $fpath)
 
-How do I complete one command like another command?
+#### How do I complete one command like another command?
 
     # complete `g` like `git`
     compdef g=git
