@@ -98,6 +98,9 @@
     "denali/": true
   },
   "stylusSupremacy.alwaysUseExtends": true,
+  "stylusSupremacy.ignoreFiles": [
+    "src/styl/noprint.styl"
+  ],
   "stylusSupremacy.insertBraces": false,
   "stylusSupremacy.insertColons": false,
   "stylusSupremacy.insertSemicolons": false,
