@@ -366,6 +366,9 @@ bindkey "^I" expand-or-complete-with-dots
 
 # $PATH {{{
 
+# This prevents duplicate entries in $PATH (e.g. after re-sourcing this files).
+typeset -U path
+
 # Add Homebrew to the path.
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
