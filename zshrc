@@ -343,7 +343,6 @@ zstyle ':completion:*:ls:*:*' list-colors 'di=34:ln=35:so=32:pi=33:ex=31:bd=34;4
 # Complete the command on the left like the command on the right
 compdef '_files -/' tcd
 compdef viw=which
-compdef find-location-of=which
 compdef staging=heroku
 compdef production=heroku
 
@@ -772,7 +771,7 @@ ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 # has to know about them to highlight them.
 # More on ZSH_HIGHLIGHT_HIGHLIGHTERS:
 # https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
-if [[  -z "$ZSH_HIGHLIGHT_HIGHLIGHTERS" ]]; then
+if [[ -z "$ZSH_HIGHLIGHT_HIGHLIGHTERS" ]]; then
   # Only source Zsh Syntax Highlighting once, otherwise we can run into
   # a "maximum nested function level reached" error
   ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
