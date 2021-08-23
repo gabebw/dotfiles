@@ -517,9 +517,11 @@ gcm(){
   if [[ "$#" == 0 ]]; then
     git master-to-main-wrapper checkout %BRANCH%
   else
-    if [[ "$branch" =~ '^EXT-' ]]; then
-      # Grab JIRA ticket name and prefix it to the commit
-      ticket_number=$(echo "$branch" | sed -E 's/^(EXT-[0-9]+).*/\1/g')
+    # Grab JIRA ticket name (if any) and prefix it to the commit.
+    if [[ "$branch" =~ '^([A-Z]{2,}-[0-9]+)' ]]; then
+      # The magic "$match" array variable now contains the groups we matched
+      # (1-indexed).
+      ticket_number=$match[1]
       commit_message="$ticket_number $commit_message"
     fi
     local commit_message_length=$(echo -n "$commit_message" | wc -c | xargs echo -n)
