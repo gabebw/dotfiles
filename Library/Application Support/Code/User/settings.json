@@ -77,6 +77,9 @@
   "gitlens.views.lineHistory.location": "explorer",
   "gitlens.views.repositories.location": "scm",
   "gitlens.views.search.location": "gitlens",
+  "importSorter.generalConfiguration.exclude": [
+    "/denali/"
+  ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.hasSemicolon": false,
   "importSorter.importStringConfiguration.quoteMark": "double",
