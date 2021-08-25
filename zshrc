@@ -363,44 +363,6 @@ zle -N expand-or-complete-with-dots
 bindkey "^I" expand-or-complete-with-dots
 # }}}
 
-# $PATH {{{
-
-# This prevents duplicate entries in $PATH (e.g. after re-sourcing this files).
-typeset -U path
-
-# Add Homebrew to the path.
-PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-# Heroku standalone client
-PATH="/usr/local/heroku/bin:$PATH"
-
-# Node
-PATH=$PATH:.git/safe/../../node_modules/.bin/
-
-# Python
-# Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
-# add them to the front so we always get Python 3.
-PATH=/usr/local/opt/python/libexec/bin:$PATH
-PATH=/usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/bin:$PATH
-
-# Postgres.app takes precedence
-PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
-
-PATH=$HOME/.bin:$PATH
-PATH=./bin/stubs:$PATH
-
-# Rust
-[[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
-alias ci="cargo install --path . --force"
-
-# rbenv
-eval "$(rbenv init -)"
-
-# Volta
-export VOLTA_HOME="$HOME/.volta"
-PATH="$VOLTA_HOME/bin:$PATH"
-# }}}
-
 # Key bindings {{{
 # Vim-style line editing
 # This sets up a bunch of bindings, so call this first and then call all
@@ -785,5 +747,45 @@ sort-vscode-settings() {
   local f="./Library/Application Support/Code/User/settings.json"
   jq --sort-keys < "$f" | sponge "$f"
 }
+
+# $PATH {{{
+# $PATH stuff is last so that other things don't add their own $PATH stuff
+# before mind.
+
+# This prevents duplicate entries in $PATH (e.g. after re-sourcing this files).
+typeset -U path
+
+# Add Homebrew to the path.
+PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# Heroku standalone client
+PATH="/usr/local/heroku/bin:$PATH"
+
+# Node
+PATH=$PATH:.git/safe/../../node_modules/.bin/
+
+# Python
+# Homebrew stores unversioned symlinks (e.g. `python` for `python3`) here, so
+# add them to the front so we always get Python 3.
+PATH=/usr/local/opt/python/libexec/bin:$PATH
+PATH=/usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/bin:$PATH
+
+# Postgres.app takes precedence
+PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
+
+PATH=$HOME/.bin:$PATH
+PATH=./bin/stubs:$PATH
+
+# Rust
+[[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
+alias ci="cargo install --path . --force"
+
+# rbenv
+eval "$(rbenv init -)"
+
+# Volta
+VOLTA_HOME="$HOME/.volta"
+PATH="$VOLTA_HOME/bin:$PATH"
+# }}}
 
 [[ -r ~/.aliases ]] && source ~/.aliases
