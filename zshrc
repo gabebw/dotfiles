@@ -750,7 +750,7 @@ sort-vscode-settings() {
 
 # $PATH {{{
 # $PATH stuff is last so that other things don't add their own $PATH stuff
-# before mind.
+# before it.
 
 # This prevents duplicate entries in $PATH (e.g. after re-sourcing this files).
 typeset -U path
