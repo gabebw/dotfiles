@@ -67,6 +67,10 @@
   "githubPullRequests.defaultMergeMethod": "squash",
   "githubPullRequests.telemetry.enabled": false,
   "gitlab.instanceUrl": "https://gitlab.grammarly.io/",
+  "gitlab.showIssueLinkOnStatusBar": false,
+  "gitlab.showMrStatusOnStatusBar": false,
+  "gitlab.showProjectMergeRequests": false,
+  "gitlab.showStatusBarLinks": false,
   "gitlens.advanced.telemetry.enabled": false,
   "gitlens.blame.highlight.locations": [
     "gutter",
