@@ -60,8 +60,8 @@ brew "moreutils"
 brew "rbenv"
 brew "rbenv-default-gems"
 
-# Volta version manager for Node
-brew "volta"
+# Version manager for Node
+brew "fnm"
 
 # Simple graphs with `bin/line_graph`
 brew "gnuplot"

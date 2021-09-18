@@ -783,9 +783,8 @@ alias ci="cargo install --path . --force"
 # rbenv
 eval "$(rbenv init -)"
 
-# Volta
-VOLTA_HOME="$HOME/.volta"
-PATH="$VOLTA_HOME/bin:$PATH"
+# Node
+eval "$(fnm env --use-on-cd)"
 # }}}
 
 [[ -r ~/.aliases ]] && source ~/.aliases

@@ -2,8 +2,8 @@
 
 set -e
 
-echo 'Installing latest NodeJS and Yarn...'
-volta install node
-volta install prettier
-volta install yarn
+echo 'Installing NodeJS 16 and Yarn...'
+fnm install 16
+npm install -g prettier
+npm install -g yarn
 yarn global add playwright@1.8.0

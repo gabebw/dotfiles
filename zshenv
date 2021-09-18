@@ -11,7 +11,6 @@ fi
 
 eval "$(rbenv init -)"
 
-# This handles Volta for things that only source zshenv, but zshrc is more
-# complicated and so we have Volta setup again in zshrc.
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
+# This handles Node versions for things that only source zshenv, but zshrc is
+# more complicated and so we have the setup again in zshrc.
+eval "$(fnm env --use-on-cd)"
