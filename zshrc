@@ -784,7 +784,7 @@ alias ci="cargo install --path . --force"
 eval "$(rbenv init -)"
 
 # Node
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd --log-level=error)"
 # }}}
 
 [[ -r ~/.aliases ]] && source ~/.aliases

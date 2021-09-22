@@ -13,4 +13,4 @@ eval "$(rbenv init -)"
 
 # This handles Node versions for things that only source zshenv, but zshrc is
 # more complicated and so we have the setup again in zshrc.
-eval "$(fnm env --use-on-cd)"
+eval "$(fnm env --use-on-cd --log-level=error)"
