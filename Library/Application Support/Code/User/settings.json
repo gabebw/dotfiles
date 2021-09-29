@@ -32,6 +32,7 @@
     "grammarly"
   ],
   "editor.autoClosingBrackets": "never",
+  "editor.bracketPairColorization.enabled": true,
   "editor.fontFamily": "'Iosevka Term', Inconsolata, Menlo, Monaco, 'Courier New', monospace",
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
