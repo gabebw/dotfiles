@@ -198,7 +198,7 @@ endfunction
 
 augroup Pasting
   autocmd!
-  autocmd VimEnter * nunmap cv
+  autocmd VimEnter * silent! nunmap cv
   autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
 augroup END
 
