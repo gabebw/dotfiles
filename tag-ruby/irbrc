@@ -16,7 +16,7 @@ require_rb_files_from(File.join(ENV["HOME"], ".irbrc.d"))
 
 class Object
   def own_methods
-    (methods - Object.new.methods).sort
+    (methods - Object.new.methods - Object.methods).sort
   end
 end
 
