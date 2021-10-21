@@ -86,7 +86,6 @@
     "/denali/"
   ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
-  "importSorter.importStringConfiguration.hasSemicolon": false,
   "importSorter.importStringConfiguration.quoteMark": "double",
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
