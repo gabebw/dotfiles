@@ -104,6 +104,7 @@
     "**/*.ipynb": true,
     "denali/": true
   },
+  "search.useGlobalIgnoreFiles": true,
   "stylusSupremacy.alwaysUseExtends": true,
   "stylusSupremacy.ignoreFiles": [
     "src/styl/noprint.styl"
