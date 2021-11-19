@@ -107,19 +107,21 @@ USAGE
   # To fix it, assume set `to` to the extra argument.
   if ARGV.length == 1
     to = ARGV[0]
-  else
+  elsif ARGV.length > 1
     STDERR.puts "Unhandled extra arguments: #{ARGV.inspect}"
     exit 1
   end
 end
 
-if from
+if from && !from.start_with?("http")
   to ||= File.basename(from)
   to = with_extension!(from, to, from)
   STDERR.puts "#{from} -> #{to}"
   `upload-image "#{from}" "#{to}"`
 else
-  from = url_from_clipboard
+  if ! from.start_with?("http")
+    from = url_from_clipboard
+  end
   if from.nil? || from == ""
     STDERR.puts "Error: -f parameter is required, or copy a URL"
     exit 1
