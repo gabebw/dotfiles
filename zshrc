@@ -612,6 +612,10 @@ export EDITOR=$VISUAL
 alias vi="$VISUAL"
 alias ev="vim '$(readlink ~/.vimrc)'"
 v(){
+  if [[ "$PWD" == "$HOME" ]]; then
+    echo "Refusing to run this in your home directory" >&2
+    return 1
+  fi
   local old_IFS=$IFS
   IFS=$'\n'
   local files=($(fzf-tmux --query="$1" --multi --exit-0))
