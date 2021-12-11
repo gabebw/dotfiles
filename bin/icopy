@@ -119,7 +119,7 @@ if from && !from.start_with?("http")
   STDERR.puts "#{from} -> #{to}"
   `upload-image "#{from}" "#{to}"`
 else
-  if ! from.start_with?("http")
+  if from.nil? || !from.start_with?("http")
     from = url_from_clipboard
   end
   if from.nil? || from == ""
