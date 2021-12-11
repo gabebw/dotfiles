@@ -33,7 +33,7 @@
   ],
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
-  "editor.fontFamily": "'Oxygen Mono', 'Iosevka Term', Inconsolata, Menlo, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "JetBrains Mono NL, monospace",
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
   "editor.minimap.enabled": false,

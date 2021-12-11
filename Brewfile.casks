@@ -5,6 +5,8 @@
 tap "homebrew/cask-fonts"
 cask "font-iosevka"
 cask "font-inconsolata"
+# Jetbrains Mono font
+cask "font-jetbrains-mono"
 
 cask "1password"
 cask "alacritty"

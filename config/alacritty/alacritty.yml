@@ -63,15 +63,15 @@ scrolling:
 # e.g. "Medium" vs "Regular".
 font:
   normal:
-    family: Iosevka Term
-    style: Medium
+    family: JetBrains Mono NL
+    style: Regular
 
   bold:
-    family: Iosevka Term
+    family: JetBrains Mono NL
     style: Bold
 
   italic:
-    family: Iosevka Term
+    family: JetBrains Mono NL
     style: Medium Italic
 
   # Point size
