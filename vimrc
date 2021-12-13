@@ -747,6 +747,9 @@ function! s:BetterColorschemeSettings()
   hi! Constant term=italic cterm=italic gui=italic
   hi! link gitCommitComment Comment
   hi! link gitCommitHeader Comment
+  " Ensure that Rust special comments (like doc comments) are highlighted as
+  " comments
+  hi! link rustCommentLineDoc Comment
 endfunction
 
 call <SID>BetterColorschemeSettings()
