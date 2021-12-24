@@ -655,7 +655,7 @@ alias tagit='/usr/local/bin/ctags -R'
 b(){
   if [[ $# == 0 ]]; then
     (bundle check > /dev/null || bundle install --jobs=4) && \
-      bundle --quiet --binstubs=./bin/stubs
+      bundle binstubs --all --path=./bin/stubs
   else
     bundle "$@"
   fi
@@ -781,7 +781,6 @@ PATH=/usr/local/Cellar/python/3.7.2_2/Frameworks/Python.framework/Versions/3.7/b
 PATH=/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH
 
 PATH=$HOME/.bin:$PATH
-PATH=./bin/stubs:$PATH
 
 # Rust
 [[ -r "$HOME"/.cargo/env ]] && source "$HOME"/.cargo/env
@@ -789,6 +788,9 @@ alias ci="cargo install --path . --force"
 
 # rbenv
 eval "$(rbenv init -)"
+
+# Add binstubs *after* doing rbenv
+PATH=./bin/stubs:$PATH
 
 # Node
 eval "$(fnm env --use-on-cd --log-level=error)"
