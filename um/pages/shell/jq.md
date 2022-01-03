@@ -70,9 +70,17 @@ the path to get a specific key, let the `..` operator do it for you:
 
     curl -A 'ua' https://www.reddit.com/r/food/new.json | jq '..|.permalink?'
 
-## SELECT NON-NULL ITEMS
+## FILTER ITEMS FROM AN ARRAY OF OBJECTS
 
-Pipe to 'select(.)':
+Given something like this:
+
+  [{ name: "Foo", year: "2020" }, { name: "Bar", year: "2021" }]
+
+You can filter to only items with a given year with `select`:
+
+  jq '.[] | select(.time | startswith("2021"))'
+
+To filter out non-null items from an array, pipe to 'select(.)':
 
     jq 'whatever | goes | here | select(.)'
 
