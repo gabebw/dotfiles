@@ -96,10 +96,10 @@ youtube-dl-safe(){
       break
     fi
   done
-  print -s "youtube-dl-safe ${args:q} ${@:q}"
+  print -s "yt-dlp ${args:q} ${@:q}"
   # Prefer ffmpeg because avconv gives these errors:
   #   ERROR: av_interleaved_write_frame(): Invalid argument
-  echo "$@" | xargs -P 5 -n 1 youtube-dl --no-check-certificate --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args
+  echo "$@" | xargs -P 5 -n 1 yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args
 }
 
 y(){
