@@ -77,6 +77,25 @@
     "gutter",
     "overview"
   ],
+  "gitlens.remotes": [
+    {
+      "domain": "ssh.gitlab.grammarly.io",
+      "name": "Grammarly",
+      "protocol": "https",
+      "type": "Custom",
+      "urls": {
+        "branch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/tree/${branch}",
+        "branches": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/branches",
+        "commit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/commit/${id}",
+        "file": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/${file}${line}",
+        "fileInBranch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/blob/${branch}/${file}${line}",
+        "fileInCommit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/blob/${id}/${file}${line}",
+        "fileLine": "#L${line}",
+        "fileRange": "#L${start}-L${end}",
+        "repository": "https://gitlab.grammarly.io/${repoBase}/${repoPath}"
+      }
+    }
+  ],
   "gitlens.views.compare.location": "gitlens",
   "gitlens.views.fileHistory.location": "explorer",
   "gitlens.views.lineHistory.location": "explorer",
