@@ -38,7 +38,9 @@ EOL
 
 all-chrome-links(){
   if is_running 'Google Chrome$'; then
-    chrome-cli list links | sed -E 's/^.+ (.+)/\1/' | rg -v '^view-source:'
+    chrome-cli list links | \
+      sed -E 's/^.+ (.+)/\1/' | \
+      rg -v '^(view-source|chrome):'
   fi
 }
 
