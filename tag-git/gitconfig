@@ -16,6 +16,12 @@
   # At that point, I know that I've forgotten to do something in my normal
   # workflow, and I retrace my steps.
   ff = only
+
+  # > diff3 should be the default. It is not only useful for resolving conflicts,
+  # > it makes resolving conflicts possible. It is literally impossible to
+  # > correctly resolve conflicts using (only) the default merge conflict style.
+  # https://stackoverflow.com/questions/27417656/should-diff3-be-default-conflictstyle-on-git/63739655#63739655
+  conflictStyle = diff3
 [diff]
   # Git diff will use (i)ndex, (w)ork tree, (c)ommit and (o)bject
   # instead of a/b/c/d as prefixes for patches
