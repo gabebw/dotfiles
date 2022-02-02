@@ -84,26 +84,27 @@ alias prettyjavascript="prettier --stdin-filepath=any-name-here.js"
 alias exif-remove="exiftool -all= "
 alias hexdump=hexyl
 youtube-dl-safe(){
-  # Allow passing arguments in; without this, xargs treats the arguments as
-  # URLs. This block assumes all arguments are at the beginning, and stops
-  # reading when it sees something that's not an argument.
-  local args=()
+  # If there are any arguments, don't use xargs, because it's likely a one-off,
+  # and spaces in argument values break xargs.
+  local has_arguments=false
   for arg in "$@"; do
     if [[ "$arg" =~ "^-" ]]; then
-      args+=("$arg")
-      shift
-    else
+      has_arguments=true
       break
     fi
   done
-  print -s "yt-dlp ${args:q} ${@:q}"
-  # Prefer ffmpeg because avconv gives these errors:
-  #   ERROR: av_interleaved_write_frame(): Invalid argument
-  echo "$@" | xargs -P 5 -n 1 yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue $args
+
+  if $has_arguments; then
+    print "\n\n>>> Since there are custom arguments, I assume there's just one URL, so I'm not parallelizing\n\n"
+    yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue "$@"
+  else
+    echo "$@" | xargs -P 5 -n 1 yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue
+  fi
 }
 
 y(){
-  echo "${@:-"$(pbpaste)"}"
+  # Expand `$(pbpaste)` to the real URL in scrollback
+  echo "Downloading ${@:-"$(pbpaste)"}"
   youtube-dl-safe "${@:-"$(pbpaste)"}"
 }
 
