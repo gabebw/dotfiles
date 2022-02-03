@@ -156,24 +156,32 @@ alias cat=bat
 alias less=bat
 
 o(){
+  custom_fd(){ command fd --no-ignore --type file "$@" }
+  open_images_in_directory(){
+      # `--depth 1` means "only go 1 level inside the directory and don't recurse"
+      custom_fd \
+        -e jpg -e png -e jpeg \
+        --depth 1 \
+        --base-directory "$1" \
+        -X open -a Preview
+  }
+
   if [[ -d "$1" ]]; then
-    # Order matters (ugh):
-    # * `-print -quit` needs to be at the end
-    # * `-type` and the `-name` clauses need to be next to each other
-    if [[ -n "$(find "$1" -type f \( -name '*.mp4' -or -name '*.flv' -or -name '*.mov' \) -print -quit)" ]]; then
-      # \+ means the results are concatenated and the command is executed once
-      # with all found results.
-      find "$1" -type f \( -name '*.mp4' -or -name '*.flv' -or -name '*.mov' \) -exec open {} \+
+    if command fd -e mp4 -e flv -e mov -q --base-directory "$1"; then
+      # "-X <command>" means the results are concatenated and the command is
+      # executed once with all found results.
+      custom_fd \
+        -e mp4 -e flv -e mov \
+        --base-directory "$1" \
+        -X open
     else
-      # Unfortunately, Xee doesn't set kMDItemLastUsedDate on files when you
-      # open their containing directory.
-      xee "$@"
+      open_images_in_directory "$1"
     fi
   else
     if [[ $# == 0 ]]; then
       # Are there any images in this directory?
       if [[ -n *.{png,jpg}(#qN) ]]; then
-        xee .
+        open_images_in_directory .
       else
         open *.*
       fi
