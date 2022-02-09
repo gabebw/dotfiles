@@ -158,10 +158,10 @@ alias less=bat
 o(){
   custom_fd(){ command fd --no-ignore --type file "$@" }
   open_images_in_directory(){
-      # `--depth 1` means "only go 1 level inside the directory and don't recurse"
+      # `--max-depth 1` means "only go 1 level inside the directory and don't recurse"
       custom_fd \
         -e jpg -e png -e jpeg \
-        --depth 1 \
+        --max-depth 1 \
         --base-directory "$1" \
         -X open -a Preview
   }
