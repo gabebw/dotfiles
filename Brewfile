@@ -47,8 +47,6 @@ brew "diffutils"
 # so :Rtags works
 brew "ctags"
 
-brew "yt-dlp"
-# youtube-dl uses ffmpeg to automatically fix some issues in downloaded files
 brew "ffmpeg"
 
 # I love `sponge` so much.

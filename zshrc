@@ -83,30 +83,6 @@ alias prettyjavascript="prettier --stdin-filepath=any-name-here.js"
 # Remove EXIF data
 alias exif-remove="exiftool -all= "
 alias hexdump=hexyl
-youtube-dl-safe(){
-  # If there are any arguments, don't use xargs, because it's likely a one-off,
-  # and spaces in argument values break xargs.
-  local has_arguments=false
-  for arg in "$@"; do
-    if [[ "$arg" =~ "^-" ]]; then
-      has_arguments=true
-      break
-    fi
-  done
-
-  if $has_arguments; then
-    print "\n\n>>> Since there are custom arguments, I assume there's just one URL, so I'm not parallelizing\n\n"
-    yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue "$@"
-  else
-    echo "$@" | xargs -P 5 -n 1 yt-dlp --no-check-certificates --ignore-errors --no-mtime --no-overwrites --prefer-ffmpeg --add-metadata --continue
-  fi
-}
-
-y(){
-  # Expand `$(pbpaste)` to the real URL in scrollback
-  echo "Downloading ${@:-"$(pbpaste)"}"
-  youtube-dl-safe "${@:-"$(pbpaste)"}"
-}
 
 epoch(){
   if [[ $# == 0 ]]; then
@@ -161,7 +137,6 @@ o(){
       # `--max-depth 1` means "only go 1 level inside the directory and don't recurse"
       custom_fd \
         -e jpg -e png -e jpeg \
-        --max-depth 1 \
         --base-directory "$1" \
         -X open -a Preview
   }
@@ -248,7 +223,7 @@ opened(){
 # `mdfind`.
 search_spotlight_files(){
   # `-onlyin .` will recurse
-  mdfind -onlyin . "$1" | sort | rg -v '\.(part|ytdl|download|epub)$'
+  mdfind -onlyin . "$1" | sort | rg -v '\.(part|download|epub)$'
 }
 # }}}
 
