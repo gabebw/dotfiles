@@ -20,7 +20,9 @@
 // And yes, that one could be fixed just by using `var` instead of `const`, but
 // I'm sure there are other errors just waiting, and an IIFE should fix all of
 // them.
-(function () {
+// Also, in Firefox, running it without the IIFE replaces the current page's
+// contents with the return value of the function.
+(function() {
   let url = location.href;
   const withoutQueryParams =
     location.protocol + "//" + location.hostname + location.pathname;
