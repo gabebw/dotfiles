@@ -2,7 +2,7 @@
 // vim: filetype=javascript
 
 /*
- * Usage: things.js PROJECT_NAME | Inbox
+ * Usage: things.js [PROJECT_NAME | Inbox]
  * Prints out the name and notes for every todo in that project.
  *
  * Prints results in JSON, so to get the name of each item, use `jq`:
@@ -20,7 +20,7 @@ ObjC.import('stdlib')
 function run(arguments){
   var projectName = arguments[0];
   if(!projectName){
-    console.log("Please provide a project name.");
+    console.log("Please provide a project name. For the Inbox, use Inbox.");
     $.exit(1)
   }
 
