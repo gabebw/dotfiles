@@ -74,11 +74,11 @@ the path to get a specific key, let the `..` operator do it for you:
 
 Given something like this:
 
-  [{ name: "Foo", year: "2020" }, { name: "Bar", year: "2021" }]
+    [{ name: "Foo", year: "2020" }, { name: "Bar", year: "2021" }]
 
 You can filter to only items with a given year with `select`:
 
-  jq '.[] | select(.time | startswith("2021"))'
+    jq '.[] | select(.time | startswith("2021"))'
 
 To filter out non-null items from an array, pipe to 'select(.)':
 
@@ -97,3 +97,34 @@ Run it through the "no-op" filter, `.`:
 Or to get keys as part of a jq expression:
 
     echo $json | jq '.users | keys'
+
+## SET A VALUE AS A VARIABLE
+
+Add it to the pipeline, and maybe return it at the end if it passes the tests:
+
+    jq "... | .selector.date as $date | ... | $date"
+
+## ONLY RETURN DATA THAT PASSES A TEST
+
+Set the parent to a variable, use recursive descent to test the contents, then
+return the parent if it passed the test:
+
+    jq '. as $parent | select(.. | .year? == "2019") | $parent'
+
+## FIND DATA THAT PASSES A TEST
+
+Find an arbitrarily-nested object with a couple of attributes, and find the item
+that passes. For example, imagine you have an array of objects and want to find
+each one's `date` object that has a year of `2019`:
+
+    jq '.. | select(.. | .year? == "2019")
+
+## FILTER BY STRING MATCH
+
+Find an object with a `.name` key that contains "Gabe" in the string:
+
+    jq 'select(.name | test("Gabe"))'
+
+To ignore case, pass the "i" flag (note the semicolon!):
+
+    jq 'select(.name | test("Gabe"; "i"))'
