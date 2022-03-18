@@ -67,3 +67,8 @@ node_modules/
 # https://github.com/whitecolor/yalc
 .yalc/
 yalc.lock
+
+# Usage:
+# git blame --ignore-revs-file .git-blame-ignore-revs describeBottles.php
+# See https://www.moxio.com/blog/43/ignoring-bulk-change-commits-with-git-blame
+.git-blame-ignore-revs
