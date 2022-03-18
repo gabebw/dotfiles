@@ -52,8 +52,6 @@ brew "ffmpeg"
 # I love `sponge` so much.
 brew "moreutils"
 
-# a Postgres pager
-
 # rbenv version manager for Ruby
 brew "rbenv"
 brew "rbenv-default-gems"
