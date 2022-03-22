@@ -68,8 +68,6 @@ brew "sinclairtarget/wst/um"
 # Rust
 brew "rustup-init"
 
-brew "zsh-syntax-highlighting"
-
 # watch COMMAND runs COMMAND on a regular cadence
 brew "watch"
 
@@ -81,3 +79,5 @@ brew "git-lfs"
 
 # Neovim, so I can use Vim in VS Code
 brew "neovim"
+
+brew "fish"

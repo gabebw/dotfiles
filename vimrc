@@ -4,6 +4,11 @@
 " Disable Vi compatibility.
 set nocompatible
 
+" Ensure we use a more POSIX-compatible shell than Fish for Vim stuff like :%!
+if &shell =~# 'fish$'
+  set shell=zsh
+endif
+
 " Leader is <Space>. Set it early because leader is used at the moment mappings
 " are defined. Changing mapleader after a mapping is defined has no effect on
 " the mapping.
@@ -202,7 +207,7 @@ augroup Pasting
   autocmd VimEnter * nnoremap cv :call MyPaste()<CR>
 augroup END
 
-" edit vimrc/zshrc and load vimrc bindings
+" edit vimrc or shell config and load vimrc bindings
 function! MaybeTabedit(file)
   let real_file = resolve(a:file)
   let new_empty_file = line('$') == 1 && getline(1) == '' && bufname('%') == ''
@@ -217,7 +222,7 @@ function! MaybeTabedit(file)
 endfunction
 nnoremap <leader>ev :call MaybeTabedit($MYVIMRC)<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>q :call MaybeTabedit('$HOME/.zshrc')<CR>
+nnoremap <leader>q :call MaybeTabedit('$HOME/.config/fish/config.fish')<CR>
 
 " Typo
 nnoremap :Nohl :nohlsearch
@@ -230,7 +235,7 @@ xnoremap > >gv
 nnoremap Y "*yiw
 
 " ReRun last command
-nnoremap <Leader>rr :write\|VtrSendCommand! !-1 <CR>
+nnoremap <Leader>rr :write\|VtrSendCommand! eval $history[1]<CR>
 " }}}
 
 " ============================================================================
@@ -641,6 +646,7 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
 Plug 'janko-m/vim-test'
+Plug 'dag/vim-fish'
 
 " tmux
 Plug 'christoomey/vim-tmux-runner'

@@ -1,22 +1,22 @@
-#!/bin/zsh
+#!/usr/local/bin/fish
 
 # List all directories in $PROJECT_DIRECTORIES that contain git repositories.
 
-cdpath_directories() {
-  echo "${PROJECT_DIRECTORIES//:/\n}" | while read dir; do
+function cdpath_directories
+  for dir in $PROJECT_DIRECTORIES
     find -L "$dir" \
       -not -path '*/\.*' \
       -type d \
       -maxdepth 1
-  done
-}
+  end
+end
 
-is_a_git_repo(){
-  while read dir; do
-    if [[ -d "$dir/.git" ]]; then
+function is_a_git_repo
+  while read -l dir
+    if [ -d "$dir/.git" ]
       echo "$dir"
-    fi
-  done
-}
+    end
+  end
+end
 
 cdpath_directories | sort -u | is_a_git_repo

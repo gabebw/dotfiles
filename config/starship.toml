@@ -12,6 +12,7 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+${custom.fish_mode}\
 \\$ """
 
 [time]
@@ -62,12 +63,17 @@ diverged = "[⇔](bold fg:197)" # red
 
 [custom.nodejs]
 description = "Custom NodeJS"
-# Using Volta (with post-processing) is slower than just doing `node --version`
-command = "node --version"
+command = "fnm current"
 files = ["package.json", ".node-version", "yarn.lock"]
 directories = ["node_modules"]
 # Unlike the standard nodejs module, it intentionally does not check for
 # *.js or *.ts since that triggers too often
 extensions = []
+format = "[($output )]($style)"
+style = "fg:031" # dark blue
+
+[custom.fish_mode]
+description = "Fish mode"
+command = "fish_default_mode_prompt"
 format = "[($output )]($style)"
 style = "fg:031" # dark blue

@@ -134,6 +134,7 @@
   "telemetry.enableCrashReporter": false,
   "telemetry.enableTelemetry": false,
   "telemetry.telemetryLevel": "off",
+  "terminal.integrated.defaultProfile.osx": "fish",
   "typescript.format.enable": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "vim.incsearch": true,

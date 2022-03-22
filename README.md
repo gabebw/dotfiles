@@ -1,6 +1,6 @@
 # dotfiles
 
-Gabriel Berke-Williams' dotfiles for Zsh, ruby, git, and more.
+Gabriel Berke-Williams' dotfiles for Fish, ruby, git, and more.
 
 They assume you're using OSX.
 
@@ -13,7 +13,7 @@ Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw
     $ ./install.sh
 
 It will install [rcm] and use that to safely symlink the dotfiles, prompting you
-if a file already exists (like if you already have `~/.zshrc`).
+if a file already exists.
 
 [rcm]: http://thoughtbot.github.io/rcm/rcm.7.html
 
@@ -29,9 +29,9 @@ to the tag root. However, non-configuration files and folders like `system/`,
 `rcm` has the concept of tags: items under `tag-git/` are in the `git` tag, and
 so on. I'm using it for organization.
 
-## Zsh
+## Fish
 
-All of the Zsh configuration is in [`zshrc`](/zshrc).
+All of the Fish configuration is in `config/fish`.
 
 ## Attribution
 

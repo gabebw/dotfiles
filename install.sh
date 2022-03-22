@@ -22,7 +22,7 @@ info(){
 }
 
 error(){
-  red "!! $@"
+  red "!! $@" >&2
 }
 
 stay_awake_while(){
@@ -102,9 +102,15 @@ if command_does_not_exist firefox-all-open-urls; then
   stay_awake_while cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
 fi
 
-if ! echo "$SHELL" | grep -Fq zsh; then
-  info "Your shell is not Zsh. Changing it to Zsh..."
-  chsh -s /bin/zsh
+if ! echo "$SHELL" | grep -Fq fish; then
+  if grep -Fq "$(which fish)" /etc/shells; then
+    error "Sorry, fish is not (YET) an approved shell"
+    error "Please add this line to /etc/shells: $(which fish)"
+    exit 1
+  else
+    info "Your shell is not Fish. Changing it to Fish..."
+    chsh -s $(which fish)
+  fi
 fi
 
 info "Linking dotfiles into ~..."
