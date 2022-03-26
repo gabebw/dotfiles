@@ -91,6 +91,19 @@ fish_vi_key_bindings
 set fish_cursor_default block
 set fish_cursor_replace_one underscore
 set fish_cursor_visual block blink
+# Fuzzy match against history, edit selected value
+# For exact match, start the query with a single quote: 'curl
+function fuzzy-history
+  # Copied from `fzf-history-widget`:
+  # https://github.com/junegunn/fzf/blob/master/shell/key-bindings.fish
+  # `-z` uses null bytes to terminate lines so we can find multi-line commands.
+  history -z | fzf --read0 --print0 -q (commandline) | read -lz result
+  and commandline -- $result
+  commandline -f repaint
+end
+
+# Ctrl-r triggers fuzzy history search
+bind -M insert \cr 'fuzzy-history'
 # }}}
 
 # cdpath {{{

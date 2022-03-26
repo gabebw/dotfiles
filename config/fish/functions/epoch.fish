@@ -1,5 +1,5 @@
 function epoch
-  if [ (count $argv) -gt 0 ]
+  if [ (count $argv) -eq 0 ]
     # Print the current epoch
     date +%s
   else
