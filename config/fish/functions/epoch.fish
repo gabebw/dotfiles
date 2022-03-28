@@ -4,6 +4,6 @@ function epoch
     date +%s
   else
     # Parse the given epoch
-    date -r "$1"
+    date -r $argv[1]
   end
 end
