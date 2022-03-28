@@ -11,7 +11,7 @@ function new-project
     return 1
   end
   if [ -f "$project_name" ]
-    echo "!! Project FILE with that name already exists" >&2
+    echo "!! Project *file* with that name already exists" >&2
     return 1
   end
   mkdir $project_name && tcd "./$project_name"
