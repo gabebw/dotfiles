@@ -7,7 +7,7 @@ function gcm
     set -f branch (git current-branch)
     set -f commit_message (string join ' ' $argv)
     # Grab JIRA ticket name (if any) and prefix it to the commit.
-    if string match -r '^(?<ticket_number>[A-Z]{2,}-[0-9]+)' $branch
+    if string match -qr '^(?<ticket_number>[A-Z]{2,}-[0-9]+)' $branch
       # The magic "$ticket_number" variable now contains the named group
       set commit_message "$ticket_number $commit_message"
     end
