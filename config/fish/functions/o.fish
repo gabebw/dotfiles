@@ -9,11 +9,11 @@ function o -a directory
   end
 
   if set -q directory && [ -d "$directory" ]
-    if command fd -e mp4 -e flv -e mov -q --base-directory $directory
+    if command fd -e webm -e mp4 -e flv -e mov -q --base-directory $directory
       # "-X <command>" means the results are concatenated and the command is
       # executed once with all found results.
       custom_fd \
-        -e mp4 -e flv -e mov \
+        -e mp4 -e flv -e mov -e webm \
         --base-directory $directory \
         -X open
     else
