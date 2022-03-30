@@ -108,6 +108,8 @@ end
 
 # Ctrl-r triggers fuzzy history search
 bind -M insert \cr 'fuzzy-history'
+# Ctrl-v opens command line in your editor
+bind -M insert \cv edit_command_buffer
 # }}}
 
 # cdpath {{{
