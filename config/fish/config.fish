@@ -58,6 +58,10 @@ set -x BAT_CONFIG_PATH "~/.config/bat/config"
 alias cat bat
 alias less bat
 abbr -a -- - 'cd -'
+# Slice out a piece of a string (regexes are allowed)
+function slice -a pattern s
+  string match -g -r $pattern $s
+end
 # }}}
 
 # Options {{{
@@ -220,7 +224,10 @@ eval "$(fnm env --use-on-cd --log-level=error)"
 
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
 
-set fish_greeting ""
+set -U fish_greeting ""
+# ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding operator in the middle of a
+# token, so dealing with URLs becomes easier.
+set -U fish_features stderr-nocaret ampersand-nobg-in-token
 
 # Colorscheme: Dracula
 set -U fish_color_normal normal
