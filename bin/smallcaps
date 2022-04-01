@@ -1,11 +1,7 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env fish
 
-# It'd be great if Zsh understood UTF-8 so that this could be a simple `tr`
-# alias, but noooo
-
-result = ARGV.join(" ").tr("abcdefghijklmnopqrstuvwxyz", "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ")
-IO.popen("pbcopy", "w") do |clipboard|
-  clipboard.print(result)
-end
-
-puts "OK, done and copied to clipboard"
+# Fish's `read` removes trailing newline from STDIN, so that the copied result
+# doesn't have a newline at the end. (The most common input is a single line of
+# text.)
+read | tr "abcdefghijklmnopqrstuvwxyz" "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" | pbcopy
+echo "OK, done and copied to clipboard"
