@@ -10,9 +10,10 @@ end
 if not inside_ssh; and not in_vs_code
   # Connect to most recent tmux session
 
-  # We're not in tmux now, but a tmux session exists
   if not set -q TMUX; and tmux has-session 2>/dev/null
-    # the name of the most recent tmux session, sorted by time the session
+    # We're not in tmux now, but a tmux session exists
+
+    # Get the name of the most recent tmux session, sorted by time the session
     # was last attached.
     set -f most_recent_tmux_session (
       tmux list-sessions -F "#{session_last_attached} #{session_name}" | \
@@ -56,9 +57,13 @@ set -x BAT_CONFIG_PATH "~/.config/bat/config"
 alias cat bat
 alias less bat
 abbr -a -- - 'cd -'
-# Slice out a piece of a string (regexes are allowed)
+
+# Slice out a piece of a string using a regex.
+# For example:
+#   $ slice 'sd[fg]' 'asdf'
+#   sdf
 function slice -a pattern s
-  string match -g -r $pattern $s
+  string match -r $pattern $s
 end
 # }}}
 
