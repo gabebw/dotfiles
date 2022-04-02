@@ -1,6 +1,16 @@
 # tmux {{{
-function connect_to_most_recent_tmux_session
-  # Not in tmux now, but a tmux session exists
+function inside_ssh
+  [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
+end
+
+function in_vs_code
+  [ "$TERM_PROGRAM" = "vscode" ]
+end
+
+if not inside_ssh; and not in_vs_code
+  # Connect to most recent tmux session
+
+  # We're not in tmux now, but a tmux session exists
   if not set -q TMUX; and tmux has-session 2>/dev/null
     # the name of the most recent tmux session, sorted by time the session
     # was last attached.
@@ -12,18 +22,6 @@ function connect_to_most_recent_tmux_session
     )
     tmux attach -t $most_recent_tmux_session
   end
-end
-
-function inside_ssh
-  [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
-end
-
-function in_vs_code
-  [ "$TERM_PROGRAM" = "vscode" ]
-end
-
-if not inside_ssh; and not in_vs_code
-  connect_to_most_recent_tmux_session
 end
 # }}}
 
