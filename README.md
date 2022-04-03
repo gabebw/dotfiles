@@ -31,7 +31,7 @@ so on. I'm using it for organization.
 
 ## Fish
 
-All of the Fish configuration is in `config/fish`.
+All of the Fish configuration is in [`config/fish`](/config/fish).
 
 ## Attribution
 
