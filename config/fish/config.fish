@@ -81,7 +81,17 @@ set -x FZF_DEFAULT_OPTS '--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 # }}}
 
 # Completion {{{
-complete -c tcd -f -a "(__fish_complete_directories)"
+complete -c tcd --no-files -a "(__fish_complete_directories)"
+
+# Ensure we never limit to 1 file (the conditions accrete)
+complete -c t --no-files
+# Complete exactly 1 argument (drawn from tmux session names)
+# The special printing format is `#{?condition,IF_TRUE,IF_FALSE}`.
+# So we only print the session name if it's not the current attached session.
+# This prints an empty new line for the current session, which fish
+# automatically ignores.
+complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condition "__fish_is_first_arg"
+
 complete -c viw -w which
 complete -c find-location-of -w which
 complete -c staging -w heroku
