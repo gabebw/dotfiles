@@ -65,6 +65,18 @@ abbr -a -- - 'cd -'
 function slice -a pattern s
   string match -r $pattern $s
 end
+
+function dig-all -a url
+  if not string match -qre '^www\.' $url
+    printf "!! Note that CNAME cannot be on the bare domain\n\n" >&1
+  end
+  for record in a aaaa cname mx ns txt
+    # +noall: Turn off all output
+    # +answer: Show just the answer
+    # +norecurse: Do not follow a CNAME record when checking records
+    dig +noall +answer +norecurse $record $url
+  end
+end
 # }}}
 
 # Options {{{
