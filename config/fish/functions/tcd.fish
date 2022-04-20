@@ -6,5 +6,7 @@ function tcd -a directory session_name
     set -f session_name $(basename $argv[1])
   end
 
-  fish -c "cd $directory && t $session_name"
+  set session_name (string replace ' ' '-' $session_name)
+
+  fish -c "cd '$directory' && t $session_name"
 end
