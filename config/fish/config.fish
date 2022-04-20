@@ -70,6 +70,13 @@ function dig-all -a url
   if not string match -qre '^www\.' $url
     printf "!! Note that CNAME cannot be on the bare domain\n\n" >&1
   end
+
+  # Add a period to the end to canonicalize it, otherwise many records don't
+  # show up with the +norecurse flag
+  if not string match -qre '\.$' $url
+    set -f url "$url."
+  end
+
   for record in a aaaa cname mx ns txt
     # +noall: Turn off all output
     # +answer: Show just the answer
