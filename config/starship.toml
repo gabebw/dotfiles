@@ -7,7 +7,7 @@ add_newline = false
 format = """
 $time\
 $ruby\
-${custom.nodejs}\
+$nodejs\
 $directory\
 $git_branch\
 $git_state\
@@ -60,13 +60,13 @@ behind = "[↓](bold fg:159)" # cyan
 ahead = "[↑](bold fg:159)" # cyan
 diverged = "[⇔](bold fg:197)" # red
 
-[custom.nodejs]
-description = "Custom NodeJS"
-command = "fnm current"
-files = ["package.json", ".node-version", "yarn.lock"]
-directories = ["node_modules"]
+[nodejs]
+# Don't show "v3", just "3"
+version_format = "${raw}"
+detect_files = ["package.json", ".node-version", "yarn.lock"]
+detect_folders = ["node_modules"]
 # Unlike the standard nodejs module, it intentionally does not check for
 # *.js or *.ts since that triggers too often
-extensions = []
-format = "[($output )]($style)"
+detect_extensions = []
+format = "[($version )]($style)"
 style = "fg:031" # dark blue
