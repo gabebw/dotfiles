@@ -113,8 +113,16 @@ complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condit
 
 complete -c viw -w which
 complete -c find-location-of -w which
+
+# Complete `staging` like the `heroku` command
 complete -c staging -w heroku
+# Add a `deploy` subcommand, while keeping the standard Heroku completions
+complete -c staging -n __fish_use_subcommand -a deploy -d "Deploy to staging"
+
+# Complete `production` like the `heroku` command
 complete -c production -w heroku
+# Add a `deploy` subcommand, while keeping the standard Heroku completions
+complete -c production -n __fish_use_subcommand -a deploy -d "Deploy to production"
 
 for script in ~/.config/fish/completions/*.fish
   source $script
