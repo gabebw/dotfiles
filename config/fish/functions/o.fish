@@ -1,3 +1,5 @@
+# This will recurse infinitely into the directory you give it, so just do `o
+# toplevel/` instead of `o toplevel/**/*.*`.
 function o -a directory
   function custom_fd; command fd --no-ignore --type file $argv; end
   function open_images_in_directory
