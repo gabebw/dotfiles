@@ -56,6 +56,9 @@
   "emmet.showAbbreviationSuggestions": false,
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.env": "properties"
+  },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "git.allowForcePush": true,
