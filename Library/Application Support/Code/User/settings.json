@@ -11,6 +11,9 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[rust]": {
     "editor.defaultFormatter": "statiolake.vscode-rustfmt"
   },
@@ -54,6 +57,7 @@
     "typescript"
   ],
   "emmet.showAbbreviationSuggestions": false,
+  "eslint.packageManager": "yarn",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
