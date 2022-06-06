@@ -3,8 +3,6 @@
 ## Directories
 
 /bin/stubs
-# For Middleman
-/build/
 /coverage/
 /doc/
 /log/
