@@ -57,7 +57,9 @@
     "typescript"
   ],
   "emmet.showAbbreviationSuggestions": false,
+  "eslint.format.enable": true,
   "eslint.packageManager": "yarn",
+  "eslint.run": "onSave",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
