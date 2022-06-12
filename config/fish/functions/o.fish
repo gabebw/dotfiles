@@ -4,10 +4,11 @@ function o -a directory
   function custom_fd; command fd --no-ignore --type file $argv; end
   function open_images_in_directory
       # `--max-depth 1` means "only go 1 level inside the directory and don't recurse"
-      custom_fd \
+      open -a Preview (custom_fd \
         -e jpg -e png -e jpeg \
-        --base-directory $argv[1] \
-        -X open -a Preview
+        -a \
+        --base-directory $argv[1] | sort)
+
   end
 
   if set -q directory && [ -d "$directory" ]
