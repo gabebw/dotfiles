@@ -11,8 +11,9 @@ function gcm
       # The magic "$ticket_number" variable now contains the named group
       set commit_message "$ticket_number $commit_message"
     end
-    set -f commit_message_length (printf $commit_message | wc -c | xargs echo -n)
-    if [ (string length $commit_message_length) -gt 50 ]
+    echo $commit_message
+    set -f commit_message_length (string length $commit_message)
+    if [ $commit_message_length -gt 50 ]
       echo "Commit message length ($commit_message_length) > 50, not committing" >&2
       return 1
     else
