@@ -1,7 +1,5 @@
 asvetliakov.vscode-neovim
 benspaulding.procfile
-bodil.prettier-toml
-bungcip.better-toml
 castwide.solargraph
 dbaeumer.vscode-eslint
 DotJoshJohnson.xml
@@ -24,6 +22,7 @@ Prisma.prisma
 rebornix.ruby
 statiolake.vscode-rustfmt
 sysoev.language-stylus
+tamasfe.even-better-toml
 thisismanta.stylus-supremacy
 timonwong.shellcheck
 usernamehw.errorlens

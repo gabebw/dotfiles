@@ -48,6 +48,24 @@
         "settings": {
           "fontStyle": "italic"
         }
+      },
+      {
+        "scope": "variable.key.table",
+        "settings": {
+          "foreground": "#4EC9B0"
+        }
+      },
+      {
+        "scope": "variable.key.array",
+        "settings": {
+          "foreground": "#569CD6"
+        }
+      },
+      {
+        "scope": "constant.other.time",
+        "settings": {
+          "foreground": "#DCDCAA"
+        }
       }
     ]
   },
@@ -68,7 +86,7 @@
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
     "*.dev": "procfile",
-    "*.env": "properties",
+    "*.env": "properties"
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
