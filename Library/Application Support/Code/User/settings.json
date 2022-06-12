@@ -67,7 +67,8 @@
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "files.associations": {
-    "*.env": "properties"
+    "*.dev": "procfile",
+    "*.env": "properties",
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
