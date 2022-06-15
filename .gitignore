@@ -40,3 +40,6 @@ Brewfile*.lock.json
 
 # Never commit node_modules in my dotfiles
 node_modules/
+package-lock.json
+package.json
+yarn.lock
