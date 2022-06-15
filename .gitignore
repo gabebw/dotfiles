@@ -37,3 +37,6 @@ tool-versions
 Brewfile*.lock.json
 
 /config/karabiner/automatic_backups
+
+# Never commit node_modules in my dotfiles
+node_modules/
