@@ -57,6 +57,10 @@
     "typescript"
   ],
   "emmet.showAbbreviationSuggestions": false,
+  "eslint.alwaysShowStatus": true,
+  "eslint.codeActionsOnSave.rules": [
+    "unused-imports/no-unused-imports"
+  ],
   "eslint.format.enable": true,
   "eslint.packageManager": "yarn",
   "eslint.run": "onSave",
