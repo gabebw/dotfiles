@@ -118,7 +118,6 @@
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "openInGitHub.defaultBranch": "master",
-  "prettier.prettierPath": "/Users/gabe/.config/yarn/global/node_modules/prettier",
   "prettier.requireConfig": true,
   "ruby.format": "rufo",
   "rust-analyzer.assist.importMergeBehavior": "none",
