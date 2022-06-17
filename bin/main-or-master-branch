@@ -5,6 +5,8 @@
 
 if git show-ref --quiet origin/main || git rev-parse main &>/dev/null; then
   echo main
+elif [[ "$(basename "$(pwd)")" == blocklist-config ]]; then
+  echo release
 else
   echo master
 fi
