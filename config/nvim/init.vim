@@ -22,4 +22,5 @@ if exists('g:vscode')
   nnoremap K <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 
   nnoremap gcc <Cmd>call VSCodeNotify('editor.action.commentLine')<CR>
+  vnoremap gc <Cmd>call VSCodeNotifyVisual('editor.action.commentLine')<CR>
 endif
