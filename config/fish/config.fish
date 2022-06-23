@@ -40,7 +40,12 @@ alias df "df -h"
 alias sed "sed -E"
 
 alias dup "pushd dotfiles; and git checkout main &>/dev/null; and git pull; and git checkout - &>/dev/null; and popd; and qq"
-alias diff "command diff --color=auto -u3"
+
+# Remove fish's alias, which breaks completions when I add another one
+functions -e diff
+function diff -w diff
+  command diff --color=auto -U3 $argv
+end
 alias mkdir "command mkdir -p"
 alias serialnumber "ioreg -l | rg IOPlatformSerialNumber | cut -d  -f2 | sed 's/[ \"]//g' | tee /dev/tty | pbcopy; echo '(Copied for you)'"
 alias prettyjson "jq ."
