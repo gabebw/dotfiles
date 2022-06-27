@@ -143,6 +143,8 @@ set fish_cursor_visual block blink
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl
 function fuzzy-history
+  test -n "$FZF_TMUX_HEIGHT"; or set FZF_TMUX_HEIGHT 40%
+  set -lx FZF_DEFAULT_OPTS "--height $FZF_TMUX_HEIGHT $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS"
   # Copied from `fzf-history-widget`:
   # https://github.com/junegunn/fzf/blob/master/shell/key-bindings.fish
   # `-z` uses null bytes to terminate lines so we can find multi-line commands.
