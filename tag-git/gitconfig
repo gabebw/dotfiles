@@ -8,7 +8,7 @@
   excludesfile = ~/.gitignore
   autocrlf = false
 [merge]
-  tool = opendiff
+  tool = Kaleidoscope
   # Per @jferris: `ff = only` means Git will never implicitly do a merge commit, including while
   # doing git pull. If I'm unexpectedly out of sync when I git pull, I get this
   # message:
@@ -34,6 +34,7 @@
   # Turn off all prefixes so that I can Cmd-Click a path in the VS Code
   # terminal. `i/tag-git/gitconfig` won't resolve, but `tag-git/gitconfig` will.
   noprefix = true
+  tool = Kaleidoscope
 [alias]
   ls = !git log -S "$(pbpaste)"
   st = status --short --branch
@@ -176,3 +177,12 @@
     line-numbers = true
 [interactive]
     diffFilter = delta --color-only
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+  prompt = false
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustExitCode = true
+[mergetool]
+  prompt = false
