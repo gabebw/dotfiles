@@ -24,5 +24,5 @@ if exists('g:vscode')
   nnoremap gcc <Cmd>call VSCodeNotify('editor.action.commentLine')<CR>
   vnoremap gc <Cmd>call VSCodeNotifyVisual('editor.action.commentLine')<CR>
 
-  nnoremap N <Cmd>call VSCodeNotify('search.action.focusNextSearchResult')<CR>
+  nnoremap S <Cmd>call VSCodeNotify('search.action.focusNextSearchResult')<CR>
 endif
