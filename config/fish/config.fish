@@ -238,6 +238,12 @@ set -x HOMEBREW_INSTALL_CLEANUP 1
 
 # Set up SSH helper (mostly for Git)
 ssh-add -K ~/.ssh/id_rsa 2> /dev/null
+# The `$TERM` is `alacritty`, which is non-standard and makes various CLI
+# commands on Digital Ocean think they're in an unsupported terminal.
+# The `SetEnv` option (e.g. `-o 'SetEnv TERM=xterm-256color'` or adding it to
+# `~/.ssh/config`) only works on OpenSSH >= 8.7, which is not built in on macOS.
+# So we'll just do this for now.
+alias ssh "TERM=xterm-256color command ssh"
 
 # $PATH {{{
 # $PATH stuff is last so that other things don't add their own $PATH stuff
