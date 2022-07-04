@@ -118,6 +118,7 @@ complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condit
 
 complete -c viw -w which
 complete -c find-location-of -w which
+complete -c fly -w flyctl
 
 # Complete `staging` like the `heroku` command
 complete -c staging -w heroku
