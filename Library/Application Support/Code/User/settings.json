@@ -155,6 +155,7 @@
     "denali/": true
   },
   "search.useGlobalIgnoreFiles": true,
+  "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "stylusSupremacy.alwaysUseExtends": true,
   "stylusSupremacy.ignoreFiles": [
     "src/styl/noprint.styl"
