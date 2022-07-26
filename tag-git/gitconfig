@@ -104,6 +104,7 @@
 [credential]
   helper = osxkeychain
 [commit]
+  cleanup = scissors
   template = ~/.git-template/gitmessage
   verbose = true
 [grep]
