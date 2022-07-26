@@ -1,4 +1,7 @@
 {
+  "[bazel]": {
+    "editor.formatOnSave": false
+  },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
