@@ -19,7 +19,7 @@ all-safari-links(){
   # will open Safari and we don't want do do that if Safari isn't already
   # running.
   if is_running /Applications/Safari.app/Contents/MacOS/Safari; then
-    osascript -l JavaScript <<EOL
+    osascript -l JavaScript <<EOL | rg -v '^favorites://$'
       app = Application('Safari');
       tabs = [];
       for(var i = 0; i < app.windows.length; i++){
