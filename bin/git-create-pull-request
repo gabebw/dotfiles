@@ -265,9 +265,25 @@ commit_message_file = Tempfile.new("commit_message_file")
 commit_message = CommitMessageBuilder.new(repo).build
 File.open(commit_message_file, "w") { |f| f.write(commit_message) }
 
-hub_pull_request = %{hub pull-request -b "$(main-or-master-branch)" -e -o -F '#{commit_message_file.path}'}
-if ! system(hub_pull_request)
+if ! system("vim '#{commit_message_file.path}'")
   # Vim exited abnormally, which always means I did it intentionally with `:cq`
   # and don't want to create the PR.
   puts "OK, not creating PR :)"
+  exit 0
+end
+
+contents = IO.readlines(commit_message_file.path)
+
+# Pull out the first line to pass to `--title` below
+title = contents[0]
+# And remove the title from the file that we use for the body
+File.open(commit_message_file, "w") { |f| f.write(contents[1..].join) }
+
+pull_request = %{gh pr create --base "$(main-or-master-branch)" --title '#{title}' --body-file '#{commit_message_file.path}'}
+url = system(pull_request)
+if !url
+  puts "Something went wrong creating the PR"
+  exit 1
+else
+  system("open '#{url}'")
 end
