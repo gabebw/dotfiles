@@ -12,4 +12,9 @@ parse_git_dirty(){ [[ -n $(git status -s 2> /dev/null) ]] && echo ' ✗'; }
 ##########
 # MUST wrap $fg in %{...%} or it creates weird errors with commands >1 line
 # Use %f to reset color and use terminal default colors (set in Terminal prefs)
-export PROMPT="[\$(user_host)%{$fg[green]%}|\$(erlang_version)\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%f "
+if type 'erlang_version' 2>/dev/null | grep -q 'function'
+then
+   export PROMPT="[\$(user_host)%{$fg[green]%}|\$(erlang_version)\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%f "
+else
+  export PROMPT="[\$(user_host)%{$fg[green]%}|\$(git_branch)] %{$fg[blue]%}%~ %{$fg[green]%}$%f "
+fi

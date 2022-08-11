@@ -17,17 +17,19 @@ source $BASE'prompt.zsh'
 # (non-core functionality) #
 ############################
 
-source $BASE'erlang.zsh'
-source $BASE'java.zsh'
 source $BASE'git.zsh'
 source $BASE'npm.zsh'
-source $BASE'scala.zsh'
-source $BASE'elixir.zsh'
+# source $BASE'scala.zsh'
+# source $BASE'elixir.zsh'
+# source $BASE'erlang.zsh'
+# source $BASE'java.zsh'
 
 export PATH
 trim_path
 
 # [In]offensive short fortunes, where short means <= 140 chars
+# if fortune is broken due to missing a off file:
+# https://github.com/ohmyzsh/ohmyzsh/issues/9698
 fortune -a -s -n140
 
 # Houston, we have liftoff.
