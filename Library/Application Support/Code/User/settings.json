@@ -93,6 +93,11 @@
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
+    "**/.ammonite": true,
+    "**/.bloop": true,
+    "**/.metals": true
+  },
   "git.allowForcePush": true,
   "git.autoStash": true,
   "git.confirmForcePush": false,
