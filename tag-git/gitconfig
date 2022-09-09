@@ -36,6 +36,7 @@
   noprefix = true
   tool = Kaleidoscope
 [alias]
+  mt = mergetool
   ls = !git log -S "$(pbpaste)"
   st = status --short --branch
   co = checkout
