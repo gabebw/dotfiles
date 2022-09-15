@@ -3,5 +3,16 @@
 # Fish's `read` removes trailing newline from STDIN, so that the copied result
 # doesn't have a newline at the end. (The most common input is a single line of
 # text.)
-read | tr "abcdefghijklmnopqrstuvwxyz" "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" | pbcopy
+
+function translate
+  tr "abcdefghijklmnopqrstuvwxyz" "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" | pbcopy
+end
+
+if [ (count $argv) -eq 0 ]
+  # No args, assume we're piping in
+  read | translate
+else
+  echo $argv | translate
+end
+
 echo "OK, done and copied to clipboard"
