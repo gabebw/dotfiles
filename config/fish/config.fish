@@ -281,9 +281,14 @@ eval "$(fnm env --use-on-cd --log-level=error)"
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
 
 set -U fish_greeting ""
-# ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding operator in the middle of a
-# token, so dealing with URLs becomes easier.
-set -U fish_features stderr-nocaret ampersand-nobg-in-token
+# Erase a global (non-universal) variable if set, since it interferes with the
+# universal one.
+set --erase fish_features
+# ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding
+#   operator in the middle of a token, so dealing with URLs becomes easier.
+# qmark-noglob: `?` is no longer interpreted as a glob operator in the middle
+#   of a token, so dealing with URLs becomes easier.
+set -U fish_features stderr-nocaret ampersand-nobg-in-token qmark-noglob
 
 # Colorscheme: Dracula
 set -U fish_color_normal normal
