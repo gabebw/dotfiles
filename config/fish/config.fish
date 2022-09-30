@@ -46,6 +46,9 @@ functions -e diff
 function diff -w diff
   command diff --color=auto -U3 $argv
 end
+
+# It can be used anywhere, not just in git
+alias diff-long-lines "git diff --word-diff=porcelain"
 alias mkdir "command mkdir -p"
 alias serialnumber "ioreg -l | rg IOPlatformSerialNumber | cut -d  -f2 | sed 's/[ \"]//g' | tee /dev/tty | pbcopy; echo '(Copied for you)'"
 alias prettyjson "jq ."
