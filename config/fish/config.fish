@@ -179,11 +179,8 @@ end
 add_dir_to_cdpath $HOME/code
 add_subdirs_to_cdpath $HOME/code
 add_subdirs_to_cdpath $HOME/code/work
-
-# Exporting $CDPATH is bad:
-# https://bosker.wordpress.com/2012/02/12/bash-scripters-beware-of-the-cdpath/
-# So, export PROJECT_DIRECTORIES instead, but set it to $CDPATH
-set -x PROJECT_DIRECTORIES $CDPATH
+# Prepend `.` so that directories in the current dir are tried first
+set -g --prepend CDPATH .
 # }}}
 
 # Prompt {{{

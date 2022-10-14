@@ -1,22 +1,12 @@
-#!/usr/local/bin/fish
+#!/usr/local/bin/fish --no-config
 
-# List all directories in $PROJECT_DIRECTORIES that contain git repositories.
+# List all directories in ~/code that contain git repositories.
 
-function cdpath_directories
-  for dir in $PROJECT_DIRECTORIES
-    find -L "$dir" \
-      -not -path '*/\.*' \
+function git_directories
+    find -L $HOME/code \
+      -path '*/.git' \
       -type d \
-      -maxdepth 1
-  end
+      -maxdepth 3
 end
 
-function is_a_git_repo
-  while read -l dir
-    if [ -d "$dir/.git" ]
-      echo "$dir"
-    end
-  end
-end
-
-cdpath_directories | sort -u | is_a_git_repo
+git_directories | sed 's|/\.git$||'
