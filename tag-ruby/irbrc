@@ -29,3 +29,7 @@ def copy
   end
   nil
 end
+
+def paste
+  IO.popen("pbpaste", "r").read
+end
