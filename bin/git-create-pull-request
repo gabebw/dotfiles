@@ -280,10 +280,11 @@ title = contents[0]
 File.open(commit_message_file, "w") { |f| f.write(contents[1..].join) }
 
 pull_request = %{gh pr create --base "$(main-or-master-branch)" --title '#{title}' --body-file '#{commit_message_file.path}'}
-url = system(pull_request)
-if !url
-  puts "Something went wrong creating the PR"
+succeeded = system(pull_request)
+if !succeeded
+  puts
+  puts "!!! Something went wrong creating the PR"
   exit 1
 else
-  system("open '#{url}'")
+  system("gh pr view --web >/dev/null")
 end
