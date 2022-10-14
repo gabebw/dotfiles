@@ -104,6 +104,10 @@ class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
     " #{content} |"
   end
 
+  def link(link, title, content)
+    "[#{content}](#{link})"
+  end
+
   private
 
   def unwrapped(text)
