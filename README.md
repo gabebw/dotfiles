@@ -4,7 +4,7 @@ Gabriel Berke-Williams' dotfiles for Fish, ruby, git, and more.
 
 They assume you're using OSX.
 
-Questions? Comments? Open an issue or tweet [@gabebw](https://twitter.com/gabebw).
+Questions? Comments? Open an issue!
 
 ## Installation
 
