@@ -144,7 +144,8 @@
   "gitlens.views.repositories.location": "scm",
   "gitlens.views.search.location": "gitlens",
   "importSorter.generalConfiguration.exclude": [
-    "/denali/"
+    "/denali/",
+    "/sdui/"
   ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.quoteMark": "double",
