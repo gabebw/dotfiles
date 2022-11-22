@@ -87,6 +87,9 @@
   "eslint.run": "onSave",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
   "files.associations": {
     "*.dev": "procfile",
     "*.env": "properties"
