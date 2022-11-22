@@ -39,6 +39,7 @@
   ],
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
+  "editor.cursorSurroundingLines": 5,
   "editor.fontFamily": "JetBrains Mono NL, monospace",
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
