@@ -134,8 +134,8 @@
         "branches": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/branches",
         "commit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/commit/${id}",
         "file": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/${file}${line}",
-        "fileInBranch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/blob/${branch}/${file}${line}",
-        "fileInCommit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/blob/${id}/${file}${line}",
+        "fileInBranch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/blob/${branch}/${file}${line}",
+        "fileInCommit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/blob/${id}/${file}${line}",
         "fileLine": "#L${line}",
         "fileRange": "#L${start}-L${end}",
         "repository": "https://gitlab.grammarly.io/${repoBase}/${repoPath}"
