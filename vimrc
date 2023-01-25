@@ -376,6 +376,7 @@ nnoremap <Leader>b :FzfBuffers<CR>
 " easytags
 " ----------
 let g:easytags_async = 1
+let g:easytags_cmd = '/usr/local/bin/ctags'
 
 " rails.vim
 "----------
