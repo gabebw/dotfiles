@@ -65,6 +65,7 @@ set -x BAT_CONFIG_PATH "~/.config/bat/config"
 alias cat bat
 alias less bat
 abbr -a -- - 'cd -'
+alias dotfiles 'cd dotfiles'
 
 # Slice out a piece of a string using a regex.
 # For example:
