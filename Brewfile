@@ -81,3 +81,6 @@ brew "git-lfs"
 brew "neovim"
 
 brew "fish"
+
+# SDUI
+brew "openjdk@17"
