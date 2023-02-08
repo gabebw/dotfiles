@@ -158,6 +158,7 @@
   "importSorter.importStringConfiguration.quoteMark": "double",
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "metals.showInferredType": true,
   "openInGitHub.defaultBranch": "master",
   "prettier.requireConfig": true,
   "ruby.format": "rufo",
