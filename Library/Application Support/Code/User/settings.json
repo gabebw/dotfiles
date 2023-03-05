@@ -186,6 +186,7 @@
   "telemetry.enableTelemetry": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.osx": "fish",
+  "terminal.integrated.enableMultiLinePasteWarning": false,
   "typescript.format.enable": false,
   "typescript.surveys.enabled": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
