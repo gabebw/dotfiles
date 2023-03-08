@@ -11,7 +11,8 @@ branch=${1:-$(git rev-parse HEAD)}
 target_commit=$(
   git log -75 --color=always "$branch" | \
   fzf --ansi --no-sort --reverse --tiebreak=index | \
-  awk '{print $1}'
+  awk '{print $1}' | \
+  xargs git rev-parse
 )
 
 echo "$target_commit" | pbcopy
