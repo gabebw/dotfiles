@@ -1,7 +1,7 @@
-function hbc -a branch
-  string length -q -- $branch; or set branch (git-shalector)
+function hbc -a commit
+  string length -q -- $commit; or set commit (git-shalector)
 
-  if [ (string length $branch) -gt 0 ]
-    hub browse -- commit/$branch
+  if [ (string length $commit) -gt 0 ]
+    gh browse $commit
   end
 end

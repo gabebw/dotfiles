@@ -9,8 +9,14 @@ if [[ -z "$1" ]]; then
   exit 1
 fi
 
+if ! gh auth status &>/dev/null; then
+  echo 'You need to log in! Run this: `gh auth login`' >&2
+  exit 1
+fi
+
 user=$1
-hub api -t graphql -f query="{
+
+query="{
   user(login: \"$user\") {
     repositories(first: 30, isFork: false, ownerAffiliations: OWNER, orderBy: {field: PUSHED_AT, direction: DESC}) {
       nodes {
@@ -18,4 +24,7 @@ hub api -t graphql -f query="{
       }
     }
   }
-}" | cut -f2
+}"
+
+gh api graphql -f query="$query" | \
+  jq --raw-output '.data.user.repositories.nodes[].nameWithOwner'

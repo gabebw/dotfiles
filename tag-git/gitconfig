@@ -66,7 +66,6 @@
   g = grep --extended-regexp --break --heading --line-number --show-function
   ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
-  compare = hub compare
   current-branch = branch --show-current
   # Delete merged branches
   cleanup-merged = !git branch --merged | rg -v '^\\*| master' | xargs git branch -d
@@ -154,8 +153,6 @@
   path = ~/.gitconfig.local
 [branch]
   sort = -committerdate
-[hub]
-  protocol = ssh
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f

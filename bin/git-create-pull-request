@@ -52,16 +52,9 @@ class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
   end
 
   def header(text, header_level)
-    # Avoid prefixing with "#" because `hub` will remove lines with that prefix.
-    if header_level == 1
-      "#{text}\n===========\n\n"
-    elsif header_level == 2
-      "#{text}\n-----------\n\n"
-    else
-      # Not sure what else to do here, honestly.
-      marker = "#" * header_level
-      "#{marker} #{text}\n\n"
-    end
+    # We can prefix with `#` and `gh` will not treat that as a comment
+    marker = "#" * header_level
+    "#{marker} #{text}\n\n"
   end
 
   def hrule
