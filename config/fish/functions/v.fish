@@ -3,6 +3,10 @@ function v -a query
     echo "Refusing to run this in your home directory" >&2
     return 1
   end
-  set -f files (fzf-tmux --query=$query --multi --exit-0)
+  if [ $TERM_PROGRAM = "vscode" ]
+    set -f files (fzf --query=$query --multi --exit-0)
+  else
+    set -f files (fzf-tmux --query=$query --multi --exit-0)
+  end
   [ (count $files) -gt 0 ]; and $VISUAL $files
 end
