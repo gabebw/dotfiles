@@ -21,9 +21,9 @@ if exists('g:vscode')
   " Search for word under cursor
   nnoremap K <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 
-  xmap gc  <Plug>VSCodeCommentary
-  nmap gc  <Plug>VSCodeCommentary
-  omap gc  <Plug>VSCodeCommentary
+  xmap gc  <Plug>VSCodeCommentaryLine
+  nmap gc  <Plug>VSCodeCommentaryLine
+  omap gc  <Plug>VSCodeCommentaryLine
   nmap gcc <Plug>VSCodeCommentaryLine
 
   nnoremap S <Cmd>call VSCodeNotify('search.action.focusNextSearchResult')<CR>
