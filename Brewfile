@@ -66,6 +66,7 @@ brew "gnuplot"
 brew "sinclairtarget/wst/um"
 
 # Rust
+# Don't install `rust` - let rustup handle it
 brew "rustup-init"
 
 # watch COMMAND runs COMMAND on a regular cadence
