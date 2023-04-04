@@ -8,6 +8,9 @@
   "[html]": {
     "editor.defaultFormatter": "HookyQR.beautify"
   },
+  "[java]": {
+    "spotlessGradle.format.enable": false
+  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -46,6 +49,7 @@
   "editor.fontFamily": "JetBrains Mono NL, monospace",
   "editor.fontSize": 18,
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.minimap.enabled": false,
   "editor.tabSize": 2,
   "editor.tokenColorCustomizations": {
