@@ -50,7 +50,10 @@ end
 # It can be used anywhere, not just in git
 alias diff-long-lines "git diff --word-diff=porcelain"
 alias mkdir "command mkdir -p"
-alias serialnumber "ioreg -l | rg IOPlatformSerialNumber | cut -d  -f2 | sed 's/[ \"]//g' | tee /dev/tty | pbcopy; echo '(Copied for you)'"
+function serialnumber
+  ioreg -l | rg IOPlatformSerialNumber | sed -e 's/^.*= "(.+)"/\1/' | tee /dev/tty | pbcopy
+  echo '(Copied for you)'
+end
 alias prettyjson "jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml "xmllint --format -"
