@@ -13,10 +13,6 @@ tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
 
-# Includes an updated CA bundle.
-# Crucial for my Pinboard integration, even if it's not `brew link`ed in.
-brew "curl"
-
 brew "bat"
 brew "chrome-cli"
 brew "fd"
