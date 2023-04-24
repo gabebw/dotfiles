@@ -1,5 +1,5 @@
 javascript:(function(){
-  const wg = /(\d+(?:\.\d*)?)\s*?(kgs?)/ig;
+  const wg = /(\d+(?:\.\d*)?)\s*?(?:(kg|kilo)s?)/ig;
   const cm = /(\d+(?:\.\d*)?)\s*?cms?/ig;
   const conversion_factor = 2.20462262;
 
@@ -12,9 +12,7 @@ javascript:(function(){
 
   function kgToLb(match, number, unit) {
     const e = parseFloat(number, 10);
-    if (unit.match(/^kgs?$/i)) {
-      match += ` (${Math.round(e * conversion_factor)}lbs)`;
-    }
+    match += ` (${Math.round(e * conversion_factor)}lbs)`;
     return match
   }
 
