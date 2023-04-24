@@ -4,10 +4,16 @@ javascript:(function(){
   const conversion_factor = 2.20462262;
 
   function toFeet(cm) {
-    var realFeet = ((cm * 0.393700) / 12);
-    var feet = Math.floor(realFeet);
-    var inches = Math.round((realFeet - feet) * 12);
-    return `${feet}&prime;${inches}&Prime;`;
+    const realInches = cm * 0.3937;
+    if (realInches < 48) {
+      /* Assume this is not height, but something else: use inches */
+      return `${Math.floor(realInches)}&Prime;`;
+    } else {
+      const realFeet = realInches / 12;
+      const feet = Math.floor(realFeet);
+      const inches = Math.round((realFeet - feet) * 12);
+      return `${feet}&prime;${inches}&Prime;`;
+    }
   }
 
   function kgToLb(match, number, unit) {
