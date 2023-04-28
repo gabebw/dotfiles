@@ -128,3 +128,56 @@ Find an object with a `.name` key that contains "Gabe" in the string:
 To ignore case, pass the "i" flag (note the semicolon!):
 
     jq 'select(.name | test("Gabe"; "i"))'
+
+## RENAME A KEY
+
+...without having to re-specify all of the other keys.
+
+Given this input:
+
+    [
+      {
+        "type": "dog",
+        "name": "Fido",
+        "weightInKg": 36.2,
+      },
+      {
+        "type": "cat",
+        "name": "Whiskers",
+        "weightInKg": 4,
+      }
+    ]
+
+Use `with_entries` on a single entry, or `map(with_entries(...))` on an array:
+
+    cat data.json | jq 'map(with_entries(if .key == "type" then .key = "species" else . end))'
+
+## TRANSFORM A NESTED KEY
+
+Given this input:
+
+    [
+      {
+        "type": "dog",
+        "name": "Fido",
+        "weightInKg": 36.2,
+      },
+      {
+        "type": "cat",
+        "name": "Whiskers",
+        "weightInKg": 4,
+      }
+    ]
+
+Let's say you want their weight in pounds, not kilograms. To transform the
+`weightInKg` key without changing any other keys:
+
+    cat data.json | jq '.[].weightInKg |= .*2.205)'
+
+To round it:
+
+    cat data.json | jq '.[].weightInKg |= (.*2.205 | round)'
+
+And to rename the key to `weightInLbs`:
+
+    cat data.json | jq '.[].weightInKg |= (.*2.205 | round)' | map(with_entries(if .key == "weightInKg" then .key = "weightInLbs" else . end))'
