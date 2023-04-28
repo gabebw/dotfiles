@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/usr/bin/env fish -N
 
 # Fish's `read` removes trailing newline from STDIN, so that the copied result
 # doesn't have a newline at the end. (The most common input is a single line of
