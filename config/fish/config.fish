@@ -7,7 +7,7 @@ function in_vs_code
   [ "$TERM_PROGRAM" = "vscode" ]
 end
 
-if not inside_ssh; and not in_vs_code
+if not inside_ssh; and not in_vs_code; and not set -q DO_NOT_AUTOCONNECT_TO_TMUX
   # Connect to most recent tmux session
 
   if not set -q TMUX; and tmux has-session 2>/dev/null
