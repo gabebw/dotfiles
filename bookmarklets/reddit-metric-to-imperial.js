@@ -1,7 +1,11 @@
 javascript: (function () {
-  const wg = /(\d+(?:\.\d*)?)\s*?(?:(kg|kilo)s?)/gi;
-  const cm = /(\d+(?:\.\d*)?)\s*?cms?/gi;
+  const wg = /(\d+(?:[.,]\d*)?)\s*?(?:(kg|kilo)s?)/gi;
+  const cm = /(\d+(?:[.,]\d*)?)\s*?cms?/gi;
   const conversion_factor = 2.20462262;
+
+  function parseNumberWithPossibleDecimalComma(s) {
+    return parseFloat(s.replace(",", "."), 10);
+  }
 
   function toFeet(cm) {
     const realInches = cm * 0.3937;
@@ -17,7 +21,7 @@ javascript: (function () {
   }
 
   function kgToLb(match, number, unit) {
-    const e = parseFloat(number, 10);
+    const e = parseNumberWithPossibleDecimalComma(number);
     match += ` (${Math.round(e * conversion_factor)}lbs)`;
     return match;
   }
@@ -27,7 +31,8 @@ javascript: (function () {
       .replace(wg, kgToLb)
       .replace(
         cm,
-        (match, number) => match + ` (${toFeet(parseFloat(number, 10))})`
+        (match, number) =>
+          match + ` (${toFeet(parseNumberWithPossibleDecimalComma(number))})`
       );
   }
 
