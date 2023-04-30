@@ -1,5 +1,5 @@
 javascript: (function () {
-  const wg = /(\d+(?:[.,]\d*)?)\s*?(?:(kg|kilo)s?)/gi;
+  const wg = /(\d+(?:[.,]\d*)?)\s*?(?:(kg|kilogram|kilo)s?)/gi;
   const cm = /(\d+(?:[.,]\d*)?)\s*?cms?/gi;
   const conversion_factor = 2.20462262;
 
