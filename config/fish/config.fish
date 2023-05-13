@@ -1,3 +1,26 @@
+if not status --is-interactive
+  # Problem: Scripts are slow because my configuration in this file is slow.
+  # Solution: Skip the configuration if not running interactively.
+  #
+  # Unlike files like `~/.bashrc` (which runs only for interactive shells)
+  # shells, `config.fish` is run for *every* fish shell, including
+  # non-interactive shells. This was surprising to me.
+  #
+  # By skipping it, I speed up things like:
+  #
+  # * scripts that run with `#!/usr/bin/env fish`
+  # * fzf, surprisingly: $FZF_DEFAULT_COMMAND is run with $SHELL, approximately
+  #   equivalent to doing `fish -c $FZF_DEFAULT_COMMAND`
+  #
+  # As a rough benchmark, skipping my configuration saves ~130ms on `fzf`
+  # initialization.
+  if not set -q I_REALLY_WANT_TO_RUN_FISH_CONFIG_FOR_FIND_LOCATION_OF
+    # This escape hatch means that things below can run in a non-interactive
+    # shell, so there are more checks below for `status --is-interactive`.
+    return 0
+  end
+end
+
 # tmux {{{
 function inside_ssh
   [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
@@ -7,7 +30,7 @@ function in_vs_code
   [ "$TERM_PROGRAM" = "vscode" ]
 end
 
-if not inside_ssh; and not in_vs_code; and not set -q DO_NOT_AUTOCONNECT_TO_TMUX
+if not inside_ssh; and not in_vs_code; and status --is-interactive
   # Connect to most recent tmux session
 
   if not set -q TMUX; and tmux has-session 2>/dev/null
@@ -112,42 +135,46 @@ set -x FZF_DEFAULT_OPTS '--color fg:188,bg:233,hl:103,fg+:222,bg+:234,hl+:104
 # }}}
 
 # Completion {{{
-complete -c tcd --no-files -a "(__fish_complete_directories)"
+if status --is-interactive
+  complete -c tcd --no-files -a "(__fish_complete_directories)"
 
-# Ensure we never limit to 1 file (the conditions accrete)
-complete -c t --no-files
-# Complete exactly 1 argument (drawn from tmux session names)
-# The special printing format is `#{?condition,IF_TRUE,IF_FALSE}`.
-# So we only print the session name if it's not the current attached session.
-# This prints an empty new line for the current session, which fish
-# automatically ignores.
-complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condition "__fish_is_first_arg"
+  # Ensure we never limit to 1 file (the conditions accrete)
+  complete -c t --no-files
+  # Complete exactly 1 argument (drawn from tmux session names)
+  # The special printing format is `#{?condition,IF_TRUE,IF_FALSE}`.
+  # So we only print the session name if it's not the current attached session.
+  # This prints an empty new line for the current session, which fish
+  # automatically ignores.
+  complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condition "__fish_is_first_arg"
 
-complete -c viw -w which
-complete -c find-location-of -w which
-complete -c fly -w flyctl
+  complete -c viw -w which
+  complete -c find-location-of -w which
+  complete -c fly -w flyctl
 
-# Complete `staging` like the `heroku` command
-complete -c staging -w heroku
-# Add a `deploy` subcommand, while keeping the standard Heroku completions
-complete -c staging -n __fish_use_subcommand -a deploy -d "Deploy to staging"
+  # Complete `staging` like the `heroku` command
+  complete -c staging -w heroku
+  # Add a `deploy` subcommand, while keeping the standard Heroku completions
+  complete -c staging -n __fish_use_subcommand -a deploy -d "Deploy to staging"
 
-# Complete `production` like the `heroku` command
-complete -c production -w heroku
-# Add a `deploy` subcommand, while keeping the standard Heroku completions
-complete -c production -n __fish_use_subcommand -a deploy -d "Deploy to production"
+  # Complete `production` like the `heroku` command
+  complete -c production -w heroku
+  # Add a `deploy` subcommand, while keeping the standard Heroku completions
+  complete -c production -n __fish_use_subcommand -a deploy -d "Deploy to production"
 
-for script in ~/.config/fish/completions/*.fish
-  source $script
+  for script in ~/.config/fish/completions/*.fish
+    source $script
+  end
 end
 # }}}
 
 # Key bindings {{{
 # Vim-style line editing
-fish_vi_key_bindings
-set fish_cursor_default block
-set fish_cursor_replace_one underscore
-set fish_cursor_visual block blink
+if status --is-interactive
+  fish_vi_key_bindings
+  set fish_cursor_default block
+  set fish_cursor_replace_one underscore
+  set fish_cursor_visual block blink
+end
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl
 function fuzzy-history
@@ -161,34 +188,40 @@ function fuzzy-history
   commandline -f repaint
 end
 
-# Ctrl-r triggers fuzzy history search
-bind -M insert \cr 'fuzzy-history'
-# Ctrl-v opens command line in your editor
-bind -M insert \cv edit_command_buffer
+if status --is-interactive
+  # Ctrl-r triggers fuzzy history search
+  bind -M insert \cr 'fuzzy-history'
+  # Ctrl-v opens command line in your editor
+  bind -M insert \cv edit_command_buffer
+end
 # }}}
 
 # cdpath {{{
-function add_dir_to_cdpath -a directory
-  if [ -d "$directory" ]
-    set -g CDPATH $CDPATH $directory
+if status --is-interactive
+  function add_dir_to_cdpath -a directory
+    if [ -d "$directory" ]
+      set -g CDPATH $CDPATH $directory
+    end
   end
-end
 
-function add_subdirs_to_cdpath -a directory
-  for subdir in $directory/*/
-    set -g CDPATH $CDPATH (string replace -r '/$' '' $subdir)
+  function add_subdirs_to_cdpath -a directory
+    for subdir in $directory/*/
+      set -g CDPATH $CDPATH (string replace -r '/$' '' $subdir)
+    end
   end
-end
 
-add_dir_to_cdpath $HOME/code
-add_subdirs_to_cdpath $HOME/code
-add_subdirs_to_cdpath $HOME/code/work
-# Prepend `.` so that directories in the current dir are tried first
-set -g --prepend CDPATH .
+  add_dir_to_cdpath $HOME/code
+  add_subdirs_to_cdpath $HOME/code
+  add_subdirs_to_cdpath $HOME/code/work
+  # Prepend `.` so that directories in the current dir are tried first
+  set -g --prepend CDPATH .
+end
 # }}}
 
 # Prompt {{{
-starship init fish | source
+if status --is-interactive
+  starship init fish | source
+end
 # }}}
 
 # Git {{{
@@ -242,7 +275,9 @@ set -x HOMEBREW_INSTALL_CLEANUP 1
 # }}}
 
 # Set up SSH helper (mostly for Git)
-ssh-add -K ~/.ssh/id_rsa 2> /dev/null
+if status --is-interactive
+  ssh-add -K ~/.ssh/id_rsa 2> /dev/null
+end
 # The `$TERM` is `alacritty`, which is non-standard and makes various CLI
 # commands on Digital Ocean think they're in an unsupported terminal.
 # The `SetEnv` option (e.g. `-o 'SetEnv TERM=xterm-256color'` or adding it to
@@ -279,45 +314,49 @@ status --is-interactive; and rbenv init - fish | source
 fish_add_path ./bin/stubs
 
 # Node
-eval "$(fnm env --use-on-cd --log-level=error)"
+if status --is-interactive
+  eval "$(fnm env --use-on-cd --log-level=error)"
+end
 # }}}
 
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
 
-set -U fish_greeting ""
-# Erase a global (non-universal) variable if set, since it interferes with the
-# universal one.
-set --erase fish_features
-# ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding
-#   operator in the middle of a token, so dealing with URLs becomes easier.
-# qmark-noglob: `?` is no longer interpreted as a glob operator in the middle
-#   of a token, so dealing with URLs becomes easier.
-set -U fish_features stderr-nocaret ampersand-nobg-in-token qmark-noglob
+if status --is-interactive
+  set -U fish_greeting ""
+  # Erase a global (non-universal) variable if set, since it interferes with the
+  # universal one.
+  set --erase fish_features
+  # ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding
+  #   operator in the middle of a token, so dealing with URLs becomes easier.
+  # qmark-noglob: `?` is no longer interpreted as a glob operator in the middle
+  #   of a token, so dealing with URLs becomes easier.
+  set -U fish_features stderr-nocaret ampersand-nobg-in-token qmark-noglob
 
-# Colorscheme: Dracula
-set -U fish_color_normal normal
-set -U fish_color_command F8F8F2
-set -U fish_color_quote F1FA8C
-set -U fish_color_redirection 8BE9FD
-set -U fish_color_end 50FA7B
-set -U fish_color_error FFB86C
-set -U fish_color_param FF79C6
-set -U fish_color_comment 6272A4
-set -U fish_color_match --background=brblue
-set -U fish_color_selection white --bold --background=brblack
-set -U fish_color_search_match bryellow --background=brblack
-set -U fish_color_history_current --bold
-set -U fish_color_operator 00a6b2
-set -U fish_color_escape 00a6b2
-set -U fish_color_cwd green
-set -U fish_color_cwd_root red
-set -U fish_color_valid_path --underline
-set -U fish_color_autosuggestion BD93F9
-set -U fish_color_user brgreen
-set -U fish_color_host normal
-set -U fish_color_cancel --reverse
-set -U fish_pager_color_prefix normal --bold --underline
-set -U fish_pager_color_progress brwhite --background=cyan
-set -U fish_pager_color_completion normal
-set -U fish_pager_color_description B3A06D
-set -U fish_pager_color_selected_background --background=brblack
+  # Colorscheme: Dracula
+  set -U fish_color_normal normal
+  set -U fish_color_command F8F8F2
+  set -U fish_color_quote F1FA8C
+  set -U fish_color_redirection 8BE9FD
+  set -U fish_color_end 50FA7B
+  set -U fish_color_error FFB86C
+  set -U fish_color_param FF79C6
+  set -U fish_color_comment 6272A4
+  set -U fish_color_match --background=brblue
+  set -U fish_color_selection white --bold --background=brblack
+  set -U fish_color_search_match bryellow --background=brblack
+  set -U fish_color_history_current --bold
+  set -U fish_color_operator 00a6b2
+  set -U fish_color_escape 00a6b2
+  set -U fish_color_cwd green
+  set -U fish_color_cwd_root red
+  set -U fish_color_valid_path --underline
+  set -U fish_color_autosuggestion BD93F9
+  set -U fish_color_user brgreen
+  set -U fish_color_host normal
+  set -U fish_color_cancel --reverse
+  set -U fish_pager_color_prefix normal --bold --underline
+  set -U fish_pager_color_progress brwhite --background=cyan
+  set -U fish_pager_color_completion normal
+  set -U fish_pager_color_description B3A06D
+  set -U fish_pager_color_selected_background --background=brblack
+end

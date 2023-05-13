@@ -1,4 +1,4 @@
-#!/usr/bin/env fish -N
+#!/usr/bin/env fish --login
 # vim: syntax=fish
 
 # Finds a script file, shell alias, or shell function and prints its
@@ -19,12 +19,13 @@
 #     [printed to STDERR]
 #     [exits 1]
 
-# My fish config file will autoconnect to tmux before running the rest of the
-# script unless this is set.
-set -x DO_NOT_AUTOCONNECT_TO_TMUX 1
+# # My fish config file won't run anything unless this is set, since it detects
+# that it's not being run in an interactive shell.
+# However, it still won't autoconnect to tmux, since that really shouldn't
+# happen ever in a non-interactive shell.
+set I_REALLY_WANT_TO_RUN_FISH_CONFIG_FOR_FIND_LOCATION_OF yes
 
 set FISH_CONFIG_FILE ~/.config/fish/config.fish
-
 source $FISH_CONFIG_FILE
 
 function handle_unknown_command -a cmd
