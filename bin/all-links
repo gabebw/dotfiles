@@ -38,6 +38,11 @@ EOL
 
 all-chrome-links(){
   if is_running 'Google Chrome$'; then
+    if not_installed chrome-cli; then
+      echo >&2 '!!! Install chrome-cli: brew install chrome-cli'
+      exit 1
+    fi
+
     chrome-cli list links | \
       sed -E 's/^.+ (.+)/\1/' | \
       rg -v '^(view-source|chrome):'
@@ -46,21 +51,15 @@ all-chrome-links(){
 
 all-firefox-links(){
   if is_running Firefox.app; then
+    if not_installed firefox-all-open-urls; then
+      echo >&2 '!!! Install firefox-all-open-urls:' \
+        'cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls'
+      exit 1
+    fi
     firefox-all-open-urls
   fi
 }
 
 not_installed(){ ! command -v "$1" &>/dev/null; }
-
-if not_installed chrome-cli; then
-  echo >&2 'Install chrome-cli: brew install chrome-cli'
-  exit 1
-fi
-
-if not_installed firefox-all-open-urls; then
-  echo >&2 'Install firefox-all-open-urls:' \
-    'cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls'
-  exit 1
-fi
 
 (all-safari-links; all-chrome-links; all-firefox-links) | sort -u
