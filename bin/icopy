@@ -59,7 +59,7 @@ def guess_extension!(from, temp_file_path)
     end
   end
   # Twitter has URLs that end in `.jpg:large`
-  extension.sub(/:large$/, "")
+  extension.sub(/:large$/, "").downcase
 end
 
 def with_extension!(from, to, path)
