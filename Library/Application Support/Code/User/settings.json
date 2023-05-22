@@ -152,7 +152,8 @@
   "gitlens.views.search.location": "gitlens",
   "importSorter.generalConfiguration.exclude": [
     "/denali/",
-    "/sdui/"
+    "/sdui/",
+    "/cheetah-web/"
   ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.quoteMark": "double",
