@@ -1,5 +1,5 @@
 javascript: (function () {
-  const kgs = /(\d+(?:[.,]\d*)?)\s*?(?:(kg|kilogram|kilo)s?)/gi;
+  const kgs = /(\d+(?:[.,]\d*)?)\s*?(?:<\/?[^>]+>)*\s*?(?:(kg|kilogram|kilo)s?)/gi;
   const kms = /(\d+(?:[.,]\d*)?)\s*?(?:(km|kilometer)s?)/gi;
   const cm = /(\d+(?:[.,]\d*)?)\s*?cms?/gi;
   const one_kilogram_in_lbs = 2.20462262;
