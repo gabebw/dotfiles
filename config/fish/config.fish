@@ -115,8 +115,7 @@ function dig-all -a url
   for record in a aaaa cname mx ns txt
     # +noall: Turn off all output
     # +answer: Show just the answer
-    # +norecurse: Do not follow a CNAME record when checking records
-    dig +noall +answer +norecurse $record $url
+    dig +noall +answer $record $url
   end
 end
 # }}}
