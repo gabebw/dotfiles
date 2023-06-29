@@ -42,7 +42,7 @@ javascript: (function () {
       .replace(kgs, kgToLb)
       .replace(kms, kmToMiles)
       .replace(cm, (match, number) =>
-        generate(match, number, (n) => ` (${toFeet(n)})`)
+        generate(match, number, (n) => toFeet(n))
       );
   }
 
