@@ -118,6 +118,13 @@ function dig-all -a url
     dig +noall +answer $record $url
   end
 end
+
+# Show a Notification Center notification. Good for long-running tasks:
+# long_running_task && notifyme "All done"
+function notifyme
+  set -l words (string join " " $argv)
+  osascript -e "display notification \"$words\" with title \"Title\""
+end
 # }}}
 
 # Options {{{
