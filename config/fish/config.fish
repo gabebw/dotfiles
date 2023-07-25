@@ -87,7 +87,8 @@ alias hexdump hexyl
 
 alias fd 'command fd --no-ignore --ignore-case --full-path --type file'
 [ -r ~/.rgrc ] && set -x RIPGREP_CONFIG_PATH ~/.rgrc
-set -x BAT_CONFIG_PATH "~/.config/bat/config"
+# Note that `bat` does not understand `~`, so we need `$HOME`
+set -x BAT_CONFIG_PATH "$HOME/.config/bat/config"
 alias cat bat
 alias less bat
 abbr -a -- - 'cd -'
