@@ -41,12 +41,9 @@
   st = status --short --branch
   co = checkout
   cm = commit -av
-  # Full commit messages without all the junk from `log --pretty=full`
-  full = log -1 --pretty='%C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b'
+  full = log --pretty=detailed
   # No color, short messages
   basic = log --pretty='%h %s'
-  # My default `git log` format without color
-  nocolor = log --pretty='%h%d %s [%an, %cr]'
   unstage = reset HEAD
   mm = master-to-main-wrapper merge-to %BRANCH%
   up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
@@ -78,8 +75,18 @@
   psuh = push
 [format]
   # git log uses --pretty format by default, so this changes the default
-  # format. It looks like this:
+  # format.
+  # Example:
+  # 9d9a0ee curl: automatically continue downloads [Gabe Berke-Williams, 9 days ago] (HEAD -> main)
   pretty = %C(magenta reverse)%h%C(reset) %C(blue)%s %C(magenta)[%an, %cr]%C(auto)%d
+[pretty]
+  # Formats here can be used by doing `--pretty=<NAME>`.
+  # You cannot redefine the same name as a built-in format, which means you
+  # can't use: oneline, short, medium, full, fuller, reference, email, mboxrd,
+  # or email.
+
+  # Full commit messages without all the junk from `--pretty=full`
+  detailed = %C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b
 [svn]
   authorsfile = ~/.git-author
 

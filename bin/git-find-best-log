@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Usage:
+# git find-best-log main other-branch
+# git find-best-log main other-branch --color=always
+# And it automatically finds the best commit to start from
+
+one=$1
+two=$2
+shift 2
+
+git log $(git merge-base $one $two)...$two "$@"
