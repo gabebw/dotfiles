@@ -1,3 +1,4 @@
+# vim: syntax=gitconfig filetype=gitconfig
 [user]
   # Try per-repo .gitconfig instead
   name = Gabe Berke-Williams
