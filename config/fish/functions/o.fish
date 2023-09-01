@@ -28,7 +28,7 @@ function o -a directory
       if [ (count *.{png,jpg}) -gt 0 ]
         open_images_in_directory .
       else
-        open *.*
+        o $PWD
       end
     else
       open $argv
