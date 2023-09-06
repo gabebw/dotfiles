@@ -80,6 +80,10 @@ You can filter to only items with a given year with `select`:
 
     jq '.[] | select(.time | startswith("2021"))'
 
+Or filter by equality:
+
+    jq '.[] | select(.name == "Foo")'
+
 To filter out non-null items from an array, pipe to 'select(.)':
 
     jq 'whatever | goes | here | select(.)'
@@ -139,12 +143,12 @@ Given this input:
       {
         "type": "dog",
         "name": "Fido",
-        "weightInKg": 36.2,
+        "weightInKg": 36.2
       },
       {
         "type": "cat",
         "name": "Whiskers",
-        "weightInKg": 4,
+        "weightInKg": 4
       }
     ]
 
@@ -174,10 +178,16 @@ Let's say you want their weight in pounds, not kilograms. To transform the
 
     cat data.json | jq '.[].weightInKg |= .*2.205)'
 
-To round it:
+To round the number:
 
     cat data.json | jq '.[].weightInKg |= (.*2.205 | round)'
 
-And to rename the key to `weightInLbs`:
+To rename the key to `weightInLbs`:
 
     cat data.json | jq '.[].weightInKg |= (.*2.205 | round)' | map(with_entries(if .key == "weightInKg" then .key = "weightInLbs" else . end))'
+
+To transform the "name" string to a capitalized version starting with the word
+"NAME:", do this. (`ascii_upcase` only takes piped output, so we can't do
+`ascii_upcase(.)`.)
+
+    cat data.json | jq '[.[].name |= "NAME: " + (.|ascii_upcase)]'
