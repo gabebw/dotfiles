@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Copied from:
+# https://gitlab.com/ole.tange/tangetools/-/blob/master/neno/neno
+
+# "neno": "no error [means there will be] no output"
+#
+# Description:
+# neno will print the output from both standard output and standard
+# error if the composed command returns an error.
+# If the composed command returns true, the output will be ignored.
+# This is useful for cron jobs where you only want output if it failed.
+
+_tmp=$(mktemp -d /tmp/no-error.XXXXX)
+true >$_tmp/stdout 2>$_tmp/stderr
+# Open the tmp-files for reading on file descriptor 21+22
+exec 21<$_tmp/stdout 22<$_tmp/stderr
+(
+    # Unlink tmp-files (but keep them open)
+    rm -rf $_tmp
+    eval "$@"
+) >$_tmp/stdout 2>$_tmp/stderr
+_error=$?
+if [ $_error == 0 ] ; then
+    # skip
+    true
+else
+    cat 0<&21
+    cat 0<&22 >&2
+fi
+exit $_error
