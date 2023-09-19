@@ -211,7 +211,7 @@
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vsicons.dontShowNewVersionMessage": true,
   "window.zoomLevel": -2,
-  "workbench.colorTheme": "Dracula",
+  "workbench.colorTheme": "Witch Hazel Hypercolor",
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "vscode-icons",
