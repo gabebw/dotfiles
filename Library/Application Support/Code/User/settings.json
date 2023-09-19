@@ -193,6 +193,7 @@
   "typescript.format.enable": false,
   "typescript.surveys.enabled": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.workspaceSymbols.scope": "currentProject",
   "vim.incsearch": true,
   "vim.leader": "<space>",
   "vim.normalModeKeyBindingsNonRecursive": [
