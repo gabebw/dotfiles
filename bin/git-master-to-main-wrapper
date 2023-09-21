@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env zsh --no-rcs
 
 # Usage: instead of
 #
@@ -16,4 +16,4 @@ branchname=$(main-or-master-branch)
 replaced_commands=$(echo $command | sed "s/%BRANCH%/$branchname/g")
 # sh_glob ignores special meaning of parentheses so that fancy logs like this
 # work: `git master-to-main-wrapper log --format='%w(78)%s%n%+b'`
-zsh -c "setopt sh_glob; git ${replaced_commands}"
+zsh --no-rcs -c "setopt sh_glob; git ${replaced_commands}"
