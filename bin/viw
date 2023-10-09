@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env zsh --no-rcs
 
 # viw = "Vim which"
 # Finds a script file, shell alias, or shell function and edits it.

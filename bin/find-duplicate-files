@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env zsh --no-rcs
 
 # Finds duplicate files based on their basename. For example, these files would
 # be considered duplicates:

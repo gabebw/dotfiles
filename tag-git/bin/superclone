@@ -1,4 +1,4 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env zsh --no-rcs
 # set syntax=zsh
 
 # Clone a git URL and print out the name of the created directory.
