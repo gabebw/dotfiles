@@ -19,7 +19,6 @@ mike-co.import-sorter
 mikestead.dotenv
 Orta.vscode-jest
 Prisma.prisma
-rebornix.ruby
 rust-lang.rust-analyzer
 statiolake.vscode-rustfmt
 sysoev.language-stylus
@@ -27,4 +26,4 @@ tamasfe.even-better-toml
 thisismanta.stylus-supremacy
 usernamehw.errorlens
 vscode-icons-team.vscode-icons
-wingrunr21.vscode-ruby
+Shopify.ruby-lsp
