@@ -26,7 +26,7 @@ function o -a directory
     if command fd -e webm -e mp4 -e m4v -e flv -e mov -q --base-directory $directory
       # "-X <command>" means the results are concatenated and the command is
       # executed once with all found results.
-      custom_fd \
+      __o_custom_fd \
         -e mp4 -e flv -e mov -e webm -e m4v \
         --base-directory $directory \
         -X open
