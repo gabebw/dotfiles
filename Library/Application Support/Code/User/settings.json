@@ -153,7 +153,8 @@
   "importSorter.generalConfiguration.exclude": [
     "/denali/",
     "/sdui/",
-    "/cheetah-web/"
+    "/cheetah-web/",
+    "/cheetah-applet/"
   ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.quoteMark": "double",
@@ -210,7 +211,7 @@
   "vim.useSystemClipboard": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vsicons.dontShowNewVersionMessage": true,
-  "window.zoomLevel": -2,
+  "window.zoomLevel": -1,
   "workbench.colorTheme": "Witch Hazel Hypercolor",
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
