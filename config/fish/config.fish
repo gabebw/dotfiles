@@ -314,8 +314,10 @@ fish_add_path --move $HOME/.bin
 # rbenv
 status --is-interactive; and rbenv init - fish | source
 
-# Add binstubs *after* doing rbenv
-fish_add_path ./bin/stubs
+# Add (prepend, by default) binstubs *after* doing rbenv.
+# Use `--move` so that it's moved to the front if it already exists,
+# not kept where it is.
+fish_add_path --move ./bin/stubs
 
 # Node
 if status --is-interactive
