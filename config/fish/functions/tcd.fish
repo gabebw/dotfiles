@@ -1,5 +1,5 @@
 function tcd -a directory session_name
-  if [ $directory = . ]
+  if [ $directory = . ] || [ $directory = .. ]
     set -f directory (greadlink -f $directory)
   end
 
