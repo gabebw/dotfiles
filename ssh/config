@@ -2,3 +2,19 @@ Host i
     HostName i.gabebw.com
     Port 13425
     User gabe
+
+# @gabebw (the default)
+Host github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+
+# @gabebw-grammarly
+# To use this config, clone like so:
+#     git clone git@github.com-grammarly:grammarly/embrace.git
+#     !!! Note this part! --> ^^^^^^^^^^
+Host github.com-grammarly
+  HostName github.com
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/grammarly_id_ed25519
