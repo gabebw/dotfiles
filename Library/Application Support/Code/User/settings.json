@@ -162,6 +162,7 @@
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "lldb.suppressUpdateNotifications": true,
+  "metals.javaHome": "/usr/local/Cellar/openjdk@17/17.0.9/libexec/openjdk.jdk/Contents/Home",
   "metals.showInferredType": true,
   "openInGitHub.defaultBranch": "master",
   "prettier.requireConfig": true,
