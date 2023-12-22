@@ -6,5 +6,5 @@ function unopened
     search_spotlight_files \
       "(kMDItemLastUsedDate != '*') && (kMDItemContentType != 'public.folder')" |
       head -n $argv[1]
-  end | rg -v '\.(ytdl|part|vtt|temp\.mp4)$'
+  end | rg -v '\.(ytdl|part|vtt|temp\.mp4|rb)$'
 end
