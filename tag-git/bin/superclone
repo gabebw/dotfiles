@@ -79,6 +79,6 @@ else
   fi
 
   # At last, clone the git repo into a directory.
-  git clone "$git_url" "$directory"
+  gh repo clone "$git_url" "$directory"
   echo "$directory"
 fi
