@@ -20,6 +20,9 @@
   "[markdown]": {
     "editor.formatOnSave": false
   },
+  "[ruby]": {
+    "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
+  },
   "[rust]": {
     "editor.defaultFormatter": "statiolake.vscode-rustfmt"
   },
@@ -217,8 +220,5 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "newUntitledFile",
-  "[ruby]": {
-    "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
-  }
+  "workbench.startupEditor": "newUntitledFile"
 }
