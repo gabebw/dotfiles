@@ -20,6 +20,9 @@
   "[markdown]": {
     "editor.formatOnSave": false
   },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
   "[ruby]": {
     "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
   },
