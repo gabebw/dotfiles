@@ -46,6 +46,7 @@
     "gnar",
     "grammarly"
   ],
+  "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
   "editor.cursorSurroundingLines": 5,
