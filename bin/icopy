@@ -117,6 +117,9 @@ USAGE
 end
 
 if from && !from.start_with?("http")
+  if to.end_with?("/")
+    to = "#{to}#{File.basename(from)}"
+  end
   to ||= File.basename(from)
   to = with_extension!(from, to, from)
   STDERR.puts "#{from} -> #{to}"
