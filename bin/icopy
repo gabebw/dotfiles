@@ -117,28 +117,25 @@ USAGE
 end
 
 if from && !from.start_with?("http")
-  if to.end_with?("/")
-    to = "#{to}#{File.basename(from)}"
-  end
-  to ||= File.basename(from)
-  to = with_extension!(from, to, from)
-  STDERR.puts "#{from} -> #{to}"
-  `upload-image "#{from}" "#{to}"`
+  local_file_name = from
 else
-  if from.nil? || !from.start_with?("http")
-    from = url_from_clipboard
-  end
+  from = url_from_clipboard
   if from.nil? || from == ""
     STDERR.puts "Error: -f parameter is required, or copy a URL"
     exit 1
   end
-
-  to ||= File.basename(from)
-  temporary_file_name = Tempfile.new.path
-  `curl -Lso "#{temporary_file_name}" "#{from}"`
-  to = with_extension!(from, to, temporary_file_name)
-
-  STDERR.puts "#{from} -> #{to}"
-
-  `upload-image "#{temporary_file_name}" "#{to}"`
+  local_file_name = Tempfile.new.path
+  `curl -Lso "#{local_file_name}" "#{from}"`
 end
+
+if to.nil?
+  to = File.basename(from)
+elsif to.end_with?("/")
+  # `-t subdir/` copies it into the subdirectory, base filename unchanged
+  to = "#{to}#{File.basename(from)}"
+end
+to = with_extension!(from, to, local_file_name)
+
+STDERR.puts "#{from} -> #{to}"
+
+`upload-image "#{local_file_name}" "#{to}"`
