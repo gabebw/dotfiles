@@ -6,17 +6,11 @@ function __o_custom_fd
 end
 
 function __o_open_images_in_directory -a directory
-  if [ -d /Applications/qView.app ]
-    # Just pass all of the arguments to qView, it can handle it
-    open -a qView $argv
-  else
-    echo 'Try installing qView: brew install qview' >&2
-    # `--max-depth 1` means "only go 1 level inside the directory and don't recurse"
-    open -a Preview (__o_custom_fd \
-      -e jpg -e png -e jpeg \
-      -a \
-      --base-directory $directory | sort)
-  end
+  # `--max-depth 1` means "only go 1 level inside the directory and don't recurse"
+  open -a Preview (__o_custom_fd \
+    -e jpg -e png -e jpeg \
+    -a \
+    --base-directory $directory | sort)
 end
 
 # This will recurse infinitely into the directory you give it, so just do `o
