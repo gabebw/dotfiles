@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
 # Safely (no overwriting) upload a local file to i.gabebw.com
 #
@@ -15,25 +15,30 @@
 #
 #   upload-image flip.jpg some/other.jpg
 
-set -e
+set rsync_major_version_number (rsync --version | rg 'version' | sed -E 's/^rsync  version ([0-9]).*/\1/')
 
-IMAGES_DIR=/nginx-data/images
+if [ $rsync_major_version_number -le 2 ]
+  echo "You are using Rsync v2, which does not support --secluded-args" >&2
+  echo "Upgrade: brew install rsync" >&2
+  exit 1
+end
 
-create_missing_directories_on_remote_host() {
-  filename=$1
-  if [ "$filename" != "$(basename "$filename")" ]; then
+set IMAGES_DIR /nginx-data/images
+
+function create_missing_directories_on_remote_host -a filename
+  if [ $filename != (basename $filename) ]
     ssh i "cd '$IMAGES_DIR' && mkdir -p '$(dirname "$filename")'"
-  fi
-}
+  end
+end
 
-local_filename=$1
-filename_on_server=${2:-"$1"}
-filename_on_server=${filename_on_server/~/$HOME}
+set local_filename $argv[1]
+if [ (count $argv) -lt 2 ]
+  set filename_on_server $argv[1]
+else
+  set filename_on_server $argv[2]
+end
 
-create_missing_directories_on_remote_host "$filename_on_server"
+create_missing_directories_on_remote_host $filename_on_server
 
-# Replace spaces with "\ ", otherwise rsync stops at the first space
-escaped_filename=${filename_on_server// /\\ }
-
-rsync -e ssh -azh --ignore-existing --chmod=ug=rw,o=r "$local_filename" "i:$IMAGES_DIR/$escaped_filename"
-open "http://i.gabebw.com/$filename_on_server"
+rsync -e ssh -azh --ignore-existing --secluded-args --chmod=ug=rw,o=r $local_filename i:$IMAGES_DIR/$filename_on_server
+open http://i.gabebw.com/$filename_on_server
