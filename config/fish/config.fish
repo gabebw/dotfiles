@@ -118,6 +118,13 @@ function dig-all -a url
     # +answer: Show just the answer
     dig +noall +answer $record $url
   end
+
+  # Fastmail-specific email stuff
+  # https://www.fastmail.help/hc/en-us/articles/1500000280261-Setting-up-your-domain-MX-only#domain-registration
+  for fm in fm1 fm2 fm3
+    dig +noall +answer CNAME $fm._domainkey.$url
+  end
+  dig +noall +answer TXT _dmarc.$url
 end
 
 # Show a Notification Center notification. Good for long-running tasks:
