@@ -35,6 +35,11 @@
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
+  "advancedNewFile.convenienceOptions": [
+    "last",
+    "current",
+    "root"
+  ],
   "breadcrumbs.enabled": true,
   "cSpell.userWords": [
     "Gbutton",
