@@ -5,9 +5,6 @@
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[html]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -83,18 +80,10 @@
       }
     ]
   },
-  "emmet.excludeLanguages": [
-    "markdown",
-    "typescriptreact",
-    "typescript"
-  ],
-  "emmet.showAbbreviationSuggestions": false,
-  "eslint.alwaysShowStatus": true,
   "eslint.codeActionsOnSave.rules": [
     "unused-imports/no-unused-imports"
   ],
   "eslint.format.enable": true,
-  "eslint.packageManager": "yarn",
   "eslint.run": "onSave",
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
@@ -118,21 +107,14 @@
   "git.path": "/usr/local/bin/git",
   "git.rebaseWhenSync": true,
   "git.supportCancellation": true,
-  "github.customPullRequestDescription": "gitEditor",
-  "github.gitCommand": "/usr/local/bin/git",
-  "github.preferedMergeMethod": "rebase",
   "githubPullRequests.defaultMergeMethod": "squash",
-  "githubPullRequests.telemetry.enabled": false,
-  "gitlab.instanceUrl": "https://gitlab.grammarly.io/",
-  "gitlab.showIssueLinkOnStatusBar": false,
-  "gitlab.showMrStatusOnStatusBar": false,
   "gitlab.showProjectMergeRequests": false,
-  "gitlab.showStatusBarLinks": false,
-  "gitlens.advanced.telemetry.enabled": false,
   "gitlens.blame.highlight.locations": [
     "gutter",
     "overview"
   ],
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
   "gitlens.remotes": [
     {
       "domain": "ssh.gitlab.grammarly.io",
@@ -152,6 +134,7 @@
       }
     }
   ],
+  "gitlens.telemetry.enabled": false,
   "gitlens.views.compare.location": "gitlens",
   "gitlens.views.fileHistory.location": "explorer",
   "gitlens.views.lineHistory.location": "explorer",
@@ -169,18 +152,8 @@
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "lldb.suppressUpdateNotifications": true,
-  "metals.javaHome": "/usr/local/Cellar/openjdk@17/17.0.9/libexec/openjdk.jdk/Contents/Home",
-  "metals.showInferredType": true,
-  "openInGitHub.defaultBranch": "master",
   "prettier.requireConfig": true,
-  "ruby.format": "rufo",
-  "rust-analyzer.callInfo.full": false,
-  "rust-analyzer.checkOnSave.command": "clippy",
-  "rust-analyzer.imports.granularity.group": "none",
   "rust-analyzer.inlayHints.parameterHints.enable": false,
-  "rust-analyzer.updates.askBeforeDownload": false,
-  "rust-client.engine": "rust-analyzer",
-  "rust.clippy_preference": "on",
   "search.exclude": {
     "**/*.ipynb": true,
     "denali/": true
@@ -194,33 +167,17 @@
   "stylusSupremacy.insertBraces": false,
   "stylusSupremacy.insertColons": false,
   "stylusSupremacy.insertSemicolons": false,
-  "telemetry.enableCrashReporter": false,
-  "telemetry.enableTelemetry": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.defaultProfile.osx": "fish",
-  "terminal.integrated.enableMultiLinePasteWarning": false,
   "typescript.format.enable": false,
   "typescript.surveys.enabled": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.workspaceSymbols.scope": "currentProject",
-  "vim.incsearch": true,
-  "vim.leader": "<space>",
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
-        "g",
-        "r"
-      ],
-      "commands": [
-        "editor.action.goToReferences"
-      ]
-    }
-  ],
-  "vim.useSystemClipboard": true,
   "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
   "vsicons.dontShowNewVersionMessage": true,
   "window.zoomLevel": -1,
   "workbench.colorTheme": "Witch Hazel Hypercolor",
+  "workbench.editor.empty.hint": "hidden",
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "vscode-icons",
