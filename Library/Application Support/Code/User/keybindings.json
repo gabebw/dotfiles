@@ -1,0 +1,7 @@
+[
+  { "key": "Alt+2", "command": "editor.action.marker.nextInFiles" },
+  {
+    "key": "cmd+n",
+    "command": "extension.advancedNewFile"
+  }
+]
