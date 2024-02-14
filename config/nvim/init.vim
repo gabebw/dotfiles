@@ -18,6 +18,11 @@ if exists('g:vscode')
   nnoremap gr <Cmd>call VSCodeNotify('editor.action.referenceSearch.trigger')<CR>
   nnoremap gR <Cmd>call VSCodeNotify('editor.action.rename')<CR>
 
+  " Don't use VSCode formatting by default - use Vim's built-in version
+  " Or, use `gw` if you don't want to unmap
+  " https://github.com/vscode-neovim/vscode-neovim/issues/1627#issuecomment-1815441879
+  unmap gq
+
   " Search for word under cursor
   nnoremap K <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
 
