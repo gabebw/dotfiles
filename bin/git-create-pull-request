@@ -138,13 +138,13 @@ class PRTemplate
   private
 
   def pull_request_template
-    if pull_request_template_path
+    @_pull_request_template ||= if pull_request_template_path
       File.read(pull_request_template_path)
     end
   end
 
   def pull_request_template_path
-    @pull_request_template_path = files.detect { |file| File.readable?(file) }
+    @_pull_request_template_path ||= files.detect { |file| File.readable?(file) }
   end
 
   def files
@@ -218,24 +218,13 @@ class Repo
     git.run("master-to-main-wrapper rev-list origin/%BRANCH%..HEAD --count").to_i
   end
 
-  def first_commit_subject
-    git.run "log -1 --format=%s"
-  end
-
-  def first_commit_body
-    git.run "log -1 --format=%b"
-  end
-
   def first_commit_full_message
     git.run "log -1 --format=%B"
   end
 
-  def on_master_branch?
-    current_branch == "master"
-  end
-
-  def on_main_branch?
-    current_branch == "main"
+  def on_main_or_master_branch?
+    current_branch == "main" ||
+      current_branch == "master"
   end
 end
 
@@ -253,7 +242,7 @@ git = Git.new
 
 repo = Repo.new(git)
 
-if repo.on_main_branch? || repo.on_master_branch?
+if repo.on_main_or_master_branch?
   warn "\n!!! You're already on #{git.current_branch}"
   exit 1
 end
