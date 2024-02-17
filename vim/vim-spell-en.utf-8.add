@@ -191,7 +191,6 @@ Honeybadger
 ESLint
 Gitlab
 linters
-Proofit
 jq
 on
 sourcemaps
@@ -203,7 +202,6 @@ SQLite
 ORM
 SVG
 Wattpad's
-referer
 tabstops
 structopt
 Clippy
@@ -211,16 +209,13 @@ FFmpeg
 PNG
 hardcoded
 Abhinav
-CAPI
 Figma
 architecture
 MVVM
 ViewModel
-Gnar
 OmniAuth
 M3Us
 enum
-Emogenie
 Vercel
 AWS
 Netlify
@@ -233,11 +228,7 @@ webring
 pinworthy
 Prisma
 Heroku's
-SDUI
-DAPI
 Faktory
-_capiWsListener
-AquaFieldIntegration
 GitLab
 colorscheme
 V8

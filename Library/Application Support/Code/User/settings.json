@@ -41,13 +41,6 @@
     "root"
   ],
   "breadcrumbs.enabled": true,
-  "cSpell.userWords": [
-    "Gbutton",
-    "Gdocs",
-    "Hoverable",
-    "gnar",
-    "grammarly"
-  ],
   "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
@@ -120,55 +113,25 @@
   ],
   "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": false,
-  "gitlens.remotes": [
-    {
-      "domain": "ssh.gitlab.grammarly.io",
-      "name": "Grammarly",
-      "protocol": "https",
-      "type": "Custom",
-      "urls": {
-        "branch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/tree/${branch}",
-        "branches": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/branches",
-        "commit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/commit/${id}",
-        "file": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/${file}${line}",
-        "fileInBranch": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/blob/${branch}/${file}${line}",
-        "fileInCommit": "https://gitlab.grammarly.io/${repoBase}/${repoPath}/-/blob/${id}/${file}${line}",
-        "fileLine": "#L${line}",
-        "fileRange": "#L${start}-L${end}",
-        "repository": "https://gitlab.grammarly.io/${repoBase}/${repoPath}"
-      }
-    }
-  ],
   "gitlens.telemetry.enabled": false,
   "gitlens.views.compare.location": "gitlens",
   "gitlens.views.fileHistory.location": "explorer",
   "gitlens.views.lineHistory.location": "explorer",
   "gitlens.views.repositories.location": "scm",
   "gitlens.views.search.location": "gitlens",
-  "importSorter.generalConfiguration.exclude": [
-    "/denali/",
-    "/sdui/",
-    "/cheetah-web/",
-    "/cheetah-applet/"
-  ],
   "importSorter.generalConfiguration.sortOnBeforeSave": true,
   "importSorter.importStringConfiguration.quoteMark": "double",
-  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable",
   "javascript.format.enable": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "lldb.suppressUpdateNotifications": true,
   "prettier.requireConfig": true,
   "rust-analyzer.inlayHints.parameterHints.enable": false,
   "search.exclude": {
-    "**/*.ipynb": true,
-    "denali/": true
+    "**/*.ipynb": true
   },
   "search.useGlobalIgnoreFiles": true,
   "shellcheck.executablePath": "/usr/local/bin/shellcheck",
   "stylusSupremacy.alwaysUseExtends": true,
-  "stylusSupremacy.ignoreFiles": [
-    "src/styl/noprint.styl"
-  ],
   "stylusSupremacy.insertBraces": false,
   "stylusSupremacy.insertColons": false,
   "stylusSupremacy.insertSemicolons": false,
