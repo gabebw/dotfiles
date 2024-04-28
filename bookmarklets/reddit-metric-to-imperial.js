@@ -1,7 +1,20 @@
 javascript: (function () {
-  const kgs = /(\d+(?:[.,]\d*)?)\s*?(?:<\/?[^>]+>)*\s*?(?:(kg|kilogram|kilo)s?)/gi;
-  const kms = /(\d+(?:[.,]\d*)?)\s*?(?:(km|kilometer)s?)/gi;
-  const m_or_cm = /(\d+(?:[.,]\d*)?)\s*?(cm|m)s?\b/gi;
+  /* Matches a number in a few formats: "1", "1.1", "1,11" */
+  const number = /(\d+(?:[.,]\d*)?)/;
+  const possible_space = /\s*?/;
+  const kgs = new RegExp(number.source + possible_space.source +
+    /* Allow (but don't capture) a closing tag like so: "45</b> kgs" */
+    String.raw`(?:</?[^>]+>)*` +
+    possible_space.source +
+    String.raw`(?:(kg|kilogram|kilo)s?)`, 'gi');
+  const kms = new RegExp(number.source + possible_space.source +
+    String.raw`(?:km|kilometer)s?`, 'gi');
+  const m_or_cm = new RegExp(number.source + possible_space.source +
+    /* Note that we _do_+ capture the unit ("cm" or "m") since we need to know
+     * which it is to convert it to feet/inches later. The "\b" ensures the
+     * unit is at a word boundary, and prevents a string like this from matching
+     * (match between []): "[4 m]onths" */
+    String.raw`(cm|m)s?\b`, 'gi');
   const one_kilogram_in_lbs = 2.20462262;
   const one_kilometer_in_miles = 0.62150404;
 
