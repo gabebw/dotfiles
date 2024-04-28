@@ -1,7 +1,7 @@
 javascript: (function () {
   const kgs = /(\d+(?:[.,]\d*)?)\s*?(?:<\/?[^>]+>)*\s*?(?:(kg|kilogram|kilo)s?)/gi;
   const kms = /(\d+(?:[.,]\d*)?)\s*?(?:(km|kilometer)s?)/gi;
-  const cm = /(\d+(?:[.,]\d*)?)\s*?cms?/gi;
+  const m_or_cm = /(\d+(?:[.,]\d*)?)\s*?(cm|m)s?\b/gi;
   const one_kilogram_in_lbs = 2.20462262;
   const one_kilometer_in_miles = 0.62150404;
 
@@ -9,7 +9,9 @@ javascript: (function () {
     return parseFloat(s.replace(",", "."), 10);
   }
 
-  function toFeet(cm) {
+  /* unit is "cm" or "m" */
+  function toFeet(number, unit) {
+    const cm = unit === "cm" ? number : unit === "m" ? number * 100 : alert(`Unknown unit: ${unit}`);
     const realInches = cm * 0.3937;
     if (realInches < 48) {
       /* Assume this is not height, but something else: use inches */
@@ -41,8 +43,8 @@ javascript: (function () {
     node.innerHTML = node.innerHTML
       .replace(kgs, kgToLb)
       .replace(kms, kmToMiles)
-      .replace(cm, (match, number) =>
-        generate(match, number, (n) => toFeet(n))
+      .replace(m_or_cm, (entireMatchedString, number, unit) =>
+        generate(entireMatchedString, number, (n) => toFeet(n, unit))
       );
   }
 
