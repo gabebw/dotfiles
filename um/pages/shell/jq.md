@@ -3,6 +3,20 @@
 {:data-date="April 15, 2019"}
 {:data-extra="Um Pages"}
 
+## String interpolation
+
+Given this:
+
+    { "animal": "cat", "sound": "meow" }
+
+To get this:
+
+    cat goes meow
+
+Do this:
+
+    jq --raw-output '"\(.animal) goes \(.sound)"'
+
 ## Re-shape an array of hashes
 
 Given this:
