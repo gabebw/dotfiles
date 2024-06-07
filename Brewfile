@@ -59,7 +59,7 @@ brew "fnm"
 brew "gnuplot"
 
 # Personal manpages, written in Markdown
-brew "sinclairtarget/wst/um"
+brew "um"
 
 # Rust
 # Don't install `rust` - let rustup handle it
