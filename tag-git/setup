@@ -3,5 +3,6 @@
 set -e
 
 echo "Installing Git hooks..."
-rm .git/hooks/post-merge
+# Don't fail if there's no such file
+rm .git/hooks/post-merge || true
 ln -s "$PWD"/tag-git/hooks/dotfiles-post-merge .git/hooks/post-merge
