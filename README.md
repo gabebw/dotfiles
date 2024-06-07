@@ -8,7 +8,7 @@ Questions? Comments? Open an issue!
 
 ## Installation
 
-    $ git clone git@github.com:gabebw/dotfiles.git ~/.dotfiles
+    $ git clone https://github.com/gabebw/dotfiles.git ~/.dotfiles
     $ cd ~/.dotfiles
     $ ./install.sh
 
