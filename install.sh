@@ -103,18 +103,20 @@ if command_does_not_exist firefox-all-open-urls; then
 fi
 
 if ! echo "$SHELL" | grep -Fq fish; then
-  if grep -Fq "$(which fish)" /etc/shells; then
+  info "Your shell is not Fish. Changing it to Fish..."
+  # Fix this error when running `chsh`:
+  # chsh: /usr/local/bin/fish: non-standard shell
+  which fish | sudo tee -a /etc/shells > /dev/null
+
+  # Now check if it worked
+  if ! grep -Fq "$(which fish)" /etc/shells; then
     error "Sorry, fish is not (YET) an approved shell"
-    error "Please add this line to /etc/shells: $(which fish)"
+    error "I tried to add it automatically but it didn't work."
+    error "Please manually add this line to /etc/shells: $(which fish)"
     exit 1
-  else
-    info "Your shell is not Fish. Changing it to Fish..."
-    # Fix this error when running `chsh`:
-    # chsh: /usr/local/bin/fish: non-standard shell
-    which fish | sudo tee -a /etc/shells
-    
-    chsh -s $(which fish)
   fi
+  
+  chsh -s $(which fish)
 fi
 
 info "Linking dotfiles into ~..."
