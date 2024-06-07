@@ -23,7 +23,7 @@ cask "google-chrome"
 cask "muzzle"
 cask "netnewswire"
 cask "ngrok"
-cask "postgres" # Postgres.app
+cask "postgres-unofficial" # Postgres.app
 cask "qlstephen" # quicklook plain text files
 cask "spotify"
 cask "vlc"
