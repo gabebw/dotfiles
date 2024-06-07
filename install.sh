@@ -109,6 +109,10 @@ if ! echo "$SHELL" | grep -Fq fish; then
     exit 1
   else
     info "Your shell is not Fish. Changing it to Fish..."
+    # Fix this error when running `chsh`:
+    # chsh: /usr/local/bin/fish: non-standard shell
+    which fish | sudo tee -a /etc/shells
+    
     chsh -s $(which fish)
   fi
 fi
