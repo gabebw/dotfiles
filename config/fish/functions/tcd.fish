@@ -9,5 +9,5 @@ function tcd -a directory session_name
 
   set session_name (string replace ' ' '-' $session_name)
 
-  fish -c "cd '$directory' && t $session_name"
+  t $session_name $directory
 end

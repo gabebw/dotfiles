@@ -38,20 +38,28 @@ _tmux_normalize_session_name(){
 # It's created in the background (`-d`) so it can be created when already in
 # another tmux session.
 _new_tmux_session_named() {
-  new_session_name=$1
+  local new_session_name=$1
+  local dir=$2
 
   # -A means "attach if this already exists, otherwise create it"
-  tmux new-session -d -As "$new_session_name"
+  if [ -n "$dir" ]; then
+    tmux new-session -d -As "$new_session_name" -c "$dir"
+  else
+    tmux new-session -d -As "$new_session_name"
+  fi
   _attach_to_tmux_session "$new_session_name"
 }
 
 # Try to connect to a tmux session with the given name.
-# If no such session exists, create it first.
+# If no such session exists, create it first, optionally inside a given
+# directory.
 _tmux_try_to_connect_to(){
-  if tmux-session-exists "$1"; then
-    _attach_to_tmux_session "$1"
+  local name=$1
+  local dir=$2
+  if tmux-session-exists "$name"; then
+    _attach_to_tmux_session "$name"
   else
-    _new_tmux_session_named "$1"
+    _new_tmux_session_named "$name" "$dir"
   fi
 }
 
@@ -64,6 +72,8 @@ _connected_to(){
 
 if (( $# == 1 )); then
   _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
+elif (( $# == 2 )); then
+  _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")" "$2"
 else
   if $USE_FZF_TMUX; then
     project_directory=$(projects | fzf-tmux --reverse -d '85%')
