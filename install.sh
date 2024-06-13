@@ -58,6 +58,9 @@ if command_does_not_exist brew; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Don't run `brew cleanup <package>` after each package is installed. It just makes things take longer.
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+
 info "Installing Homebrew packages..."
 brew tap homebrew/bundle
 brew install mas 2>/dev/null
