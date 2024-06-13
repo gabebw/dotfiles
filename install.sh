@@ -55,6 +55,7 @@ fi
 info "Installing Homebrew (if not already installed)..."
 if command_does_not_exist brew; then
   stay_awake_while /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 info "Installing Homebrew packages..."
