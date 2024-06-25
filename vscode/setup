@@ -6,7 +6,7 @@ command_does_not_exist(){
 
 # Install extensions
 if command_does_not_exist code; then
-  error "Open VS Code and run: Install code command in \$PATH"
+  echo "Open VS Code and run: Install code command in \$PATH" >&1
 else
   for extension in $(cat vscode/extensions); do
     code --install-extension "$extension"
