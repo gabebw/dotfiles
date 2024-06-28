@@ -1,6 +1,6 @@
 function tcd -a directory session_name
   if [ $directory = . ] || [ $directory = .. ]
-    set -f directory (greadlink -f $directory)
+    set -f directory (readlink -f $directory)
   end
 
   if [ -z $session_name ]
