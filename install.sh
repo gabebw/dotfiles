@@ -60,6 +60,7 @@ fi
 
 # Don't run `brew cleanup <package>` after each package is installed. It just makes things take longer.
 export HOMEBREW_NO_INSTALL_CLEANUP=1
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 info "Installing Homebrew packages..."
 brew tap homebrew/bundle
@@ -119,7 +120,7 @@ if ! echo "$SHELL" | grep -Fq fish; then
     error "Please manually add this line to /etc/shells: $(which fish)"
     exit 1
   fi
-  
+
   chsh -s $(which fish)
 fi
 
