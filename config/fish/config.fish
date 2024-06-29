@@ -85,7 +85,14 @@ alias prettyjavascript "prettier --stdin-filepath any-name-here.js"
 alias exif-remove "exiftool -all  "
 alias hexdump hexyl
 
-alias fd 'command fd --no-ignore --ignore-case --full-path --type file'
+function fd
+  if [ (count $argv) -eq 0 ]
+    command fd --no-ignore --ignore-case --full-path --type file
+  else
+    # Don't limit it to files if I do e.g. `--type directory`
+    command fd --no-ignore --ignore-case --full-path $argv
+  end
+end
 [ -r ~/.rgrc ] && set -x RIPGREP_CONFIG_PATH ~/.rgrc
 # Note that `bat` does not understand `~`, so we need `$HOME`
 set -x BAT_CONFIG_PATH "$HOME/.config/bat/config"
