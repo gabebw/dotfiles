@@ -22,7 +22,6 @@ cask "dropbox"
 cask "google-chrome"
 cask "muzzle"
 cask "netnewswire"
-cask "ngrok"
 cask "postgres-unofficial" # Postgres.app
 cask "qlstephen" # quicklook plain text files
 cask "spotify"
