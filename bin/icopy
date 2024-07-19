@@ -138,4 +138,4 @@ to = with_extension!(from, to, local_file_name)
 
 STDERR.puts "#{from} -> #{to}"
 
-`upload-image "#{local_file_name}" "#{to}"`
+STDERR.puts `upload-image "#{local_file_name}" "#{to}"`
