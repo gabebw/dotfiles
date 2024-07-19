@@ -46,5 +46,5 @@ set filename_on_server (string replace --all '：' ':' $filename_on_server)
 
 create_missing_directories_on_remote_host $filename_on_server
 
-rsync -e ssh -azh --ignore-existing --secluded-args --chmod=ug=rw,o=r $local_filename i:$IMAGES_DIR/$filename_on_server
+rsync -e ssh --archive --compress --human-readable --ignore-existing --secluded-args --chmod=ug=rw,o=r $local_filename i:$IMAGES_DIR/$filename_on_server
 open http://i.gabebw.com/$filename_on_server
