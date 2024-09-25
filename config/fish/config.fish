@@ -337,6 +337,10 @@ fish_add_path --move ./bin/stubs
 if status --is-interactive
   eval "$(fnm env --use-on-cd --log-level=error)"
 end
+
+# Go
+# `go install` will install executables to ~/.bin
+set -x GOBIN ~/.bin
 # }}}
 
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
