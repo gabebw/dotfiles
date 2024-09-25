@@ -1,0 +1,18 @@
+#!/usr/bin/env fish -N
+
+# Fish's `read` removes trailing newline from STDIN, so that the copied result
+# doesn't have a newline at the end. (The most common input is a single line of
+# text.)
+
+function translate
+  tr "abcdefghijklmnopqrstuvwxyz" "𝒶𝒷𝒸𝒹𝑒𝒻𝑔𝒽𝒾𝒿𝓀𝓁𝓂𝓃𝑜𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏" | pbcopy
+end
+
+if [ (count $argv) -eq 0 ]
+  # No args, assume we're piping in
+  read | translate
+else
+  echo $argv | translate
+end
+
+echo "OK, done and copied to clipboard"
