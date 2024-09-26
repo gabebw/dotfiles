@@ -12,7 +12,7 @@ if [ (count $argv) -eq 0 ]
   # No args, assume we're piping in
   read | translate
 else
-  echo $argv | translate
+  echo -n $argv | translate
 end
 
 echo "OK, done and copied to clipboard"
