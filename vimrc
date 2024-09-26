@@ -332,7 +332,7 @@ set noerrorbells visualbell t_vb=
 set complete+=kspell
 set spellfile=$HOME/.vim/vim-spell-en.utf-8.add
 
-set grepprg=rg\ --hidden\ --vimgrep\ --with-filename\ --max-columns\ 200\ --case-sensitive
+set grepprg=rg\ --hidden\ --vimgrep\ --with-filename\ --max-columns\ 200\ --smart-case
 set grepformat=%f:%l:%c:%m
 " }}}
 
