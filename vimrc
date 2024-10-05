@@ -17,34 +17,37 @@ let mapleader=' '
 " ============================================================================
 " AUTOCOMMANDS {{{
 " ===========================================================================
-" on opening the file, clear search-highlighting
-augroup Highlighting
-  autocmd!
-  autocmd BufReadCmd set nohlsearch
-augroup END
-
 " Without this, the next line copies a bunch of netrw settings like `let
 " g:netrw_dirhistmax` to the system clipboard.
 " I never use netrw, so disable its history.
 let g:netrw_dirhistmax = 0
 
-" Highlight the current line, only for the buffer with focus
-augroup CursorLine
+augroup vimrc
+  " Clear all autocommands in this group so that I don't need to do `autocmd!`
+  " for each command. This just clears all of them at once.
   autocmd!
+
+  " on opening the file, clear search-highlighting
+  autocmd BufReadCmd set nohlsearch
+
+  " Highlight the current line, only for the buffer with focus
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
-augroup END
 
-augroup vimrc
-  autocmd!
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
   " and not leave the "!"
   autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
+  " Highlight text between two "---"s as a comment.
+  " `\_x` means "x regex character class, with newlines allowed"
   autocmd BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
 
   " Re-source vimrc whenever it changes
   autocmd BufWritePost vimrc,$MYVIMRC,.vimrc.bundles.local nested if expand("%") !~ 'fugitive' | source % | endif
+
+  " Don't let netrw override <C-l> to move between tmux panes
+  " https://github.com/christoomey/vim-tmux-navigator/issues/189
+  autocmd filetype netrw call NetrwMapping()
 augroup END
 
 " vim-rails + vim-projectionist
@@ -61,13 +64,6 @@ augroup Javascript
   " Keep highlighting in sync (at a performance cost)
   autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
-augroup END
-
-" Don't let netrw override <C-l> to move between tmux panes
-" https://github.com/christoomey/vim-tmux-navigator/issues/189
-augroup netrw_mapping
-  autocmd!
-  autocmd filetype netrw call NetrwMapping()
 augroup END
 
 function! NetrwMapping()
@@ -103,15 +99,8 @@ set completeopt=menu,menuone,longest,preview
 " Change the current working directory to the directory that the current file you are editing is in.
 nnoremap <Leader>cd :cd %:p:h <CR>
 
-" Switch between the last two files
-nnoremap <Leader><Leader> <C-^>
-
-" Toggle quickfix
-nnoremap yoq :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
-
 " Opens a file with the current working directory already filled in so you have to specify only the filename.
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
-nnoremap <Leader>ve :vsp <C-R>=escape(expand('%:p:h'), ' ') . '/' <CR>
 
 " OK, so, in this comment, | is where the Vim cursor is.
 " Given this situation:
@@ -128,20 +117,6 @@ nnoremap <C-W><C-]> :stag <C-R>=expand('<cword>')<CR><CR>
 " -----------------
 command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 | redraw!
 command! -nargs=+ -complete=file -bar GrepRegex silent! grep! <args> | copen 10 | redraw!
-command! -nargs=+ -complete=file -bar GrepWithoutTests silent! grep! --glob '!spec/' --glob '!*.test.tsx' <args> | copen 10 | redraw!
-
-function! FindLocationOf(needle)
-  let l:path_and_line_number = split(system('find-location-of ' . a:needle), ':')
-  if v:shell_error == 0
-    let l:path = path_and_line_number[0]
-    let l:line_number = path_and_line_number[1]
-    call MaybeTabedit(path)
-    execute line_number
-  else
-    echom 'Something went wrong'
-  endif
-endfunction
-command! -nargs=1 -bar Viw call FindLocationOf(<q-args>)
 
 function! CharacterUnderCursor()
   return nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
@@ -181,7 +156,6 @@ function! SearchForWordUnderCursor()
 endfunction
 
 nnoremap K :call SearchForWordUnderCursor()<CR>
-nnoremap <Leader>g :Grep<Space>
 
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
@@ -231,9 +205,6 @@ nnoremap :Nohl :nohlsearch
 xnoremap < <gv
 xnoremap > >gv
 
-" Big Yank to clipboard
-nnoremap Y "*yiw
-
 " ReRun last command
 nnoremap <Leader>rr :write\|VtrSendCommand! eval $history[1]<CR>
 " }}}
@@ -248,8 +219,7 @@ set ruler         " show cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
 set smarttab      " insert tabs on the start of a line according to shiftwidth, not tabstop
-set modelines=2   " inspect top/bottom 2 lines for modeline
-set scrolloff=1   " When scrolling, keep cursor in the middle
+set modelines=2   " inspect top/bottom 2 lines of the file for a modeline
 set shiftround    " When at 3 spaces and I hit >>, go to 4, not 5.
 set colorcolumn=+0 " Set to the textwidth
 
@@ -281,8 +251,8 @@ if v:version > 703 || v:version == 703 && has('patch541')
 endif
 
 " Let mappings and key codes timeout in 100ms
-set ttimeout
-set ttimeoutlen=100
+set ttimeout " Default is to never time out
+set ttimeoutlen=100 " default is 1 second, which is a long time
 
 " Create backups
 set backup
@@ -371,7 +341,6 @@ command! -bang -nargs=? -complete=dir FilesWithPreview
      \   <bang>0)
 
 nnoremap <Leader>t :FilesWithPreview<CR>
-nnoremap <Leader>b :FzfBuffers<CR>
 
 " easytags
 " ----------
@@ -412,14 +381,6 @@ let g:rails_projections = {
     \   ]
     \ },
 \ }
-
-" gist.vim
-" -----------------
-let g:gist_open_browser_after_post = 1
-" Copy the URL after gisting
-let g:gist_clip_command = 'pbcopy'
-" Post privately by default
-let g:gist_post_private = 1
 
 " fugitive
 " --------
@@ -472,7 +433,6 @@ let ruby_no_expensive = 1
 " -------
 " Don't require a .jsx extension
 let g:jsx_ext_required = 0
-" let g:vim_jsx_pretty_highlight_close_tag = 1
 
 " luochen1990/rainbow
 " -----------------
@@ -671,8 +631,6 @@ Plug 'ervandew/supertab'
 Plug 'tpope/vim-fugitive'
 " The Hub to vim-fugitive's git
 Plug 'tpope/vim-rhubarb'
-" :Gist
-Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 " Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
 " When editing deeply/nested/file, auto-create deeply/nested/ dirs
