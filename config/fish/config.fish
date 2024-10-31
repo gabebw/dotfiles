@@ -204,11 +204,27 @@ function fuzzy-history
   commandline -f repaint
 end
 
+# Use Alfred's database of clipboard history and run it through FZF
+function fuzzy-clipboard-history
+  set -l clipboard_db "$HOME/Library/Application Support/Alfred/Databases/clipboard.alfdb"
+  set -l column_name "item"
+  set -l query (string join ' ' 'SELECT replace(item, CHAR(10), "") as ' $column_name ' FROM clipboard ORDER BY ts DESC;')
+  sqlite3 -line -noheader "$clipboard_db" $query 2>/dev/null | \
+    sed -n -e "s/$column_name = //p" | \
+    fzf --no-sort | \
+    pbcopy
+end
+
 if status --is-interactive
   # Ctrl-r triggers fuzzy history search
   bind -M insert \cr 'fuzzy-history'
   # Ctrl-v opens command line in your editor
   bind -M insert \cv edit_command_buffer
+  # Ctrl-p shows clipboard history in FZF and copies the selected item
+  # It intentionally has no mode (`-M`) so that it works in insert and command
+  # modes. It doesn't affect the current command line, so it should just work
+  # all the time.
+  bind \cp 'fuzzy-clipboard-history'
 end
 # }}}
 
