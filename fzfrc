@@ -4,4 +4,7 @@
 
 --bind ctrl-u:page-up,ctrl-f:page-down
 
+# ctrl-y: yank the current line
+--bind 'ctrl-y:execute-silent(echo -n {+} | pbcopy)'
+
 --reverse
