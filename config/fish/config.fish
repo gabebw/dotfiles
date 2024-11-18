@@ -80,6 +80,7 @@ end
 alias prettyjson "jq ."
 # xmllint is from `brew install libxml2`
 alias prettyxml "xmllint --format -"
+alias prettyhtml "prettier --stdin-filepath any-name-here.html"
 alias prettyjavascript "prettier --stdin-filepath any-name-here.js"
 # Remove EXIF data
 alias exif-remove "exiftool -all  "
