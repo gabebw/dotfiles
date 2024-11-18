@@ -7,4 +7,6 @@
 # ctrl-y: yank the current line
 --bind 'ctrl-y:execute-silent(echo -n {+} | pbcopy)'
 
+--bind 'ctrl-t:toggle-all'
+
 --reverse
