@@ -316,31 +316,33 @@ alias ssh "TERM=xterm-256color command ssh"
 # $PATH stuff is last so that other things don't add their own $PATH stuff
 # before it.
 # Note that `fish_add_path` will prepend by default.
+# It is also universal by default, unless you pass "--path".
 
 # Add Homebrew to the path.
-fish_add_path /usr/local/bin /usr/local/sbin
+fish_add_path --path /usr/local/bin /usr/local/sbin
 
 # Heroku standalone client
-fish_add_path /usr/local/heroku/bin
+fish_add_path --path /usr/local/heroku/bin
 
 # Node
-fish_add_path --append ".git/safe/../../node_modules/.bin/"
+set PATH $PATH ".git/safe/../../node_modules/.bin/"
 
 # Postgres.app takes precedence
-fish_add_path /Applications/Postgres.app/Contents/Versions/latest/bin
+fish_add_path --path /Applications/Postgres.app/Contents/Versions/latest/bin
 
-fish_add_path --move $HOME/.bin
+fish_add_path --path --move $HOME/.bin
 
 # Rust
-[ -d "$HOME/.cargo/bin" ] && fish_add_path $HOME/.cargo/bin
+[ -d "$HOME/.cargo/bin" ] && fish_add_path --path $HOME/.cargo/bin
 
 # rbenv
 status --is-interactive; and rbenv init - fish | source
 
-# Add (prepend, by default) binstubs *after* doing rbenv.
-# Use `--move` so that it's moved to the front if it already exists,
-# not kept where it is.
-fish_add_path --move ./bin/stubs
+# Prepend binstubs *after* doing rbenv.
+# Do not use `fish_add_path` because that will expand `.` to wherever you are
+# when you sourced `config.fish`. I want it to refer to the current directory
+# wherever I am.
+set PATH ./bin/stubs $PATH
 
 # Node
 if status --is-interactive
