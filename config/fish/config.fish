@@ -219,10 +219,7 @@ if status --is-interactive
   # Ctrl-v opens command line in your editor
   bind -M insert \cv edit_command_buffer
   # Ctrl-p shows clipboard history in FZF and copies the selected item
-  # It intentionally has no mode (`-M`) so that it works in insert and command
-  # modes. It doesn't affect the current command line, so it should just work
-  # all the time.
-  bind \cp 'fuzzy-clipboard-history'
+  bind -M insert \cp 'fuzzy-clipboard-history'
 end
 # }}}
 
