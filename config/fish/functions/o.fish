@@ -8,7 +8,7 @@ end
 function __o_all_images_in_directory
   set directory $argv[1]
   set --erase argv[1]
-  __o_custom_fd -e jpg -e png -e jpeg -a --base-directory $directory $argv
+  __o_custom_fd -e jpg -e png -e jpeg -e webp -a --base-directory $directory $argv
 end
 
 function __o_open_images_in_directory -a directory
