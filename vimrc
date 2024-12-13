@@ -66,6 +66,12 @@ augroup Javascript
   autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 augroup END
 
+augroup json
+  autocmd!
+  " indent json files on save
+  autocmd FileType json autocmd BufWritePre <buffer> let b:json_old_pos = getpos(".") | execute "%!jq ." | call setpos('.', b:json_old_pos) | unlet b:json_old_pos
+augroup END
+
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
 endfunction
