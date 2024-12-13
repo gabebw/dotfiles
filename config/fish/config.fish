@@ -209,8 +209,7 @@ function fuzzy-clipboard-history
   set -l query (string join ' ' 'SELECT replace(item, CHAR(10), "") as ' $column_name ' FROM clipboard ORDER BY ts DESC;')
   sqlite3 -line -noheader "$clipboard_db" $query 2>/dev/null | \
     sed -n -e "s/$column_name = //p" | \
-    fzf --no-sort | \
-    pbcopy
+    fzf --no-sort --multi
 end
 
 if status --is-interactive
