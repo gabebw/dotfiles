@@ -14,7 +14,7 @@ javascript: (function () {
      * which it is to convert it to feet/inches later. The "\b" ensures the
      * unit is at a word boundary, and prevents a string like this from matching
      * (match between []): "[4 m]onths" */
-    String.raw`(cm|m)s?\b`, 'gi');
+    String.raw`(cm|m)s?\b`, 'g');
   const one_kilogram_in_lbs = 2.20462262;
   const one_kilometer_in_miles = 0.62150404;
 
@@ -24,7 +24,7 @@ javascript: (function () {
 
   /* unit is "cm" or "m" */
   function toFeet(number, unit) {
-    const cm = unit === "cm" ? number : unit === "m" ? number * 100 : alert(`Unknown unit: ${unit}`);
+    const cm = unit === "cm" ? number : unit === "m" ? number * 100 : alert(`Unknown unit: ${unit} in "${number} ${unit}"`);
     const realInches = cm * 0.3937;
     if (realInches < 48) {
       /* Assume this is not height, but something else: use inches */
