@@ -5,10 +5,11 @@ function __o_custom_fd
   command fd --no-ignore --type file $argv
 end
 
-function __o_all_images_in_directory
-  set directory $argv[1]
-  set --erase argv[1]
-  __o_custom_fd -e jpg -e png -e jpeg -e webp -a --base-directory $directory $argv
+function __o_all_images_in_directory -a directory
+  __o_custom_fd \
+    -e jpg -e png -e jpeg -e webp -a \
+    --base-directory $directory \
+    $argv[2..-1]
 end
 
 function __o_open_images_in_directory -a directory
