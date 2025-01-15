@@ -72,6 +72,12 @@ augroup json
   autocmd FileType json autocmd BufWritePre <buffer> let b:json_old_pos = getpos(".") | execute "%!jq ." | call setpos('.', b:json_old_pos) | unlet b:json_old_pos
 augroup END
 
+augroup verymagic
+  " Pretend that verymagic is always on
+  nnoremap / /\v
+  cnoremap %s/ %s/\v
+augroup END
+
 function! NetrwMapping()
   nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
 endfunction
