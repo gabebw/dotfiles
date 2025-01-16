@@ -159,7 +159,7 @@ if status --is-interactive
   # So we only print the session name if it's not the current attached session.
   # This prints an empty new line for the current session, which fish
   # automatically ignores.
-  complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}')" --condition "__fish_is_first_arg"
+  complete -c t -a "(tmux ls -F '#{?session_attached,,#{session_name}}' 2>/dev/null)" --condition "__fish_is_first_arg" --condition "tmux has-session 2>/dev/null"
 
   complete -c viw -w which
   complete -c find-location-of -w which
