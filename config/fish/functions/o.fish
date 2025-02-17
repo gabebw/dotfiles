@@ -21,20 +21,53 @@ end
 
 # This will recurse infinitely into the directory you give it, so just do `o
 # toplevel/` instead of `o toplevel/**/*.*`.
-function o -a directory
-  if set -q directory && [ -d "$directory" ]
+function o
+  if [ (count $argv) -eq 0 ]
+    o $PWD
+  else
+    set -f files_to_open
+
+    for x in $argv
+      set -l index (contains -i $x $argv)
+      if [ -f $x ]
+        set files_to_open $files_to_open $x
+      end
+    end
+
+    for x in $files_to_open
+      set -l index (contains -i $x $argv)
+      # Remove it from $argv so it's not processed below
+      set -e argv[$index]
+    end
+
+    if [ (count $files_to_open) -gt 0 ]
+      open $files_to_open
+    end
+
+    # Search all dirs at once so we start with the first item of all combined
+    # dirs, rather than opening batch 1, then going to the first item in
+    # batch 2, and so on
+    set -f search_path_all_dirs
+
+    for directory in $argv
+      if [ -d $directory ]
+        set search_path_all_dirs $teststring --search-path $directory
+      end
+    end
+
+    if [ (count $search_path_all_dirs) -eq 0 ]
+      return 0
+    end
+
     # "-X <command>" means the results are concatenated and the command is
     # executed once with all found results.
     __o_custom_fd \
       -e mp4 -e flv -e mov -e webm -e m4v \
-      --base-directory $directory \
+      $search_path_all_dirs \
       -X open
-    __o_open_images_in_directory $directory
-  else
-    if [ (count $argv) -eq 0 ]
-      o $PWD
-    else
-      open $argv
+
+    for directory in $argv
+      __o_open_images_in_directory $directory
     end
   end
 end
