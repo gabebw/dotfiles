@@ -112,6 +112,10 @@
   "git.rebaseWhenSync": true,
   "git.supportCancellation": true,
   "githubPullRequests.defaultMergeMethod": "squash",
+  "gitlab.duo.enabledWithoutGitlabProject": false,
+  "gitlab.duoChat.enabled": false,
+  "gitlab.duoCodeSuggestions.enabled": false,
+  "gitlab.keybindingHints.enabled": false,
   "gitlab.showProjectMergeRequests": false,
   "gitlens.blame.highlight.locations": [
     "gutter",
