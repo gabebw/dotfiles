@@ -1,0 +1,4 @@
+--skip-rubocop
+--skip-test
+--database=postgresql
+-m=https://raw.githubusercontent.com/thoughtbot/suspenders/main/lib/install/web.rb
