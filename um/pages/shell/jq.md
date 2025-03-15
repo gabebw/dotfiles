@@ -9,13 +9,23 @@ Given this:
 
     { "animal": "cat", "sound": "meow" }
 
-To get this:
+Do this:
 
-    cat goes meow
+    # cat goes meow
+    jq --raw-output '"\(.animal) goes \(.sound)"'
+
+Or with an array:
+
+    [
+        { "animal": "cat", "sound": "meow" },
+        { "animal": "dog", "sound": "arf" },
+    ]
 
 Do this:
 
-    jq --raw-output '"\(.animal) goes \(.sound)"'
+    # Cat goes meow
+    # Dog goes arf
+    jq --raw-output '.[] | "\(.animal) goes \(.sound)"'
 
 ## Re-shape an array of hashes
 
