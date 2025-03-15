@@ -23,7 +23,14 @@ end
 # toplevel/` instead of `o toplevel/**/*.*`.
 function o
   if [ (count $argv) -eq 0 ]
-    o $PWD
+    read -l --prompt "set_color red; echo -n 'Are you sure?'; set_color normal; echo -n '> '" response
+    if [ (string lower $response) = "yes" ]
+      o $PWD
+    else
+      set_color yellow
+      echo "You didn't say 'yes', not doing anything" >&2
+      set_color normal
+    end
   else
     set -f files_to_open
 
