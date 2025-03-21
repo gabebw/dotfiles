@@ -23,6 +23,7 @@ use_12hr = true
 [ruby]
 format = "[($version )]($style)"
 style = "fg:218" # pink
+detect_folders = [".rbenv"]
 
 [directory]
 # Show 1 parent directory (setting to 0 means no truncation)
