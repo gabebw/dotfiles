@@ -1,3 +1,3 @@
 function ev
-  vim (realpath ~/.vimrc)
+  nvim (realpath ~/.config/nvim/init.lua)
 end

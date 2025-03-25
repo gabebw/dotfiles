@@ -4,6 +4,6 @@ function gv
     echo "Usage: gv THING_TO_GREP_FOR" >&2
     return 64
   else
-    vim -c ":Grep $argv"
+    nvim -c ":Grep $argv"
   end
 end

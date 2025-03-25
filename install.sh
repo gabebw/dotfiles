@@ -131,8 +131,8 @@ info "Linking dotfiles into ~..."
 export RCRC=rcrc
 stay_awake_while rcup -d .
 
-info "Installing Vim packages..."
-vim +PlugInstall +qa
+info "Installing Neovim packages..."
+nvim +PlugInstall +qa
 
 info "Creating ~/Desktop/screenshots so screenshots can be saved there..."
 mkdir -p ~/Desktop/screenshots

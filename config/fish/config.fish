@@ -50,8 +50,8 @@ end
 # }}}
 
 # Aliases {{{
-alias va "vim ~/.aliases.fish"
-alias q "vim (readlink ~/.config/fish/config.fish)"
+alias va "nvim ~/.aliases.fish"
+alias q "nvim (readlink ~/.config/fish/config.fish)"
 alias qq "source ~/.config/fish/config.fish"
 alias cp "cp -iv"
 alias rm "rm -Iv"
@@ -262,7 +262,7 @@ alias gcp "git rev-parse HEAD | xargs echo -n | pbcopy"
 # Editor {{{
 # Why set $VISUAL instead of $EDITOR?
 # http://robots.thoughtbot.com/visual-ize-the-future
-set -x VISUAL vim
+set -x VISUAL nvim
 set -x EDITOR $VISUAL
 alias vi $VISUAL
 # }}}
@@ -284,7 +284,7 @@ alias tagit '/usr/local/bin/ctags -R'
 
 # Postgres {{{
 # Set filetype on editing. Use `\e` to open the editor from `psql`.
-set -x PSQL_EDITOR "vim -c ':set ft=sql'"
+set -x PSQL_EDITOR "nvim -c ':set ft=sql'"
 # }}}
 
 # Homebrew {{{

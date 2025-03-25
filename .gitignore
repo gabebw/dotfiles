@@ -11,17 +11,17 @@ emacs-plugins/*
 !emacs-plugins/.gitkeep
 
 # Ignore Vim bundles
-vim/bundle/
+config/nvim/bundle/
 
 # Keep these folders...
-!vim/backups/.gitkeep
-!vim/undodir/.gitkeep
+!config/nvim/backups/.gitkeep
+!config/nvim/undodir/.gitkeep
 # ...but not their contents
-vim/backups/*
-vim/undodir/*
+config/nvim/backups/*
+config/nvim/undodir/*
 # Ignore the binary version because it will be automatically updated and
 # reloaded when words are added with `zg`
-vim/vim-spell-en.utf-8.add.spl
+config/nvim/vim-spell-en.utf-8.add.spl
 
 # Ignore old version of vim-plug (created by `:PlugUpgrade`)
 plug.vim.old

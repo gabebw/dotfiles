@@ -5,5 +5,5 @@ conflicts=$(git diff --name-only --diff-filter=U)
 if [ -z "$conflicts" ]; then
   echo "No conflicts :)"
 else
-  vim $conflicts
+  nvim $conflicts
 fi
