@@ -511,13 +511,13 @@ let g:lightline.component.readonly = '%{(&filetype!="help" && &readonly) ? "RO" 
 let g:lightline.component_function.fugitive = 'LightLineGitBranch'
 let g:lightline.component_function.myfilename = 'LightLineFilename'
 let g:lightline.component_visible_condition.readonly = '(&filetype!="help"&& &readonly)'
-let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head") && ""!=fugitive#head())'
+let g:lightline.component_visible_condition.fugitive = '(exists("*FugitiveHead") && ""!=FugitiveHead())'
 let g:lightline.tabline.right = [] " Disable the 'X' on the far right
 
 function! LightLineGitBranch()
   let l:max = 25
-  if exists("*fugitive#head") && "" != fugitive#head()
-    let branch = fugitive#head()
+  if exists("*FugitiveHead") && "" != FugitiveHead()
+    let branch = FugitiveHead()
     if len(branch) > l:max
       " Long branch names get truncated
       return branch[0:l:max-3] . '...'
