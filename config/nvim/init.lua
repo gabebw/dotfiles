@@ -154,10 +154,6 @@ nnoremap k gk
 " no ex mode
 map Q <Nop>
 
-" paste from the clipboard (before/after cursor)
-nnoremap cv "+p
-nnoremap cV "+P
-
 " Automatically reselect text after in- or out-denting in visual mode
 xnoremap < <gv
 xnoremap > >gv
