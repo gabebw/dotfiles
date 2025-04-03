@@ -159,6 +159,7 @@ xnoremap < <gv
 xnoremap > >gv
 
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>q :tabedit '$HOME/.config/fish/config.fish')<CR>
 ]]
 
