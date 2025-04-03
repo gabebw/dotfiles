@@ -227,14 +227,9 @@ vim.g.rails_projections = {
 -- Get a direct link to the current line (with specific commit included!) and
 -- copy it to the system clipboard
 vim.cmd([[
-command! GitLink silent .Gbrowse!
-command! GitLinkFile silent 0Gbrowse!
+command! GitLink silent .GBrowse!
+command! GitLinkFile silent 0GBrowse!
 
-augroup Fugitive
-  autocmd!
-  " Open the commit hash under the cursor, in GitHub
-  autocmd FileType fugitiveblame nnoremap <buffer> <silent> gb :Gbrowse <C-r><C-w><CR>
-augroup END
 " Prevent Fugitive from raising an error about .git/tags by telling it to
 " explicitly check .git/tags
 set tags^=./.git/tags
