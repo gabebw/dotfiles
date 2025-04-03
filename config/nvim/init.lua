@@ -187,12 +187,7 @@ vim.g.fzf_action = {
 }
 
 vim.cmd [[
-command! -bang -nargs=? -complete=dir FilesWithPreview
-     \ call fzf#vim#files(<q-args>,
-     \   fzf#vim#with_preview(),
-     \   <bang>0)
-
-nnoremap <Leader>t :FilesWithPreview<CR>
+nnoremap <Leader>t :Telescope find_files<CR>
 ]]
 
 -- rails.vim
@@ -500,7 +495,60 @@ Plug("folke/lazydev.nvim", {
   end,
 })
 
+-- Telescope is absolutely magic.
+Plug "nvim-telescope/telescope.nvim"
+-- Use (ported version of) FZF for better performance and to support FZF syntax
+Plug("nvim-telescope/telescope-fzf-native.nvim", {
+  run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+  config = function()
+    require("telescope").load_extension "fzf"
+  end,
+})
+
 Plug.ends()
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+  callback = function(event)
+    -- Helper function for mapping keybindings
+    local map = function(keys, func, desc, mode)
+      mode = mode or "n"
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+    end
+
+    local t = require "telescope.builtin"
+
+    -- Jump to the definition of the word under your cursor.
+    --  This is where a variable was first declared, or where a function is defined, etc.
+    --  To jump back, press <C-t>.
+    map("gd", t.lsp_definitions, "[G]oto [D]efinition")
+
+    -- Find references for the word under your cursor.
+    map("gr", t.lsp_references, "[G]oto [R]eferences")
+
+    -- Rename the variable under your cursor.
+    map("gR", vim.lsp.buf.rename, "[R]ename")
+
+    map("gh", vim.lsp.buf.hover, "[H]over")
+
+    -- Jump to the type of the word under your cursor.
+    --  Useful when you're not sure what type a variable is and you want to see
+    --  the definition of its *type*, not where it was *defined*.
+    map("<leader>D", t.lsp_type_definitions, "Type [D]efinition")
+
+    -- Fuzzy find all the symbols in your current document.
+    --  Symbols are things like variables, functions, types, etc.
+    map("<leader>ds", t.lsp_document_symbols, "[D]ocument [S]ymbols")
+
+    -- Fuzzy find all the symbols in your current workspace.
+    --  Similar to document symbols, except searches over your entire project.
+    map("<leader>ws", t.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+
+    -- Execute a code action, usually your cursor needs to be on top of an error
+    -- or a suggestion from your LSP for this to activate.
+    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+  end,
+})
 
 vim.cmd [[
 augroup vimrc
