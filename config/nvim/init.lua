@@ -1,6 +1,6 @@
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
+-- Set leader/localleader early because leader is used at the moment mappings
+-- are defined. Changing the (local)leader after a mapping is defined has no
+-- effect on the mapping.
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
