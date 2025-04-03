@@ -6,13 +6,13 @@ vim.g.maplocalleader = "\\"
 
 -- Options
 vim.o.history = 10000
-vim.o.swapfile = false -- http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-vim.o.ruler = true -- show cursor position all the time
-vim.o.showcmd = true -- display incomplete commands
-vim.o.incsearch = true -- do incremental searching
-vim.o.smarttab = true -- insert tabs on the start of a line according to shiftwidth, not tabstop
-vim.o.modelines = 2 --  inspect top/bottom 2 lines of the file for a modeline
-vim.o.shiftround = true -- When at 3 spaces and I hit >>, go to 4, not 5.
+vim.o.swapfile = false   -- http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+vim.o.ruler = true       -- show cursor position all the time
+vim.o.showcmd = true     -- display incomplete commands
+vim.o.incsearch = true   -- do incremental searching
+vim.o.smarttab = true    -- insert tabs on the start of a line according to shiftwidth, not tabstop
+vim.o.modelines = 2      --  inspect top/bottom 2 lines of the file for a modeline
+vim.o.shiftround = true  -- When at 3 spaces and I hit >>, go to 4, not 5.
 vim.o.colorcolumn = "+0" -- Set to the textwidth
 
 -- Don't ask me if I want to load changed files. The answer is always 'Yes'
@@ -58,8 +58,8 @@ vim.o.numberwidth = 3
 
 vim.opt.backspace = { "indent", "eol", "start" } -- allow backspacing over everything in insert mode
 vim.o.autoindent = true
-vim.o.copyindent = true -- copy previous indentation on autoindenting
-vim.o.showmatch = true -- show matching parenthesis
+vim.o.copyindent = true                          -- copy previous indentation on autoindenting
+vim.o.showmatch = true                           -- show matching parenthesis
 
 -- make searches case-sensitive only if they contain upper-case characters
 vim.o.ignorecase = true
@@ -91,7 +91,7 @@ vim.o.grepformat = "%f:%l:%c:%m"
 
 -- The wild* settings are for _command_ (like `:color<TAB>`) completion, not for
 -- completion of words in files.
-vim.o.wildmenu = true -- enable a menu near the Vim command line
+vim.o.wildmenu = true       -- enable a menu near the Vim command line
 vim.o.wildignorecase = true -- ignore case when completing file names and directories
 vim.o.wildmode = "list:longest,list:full"
 vim.opt.completeopt = { "menu", "menuone", "longest", "preview" }
@@ -303,7 +303,7 @@ vim.g.lightline = {
   colorscheme = "darcula",
   active = {
     left = {
-      { "mode", "paste" },
+      { "mode",     "paste" },
       { "fugitive", "readonly", "myfilename", "modified" },
     },
     right = {
