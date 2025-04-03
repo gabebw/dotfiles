@@ -170,6 +170,9 @@ vim.g.SuperTabDefaultCompletionType = "<c-n>"
 -- peekaboo
 vim.g.peekaboo_window = "vert bo 50new"
 
+-- easytags
+vim.g.easytags_events = {}
+
 -- FZF
 -- This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
 -- FZF commands and not have to remember 'Colors' and 'History/' etc.
