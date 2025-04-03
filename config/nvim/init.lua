@@ -461,7 +461,43 @@ Plug("nicholaides/words-to-avoid.vim", { ft = "markdown" })
 -- `gx` so that `gx` works on [Markdown](links).
 Plug("christoomey/vim-quicklink", { ft = "markdown" })
 -- Make `gx` work on 'gabebw/dotfiles' too
-Plug("gabebw/vim-github-link-opener", { branch = "main" })
+Plug('gabebw/vim-github-link-opener', { branch = 'main' })
+
+-- LSP stuff
+Plug('neovim/nvim-lspconfig', {
+  config = function()
+    require'lspconfig'.ruby_lsp.setup{
+      cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') }
+    }
+    require'lspconfig'.pyright.setup{}
+    require'lspconfig'.lua_ls.setup {
+      settings = {
+        Lua = {
+          diagnostics = {
+            -- Tell the language server to recognize the `vim` global
+            globals = {
+              'vim',
+            }
+          },
+        }
+      }
+    }
+  end
+})
+
+Plug('pmizio/typescript-tools.nvim', {
+	dependencies = { 'nvim-lua/plenary.nvim' },
+	config = function()
+		require('typescript-tools').setup {}
+	end
+})
+
+Plug("folke/lazydev.nvim", {
+  config = function()
+    require("lazydev").setup()
+  end,
+})
+
 Plug.ends()
 
 vim.cmd [[

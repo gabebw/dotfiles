@@ -77,6 +77,7 @@ brew "git-lfs"
 # Neovim/Lua
 brew "neovim"
 brew "stylua"
+brew "lua-language-server"
 
 brew "fish"
 
