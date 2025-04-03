@@ -1,0 +1,4 @@
+# Configuration for https://github.com/JohnnyMorganz/StyLua
+indent_type = "Spaces"
+indent_width = 2
+call_parentheses = "NoSingleString"

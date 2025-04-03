@@ -29,7 +29,7 @@ vim.g.is_posix = 1
 
 -- Persistent undo
 vim.o.undofile = true -- Create FILE.un~ files for persistent undo
-vim.o.undodir = vim.fn.stdpath("config") .. "/undodir"
+vim.o.undodir = vim.fn.stdpath "config" .. "/undodir"
 
 -- Delete comment character when joining commented lines
 vim.opt.formatoptions:append({ j = true })
@@ -41,10 +41,10 @@ vim.o.ttimeoutlen = 100
 -- Create backups
 vim.o.backup = true
 vim.o.writebackup = true
-vim.o.backupdir = vim.fn.stdpath("config") .. "/backups"
+vim.o.backupdir = vim.fn.stdpath "config" .. "/backups"
 -- setting backupskip to this to allow for 'crontab -e' using vim.
 -- thanks to: http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-ed
-if vim.fn.has('unix') then
+if vim.fn.has "unix" then
   vim.opt.backupskip = { "/tmp/*", "/private/tmp/*" }
 end
 vim.opt.listchars = { tab = ">-", trail = "~" }
@@ -83,8 +83,8 @@ vim.o.errorbells = false
 vim.o.visualbell = true
 
 -- Autocomplete with dictionary words when spell check is on
-vim.opt.complete:append("kspell")
-vim.o.spellfile = vim.fn.stdpath("config") .. "/vim-spell-en.utf-8.add"
+vim.opt.complete:append "kspell"
+vim.o.spellfile = vim.fn.stdpath "config" .. "/vim-spell-en.utf-8.add"
 
 vim.o.grepprg = "rg --hidden --vimgrep --with-filename --max-columns 200 --smart-case"
 vim.o.grepformat = "%f:%l:%c:%m"
@@ -97,14 +97,14 @@ vim.o.wildmode = "list:longest,list:full"
 vim.opt.completeopt = { "menu", "menuone", "longest", "preview" }
 
 -- Searching
-vim.cmd([[
+vim.cmd [[
 command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 | redraw!
 command! -nargs=+ -complete=file -bar GrepRegex silent! grep! <args> | copen 10 | redraw!
-]])
+]]
 
 function CharacterUnderCursor()
   local column = vim.api.nvim_win_get_cursor(0)[2]
-  return vim.api.nvim_get_current_line():sub(column, column+1)
+  return vim.api.nvim_get_current_line():sub(column, column + 1)
 end
 
 function SearchableWordNearCursor()
@@ -114,16 +114,16 @@ function SearchableWordNearCursor()
   -- Then the <cword> is `there`.
   -- Thus, we use `CharacterUnderCursor` (which is precise) to determine if we're
   -- on a word at all.
-  if CharacterUnderCursor():match("^%s$") then
-    return ''
+  if CharacterUnderCursor():match "^%s$" then
+    return ""
   else
-    local word_under_cursor = vim.fn.expand('<cword>')
+    local word_under_cursor = vim.fn.expand "<cword>"
     -- Sometimes the word under the cursor includes punctuation, in which case
     -- '\bWORD!\b' will fail because \b is a word boundary and we have non-word
     -- characters in WORD. So, remove them. This results in a less-precise match
     -- (it'll find WORD as well as WORD!, for example), but is better than getting
     -- zero results.
-    return word_under_cursor:gsub('[$!?]', '')
+    return word_under_cursor:gsub("[$!?]", "")
   end
 end
 
@@ -133,17 +133,17 @@ function SearchForWordUnderCursor()
   if searchable_word:len() == 0 then
     -- All whitespace or empty, don't search for it because there will be
     -- thousands of (useless) results.
-    vim.fn.echo('Not searching for whitespace or empty string')
+    vim.fn.echo "Not searching for whitespace or empty string"
   else
     local s = "'\\b" .. vim.fn.shellescape(searchable_word) .. "\\b'"
     vim.cmd.GrepRegex(s)
   end
 end
 
-vim.keymap.set('n', 'K', SearchForWordUnderCursor, { remap = false })
+vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
 
 -- Opens a file with the current working directory already filled in so you have to specify only the filename.
-vim.cmd([[
+vim.cmd [[
 nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/'<CR>
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
@@ -160,7 +160,7 @@ xnoremap > >gv
 
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>q :tabedit '$HOME/.config/fish/config.fish')<CR>
-]])
+]]
 
 -- PLUGIN OPTIONS
 -- Supertab
@@ -179,64 +179,64 @@ vim.g.easytags_events = {}
 vim.g.fzf_command_prefix = "Fzf"
 -- Ctrl-M is Enter: open in tabs by default
 vim.g.fzf_action = {
-	["ctrl-m"] = "tabedit",
-	["ctrl-e"] = "edit",
-	["ctrl-p"] = "split",
-	["ctrl-v"] = "vsplit"
+  ["ctrl-m"] = "tabedit",
+  ["ctrl-e"] = "edit",
+  ["ctrl-p"] = "split",
+  ["ctrl-v"] = "vsplit",
 }
 
-vim.cmd([[
+vim.cmd [[
 command! -bang -nargs=? -complete=dir FilesWithPreview
      \ call fzf#vim#files(<q-args>,
      \   fzf#vim#with_preview(),
      \   <bang>0)
 
 nnoremap <Leader>t :FilesWithPreview<CR>
-]])
+]]
 
 -- rails.vim
 vim.g.rails_projections = {
-     ["config/routes.rb"] = { command = "routes" },
-     ["app/admin/*.rb"] = {
-       command = "admin",
-       alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
-     },
-     ["spec/controllers/admin/*_controller_spec.rb"] = {
-       alternate = "app/admin/{plural}.rb",
-     },
-     ["spec/factories/*.rb"] = { command = "factories" },
-     ["spec/factories.rb"] = { command = "factories" },
-     ["spec/features/*_spec.rb"] = { command = "feature" },
-     ["config/locales/en/*.yml"] = {
-       command = "tran",
-       template = "en:\n  {underscore|plural}:\n    ",
-     },
-     ["app/services/*.rb"] = {
-       command = "service",
-       test = "spec/services/{}_spec.rb"
-     },
-     ["script/datamigrate/*.rb"] = {
-       command = "datamigrate",
-       template = "#!/usr/bin/env rails runner\n\n",
-     },
-     ["app/jobs/*_job.rb"] = {
-       command = "job",
-       template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
-       test = { "spec/jobs/{}_job_spec.rb" }
-     },
+  ["config/routes.rb"] = { command = "routes" },
+  ["app/admin/*.rb"] = {
+    command = "admin",
+    alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
+  },
+  ["spec/controllers/admin/*_controller_spec.rb"] = {
+    alternate = "app/admin/{plural}.rb",
+  },
+  ["spec/factories/*.rb"] = { command = "factories" },
+  ["spec/factories.rb"] = { command = "factories" },
+  ["spec/features/*_spec.rb"] = { command = "feature" },
+  ["config/locales/en/*.yml"] = {
+    command = "tran",
+    template = "en:\n  {underscore|plural}:\n    ",
+  },
+  ["app/services/*.rb"] = {
+    command = "service",
+    test = "spec/services/{}_spec.rb",
+  },
+  ["script/datamigrate/*.rb"] = {
+    command = "datamigrate",
+    template = "#!/usr/bin/env rails runner\n\n",
+  },
+  ["app/jobs/*_job.rb"] = {
+    command = "job",
+    template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
+    test = { "spec/jobs/{}_job_spec.rb" },
+  },
 }
 
 -- fugitive
 -- Get a direct link to the current line (with specific commit included!) and
 -- copy it to the system clipboard
-vim.cmd([[
+vim.cmd [[
 command! GitLink silent .GBrowse!
 command! GitLinkFile silent 0GBrowse!
 
 " Prevent Fugitive from raising an error about .git/tags by telling it to
 " explicitly check .git/tags
 set tags^=./.git/tags
-]])
+]]
 
 -- vim-trimmer
 -- filetypes, check with `:set ft?`
@@ -248,20 +248,20 @@ vim.g.trimmer_repeated_lines_blacklist_file_base_names = { "schema.rb", "structu
 vim.g.VtrOrientation = "h"
 -- Take up this percentage of the screen
 vim.g.VtrPercentage = 30
-vim.cmd([[
+vim.cmd [[
 " Attach to a specific pane
 nnoremap <leader>va :VtrAttachToPane<CR>
-]])
+]]
 
 -- Test running
-vim.cmd([[
+vim.cmd [[
 nnoremap <Leader>l :w<CR>:TestNearest<CR>:redraw!<CR>
 nnoremap <Leader>a :w<CR>:TestFile<CR>:redraw!<CR>
-]])
+]]
 vim.g["test#strategy"] = "vtr"
 vim.g["test#ruby#rspec#options"] = {
-      nearest = '--format documentation',
-      file = '--format documentation',
+  nearest = "--format documentation",
+  file = "--format documentation",
 }
 
 -- JSX
@@ -271,23 +271,23 @@ vim.g.jsx_ext_required = 0
 -- luochen1990/rainbow
 vim.g.rainbow_conf = {
   ctermfgs = {
-      "brown",
-      "Darkblue",
-      "darkgray",
-      "darkgreen",
-      "darkcyan",
-      "darkred",
-      "darkmagenta",
-      "brown",
-      "gray",
-      "black",
-      "darkmagenta",
-      "Darkblue",
-      "darkgreen",
-      "darkcyan",
-      "darkred",
-      "red",
-  }
+    "brown",
+    "Darkblue",
+    "darkgray",
+    "darkgreen",
+    "darkcyan",
+    "darkred",
+    "darkmagenta",
+    "brown",
+    "gray",
+    "black",
+    "darkmagenta",
+    "Darkblue",
+    "darkgreen",
+    "darkcyan",
+    "darkred",
+    "red",
+  },
 }
 
 -- ============================================================================
@@ -299,43 +299,43 @@ vim.o.laststatus = 2
 vim.o.showmode = false
 
 vim.g.lightline = {
-	colorscheme = "darcula",
-	active = {
-		left = {
-			{ "mode", "paste" },
-			{ "fugitive", "readonly", "myfilename", "modified" }
-		},
-		right = {
-		  { "filetype" }
-    }
-	},
-	component = {
-		readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}'
-	},
-	component_function = {
-		fugitive = "v:lua.LightLineGitBranch",
-		myfilename = "LightLineFilename"
-	},
-	component_visible_condition = {
-		readonly = '(&filetype!="help" && &readonly)',
-		fugitive = '(exists("*FugitiveHead") && ""!=FugitiveHead())'
-	},
-	tabline = {
-		-- Disable the 'X' on the far right
-		right = {}
-	}
+  colorscheme = "darcula",
+  active = {
+    left = {
+      { "mode", "paste" },
+      { "fugitive", "readonly", "myfilename", "modified" },
+    },
+    right = {
+      { "filetype" },
+    },
+  },
+  component = {
+    readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}',
+  },
+  component_function = {
+    fugitive = "v:lua.LightLineGitBranch",
+    myfilename = "LightLineFilename",
+  },
+  component_visible_condition = {
+    readonly = '(&filetype!="help" && &readonly)',
+    fugitive = '(exists("*FugitiveHead") && ""!=FugitiveHead())',
+  },
+  tabline = {
+    -- Disable the 'X' on the far right
+    right = {},
+  },
 }
 
 function LightLineGitBranch()
   local max = 25
-  if vim.fn.exists("*FugitiveHead") == 1 then
+  if vim.fn.exists "*FugitiveHead" == 1 then
     local branch = vim.fn["FugitiveHead"]()
     if branch:len() == 0 then
       return ""
     else
       if branch:len() > max then
         -- Long branch names get truncated
-        return branch:sub(0, max-3) .. '...'
+        return branch:sub(0, max - 3) .. "..."
       else
         return branch
       end
@@ -345,7 +345,7 @@ function LightLineGitBranch()
   end
 end
 
-vim.cmd([[
+vim.cmd [[
 function! LightLineFilename()
   let unfollowed_symlink_filename = expand('%:p')
   let filename = resolve(unfollowed_symlink_filename)
@@ -366,7 +366,7 @@ function! LightLineFilename()
     return filename
   endif
 endfunction
-]])
+]]
 
 -- Tabs
 -- Softtabs, 2 spaces
@@ -375,92 +375,92 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 -- Plugins
-local Plug = require('vimplug')
-Plug.begin(vim.fn.stdpath('config') .. '/bundle')
+local Plug = require "vimplug"
+Plug.begin(vim.fn.stdpath "config" .. "/bundle")
 -- JavaScript
-Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+Plug "pangloss/vim-javascript"
+Plug "MaxMEllon/vim-jsx-pretty"
+Plug "leafgarland/typescript-vim"
+Plug "peitalin/vim-jsx-typescript"
 
 -- Ruby/Rails
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
+Plug "tpope/vim-rails"
+Plug "vim-ruby/vim-ruby"
 -- Allow `cir` to change inside ruby block, etc
-Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-projectionist'
-Plug 'janko-m/vim-test'
-Plug 'dag/vim-fish'
+Plug "nelstrom/vim-textobj-rubyblock"
+Plug "tpope/vim-rake"
+Plug "tpope/vim-projectionist"
+Plug "janko-m/vim-test"
+Plug "dag/vim-fish"
 
 -- tmux
-Plug 'christoomey/vim-tmux-runner'
-Plug 'christoomey/vim-tmux-navigator'
+Plug "christoomey/vim-tmux-runner"
+Plug "christoomey/vim-tmux-navigator"
 
 -- Syntax
-Plug 'rust-lang/rust.vim'
-Plug 'vim-scripts/applescript.vim'
-Plug 'shmup/vim-sql-syntax'
-Plug 'tpope/vim-git'
-Plug 'cespare/vim-toml'
+Plug "rust-lang/rust.vim"
+Plug "vim-scripts/applescript.vim"
+Plug "shmup/vim-sql-syntax"
+Plug "tpope/vim-git"
+Plug "cespare/vim-toml"
 
 -- Plumbing that makes everything nicer
 -- Fuzzy-finder
 -- Easily comment/uncomment lines in many languages
-Plug('junegunn/fzf.vim', { dependencies = { '/usr/local/opt/fzf' }})
-Plug 'tomtom/tcomment_vim'
+Plug("junegunn/fzf.vim", { dependencies = { "/usr/local/opt/fzf" } })
+Plug "tomtom/tcomment_vim"
 
 -- <Tab> indents or triggers autocomplete, smartly
-Plug 'ervandew/supertab'
+Plug "ervandew/supertab"
 -- Git bindings
-Plug 'tpope/vim-fugitive'
+Plug "tpope/vim-fugitive"
 -- The Hub to vim-fugitive's git
-Plug 'tpope/vim-rhubarb'
+Plug "tpope/vim-rhubarb"
 -- Auto-add `end` in Ruby, `endfunction` in Vim, etc
-Plug 'tpope/vim-endwise'
+Plug "tpope/vim-endwise"
 -- When editing deeply/nested/file, auto-create deeply/nested/ dirs
-Plug 'duggiefresh/vim-easydir'
+Plug "duggiefresh/vim-easydir"
 -- Cool statusbar
-Plug 'itchyny/lightline.vim'
+Plug "itchyny/lightline.vim"
 -- Easily navigate directories
-Plug 'tpope/vim-vinegar'
+Plug "tpope/vim-vinegar"
 -- Make working with shell scripts nicer ("vim-unix")
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
+Plug "tpope/vim-eunuch"
+Plug "tpope/vim-surround"
 -- Make `.` work to repeat plugin actions too
-Plug 'tpope/vim-repeat'
+Plug "tpope/vim-repeat"
 -- Intelligently reopen files where you left off
-Plug 'farmergreg/vim-lastplace'
+Plug "farmergreg/vim-lastplace"
 -- Instead of always copying to the system clipboard, use `cp` (plus motions) to
 -- copy to the system clipboard. `cP` copies the current line. `cv` pastes.
-Plug 'christoomey/vim-system-copy'
+Plug "christoomey/vim-system-copy"
 -- `vim README.md:10` opens README.md at the 10th line, rather than saying "No
 -- such file: README.md:10"
-Plug 'xim/file-line'
-Plug 'christoomey/vim-sort-motion'
-Plug 'flazz/vim-colorschemes'
-Plug 'sjl/gundo.vim'
-Plug('xolox/vim-easytags', { dependencies = { 'xolox/vim-misc' }})
+Plug "xim/file-line"
+Plug "christoomey/vim-sort-motion"
+Plug "flazz/vim-colorschemes"
+Plug "sjl/gundo.vim"
+Plug("xolox/vim-easytags", { dependencies = { "xolox/vim-misc" } })
 -- Easily inspect registers exactly when you need them
 -- https://github.com/junegunn/vim-peekaboo
-Plug 'junegunn/vim-peekaboo'
+Plug "junegunn/vim-peekaboo"
 
 -- Text objects
 -- required for all the vim-textobj-* plugins
-Plug 'kana/vim-textobj-user'
+Plug "kana/vim-textobj-user"
 -- `ae` text object, so `gcae` comments whole file
-Plug 'kana/vim-textobj-entire'
+Plug "kana/vim-textobj-entire"
 -- `l` text object for the current line excluding leading whitespace
-Plug 'kana/vim-textobj-line'
+Plug "kana/vim-textobj-line"
 
 -- Markdown
-Plug 'tpope/vim-markdown'
-Plug('nicholaides/words-to-avoid.vim', { ft = 'markdown' })
+Plug "tpope/vim-markdown"
+Plug("nicholaides/words-to-avoid.vim", { ft = "markdown" })
 -- It does more, but I'm mainly using this because it gives me markdown-aware
 -- `gx` so that `gx` works on [Markdown](links).
-Plug('christoomey/vim-quicklink', { ft = 'markdown' })
+Plug("christoomey/vim-quicklink", { ft = "markdown" })
 -- Make `gx` work on 'gabebw/dotfiles' too
-Plug('gabebw/vim-github-link-opener', { branch = 'main' })
+Plug("gabebw/vim-github-link-opener", { branch = "main" })
 Plug.ends()
 
 vim.cmd [[
@@ -498,15 +498,15 @@ augroup END
 
 -- vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
 -- _after_ loading plugins.
-vim.cmd([[
+vim.cmd [[
   runtime macros/matchit.vim
   filetype plugin indent on
   syntax enable
   colorscheme Tomorrow-Night-Eighties
-]])
+]]
 
 if vim.g.vscode == 1 then
-  vim.cmd([[
+  vim.cmd [[
   " This block is running in VS Code.
   " To tell VS Code to reload this file, reload VS Code with Cmd-r.
 
@@ -533,5 +533,5 @@ if vim.g.vscode == 1 then
   nmap gcc <Plug>VSCodeCommentaryLine
   nnoremap S <Cmd>call VSCodeNotify('search.action.focusNextSearchResult')<CR>
   nnoremap % <Cmd>call VSCodeNotify('editor.action.jumpToBracket')
-  ]])
+  ]]
 end
