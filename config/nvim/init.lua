@@ -177,9 +177,9 @@ vim.g.fzf_command_prefix = "Fzf"
 -- Ctrl-M is Enter: open in tabs by default
 vim.g.fzf_action = {
 	["ctrl-m"] = "tabedit",
-	["ctrl-o"] =  "edit",
-	["ctrl-x"] = "split",
-	["ctrl-v"]= "vsplit"
+	["ctrl-e"] = "edit",
+	["ctrl-p"] = "split",
+	["ctrl-v"] = "vsplit"
 }
 
 vim.cmd([[
