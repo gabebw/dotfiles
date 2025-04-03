@@ -503,6 +503,7 @@ vim.cmd([[
   runtime macros/matchit.vim
   filetype plugin indent on
   syntax enable
+  colorscheme Tomorrow-Night-Eighties
 ]])
 
 if vim.g.vscode == 1 then
