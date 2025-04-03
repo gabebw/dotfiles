@@ -375,94 +375,93 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 -- Plugins
-vim.cmd([[
-call plug#begin(stdpath('config') . '/bundle')
-" JavaScript
+local Plug = require('vimplug')
+Plug.begin(vim.fn.stdpath('config') .. '/bundle')
+-- JavaScript
 Plug 'pangloss/vim-javascript'
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 
-" Ruby/Rails
+-- Ruby/Rails
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
-" Allow `cir` to change inside ruby block, etc
+-- Allow `cir` to change inside ruby block, etc
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-projectionist'
 Plug 'janko-m/vim-test'
 Plug 'dag/vim-fish'
 
-" tmux
+-- tmux
 Plug 'christoomey/vim-tmux-runner'
 Plug 'christoomey/vim-tmux-navigator'
 
-" Syntax
+-- Syntax
 Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/applescript.vim'
 Plug 'shmup/vim-sql-syntax'
 Plug 'tpope/vim-git'
 Plug 'cespare/vim-toml'
 
-" Plumbing that makes everything nicer
-" Fuzzy-finder
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-" Easily comment/uncomment lines in many languages
+-- Plumbing that makes everything nicer
+-- Fuzzy-finder
+-- Easily comment/uncomment lines in many languages
+Plug('junegunn/fzf.vim', { dependencies = { '/usr/local/opt/fzf' }})
 Plug 'tomtom/tcomment_vim'
-" <Tab> indents or triggers autocomplete, smartly
+
+-- <Tab> indents or triggers autocomplete, smartly
 Plug 'ervandew/supertab'
-" Git bindings
+-- Git bindings
 Plug 'tpope/vim-fugitive'
-" The Hub to vim-fugitive's git
+-- The Hub to vim-fugitive's git
 Plug 'tpope/vim-rhubarb'
-" Auto-add `end` in Ruby, `endfunction` in Vim, etc
+-- Auto-add `end` in Ruby, `endfunction` in Vim, etc
 Plug 'tpope/vim-endwise'
-" When editing deeply/nested/file, auto-create deeply/nested/ dirs
+-- When editing deeply/nested/file, auto-create deeply/nested/ dirs
 Plug 'duggiefresh/vim-easydir'
-" Cool statusbar
+-- Cool statusbar
 Plug 'itchyny/lightline.vim'
-" Easily navigate directories
+-- Easily navigate directories
 Plug 'tpope/vim-vinegar'
-" Make working with shell scripts nicer ("vim-unix")
+-- Make working with shell scripts nicer ("vim-unix")
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
-" Make `.` work to repeat plugin actions too
+-- Make `.` work to repeat plugin actions too
 Plug 'tpope/vim-repeat'
-" Intelligently reopen files where you left off
+-- Intelligently reopen files where you left off
 Plug 'farmergreg/vim-lastplace'
-" Instead of always copying to the system clipboard, use `cp` (plus motions) to
-" copy to the system clipboard. `cP` copies the current line. `cv` pastes.
+-- Instead of always copying to the system clipboard, use `cp` (plus motions) to
+-- copy to the system clipboard. `cP` copies the current line. `cv` pastes.
 Plug 'christoomey/vim-system-copy'
-" `vim README.md:10` opens README.md at the 10th line, rather than saying "No
-" such file: README.md:10"
+-- `vim README.md:10` opens README.md at the 10th line, rather than saying "No
+-- such file: README.md:10"
 Plug 'xim/file-line'
 Plug 'christoomey/vim-sort-motion'
 Plug 'flazz/vim-colorschemes'
 Plug 'sjl/gundo.vim'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
-" Easily inspect registers exactly when you need them
-" https://github.com/junegunn/vim-peekaboo
+Plug('xolox/vim-easytags', { dependencies = { 'xolox/vim-misc' }})
+-- Easily inspect registers exactly when you need them
+-- https://github.com/junegunn/vim-peekaboo
 Plug 'junegunn/vim-peekaboo'
 
-" Text objects
-" required for all the vim-textobj-* plugins
+-- Text objects
+-- required for all the vim-textobj-* plugins
 Plug 'kana/vim-textobj-user'
-" `ae` text object, so `gcae` comments whole file
+-- `ae` text object, so `gcae` comments whole file
 Plug 'kana/vim-textobj-entire'
-" `l` text object for the current line excluding leading whitespace
+-- `l` text object for the current line excluding leading whitespace
 Plug 'kana/vim-textobj-line'
 
-" Markdown
+-- Markdown
 Plug 'tpope/vim-markdown'
-Plug 'nicholaides/words-to-avoid.vim', { 'for': 'markdown' }
-" It does more, but I'm mainly using this because it gives me markdown-aware
-" `gx` so that `gx` works on [Markdown](links).
-Plug 'christoomey/vim-quicklink', { 'for': 'markdown' }
-" Make `gx` work on 'gabebw/dotfiles' too
-Plug 'gabebw/vim-github-link-opener', { 'branch': 'main' }
-
-call plug#end()
-]])
+Plug('nicholaides/words-to-avoid.vim', { ft = 'markdown' })
+-- It does more, but I'm mainly using this because it gives me markdown-aware
+-- `gx` so that `gx` works on [Markdown](links).
+Plug('christoomey/vim-quicklink', { ft = 'markdown' })
+-- Make `gx` work on 'gabebw/dotfiles' too
+Plug('gabebw/vim-github-link-opener', { branch = 'main' })
+Plug.ends()
 
 vim.cmd [[
 augroup vimrc
