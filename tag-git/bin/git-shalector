@@ -10,7 +10,7 @@ branch=${1:-$(git rev-parse HEAD)}
 
 target_commit=$(
   git log -75 --color=always "$branch" | \
-  fzf --ansi --no-sort --reverse --tiebreak=index | \
+  fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | rg -o '[a-f0-9]\{7}' | xargs git show --color=always" | \
   awk '{print $1}' | \
   xargs git rev-parse
 )
