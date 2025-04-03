@@ -479,7 +479,7 @@ augroup vimrc
 
   " Include ! as a word character, so dw will delete all of e.g. gsub!,
   " and not leave the "!"
-  autocmd FileType ruby,eruby,yaml set iskeyword+=!,?
+  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=!,?
   " Highlight text between two "---"s as a comment.
   " `\_x` means "x regex character class, with newlines allowed"
   autocmd BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
