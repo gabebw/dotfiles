@@ -1,4 +1,4 @@
 augroup lua_ftplugin
   autocmd!
-  autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ async = false })
+  autocmd BufWritePre <buffer> lua require("stylua").format()
 augroup END
