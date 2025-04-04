@@ -168,9 +168,6 @@ nnoremap <leader>q :tabedit '$HOME/.config/fish/config.fish')<CR>
 -- Tell Supertab to start completions at the top of the list, not the bottom.
 vim.g.SuperTabDefaultCompletionType = "<c-n>"
 
--- peekaboo
-vim.g.peekaboo_window = "vert bo 50new"
-
 -- easytags
 vim.g.easytags_events = {}
 
@@ -437,9 +434,6 @@ Plug "christoomey/vim-sort-motion"
 Plug "flazz/vim-colorschemes"
 Plug "sjl/gundo.vim"
 Plug("xolox/vim-easytags", { dependencies = { "xolox/vim-misc" } })
--- Easily inspect registers exactly when you need them
--- https://github.com/junegunn/vim-peekaboo
-Plug "junegunn/vim-peekaboo"
 
 -- Text objects
 -- required for all the vim-textobj-* plugins
@@ -502,6 +496,16 @@ Plug("nvim-telescope/telescope-fzf-native.nvim", {
   run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
   config = function()
     require("telescope").load_extension "fzf"
+  end,
+})
+
+Plug("AckslD/nvim-neoclip.lua", {
+  config = function()
+    require("neoclip").setup()
+    vim.cmd [[
+      autocmd BufEnter * nmap <buffer> " :Telescope neoclip<CR>
+      autocmd BufEnter * imap <buffer> <c-x> <Esc>:Telescope neoclip<CR>
+    ]]
   end,
 })
 
