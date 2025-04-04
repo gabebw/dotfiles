@@ -102,12 +102,12 @@ command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 
 command! -nargs=+ -complete=file -bar GrepRegex silent! grep! <args> | copen 10 | redraw!
 ]]
 
-function CharacterUnderCursor()
+local function CharacterUnderCursor()
   local column = vim.api.nvim_win_get_cursor(0)[2]
   return vim.api.nvim_get_current_line():sub(column, column + 1)
 end
 
-function SearchableWordNearCursor()
+local function SearchableWordNearCursor()
   -- <cword> tries a little too hard to find a word.
   -- Given this (cursor at |):
   -- hello | there
@@ -127,7 +127,7 @@ function SearchableWordNearCursor()
   end
 end
 
-function SearchForWordUnderCursor()
+local function SearchForWordUnderCursor()
   local searchable_word = SearchableWordNearCursor()
 
   if searchable_word:len() == 0 then
