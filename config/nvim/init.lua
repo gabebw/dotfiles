@@ -460,11 +460,16 @@ Plug "wesleimp/stylua.nvim"
 -- LSP stuff
 Plug("neovim/nvim-lspconfig", {
   config = function()
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
     require("lspconfig").ruby_lsp.setup({
       cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
+      capabilities = capabilities,
     })
-    require("lspconfig").pyright.setup({})
+    require("lspconfig").pyright.setup({
+      capabilities = capabilities,
+    })
     require("lspconfig").lua_ls.setup({
+      capabilities = capabilities,
       settings = {
         Lua = {
           diagnostics = {
@@ -475,6 +480,49 @@ Plug("neovim/nvim-lspconfig", {
           },
         },
       },
+    })
+  end,
+})
+
+Plug "hrsh7th/cmp-nvim-lsp"
+-- nvim-cmp source for words in the buffer
+Plug "hrsh7th/cmp-buffer"
+-- Autocomplete filesystem paths as you type them. Neat!
+Plug "hrsh7th/cmp-path"
+Plug("hrsh7th/nvim-cmp", {
+  config = function()
+    local cmp = require "cmp"
+
+    -- `has_words_before` and the functions that use it are copied from
+    -- the nvim-cmp README.
+    local has_words_before = function()
+      unpack = unpack or table.unpack
+      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+    end
+    cmp.setup({
+      mapping = cmp.mapping.preset.insert({
+        ["<Tab>"] = function(fallback)
+          if not cmp.select_next_item() then
+            if vim.bo.buftype ~= "prompt" and has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end
+        end,
+
+        ["<S-Tab>"] = function(fallback)
+          if not cmp.select_prev_item() then
+            if vim.bo.buftype ~= "prompt" and has_words_before() then
+              cmp.complete()
+            else
+              fallback()
+            end
+          end
+        end,
+      }),
+      sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }, { { name = "path" } }),
     })
   end,
 })
