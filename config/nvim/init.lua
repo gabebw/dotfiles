@@ -465,7 +465,8 @@ Plug("neovim/nvim-lspconfig", {
       cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
       capabilities = capabilities,
     })
-    require("lspconfig").pyright.setup({
+    require("lspconfig").pylsp.setup({
+      cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
       capabilities = capabilities,
     })
     require("lspconfig").lua_ls.setup({
