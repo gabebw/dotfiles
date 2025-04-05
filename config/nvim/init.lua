@@ -523,7 +523,7 @@ Plug("hrsh7th/nvim-cmp", {
           end
         end,
       }),
-      sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "buffer" } }, { { name = "path" } }),
+      sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "path" } }),
     })
   end,
 })
