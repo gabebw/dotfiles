@@ -572,6 +572,23 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
 
+    local extensions_to_autoformat = { "py" }
+    local patterns_to_autoformat = vim.iter(extensions_to_autoformat):map(function(ext)
+      return "*." .. ext
+    end):totable()
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.supports_method "textDocument/formatting" then
+      local augroup = vim.api.nvim_create_augroup("autoformat", { clear = true })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = patterns_to_autoformat,
+        group = augroup,
+        buffer = event.buf,
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+    end
+
     local t = require "telescope.builtin"
 
     -- Jump to the definition of the word under your cursor.
