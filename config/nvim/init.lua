@@ -160,7 +160,7 @@ xnoremap > >gv
 
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-nnoremap <leader>q :tabedit '$HOME/.config/fish/config.fish')<CR>
+nnoremap <leader>q :tabedit $HOME/.config/fish/config.fish<CR>
 
 " This is like "<C-R>" in your terminal.
 cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
