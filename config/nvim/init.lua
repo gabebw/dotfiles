@@ -260,32 +260,6 @@ vim.g["test#ruby#rspec#options"] = {
   file = "--format documentation",
 }
 
--- JSX
--- Don't require a .jsx extension
-vim.g.jsx_ext_required = 0
-
--- luochen1990/rainbow
-vim.g.rainbow_conf = {
-  ctermfgs = {
-    "brown",
-    "Darkblue",
-    "darkgray",
-    "darkgreen",
-    "darkcyan",
-    "darkred",
-    "darkmagenta",
-    "brown",
-    "gray",
-    "black",
-    "darkmagenta",
-    "Darkblue",
-    "darkgreen",
-    "darkcyan",
-    "darkred",
-    "red",
-  },
-}
-
 -- ============================================================================
 -- STATUSLINE
 -- ===========================================================================
