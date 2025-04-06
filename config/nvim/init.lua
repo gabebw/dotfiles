@@ -1,3 +1,20 @@
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- Set leader/localleader early because leader is used at the moment mappings
 -- are defined. Changing the (local)leader after a mapping is defined has no
 -- effect on the mapping.
@@ -167,60 +184,9 @@ cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
 ]]
 
 -- PLUGIN OPTIONS
--- Supertab
--- Tell Supertab to start completions at the top of the list, not the bottom.
-vim.g.SuperTabDefaultCompletionType = "<c-n>"
-
--- easytags
-vim.g.easytags_events = {}
-
--- FZF
--- This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
--- FZF commands and not have to remember 'Colors' and 'History/' etc.
-vim.g.fzf_command_prefix = "Fzf"
--- Ctrl-M is Enter: open in tabs by default
-vim.g.fzf_action = {
-  ["ctrl-m"] = "tabedit",
-  ["ctrl-e"] = "edit",
-  ["ctrl-p"] = "split",
-  ["ctrl-v"] = "vsplit",
-}
-
 vim.cmd [[
 nnoremap <Leader>t :Telescope find_files<CR>
 ]]
-
--- rails.vim
-vim.g.rails_projections = {
-  ["config/routes.rb"] = { command = "routes" },
-  ["app/admin/*.rb"] = {
-    command = "admin",
-    alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
-  },
-  ["spec/controllers/admin/*_controller_spec.rb"] = {
-    alternate = "app/admin/{plural}.rb",
-  },
-  ["spec/factories/*.rb"] = { command = "factories" },
-  ["spec/factories.rb"] = { command = "factories" },
-  ["spec/features/*_spec.rb"] = { command = "feature" },
-  ["config/locales/en/*.yml"] = {
-    command = "tran",
-    template = "en:\n  {underscore|plural}:\n    ",
-  },
-  ["app/services/*.rb"] = {
-    command = "service",
-    test = "spec/services/{}_spec.rb",
-  },
-  ["script/datamigrate/*.rb"] = {
-    command = "datamigrate",
-    template = "#!/usr/bin/env rails runner\n\n",
-  },
-  ["app/jobs/*_job.rb"] = {
-    command = "job",
-    template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
-    test = { "spec/jobs/{}_job_spec.rb" },
-  },
-}
 
 -- fugitive
 -- Get a direct link to the current line (with specific commit included!) and
@@ -238,27 +204,6 @@ set tags^=./.git/tags
 -- filetypes, check with `:set ft?`
 vim.g.trimmer_repeated_lines_blacklist_file_types = { "conf", "python", "eruby.yaml" }
 vim.g.trimmer_repeated_lines_blacklist_file_base_names = { "schema.rb", "structure.sql" }
-
--- vim-tmux-runner
--- Open runner pane to the right, not to the bottom
-vim.g.VtrOrientation = "h"
--- Take up this percentage of the screen
-vim.g.VtrPercentage = 30
-vim.cmd [[
-" Attach to a specific pane
-nnoremap <leader>va :VtrAttachToPane<CR>
-]]
-
--- Test running
-vim.cmd [[
-nnoremap <Leader>l :w<CR>:TestNearest<CR>:redraw!<CR>
-nnoremap <Leader>a :w<CR>:TestFile<CR>:redraw!<CR>
-]]
-vim.g["test#strategy"] = "vtr"
-vim.g["test#ruby#rspec#options"] = {
-  nearest = "--format documentation",
-  file = "--format documentation",
-}
 
 -- ============================================================================
 -- STATUSLINE
@@ -345,197 +290,288 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 -- Plugins
-local Plug = require "vimplug"
-Plug.begin(vim.fn.stdpath "config" .. "/bundle")
--- JavaScript
-Plug "pangloss/vim-javascript"
-Plug "MaxMEllon/vim-jsx-pretty"
-Plug "leafgarland/typescript-vim"
-Plug "peitalin/vim-jsx-typescript"
+require("lazy").setup({
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+  spec = {
+    { "pangloss/vim-javascript" },
+    { "MaxMEllon/vim-jsx-pretty" },
+    { "leafgarland/typescript-vim" },
+    { "peitalin/vim-jsx-typescript" },
 
--- Ruby/Rails
-Plug "tpope/vim-rails"
-Plug "vim-ruby/vim-ruby"
--- Allow `cir` to change inside ruby block, etc
-Plug "nelstrom/vim-textobj-rubyblock"
-Plug "tpope/vim-rake"
-Plug "tpope/vim-projectionist"
-Plug "janko-m/vim-test"
-Plug "dag/vim-fish"
+    -- Ruby/Rails
+    {
+      "tpope/vim-rails",
+      init = function()
+        vim.g.rails_projections = {
+          ["config/routes.rb"] = { command = "routes" },
+          ["app/admin/*.rb"] = {
+            command = "admin",
+            alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
+          },
+          ["spec/controllers/admin/*_controller_spec.rb"] = {
+            alternate = "app/admin/{plural}.rb",
+          },
+          ["spec/factories/*.rb"] = { command = "factories" },
+          ["spec/factories.rb"] = { command = "factories" },
+          ["spec/features/*_spec.rb"] = { command = "feature" },
+          ["config/locales/en/*.yml"] = {
+            command = "tran",
+            template = "en:\n  {underscore|plural}:\n    ",
+          },
+          ["app/services/*.rb"] = {
+            command = "service",
+            test = "spec/services/{}_spec.rb",
+          },
+          ["script/datamigrate/*.rb"] = {
+            command = "datamigrate",
+            template = "#!/usr/bin/env rails runner\n\n",
+          },
+          ["app/jobs/*_job.rb"] = {
+            command = "job",
+            template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
+            test = { "spec/jobs/{}_job_spec.rb" },
+          },
+        }
+      end,
+    },
+    { "vim-ruby/vim-ruby" },
+    -- Allow `cir` to change inside ruby block, etc
+    { "nelstrom/vim-textobj-rubyblock", dependencies = { "kana/vim-textobj-user" } },
+    { "tpope/vim-rake" },
+    { "tpope/vim-projectionist" },
+    {
+      "janko-m/vim-test",
+      init = function()
+        vim.g["test#strategy"] = "vtr"
+        vim.g["test#ruby#rspec#options"] = {
+          nearest = "--format documentation",
+          file = "--format documentation",
+        }
 
--- tmux
-Plug "christoomey/vim-tmux-runner"
-Plug "christoomey/vim-tmux-navigator"
+        vim.cmd [[
+          nnoremap <Leader>l :w<CR>:TestNearest<CR>:redraw!<CR>
+          nnoremap <Leader>a :w<CR>:TestFile<CR>:redraw!<CR>
+        ]]
+      end,
+    },
+    { "dag/vim-fish" },
 
--- Syntax
-Plug "rust-lang/rust.vim"
-Plug "vim-scripts/applescript.vim"
-Plug "shmup/vim-sql-syntax"
-Plug "tpope/vim-git"
-Plug "cespare/vim-toml"
+    -- tmux
+    {
+      "christoomey/vim-tmux-runner",
 
--- Plumbing that makes everything nicer
--- Fuzzy-finder
--- Easily comment/uncomment lines in many languages
-Plug("junegunn/fzf.vim", { dependencies = { "/usr/local/opt/fzf" } })
-Plug "tomtom/tcomment_vim"
+      init = function()
+        -- Open runner pane to the right, not to the bottom
+        vim.g.VtrOrientation = "h"
+        -- Take up this percentage of the screen
+        vim.g.VtrPercentage = 30
+        vim.cmd [[
+          " Attach to a specific pane
+          nnoremap <leader>va :VtrAttachToPane<CR>
+        ]]
+      end,
+    },
+    { "christoomey/vim-tmux-navigator" },
 
--- <Tab> indents or triggers autocomplete, smartly
-Plug "ervandew/supertab"
--- Git bindings
-Plug "tpope/vim-fugitive"
--- The Hub to vim-fugitive's git
-Plug "tpope/vim-rhubarb"
--- Auto-add `end` in Ruby, `endfunction` in Vim, etc
-Plug "tpope/vim-endwise"
--- When editing deeply/nested/file, auto-create deeply/nested/ dirs
-Plug "duggiefresh/vim-easydir"
--- Cool statusbar
-Plug "itchyny/lightline.vim"
--- Easily navigate directories
-Plug "tpope/vim-vinegar"
--- Make working with shell scripts nicer ("vim-unix")
-Plug "tpope/vim-eunuch"
-Plug "tpope/vim-surround"
--- Make `.` work to repeat plugin actions too
-Plug "tpope/vim-repeat"
--- Intelligently reopen files where you left off
-Plug "farmergreg/vim-lastplace"
--- Instead of always copying to the system clipboard, use `cp` (plus motions) to
--- copy to the system clipboard. `cP` copies the current line. `cv` pastes.
-Plug "christoomey/vim-system-copy"
--- `vim README.md:10` opens README.md at the 10th line, rather than saying "No
--- such file: README.md:10"
-Plug "xim/file-line"
-Plug "christoomey/vim-sort-motion"
-Plug "flazz/vim-colorschemes"
-Plug "sjl/gundo.vim"
-Plug("xolox/vim-easytags", { dependencies = { "xolox/vim-misc" } })
+    -- Syntax
+    { "rust-lang/rust.vim" },
+    { "vim-scripts/applescript.vim" },
+    { "shmup/vim-sql-syntax" },
+    { "tpope/vim-git" },
+    { "cespare/vim-toml" },
 
--- Text objects
--- required for all the vim-textobj-* plugins
-Plug "kana/vim-textobj-user"
--- `ae` text object, so `gcae` comments whole file
-Plug "kana/vim-textobj-entire"
--- `l` text object for the current line excluding leading whitespace
-Plug "kana/vim-textobj-line"
+    -- Plumbing that makes everything nicer
+    -- Fuzzy-finder
+    { dir = "/usr/local/opt/fzf" },
+    {
+      "junegunn/fzf.vim",
+      init = function()
+        -- This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
+        -- FZF commands and not have to remember 'Colors' and 'History/' etc.
+        vim.g.fzf_command_prefix = "Fzf"
+        -- Ctrl-M is Enter: open in tabs by default
+        vim.g.fzf_action = {
+          ["ctrl-m"] = "tabedit",
+          ["ctrl-e"] = "edit",
+          ["ctrl-p"] = "split",
+          ["ctrl-v"] = "vsplit",
+        }
+      end,
+    },
+    -- Easily comment/uncomment lines in many languages
+    { "tomtom/tcomment_vim" },
 
--- Markdown
-Plug "tpope/vim-markdown"
-Plug("nicholaides/words-to-avoid.vim", { ft = "markdown" })
--- It does more, but I'm mainly using this because it gives me markdown-aware
--- `gx` so that `gx` works on [Markdown](links).
-Plug("christoomey/vim-quicklink", { ft = "markdown" })
--- Make `gx` work on 'gabebw/dotfiles' too
-Plug("gabebw/vim-github-link-opener", { branch = "main" })
+    -- <Tab> indents or triggers autocomplete, smartly
+    {
+      "ervandew/supertab",
+      init = function()
+        -- Tell Supertab to start completions at the top of the list, not the bottom.
+        vim.g.SuperTabDefaultCompletionType = "<c-n>"
+      end,
+    },
+    -- Git bindings
+    { "tpope/vim-fugitive" },
+    -- The Hub to vim-fugitive's git
+    { "tpope/vim-rhubarb" },
+    -- Auto-add `end` in Ruby, `endfunction` in Vim, etc
+    { "tpope/vim-endwise" },
+    -- When editing deeply/nested/file, auto-create deeply/nested/ dirs
+    { "duggiefresh/vim-easydir" },
+    -- Cool statusbar
+    { "itchyny/lightline.vim" },
+    -- Easily navigate directories
+    { "tpope/vim-vinegar" },
+    -- Make working with shell scripts nicer ("vim-unix")
+    { "tpope/vim-eunuch" },
+    { "tpope/vim-surround" },
+    -- Make `.` work to repeat plugin actions too
+    { "tpope/vim-repeat" },
+    -- Intelligently reopen files where you left off
+    { "farmergreg/vim-lastplace" },
+    -- Instead of always copying to the system clipboard, use `cp` (plus motions) to
+    -- copy to the system clipboard. `cP` copies the current line. `cv` pastes.
+    { "christoomey/vim-system-copy" },
+    -- `vim README.md:10` opens README.md at the 10th line, rather than saying "No
+    -- such file: README.md:10"
+    { "xim/file-line" },
+    { "christoomey/vim-sort-motion" },
+    { "flazz/vim-colorschemes" },
+    { "sjl/gundo.vim" },
+    {
+      "xolox/vim-easytags",
+      dependencies = { "xolox/vim-misc" },
+      init = function()
+        vim.g.easytags_events = {}
+      end,
+    },
 
-Plug "wesleimp/stylua.nvim"
+    -- Text objects
+    -- `ae` text object, so `gcae` comments whole file
+    { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
+    -- `l` text object for the current line excluding leading whitespace
+    { "kana/vim-textobj-line", dependencies = { "kana/vim-textobj-user" } },
 
--- LSP stuff
-Plug("neovim/nvim-lspconfig", {
-  config = function()
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
-    require("lspconfig").ruby_lsp.setup({
-      cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
-      capabilities = capabilities,
-    })
-    require("lspconfig").pylsp.setup({
-      cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
-      capabilities = capabilities,
-    })
-    require("lspconfig").lua_ls.setup({
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            -- Tell the language server to recognize the `vim` global
-            globals = {
-              "vim",
+    -- Markdown
+    { "tpope/vim-markdown" },
+    { "nicholaides/words-to-avoid.vim", ft = "markdown" },
+    -- It does more, but I'm mainly using this because it gives me markdown-aware
+    -- `gx` so that `gx` works on [Markdown](links).
+    { "christoomey/vim-quicklink", ft = "markdown" },
+    -- Make `gx` work on 'gabebw/dotfiles' too
+    { "gabebw/vim-github-link-opener", branch = "main" },
+
+    { "wesleimp/stylua.nvim" },
+
+    -- LSP stuff
+    {
+      "neovim/nvim-lspconfig",
+      config = function()
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        require("lspconfig").ruby_lsp.setup({
+          cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
+          capabilities = capabilities,
+        })
+        require("lspconfig").pylsp.setup({
+          cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
+          capabilities = capabilities,
+        })
+        require("lspconfig").lua_ls.setup({
+          capabilities = capabilities,
+          settings = {
+            Lua = {
+              diagnostics = {
+                -- Tell the language server to recognize the `vim` global
+                globals = {
+                  "vim",
+                },
+              },
             },
           },
-        },
+        })
+      end,
+    },
+
+    {
+      "hrsh7th/nvim-cmp",
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",
+        -- nvim-cmp source for words in the buffer
+        "hrsh7th/cmp-buffer",
+        -- Autocomplete filesystem paths as you type them. Neat!
+        "hrsh7th/cmp-path",
       },
-    })
-  end,
+      config = function()
+        local cmp = require "cmp"
+
+        -- `has_words_before` and the functions that use it are copied from
+        -- the nvim-cmp README.
+        local has_words_before = function()
+          unpack = unpack or table.unpack
+          local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+          return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+        end
+        cmp.setup({
+          mapping = cmp.mapping.preset.insert({
+            ["<Tab>"] = function(fallback)
+              if not cmp.select_next_item() then
+                if vim.bo.buftype ~= "prompt" and has_words_before() then
+                  cmp.complete()
+                else
+                  fallback()
+                end
+              end
+            end,
+
+            ["<S-Tab>"] = function(fallback)
+              if not cmp.select_prev_item() then
+                if vim.bo.buftype ~= "prompt" and has_words_before() then
+                  cmp.complete()
+                else
+                  fallback()
+                end
+              end
+            end,
+          }),
+          sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "path" } }),
+        })
+      end,
+    },
+
+    { "pmizio/typescript-tools.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
+
+    { "folke/lazydev.nvim", opts = {} },
+
+    -- Telescope is absolutely magic.
+    {
+      "nvim-telescope/telescope.nvim",
+      branch = "0.1.x",
+      dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
+      config = function()
+        require("telescope").load_extension "fzf"
+      end,
+    },
+    -- Use (ported version of) FZF for better performance and to support FZF syntax
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+    },
+    {
+      "AckslD/nvim-neoclip.lua",
+      dependencies = { "nvim-telescope/telescope.nvim" },
+      config = function()
+        require("neoclip").setup()
+        vim.cmd [[
+          autocmd BufEnter * nmap <buffer> " :Telescope neoclip<CR>
+          autocmd BufEnter * imap <buffer> <c-x> <Esc>:Telescope neoclip<CR>
+        ]]
+      end,
+    },
+  },
 })
-
-Plug "hrsh7th/cmp-nvim-lsp"
--- nvim-cmp source for words in the buffer
-Plug "hrsh7th/cmp-buffer"
--- Autocomplete filesystem paths as you type them. Neat!
-Plug "hrsh7th/cmp-path"
-Plug("hrsh7th/nvim-cmp", {
-  config = function()
-    local cmp = require "cmp"
-
-    -- `has_words_before` and the functions that use it are copied from
-    -- the nvim-cmp README.
-    local has_words_before = function()
-      unpack = unpack or table.unpack
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
-    end
-    cmp.setup({
-      mapping = cmp.mapping.preset.insert({
-        ["<Tab>"] = function(fallback)
-          if not cmp.select_next_item() then
-            if vim.bo.buftype ~= "prompt" and has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end
-        end,
-
-        ["<S-Tab>"] = function(fallback)
-          if not cmp.select_prev_item() then
-            if vim.bo.buftype ~= "prompt" and has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end
-        end,
-      }),
-      sources = cmp.config.sources({ { name = "nvim_lsp" } }, { { name = "path" } }),
-    })
-  end,
-})
-
-Plug("pmizio/typescript-tools.nvim", {
-  dependencies = { "nvim-lua/plenary.nvim" },
-  config = function()
-    require("typescript-tools").setup({})
-  end,
-})
-
-Plug("folke/lazydev.nvim", {
-  config = function()
-    require("lazydev").setup()
-  end,
-})
-
--- Telescope is absolutely magic.
-Plug "nvim-telescope/telescope.nvim"
--- Use (ported version of) FZF for better performance and to support FZF syntax
-Plug("nvim-telescope/telescope-fzf-native.nvim", {
-  run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
-  config = function()
-    require("telescope").load_extension "fzf"
-  end,
-})
-
-Plug("AckslD/nvim-neoclip.lua", {
-  config = function()
-    require("neoclip").setup()
-    vim.cmd [[
-      autocmd BufEnter * nmap <buffer> " :Telescope neoclip<CR>
-      autocmd BufEnter * imap <buffer> <c-x> <Esc>:Telescope neoclip<CR>
-    ]]
-  end,
-})
-
-Plug.ends()
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
