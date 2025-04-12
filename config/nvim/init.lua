@@ -473,6 +473,10 @@ require("lazy").setup({
         local capabilities = require("cmp_nvim_lsp").default_capabilities()
         require("lspconfig").ruby_lsp.setup({
           cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
+          init_options = {
+            formatter = "standard",
+            linters = { "standard" },
+          },
           capabilities = capabilities,
         })
         require("lspconfig").pylsp.setup({
