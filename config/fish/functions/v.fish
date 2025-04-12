@@ -7,10 +7,6 @@ function v -a query
   # Check if $TERM_PROGRAM is set before running tests.
   # Otherwise it will show an error because it sees `[ = "vscode" ]`, which
   # isn't valid.
-  if set -q TERM_PROGRAM && [ $TERM_PROGRAM = "vscode" ]
-    set -f files (fzf --query=$query --multi --exit-0)
-  else
-    set -f files (fzf-tmux --query=$query --multi --exit-0)
-  end
+  set -f files (fzf --query=$query --multi --exit-0)
   [ (count $files) -gt 0 ]; and $VISUAL $files
 end
