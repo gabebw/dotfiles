@@ -372,6 +372,7 @@ require("lazy").setup({
         vim.cmd [[
           " Attach to a specific pane
           nnoremap <leader>va :VtrAttachToPane<CR>
+          nnoremap <leader>rr :VtrSendCommandToRunner eval (history search --prefix 'clear;' -n1)<CR>
         ]]
       end,
     },
