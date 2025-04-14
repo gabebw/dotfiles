@@ -433,6 +433,7 @@ require("lazy").setup({
     { "tpope/vim-surround" },
     -- Make `.` work to repeat plugin actions too
     { "tpope/vim-repeat" },
+    { "tpope/vim-unimpaired" },
     -- Intelligently reopen files where you left off
     { "farmergreg/vim-lastplace" },
     -- Instead of always copying to the system clipboard, use `cp` (plus motions) to
