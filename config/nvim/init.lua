@@ -358,6 +358,8 @@ require("lazy").setup({
         ]]
       end,
     },
+    { "airblade/vim-localorie" },
+
     { "dag/vim-fish" },
 
     -- tmux
@@ -606,6 +608,10 @@ require("lazy").setup({
     },
   },
 })
+
+vim.cmd [[
+  autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = localorie#expand_key()<CR>
+]]
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
