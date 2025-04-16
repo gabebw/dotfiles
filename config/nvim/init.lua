@@ -488,6 +488,12 @@ require("lazy").setup({
         require("lspconfig").pylsp.setup({
           cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
           capabilities = capabilities,
+          plugins = {
+            ruff = {
+              formatEnabled = true,
+              executable = "uvx ruff",
+            },
+          },
         })
         require("lspconfig").lua_ls.setup({
           capabilities = capabilities,
