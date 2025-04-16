@@ -646,6 +646,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
+    vim.cmd [[
+      nnoremap ]r :lua vim.diagnostic.goto_next()<CR>
+      nnoremap [r :lua vim.diagnostic.goto_prev()<CR>
+    ]]
+
     local t = require "telescope.builtin"
 
     -- Jump to the definition of the word under your cursor.
