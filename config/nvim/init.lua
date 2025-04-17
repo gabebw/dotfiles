@@ -177,6 +177,12 @@ cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
 -- PLUGIN OPTIONS
 vim.cmd [[
 nnoremap <Leader>t :Telescope find_files<CR>
+augroup mrails
+	autocmd!
+	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar A :exec 'edit '.rails#buffer().alternate()
+	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar AS :exec 'split '.rails#buffer().alternate()
+	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar AV :exec 'vsplit '.rails#buffer().alternate()
+augroup END
 ]]
 
 -- fugitive
@@ -316,6 +322,7 @@ require("lazy").setup({
       init = function()
         vim.g.rails_projections = {
           ["config/routes.rb"] = { command = "routes" },
+          ["app/models/*.rb"] = { command = "model", alternate = "spec/models/{}_spec.rb" },
           ["app/admin/*.rb"] = {
             command = "admin",
             alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
@@ -342,6 +349,10 @@ require("lazy").setup({
             command = "job",
             template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
             test = { "spec/jobs/{}_job_spec.rb" },
+          },
+          ["app/controllers/*_controller.rb"] = {
+            command = "c",
+            template = "class {camelcase|capitalize|colons}Controller < ApplicationController\nend",
           },
         }
       end,
@@ -654,7 +665,7 @@ require("lazy").setup({
 })
 
 vim.cmd [[
-  autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = localorie#expand_key()<CR>
+autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
 ]]
 
 vim.api.nvim_create_autocmd("LspAttach", {
