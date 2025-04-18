@@ -468,15 +468,55 @@ require("lazy").setup({
       end,
     },
     {
-      "sbdchd/neoformat",
-      init = function()
-        vim.cmd [[
-          augroup fmt
-            autocmd!
-            autocmd BufWritePre *.css undojoin | silent Neoformat
-          augroup END
-        ]]
-      end,
+      "stevearc/conform.nvim",
+      -- This will provide type hinting with LuaLS
+      ---@module "conform"
+      ---@type conform.setupOpts
+      opts = {
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "ruff" },
+          javascript = { "prettierd", "prettier", stop_after_first = true },
+          ruby = { "standardrb" },
+          eruby = { "erb_lint", timeout_ms = 2000 },
+          markdown = { "prettierd", "prettier", stop_after_first = true },
+        },
+        formatters = {
+          erb_lint = {
+            stdin = false,
+            tmpfile_format = ".conform.$RANDOM.$FILENAME",
+            command = "bundle",
+            args = { "exec", "erb_lint", "--autocorrect", "$FILENAME" },
+          },
+        },
+        format_on_save = function(bufnr)
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 1500, lsp_format = "fallback" }
+        end,
+        -- If this is set, Conform will run the formatter asynchronously after save.
+        -- It will pass the table to conform.format().
+        format_after_save = function(bufnr)
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 500, lsp_format = "fallback" }
+        end,
+      },
+      event = { "BufWritePre" },
+      cmd = { "ConformInfo" },
+      keys = {
+        {
+          "<leader>fo",
+          function()
+            require("conform").format({ async = true })
+          end,
+          desc = "Format buffer",
+        },
+      },
     },
 
     -- Text objects
@@ -650,6 +690,27 @@ require("lazy").setup({
       build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
     },
     {
+      "debugloop/telescope-undo.nvim",
+      dependencies = {
+        "nvim-telescope/telescope.nvim",
+        "nvim-lua/plenary.nvim",
+      },
+      opts = {
+        -- don't use `defaults = { }` here, do this in the main telescope spec
+        extensions = {
+          undo = {
+            -- https://github.com/debugloop/telescope-undo.nvim?tab=readme-ov-file#configuration
+          },
+        },
+      },
+      config = function(_, opts)
+        -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
+        -- configs for us.
+        require("telescope").setup(opts)
+        require("telescope").load_extension "undo"
+      end,
+    },
+    {
       "AckslD/nvim-neoclip.lua",
       dependencies = { "nvim-telescope/telescope.nvim" },
       config = function()
@@ -666,6 +727,25 @@ require("lazy").setup({
 vim.cmd [[
 autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
 ]]
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+  if args.bang then
+    -- FormatDisable! will disable formatting just for this buffer
+    vim.b.disable_autoformat = true
+  else
+    vim.g.disable_autoformat = true
+  end
+end, {
+  desc = "Disable autoformat-on-save",
+  bang = true,
+})
+
+vim.api.nvim_create_user_command("FormatEnable", function()
+  vim.b.disable_autoformat = false
+  vim.g.disable_autoformat = false
+end, {
+  desc = "Re-enable autoformat-on-save",
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
