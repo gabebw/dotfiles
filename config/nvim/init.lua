@@ -497,8 +497,8 @@ require("lazy").setup({
     { "christoomey/vim-quicklink", ft = "markdown" },
     -- Make `gx` work on 'gabebw/dotfiles' too
     { "gabebw/vim-github-link-opener", branch = "main" },
-
     { "wesleimp/stylua.nvim" },
+    { "vim-language-dept/css-syntax.vim" },
 
     -- LSP stuff
     {
