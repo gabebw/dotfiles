@@ -114,11 +114,6 @@ vim.o.wildmode = "list:longest,list:full"
 vim.opt.completeopt = { "menu", "menuone", "longest", "preview" }
 
 -- Searching
-vim.cmd [[
-command! -nargs=+ -complete=file -bar Grep silent! grep! -F <q-args> | copen 10 | redraw!
-command! -nargs=+ -complete=file -bar GrepRegex silent! grep! <args> | copen 10 | redraw!
-]]
-
 local function CharacterUnderCursor()
   local column = vim.api.nvim_win_get_cursor(0)[2]
   return vim.api.nvim_get_current_line():sub(column, column + 1)
@@ -145,19 +140,15 @@ local function SearchableWordNearCursor()
 end
 
 local function SearchForWordUnderCursor()
-  local searchable_word = SearchableWordNearCursor()
-
-  if searchable_word:len() == 0 then
-    -- All whitespace or empty, don't search for it because there will be
-    -- thousands of (useless) results.
-    vim.fn.echo "Not searching for whitespace or empty string"
-  else
-    local s = "'\\b" .. vim.fn.shellescape(searchable_word) .. "\\b'"
-    vim.cmd.GrepRegex(s)
-  end
+  require("telescope.builtin").live_grep({
+    default_text = SearchableWordNearCursor(),
+  })
 end
 
 vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
+vim.keymap.set("n", "<Leader>gg", function()
+  require("telescope.builtin").live_grep()
+end, { remap = false })
 
 -- Opens a file with the current working directory already filled in so you have to specify only the filename.
 vim.cmd [[
