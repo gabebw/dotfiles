@@ -150,9 +150,7 @@ vim.keymap.set("n", "<Leader>gg", function()
   require("telescope.builtin").live_grep()
 end, { remap = false })
 
--- Opens a file with the current working directory already filled in so you have to specify only the filename.
 vim.cmd [[
-
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
 " move vertically by _visual_ line
@@ -288,8 +286,6 @@ vim.o.expandtab = true
 
 -- Plugins
 require("lazy").setup({
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
@@ -617,7 +613,10 @@ require("lazy").setup({
     {
       "nvim-telescope/telescope.nvim",
       branch = "0.1.x",
-      dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-fzf-native.nvim",
+      },
       config = function()
         local actions = require "telescope.actions"
         require("telescope").setup({
