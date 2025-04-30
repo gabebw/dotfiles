@@ -161,7 +161,7 @@ vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
 
 -- Opens a file with the current working directory already filled in so you have to specify only the filename.
 vim.cmd [[
-nnoremap <Leader>e :e <C-R>=escape(expand('%:p:h'), ' ') . '/'<CR>
+
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>
 " move vertically by _visual_ line
