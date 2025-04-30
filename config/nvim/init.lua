@@ -594,6 +594,24 @@ require("lazy").setup({
       branch = "0.1.x",
       dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
       config = function()
+        local actions = require "telescope.actions"
+        require("telescope").setup({
+          defaults = {
+            mappings = {
+              i = {
+                ["<C-h>"] = actions.which_key,
+                ["<CR>"] = actions.select_tab,
+                ["<C-s>"] = actions.select_horizontal,
+                ["<C-v>"] = actions.select_vertical,
+              },
+            },
+          },
+          extensions = {
+            file_browser = {
+              disable_devicons = true,
+            },
+          },
+        })
         require("telescope").load_extension "fzf"
         require("telescope").load_extension "file_browser"
       end,
