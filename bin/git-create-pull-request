@@ -15,6 +15,7 @@
 require "open3"
 require "redcarpet"
 require "tempfile"
+require "shellwords"
 
 # An arbitrary string that's unlikely to occur in commits, used in the `git log`
 # format so that we can split on it later.
@@ -261,11 +262,11 @@ end
 contents = IO.readlines(commit_message_file.path)
 
 # Pull out the first line to pass to `--title` below
-title = contents[0]
+title = Shellwords.escape(contents[0].strip)
 # And remove the title from the file that we use for the body
 File.open(commit_message_file, "w") { |f| f.write(contents[1..].join) }
 
-pull_request = %{gh pr create --base "$(main-or-master-branch)" --title '#{title}' --body-file '#{commit_message_file.path}'}
+pull_request = %{gh pr create --base "$(main-or-master-branch)" --title #{title} --body-file '#{commit_message_file.path}'}
 succeeded = system(pull_request)
 if !succeeded
   puts
