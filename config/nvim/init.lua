@@ -648,7 +648,7 @@ require("lazy").setup({
     -- Telescope is absolutely magic.
     {
       "nvim-telescope/telescope.nvim",
-      branch = "0.1.x",
+      -- branch = "0.1.x",
       dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -753,7 +753,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client and client.supports_method "textDocument/formatting" then
+    if client and client.supports_method("textDocument/formatting", event.buf) then
       local augroup = vim.api.nvim_create_augroup("autoformat", { clear = true })
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = { "*.py", "*.rb" },
@@ -764,10 +764,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
       })
     end
 
-    vim.cmd [[
-      nnoremap ]r :lua vim.diagnostic.goto_next()<CR>
-      nnoremap [r :lua vim.diagnostic.goto_prev()<CR>
-    ]]
+    map("]r", function()
+      vim.diagnostic.jump({ count = 1 })
+    end, "Go to next warning")
+    map("[r", function()
+      vim.diagnostic.jump({ count = -1 })
+    end, "Go to previous warning")
+    map("grD", function()
+      vim.diagnostic.open_float()
+    end, "Show diagnostic for this line")
 
     local t = require "telescope.builtin"
 
@@ -777,10 +782,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gd", t.lsp_definitions, "[G]oto [D]efinition")
 
     -- Find references for the word under your cursor.
-    map("gr", t.lsp_references, "[G]oto [R]eferences")
-
-    -- Rename the variable under your cursor.
-    map("gR", vim.lsp.buf.rename, "[R]ename")
+    map("grr", t.lsp_references, "[G]oto [R]eferences")
 
     map("gh", vim.lsp.buf.hover, "[H]over")
 
@@ -791,15 +793,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map("<leader>ds", t.lsp_document_symbols, "[D]ocument [S]ymbols")
+    map("gO", t.lsp_document_symbols, "[D]ocument [S]ymbols")
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
     map("<leader>ws", t.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
-    -- Execute a code action, usually your cursor needs to be on top of an error
-    -- or a suggestion from your LSP for this to activate.
-    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
   end,
 })
 
@@ -875,3 +873,5 @@ if vim.g.vscode == 1 then
   nnoremap % <Cmd>call VSCodeNotify('editor.action.jumpToBracket')
   ]]
 end
+
+vim.diagnostic.config({ virtual_text = true })
