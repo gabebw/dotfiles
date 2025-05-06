@@ -88,7 +88,7 @@ vim.o.splitright = true
 
 vim.opt.fileencodings = { "utf-8", "iso-8859-1" }
 vim.opt.fileformats = { "unix", "mac", "dos" }
-vim.o.textwidth = 80
+vim.o.textwidth = 120
 
 -- This character is prepended to wrapped lines
 vim.o.showbreak = "@"
@@ -385,7 +385,7 @@ require("lazy").setup({
         -- Open runner pane to the right, not to the bottom
         vim.g.VtrOrientation = "h"
         -- Take up this percentage of the screen
-        vim.g.VtrPercentage = 30
+        vim.g.VtrPercentage = 20
         vim.cmd [[
           " Attach to a specific pane
           nnoremap <leader>va :VtrAttachToPane<CR>
