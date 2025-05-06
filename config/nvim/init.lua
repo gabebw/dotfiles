@@ -673,7 +673,7 @@ require("lazy").setup({
             mappings = {
               i = {
                 ["<C-h>"] = actions.which_key,
-                ["<CR>"] = actions.select_tab,
+                ["<CR>"] = actions.select_default,
                 ["<C-s>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
               },
@@ -730,8 +730,47 @@ require("lazy").setup({
         ]]
       end,
     },
+    {
+      "nvim-tree/nvim-tree.lua",
+      opts = {
+        live_filter = {
+          prefix = "[FILTER]: ",
+          always_show_folders = false, -- Turn into false from true by default
+        },
+        actions = {
+          change_dir = {
+            enable = false,
+          },
+        },
+        renderer = {
+          icons = {
+            show = {
+              file = false,
+              folder = false,
+              folder_arrow = false,
+              git = false,
+              modified = false,
+              hidden = false,
+              diagnostics = false,
+              bookmarks = false,
+            },
+          },
+        },
+      },
+      init = function()
+        -- disable netrw at the very start of your init.lua
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+        -- optionally enable 24-bit colour
+        vim.opt.termguicolors = true
+      end,
+    },
   },
 })
+
+vim.keymap.set("n", "<Leader>n", function()
+  require("nvim-tree.api").tree.toggle({ find_file = true })
+end, { remap = false })
 
 vim.cmd [[
 autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
