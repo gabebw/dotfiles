@@ -540,18 +540,15 @@ require("lazy").setup({
     {
       "neovim/nvim-lspconfig",
       config = function()
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
         require("lspconfig").ruby_lsp.setup({
           cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
           init_options = {
             formatter = "standard",
             linters = { "standard" },
           },
-          capabilities = capabilities,
         })
         require("lspconfig").pylsp.setup({
           cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
-          capabilities = capabilities,
           plugins = {
             ruff = {
               formatEnabled = true,
@@ -560,7 +557,6 @@ require("lazy").setup({
           },
         })
         require("lspconfig").lua_ls.setup({
-          capabilities = capabilities,
           settings = {
             Lua = {
               diagnostics = {
@@ -578,7 +574,6 @@ require("lazy").setup({
     {
       "hrsh7th/nvim-cmp",
       dependencies = {
-        "hrsh7th/cmp-nvim-lsp",
         -- nvim-cmp source for words in the buffer
         "hrsh7th/cmp-buffer",
         -- Autocomplete filesystem paths as you type them. Neat!
@@ -634,6 +629,7 @@ require("lazy").setup({
             },
           }),
           sorting = {
+            priority_weight = 1,
             comparators = {
               function(...)
                 -- Prefer words that are closer
