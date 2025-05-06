@@ -488,6 +488,17 @@ require("lazy").setup({
             command = "bundle",
             args = { "exec", "erb_lint", "--autocorrect", "$FILENAME" },
           },
+          ruff = {
+            command = "uvx",
+            args = {
+              "ruff",
+              "format",
+              "--force-exclude",
+              "--stdin-filename",
+              "$FILENAME",
+              "-",
+            },
+          },
         },
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
@@ -750,18 +761,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local map = function(keys, func, desc, mode)
       mode = mode or "n"
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-    end
-
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
-    if client and client.supports_method("textDocument/formatting", event.buf) then
-      local augroup = vim.api.nvim_create_augroup("autoformat", { clear = true })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = { "*.py", "*.rb" },
-        group = augroup,
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
     end
 
     map("]r", function()
