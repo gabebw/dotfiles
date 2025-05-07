@@ -275,6 +275,17 @@ alias rollback "be rake db:rollback"
 alias remigrate "migrate && rake db:rollback && migrate"
 alias rrg "rails routes | rg"
 alias db-reset "be rake db:drop db:create db:migrate db:test:prepare"
+function db-dump-and-restore -a connection_string local_db_name
+  if [ (count $argv) -ne 2 ]
+    echo "Usage: db-dump-and-restore <connection string> <local_db_name>" >&2
+    return 1
+  end
+  set -f dumpfile (mktemp)
+  db-dump $connection_string $dumpfile
+  and db-restore $local_db_name $dumpfile
+  # Use `command` to bypass my alias so it's quiet and not verbose
+  command rm $dumpfile
+end
 alias unfuck-gemfile "git checkout HEAD -- Gemfile.lock"
 
 # Bundler
