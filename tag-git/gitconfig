@@ -67,9 +67,10 @@
   current-branch = branch --show-current
   # Delete merged branches
   cleanup-merged = !git branch --merged | rg -v '^\\*|^  (master|main)$' | xargs git branch -d
+  open = !gh repo view -w
 
   # Check out a pull request by number: g co-pr 123
-  co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+  co-pr = !gh pr checkout $1
 
   # Typos
   pul = pull
