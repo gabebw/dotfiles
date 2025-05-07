@@ -477,6 +477,7 @@ require("lazy").setup({
           lua = { "stylua" },
           python = { "ruff" },
           javascript = { "prettierd", "prettier", stop_after_first = true },
+          css = { "prettierd", "prettier", stop_after_first = true },
           ruby = { "standardrb" },
           eruby = { "erb_lint", timeout_ms = 2000 },
           markdown = { "prettierd", "prettier", stop_after_first = true },
