@@ -1,6 +1,6 @@
 function db-restore -a db_name filename
   if [ (count $argv) -eq 2 ]
-    dropdb $db_name || echo "OK, skipping"
+    dropdb --if-exists $db_name && \
     createdb $db_name && \
       pg_restore \
         --verbose \
