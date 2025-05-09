@@ -175,6 +175,7 @@ cmap <C-R> <Plug>(TelescopeFuzzyCommandSearch)
 -- PLUGIN OPTIONS
 vim.cmd [[
 nnoremap <Leader>t :Telescope find_files<CR>
+nnoremap <Leader>b :Telescope buffers<CR>
 augroup mrails
 	autocmd!
 	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar A :exec 'edit '.rails#buffer().alternate()
