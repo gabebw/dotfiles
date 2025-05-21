@@ -319,7 +319,6 @@ require("lazy").setup({
       init = function()
         vim.g.rails_projections = {
           ["config/routes.rb"] = { command = "routes" },
-          ["app/models/*.rb"] = { command = "model", alternate = "spec/models/{}_spec.rb" },
           ["app/admin/*.rb"] = {
             command = "admin",
             alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
@@ -346,10 +345,6 @@ require("lazy").setup({
             command = "job",
             template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
             test = { "spec/jobs/{}_job_spec.rb" },
-          },
-          ["app/controllers/*_controller.rb"] = {
-            command = "c",
-            template = "class {camelcase|capitalize|colons}Controller < ApplicationController\nend",
           },
         }
       end,
