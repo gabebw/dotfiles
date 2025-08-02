@@ -68,6 +68,7 @@
   ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
   current-branch = branch --show-current
+  mb = merge-base head main
   # Delete merged branches
   cleanup-merged = !git branch --merged | rg -v '^\\*|^  (master|main)$' | xargs git branch -d
   open = !gh repo view -w
