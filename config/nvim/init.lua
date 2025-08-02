@@ -326,6 +326,12 @@ require("lazy").setup({
           ["spec/controllers/admin/*_controller_spec.rb"] = {
             alternate = "app/admin/{plural}.rb",
           },
+          ["app/components/*.html.erb"] = {
+            alternate = "app/components/{}.rb",
+          },
+          ["app/components/*.rb"] = {
+            alternate = "app/components/{}.html.erb",
+          },
           ["spec/factories/*.rb"] = { command = "factories" },
           ["spec/factories.rb"] = { command = "factories" },
           ["spec/features/*_spec.rb"] = { command = "feature" },
