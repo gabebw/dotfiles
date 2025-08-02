@@ -473,6 +473,11 @@ require("lazy").setup({
     { "christoomey/vim-sort-motion" },
     { "flazz/vim-colorschemes" },
     {
+      "zootedb0t/citruszest.nvim",
+      lazy = false,
+      priority = 1000,
+    },
+    {
       "xolox/vim-easytags",
       dependencies = { "xolox/vim-misc" },
       init = function()
@@ -892,7 +897,7 @@ vim.cmd [[
   runtime macros/matchit.vim
   filetype plugin indent on
   syntax enable
-  colorscheme Tomorrow-Night-Eighties
+  colorscheme citruszest
 ]]
 
 if vim.g.vscode == 1 then
