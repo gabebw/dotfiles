@@ -1,2 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env fish
+
+# The hook is given three parameters:
+# 1) the ref of the previous HEAD,
+set previous_head $argv[1]
+# 2) the ref of the new HEAD (which may or may not have changed), and
+set new_head $argv[2]
+# 3) a flag indicating whether the checkout was a branch checkout (changing branches, flag=1) or a file checkout (retrieving a file from the index, flag=0).
+set flag $argv[3]
+
+if git diff --name-only $previous_head $new_head | rg -qF Gemfile
+  if bundle check > /dev/null || bundle install --jobs=4
+    bundle binstubs --all --path=./bin/stubs
+  else
+    echo "Would have run bundle, but skipped"
+  end
+end
+
 .git/hooks/ctags >/dev/null 2>&1 &
