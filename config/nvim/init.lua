@@ -717,7 +717,22 @@ require("lazy").setup({
         -- don't use `defaults = { }` here, do this in the main telescope spec
         extensions = {
           undo = {
+            side_by_side = true,
+            layout_strategy = "horizontal",
+            layout_config = {
+              preview_height = 0.8,
+            },
             -- https://github.com/debugloop/telescope-undo.nvim?tab=readme-ov-file#configuration
+            -- opts = {
+            mappings = {
+              -- Wrapping the actions inside a function prevents the error due to telescope-undo being not
+              -- yet loaded.
+              i = {
+                ["<cr>"] = function(bufnr)
+                  require("telescope-undo.actions").restore(bufnr)
+                end,
+              },
+            },
           },
         },
       },
