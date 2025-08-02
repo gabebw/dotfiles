@@ -497,7 +497,7 @@ require("lazy").setup({
           css = { "prettierd", "prettier", stop_after_first = true },
           ["eruby.yaml"] = { "prettierd", "prettier", stop_after_first = true },
           ruby = { "standardrb" },
-          eruby = { "erb_lint", timeout_ms = 2000 },
+          eruby = { "erb_lint" },
           markdown = { "prettierd", "prettier", stop_after_first = true },
         },
         formatters = {
@@ -519,13 +519,6 @@ require("lazy").setup({
             },
           },
         },
-        format_on_save = function(bufnr)
-          -- Disable with a global or buffer-local variable
-          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-            return
-          end
-          return { timeout_ms = 1500, lsp_format = "fallback" }
-        end,
         -- If this is set, Conform will run the formatter asynchronously after save.
         -- It will pass the table to conform.format().
         format_after_save = function(bufnr)
@@ -573,7 +566,6 @@ require("lazy").setup({
         require("lspconfig").ruby_lsp.setup({
           cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
           init_options = {
-            formatter = "standard",
             linters = { "standard" },
           },
         })
