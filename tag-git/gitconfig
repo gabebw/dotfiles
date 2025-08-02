@@ -32,10 +32,13 @@
   # https://twitter.com/SmileyKeith/status/946789768506912773
   colorMoved = zebra
 
+  # difftastic: https://difftastic.wilfred.me.uk
+  external = difft
+
   # Turn off all prefixes so that I can Cmd-Click a path in the VS Code
   # terminal. `i/tag-git/gitconfig` won't resolve, but `tag-git/gitconfig` will.
   noprefix = true
-  tool = Kaleidoscope
+  tool = difftastic
 [alias]
   mt = mergetool
   ls = !git log -S "$(pbpaste)"
@@ -172,10 +175,9 @@
 [advice]
   detachedHead = false
 [pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+  # Use a pager if the difftool output is larger than one screenful,
+  # consistent with the behaviour of `git diff`.
+  difftool = true
 [delta]
     plus-style = "black green"
     minus-style = "black #FFC0CB"
