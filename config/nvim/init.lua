@@ -472,7 +472,6 @@ require("lazy").setup({
     { "xim/file-line" },
     { "christoomey/vim-sort-motion" },
     { "flazz/vim-colorschemes" },
-    { "sjl/gundo.vim" },
     {
       "xolox/vim-easytags",
       dependencies = { "xolox/vim-misc" },
