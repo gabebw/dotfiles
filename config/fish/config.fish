@@ -280,6 +280,7 @@ function db-dump-and-restore -a connection_string local_db_name
     echo "Usage: db-dump-and-restore <connection string> <local_db_name>" >&2
     return 1
   end
+  dropdb $local_db_name; or return 1
   set -f dumpfile (mktemp)
   db-dump $connection_string $dumpfile
   and db-restore $local_db_name $dumpfile
