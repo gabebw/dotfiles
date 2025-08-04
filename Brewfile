@@ -6,9 +6,6 @@ brew "rcm"
 # parity: useful tools for Heroku development/staging/production
 brew "parity"
 
-# Lets us do `brew services restart postgres`, etc
-tap "homebrew/services"
-
 tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
