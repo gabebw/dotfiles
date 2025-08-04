@@ -10,12 +10,14 @@ tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
 
+tap "heroku/brew"
+brew "heroku/brew/heroku"
+
 brew "bat"
 brew "chrome-cli"
 brew "fd"
 brew "fzf"
 brew "git"
-brew "heroku"
 brew "hexyl"
 brew "gh"
 brew "pgrep"
