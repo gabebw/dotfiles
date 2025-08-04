@@ -79,6 +79,3 @@ brew "stylua"
 brew "lua-language-server"
 
 brew "fish"
-
-# SDUI
-brew "openjdk@17"
