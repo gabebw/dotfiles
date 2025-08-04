@@ -2,8 +2,8 @@
 
 set -e
 
-echo 'Installing NodeJS 16 and Yarn...'
-fnm install 16
+echo 'Installing NodeJS 20 and Yarn...'
+fnm install 20
 npm install -g prettier
 npm install -g yarn
-yarn global add playwright@1.8.0
+yarn global add playwright
