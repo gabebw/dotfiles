@@ -705,7 +705,7 @@ require("lazy").setup({
     -- Use (ported version of) FZF for better performance and to support FZF syntax
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+      build = "make",
     },
     {
       "debugloop/telescope-undo.nvim",
