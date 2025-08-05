@@ -646,7 +646,11 @@ require("lazy").setup({
       end,
     },
 
-    { "pmizio/typescript-tools.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {}, ft = "typescript" },
+    {
+      "pmizio/typescript-tools.nvim",
+      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+      opts = {},
+    },
 
     { "folke/lazydev.nvim", opts = {} },
 
