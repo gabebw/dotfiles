@@ -416,23 +416,6 @@ require("lazy").setup({
     { "cespare/vim-toml" },
 
     -- Plumbing that makes everything nicer
-    -- Fuzzy-finder
-    { dir = "/usr/local/opt/fzf" },
-    {
-      "junegunn/fzf.vim",
-      init = function()
-        -- This prefixes all FZF-provided commands with 'Fzf' so I can easily find cool
-        -- FZF commands and not have to remember 'Colors' and 'History/' etc.
-        vim.g.fzf_command_prefix = "Fzf"
-        -- Ctrl-M is Enter: open in tabs by default
-        vim.g.fzf_action = {
-          ["ctrl-m"] = "tabedit",
-          ["ctrl-e"] = "edit",
-          ["ctrl-p"] = "split",
-          ["ctrl-v"] = "vsplit",
-        }
-      end,
-    },
     -- Easily comment/uncomment lines in many languages
     { "tomtom/tcomment_vim" },
 
