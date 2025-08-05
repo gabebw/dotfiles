@@ -10,7 +10,8 @@ set flag $argv[3]
 
 if git diff --name-only $previous_head $new_head | rg -qF Gemfile
   if bundle check > /dev/null || bundle install --jobs=4
-    bundle binstubs --all --path=./bin/stubs
+    bundle config set bin './bin/stubs'
+    bundle binstubs --all
   else
     echo "Would have run bundle, but skipped"
   end
