@@ -1,4 +1,4 @@
-#!/usr/local/bin/fish --no-config
+#!/usr/bin/env fish --no-config
 
 # List all directories in ~/code that contain git repositories.
 

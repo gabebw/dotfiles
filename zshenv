@@ -10,7 +10,8 @@
 # This is fixed in this merged but unreleased PR: https://github.com/alacritty/alacritty/pull/7950
 if [ -n "$VIMRUNTIME" ]; then
   # Add the Homebrew path here so that Vim can find Homebrew's ctags.
-  PATH=/usr/local/bin:/usr/local/sbin:$PATH
+  MY_HOMEBREW_PREFIX=$(brew --prefix)
+  PATH="$MY_HOMEBREW_PREFIX"/bin:"$MY_HOMEBREW_PREFIX"/sbin:$PATH
 
   if [[ -r ~/.terminfo/61/alacritty ]]; then
     export TERM=alacritty

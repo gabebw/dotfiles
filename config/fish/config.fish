@@ -291,7 +291,7 @@ alias unfuck-gemfile "git checkout HEAD -- Gemfile.lock"
 
 # Bundler
 alias be "bundle exec"
-alias tagit '/usr/local/bin/ctags -R'
+alias tagit 'ctags -R'
 # }}}
 
 # Postgres {{{
@@ -327,10 +327,8 @@ alias ssh "TERM=xterm-256color command ssh"
 # It is also universal by default, unless you pass "--path".
 
 # Add Homebrew to the path.
-fish_add_path --path /usr/local/bin /usr/local/sbin
-
-# Heroku standalone client
-fish_add_path --path /usr/local/heroku/bin
+set HOMEBREW_PREFIX (brew --prefix)
+fish_add_path --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
 # Node
 set PATH $PATH ".git/safe/../../node_modules/.bin/"
