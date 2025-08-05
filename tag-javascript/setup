@@ -2,8 +2,12 @@
 
 set -e
 
-echo 'Installing NodeJS 20 and Yarn...'
-fnm install 20
-npm install -g prettier
-npm install -g yarn
-yarn global add playwright
+echo 'Installing NodeJS (latest LTS) and Yarn...'
+if ! fnm list | grep -q lts-latest; then
+  fnm install --progress never --log-level error --lts
+fi
+npm install --silent --no-progress -g prettier
+npm install --silent --no-progress -g yarn
+
+# Turn off progress bar globally
+npm set progress=false
