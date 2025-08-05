@@ -63,25 +63,9 @@ export HOMEBREW_NO_INSTALL_CLEANUP=1
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 info "Installing Homebrew packages..."
-brew install mas 2>/dev/null
 for brewfile in Brewfile */Brewfile; do
   quietly_brew_bundle "$brewfile" --verbose
 done
-
-app_store_id=$(mas account || true)
-desired_app_store_id="gabebw@gabebw.com"
-if [[ "$app_store_id" == "$desired_app_store_id" ]]; then
-  quietly_brew_bundle Brewfile.mas
-else
-  if mas account &>/dev/null; then
-    error "You are signed in to the App Store as $app_store_id."
-    error "Sign out and re-sign in as $desired_app_store_id"
-  else
-    error "You are not signed in to the App Store."
-    error "Sign in as $desired_app_store_id"
-  fi
-  error "(This won't affect your iCloud account.)"
-fi
 
 # Brewfile.casks exits 1 sometimes but didn't actually fail
 quietly_brew_bundle Brewfile.casks || true
