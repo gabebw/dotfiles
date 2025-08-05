@@ -790,7 +790,7 @@ require("lazy").setup({
 })
 
 vim.keymap.set("n", "<Leader>n", function()
-  require("nvim-tree.api").tree.toggle({ find_file = true })
+  require("nvim-tree.api").tree.toggle({ path = vim.fn.expand "%:p:h", find_file = true })
 end, { remap = false })
 
 vim.cmd [[
