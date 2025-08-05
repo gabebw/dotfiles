@@ -75,7 +75,7 @@ brew pin postgresql
 make_qlstephen_work_on_catalina
 
 info "Installing rust..."
-stay_awake_while rustup-init -y > /dev/null
+stay_awake_while rustup-init --no-modify-path -y > /dev/null
 # Make sure `cargo` is in $PATH
 source "$HOME/.cargo/env"
 rustup component add clippy
