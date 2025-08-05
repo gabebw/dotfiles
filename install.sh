@@ -18,11 +18,11 @@ green(){ color 2 "$*"; }
 yellow(){ color 3 "$*"; }
 
 info(){
-  green "=== $@"
+  green "=== $*"
 }
 
 error(){
-  red "!! $@" >&2
+  red "!! $*" >&2
 }
 
 stay_awake_while(){
@@ -77,7 +77,7 @@ make_qlstephen_work_on_catalina
 info "Installing rust..."
 stay_awake_while rustup-init -y > /dev/null
 # Make sure `cargo` is in $PATH
-source $HOME/.cargo/env
+source "$HOME/.cargo/env"
 rustup component add clippy
 
 info "Installing lister..."
@@ -104,7 +104,7 @@ if ! echo "$SHELL" | grep -Fq fish; then
     exit 1
   fi
 
-  chsh -s $(which fish)
+  chsh -s "$(which fish)"
 fi
 
 info "Linking dotfiles into ~..."
@@ -137,10 +137,8 @@ if ! [[ -r ~/.terminfo/61/alacritty ]]; then
   tic -xe alacritty,alacritty-direct "$alacritty_terminfo"
 fi
 
-# Load Volta and rbenv (before setup scripts) in case it's the first time installing them
+# Load rbenv (before setup scripts) in case it's the first time installing them
 eval "$(rbenv init -)"
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
 
 info "Running all setup scripts..."
 for setup in tag-*/setup vscode/setup; do

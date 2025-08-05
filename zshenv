@@ -25,3 +25,4 @@ if [ -n "$VIMRUNTIME" ]; then
   # more complicated and so we have the setup again in zshrc.
   eval "$(fnm env --use-on-cd --log-level=error)"
 fi
+. "$HOME/.cargo/env"
