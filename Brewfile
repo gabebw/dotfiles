@@ -79,3 +79,4 @@ brew "stylua"
 brew "lua-language-server"
 
 brew "fish"
+brew "uv"
