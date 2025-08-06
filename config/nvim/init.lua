@@ -832,6 +832,10 @@ vim.keymap.set("n", "<Leader>n", function()
   require("nvim-tree.api").tree.toggle({ path = vim.fn.expand "%:p:h", find_file = true })
 end, { remap = false })
 
+vim.keymap.set("n", "<Leader>u", function()
+  require("telescope").extensions.undo.undo()
+end, { remap = false })
+
 vim.cmd [[
 autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
 ]]
