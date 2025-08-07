@@ -80,3 +80,4 @@ brew "lua-language-server"
 
 brew "fish"
 brew "uv"
+brew "prettierd" # prettier daemon to avoid per-format startup cost
