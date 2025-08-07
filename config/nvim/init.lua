@@ -707,7 +707,7 @@ require("lazy").setup({
             side_by_side = true,
             layout_strategy = "horizontal",
             layout_config = {
-              preview_height = 0.8,
+              height = 0.8,
             },
             -- https://github.com/debugloop/telescope-undo.nvim?tab=readme-ov-file#configuration
             -- opts = {
