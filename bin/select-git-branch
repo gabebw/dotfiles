@@ -2,15 +2,14 @@
 
 # Only 1 branch
 if [ "$(git branch "$@" | wc -l | xargs echo)" = 1 ]; then
-  echo "select-git-branch: There's only one git branch, exiting." >&2
+  echo "(basename $0): There's only one git branch, exiting." >&2
   exit 1
 fi
 
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 git branch --sort=-committerdate --color=always "$@" |\
-  sed -E -e 's/^[[:space:]]*//' |\
-  sed -E -e 's@^remotes/@@' |\
+  sed -E -e 's/^[[:space:]]*//' -e 's@^remotes/@@' |\
   rg -v '^\*' |\
   rg -v "remotes/origin/${current_branch}" |\
   fzf --reverse --ansi --exit-0 --preview="git find-best-log $current_branch {} --color=always --" |\
