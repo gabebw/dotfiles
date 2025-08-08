@@ -12,5 +12,6 @@ git branch --sort=-committerdate --color=always "$@" |\
   sed -E -e 's/^[[:space:]]*//' -e 's@^remotes/@@' |\
   rg -v '^\*' |\
   rg -v "remotes/origin/${current_branch}" |\
+  rg -v "remotes/origin/HEAD" |\
   fzf --reverse --ansi --exit-0 --preview="git find-best-log $current_branch {} --color=always --" |\
   sed -e 's@^remotes/origin/@@' -e 's/ .*$//'
