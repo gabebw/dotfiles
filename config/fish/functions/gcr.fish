@@ -1,5 +1,5 @@
 function gcr
-  set -f branch (select-git-branch --all)
+  set -f branch (git-select-branch --all)
   if [ -n "$branch" ]
     git checkout $branch
     true

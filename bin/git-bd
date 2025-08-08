@@ -4,7 +4,7 @@
 set -e
 
 if [[ $# == 0 ]]; then
-  branch=$(select-git-branch)
+  branch=$(git-select-branch)
 else
   branch="$1"
 fi

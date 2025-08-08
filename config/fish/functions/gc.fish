@@ -1,6 +1,6 @@
 function gc -w 'git branch'
   if [ (count $argv) -eq 0 ]
-    set -f branch (select-git-branch)
+    set -f branch (git-select-branch)
     if [ -n $branch ]
       git checkout $branch
     end
