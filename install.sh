@@ -115,7 +115,7 @@ export RCRC=rcrc
 stay_awake_while rcup -d .
 
 info "Installing Neovim packages..."
-nvim +PlugInstall +qa
+nvim +qa
 
 stay_awake_while ./system/osx-settings
 
