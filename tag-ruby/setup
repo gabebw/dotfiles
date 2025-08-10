@@ -13,3 +13,5 @@ else
   rbenv install "$(latest_ruby_version)"
   rbenv global "$(latest_ruby_version)"
 fi
+
+gem install ruby-lsp-rails
