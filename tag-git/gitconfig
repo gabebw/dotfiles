@@ -52,7 +52,8 @@
   mm = master-to-main-wrapper merge-to %BRANCH%
   up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
   mup = !git fetch origin && git master-to-main-wrapper merge --ff origin/%BRANCH%
-  r = master-to-main-wrapper rebase -i origin/%BRANCH%
+  r = master-to-main-wrapper rebase -i $(git shalector)
+  rr = master-to-main-wrapper rebase -i origin/%BRANCH%
   cp = !git cherry-pick $(git recent-branches | fzf --nth 1 | awk '{print $1}')
   # "cherry-pick previous", e.g. the head of the branch we just left
   cpp = cherry-pick HEAD@{1}
