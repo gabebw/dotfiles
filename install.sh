@@ -70,7 +70,7 @@ done
 # Brewfile.casks exits 1 sometimes but didn't actually fail
 quietly_brew_bundle Brewfile.casks || true
 # Pin postgresql since I use Postgres.app and we only need it as a dependency
-brew pin postgresql
+brew pin postgresql@14
 
 make_qlstephen_work_on_catalina
 
