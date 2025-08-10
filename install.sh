@@ -117,9 +117,6 @@ stay_awake_while rcup -d .
 info "Installing Neovim packages..."
 nvim +PlugInstall +qa
 
-info "Creating ~/Desktop/screenshots so screenshots can be saved there..."
-mkdir -p ~/Desktop/screenshots
-
 stay_awake_while ./system/osx-settings
 
 if command -v asdf &>/dev/null || [[ -d ~/.asdf ]]; then
