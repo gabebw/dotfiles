@@ -4,7 +4,7 @@
 # You can use `git shalector master` to select commits from master,
 # otherwise it uses the current branch.
 
-set -e
+set -eo pipefail
 
 branch=${1:-$(git rev-parse HEAD)}
 
