@@ -292,6 +292,9 @@ alias unfuck-gemfile "git checkout HEAD -- Gemfile.lock"
 # Bundler
 alias be "bundle exec"
 alias tagit 'ctags -R'
+
+# Ruby by default looks for openssl@1.1, which doesn't exist
+set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir="$(brew --prefix openssl@3)
 # }}}
 
 # Postgres {{{

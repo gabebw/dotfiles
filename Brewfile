@@ -84,3 +84,4 @@ brew "prettierd" # prettier daemon to avoid per-format startup cost
 brew "eza"
 brew "difftastic"
 brew "expect" # for `unbuffer`
+brew "openssl@3"
