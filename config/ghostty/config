@@ -4,3 +4,4 @@
 
 # To see a list of available themes, run ghostty +list-themes
 theme = Builtin Pastel Dark
+confirm-close-surface = false
