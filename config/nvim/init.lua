@@ -848,6 +848,11 @@ require("lazy").setup({
             "<cmd>Trouble symbols toggle focus=true<cr>",
             desc = "Symbols (Trouble)",
           },
+          {
+            "<leader>cf",
+            "<cmd>Trouble symbols toggle focus=true filter.kind=Function<cr>",
+            desc = "Function Symbols (Trouble)",
+          },
         },
         modes = {
           preview_float = {
