@@ -1019,4 +1019,3 @@ if vim.g.vscode == 1 then
   ]]
 end
 
-vim.diagnostic.config({ virtual_text = true })
