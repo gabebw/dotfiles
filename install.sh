@@ -126,14 +126,6 @@ if command -v asdf &>/dev/null || [[ -d ~/.asdf ]]; then
   brew uninstall asdf || true
 fi
 
-# Installs to ~/.terminfo
-echo "Installing italics-capable terminfo files..."
-if ! [[ -r ~/.terminfo/61/alacritty ]]; then
-  alacritty_terminfo=$(mktemp)
-  stay_awake_while curl -o "$alacritty_terminfo" https://raw.githubusercontent.com/jwilm/alacritty/master/extra/alacritty.info
-  tic -xe alacritty,alacritty-direct "$alacritty_terminfo"
-fi
-
 # Load rbenv (before setup scripts) in case it's the first time installing them
 eval "$(rbenv init -)"
 

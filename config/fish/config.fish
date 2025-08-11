@@ -316,7 +316,7 @@ set -x HOMEBREW_INSTALL_CLEANUP 1
 if status --is-interactive
   ssh-add -K ~/.ssh/id_rsa 2> /dev/null
 end
-# The `$TERM` is `alacritty`, which is non-standard and makes various CLI
+# The `$TERM` might be `xterm-ghostty`, which is non-standard and makes various CLI
 # commands on Digital Ocean think they're in an unsupported terminal.
 # The `SetEnv` option (e.g. `-o 'SetEnv TERM=xterm-256color'` or adding it to
 # `~/.ssh/config`) only works on OpenSSH >= 8.7, which is not built in on macOS.
