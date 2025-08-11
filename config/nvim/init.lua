@@ -1024,3 +1024,10 @@ if vim.g.vscode == 1 then
   ]]
 end
 
+-- The number of milliseconds before "CursorHold" kicks in (default is 4000 = 4 seconds)
+vim.o.updatetime = 1000
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
