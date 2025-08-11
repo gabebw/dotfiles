@@ -85,3 +85,4 @@ brew "eza"
 brew "difftastic"
 brew "expect" # for `unbuffer`
 brew "openssl@3"
+brew "php" # for Alfred workflow
