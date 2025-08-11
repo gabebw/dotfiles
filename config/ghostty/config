@@ -3,5 +3,5 @@
 # These are the default keybindings, but it is possible to define your own via the reload_config action.
 
 # To see a list of available themes, run ghostty +list-themes
-theme = Builtin Pastel Dark
+theme = Dracula
 confirm-close-surface = false
