@@ -86,3 +86,10 @@ brew "difftastic"
 brew "expect" # for `unbuffer`
 brew "openssl@3"
 brew "php" # for Alfred workflow
+
+# For Scala/Java
+brew "scala"
+tap "coursier/formulas"
+brew "coursier"
+brew "jenv"
+brew "java"

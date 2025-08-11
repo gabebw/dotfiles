@@ -811,6 +811,8 @@ require("lazy").setup({
           vim.api.nvim_create_autocmd("FileType", {
             pattern = self.ft,
             callback = function()
+              -- Show messages from Metals
+              vim.opt_global.shortmess:remove "F"
               require("metals").initialize_or_attach(metals_config)
             end,
             group = nvim_metals_group,

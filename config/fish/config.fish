@@ -344,6 +344,11 @@ fish_add_path --path --move $HOME/.bin
 # Rust
 [ -d "$HOME/.cargo/bin" ] && fish_add_path --path $HOME/.cargo/bin
 
+# Scala/Java
+eval "$(jenv init -)"
+# https://get-coursier.io/docs/cli-installation
+fish_add_path --path --append $HOME"/Library/Application Support/Coursier/bin"
+
 # rbenv
 status --is-interactive; and rbenv init - fish | source
 
