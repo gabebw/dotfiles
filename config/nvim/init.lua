@@ -828,6 +828,43 @@ require("lazy").setup({
           end, { nargs = 0 })
         end,
       },
+      {
+        "folke/trouble.nvim",
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        keys = {
+          {
+            "<leader>xx",
+            "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
+            desc = "Buffer Diagnostics (Trouble)",
+          },
+          {
+            "<leader>xX",
+            "<cmd>Trouble diagnostics toggle<cr>",
+            desc = "Project Diagnostics (Trouble)",
+          },
+          {
+            "<leader>cs",
+            "<cmd>Trouble symbols toggle focus=true<cr>",
+            desc = "Symbols (Trouble)",
+          },
+        },
+        modes = {
+          preview_float = {
+            mode = "diagnostics",
+            preview = {
+              type = "float",
+              relative = "editor",
+              border = "rounded",
+              title = "Preview",
+              title_pos = "center",
+              position = { 0, -2 },
+              size = { width = 0.3, height = 0.3 },
+              zindex = 200,
+            },
+          },
+        },
+      },
     },
   },
 })
