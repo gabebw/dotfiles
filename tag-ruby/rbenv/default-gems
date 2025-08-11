@@ -1,6 +1,4 @@
-bundler <2
 awesome_print
 redcarpet
-prettier
-solargraph
-ruby-lsp
+ruby-lsp-rails
+standard
