@@ -1,8 +1,9 @@
 # vim: syntax=ruby filetype=ruby
 
-tap "thoughtbot/formulae"
 # rcm: dotfile management
 brew "rcm"
+
+tap "thoughtbot/formulae"
 # parity: useful tools for Heroku development/staging/production
 brew "parity"
 
@@ -10,8 +11,7 @@ tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
 
-tap "heroku/brew"
-brew "heroku/brew/heroku"
+brew "heroku"
 
 brew "bat"
 brew "chrome-cli"
@@ -89,7 +89,6 @@ brew "php" # for Alfred workflow
 
 # For Scala/Java
 brew "scala"
-tap "coursier/formulas"
 brew "coursier"
 brew "jenv"
 brew "java"
