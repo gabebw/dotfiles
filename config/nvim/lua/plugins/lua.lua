@@ -1,0 +1,3 @@
+return {
+  { "wesleimp/stylua.nvim" },
+}
