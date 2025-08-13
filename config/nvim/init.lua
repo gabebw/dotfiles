@@ -964,7 +964,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
-    map("gO", t.lsp_document_symbols, "[D]ocument [S]ymbols")
+    map("gO", function()
+      t.lsp_document_symbols({ symbols = { "function", "constant" } })
+    end, "[D]ocument [S]ymbols")
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
