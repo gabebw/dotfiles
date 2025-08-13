@@ -286,10 +286,11 @@ vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
 -- Plugins
+ONE_DAY = 60 * 60 * 24
 require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = true, frequency = ONE_DAY * 30 },
   ui = {
     icons = {
       cmd = "⌘",
