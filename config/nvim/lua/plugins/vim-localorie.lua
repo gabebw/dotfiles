@@ -1,0 +1,1 @@
+return { "airblade/vim-localorie" }
