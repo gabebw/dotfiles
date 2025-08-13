@@ -309,67 +309,8 @@ require("lazy").setup({
     },
   },
   spec = {
-    { "pangloss/vim-javascript" },
-    { "MaxMEllon/vim-jsx-pretty" },
-    { "leafgarland/typescript-vim" },
-    { "peitalin/vim-jsx-typescript" },
 
     -- Ruby/Rails
-    {
-      "tpope/vim-rails",
-      init = function()
-        vim.g.rails_projections = {
-          ["config/routes.rb"] = { command = "routes" },
-          ["app/admin/*.rb"] = {
-            command = "admin",
-            alternate = "spec/controllers/admin/{singular}_controller_spec.rb",
-          },
-          ["spec/controllers/admin/*_controller_spec.rb"] = {
-            alternate = "app/admin/{plural}.rb",
-          },
-          ["app/components/*.html.erb"] = {
-            alternate = "app/components/{}.rb",
-          },
-          ["app/components/*.rb"] = {
-            alternate = "app/components/{}.html.erb",
-          },
-          ["spec/factories/*.rb"] = { command = "factories" },
-          ["spec/factories.rb"] = { command = "factories" },
-          ["spec/features/*_spec.rb"] = { command = "feature" },
-          ["config/locales/en/*.yml"] = {
-            command = "tran",
-            template = "en:\n  {underscore|plural}:\n    ",
-          },
-          ["app/services/*.rb"] = {
-            command = "service",
-            test = "spec/services/{}_spec.rb",
-          },
-          ["script/datamigrate/*.rb"] = {
-            command = "datamigrate",
-            template = "#!/usr/bin/env rails runner\n\n",
-          },
-          ["app/jobs/*_job.rb"] = {
-            command = "job",
-            template = "class {camelcase|capitalize|colons}Job < ActiveJob::Job\n  def perform(*)\n  end\nend",
-            test = { "spec/jobs/{}_job_spec.rb" },
-          },
-        }
-      end,
-    },
-    { "vim-ruby/vim-ruby" },
-    -- Allow `cir` to change inside ruby block, etc
-    {
-      "rhysd/vim-textobj-ruby",
-      dependencies = { "kana/vim-textobj-user" },
-      init = function()
-        -- definitions blocks	(module, class, def): ro
-        -- loop blocks (while, for, until): rl
-        -- control blocks	(do, begin, if, unless, case): rc
-        -- do statement	(do): rd
-        -- any block (including above): rr
-        vim.g.textobj_ruby_more_mappings = 1
-      end,
-    },
     { "tpope/vim-rake" },
     { "tpope/vim-projectionist" },
     {
@@ -663,8 +604,13 @@ require("lazy").setup({
       dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope-fzf-native.nvim",
+        "folke/trouble.nvim",
       },
       config = function()
+        local open_with_trouble = require("trouble.sources.telescope").open
+        -- Use this to add more results without clearing the trouble list
+        -- local add_to_trouble = require("trouble.sources.telescope").add
+
         local actions = require "telescope.actions"
         require("telescope").setup({
           defaults = {
@@ -674,7 +620,9 @@ require("lazy").setup({
                 ["<CR>"] = actions.select_default,
                 ["<C-s>"] = actions.select_horizontal,
                 ["<C-v>"] = actions.select_vertical,
+                ["<c-t>"] = open_with_trouble,
               },
+              n = { ["<c-t>"] = open_with_trouble },
             },
           },
           extensions = {
