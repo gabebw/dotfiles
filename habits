@@ -1,0 +1,9 @@
+Don't forget about hexyl! A handy binary file viewer.
+%
+Still using man? Try using `tldr` first!
+%
+Prefer `procs` over `ps`
+%
+To create a fortune file, run `strfile <FILE> <FILE>.dat` then run `fortune <FILE_WITHOUT_DAT>`
+%
+Prefer `dust` over `du`

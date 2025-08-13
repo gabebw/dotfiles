@@ -408,4 +408,12 @@ if status --is-interactive
   set -U fish_pager_color_completion normal
   set -U fish_pager_color_description B3A06D
   set -U fish_pager_color_selected_background --background=brblack
+
+  function fish_greeting
+    set -f this_file (readlink (status --current-filename))
+    # -C <path>: Run as if git was started in <path> instead of the current working directory
+    set -f dotfiles_git_dir (git -C (dirname $this_file) rev-parse --show-toplevel)
+    # Fortune doesn't like `~/.habits`, so point it directly here
+    fortune $dotfiles_git_dir/habits
+  end
 end
