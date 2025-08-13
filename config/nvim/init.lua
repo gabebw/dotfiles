@@ -845,12 +845,33 @@ require("lazy").setup({
           },
           {
             "<leader>cs",
-            "<cmd>Trouble symbols toggle focus=true<cr>",
+            "<cmd>Trouble lsp_document_symbols toggle focus=true<cr>",
             desc = "Symbols (Trouble)",
           },
           {
             "<leader>cf",
-            "<cmd>Trouble symbols toggle focus=true filter.kind=Function<cr>",
+            function()
+              require("trouble").open({
+                mode = "lsp_document_symbols",
+                focus = "true",
+                -- Available kinds:
+                -- "Class"
+                -- "Constructor"
+                -- "Enum"
+                -- "Field"
+                -- "Function"
+                -- "Interface"
+                -- "Method"
+                -- "Module"
+                -- "Namespace"
+                -- "Package"
+                -- "Property"
+                -- "Struct"
+                -- "Trait"
+                filter = { kind = { "Function", "Constant" } },
+                win = { position = "left" },
+              })
+            end,
             desc = "Function Symbols (Trouble)",
           },
         },
