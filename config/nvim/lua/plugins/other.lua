@@ -65,4 +65,9 @@ return {
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
   },
+
+  { "airblade/vim-localorie" },
+  { "tpope/vim-projectionist" },
+  { "christoomey/vim-tmux-navigator" },
+  { "tpope/vim-rake" },
 }
