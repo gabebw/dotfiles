@@ -1,1 +1,0 @@
-return { "tpope/vim-projectionist" }
