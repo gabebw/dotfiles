@@ -331,23 +331,23 @@ alias ssh "TERM=xterm-256color command ssh"
 
 # Add Homebrew to the path.
 set HOMEBREW_PREFIX (brew --prefix)
-fish_add_path --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+fish_add_path --move --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
 # Node
 set PATH $PATH ".git/safe/../../node_modules/.bin/"
 
 # Postgres.app takes precedence
-fish_add_path --path /Applications/Postgres.app/Contents/Versions/latest/bin
+fish_add_path --move --path /Applications/Postgres.app/Contents/Versions/latest/bin
 
 fish_add_path --path --move $HOME/.bin
 
 # Rust
-[ -d "$HOME/.cargo/bin" ] && fish_add_path --path $HOME/.cargo/bin
+[ -d "$HOME/.cargo/bin" ] && fish_add_path --move --path $HOME/.cargo/bin
 
 # Scala/Java
 eval "$(jenv init -)"
 # https://get-coursier.io/docs/cli-installation
-fish_add_path --path --append $HOME"/Library/Application Support/Coursier/bin"
+fish_add_path --move --path --append $HOME"/Library/Application Support/Coursier/bin"
 
 # rbenv
 status --is-interactive; and rbenv init - fish | source
