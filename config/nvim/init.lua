@@ -287,6 +287,7 @@ vim.o.expandtab = true
 
 -- Plugins
 ONE_DAY = 60 * 60 * 24
+---@diagnostic disable-next-line: missing-fields
 require("lazy").setup({
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
