@@ -126,8 +126,8 @@ if command -v asdf &>/dev/null || [[ -d ~/.asdf ]]; then
   brew uninstall asdf || true
 fi
 
-# Load rbenv (before setup scripts) in case it's the first time installing them
-eval "$(rbenv init -)"
+# Load mise (before setup scripts) in case it's the first time installing them
+eval (mise activate)
 
 info "Running all setup scripts..."
 for setup in tag-*/setup vscode/setup; do

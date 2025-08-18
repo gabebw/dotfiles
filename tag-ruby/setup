@@ -2,16 +2,15 @@
 
 set -e
 
+# Point Ruby at OpenSSL, which it otherwise cannot find
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@3)"
+
 latest_ruby_version(){
-  rbenv install -l 2>/dev/null | rg '^\d' | tail -1
+  mise ls-remote ruby | rg -v 'dev|preview|rc' | tail -1
 }
 
 echo "Installing latest Ruby (version $(latest_ruby_version))..."
-if rbenv versions | rg "$(latest_ruby_version)" > /dev/null; then
-  echo "Already installed"
-else
-  rbenv install "$(latest_ruby_version)"
-  rbenv global "$(latest_ruby_version)"
-fi
+# `mise use` installs it if it's not yet installed
+mise use --global ruby@"$(latest_ruby_version)"
 
 gem install ruby-lsp-rails

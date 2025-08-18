@@ -3,9 +3,7 @@
 set -e
 
 echo 'Installing NodeJS (latest LTS) and Yarn...'
-if ! fnm list | grep -q lts-latest; then
-  fnm install --progress never --log-level error --lts
-fi
+mise use --global node@lts
 npm install --silent --no-progress -g prettier
 npm install --silent --no-progress -g yarn
 

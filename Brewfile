@@ -47,12 +47,9 @@ brew "ffmpeg"
 # I love `sponge` so much.
 brew "moreutils"
 
-# rbenv version manager for Ruby
-brew "rbenv"
-brew "rbenv-default-gems"
-
-# Version manager for Node
-brew "fnm"
+# general version manager (and more)
+# https://mise.jdx.dev
+brew "mise"
 
 # Simple graphs with `bin/line_graph`
 brew "gnuplot"
@@ -87,8 +84,6 @@ brew "expect" # for `unbuffer`
 brew "openssl@3"
 brew "php" # for Alfred workflow
 
-# For Scala/Java
+# For Scala
 brew "scala"
 brew "coursier"
-brew "jenv"
-brew "java"

@@ -1,0 +1,10 @@
+[tools]
+java = "latest"
+node = "lts"
+ruby = "3.4.5"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node"]
+
+[settings.node]
+gpg_verify = false

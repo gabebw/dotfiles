@@ -2,6 +2,5 @@
 
 set -eo pipefail
 
-coursier setup
-eval "$(jenv init -)"
-jenv add "$(brew --prefix java)"
+mise use -g java
+cs setup

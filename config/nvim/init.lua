@@ -16,6 +16,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Prepend mise shims to PATH
+vim.env.PATH = vim.env.HOME .. "/.local/share/mise/shims:" .. vim.env.PATH
+
 -- Set leader/localleader early because leader is used at the moment mappings
 -- are defined. Changing the (local)leader after a mapping is defined has no
 -- effect on the mapping.
@@ -552,7 +555,7 @@ require("lazy").setup({
       "neovim/nvim-lspconfig",
       config = function()
         require("lspconfig").ruby_lsp.setup({
-          cmd = { vim.fn.expand "~/.rbenv/shims/ruby-lsp" },
+          cmd = { "ruby-lsp" },
           init_options = {
             linters = { "standard" },
           },

@@ -333,7 +333,7 @@ alias ssh "TERM=xterm-256color command ssh"
 set HOMEBREW_PREFIX (brew --prefix)
 fish_add_path --move --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
-# Node
+# Find Node commands from current project
 set PATH $PATH ".git/safe/../../node_modules/.bin/"
 
 # Postgres.app takes precedence
@@ -345,23 +345,16 @@ fish_add_path --path --move $HOME/.bin
 [ -d "$HOME/.cargo/bin" ] && fish_add_path --move --path $HOME/.cargo/bin
 
 # Scala/Java
-eval "$(jenv init -)"
 # https://get-coursier.io/docs/cli-installation
 fish_add_path --move --path --append $HOME"/Library/Application Support/Coursier/bin"
 
-# rbenv
-status --is-interactive; and rbenv init - fish | source
+status --is-interactive; and mise activate | source
 
-# Prepend binstubs *after* doing rbenv.
+# Prepend binstubs
 # Do not use `fish_add_path` because that will expand `.` to wherever you are
 # when you sourced `config.fish`. I want it to refer to the current directory
 # wherever I am.
 set PATH ./bin/stubs $PATH
-
-# Node
-if status --is-interactive
-  eval "$(fnm env --use-on-cd --log-level=error)"
-end
 
 # Go
 # `go install` will install executables to ~/.bin

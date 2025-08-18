@@ -7,10 +7,6 @@ if [ -n "$VIMRUNTIME" ]; then
   MY_HOMEBREW_PREFIX=$(brew --prefix)
   PATH="$MY_HOMEBREW_PREFIX"/bin:"$MY_HOMEBREW_PREFIX"/sbin:$PATH
 
-  eval "$(rbenv init -)"
-
-  # This handles Node versions for things that only source zshenv, but zshrc is
-  # more complicated and so we have the setup again in zshrc.
-  eval "$(fnm env --use-on-cd --log-level=error)"
+  eval "$(mise activate zsh)"
 fi
 . "$HOME/.cargo/env"
