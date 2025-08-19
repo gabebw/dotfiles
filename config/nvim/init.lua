@@ -554,6 +554,7 @@ require("lazy").setup({
     {
       "neovim/nvim-lspconfig",
       config = function()
+        require("lspconfig").ts_ls.setup({})
         require("lspconfig").ruby_lsp.setup({
           cmd = { "ruby-lsp" },
           init_options = {
@@ -640,12 +641,6 @@ require("lazy").setup({
           },
         },
       },
-    },
-
-    {
-      "pmizio/typescript-tools.nvim",
-      dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-      opts = {},
     },
 
     { "folke/lazydev.nvim", opts = {} },
@@ -964,7 +959,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map("<leader>ws", t.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+    map("<leader>ws", t.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
   end,
 })
 
