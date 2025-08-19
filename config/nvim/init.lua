@@ -153,6 +153,12 @@ vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
 vim.keymap.set("n", "<Leader>gg", function()
   require("telescope.builtin").live_grep()
 end, { remap = false })
+vim.keymap.set("n", "<Leader>go", function()
+  require("telescope.builtin").live_grep({
+    grep_open_files = true,
+    additional_args = { "--fixed-strings" },
+  })
+end, { remap = false })
 
 vim.cmd [[
 " Close all other windows in this tab, and don't error if this is the only one
