@@ -819,12 +819,38 @@ require("lazy").setup({
       },
       {
         "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        opts = {
+          modes = {
+            top_level_only = {
+              mode = "lsp_document_symbols",
+              filter = function(items)
+                return vim.tbl_filter(function(item)
+                  return not item.parent
+                  -- allow 2nd-level:
+                  -- or not item.parent.parent
+                end, items)
+              end,
+            },
+            preview_float = {
+              mode = "diagnostics",
+              preview = {
+                type = "float",
+                relative = "editor",
+                border = "rounded",
+                title = "Preview",
+                title_pos = "center",
+                position = { 0, -2 },
+                size = { width = 0.3, height = 0.3 },
+                zindex = 200,
+              },
+            },
+          },
+        }, -- for default options, refer to the configuration section for custom setup.
         cmd = "Trouble",
         keys = {
           {
             "<leader>xx",
-            "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
+            "<cmd>Trouble preview_float toggle filter.buf=0 focus=true<cr>",
             desc = "Buffer Diagnostics (Trouble)",
           },
           {
@@ -840,7 +866,9 @@ require("lazy").setup({
           {
             "<leader>cf",
             function()
-              require("trouble").open({
+              local t = require "trouble"
+              ---@diagnostic disable-next-line: missing-fields
+              t.toggle({
                 mode = "lsp_document_symbols",
                 focus = "true",
                 -- Available kinds:
@@ -858,25 +886,29 @@ require("lazy").setup({
                 -- "Struct"
                 -- "Trait"
                 filter = { kind = { "Function", "Constant" } },
-                win = { position = "left" },
+                -- If `size` is < 1, it is treated as a percentage (0.4 = 40%).
+                -- Otherwise, it's treated as absolute number of columns.
+                win = { position = "left", size = 0.25 },
               })
+              if t.is_open "lsp_document_symbols" then
+                -- Key bindings: zm to fold [m]ore (show less), zr to fold [r]educe (show more)
+
+                -- Set fold level to 2, by setting to:
+                -- 0 ("Document Symbols")
+                ---@diagnostic disable-next-line: missing-parameter
+                t.fold_close_all()
+
+                -- 3 times:
+                -- + 1 (filename)
+                -- + 1 (top level)
+                -- + 1 (nested level below that)
+                for _ = 1, 3 do
+                  ---@diagnostic disable-next-line: missing-parameter
+                  t.fold_reduce()
+                end
+              end
             end,
             desc = "Function Symbols (Trouble)",
-          },
-        },
-        modes = {
-          preview_float = {
-            mode = "diagnostics",
-            preview = {
-              type = "float",
-              relative = "editor",
-              border = "rounded",
-              title = "Preview",
-              title_pos = "center",
-              position = { 0, -2 },
-              size = { width = 0.3, height = 0.3 },
-              zindex = 200,
-            },
           },
         },
       },
@@ -959,7 +991,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map("<leader>ws", t.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+    map("<leader>ws", function()
+      t.lsp_workspace_symbols({ ignore_symbols = { "variable", "property" } })
+    end, "[W]orkspace [S]ymbols")
   end,
 })
 
