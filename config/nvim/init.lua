@@ -629,14 +629,8 @@ require("lazy").setup({
       opts = {
         keymap = { preset = "super-tab" },
         completion = {
-          ghost_text = {
-            enabled = true,
-            -- only show ghost text when menu is closed
-            show_with_menu = false,
-          },
           menu = {
-            -- only show menu on manual <C-space>
-            auto_show = false,
+            auto_show = true,
           },
         },
         sources = {
