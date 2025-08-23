@@ -1,4 +1,5 @@
 # jq -- sed for JSON
+
 {:data-section="shell"}
 {:data-date="April 15, 2019"}
 {:data-extra="Um Pages"}
@@ -39,7 +40,9 @@ To get this:
 
 Do this:
 
-    jq '[ .topLevel[] | { letter: .sub } ]'
+    jq '.topLevel | map({ letter: .sub })'
+
+If the key is the same, you can use `{ letter }` to get `{ letter: .letter }`.
 
 ## Cast a value to a number with `tonumber`
 
@@ -94,6 +97,13 @@ the path to get a specific key, let the `..` operator do it for you:
 
     curl -A 'ua' https://www.reddit.com/r/food/new.json | jq '..|.permalink?'
 
+You can also use this to find arbitrarily-nested data:
+
+For example, imagine you have an object with keys and the keys point to objects, etc.
+Find each one's `date` object that has a year of `2019`:
+
+    jq '.. | objects | select(.year? == "2019")'
+
 ## FILTER ITEMS FROM AN ARRAY OF OBJECTS
 
 Given something like this:
@@ -138,14 +148,6 @@ Set the parent to a variable, use recursive descent to test the contents, then
 return the parent if it passed the test:
 
     jq '. as $parent | select(.. | .year? == "2019") | $parent'
-
-## FIND DATA THAT PASSES A TEST
-
-Find an arbitrarily-nested object with a couple of attributes, and find the item
-that passes. For example, imagine you have an array of objects and want to find
-each one's `date` object that has a year of `2019`:
-
-    jq '.. | select(.. | .year? == "2019")
 
 ## FILTER BY STRING MATCH
 
