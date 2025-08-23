@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This is the post-merge hook for _this dotfiles repo_.
 # It gets copied in by the `tag-git/setup` script.
@@ -43,6 +43,7 @@ run_rcup(){
 
 run_rcdn(){
   rcdn
+  # shellcheck disable=SC2016
   echo '>>> Some files were deleted, so I ran `rcdn`'
 }
 
