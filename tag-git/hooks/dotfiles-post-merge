@@ -68,6 +68,10 @@ else
   fi
 fi
 
+if files_filtered_by M | grep -qF mise/config.toml; then
+  mise install
+fi
+
 # Install VS Code extensions when they're added to the list.
 for extension in $(added_lines_in vscode/extensions); do
   code --install-extension "$extension"
