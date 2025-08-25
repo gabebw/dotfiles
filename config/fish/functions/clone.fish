@@ -7,7 +7,7 @@ function clone -a directory github_repo repo_name
     return 1
   end
   pushd $directory
-  if gcl $argv
+  if gcl $github_repo $repo_name
     # Name the session after the current directory
     set -f session_name (basename $PWD)
     if tmux-session-exists $session_name
