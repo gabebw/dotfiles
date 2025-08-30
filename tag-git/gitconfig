@@ -8,6 +8,7 @@
   whitespace = trailing-space,cr-at-eol
   excludesfile = ~/.gitignore
   autocrlf = false
+  attributesfile = ~/.gitattributes
 [merge]
   tool = Kaleidoscope
   # Per @jferris: `ff = only` means Git will never implicitly do a merge commit, including while

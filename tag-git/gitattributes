@@ -1,0 +1,52 @@
+# There are diff patterns for various languages built right into git!
+# Search for "The following built in patterns are available:" on the docs page:
+# https://git-scm.com/docs/gitattributes
+
+*.rb diff=ruby
+*.rake diff=ruby
+
+*.c     diff=cpp
+*.h     diff=cpp
+*.c++   diff=cpp
+*.h++   diff=cpp
+*.cpp   diff=cpp
+*.hpp   diff=cpp
+*.cc    diff=cpp
+*.hh    diff=cpp
+
+*.m     diff=objc
+*.mm    diff=objc
+
+*.cs    diff=csharp
+
+*.css   diff=css
+
+*.html  diff=html
+*.xhtml diff=html
+
+*.ex    diff=elixir
+*.exs   diff=elixir
+
+*.go    diff=golang
+
+*.php   diff=php
+
+*.pl    diff=perl
+
+*.py    diff=python
+
+*.md    diff=markdown
+
+*.rb    diff=ruby
+*.rake  diff=ruby
+
+*.rs    diff=rust
+
+*.lisp  diff=lisp
+*.el    diff=lisp
+
+# "exif" is a special diff defined in gitconfig
+*.png   diff=exif
+*.jpg   diff=exif
+*.jpeg  diff=exif
+*.gif   diff=exif
