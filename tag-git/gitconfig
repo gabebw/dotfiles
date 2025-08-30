@@ -32,14 +32,26 @@
   # https://twitter.com/SmileyKeith/status/946789768506912773
   colorMoved = zebra
 
-  # difftastic: https://difftastic.wilfred.me.uk
-  external = difft
-
   # Turn off all prefixes so that I can Cmd-Click a path in the VS Code
   # terminal. `i/tag-git/gitconfig` won't resolve, but `tag-git/gitconfig` will.
   noprefix = true
-  tool = difftastic
+[diff "rspec"]
+  # https://gist.github.com/tekin/12500956bd56784728e490d8cef9cb81?permalink_comment_id=3500150#gistcomment-3500150
+  xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
+[diff "exif"]
+  binary = true
+  # brew install exiftool
+  # Git will then diff between `exiftool file1` and `exiftool file2`
+  textconv = exiftool
 [alias]
+  ksd = difftool -t Kaleidoscope
+  # `git log` with patches shown with difftastic.
+  dl = -c diff.external=difft log -p --ext-diff
+  # Show the most recent commit with difftastic.
+  ds = -c diff.external=difft show --ext-diff
+  # `git diff` with difftastic.
+  dft = -c diff.external=difft diff
+
   mt = mergetool
   cf = checkout -f
   full = log --pretty=detailed
@@ -170,14 +182,6 @@
   # Use a pager if the difftool output is larger than one screenful,
   # consistent with the behaviour of `git diff`.
   difftool = true
-[delta]
-    plus-style = "black green"
-    minus-style = "black #FFC0CB"
-    syntax-theme = ansi
-    navigate = true
-    line-numbers = true
-[interactive]
-    diffFilter = delta --color-only
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
