@@ -356,6 +356,9 @@ status --is-interactive; and mise activate | source
 # wherever I am.
 set PATH ./bin/stubs $PATH
 
+# Tell well-behaved tools to look in ~/.config for dotfiles
+set -x XDG_CONFIG_HOME "$HOME/.config"
+
 # Go
 # `go install` will install executables to ~/.bin
 set -x GOBIN ~/.bin

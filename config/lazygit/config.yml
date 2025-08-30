@@ -1,0 +1,9 @@
+keybinding:
+  commits:
+    # The defaults are C-j and C-k, which I use to navigate tmux
+    moveUpCommit: '<c-u>'
+    moveDownCommit: '<c-d>'
+
+    # These defaults are c-u and c-d, so disable them
+    scrollUpMain-alt1: '<disabled>'
+    scrollDownMain-alt1: '<disabled>'
