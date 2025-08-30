@@ -41,22 +41,17 @@
   tool = difftastic
 [alias]
   mt = mergetool
-  ls = !git log -S "$(pbpaste)"
-  st = status --short --branch
-  co = checkout
-  cm = commit -av
+  cf = checkout -f
   full = log --pretty=detailed
   # No color, short messages
   basic = log --pretty='%h %s'
   unstage = reset HEAD
+  redo = !git reset --soft HEAD~1 && git unstage
   mm = master-to-main-wrapper merge-to %BRANCH%
   up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
-  mup = !git fetch origin && git master-to-main-wrapper merge --ff origin/%BRANCH%
   r = master-to-main-wrapper rebase -i origin/%BRANCH%
   rr = master-to-main-wrapper rebase -i $(git shalector)
   cp = !git cherry-pick $(git recent-branches | fzf --nth 1 | awk '{print $1}')
-  # "cherry-pick previous", e.g. the head of the branch we just left
-  cpp = cherry-pick HEAD@{1}
   newauthor = commit --amend --reset-author -C HEAD
   next = !git add . && git rebase --continue
   pr = !git push -u -q && git create-pull-request
@@ -65,17 +60,12 @@
   # you haven't already seen the ref you're overwriting. It avoids the race
   # condition of accidentally "push -f"ing over a commit you haven't seen.
   pf = push --force-with-lease --set-upstream
-  g = grep --extended-regexp --break --heading --line-number --show-function
-  ss = !git shalector | xargs git show
   safe = !mkdir .git/safe
   current-branch = branch --show-current
   mb = master-to-main-wrapper merge-base head %BRANCH%
   # Delete merged branches
   cleanup-merged = !git branch --merged | rg -v '^\\*|^  (master|main)$' | xargs git branch -d
   open = !gh repo view -w
-
-  # Check out a pull request by number: g co-pr 123
-  co-pr = !gh pr checkout $1
 
   # Typos
   pul = pull

@@ -4,6 +4,6 @@ function g --wraps=git
   if [ (count $argv) -gt 0 ]
     git $argv
   else
-    git st
+    git status --short --branch
   end
 end
