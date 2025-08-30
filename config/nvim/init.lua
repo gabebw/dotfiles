@@ -1030,8 +1030,7 @@ augroup vimrc
 augroup END
 ]]
 
--- vim-plug loads all the filetype, syntax and colorscheme files, so turn them on
--- _after_ loading plugins.
+-- Turn filetype, syntax and colorscheme settings on _after_ loading plugins.
 vim.cmd [[
   runtime macros/matchit.vim
   filetype plugin indent on
