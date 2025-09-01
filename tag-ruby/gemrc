@@ -1,2 +1,3 @@
+# vim: ft=yaml
 # Speed up gem installation by skipping docs
 gem: --no-document
