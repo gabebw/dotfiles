@@ -36,6 +36,9 @@
   # Turn off all prefixes so that I can Cmd-Click a path in the VS Code
   # terminal. `i/tag-git/gitconfig` won't resolve, but `tag-git/gitconfig` will.
   noprefix = true
+
+  # https://adamj.eu/tech/2024/01/18/git-improve-diff-histogram/
+  algorithm = histogram
 [diff "rspec"]
   # https://gist.github.com/tekin/12500956bd56784728e490d8cef9cb81?permalink_comment_id=3500150#gistcomment-3500150
   xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario|background)[ \t].*)$"
