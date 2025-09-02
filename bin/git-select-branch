@@ -2,7 +2,7 @@
 
 # Only 1 branch
 if [ "$(git branch "$@" | wc -l | xargs echo)" = 1 ]; then
-  echo "(basename $0): There's only one git branch, exiting." >&2
+  echo "$(basename $0): There's only one git branch, exiting." >&2
   exit 1
 fi
 
