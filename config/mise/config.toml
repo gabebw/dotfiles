@@ -4,6 +4,7 @@ node = "lts"
 "npm:typescript" = "latest"
 ruby = "3.4.5"
 "npm:typescript-language-server" = "latest"
+"npm:vscode-langservers-extracted" = "4.10.0"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
