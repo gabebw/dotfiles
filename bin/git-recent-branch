@@ -1,0 +1,5 @@
+#!/usr/bin/env fish --no-config
+
+git branch --sort=-committerdate | \
+  fzf --accept-nth '{1}{2}' --delimiter='*' | \
+  string trim
