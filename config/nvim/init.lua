@@ -560,6 +560,19 @@ require("lazy").setup({
     {
       "neovim/nvim-lspconfig",
       config = function()
+        require("lspconfig").rust_analyzer.setup({
+          settings = {
+            ["rust-analyzer"] = {
+              check = {
+                command = "clippy",
+              },
+              diagnostics = {
+                enable = true,
+              },
+            },
+          },
+        })
+
         require("lspconfig").ts_ls.setup({})
         require("lspconfig").ruby_lsp.setup({
           cmd = { "ruby-lsp" },
