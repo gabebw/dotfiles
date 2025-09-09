@@ -629,8 +629,23 @@ require("lazy").setup({
       opts = {
         keymap = { preset = "super-tab" },
         completion = {
+          accept = { auto_brackets = { enabled = false } },
           menu = {
             auto_show = true,
+            border = "single",
+            draw = {
+              columns = {
+                { "kind_icon" },
+                { "label" },
+                { "source_id", gap = 1 },
+              },
+            },
+          },
+          -- Show documentation when selecting a completion item
+          documentation = {
+            auto_show = true,
+            treesitter_highlighting = true,
+            auto_show_delay_ms = 0,
           },
         },
         sources = {
