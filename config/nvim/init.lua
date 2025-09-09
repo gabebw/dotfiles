@@ -769,10 +769,23 @@ require("lazy").setup({
         "scalameta/nvim-metals",
         dependencies = {
           "nvim-lua/plenary.nvim",
+          "j-hui/fidget.nvim",
         },
         ft = { "scala", "sbt", "java" },
         opts = function()
           local metals_config = require("metals").bare_config()
+
+          -- https://github.com/scalameta/nvim-metals/discussions/39
+          -- *READ THIS*
+          -- I *highly* recommend setting statusBarProvider to either "off" or "on"
+          --
+          -- "off" will enable LSP progress notifications by Metals and you'll need
+          -- to ensure you have a plugin like fidget.nvim installed to handle them.
+          --
+          -- "on" will enable the custom Metals status extension and you *have* to have
+          -- a have settings to capture this in your statusline or else you'll not see
+          -- any messages from metals. There is more info in the help docs about this
+          metals_config.init_options.statusBarProvider = "off"
 
           -- Optimize memory allocation with serverProperties
           metals_config.settings = {
@@ -816,6 +829,10 @@ require("lazy").setup({
             vim.cmd "!bloop clean" -- Adjust if you use a different build tool
           end, { nargs = 0 })
         end,
+      },
+      {
+        "j-hui/fidget.nvim",
+        opts = {},
       },
       {
         "folke/trouble.nvim",
