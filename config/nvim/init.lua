@@ -759,6 +759,12 @@ require("lazy").setup({
             enable = false,
           },
         },
+        filters = {
+          -- Show gitignored files (defaults to true, meaning DON'T show them.)
+          -- This is an annoying default, because it means that sometimes newly created files will just not show up in
+          -- the tree.
+          git_ignored = false,
+        },
         renderer = {
           icons = {
             show = {
