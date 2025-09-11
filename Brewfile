@@ -3,10 +3,6 @@
 # rcm: dotfile management
 brew "rcm"
 
-tap "thoughtbot/formulae"
-# parity: useful tools for Heroku development/staging/production
-brew "parity"
-
 tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"

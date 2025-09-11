@@ -2,3 +2,5 @@ awesome_print
 redcarpet
 ruby-lsp-rails
 standard
+# parity: useful tools for Heroku development/staging/production
+parity
