@@ -854,6 +854,15 @@ require("lazy").setup({
             group = nvim_metals_group,
           })
 
+          -- Automatically organize imports on save
+          vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+            group = nvim_metals_group,
+            pattern = "*.scala",
+            -- Organizing imports will fail with a warning if the current fails to compile.
+            -- That's fine, silence the warning, I don't care about organizing imports if the file has errors.
+            command = "silent! lua require('metals').organize_imports()",
+          })
+
           -- Add custom commands for Metals
           vim.api.nvim_create_user_command("MetalsRestart", function()
             require("metals").restart_server()
