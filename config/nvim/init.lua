@@ -117,6 +117,17 @@ vim.o.wildignorecase = true -- ignore case when completing file names and direct
 vim.o.wildmode = "list:longest,list:full"
 vim.opt.completeopt = { "menu", "menuone", "longest", "preview" }
 
+--- Defines the default border style of floating windows. The default value
+--- is empty, which is equivalent to "none". Valid values include:
+--- - "bold": Bold line box.
+--- - "double": Double-line box.
+--- - "none": No border.
+--- - "rounded": Like "single", but with rounded corners ("╭" etc.).
+--- - "shadow": Drop shadow effect, by blending with the background.
+--- - "single": Single-line box.
+--- - "solid": Adds padding by a single whitespace cell.
+vim.o.winborder = "rounded"
+
 -- Searching
 local function CharacterUnderCursor()
   local column = vim.api.nvim_win_get_cursor(0)[2]
