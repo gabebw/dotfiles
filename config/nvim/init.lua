@@ -194,7 +194,7 @@ cnoremap <C-x> <Plug>(TelescopeFuzzyCommandSearch)
 
 -- PLUGIN OPTIONS
 vim.cmd [[
-nnoremap <Leader>t :Telescope find_files<CR>
+nnoremap <Leader>t :Telescope find_files hidden=true<CR>
 nnoremap <Leader>b :Telescope buffers<CR>
 augroup mrails
 	autocmd!
