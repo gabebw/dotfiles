@@ -81,11 +81,6 @@ source "$HOME/.cargo/env"
 rustup component add clippy
 rustup component add rust-analyzer
 
-info "Installing lister..."
-if command_does_not_exist lister; then
-  stay_awake_while cargo install --git https://github.com/gabebw/rust-lister
-fi
-
 info "Installing Firefox open URL printer..."
 if command_does_not_exist firefox-all-open-urls; then
   stay_awake_while cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls
