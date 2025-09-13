@@ -5,7 +5,7 @@ function al -a number
   end
 
   # Default to 10 results if no number was set
-  set -q number[1]; or set number 10
+  set -q $argv[1]; or set number 10
 
   lister -n $number -s modified
 end
