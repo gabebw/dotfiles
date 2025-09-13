@@ -81,7 +81,8 @@
   mb = master-to-main-wrapper merge-base head %BRANCH%
   # Delete merged branches
   cleanup-merged = !git branch --merged | rg -v '^\\*|^  (master|main)$' | xargs git branch -d
-  open = !gh repo view -w
+  # Try to open a PR for the current branch; otherwise, open the main repo page
+  open = !gh pr view --web 2>/dev/null || gh repo view --web
 
   # Typos
   pul = pull
