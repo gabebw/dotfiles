@@ -755,6 +755,11 @@ require("lazy").setup({
         -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
         -- configs for us.
         require("telescope").setup(opts)
+        require("telescope").setup({
+          pickers = {
+            find_files = { hidden = true },
+          },
+        })
         require("telescope").load_extension "undo"
       end,
     },
