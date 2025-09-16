@@ -1072,7 +1072,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
     map("<leader>ws", function()
-      t.lsp_workspace_symbols({ ignore_symbols = { "variable", "property" } })
+      t.lsp_workspace_symbols({
+        ignore_symbols = { "variable", "property" },
+      })
     end, "[W]orkspace [S]ymbols")
   end,
 })
