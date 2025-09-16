@@ -1089,10 +1089,6 @@ augroup vimrc
   autocmd User Rails nnoremap <Leader>c :Econtroller<Space>
   autocmd User Rails nnoremap <Leader>v :Eview<Space>
   autocmd User Rails nnoremap <Leader>u :Eunittest<Space>
-
-  " Pretend that verymagic is always on
-  nnoremap / /\v
-  cnoremap %s/ %s/\v
 augroup END
 ]]
 
