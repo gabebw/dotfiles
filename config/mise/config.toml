@@ -1,5 +1,5 @@
 [tools]
-java = "latest"
+java = "temurin-17"
 node = "lts"
 "npm:typescript" = "latest"
 ruby = "3.4.5"
