@@ -83,3 +83,6 @@ javac.*_*.args
 
 # Used by my `gcm` command
 /.commit-prefix
+
+# Used by https://github.com/tpope/vim-projectionist
+.projections.json
