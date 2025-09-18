@@ -581,7 +581,17 @@ require("lazy").setup({
     {
       "neovim/nvim-lspconfig",
       config = function()
-        require("lspconfig").rust_analyzer.setup({
+        --- Wrapper for setting up and enabling language-server
+        ---@param ls string server name
+        ---@param config? vim.lsp.Config
+        local setup = function(ls, config)
+          if config then
+            vim.lsp.config[ls] = config
+          end
+          vim.lsp.enable(ls)
+        end
+
+        setup("rust_analyzer", {
           settings = {
             ["rust-analyzer"] = {
               check = {
@@ -594,14 +604,16 @@ require("lazy").setup({
           },
         })
 
-        require("lspconfig").ts_ls.setup({})
-        require("lspconfig").ruby_lsp.setup({
+        vim.lsp.enable "ts_ls"
+
+        setup("ruby_lsp", {
           cmd = { "ruby-lsp" },
           init_options = {
             linters = { "standard" },
           },
         })
-        require("lspconfig").pylsp.setup({
+
+        setup("pylsp", {
           cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
           plugins = {
             ruff = {
@@ -610,7 +622,8 @@ require("lazy").setup({
             },
           },
         })
-        require("lspconfig").lua_ls.setup({
+
+        setup("lua_ls", {
           settings = {
             Lua = {
               diagnostics = {
@@ -622,7 +635,8 @@ require("lazy").setup({
             },
           },
         })
-        require("lspconfig").eslint.setup({
+
+        setup("eslint", {
           settings = {
             -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
             workingDirectories = { mode = "auto" },
