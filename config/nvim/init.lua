@@ -498,6 +498,8 @@ require("lazy").setup({
         -- table.
         local prettier = { "prettierd", "prettier", stop_after_first = true }
 
+        -- If prettier fails, try switching Yarn from `pnp` to `node-modules` linker, or add this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
+
         -- This will provide type hinting with LuaLS
         ---@module "conform"
         ---@type conform.setupOpts
