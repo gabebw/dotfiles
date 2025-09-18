@@ -864,26 +864,31 @@ require("lazy").setup({
               -- Show messages from Metals
               vim.opt_global.shortmess:remove "F"
               require("metals").initialize_or_attach(metals_config)
+
+              -- Metals provides a custom picker from
+              -- https://github.com/nvim-telescope/telescope.nvim which allows you to easily
+              -- choose any of the |metals-commands|. You can trigger the picker by using the
+              -- following function in a mapping: >
+              --
+              --   lua require("telescope").extensions.metals.commands()
+              --
+              -- If this is the only way you'll trigger the picker, then there is no need to
+              -- explicitly load it in your telescope config. However, if you want the module
+              -- to be autocompleted when trying to trigger it via: >
+              --
+              --   :Telescope metals commands
+              vim.keymap.set("n", "<Leader>mm", require("telescope").extensions.metals.commands, { buffer = true })
             end,
             group = nvim_metals_group,
           })
 
-          -- Automatically organize imports on save
-          vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-            group = nvim_metals_group,
-            pattern = "*.scala",
-            -- Organizing imports will fail with a warning if the current fails to compile.
-            -- That's fine, silence the warning, I don't care about organizing imports if the file has errors.
-            command = "silent! lua require('metals').organize_imports()",
-          })
-
           -- Add custom commands for Metals
           vim.api.nvim_create_user_command("MetalsRestart", function()
-            require("metals").restart_server()
+            require("metals").restart_metals()
           end, { nargs = 0 })
 
           vim.api.nvim_create_user_command("MetalsClean", function()
-            vim.cmd "!bloop clean" -- Adjust if you use a different build tool
+            require("metals").compile_clean()
           end, { nargs = 0 })
         end,
       },
