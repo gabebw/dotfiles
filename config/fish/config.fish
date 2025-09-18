@@ -3,8 +3,8 @@ if not status --is-interactive
   # Solution: Skip the configuration if not running interactively.
   #
   # Unlike files like `~/.bashrc` (which runs only for interactive shells)
-  # shells, `config.fish` is run for *every* fish shell, including
-  # non-interactive shells. This was surprising to me.
+  # `config.fish` is run for *every* fish shell, including non-interactive
+  # shells. This was surprising to me.
   #
   # By skipping it, I speed up things like:
   #
@@ -30,7 +30,11 @@ function in_vs_code
   [ "$TERM_PROGRAM" = "vscode" ]
 end
 
-if not inside_ssh; and not in_vs_code; and status --is-interactive
+function in_ghostty_quick_terminal
+  [ $(tput lines) -le 25 ]
+end
+
+if not inside_ssh; and not in_vs_code; and status --is-interactive; and not in_ghostty_quick_terminal
   # Connect to most recent tmux session
 
   if not set -q TMUX; and tmux has-session 2>/dev/null

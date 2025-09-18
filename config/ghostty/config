@@ -5,3 +5,6 @@
 # To see a list of available themes, run ghostty +list-themes
 theme = Dracula
 confirm-close-surface = false
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+# 22 lines
+quick-terminal-size = 100px
