@@ -586,7 +586,7 @@ require("lazy").setup({
         ---@param config? vim.lsp.Config
         local setup = function(ls, config)
           if config then
-            vim.lsp.config[ls] = config
+            vim.lsp.config(ls, config)
           end
           vim.lsp.enable(ls)
         end
