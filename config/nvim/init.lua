@@ -569,11 +569,32 @@ require("lazy").setup({
     -- Markdown
     { "tpope/vim-markdown" },
     { "nicholaides/words-to-avoid.vim", ft = "markdown" },
-    -- It does more, but I'm mainly using this because it gives me markdown-aware
-    -- `gx` so that `gx` works on [Markdown](links).
-    { "christoomey/vim-quicklink", ft = "markdown" },
     -- Make `gx` work on 'gabebw/dotfiles' too
-    { "gabebw/vim-github-link-opener", branch = "main" },
+    {
+      "chrishrb/gx.nvim",
+      submodules = false,
+      keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+      cmd = { "Browse" },
+      init = function()
+        vim.g.netrw_nogx = 1 -- disable netrw gx
+      end,
+      opts = {
+        -- These handlers have higher precedence than builtin handlers
+        handlers = {
+          -- custom handler to open Linear tickets
+          linear = {
+            name = "linear",
+            handle = function(mode, line, _)
+              -- %u == \u in vim's patterns, i.e. uppercase
+              local ticket = require("gx.helper").find(line, mode, "(%u+-%d+)")
+              if ticket and #ticket < 20 then
+                return "https://linear.app/august-health/issue/" .. ticket
+              end
+            end,
+          },
+        },
+      },
+    },
     { "wesleimp/stylua.nvim" },
     { "vim-language-dept/css-syntax.vim" },
 
