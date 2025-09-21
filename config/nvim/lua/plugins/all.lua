@@ -87,7 +87,7 @@ return {
   },
   { "airblade/vim-localorie" },
 
-  { "nickeb96/fish.vim" },
+  { "dag/vim-fish" },
 
   -- tmux
   {
