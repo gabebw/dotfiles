@@ -483,7 +483,6 @@ require("lazy").setup({
     -- such file: README.md:10"
     { "xim/file-line" },
     { "christoomey/vim-sort-motion" },
-    { "flazz/vim-colorschemes" },
     {
       "zootedb0t/citruszest.nvim",
       lazy = false,
