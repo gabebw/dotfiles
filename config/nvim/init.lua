@@ -128,6 +128,12 @@ vim.opt.completeopt = { "menu", "menuone", "longest", "preview" }
 --- - "solid": Adds padding by a single whitespace cell.
 vim.o.winborder = "rounded"
 
+vim.o.foldmethod = "syntax"
+-- Automatically fold everything...
+vim.o.foldlevelstart = 0
+-- ... but only make 1 big fold, not a lot of little folds inside the big fold
+vim.o.foldnestmax = 1
+
 -- Searching
 local function CharacterUnderCursor()
   local column = vim.api.nvim_win_get_cursor(0)[2]
