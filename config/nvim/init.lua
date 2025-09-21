@@ -435,7 +435,6 @@ require("lazy").setup({
     { "vim-scripts/applescript.vim" },
     { "shmup/vim-sql-syntax" },
     { "tpope/vim-git" },
-    { "cespare/vim-toml" },
 
     -- Plumbing that makes everything nicer
     -- Easily comment/uncomment lines in many languages
@@ -567,7 +566,6 @@ require("lazy").setup({
     { "kana/vim-textobj-line", dependencies = { "kana/vim-textobj-user" } },
 
     -- Markdown
-    { "tpope/vim-markdown" },
     { "nicholaides/words-to-avoid.vim", ft = "markdown" },
     -- Make `gx` work on 'gabebw/dotfiles' too
     {
@@ -596,7 +594,6 @@ require("lazy").setup({
       },
     },
     { "wesleimp/stylua.nvim" },
-    { "vim-language-dept/css-syntax.vim" },
 
     -- LSP stuff
     {
