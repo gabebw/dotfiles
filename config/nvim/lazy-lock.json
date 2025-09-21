@@ -22,7 +22,6 @@
   "telescope-undo.nvim": { "branch": "main", "commit": "928d0c2dc9606e01e2cc547196f48d2eaecf58e5" },
   "telescope.nvim": { "branch": "master", "commit": "b4da76be54691e854d3e0e02c36b0245f945c2c7" },
   "trouble.nvim": { "branch": "main", "commit": "3fb3bd737be8866e5f3a170abc70b4da8b5dd45a" },
-  "typescript-vim": { "branch": "master", "commit": "4740441db1e070ef8366c888c658000dd032e4cb" },
   "vim-colorschemes": { "branch": "master", "commit": "fd8f122cef604330c96a6a6e434682dbdfb878c9" },
   "vim-easydir": { "branch": "master", "commit": "2efbed9e24438f626971a526d19af719b89e8040" },
   "vim-easytags": { "branch": "master", "commit": "72a8753b5d0a951e547c51b13633f680a95b5483" },
@@ -33,7 +32,6 @@
   "vim-git": { "branch": "master", "commit": "485e38f29494e46a9998100e707c755d114155f1" },
   "vim-javascript": { "branch": "master", "commit": "b26c9edb3563e02f5c0b20580f7cf9743e95b157" },
   "vim-jsx-pretty": { "branch": "master", "commit": "6989f1663cc03d7da72b5ef1c03f87e6ddb70b41" },
-  "vim-jsx-typescript": { "branch": "master", "commit": "22df470d92651426f2377e3166488672f7b4b4ef" },
   "vim-lastplace": { "branch": "master", "commit": "e58cb0df716d3c88605ae49db5c4741db8b48aa9" },
   "vim-localorie": { "branch": "master", "commit": "3eff9a4ffab8e3d39ee35c56d6f275cfdc8fbe9b" },
   "vim-misc": { "branch": "master", "commit": "3e6b8fb6f03f13434543ce1f5d24f6a5d3f34f0b" },
@@ -56,5 +54,6 @@
   "vim-tmux-runner": { "branch": "master", "commit": "eead441119d9863227f4c39dac7890aa09d6b4cd" },
   "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
   "vim-vinegar": { "branch": "master", "commit": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6" },
-  "words-to-avoid.vim": { "branch": "master", "commit": "65913c5e43ae948c1856b68e013f435ee68fd451" }
+  "words-to-avoid.vim": { "branch": "master", "commit": "65913c5e43ae948c1856b68e013f435ee68fd451" },
+  "yats.vim": { "branch": "master", "commit": "9507e827a1bfa9d136ca8f6539814a9597c13b29" }
 }

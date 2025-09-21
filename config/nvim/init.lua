@@ -332,8 +332,16 @@ require("lazy").setup({
   spec = {
     { "pangloss/vim-javascript" },
     { "MaxMEllon/vim-jsx-pretty" },
-    { "leafgarland/typescript-vim" },
-    { "peitalin/vim-jsx-typescript" },
+    {
+      "HerringtonDarkholme/yats.vim",
+      submodules = false,
+      init = function()
+        -- From the yats.vim README:
+        -- > Note: set re=0 explicitly in your vimrc. Old regexp engine will incur performance issues for yats and old
+        -- > engine is usually turned on by other plugins.
+        vim.g.regexpengine = 0
+      end,
+    },
 
     -- Ruby/Rails
     {
