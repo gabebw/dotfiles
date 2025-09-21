@@ -418,7 +418,7 @@ require("lazy").setup({
     },
     { "airblade/vim-localorie" },
 
-    { "dag/vim-fish" },
+    { "nickeb96/fish.vim" },
 
     -- tmux
     {
