@@ -315,7 +315,8 @@ vim.o.expandtab = true
 ONE_DAY = 60 * 60 * 24
 ---@diagnostic disable-next-line: missing-fields
 require("lazy").setup({
-  install = { colorscheme = { "habamax" } },
+  -- Try to load one of these colorschemes _when starting an installation during startup_
+  install = { colorscheme = { "citruszest" } },
   -- automatically check for plugin updates
   checker = { enabled = true, frequency = ONE_DAY * 30 },
   ui = {
