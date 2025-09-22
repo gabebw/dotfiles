@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env fish --no-config
 
 ### ~*~ t ~*~ ###
 # Use `t blog` to connect to the `blog` session, or create a new session named
@@ -7,89 +7,88 @@
 # With no arguments, fuzzy-finds a session in a directory using the `projects`
 # script.
 
-if [[ "$1" == "with-tmux" ]]; then
-  USE_FZF_TMUX=true
-  shift
+if [ (count $argv) -gt 0 ] && [ $argv[1] = with-tmux ]
+  set USE_FZF_TMUX true
+  # Remove the first argument, like `shift` in Bash/Zsh
+  set argv $argv[2..]
 else
-  USE_FZF_TMUX=false
-fi
+  set USE_FZF_TMUX false
+end
 
-_not_in_tmux(){
-  [[ -z "$TMUX" ]]
-}
+function not_in_tmux
+  [ -z "$TMUX" ]
+end
 
 # Attach if not in tmux, or switch if we are in tmux
-_attach_to_tmux_session() {
-  session=$1
+function attach_to_tmux_session
+  set -l session $argv[1]
 
-  if _not_in_tmux; then
-    tmux attach -d -t "$session"
+  if not_in_tmux
+    tmux attach -d -t $session
   else
-    tmux switch-client -t "$session"
-  fi
-}
+    tmux switch-client -t $session
+  end
+end
 
 # tmux doesn't allow . in session names
-_tmux_normalize_session_name(){
-  basename "${1//./-}"
-}
+function tmux_normalize_session_name
+  basename (string replace '.' '' $argv[1])
+end
 
 # Create a new tmux session with the given name.
 # It's created in the background (`-d`) so it can be created when already in
 # another tmux session.
-_new_tmux_session_named() {
-  local new_session_name=$1
-  local dir=$2
-
+function new_tmux_session_named -a new_session_name dir
   # -A means "attach if this already exists, otherwise create it"
-  if [ -n "$dir" ]; then
-    tmux new-session -d -As "$new_session_name" -c "$dir"
+  if [ -n "$dir" ]
+    tmux new-session -d -As $new_session_name -c $dir
   else
-    tmux new-session -d -As "$new_session_name"
-  fi
-  _attach_to_tmux_session "$new_session_name"
-}
+    tmux new-session -d -As $new_session_name
+  end
+  attach_to_tmux_session $new_session_name
+end
 
 # Try to connect to a tmux session with the given name.
 # If no such session exists, create it first, optionally inside a given
 # directory.
-_tmux_try_to_connect_to(){
-  local name=$1
-  local dir=$2
-  if tmux-session-exists "$name"; then
-    _attach_to_tmux_session "$name"
+function tmux_try_to_connect_to -a name dir
+  if tmux-session-exists $name
+    attach_to_tmux_session $name
   else
-    _new_tmux_session_named "$name" "$dir"
-  fi
-}
+    echo "_new_tmux_session_named $name $dir"
+    new_tmux_session_named $name $dir
+  end
+end
 
 # Are we currently connected to the given session?
-_connected_to(){
-  current_tmux_session=$(tmux ls -F '#S #{session_attached}' 2>/dev/null | grep '1$' | cut -d' ' -f1)
+function connected_to
+  set -l current_tmux_session $(tmux ls -F '#S #{session_attached}' 2>/dev/null | grep '1$' | cut -d' ' -f1)
 
-  [[ "$1" == "$current_tmux_session" ]]
-}
+  [ $argv[1] = $current_tmux_session ]
+end
 
-if (( $# == 1 )); then
-  _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")"
-elif (( $# == 2 )); then
-  _tmux_try_to_connect_to "$(_tmux_normalize_session_name "$1")" "$2"
+if [ (count $argv) -eq 1 ]
+  tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1])
+  else if [ (count $argv) -eq 2 ]
+  tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1]) $argv[2]
 else
-  if $USE_FZF_TMUX; then
-    project_directory=$(projects | fzf-tmux --reverse -d '85%')
+  if $USE_FZF_TMUX
+    set project_directory $(projects | fzf-tmux --reverse -d '85%')
   else
-    project_directory=$(projects | fzf --reverse)
-  fi
+    set project_directory $(projects | fzf --reverse)
+  end
 
-  if [[ -n "$project_directory" ]]; then
-    session_name=$(_tmux_normalize_session_name "$project_directory")
+  if [ -n "$project_directory" ]
+    set session_name $(tmux_normalize_session_name $project_directory)
 
-    if ! _connected_to "$session_name"; then
-      if tmux-session-exists "$session_name"; then
-        _attach_to_tmux_session "$session_name"
+    if ! connected_to $session_name
+      if tmux-session-exists $session_name
+        attach_to_tmux_session $session_name
       else
-        (cd "$project_directory" && _new_tmux_session_named "$session_name")
-      fi
-    fi
-  fi
-fi
+        pushd $project_directory
+        new_tmux_session_named $session_name
+        popd
+      end
+    end
+  end
+end
