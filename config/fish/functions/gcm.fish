@@ -14,12 +14,17 @@ function gcm
       set commit_message "$commit_prefix $commit_message"
     end
 
-    echo $commit_message
     set -f commit_message_length (string length $commit_message)
     if [ $commit_message_length -gt 50 ]
-      echo "Commit message length ($commit_message_length) > 50, not committing" >&2
+      set_color red
+      echo >&2
+      echo $commit_message >&2
+      echo >&2
+      echo "!!! Commit message length ($commit_message_length) > 50, not committing" >&2
+      echo >&2
       return 1
     else
+      echo $commit_message
       git commit -m $commit_message
     end
   end
