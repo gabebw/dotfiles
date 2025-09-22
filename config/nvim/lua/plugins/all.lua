@@ -338,29 +338,6 @@ return {
           validate = "on",
           packageManager = "yarn",
         },
-        root_dir = function(fname)
-          -- For some reason, the default `root_dir` function preferentially finds
-          -- ~/.eslintrc.js over `<project root>/.eslintrc.json`. It _should_ be searching upward from the current
-          -- file, but for some reason is broken, so I reimplemented a working version here.
-          local eslint_config_files = {
-            ".eslintrc",
-            ".eslintrc.js",
-            ".eslintrc.cjs",
-            ".eslintrc.yaml",
-            ".eslintrc.yml",
-            ".eslintrc.json",
-            "eslint.config.js",
-            "eslint.config.mjs",
-            "eslint.config.cjs",
-            "eslint.config.ts",
-            "eslint.config.mts",
-            "eslint.config.cts",
-          }
-
-          return vim.fs.dirname(
-            vim.fs.find(eslint_config_files, { upward = true, path = vim.fn.fnamemodify(fname, ":p:h") })[1]
-          )
-        end,
       })
     end,
   },
