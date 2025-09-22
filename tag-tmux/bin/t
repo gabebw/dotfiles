@@ -67,15 +67,21 @@ function connected_to
   [ $argv[1] = $current_tmux_session ]
 end
 
+# Remove the longest common substring from each path so that they're easier to read. This might be complex, except that I know what the substring is so
+# I can hardcode it.
+function truncated_projects
+  projects | sed "s|$HOME/code/||" | sort
+end
+
 if [ (count $argv) -eq 1 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1])
-  else if [ (count $argv) -eq 2 ]
+else if [ (count $argv) -eq 2 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1]) $argv[2]
 else
   if $USE_FZF_TMUX
-    set project_directory $(projects | fzf-tmux --reverse -d '85%')
+    set project_directory $(truncated_projects | fzf-tmux --reverse -d '85%')
   else
-    set project_directory $(projects | fzf --reverse)
+    set project_directory $(truncated_projects | fzf --reverse)
   end
 
   if [ -n "$project_directory" ]

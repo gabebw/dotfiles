@@ -6,7 +6,7 @@ function git_directories
     find -L $HOME/code \
       -path '*/.git' \
       -type d \
-      -maxdepth 3
+      -maxdepth 4
 end
 
 git_directories | sed 's|/\.git$||'
