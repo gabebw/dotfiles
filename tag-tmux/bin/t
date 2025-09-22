@@ -32,7 +32,7 @@ end
 
 # tmux doesn't allow . in session names
 function tmux_normalize_session_name
-  basename (string replace '.' '' $argv[1])
+  basename (string replace . _ $argv[1])
 end
 
 # Create a new tmux session with the given name.
