@@ -64,13 +64,14 @@ end
 function connected_to
   set -l current_tmux_session $(tmux ls -F '#S #{session_attached}' 2>/dev/null | grep '1$' | cut -d' ' -f1)
 
-  [ $argv[1] = $current_tmux_session ]
+  [ $argv[1] = "$current_tmux_session" ]
 end
 
 # Remove the longest common substring from each path so that they're easier to read. This might be complex, except that I know what the substring is so
 # I can hardcode it.
+set PROJECT_PREFIX $HOME/code/
 function truncated_projects
-  projects | sed "s|$HOME/code/||" | sort
+  projects | sed "s|$PROJECT_PREFIX||" | sort
 end
 
 if [ (count $argv) -eq 1 ]
@@ -85,6 +86,7 @@ else
   end
 
   if [ -n "$project_directory" ]
+    set project_directory "$PROJECT_PREFIX"$project_directory
     set session_name $(tmux_normalize_session_name $project_directory)
 
     if ! connected_to $session_name
