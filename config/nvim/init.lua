@@ -196,6 +196,21 @@ nnoremap <leader>q :tabedit $HOME/.config/fish/config.fish<CR>
 cnoremap <C-x> <Plug>(TelescopeFuzzyCommandSearch)
 ]]
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "init.lua" },
+  callback = function(event)
+    -- "~/.config/nvim"
+    local config_dir = vim.fn.stdpath "config"
+    local plugins_file = config_dir .. "/lua/plugins/all.lua"
+    vim.keymap.set("n", "<Leader>ev", "<cmd>tabedit " .. plugins_file .. "<cr>", {
+      buffer = event.buf,
+      desc = "Edit plugins from Vim config file",
+      -- Yes, overwrite the <Leader>ev that edits $MYVIMRC
+      remap = true,
+    })
+  end,
+})
+
 -- PLUGIN OPTIONS
 vim.cmd [[
 nnoremap <Leader>t :Telescope find_files hidden=true<CR>
