@@ -210,6 +210,10 @@ return {
               "-",
             },
           },
+          sql_formatter_play = {
+            command = "sql-formatter-play-evolutions",
+            exit_codes = { 0 },
+          },
         },
         -- If this is set, Conform will run the formatter asynchronously after save.
         -- It will pass the table to conform.format().
