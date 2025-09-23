@@ -80,6 +80,7 @@ brew "expect" # for `unbuffer`
 brew "openssl@3"
 brew "php" # for Alfred workflow
 
-# For Scala
+# For Scala/Play
 brew "scala"
 brew "coursier"
+brew "sql-formatter"

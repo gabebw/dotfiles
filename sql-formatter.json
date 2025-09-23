@@ -1,0 +1,5 @@
+{
+  "language": "postgresql",
+  "tabWidth": 2,
+  "keywordCase": "upper"
+}
