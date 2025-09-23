@@ -6,7 +6,9 @@
 add_newline = false
 
 format = """
-[](pink)\
+[](fg:lavender)\
+$time\
+[](bg:pink fg:lavender)\
 $directory\
 [](bg:blue fg:pink)\
 $ruby\
@@ -17,10 +19,7 @@ $python\
 [](bg:green fg:blue)\
 $git_branch\
 $git_status\
-[](fg:green bg:lavender)\
-$time\
-[ ](fg:lavender)\
-$cmd_duration\
+[](fg:green)\
 $line_break\
 $character"""
 
@@ -94,14 +93,14 @@ format = '[ $symbol $branch ]($style)'
 
 [git_status]
 style = "fg:crust bg:green"
-format = '[([\[$all_status\]]($style)$ahead_behind )]($style)'
+format = '([\[$all_status\]]($style))[( $ahead_behind )]($style)'
 modified = "[M](italic fg:red bg:green)"
 stashed = "[S](fg:crust bg:green)"
 
 [nodejs]
 symbol = ""
 style = "fg:crust bg:blue"
-format = '[ $symbol( $version)]($style)'
+format = '[ $symbol( $version) ]($style)'
 version_format = "$major"
 detect_files = ["package.json", ".node-version", "yarn.lock"]
 detect_folders = ["node_modules"]
@@ -132,7 +131,7 @@ style = "bg:lavender"
 format = '[[  $time ](fg:crust bg:lavender)]($style)'
 
 [line_break]
-disabled = true
+disabled = false
 
 [character]
 disabled = false
