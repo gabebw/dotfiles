@@ -584,6 +584,22 @@ return {
       opts = {},
     },
     {
+      "folke/snacks.nvim",
+      ---@type snacks.Config
+      opts = {
+        -- Fancy notifications!
+        -- fidget.nvim can show notifications with
+        --   opts = {
+        --     notification = {
+        --       override_vim_notify = true,
+        --     },
+        --   },
+        -- but I like this more. I want notifications to be a little less obtrusive, while fidget is great for LSP
+        -- progress notifications.
+        notifier = {},
+      },
+    },
+    {
       "folke/trouble.nvim",
       opts = {
         modes = {
