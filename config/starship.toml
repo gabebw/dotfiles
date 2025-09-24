@@ -76,7 +76,7 @@ $modified\
 $staged\
 $untracked\
 $ahead_behind )](bg:color_blue)""" # purple
-stashed = "[stash](bold fg:222 bg:color_blue)" # yellow
+stashed = "[stash ](bold fg:222 bg:color_blue)" # yellow
 staged = "[S](bold color_yellow bg:color_blue)" # yellow
 conflicted = "[=](bold color_red)"
 untracked = "[?](bold color_fg1 bg:color_blue)" # cyan
