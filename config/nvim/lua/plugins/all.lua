@@ -191,6 +191,10 @@ return {
           eruby = { "erb_lint" },
           markdown = prettier,
           json = prettier,
+          sql = {
+            -- This has its own `condition`, so run it on every SQL file
+            "sql_formatter_play",
+          },
         },
         formatters = {
           erb_lint = {
@@ -213,6 +217,9 @@ return {
           sql_formatter_play = {
             command = "sql-formatter-play-evolutions",
             exit_codes = { 0 },
+            condition = function(self, ctx)
+              return ctx.filename:match "conf/%d+.sql$"
+            end,
           },
         },
         -- If this is set, Conform will run the formatter asynchronously after save.
