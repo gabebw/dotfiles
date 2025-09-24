@@ -7,10 +7,7 @@
 # Thanks to @devinjameson!
 
 # Read everything piped into this command into one big hunk of text in the $sql variable
-set sql ''
-while read x
-  set sql $sql\n$x
-end
+read -z sql
 
 # The `sed` line adds a newline after these lines:
 #     # --- !Ups
