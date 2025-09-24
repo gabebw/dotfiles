@@ -699,4 +699,24 @@ return {
       },
     },
   },
+  {
+    -- Show hex codes in their color
+    "catgoose/nvim-colorizer.lua",
+    opts = {
+      ---@module "colorizer.config"
+      filetypes = {
+        "*", -- Highlight all files, but customize some others.
+        toml = {
+          RGB = true,
+          names_opts = { -- options for mutating/filtering names.
+            lowercase = true,
+            css = true,
+          },
+          mode = "inline",
+          -- Turn off names because it highlights the aqua in `color_aqua`, instead of respecting word boundaries.
+          names = false,
+        },
+      },
+    },
+  },
 }
