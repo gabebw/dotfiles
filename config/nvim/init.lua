@@ -417,6 +417,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     --  To jump back, press <C-t>.
     map("gd", t.lsp_definitions, "[G]oto [D]efinition")
 
+    map("gvd", function()
+      t.lsp_definitions({ jump_type = "vsplit" })
+    end, "[G]oto [D]efinition in vsplit")
+
+    map("gxd", function()
+      t.lsp_definitions({ jump_type = "split" })
+    end, "[G]oto [D]efinition in split")
+
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
