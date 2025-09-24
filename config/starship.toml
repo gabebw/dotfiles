@@ -1,3 +1,4 @@
+"$schema" = 'https://starship.rs/config-schema.json'
 # ANSI colors for fg:NUMBER
 # https://i.stack.imgur.com/KTSQa.png
 
@@ -5,14 +6,38 @@
 add_newline = false
 
 format = """
-$time\
+[](color_aqua)\
 $ruby\
 $nodejs\
 $directory\
+[](bg:color_blue fg:color_yellow)\
 $git_branch\
 $git_state\
 $git_status\
-\\$ """
+[ ](fg:color_blue bg:color_purple)\
+[\\$](bg:color_purple fg:color_fg1)\
+[ ](color_purple)"""
+
+right_format = """
+$time
+"""
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+# Light text
+color_fg0 = '#fbf1c7'
+# Dark text
+color_fg1 = "#11111b"  # crust from catpuccin_mocha
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+color_green = '#98971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+color_yellow = '#d79921'
 
 [time]
 disabled = false
@@ -22,45 +47,44 @@ use_12hr = true
 
 [ruby]
 format = "[($version )]($style)"
-style = "fg:218" # pink
+style = "bg:color_aqua fg:color_fg0"
 # Show ruby version in my home directory
 detect_folders = ["Desktop"]
 
 [directory]
 # Show 1 parent directory (setting to 0 means no truncation)
 truncation_length = 2
-# A lovely grayish-purple
-style = "fg:146"
-format = "[$path]($style) "
+style = "fg:color_fg1 bg:color_yellow"
+format = "[ ](bg:color_yellow fg:color_aqua)[$path ]($style)"
 # When in a Git repo, keep showing parent directories
 truncate_to_repo = false
 
 [git_branch]
-format = "[($branch )]($style)"
-style = "fg:031" # dark blue
+format = "[($symbol$branch )]($style)"
+style = "bg:color_blue"
 
 [git_state]
-cherry_pick = "[🍒 PICKING](bold fg:197)" # red
+cherry_pick = "[🍒 PICKING](bold fg:color_red)"
 
 [git_status]
 format = """
-($conflicted\
+[($conflicted\
 $stashed\
 $deleted\
 $renamed\
 $modified\
 $staged\
-$untracked )\
-($ahead_behind )""" # purple
-stashed = "[stash](bold fg:222)" # yellow
-staged = "[S](bold fg:222)" # yellow
-conflicted = "[=](bold fg:197)" # red
-untracked = "[?](bold fg:159)" # cyan
-modified = "[!](bold fg:222)" # yellow
-deleted = "[✘](bold fg:197)" # red
-behind = "[↓](bold fg:159)" # cyan
-ahead = "[↑](bold fg:159)" # cyan
-diverged = "[⇔](bold fg:197)" # red
+$untracked\
+$ahead_behind )](bg:color_blue)""" # purple
+stashed = "[stash](bold fg:222 bg:color_blue)" # yellow
+staged = "[S](bold color_yellow bg:color_blue)" # yellow
+conflicted = "[=](bold color_red)"
+untracked = "[?](bold color_fg1 bg:color_blue)" # cyan
+modified = "[!](bold fg:color_red bg:color_blue)"
+deleted = "[✘](bold fg:color_red bg:color_blue)" # red
+behind = "[↓](bold bg:color_blue fg:159)" # cyan
+ahead = "[↑](bold bg:color_blue fg:159)" # cyan
+diverged = "[⇔](bold bg:color_blue fg:197)" # red
 
 [nodejs]
 # Don't show "v3", just "3"
@@ -71,4 +95,4 @@ detect_folders = ["node_modules"]
 # *.js or *.ts since that triggers too often
 detect_extensions = []
 format = "[($version )]($style)"
-style = "fg:031" # dark blue
+style = "bg:color_aqua fg:color_fg0"
