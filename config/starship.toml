@@ -82,7 +82,7 @@ truncate_to_repo = false
 [git_branch]
 format = "[($symbol$branch )]($style)"
 style = "bg:color_blue"
-truncation_length = 50
+truncation_length = 30
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\) ]($style)"
@@ -90,17 +90,26 @@ style = "bg:color_blue"
 cherry_pick = "[🍒](fg:color_red bg:color_blue)"
 
 [git_status]
-format = '[(\[$all_status$ahead_behind\] )](bg:color_blue)'
+format = """[\\[(\
+$conflicted\
+($stashed )\
+($deleted )\
+($modified )\
+($staged )\
+($untracked )\
+$typechanged\
+$renamed\
+$ahead_behind\
+\\] )](bg:color_blue)"""
 # $all_status = $conflicted $stashed $deleted $renamed $modified $typechanged $staged $untracked
 # except $all_status doesn't have spaces
-# so these are in that order
 conflicted = "[=](bold color_red bg:color_blue)"
 stashed = '[\$$count](bold fg:color_yellow bg:color_blue)'
-deleted = "[✘$count ](bold fg:color_red bg:color_blue)"
-renamed = "[» ](bold color_fg0 bg:color_blue)"
+deleted = "[✘$count](bold fg:color_red bg:color_blue)"
+renamed = "[»](bold color_fg0 bg:color_blue)"
 modified = "[M$count](bold fg:color_fg0 bg:color_blue)"
-staged = "[ S$count](bold fg:color_orange bg:color_blue)"
-untracked = "[ ?$count](bold color_fg0 bg:color_blue)"
+staged = "[S$count](bold fg:color_orange bg:color_blue)"
+untracked = "[?$count](bold color_fg0 bg:color_blue)"
 
 behind = "[↓](bold fg:color_fg0 bg:color_blue)"
 ahead = "[↑](bold fg:color_fg0 bg:color_blue)"
