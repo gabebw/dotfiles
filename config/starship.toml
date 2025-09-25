@@ -65,7 +65,8 @@ format = "[($symbol$version )]($style)"
 style = "bg:color_aqua fg:color_fg0"
 
 [java]
-format = "[☕️$version ]($style)"
+format = "[$symbol$version ]($style)"
+symbol = '☕'
 version_format = "$major"
 style = "bg:color_aqua fg:color_fg0"
 detect_extensions = ["java"]
