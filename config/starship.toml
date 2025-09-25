@@ -70,6 +70,7 @@ symbol = '☕'
 version_format = "$major"
 style = "bg:color_aqua fg:color_fg0"
 detect_extensions = ["java"]
+detect_folders = ["loquat"]
 
 [directory]
 # Show 1 parent directory (setting to 0 means no truncation)
