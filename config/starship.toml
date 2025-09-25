@@ -90,7 +90,7 @@ style = "bg:color_blue"
 cherry_pick = "[🍒](fg:color_red bg:color_blue)"
 
 [git_status]
-format = '[(\[$all_status\] )](bg:color_blue)'
+format = '[(\[$all_status$ahead_behind\] )](bg:color_blue)'
 # $all_status = $conflicted $stashed $deleted $renamed $modified $typechanged $staged $untracked
 # except $all_status doesn't have spaces
 # so these are in that order
