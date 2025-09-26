@@ -91,17 +91,18 @@ style = "bg:color_blue"
 cherry_pick = "[🍒](fg:color_red bg:color_blue)"
 
 [git_status]
-format = """[\\[(\
+format = """[(\\[\
 $conflicted\
 ($stashed )\
 ($deleted )\
-($modified )\
-($staged )\
-($untracked )\
+$modified\
+$staged\
+$untracked\
 $typechanged\
 $renamed\
+\\] )\
 $ahead_behind\
-\\] )](bg:color_blue)"""
+](bg:color_blue)"""
 # $all_status = $conflicted $stashed $deleted $renamed $modified $typechanged $staged $untracked
 # except $all_status doesn't have spaces
 conflicted = "[=](bold color_red bg:color_blue)"
@@ -114,4 +115,6 @@ untracked = "[?$count](bold color_fg0 bg:color_blue)"
 
 behind = "[↓](bold fg:color_fg0 bg:color_blue)"
 ahead = "[↑](bold fg:color_fg0 bg:color_blue)"
+up_to_date = "[✓](bold fg:color_fg0 bg:color_blue)"
+
 diverged = "[⇔](bold fg:color_red bg:color_blue)"
