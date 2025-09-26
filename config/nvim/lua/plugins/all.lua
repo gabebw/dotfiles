@@ -716,6 +716,13 @@ return {
       ---@module "colorizer.config"
       filetypes = {
         "*", -- Highlight all files, but customize some others.
+        typescriptreact = {
+          tailwind = true,
+          tailwind_opts = {
+            -- When using tailwind = 'both', update tailwind names from LSP results.
+            update_names = "both",
+          },
+        },
         toml = {
           RGB = true,
           names_opts = { -- options for mutating/filtering names.
