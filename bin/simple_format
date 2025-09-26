@@ -18,6 +18,6 @@ sed -E \
   # Italics - must be after Bold or else it steals the *s first
   -e (replacement_command '\*' sitm) \
   # Underline
-  -e (replacement_command '_' ssubm) \
+  -e (replacement_command '_' smul) \
   # Code snippet: shown bold and reversed
   -e (replacement_command '`' bold rev)
