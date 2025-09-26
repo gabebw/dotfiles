@@ -84,3 +84,5 @@ brew "php" # for Alfred workflow
 brew "scala"
 brew "coursier"
 brew "sql-formatter"
+
+brew "fortune"
