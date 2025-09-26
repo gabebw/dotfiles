@@ -1,0 +1,23 @@
+#!/usr/bin/env fish --no-config
+
+# For more about the codes you can pass to `tput`, see here: https://www.mankier.com/5/terminfo#Description-Predefined_Capabilities
+
+function replacement_command -a character
+  set -f codes $argv[2..]
+  set -f formatting ""
+  for code in $codes
+    set formatting $formatting(tput $code)
+  end
+  # sgr0 = remove all formatting and reset to normal
+  echo "s|$character([^$character[1]]+)$character|"$formatting'\1'(tput sgr0)'|g'
+end
+
+sed -E \
+  # Bold
+  -e (replacement_command '\*\*' bold) \
+  # Italics - must be after Bold or else it steals the *s first
+  -e (replacement_command '\*' sitm) \
+  # Underline
+  -e (replacement_command '_' ssubm) \
+  # Code snippet: shown bold and reversed
+  -e (replacement_command '`' bold rev)

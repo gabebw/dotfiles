@@ -414,6 +414,6 @@ if status --is-interactive
     # -C <path>: Run as if git was started in <path> instead of the current working directory
     set -f dotfiles_git_dir (git -C (dirname $this_file) rev-parse --show-toplevel)
     # Fortune doesn't like `~/.habits`, so point it directly here
-    fortune $dotfiles_git_dir/habits
+    fortune $dotfiles_git_dir/habits | simple_format
   end
 end
