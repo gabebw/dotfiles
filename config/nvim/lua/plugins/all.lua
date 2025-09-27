@@ -358,8 +358,39 @@ return {
   {
     "Saghen/blink.cmp",
     version = "1.*",
+    ---@module "blink.cmp.config"
+    ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = "super-tab" },
+      keymap = {
+        preset = "default",
+        ["<Tab>"] = {
+          function(cmp)
+            if cmp.snippet_active() then
+              return cmp.accept()
+            else
+              return cmp.select_and_accept()
+            end
+          end,
+          "snippet_forward",
+          "fallback",
+        },
+      },
+      cmdline = {
+        enabled = true,
+        keymap = {
+          preset = "cmdline",
+        },
+        completion = {
+          list = {
+            selection = {
+              -- When `true`, will automatically select the first item in the completion list
+              preselect = true,
+              -- When `true`, inserts the completion item automatically when selecting it
+              auto_insert = true,
+            },
+          },
+        },
+      },
       completion = {
         accept = { auto_brackets = { enabled = false } },
         menu = {
