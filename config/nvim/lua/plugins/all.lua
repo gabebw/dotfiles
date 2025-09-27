@@ -264,6 +264,8 @@ return {
       vim.g.netrw_nogx = 1 -- disable netrw gx
     end,
     opts = {
+      -- If multiple URLs match, use the top one without prompting
+      select_prompt = false,
       -- These handlers have higher precedence than builtin handlers
       handlers = {
         -- custom handler to open Linear tickets
