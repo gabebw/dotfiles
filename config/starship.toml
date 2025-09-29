@@ -73,17 +73,20 @@ detect_extensions = ["java"]
 detect_folders = ["loquat"]
 
 [directory]
-# Show 1 parent directory (setting to 0 means no truncation)
+# Show (n-1) parent directories
+# 0: no truncation
+# 1: basename $PWD
+# 2: show 1 parent directory, etc
 truncation_length = 2
 style = "fg:color_fg1 bg:color_yellow"
 format = "[ ](bg:color_yellow fg:color_aqua)[$path ]($style)"
-# When in a Git repo, keep showing parent directories
-truncate_to_repo = false
+# When in a Git repo, should we keep showing parent directories?
+truncate_to_repo = true
 
 [git_branch]
 format = "[($symbol$branch )]($style)"
 style = "bg:color_blue"
-truncation_length = 30
+truncation_length = 15
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\) ]($style)"
