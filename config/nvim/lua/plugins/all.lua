@@ -444,8 +444,19 @@ return {
             },
           },
         },
+        pickers = {
+          find_files = { hidden = true },
+        },
       })
       require("telescope").load_extension "fzf"
+    end,
+  },
+  {
+    "fdschmidt93/telescope-egrepify.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension "egrepify"
     end,
   },
   -- Use (ported version of) FZF for better performance and to support FZF syntax
@@ -486,11 +497,6 @@ return {
       -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
       -- configs for us.
       require("telescope").setup(opts)
-      require("telescope").setup({
-        pickers = {
-          find_files = { hidden = true },
-        },
-      })
       require("telescope").load_extension "undo"
     end,
   },
