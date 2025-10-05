@@ -86,3 +86,11 @@ javac.*_*.args
 
 # Used by https://github.com/tpope/vim-projectionist
 .projections.json
+
+# Scala
+.scala-build/
+.metals/
+.bsp/
+.bloop/
+metals.sbt
+.idea/
