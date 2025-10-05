@@ -569,10 +569,12 @@ return {
         -- Optimize memory allocation with serverProperties
         metals_config.settings = {
           serverProperties = {
-            "-Xmx4G",
+            -- Initial (minimum) heap size
             "-Xms100m",
+            -- Max heap size (default 1/4 physical memory)
+            "-Xmx4G",
             "-XX:+UseG1GC",
-            "-XX:MaxGCPauseMillis=200",
+            "-XX:+UseStringDeduplication",
           },
           showImplicitArguments = true,
           excludedPackages = {
