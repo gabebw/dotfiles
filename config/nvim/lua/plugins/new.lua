@@ -6,4 +6,5 @@ return {
       vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
     end,
   },
+  { "lewis6991/gitsigns.nvim" },
 }
