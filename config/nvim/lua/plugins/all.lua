@@ -541,6 +541,21 @@ return {
     init = function()
       -- optionally enable 24-bit colour
       vim.opt.termguicolors = true
+
+      -- Integrate with Snacks for alerting LSPs that renaming happened
+      local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "NvimTreeSetup",
+        callback = function()
+          local events = require("nvim-tree.api").events
+          events.subscribe(events.Event.NodeRenamed, function(data)
+            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
+              data = data
+              Snacks.rename.on_rename_file(data.old_name, data.new_name)
+            end
+          end)
+        end,
+      })
     end,
   },
   {
@@ -646,6 +661,13 @@ return {
         -- but I like this more. I want notifications to be a little less obtrusive, while fidget is great for LSP
         -- progress notifications.
         notifier = {},
+        -- https://github.com/folke/snacks.nvim/blob/main/docs/lazygit.md
+        lazygit = {},
+        -- https://github.com/folke/snacks.nvim/blob/main/docs/scope.md
+        scope = {},
+        statuscolumn = {},
+        -- https://github.com/folke/snacks.nvim/blob/main/docs/words.md
+        words = {},
       },
     },
     {

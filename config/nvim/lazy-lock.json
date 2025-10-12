@@ -57,6 +57,7 @@
   "vim-tmux-runner": { "branch": "master", "commit": "eead441119d9863227f4c39dac7890aa09d6b4cd" },
   "vim-unimpaired": { "branch": "master", "commit": "db65482581a28e4ccf355be297f1864a4e66985c" },
   "vim-vinegar": { "branch": "master", "commit": "bb1bcddf43cfebe05eb565a84ab069b357d0b3d6" },
+  "which-key.nvim": { "branch": "main", "commit": "b4177e3eaf15fe5eb8357ebac2286d488be1ed00" },
   "words-to-avoid.vim": { "branch": "master", "commit": "65913c5e43ae948c1856b68e013f435ee68fd451" },
   "yats.vim": { "branch": "master", "commit": "9507e827a1bfa9d136ca8f6539814a9597c13b29" }
 }
