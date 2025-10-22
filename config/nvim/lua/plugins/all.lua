@@ -585,9 +585,9 @@ return {
         metals_config.settings = {
           serverProperties = {
             -- Initial (minimum) heap size
-            "-Xms100m",
+            "-Xms10m",
             -- Max heap size (default 1/4 physical memory)
-            "-Xmx4G",
+            "-Xmx2G",
             "-XX:+UseG1GC",
             "-XX:+UseStringDeduplication",
           },
