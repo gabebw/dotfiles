@@ -86,7 +86,7 @@ truncate_to_repo = true
 [git_branch]
 format = "[($symbol$branch )]($style)"
 style = "bg:color_blue"
-truncation_length = 15
+truncation_length = 40
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\) ]($style)"
@@ -96,7 +96,7 @@ cherry_pick = "[🍒](fg:color_red bg:color_blue)"
 [git_status]
 format = """[(\\[\
 $conflicted\
-($stashed )\
+($stashed)\
 ($deleted )\
 $modified\
 $staged\
