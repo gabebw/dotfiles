@@ -191,6 +191,7 @@ return {
           eruby = { "erb_lint" },
           markdown = prettier,
           json = prettier,
+          jsonc = prettier,
           sql = {
             -- This has its own `condition`, so run it on every SQL file
             "sql_formatter_play",
