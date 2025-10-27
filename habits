@@ -7,3 +7,5 @@ Prefer `procs` over `ps`
 To create a fortune file, run `strfile <FILE> <FILE>.dat` then run `fortune <FILE_WITHOUT_DAT>`
 %
 Prefer `dust` over `du`
+%
+Prefer `zenith -d0 -n0` over `(h)top`
