@@ -9,3 +9,5 @@ To create a fortune file, run `strfile <FILE> <FILE>.dat` then run `fortune <FIL
 Prefer `dust` over `du`
 %
 Prefer `zenith -d0 -n0` over `(h)top`
+%
+Generate `habits.dat`: strfile habits habits.dat
