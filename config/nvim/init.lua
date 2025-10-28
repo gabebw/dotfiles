@@ -159,21 +159,12 @@ local function SearchableWordNearCursor()
 end
 
 local function SearchForWordUnderCursor()
-  require("telescope.builtin").live_grep({
-    default_text = SearchableWordNearCursor(),
+  require("snacks").picker.grep({
+    search = SearchableWordNearCursor,
   })
 end
 
 vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
-vim.keymap.set("n", "<Leader>gg", function()
-  require("telescope.builtin").live_grep()
-end, { remap = false })
-vim.keymap.set("n", "<Leader>go", function()
-  require("telescope.builtin").live_grep({
-    grep_open_files = true,
-    additional_args = { "--fixed-strings" },
-  })
-end, { remap = false })
 
 vim.cmd [[
 " Close all other windows in this tab, and don't error if this is the only one
@@ -192,8 +183,6 @@ xnoremap > >gv
 nnoremap <leader>ev :tabedit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>q :tabedit $HOME/.config/fish/config.fish<CR>
-
-cnoremap <C-x> <Plug>(TelescopeFuzzyCommandSearch)
 ]]
 
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
@@ -213,8 +202,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 
 -- PLUGIN OPTIONS
 vim.cmd [[
-nnoremap <Leader>t :Telescope find_files hidden=true<CR>
-nnoremap <Leader>b :Telescope buffers<CR>
 augroup mrails
 	autocmd!
 	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar A :exec 'edit '.rails#buffer().alternate()
@@ -354,14 +341,6 @@ require("lazy").setup({
   },
 })
 
-vim.keymap.set("n", "<Leader>n", function()
-  require("nvim-tree.api").tree.toggle({ path = vim.fn.expand "%:p:h", find_file = true })
-end, { remap = false })
-
-vim.keymap.set("n", "<Leader>u", function()
-  require("telescope").extensions.undo.undo()
-end, { remap = false })
-
 vim.cmd [[
 autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
 ]]
@@ -410,42 +389,69 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.diagnostic.open_float()
     end, "Show diagnostic for this line")
 
-    local t = require "telescope.builtin"
+    local snacks = require "snacks"
 
     -- Jump to the definition of the word under your cursor.
     --  This is where a variable was first declared, or where a function is defined, etc.
     --  To jump back, press <C-t>.
-    map("gd", t.lsp_definitions, "[G]oto [D]efinition")
-
-    map("gvd", function()
-      t.lsp_definitions({ jump_type = "vsplit" })
-    end, "[G]oto [D]efinition in vsplit")
-
-    map("gxd", function()
-      t.lsp_definitions({ jump_type = "split" })
-    end, "[G]oto [D]efinition in split")
+    map("gd", snacks.picker.lsp_definitions, "[G]oto [D]efinition")
 
     -- Jump to the type of the word under your cursor.
     --  Useful when you're not sure what type a variable is and you want to see
     --  the definition of its *type*, not where it was *defined*.
-    map("gD", t.lsp_type_definitions, "Type [D]efinition")
+    map("gD", snacks.picker.lsp_type_definitions, "Type [D]efinition")
 
     -- Find references for the word under your cursor.
-    map("grr", t.lsp_references, "[G]oto [R]eferences")
+    map("grr", snacks.picker.lsp_references, "[G]oto [R]eferences")
 
     map("gh", vim.lsp.buf.hover, "[H]over")
 
     -- Fuzzy find all the symbols in your current document.
     --  Symbols are things like variables, functions, types, etc.
     map("gO", function()
-      t.lsp_document_symbols({ symbols = { "function", "constant" } })
+      snacks.picker.lsp_symbols({
+        -- Can also specify different ones for each filetype.
+        filter = {
+          default = {
+            -- "Class",
+            -- "Constructor",
+            -- "Enum",
+            -- "Field",
+            "Function",
+            -- "Interface",
+            -- "Method",
+            -- "Module",
+            -- "Namespace",
+            -- "Package",
+            -- "Property",
+            -- "Struct",
+            -- "Trait",
+          },
+        },
+      })
     end, "[D]ocument [S]ymbols")
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
     map("<leader>ws", function()
-      t.lsp_workspace_symbols({
-        ignore_symbols = { "variable", "property" },
+      snacks.picker.lsp_workspace_symbols({
+        filter = {
+          default = {
+            "Class",
+            "Constructor",
+            "Enum",
+            "Field",
+            "Function",
+            "Interface",
+            "Method",
+            "Module",
+            "Namespace",
+            "Package",
+            -- "Property",
+            "Struct",
+            "Trait",
+          },
+        },
       })
     end, "[W]orkspace [S]ymbols")
   end,

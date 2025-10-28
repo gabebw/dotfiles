@@ -455,108 +455,32 @@ return {
     build = "make",
   },
   {
-    "debugloop/telescope-undo.nvim",
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    opts = {
-      -- don't use `defaults = { }` here, do this in the main telescope spec
-      extensions = {
-        undo = {
-          side_by_side = true,
-          layout_strategy = "horizontal",
-          layout_config = {
-            height = 0.8,
-          },
-          -- https://github.com/debugloop/telescope-undo.nvim?tab=readme-ov-file#configuration
-          -- opts = {
-          mappings = {
-            -- Wrapping the actions inside a function prevents the error due to telescope-undo being not
-            -- yet loaded.
-            i = {
-              ["<cr>"] = function(bufnr)
-                require("telescope-undo.actions").restore(bufnr)
-              end,
-            },
-          },
-        },
-      },
-    },
-    config = function(_, opts)
-      -- Calling telescope's setup from multiple specs does not hurt, it will happily merge the
-      -- configs for us.
-      require("telescope").setup(opts)
-      require("telescope").setup({
-        pickers = {
-          find_files = { hidden = true },
-        },
-      })
-      require("telescope").load_extension "undo"
-    end,
-  },
-  {
-    "AckslD/nvim-neoclip.lua",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = function()
-      require("neoclip").setup()
-      vim.cmd [[
-          autocmd BufEnter * imap <buffer> <c-x> <Esc>:Telescope neoclip<CR>
-        ]]
-    end,
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    opts = {
-      live_filter = {
-        prefix = "[FILTER]: ",
-        always_show_folders = false, -- Turn into false from true by default
-      },
-      actions = {
-        change_dir = {
-          enable = false,
-        },
-      },
-      filters = {
-        -- Show gitignored files (defaults to true, meaning DON'T show them.)
-        -- This is an annoying default, because it means that sometimes newly created files will just not show up in
-        -- the tree.
-        git_ignored = false,
-      },
-      renderer = {
-        icons = {
-          show = {
-            file = false,
-            folder = false,
-            folder_arrow = false,
-            git = false,
-            modified = false,
-            hidden = false,
-            diagnostics = false,
-            bookmarks = false,
-          },
-        },
-      },
-    },
-    init = function()
-      -- optionally enable 24-bit colour
-      vim.opt.termguicolors = true
-
-      -- Integrate with Snacks for alerting LSPs that renaming happened
-      local prev = { new_name = "", old_name = "" } -- Prevents duplicate events
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "NvimTreeSetup",
-        callback = function()
-          local events = require("nvim-tree.api").events
-          events.subscribe(events.Event.NodeRenamed, function(data)
-            if prev.new_name ~= data.new_name or prev.old_name ~= data.old_name then
-              data = data
-              Snacks.rename.on_rename_file(data.old_name, data.new_name)
-            end
-          end)
+    "gbprod/yanky.nvim",
+    opts = {},
+    dependencies = { "folke/snacks.nvim" },
+    keys = {
+      {
+        "<C-x>",
+        function()
+          require("snacks").picker.yanky()
         end,
-      })
-    end,
+        mode = { "i" },
+        desc = "Open Yank History",
+      },
+      { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
+      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
+      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
+      { "<c-p>", "<Plug>(YankyPreviousEntry)", desc = "Select previous entry through yank history" },
+      { "<c-n>", "<Plug>(YankyNextEntry)", desc = "Select next entry through yank history" },
+      { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indented after cursor (linewise)" },
+      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indented before cursor (linewise)" },
+      { "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put indented after cursor (linewise)" },
+      { "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put indented before cursor (linewise)" },
+      { ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and indent right" },
+      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and indent left" },
+      { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put before and indent right" },
+      { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put before and indent left" },
+    },
   },
   {
     {
@@ -648,6 +572,100 @@ return {
       "folke/snacks.nvim",
       priority = 1000,
       lazy = false,
+      keys = {
+        -- https://github.com/folke/snacks.nvim/blob/main/docs/scratch.md
+        {
+          "<leader>.",
+          function()
+            Snacks.scratch()
+          end,
+          desc = "Toggle Scratch Buffer",
+        },
+        {
+          "<leader>S",
+          function()
+            Snacks.scratch.select()
+          end,
+          desc = "Select Scratch Buffer",
+        },
+        {
+          "<Leader>t",
+          function()
+            Snacks.picker.files({ hidden = true })
+          end,
+          desc = "File picker",
+        },
+        {
+          "<Leader>b",
+          function()
+            Snacks.picker.buffers()
+          end,
+          desc = "Buffer picker",
+        },
+        {
+          "q:",
+          function()
+            Snacks.picker.command_history()
+          end,
+          desc = "Fuzzy command history",
+        },
+        {
+          "q/",
+          function()
+            Snacks.picker.search_history()
+          end,
+          desc = "Fuzzy search history",
+        },
+        {
+          "<Leader>gg",
+          function()
+            Snacks.picker.grep({ hidden = true })
+          end,
+          desc = "Live grep",
+        },
+        {
+          "<Leader>gG",
+          function()
+            local current_file_extension = vim.fn.expand "%:e"
+            Snacks.picker.grep({
+              hidden = true,
+              args = { "--glob", "*." .. current_file_extension },
+            })
+          end,
+          desc = "Live grep, filtered to this file's extension",
+        },
+        {
+          "<Leader>go",
+          function()
+            Snacks.picker.grep_buffers({
+              regex = false,
+            })
+          end,
+          desc = "Grep open buffers (literal search)",
+        },
+        {
+          "<Leader>n",
+          function()
+            -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
+            Snacks.explorer()
+          end,
+          desc = "Toggle file explorer",
+        },
+        {
+          "<Leader>u",
+          function()
+            Snacks.picker.undo()
+          end,
+          desc = "Undo history",
+        },
+        {
+          "<Leader>pp",
+          function()
+            Snacks.picker.pickers()
+          end,
+          desc = "Show a meta-picker",
+        },
+      },
       ---@module "snacks"
       ---@type snacks.Config
       opts = {
@@ -668,7 +686,57 @@ return {
         statuscolumn = {},
         -- https://github.com/folke/snacks.nvim/blob/main/docs/words.md
         words = {},
+        dashboard = {
+          -- https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md
+        },
+        picker = {
+          win = {
+            input = {
+              keys = {
+                ["<a-r>"] = { "toggle_regex", mode = { "i", "n" } },
+              },
+            },
+          },
+          sources = {
+            explorer = {
+              win = {
+                list = {
+                  keys = {
+                    ["Y"] = { "copy_path_to_clipboard", mode = { "n", "x" } },
+                  },
+                },
+              },
+              actions = {
+                copy_path_to_clipboard = function()
+                  vim.cmd [[ normal "+y ]]
+                end,
+              },
+            },
+          },
+        },
       },
+      init = function()
+        vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+          pattern = { "*.lua" },
+          callback = function(event)
+            local Snacks = require "snacks"
+            vim.keymap.set("n", "<Leader>ev", function()
+              Snacks.picker.lazy({
+                matcher = { sort_empty = true },
+                sort = function(a, b)
+                  -- Sort by modification time, most recent at the top
+                  return vim.fn.getftime(a.file) > vim.fn.getftime(b.file)
+                end,
+              })
+            end, {
+              buffer = event.buf,
+              desc = "Search plugins from Vim config file",
+              -- Yes, overwrite the <Leader>ev that edits $MYVIMRC
+              remap = true,
+            })
+          end,
+        })
+      end,
     },
     {
       "folke/trouble.nvim",
