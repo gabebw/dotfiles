@@ -1,1 +1,3 @@
 --smart-case
+# Search files beginning with a "."
+--hidden
