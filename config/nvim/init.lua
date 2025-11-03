@@ -201,14 +201,6 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 })
 
 -- PLUGIN OPTIONS
-vim.cmd [[
-augroup mrails
-	autocmd!
-	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar A :exec 'edit '.rails#buffer().alternate()
-	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar AS :exec 'split '.rails#buffer().alternate()
-	autocmd BufEnter {app,spec}/models/*.rb command! -buffer -bar AV :exec 'vsplit '.rails#buffer().alternate()
-augroup END
-]]
 
 -- fugitive
 -- Get a direct link to the current line (with specific commit included!) and
@@ -234,76 +226,6 @@ vim.g.trimmer_repeated_lines_blacklist_file_base_names = { "schema.rb", "structu
 vim.o.laststatus = 2
 -- Don't show `-- INSERT --` below the statusbar since it's in the statusbar
 vim.o.showmode = false
-
-vim.g.lightline = {
-  colorscheme = "darcula",
-  active = {
-    left = {
-      { "mode", "paste" },
-      { "fugitive", "readonly", "myfilename", "modified" },
-    },
-    right = {
-      { "filetype" },
-    },
-  },
-  component = {
-    readonly = '%{(&filetype!="help" && &readonly) ? "RO" : ""}',
-  },
-  component_function = {
-    fugitive = "v:lua.LightLineGitBranch",
-    myfilename = "LightLineFilename",
-  },
-  component_visible_condition = {
-    readonly = '(&filetype!="help" && &readonly)',
-    fugitive = '(exists("*FugitiveHead") && ""!=FugitiveHead())',
-  },
-  tabline = {
-    -- Disable the 'X' on the far right
-    right = {},
-  },
-}
-
-function LightLineGitBranch()
-  local max = 25
-  if vim.fn.exists "*FugitiveHead" == 1 then
-    local branch = vim.fn["FugitiveHead"]()
-    if branch:len() == 0 then
-      return ""
-    else
-      if branch:len() > max then
-        -- Long branch names get truncated
-        return branch:sub(0, max - 3) .. "..."
-      else
-        return branch
-      end
-    end
-  else
-    return ""
-  end
-end
-
-vim.cmd [[
-function! LightLineFilename()
-  let unfollowed_symlink_filename = expand('%:p')
-  let filename = resolve(unfollowed_symlink_filename)
-  let git_root = fnamemodify(FugitiveExtractGitDir(filename), ':h')
-
-  if expand('%:t') == ''
-    return '[No Name]'
-  elseif git_root != '' && git_root != '.'
-    let path = substitute(filename, git_root . '/', '', '')
-    " Check if the git root is in another directory, like a dotfile in ~/.vimrc
-    " that's really in ~/code/personal/dotfiles/vimrc
-    if FugitivePath(filename) !=# unfollowed_symlink_filename
-      return path . ' @ ' . git_root
-    else
-      return path
-    endif
-  else
-    return filename
-  endif
-endfunction
-]]
 
 -- Tabs
 -- Softtabs, 2 spaces
@@ -339,29 +261,6 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
   },
-})
-
-vim.cmd [[
-autocmd BufEnter *.yml nmap <buffer> <Leader>y :let @" = substitute(localorie#expand_key(), '^en\.', '', '')<CR>
-]]
-
-vim.api.nvim_create_user_command("FormatDisable", function(args)
-  if args.bang then
-    -- FormatDisable! will disable formatting just for this buffer
-    vim.b.disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-end, {
-  desc = "Disable autoformat-on-save",
-  bang = true,
-})
-
-vim.api.nvim_create_user_command("FormatEnable", function()
-  vim.b.disable_autoformat = false
-  vim.g.disable_autoformat = false
-end, {
-  desc = "Re-enable autoformat-on-save",
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -477,12 +376,6 @@ augroup vimrc
   " `\_x` means "x regex character class, with newlines allowed"
   autocmd BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
   autocmd VimResized * wincmd =
-
-  " rails.vim
-  autocmd User Rails nnoremap <Leader>m :Emodel<Space>
-  autocmd User Rails nnoremap <Leader>c :Econtroller<Space>
-  autocmd User Rails nnoremap <Leader>v :Eview<Space>
-  autocmd User Rails nnoremap <Leader>u :Eunittest<Space>
 augroup END
 ]]
 
