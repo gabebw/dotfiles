@@ -147,26 +147,23 @@ return {
       },
     },
     init = function()
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-        pattern = { "*.lua" },
-        callback = function(event)
-          local Snacks = require "snacks"
-          vim.keymap.set("n", "<Leader>ev", function()
-            Snacks.picker.lazy({
-              matcher = { sort_empty = true },
-              sort = function(a, b)
-                -- Sort by modification time, most recent at the top
-                return vim.fn.getftime(a.file) > vim.fn.getftime(b.file)
-              end,
-            })
-          end, {
-            buffer = event.buf,
-            desc = "Search plugins from Vim config file",
-            -- Yes, overwrite the <Leader>ev that edits $MYVIMRC
-            remap = true,
-          })
-        end,
-      })
+      vim.keymap.set("n", "<Leader>vv", function()
+        Snacks.picker.lazy({
+          matcher = { sort_empty = true },
+          sort = function(a, b)
+            -- Sort by modification time, most recent at the top
+            return vim.fn.getftime(a.file) > vim.fn.getftime(b.file)
+          end,
+          win = {
+            input = {
+              keys = {
+                -- Open in tab by default
+                ["<CR>"] = { "tab", mode = { "n", "i" } },
+              },
+            },
+          },
+        })
+      end, { remap = false, desc = "Fuzzy-find plugin specs" })
     end,
   },
 }
