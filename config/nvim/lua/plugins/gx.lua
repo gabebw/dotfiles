@@ -2,8 +2,16 @@ return {
   {
     "chrishrb/gx.nvim",
     submodules = false,
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
-    cmd = { "Browse" },
+    keys = {
+      {
+        "gx",
+        function()
+          require("gx").open()
+        end,
+        mode = { "n", "x" },
+        desc = "Open URL with gx",
+      },
+    },
     init = function()
       vim.g.netrw_nogx = 1 -- disable netrw gx
     end,
