@@ -34,7 +34,8 @@ return {
         desc = "Buffer picker",
       },
       {
-        "q:",
+        -- Really it's replacing `q:`, but `q;` is easier to type
+        "q;",
         function()
           Snacks.picker.command_history()
         end,
@@ -46,6 +47,13 @@ return {
           Snacks.picker.search_history()
         end,
         desc = "Fuzzy search history",
+      },
+      {
+        "<Leader>j",
+        function()
+          Snacks.picker.jumps()
+        end,
+        desc = "Fuzzy jump list",
       },
       {
         "<Leader>gg",
