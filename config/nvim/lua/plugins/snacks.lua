@@ -1,3 +1,21 @@
+local fuzzy_find_specs = function()
+  Snacks.picker.lazy({
+    matcher = { sort_empty = true },
+    sort = function(a, b)
+      -- Sort by modification time, most recent at the top
+      return vim.fn.getftime(a.file) > vim.fn.getftime(b.file)
+    end,
+    win = {
+      input = {
+        keys = {
+          -- Open in tab by default
+          ["<CR>"] = { "tab", mode = { "n", "i" } },
+        },
+      },
+    },
+  })
+end
+
 return {
   {
     "folke/snacks.nvim",
@@ -127,6 +145,88 @@ return {
       words = {},
       dashboard = {
         -- https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md
+        preset = {
+          ---@type snacks.dashboard.Item[]
+          keys = {
+            {
+              icon = " ",
+              key = "f",
+              desc = "Find File",
+              action = function()
+                Snacks.dashboard.pick("files", { hidden = true })
+              end,
+            },
+            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            {
+              icon = " ",
+              key = "g",
+              desc = "Find Text",
+              action = function()
+                Snacks.dashboard.pick("live_grep", { hidden = true })
+              end,
+            },
+            {
+              icon = " ",
+              key = "r",
+              desc = "Recent Files",
+              action = function()
+                Snacks.picker.recent({
+                  filter = {
+                    paths = {
+                      -- Hide this path
+                      COMMIT_EDITMSG = false,
+                    },
+                  },
+                })
+              end,
+            },
+            {
+              icon = "󰊪 ",
+              key = "v",
+              desc = "Plugin specs",
+              action = fuzzy_find_specs,
+            },
+            {
+              icon = " ",
+              key = "c",
+              desc = "Config",
+              action = function()
+                Snacks.dashboard.pick("files", { cwd = vim.fn.stdpath "config" })
+              end,
+            },
+            {
+              icon = " ",
+              key = "s",
+              desc = "Restore Session",
+              section = "session",
+              enabled = function()
+                return require("mini.sessions").get_latest() ~= nil
+              end,
+            },
+            { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+          },
+        },
+        sections = {
+          { section = "header" },
+          { section = "keys", gap = 1, padding = 1 },
+          {
+            icon = " ",
+            title = "Recent Files",
+            section = "recent_files",
+            cwd = true,
+            --- @param path string
+            filter = function(path)
+              return path:match "COMMIT_EDITMSG" == nil
+            end,
+            limit = 15,
+            indent = 2,
+            padding = 1,
+            pane = 2,
+          },
+          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1, pane = 2 },
+          { section = "startup" },
+        },
       },
       picker = {
         win = {
@@ -155,23 +255,7 @@ return {
       },
     },
     init = function()
-      vim.keymap.set("n", "<Leader>vv", function()
-        Snacks.picker.lazy({
-          matcher = { sort_empty = true },
-          sort = function(a, b)
-            -- Sort by modification time, most recent at the top
-            return vim.fn.getftime(a.file) > vim.fn.getftime(b.file)
-          end,
-          win = {
-            input = {
-              keys = {
-                -- Open in tab by default
-                ["<CR>"] = { "tab", mode = { "n", "i" } },
-              },
-            },
-          },
-        })
-      end, { remap = false, desc = "Fuzzy-find plugin specs" })
+      vim.keymap.set("n", "<Leader>vv", fuzzy_find_specs, { remap = false, desc = "Fuzzy-find plugin specs" })
     end,
   },
 }
