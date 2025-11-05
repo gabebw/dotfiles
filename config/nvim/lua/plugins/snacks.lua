@@ -78,7 +78,7 @@ return {
         "<Leader>n",
         function()
           -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
-          Snacks.explorer()
+          Snacks.picker.explorer({ cwd = vim.fn.expand "%:p:h" })
         end,
         desc = "Toggle file explorer",
       },
