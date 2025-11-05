@@ -139,10 +139,8 @@ return {
       -- https://github.com/folke/snacks.nvim/blob/main/docs/lazygit.md
       lazygit = {},
       -- https://github.com/folke/snacks.nvim/blob/main/docs/scope.md
+      -- text objects: ai, ii
       scope = {},
-      statuscolumn = {},
-      -- https://github.com/folke/snacks.nvim/blob/main/docs/words.md
-      words = {},
       dashboard = {
         -- https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md
         preset = {
