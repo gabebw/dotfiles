@@ -132,40 +132,6 @@ vim.o.winborder = "rounded"
 vim.o.foldmethod = "syntax"
 vim.o.foldenable = false
 
--- Searching
-local function CharacterUnderCursor()
-  local column = vim.api.nvim_win_get_cursor(0)[2]
-  return vim.api.nvim_get_current_line():sub(column, column + 1)
-end
-
-local function SearchableWordNearCursor()
-  -- <cword> tries a little too hard to find a word.
-  -- Given this (cursor at |):
-  -- hello | there
-  -- Then the <cword> is `there`.
-  -- Thus, we use `CharacterUnderCursor` (which is precise) to determine if we're
-  -- on a word at all.
-  if CharacterUnderCursor():match "^%s$" then
-    return ""
-  else
-    local word_under_cursor = vim.fn.expand "<cword>"
-    -- Sometimes the word under the cursor includes punctuation, in which case
-    -- '\bWORD!\b' will fail because \b is a word boundary and we have non-word
-    -- characters in WORD. So, remove them. This results in a less-precise match
-    -- (it'll find WORD as well as WORD!, for example), but is better than getting
-    -- zero results.
-    return word_under_cursor:gsub("[$!?]", "")
-  end
-end
-
-local function SearchForWordUnderCursor()
-  require("snacks").picker.grep({
-    search = SearchableWordNearCursor,
-  })
-end
-
-vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false })
-
 vim.cmd [[
 " Close all other windows in this tab, and don't error if this is the only one
 nnoremap <Leader>o :silent only<CR>

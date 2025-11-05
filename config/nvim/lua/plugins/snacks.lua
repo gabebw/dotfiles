@@ -1,4 +1,4 @@
-local fuzzy_find_specs = function()
+local function fuzzy_find_specs()
   Snacks.picker.lazy({
     matcher = { sort_empty = true },
     sort = function(a, b)
@@ -13,6 +13,50 @@ local fuzzy_find_specs = function()
         },
       },
     },
+  })
+end
+
+local function fuzzy_find_files()
+  Snacks.picker.files({
+    hidden = true,
+    layout = {
+      cycle = true,
+      preset = function()
+        local wide_enough = vim.o.columns >= 120
+        return wide_enough and "bottom" or "default"
+      end,
+    },
+  })
+end
+
+local function CharacterUnderCursor()
+  local column = vim.api.nvim_win_get_cursor(0)[2]
+  return vim.api.nvim_get_current_line():sub(column, column + 1)
+end
+
+local function SearchableWordNearCursor()
+  -- <cword> tries a little too hard to find a word.
+  -- Given this (cursor at |):
+  -- hello | there
+  -- Then the <cword> is `there`.
+  -- Thus, we use `CharacterUnderCursor` (which is precise) to determine if we're
+  -- on a word at all.
+  if CharacterUnderCursor():match "^%s$" then
+    return ""
+  else
+    local word_under_cursor = vim.fn.expand "<cword>"
+    -- Sometimes the word under the cursor includes punctuation, in which case
+    -- '\bWORD!\b' will fail because \b is a word boundary and we have non-word
+    -- characters in WORD. So, remove them. This results in a less-precise match
+    -- (it'll find WORD as well as WORD!, for example), but is better than getting
+    -- zero results.
+    return word_under_cursor:gsub("[$!?]", "")
+  end
+end
+
+local function SearchForWordUnderCursor()
+  Snacks.picker.grep({
+    search = SearchableWordNearCursor,
   })
 end
 
@@ -39,9 +83,7 @@ return {
       },
       {
         "<Leader>t",
-        function()
-          Snacks.picker.files({ hidden = true })
-        end,
+        fuzzy_find_files,
         desc = "File picker",
       },
       {
@@ -86,7 +128,7 @@ return {
           local current_file_extension = vim.fn.expand "%:e"
           Snacks.picker.grep({
             hidden = true,
-            args = { "--glob", "*." .. current_file_extension },
+            glob = "*." .. current_file_extension,
           })
         end,
         desc = "Live grep, filtered to this file's extension",
@@ -150,9 +192,7 @@ return {
               icon = " ",
               key = "f",
               desc = "Find File",
-              action = function()
-                Snacks.dashboard.pick("files", { hidden = true })
-              end,
+              action = fuzzy_find_files,
             },
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             {
@@ -254,6 +294,7 @@ return {
     },
     init = function()
       vim.keymap.set("n", "<Leader>vv", fuzzy_find_specs, { remap = false, desc = "Fuzzy-find plugin specs" })
+      vim.keymap.set("n", "K", SearchForWordUnderCursor, { remap = false, desc = "Search for word under cursor" })
     end,
   },
 }
