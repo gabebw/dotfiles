@@ -184,6 +184,14 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 
+-- The number of milliseconds before "CursorHold" kicks in (default is 4000 = 4 seconds)
+vim.o.updatetime = 1000
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float(nil, { focus = false })
+  end,
+})
+
 -- Plugins
 ONE_DAY = 60 * 60 * 24
 ---@diagnostic disable-next-line: missing-fields
@@ -377,11 +385,3 @@ if vim.g.vscode == 1 then
   nnoremap % <Cmd>call VSCodeNotify('editor.action.jumpToBracket')
   ]]
 end
-
--- The number of milliseconds before "CursorHold" kicks in (default is 4000 = 4 seconds)
-vim.o.updatetime = 1000
-vim.api.nvim_create_autocmd("CursorHold", {
-  callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
-  end,
-})
