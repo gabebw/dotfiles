@@ -1,8 +1,5 @@
 -- Plumbing that makes everything nicer
 return {
-  -- Easily comment/uncomment lines in many languages
-  { "tomtom/tcomment_vim" },
-
   -- <Tab> indents or triggers autocomplete, smartly
   {
     "ervandew/supertab",
