@@ -193,7 +193,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
 })
 
 -- Plugins
-ONE_DAY = 60 * 60 * 24
+local ONE_DAY = 60 * 60 * 24
 ---@diagnostic disable-next-line: missing-fields
 require("lazy").setup({
   -- Try to load one of these colorschemes _when starting an installation during startup_
@@ -352,5 +352,4 @@ vim.cmd [[
   runtime macros/matchit.vim
   filetype plugin indent on
   syntax enable
-  colorscheme citruszest
 ]]
