@@ -347,6 +347,18 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "lua",
+  callback = function()
+    vim.keymap.set(
+      { "v", "x" },
+      "g=",
+      ":lua<CR>",
+      { buffer = true, remap = false, desc = "Source this chunk of Lua code" }
+    )
+  end,
+})
+
 -- Turn filetype, syntax and colorscheme settings on _after_ loading plugins.
 vim.cmd [[
   runtime macros/matchit.vim
