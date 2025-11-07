@@ -4,10 +4,15 @@ Still using man? Try using `tldr` first!
 %
 Prefer `procs` over `ps`
 %
-To create a fortune file, run `strfile <FILE> <FILE>.dat` then run `fortune <FILE_WITHOUT_DAT>`
+To create a fortune file, run `strfile <FILE>` then run `fortune <FILE>`
 %
-Prefer `dust` over `du`
+Prefer `dust` or `dua` over `du`
 %
-Prefer `zenith -d0 -n0` over `(h)top`
+Prefer `btm` (brew install bottom) over `(h)top`
 %
 Generate `habits.dat`: strfile habits habits.dat
+%
+Vim: `g=` to run a chunk of Lua code
+%
+Vim: `<Leader>.` to open a scratch buffer
+%
