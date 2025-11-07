@@ -291,7 +291,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Fuzzy find all the symbols in your current workspace.
     --  Similar to document symbols, except searches over your entire project.
-    map("<leader>ws", function()
+    map("gws", function()
       snacks.picker.lsp_workspace_symbols({
         filter = {
           default = {
