@@ -70,6 +70,7 @@ brew "git-lfs"
 brew "neovim"
 brew "stylua"
 brew "lua-language-server"
+brew "luarocks"
 
 brew "fish"
 brew "uv"
