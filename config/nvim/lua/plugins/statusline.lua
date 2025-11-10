@@ -3,6 +3,17 @@ local function trailing_whitespace()
   return space ~= 0 and "TW:" .. space or ""
 end
 
+--- @param trunc_len number truncates component to trunc_len number of chars
+--- return function that can format the component accordingly
+local function trunc(trunc_len)
+  return function(str)
+    if trunc_len and #str > trunc_len then
+      return str:sub(1, trunc_len) .. "..."
+    end
+    return str
+  end
+end
+
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -20,7 +31,7 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = {
-          "branch",
+          { "branch", fmt = trunc(30) },
           "diff",
           trailing_whitespace,
           "diagnostics",
@@ -37,6 +48,8 @@ return {
             -- 3: Absolute path, with tilde as the home directory
             -- 4: Filename and parent dir, with tilde as the home directory
             path = 1,
+            -- Shortens path to leave 40 spaces in the window
+            shorting_target = 100,
             symbols = {
               modified = "[+]",
               readonly = "[RO]",
@@ -53,7 +66,33 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { "filename" },
-        lualine_x = { "location" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
+      },
+      tabline = {
+        lualine_a = {
+          {
+            "tabs",
+
+            -- can also be a function
+            max_length = vim.o.columns,
+
+            -- 0: Shows tab_nr
+            -- 1: Shows tab_name
+            -- 2: Shows tab_nr + tab_name
+            mode = 2,
+
+            -- 0: just shows the filename
+            -- 1: shows the relative path and shorten $HOME to ~
+            -- 2: shows the full path
+            -- 3: shows the full path and shorten $HOME to ~
+            path = 0,
+          },
+        },
+        lualine_b = {},
+        lualine_c = {},
+        lualine_x = {},
         lualine_y = {},
         lualine_z = {},
       },
