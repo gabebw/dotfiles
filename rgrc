@@ -1,3 +1,7 @@
 --smart-case
 # Search files beginning with a "."
 --hidden
+
+# --type-add and its argument must be on separate lines
+--type-add
+movie: *.{avi,flv,m4v,mkv,mov,mp4,mpeg,mpg,ogg,webm,wmv}
