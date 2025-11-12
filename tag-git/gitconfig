@@ -92,7 +92,7 @@
   # format.
   # Example:
   # 9d9a0ee curl: automatically continue downloads [Gabe Berke-Williams, 9 days ago] (HEAD -> main)
-  pretty = %C(magenta reverse)%h%C(reset) %C(blue)%s %C(magenta)[%an, %cr]%C(auto)%d
+  pretty = "%C(#d79921)%h%C(reset) %<(50)%C(blue)%s %C(reset)[%an, %>(12)%cr]%C(auto)%d%+b"
 [pretty]
   # Formats here can be used by doing `--pretty=<NAME>`.
   # You cannot redefine the same name as a built-in format, which means you
@@ -197,3 +197,8 @@
 [mergetool]
   keepBackup = false
   prompt = false
+[color "branch"]
+  # To see color codes: `uvx --from ansi256colors ansi256 print-table both`
+  local = 219
+  remote =  179
+  current = 200
