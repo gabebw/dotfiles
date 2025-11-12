@@ -88,11 +88,8 @@
   pul = pull
   psuh = push
 [format]
-  # git log uses --pretty format by default, so this changes the default
-  # format.
-  # Example:
-  # 9d9a0ee curl: automatically continue downloads [Gabe Berke-Williams, 9 days ago] (HEAD -> main)
-  pretty = %C(magenta reverse)%h%C(reset) %C(blue)%s %C(magenta)[%an, %cr]%C(auto)%d
+  # git log uses the `pretty` format by default
+  pretty = "%C(cyan ul)%h%C(reset) %C(default)%<(50)%C(reset)%s %C(italic dim)%an, %cr%C(auto)%d%C(default)%w(0,0,4)%+b"
 [pretty]
   # Formats here can be used by doing `--pretty=<NAME>`.
   # You cannot redefine the same name as a built-in format, which means you
@@ -197,3 +194,16 @@
 [mergetool]
   keepBackup = false
   prompt = false
+# What you see from `git branch -a`
+[color "branch"]
+  # To see color codes: `uvx --from ansi256colors ansi256 print-table <fg,bg,both>`
+  # You can put anything here that git formatting accepts inside `%C(...)`, including modifiers, like
+  # "green ul italic".
+  # The accepted attributes are bold, dim, ul, blink, reverse, italic, and strike
+  # See `git help config` and search for `/^ *color`
+  # https://git-scm.com/docs/git-config#Documentation/git-config.txt-color
+  current = green
+  local = blue
+  remote = red italic
+  # `upstream` is shown when seeing output from `git branch -vv`
+  upstream = magenta
