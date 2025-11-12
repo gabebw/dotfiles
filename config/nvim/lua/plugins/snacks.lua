@@ -34,6 +34,23 @@ local function CharacterUnderCursor()
   return vim.api.nvim_get_current_line():sub(column, column + 1)
 end
 
+local GH_FILTERS = {}
+GH_FILTERS.awaiting_my_feedback = "review-requested:@me"
+GH_FILTERS.mine = "author:@me"
+
+local function GH_PR(filter)
+  Snacks.gh.pr({ state = "open", search = filter, live = false })
+end
+
+GH = {}
+function GH.awaiting_my_feedback()
+  GH_PR(GH_FILTERS.awaiting_my_feedback)
+end
+
+function GH.mine()
+  GH_PR(GH_FILTERS.mine)
+end
+
 local function SearchableWordNearCursor()
   -- <cword> tries a little too hard to find a word.
   -- Given this (cursor at |):
