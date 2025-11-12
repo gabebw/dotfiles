@@ -18,9 +18,10 @@ return {
       -- "off" will enable LSP progress notifications by Metals and you'll need
       -- to ensure you have a plugin like fidget.nvim installed to handle them.
       --
-      -- "on" will enable the custom Metals status extension and you *have* to have
-      -- a have settings to capture this in your statusline or else you'll not see
-      -- any messages from metals. There is more info in the help docs about this
+      -- "on" will enable the custom Metals status extension and you *have* to
+      -- have settings to capture this in your statusline or else you'll
+      -- not see any messages from metals. There is more info in the help docs
+      -- about this
       metals_config.init_options.statusBarProvider = "off"
 
       -- Optimize memory allocation with serverProperties
@@ -29,8 +30,14 @@ return {
           -- Initial (minimum) heap size
           "-Xms10m",
           -- Max heap size (default 1/4 physical memory)
-          "-Xmx2G",
-          "-XX:+UseG1GC",
+          -- "-Xmx2G",
+
+          -- stack size
+          "-Xss4m",
+
+          "-XX:+UseZGC",
+          "-XX:ZUncommitDelay=30",
+          "-XX:ZCollectionInterval=5",
           "-XX:+UseStringDeduplication",
         },
         showImplicitArguments = true,
@@ -67,7 +74,12 @@ return {
           -- to be autocompleted when trying to trigger it via: >
           --
           --   :Telescope metals commands
-          vim.keymap.set("n", "<Leader>mm", require("telescope").extensions.metals.commands, { buffer = true })
+          vim.keymap.set(
+            "n",
+            "<Leader>mm",
+            require("telescope").extensions.metals.commands,
+            { buffer = true, desc = "Metals Commands picker" }
+          )
         end,
         group = nvim_metals_group,
       })
