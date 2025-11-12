@@ -45,10 +45,16 @@ return {
           "akka.actor.typed.javadsl",
           "com.github.swagger.akka.javadsl",
         },
+
+        -- Automatically import builds rather than prompting the user to choose. "initial" will only automatically
+        -- import a build when a project is first opened, "all" will automate build imports after subsequent changes as
+        -- well. (Default: off)
+        autoImportBuild = "all",
+
         bloopSbtAlreadyInstalled = true, -- Set to true if you use Bloop
         enableSemanticHighlighting = false, -- Disable for better performance
         superMethodLensesEnabled = false, -- Disable additional lenses
-        scalafixConfigPath = ".scalafix.conf", -- Only if you use Scalafix
+        -- scalafixConfigPath = ".scalafix.conf", -- Only if you use Scalafix
       }
 
       return metals_config
