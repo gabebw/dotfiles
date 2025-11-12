@@ -92,7 +92,7 @@ vim.o.splitright = true
 
 vim.opt.fileencodings = { "utf-8", "iso-8859-1" }
 vim.opt.fileformats = { "unix", "mac", "dos" }
-vim.o.textwidth = 120
+vim.o.textwidth = 100
 
 -- This character is prepended to wrapped lines
 vim.o.showbreak = "@"
