@@ -297,8 +297,17 @@ return {
               ["<a-r>"] = { "toggle_regex", mode = { "i", "n" } },
             },
           },
+          list = {
+            keys = {
+              ["Y"] = { "copy_item", mode = { "i", "n", "x" } },
+              ["y"] = { "yank_text", mode = { "i", "n", "x" } },
+            },
+          },
         },
         sources = {
+          notifications = {
+            confirm = { "copy", "close" },
+          },
           explorer = {
             win = {
               list = {
@@ -310,6 +319,60 @@ return {
             actions = {
               copy_path_to_clipboard = function()
                 vim.cmd [[ normal "+y ]]
+              end,
+              yank_text = { action = "yank", field = "text", reg = "a", notify = true },
+
+              copy_item = function(_, item)
+                vim.notify "HELLO"
+                local result
+                local set_registers = function(value, i)
+                  vim.fn.setreg('"', value) -- Neovim unnamed register
+                  vim.fn.setreg("+", value) -- System clipboard
+                  vim.notify("Copied: " .. value)
+                end
+                if item.file then
+                  local modify = vim.fn.fnamemodify
+                  local filepath = item.file
+                  local filename = modify(filepath, ":t")
+                  local values = {
+                    filepath,
+                    modify(filepath, ":."),
+                    modify(filepath, ":~"),
+                    filename,
+                    modify(filename, ":r"),
+                    modify(filename, ":e"),
+                  }
+                  local items = {
+                    "Absolute path: " .. values[1],
+                    "Path relative to CWD: " .. values[2],
+                    "Path relative to HOME: " .. values[3],
+                    "Filename: " .. values[4],
+                  }
+                  if vim.fn.isdirectory(filepath) == 0 then
+                    vim.list_extend(items, {
+                      "Filename without extension: " .. values[5],
+                      "Extension of the filename: " .. values[6],
+                    })
+                  end
+                  vim.ui.select(items, { prompt = "Choose to copy to clipboard:" }, function(choice, i)
+                    if not choice then
+                      vim.notify "Selection cancelled"
+                      return
+                    end
+                    if not i then
+                      vim.notify("Invalid selection", vim.log.levels.WARN)
+                      return
+                    end
+                    set_registers(result)
+                  end)
+                else
+                  if item.text then
+                    set_registers(item.text)
+                  else
+                    Snacks.win.new({ text = vim.inspect(item), enter = true })
+                    vim.notify("No .file or .text keys", vim.log.levels.ERROR)
+                  end
+                end
               end,
             },
           },
