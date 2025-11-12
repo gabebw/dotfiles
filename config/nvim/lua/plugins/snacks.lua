@@ -198,24 +198,9 @@ return {
             {
               icon = " ",
               key = "g",
-              desc = "Find Text",
+              desc = "Grep",
               action = function()
                 Snacks.dashboard.pick("live_grep", { hidden = true })
-              end,
-            },
-            {
-              icon = " ",
-              key = "r",
-              desc = "Recent Files",
-              action = function()
-                Snacks.picker.recent({
-                  filter = {
-                    paths = {
-                      -- Hide this path
-                      COMMIT_EDITMSG = false,
-                    },
-                  },
-                })
               end,
             },
             {
@@ -241,6 +226,14 @@ return {
                 return require("mini.sessions").get_latest() ~= nil
               end,
             },
+            {
+              icon = " ",
+              key = "b",
+              desc = "Browse Repo",
+              action = function()
+                Snacks.gitbrowse()
+              end,
+            },
             { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
@@ -263,6 +256,20 @@ return {
             pane = 2,
           },
           { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1, pane = 2 },
+          {
+            pane = 2,
+            icon = " ",
+            title = "Git Status",
+            section = "terminal",
+            enabled = function()
+              return Snacks.git.get_root() ~= nil
+            end,
+            cmd = "git status --short --branch --renames",
+            height = 5,
+            padding = 1,
+            ttl = 5 * 60,
+            indent = 3,
+          },
           { section = "startup" },
         },
       },
