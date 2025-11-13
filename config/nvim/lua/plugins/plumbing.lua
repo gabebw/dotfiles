@@ -20,7 +20,20 @@ return {
   { "tpope/vim-vinegar" },
   -- Make working with shell scripts nicer ("vim-unix")
   { "tpope/vim-eunuch" },
-  { "tpope/vim-surround" },
+  {
+    "tpope/vim-surround",
+    config = function()
+      -- Reserve `yS` for flash.nvim
+      local mappings = {
+        "yS",
+        "ySs",
+        "ySS",
+      }
+      for _, v in pairs(mappings) do
+        vim.keymap.del("n", v)
+      end
+    end,
+  },
   -- Make `.` work to repeat plugin actions too
   { "tpope/vim-repeat" },
   { "tpope/vim-unimpaired" },
