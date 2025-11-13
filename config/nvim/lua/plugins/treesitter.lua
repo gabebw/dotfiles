@@ -7,9 +7,18 @@ return {
   ---@diagnostic disable-next-line: missing-fields
   opts = {
     -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-    ensure_installed = { "typescript", "tsx" },
+    ensure_installed = {
+      "css",
+      "fish",
+      "ruby",
+      "scala",
+      "sql",
+      "tsx",
+      "typescript",
+    },
     -- It does nothing unless this is `true`
     highlight = { enable = true },
+    indent = { enable = true },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
