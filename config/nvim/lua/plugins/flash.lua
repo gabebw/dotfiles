@@ -19,9 +19,19 @@ return {
       -- Incrementally search up the tree (with expanding chunks).
       -- Use ; and , to make it bigger/smaller.
       "S",
-      mode = { "n", "x", "o" },
+      mode = { "x", "o" },
       function()
         require("flash").treesitter()
+      end,
+      desc = "Flash Treesitter Range",
+    },
+    {
+      -- Incrementally search up the tree (with expanding chunks).
+      -- Use ; and , to make it bigger/smaller.
+      "S",
+      mode = { "n" },
+      function()
+        require("flash").treesitter({ jump = { pos = "start" } })
       end,
       desc = "Flash Treesitter",
     },
