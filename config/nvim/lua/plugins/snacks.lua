@@ -146,9 +146,17 @@ return {
         "<Leader>n",
         function()
           -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
-          Snacks.picker.explorer({ cwd = vim.fn.expand "%:p:h" })
+          Snacks.picker.explorer()
         end,
         desc = "Toggle file explorer",
+      },
+      {
+        "<Leader>N",
+        function()
+          -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
+          Snacks.picker.explorer({ cwd = vim.fn.expand "%:p:h" })
+        end,
+        desc = "Toggle file explorer in PWD",
       },
       {
         "<Leader>u",
