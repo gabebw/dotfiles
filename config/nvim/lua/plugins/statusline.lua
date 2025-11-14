@@ -17,7 +17,10 @@ end
 return {
   {
     "nvim-lualine/lualine.nvim",
-    dependencies = { "mini.nvim" },
+    dependencies = {
+      -- replacement for nvim-web-devicons
+      "mini.nvim",
+    },
     opts = {
       -- Themes: https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
       options = {
@@ -31,7 +34,6 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = {
-          { "branch", fmt = trunc(30) },
           "diff",
           trailing_whitespace,
           "diagnostics",
@@ -49,7 +51,6 @@ return {
             -- 4: Filename and parent dir, with tilde as the home directory
             path = 1,
             -- Shortens path to leave 40 spaces in the window
-            shorting_target = 100,
             symbols = {
               modified = "[+]",
               readonly = "[RO]",
@@ -58,9 +59,9 @@ return {
             },
           },
         },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "" },
-        lualine_z = { "" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
@@ -94,7 +95,9 @@ return {
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = {
+          { "branch", fmt = trunc(30) },
+        },
       },
     },
     init = function()
