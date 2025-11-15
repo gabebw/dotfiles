@@ -9,6 +9,7 @@ return {
     -- A list of parser names, or "all" (the listed parsers MUST always be installed)
     ensure_installed = {
       "css",
+      "embedded_template", -- now it understands Erb
       "fish",
       "ruby",
       "scala",
