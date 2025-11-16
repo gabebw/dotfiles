@@ -66,6 +66,8 @@ return {
           packageManager = "yarn",
         },
       })
+
+      vim.lsp.enable "herb_ls"
     end,
   },
 }

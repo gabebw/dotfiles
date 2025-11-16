@@ -5,6 +5,8 @@ node = "lts"
 ruby = "3.4.5"
 "npm:typescript-language-server" = "latest"
 "npm:vscode-langservers-extracted" = "4.10.0"
+# https://herb-tools.dev/projects/language-server
+"npm:@herb-tools/language-server" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
