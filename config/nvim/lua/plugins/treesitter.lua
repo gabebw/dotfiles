@@ -11,6 +11,7 @@ return {
       "css",
       "embedded_template", -- now it understands Erb
       "fish",
+      "markdown_inline",
       "ruby",
       "scala",
       "sql",
