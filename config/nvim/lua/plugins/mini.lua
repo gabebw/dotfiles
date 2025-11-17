@@ -8,5 +8,13 @@ return {
       -- https://nvim-mini.org/mini.nvim/doc/mini-comment.html
       require("mini.comment").setup()
     end,
+    init = function()
+      vim.api.nvim_create_autocmd("VimLeavePre", {
+        callback = function()
+          MiniSessions.write(nil, { verbose = false })
+        end,
+        pattern = "*",
+      })
+    end,
   },
 }
