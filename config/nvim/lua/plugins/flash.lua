@@ -59,9 +59,22 @@ return {
       "<c-s>",
       mode = { "c" },
       function()
-        require("flash").toggle()
+        local enabled = require("flash").toggle()
+        local description
+        local prefix = ""
+        if enabled then
+          description = "**enabled**"
+          prefix = "󱐋 "
+        else
+          description = "**disabled**"
+        end
+        require("snacks").notify.info(prefix .. "Flash search is " .. description)
       end,
       desc = "Toggle Flash Search",
     },
+    init = function()
+      -- Enable Flash search by default
+      require("flash").toggle(true)
+    end,
   },
 }
