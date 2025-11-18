@@ -25,7 +25,7 @@ return {
         },
       })
 
-      vim.lsp.enable "ts_ls"
+      setup "ts_ls"
 
       setup("ruby_lsp", {
         cmd = { "ruby-lsp" },
@@ -67,7 +67,7 @@ return {
         },
       })
 
-      vim.lsp.enable "herb_ls"
+      setup "herb_ls"
     end,
   },
 }
