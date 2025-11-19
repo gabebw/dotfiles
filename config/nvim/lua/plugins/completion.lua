@@ -4,6 +4,9 @@ return {
   {
     "Saghen/blink.cmp",
     version = "1.*",
+    dependencies = {
+      { "L3MON4D3/LuaSnip" },
+    },
     ---@module "blink.cmp.config"
     ---@type blink.cmp.Config
     opts = {
@@ -60,7 +63,15 @@ return {
           auto_show_delay_ms = 0,
         },
       },
+      snippets = { preset = "luasnip" },
       sources = {
+        default = {
+          "snippets",
+          "lsp",
+          "path",
+          "buffer",
+          -- "cmp_r"
+        },
         providers = {
           -- Defaults to `{ 'buffer' }`, which means "only show buffer if LSP has no results".
           -- When it's blank, we always show buffer completions.
