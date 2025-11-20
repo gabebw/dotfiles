@@ -47,7 +47,7 @@ style = "#888888"
 use_12hr = true
 
 [ruby]
-format = "[💎($version )]($style)"
+format = "[($version )]($style)"
 version_format = "$major.$minor"
 style = "bg:color_aqua fg:color_fg0"
 # Show ruby version in my home directory
@@ -60,13 +60,13 @@ detect_folders = ["node_modules"]
 # Unlike the standard nodejs module, it intentionally does not check for
 # *.js or *.ts since that triggers too often
 detect_extensions = []
-symbol = "📦"
+symbol = ""
 format = "[($symbol$version )]($style)"
 style = "bg:color_aqua fg:color_fg0"
 
 [java]
 format = "[$symbol$version ]($style)"
-symbol = '☕'
+symbol = ''
 version_format = "$major"
 style = "bg:color_aqua fg:color_fg0"
 detect_extensions = ["java"]
