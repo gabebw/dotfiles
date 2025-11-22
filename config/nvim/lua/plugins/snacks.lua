@@ -191,6 +191,11 @@ return {
       -- https://github.com/folke/snacks.nvim/blob/main/docs/scope.md
       -- text objects: ai, ii
       scope = {},
+      -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
+      explorer = {
+        -- Replace netrw with the snacks explorer
+        replace_netrw = true,
+      },
       dashboard = {
         -- https://github.com/folke/snacks.nvim/blob/main/docs/dashboard.md
         preset = {
