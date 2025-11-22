@@ -31,19 +31,19 @@ to = nil
 def url_from_clipboard
   url = `pbpaste`.strip
   unless url.start_with?("http")
-    STDERR.puts "Error: Looks like you didn't copy a URL"
-    STDERR.puts "Found: #{url}"
+    warn "Error: Looks like you didn't copy a URL"
+    warn "Found: #{url}"
     exit 1
   end
   url
 end
 
 def guess_extension!(from, temp_file_path)
-  from_path = if from =~ /^http/
-                URI.parse(from).path
-              else
-                from
-              end
+  from_path = if /^http/.match?(from)
+    URI.parse(from).path
+  else
+    from
+  end
   extension = File.extname(from_path).sub(/^\./, "")
   if extension == ""
     file_output = `file "#{temp_file_path}"`.strip
@@ -54,7 +54,7 @@ def guess_extension!(from, temp_file_path)
     elsif file_output.include?("GIF image data")
       extension = "gif"
     else
-      STDERR.puts "Couldn't guess extension, and none provided"
+      warn "Couldn't guess extension, and none provided"
       exit 1
     end
   end
@@ -69,7 +69,7 @@ def with_extension!(from, to, path)
   elsif to.include?(".")
     to
   else
-    to += "." + guess_extension!(from, path)
+    to + "." + guess_extension!(from, path)
   end
 end
 
@@ -111,7 +111,7 @@ USAGE
   if ARGV.length == 1
     to = ARGV[0]
   elsif ARGV.length > 1
-    STDERR.puts "Unhandled extra arguments: #{ARGV.inspect}"
+    warn "Unhandled extra arguments: #{ARGV.inspect}"
     exit 1
   end
 end
@@ -121,7 +121,7 @@ if from && !from.start_with?("http")
 else
   from = url_from_clipboard
   if from.nil? || from == ""
-    STDERR.puts "Error: -f parameter is required, or copy a URL"
+    warn "Error: -f parameter is required, or copy a URL"
     exit 1
   end
   local_file_name = Tempfile.new.path
@@ -136,6 +136,6 @@ elsif to.end_with?("/")
 end
 to = with_extension!(from, to, local_file_name)
 
-STDERR.puts "#{from} -> #{to}"
+warn "#{from} -> #{to}"
 
-STDERR.puts `upload-image "#{local_file_name}" "#{to}"`
+warn `upload-image "#{local_file_name}" "#{to}"`
