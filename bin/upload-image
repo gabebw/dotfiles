@@ -15,6 +15,7 @@
 #
 #   upload-image flip.jpg some/other.jpg
 
+fish_add_path --move --path /opt/homebrew/bin
 set rsync_major_version_number (rsync --version | rg 'version' | sed -E 's/^rsync  version ([0-9]).*/\1/')
 
 if [ $rsync_major_version_number -le 2 ]
