@@ -81,11 +81,40 @@ function serialnumber
   ioreg -l | rg IOPlatformSerialNumber | sed -e 's/^.*= "(.+)"/\1/' | tee /dev/tty | pbcopy
   echo '(Copied for you)'
 end
-alias prettyjson "jq ."
-# xmllint is from `brew install libxml2`
-alias prettyxml "xmllint --format -"
-alias prettyhtml "prettier --stdin-filepath any-name-here.html"
-alias prettyjavascript "prettier --stdin-filepath any-name-here.js"
+
+function prettyjson
+  if isatty stdin
+    pbcopy | prettyjson | pbpaste
+  else
+    jq .
+  end
+end
+
+function prettyxml
+  if isatty stdin
+    pbcopy | prettyxml | pbpaste
+  else
+    # xmllint is from `brew install libxml2`
+    xmllint --format -
+  end
+end
+
+function prettyhtml
+  if isatty stdin
+    pbcopy | prettyhtml | pbpaste
+  else
+    prettier --stdin-filepath any-name-here.html
+  end
+end
+
+function prettyjavascript
+  if isatty stdin
+    prettier --stdin-filepath any-name-here.js
+  else
+    pbcopy | prettyjavascript | pbpaste
+  end
+end
+
 # Remove EXIF data
 alias exif-remove "exiftool -all  "
 alias hexdump hexyl
