@@ -334,6 +334,10 @@ augroup vimrc
   " Highlight text between two "---"s as a comment.
   " `\_x` means "x regex character class, with newlines allowed"
   autocmd BufNewFile,BufRead,BufWrite *.md,*.markdown,*.html syntax match Comment /\%^---\_.\{-}---$/
+
+  " Use `#` as the comment character, not `;`
+  autocmd BufNewFile,BufRead,BufWrite .npmrc,npmrc setlocal commentstring=#\ %s
+
   autocmd VimResized * wincmd =
 augroup END
 ]]
