@@ -5,8 +5,14 @@
 # To see a list of available themes, run ghostty +list-themes
 theme = Dracula
 confirm-close-surface = false
-keybind = global:ctrl+grave_accent=toggle_quick_terminal
 # 22 lines
 quick-terminal-size = 100px
 font-family = JetBrains Mono
 font-size = 12
+
+# https://ghostty.org/docs/config/keybind/reference
+# "cmd" must be lowercase, not "Cmd"
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# Cmd+k triggers a command palette, like VS Code
+keybind = cmd+k=toggle_command_palette
