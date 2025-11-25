@@ -1,0 +1,4 @@
+# Do not run lifecycle scripts (preinstall, postinstall, etc)
+# https://docs.npmjs.com/cli/v11/using-npm/scripts#life-cycle-scripts
+# https://docs.npmjs.com/cli/v11/commands/npm-install#ignore-scripts
+ignore-scripts=true
