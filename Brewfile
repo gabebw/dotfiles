@@ -87,3 +87,4 @@ brew "coursier"
 brew "sql-formatter"
 
 brew "fortune"
+brew "pandoc"
