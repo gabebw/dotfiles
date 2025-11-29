@@ -92,7 +92,7 @@ end
 
 function prettyxml
   if isatty stdin
-    pbcopy | prettyxml | pbpaste
+    pbpaste | prettyxml | pbcopy
   else
     # xmllint is from `brew install libxml2`
     xmllint --format -
@@ -101,7 +101,7 @@ end
 
 function prettyhtml
   if isatty stdin
-    pbcopy | prettyhtml | pbpaste
+    pbpaste | prettyhtml | pbcopy
   else
     prettier --stdin-filepath any-name-here.html
   end
@@ -109,9 +109,9 @@ end
 
 function prettyjavascript
   if isatty stdin
-    prettier --stdin-filepath any-name-here.js
+    pbpaste | prettyjavascript | pbcopy
   else
-    pbcopy | prettyjavascript | pbpaste
+    prettier --stdin-filepath any-name-here.js
   end
 end
 
