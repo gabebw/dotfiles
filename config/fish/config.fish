@@ -82,37 +82,41 @@ function serialnumber
   echo '(Copied for you)'
 end
 
-function prettyjson
+function read-from-stdin-or-pasteboard -a func
   if isatty stdin
-    pbcopy | prettyjson | pbpaste
+    pbpaste | $func | pbcopy
   else
+    $func
+  end
+end
+
+function prettyjson
+  function doit
     jq .
   end
+  read-from-stdin-or-pasteboard doit
 end
 
 function prettyxml
-  if isatty stdin
-    pbpaste | prettyxml | pbcopy
-  else
+  function doit
     # xmllint is from `brew install libxml2`
     xmllint --format -
   end
+  read-from-stdin-or-pasteboard doit
 end
 
 function prettyhtml
-  if isatty stdin
-    pbpaste | prettyhtml | pbcopy
-  else
+  function doit
     prettier --stdin-filepath any-name-here.html
   end
+  read-from-stdin-or-pasteboard doit
 end
 
 function prettyjavascript
-  if isatty stdin
-    pbpaste | prettyjavascript | pbcopy
-  else
+  function doit
     prettier --stdin-filepath any-name-here.js
   end
+  read-from-stdin-or-pasteboard doit
 end
 
 # Remove EXIF data
