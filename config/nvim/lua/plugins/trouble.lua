@@ -1,6 +1,10 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "folke/trouble.nvim",
+    ---@module "trouble"
+    ---@type trouble.Config
     opts = {
       modes = {
         top_level_only = {

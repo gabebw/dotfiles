@@ -1,3 +1,5 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "chrishrb/gx.nvim",
@@ -15,6 +17,8 @@ return {
     init = function()
       vim.g.netrw_nogx = 1 -- disable netrw gx
     end,
+    ---@module "gx"
+    ---@type GxOptions
     opts = {
       -- If multiple URLs match, use the top one without prompting
       select_prompt = false,

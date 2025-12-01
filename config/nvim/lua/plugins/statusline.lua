@@ -14,6 +14,8 @@ local function trunc(trunc_len)
   end
 end
 
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "nvim-lualine/lualine.nvim",
@@ -21,6 +23,8 @@ return {
       -- replacement for nvim-web-devicons
       "mini.nvim",
     },
+    ---@module "lualine"
+    ---@type LualineHideOpts
     opts = {
       -- Themes: https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
       options = {

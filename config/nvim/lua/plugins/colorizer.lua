@@ -1,3 +1,5 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     -- Show hex codes in their color
@@ -12,7 +14,6 @@ return {
         },
       }
       return {
-        ---@module "colorizer.config"
         filetypes = {
           "cmp_menu",
           "cmp_docs",

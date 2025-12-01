@@ -1,3 +1,5 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   { "vim-ruby/vim-ruby" },
   -- Allow `cir` to change inside ruby block, etc

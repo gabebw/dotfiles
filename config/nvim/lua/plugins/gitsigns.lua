@@ -1,6 +1,9 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "lewis6991/gitsigns.nvim",
+    ---@module "gitsigns"
     opts = {
       -- On hover, show blame for current line
       current_line_blame = true,
@@ -19,7 +22,7 @@ return {
           if vim.wo.diff then
             vim.cmd.normal({ "]h", bang = true })
           else
-            gitsigns.nav_hunk "next"
+            require("gitsigns.actions.nav").nav_hunk "next"
           end
         end, { desc = "Next Git hunk" })
 
@@ -27,7 +30,7 @@ return {
           if vim.wo.diff then
             vim.cmd.normal({ "[h", bang = true })
           else
-            gitsigns.nav_hunk "prev"
+            require("gitsigns.actions.nav").nav_hunk "prev"
           end
         end, { desc = "Previous Git hunk" })
 

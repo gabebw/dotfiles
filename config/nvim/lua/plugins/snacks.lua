@@ -60,6 +60,8 @@ local function SearchForWordUnderCursor()
   })
 end
 
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "folke/snacks.nvim",

@@ -121,6 +121,8 @@ function RailsYamlPicker()
   })
 end
 
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   -- lyaml prints warnings on install, but it does work with Lua > 5.1, so ignore them :shrug:
   {

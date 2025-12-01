@@ -1,3 +1,5 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   { "dag/vim-fish" },
   { "pangloss/vim-javascript" },

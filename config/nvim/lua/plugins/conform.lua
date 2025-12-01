@@ -1,16 +1,15 @@
+---@module "lazy.types"
+---@type LazySpec[]
 return {
   {
     "stevearc/conform.nvim",
-    ---@type table | fun(plugin: LazyPlugin, table: table): conform.setupOpts
-    ---@diagnostic disable-next-line: unused-local
-    opts = function(plugin, table)
+    opts = function()
       -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
       -- table.
       local prettier = { "prettierd", "prettier", stop_after_first = true }
 
       -- If prettier fails, try switching Yarn from `pnp` to `node-modules` linker, or add this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
 
-      -- This will provide type hinting with LuaLS
       ---@module "conform"
       ---@type conform.setupOpts
       return {
@@ -53,7 +52,7 @@ return {
           sql_formatter_play = {
             command = "sql-formatter-play-evolutions",
             exit_codes = { 0 },
-            condition = function(self, ctx)
+            condition = function(_, ctx)
               return ctx.filename:match "conf/%d+.sql$"
             end,
           },

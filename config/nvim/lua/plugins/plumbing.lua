@@ -1,3 +1,5 @@
+---@module "lazy.types"
+---@type LazySpec[]
 -- Plumbing that makes everything nicer
 return {
   -- <Tab> indents or triggers autocomplete, smartly
