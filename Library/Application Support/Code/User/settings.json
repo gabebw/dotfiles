@@ -159,5 +159,8 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.startupEditor": "newUntitledFile",
+  "chat.agent.enabled": false,
+  "chat.checkpoints.enabled": false,
+  "chat.agent.codeBlockProgress": false
 }
