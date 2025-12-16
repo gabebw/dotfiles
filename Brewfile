@@ -88,3 +88,4 @@ brew "sql-formatter"
 
 brew "fortune"
 brew "pandoc"
+brew "chars"

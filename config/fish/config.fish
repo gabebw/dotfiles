@@ -122,6 +122,10 @@ end
 # Remove EXIF data
 alias exif-remove "exiftool -all  "
 alias hexdump hexyl
+function utf8
+  # Pass each character to `chars`
+  string split '' | xargs -n1 chars
+end
 
 # All the flags I always want turned on
 alias fd-basic "command fd --no-ignore --ignore-case --full-path --type file"
