@@ -47,6 +47,9 @@
     "root"
   ],
   "breadcrumbs.enabled": true,
+  "chat.agent.codeBlockProgress": false,
+  "chat.agent.enabled": false,
+  "chat.checkpoints.enabled": false,
   "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
@@ -159,8 +162,5 @@
   "workbench.editor.enablePreview": false,
   "workbench.editor.enablePreviewFromQuickOpen": false,
   "workbench.iconTheme": "vscode-icons",
-  "workbench.startupEditor": "newUntitledFile",
-  "chat.agent.enabled": false,
-  "chat.checkpoints.enabled": false,
-  "chat.agent.codeBlockProgress": false
+  "workbench.startupEditor": "newUntitledFile"
 }
