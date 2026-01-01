@@ -7,6 +7,9 @@ return {
     ---@module "blink.cmp.config"
     ---@type blink.cmp.Config
     opts = {
+      fuzzy = {
+        implementation = "prefer_rust",
+      },
       keymap = {
         preset = "default",
         ["<Tab>"] = {
