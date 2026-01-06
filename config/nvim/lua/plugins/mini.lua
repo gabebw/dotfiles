@@ -13,7 +13,7 @@ return {
     init = function()
       vim.api.nvim_create_autocmd("VimLeavePre", {
         callback = function()
-          MiniSessions.write(nil, { verbose = false })
+          vim.cmd [[ mksession! ]]
         end,
         pattern = "*",
       })
