@@ -47,9 +47,8 @@
     "root"
   ],
   "breadcrumbs.enabled": true,
-  "chat.agent.codeBlockProgress": false,
-  "chat.agent.enabled": false,
   "chat.checkpoints.enabled": false,
+  "chat.disableAIFeatures": true,
   "editor.accessibilitySupport": "off",
   "editor.autoClosingBrackets": "never",
   "editor.bracketPairColorization.enabled": true,
