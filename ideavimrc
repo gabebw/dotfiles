@@ -1,0 +1,17 @@
+" Settings for IDEA Vim: https://github.com/JetBrains/ideavim
+
+" List all found actions
+" :actionlist
+
+" Filter the action list to things containing "git"
+" :actionlist git
+
+set incsearch
+
+nmap grn <action>(RenameElement)
+" nmap grr <action>(FindUsagesMenuGroup)
+nmap grr <action>(ShowUsages)
+nmap gh <action>(ShowHoverInfo)
+
+nmap ]r <action>(GotoNextError)
+nmap [r <action>(GotoPreviousError)
