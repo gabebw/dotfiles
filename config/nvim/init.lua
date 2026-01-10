@@ -352,6 +352,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("Lua", { clear = true }),
   pattern = "lua",
   callback = function()
     vim.keymap.set(
