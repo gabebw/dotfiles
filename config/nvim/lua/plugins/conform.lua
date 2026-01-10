@@ -7,6 +7,8 @@ return {
       -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
       -- table.
       local prettier = { "prettierd", "prettier", stop_after_first = true }
+      local jsonc = vim.deepcopy(prettier)
+      table.insert(jsonc, 1, "vscode_settings")
 
       -- If prettier fails, try switching Yarn from `pnp` to `node-modules` linker, or add this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
 
@@ -25,7 +27,7 @@ return {
           eruby = { "erb_lint" },
           markdown = prettier,
           json = prettier,
-          jsonc = prettier,
+          jsonc = jsonc,
           sql = {
             -- This has its own `condition`, so run it on every SQL file
             "sql_formatter_play",
@@ -57,6 +59,14 @@ return {
             exit_codes = { 0 },
             condition = function(_, ctx)
               return ctx.filename:match "conf/%d+.sql$"
+            end,
+          },
+          vscode_settings = {
+            -- Inherit from https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/jq.lua
+            inherit = "jq",
+            append_args = { "--sort-keys" },
+            condition = function(_, ctx)
+              return ctx.filename:match "Code/User/settings.json"
             end,
           },
         },
