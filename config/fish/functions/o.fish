@@ -19,17 +19,34 @@ function __o_open_images_in_directory -a directory
   end
 end
 
+function __o_confirm -a msg
+  if command -v gum &>/dev/null
+    gum confirm --prompt.foreground '#F00' --default=no $msg
+  else
+    read -l --prompt "set_color red; echo -n $msg; set_color normal; echo -n '> '" response
+    [ (string lower "$response") = "yes" ]
+  end
+end
+
+function __o_warn -a msg
+  if command -v gum &>/dev/null
+    gum log --level=warn --time=kitchen $msg
+  else
+    set_color yellow
+    echo $msg >&2
+    set_color normal
+  end
+end
+
 # This will recurse infinitely into the directory you give it, so just do `o
 # toplevel/` instead of `o toplevel/**/*.*`.
 function o
   if [ (count $argv) -eq 0 ]
-    read -l --prompt "set_color red; echo -n 'Are you sure?'; set_color normal; echo -n '> '" response
-    if [ (string lower "$response") = "yes" ]
+    if __o_confirm "Are you sure?"
       o $PWD
     else
-      set_color yellow
-      echo "You didn't say 'yes', not doing anything" >&2
-      set_color normal
+      __o_warn "You didn't confirm, not doing anything"
+      return 1
     end
   else
     set -f files_to_open

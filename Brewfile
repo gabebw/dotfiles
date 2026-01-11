@@ -89,3 +89,6 @@ brew "sql-formatter"
 brew "fortune"
 brew "pandoc"
 brew "chars"
+
+# Fancy shell scripting: https://github.com/charmbracelet/gum?tab=readme-ov-file
+brew "gum"
