@@ -26,9 +26,6 @@
   "[ruby]": {
     "editor.defaultFormatter": "testdouble.vscode-standard-ruby"
   },
-  "[rust]": {
-    "editor.defaultFormatter": "statiolake.vscode-rustfmt"
-  },
   "[scss]": {
     "editor.defaultFormatter": "prettier.prettier-vscode"
   },
