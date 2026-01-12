@@ -1,11 +1,11 @@
-function gb -a branch base
+function gb -a branch base --wraps 'git switch'
   if [ (count $argv) -eq 0 ]
     echo "No branch name :(" >&2
     return 1
   end
   if [ -n "$base" ]
-    git checkout -b $branch $base
+    git switch $branch $base
   else
-    git checkout -b $branch
+    git switch $branch
   end
 end
