@@ -4,8 +4,8 @@ function gb -a branch base --wraps 'git switch'
     return 1
   end
   if [ -n "$base" ]
-    git switch $branch $base
+    git switch --create $branch $base
   else
-    git switch $branch
+    git switch --create $branch
   end
 end
