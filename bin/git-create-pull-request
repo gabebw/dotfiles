@@ -269,8 +269,11 @@ File.write(commit_message_file, contents[1..].join)
 pull_request = %{gh pr create --base "$(main-or-master-branch)" --title #{title} --body-file '#{commit_message_file.path}'}
 succeeded = system(pull_request)
 if !succeeded
+  saved_pr_message_file = "saved-pr-message"
   puts
   puts "!!! Something went wrong creating the PR"
+  puts "!!! See ./#{saved_pr_message_file} for saved PR contents"
+  File.write(saved_pr_message_file, File.read(commit_message_file))
   exit 1
 else
   system("gh pr view --web >/dev/null")
