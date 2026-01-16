@@ -29,9 +29,9 @@ COMMIT_MARKER = "---MARKER---".freeze
 class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
   def block_code(code, language)
     <<~CODE
-    ```#{language}
-    #{code.strip}
-    ```
+      ```#{language}
+      #{code.strip}
+      ```
 
     CODE
   end
@@ -68,11 +68,11 @@ class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
 
   def list_item(text, list_type)
     marker = case list_type
-             when :unordered
-               "*"
-             when :ordered
-               "1."
-             end
+    when :unordered
+      "*"
+    when :ordered
+      "1."
+    end
     text.gsub!(/^(\*|\d\.)\s*(?<body>[^\n]+\n)/) do
       body = Regexp.last_match[:body]
       "  #{marker} #{unwrapped(body)}\n"
@@ -105,7 +105,7 @@ class RenderMarkdownWithOneLineParagraphs < Redcarpet::Render::Base
   private
 
   def unwrapped(text)
-    text.strip.gsub("\n", " ").strip
+    text.strip.tr("\n", " ").strip
   end
 end
 
@@ -114,7 +114,7 @@ class Markdown
     @renderer = Redcarpet::Markdown.new(
       RenderMarkdownWithOneLineParagraphs,
       fenced_code_blocks: true,
-      tables: true,
+      tables: true
     )
   end
 
@@ -168,10 +168,10 @@ class CommitMessageBuilder
     # Reflow each commit message, since reflowing the entire text leads to weird
     # results.
     markdown = Markdown.new
-    message = commit_message.split(/^#{COMMIT_MARKER}/).
-      map { |commit| markdown.render(commit) }.
-      join("---------------------\n"). # turns into an <hr>
-      strip
+    commit_message.split(/^#{COMMIT_MARKER}/o)
+      .map { |commit| markdown.render(commit) }
+      .join("---------------------\n") # turns into an <hr>
+      .strip
   end
 
   private
@@ -250,9 +250,9 @@ end
 
 commit_message_file = Tempfile.new("commit_message_file")
 commit_message = CommitMessageBuilder.new(repo).build
-File.open(commit_message_file, "w") { |f| f.write(commit_message) }
+File.write(commit_message_file, commit_message)
 
-if ! system("nvim '#{commit_message_file.path}'")
+if !system("nvim '#{commit_message_file.path}'")
   # Vim exited abnormally, which always means I did it intentionally with `:cq`
   # and don't want to create the PR.
   puts "OK, not creating PR :)"
@@ -264,7 +264,7 @@ contents = IO.readlines(commit_message_file.path)
 # Pull out the first line to pass to `--title` below
 title = Shellwords.escape(contents[0].strip)
 # And remove the title from the file that we use for the body
-File.open(commit_message_file, "w") { |f| f.write(contents[1..].join) }
+File.write(commit_message_file, contents[1..].join)
 
 pull_request = %{gh pr create --base "$(main-or-master-branch)" --title #{title} --body-file '#{commit_message_file.path}'}
 succeeded = system(pull_request)
