@@ -70,6 +70,10 @@ return {
       })
 
       setup "herb_ls"
+
+      setup("oxlint", {
+        cmd = { "yarn", "oxlint", "--lsp" },
+      })
     end,
   },
 }

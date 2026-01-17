@@ -6,8 +6,10 @@ return {
     opts = function()
       -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
       -- table.
-      local prettier = { "prettierd", "prettier", stop_after_first = true }
-      local jsonc = vim.deepcopy(prettier)
+      local prettier = { "oxfmt", "prettierd", "prettier", stop_after_first = true }
+      local js = vim.deepcopy(prettier)
+      table.insert(js, 1, "oxfmt")
+      local jsonc = vim.deepcopy(js)
       table.insert(jsonc, 1, "vscode_settings")
 
       -- If prettier fails, try switching Yarn from `pnp` to `node-modules` linker, or add this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
@@ -18,15 +20,15 @@ return {
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff" },
-          javascript = prettier,
-          typescriptreact = prettier,
-          typescript = prettier,
-          css = prettier,
+          javascript = js,
+          typescriptreact = js,
+          typescript = js,
+          css = js,
           ["eruby.yaml"] = prettier,
           ruby = { "standardrb" },
           eruby = { "erb_lint" },
           markdown = prettier,
-          json = prettier,
+          json = js,
           jsonc = jsonc,
           sql = {
             -- This has its own `condition`, so run it on every SQL file
@@ -68,6 +70,14 @@ return {
             condition = function(_, ctx)
               return ctx.filename:match "Code/User/settings.json"
             end,
+          },
+          oxfmt = {
+            command = "yarn",
+            args = {
+              "oxfmt",
+              "--stdin-filepath",
+              "$FILENAME",
+            },
           },
         },
         -- If this is set, Conform will run the formatter asynchronously after save.
