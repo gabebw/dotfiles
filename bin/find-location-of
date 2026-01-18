@@ -66,10 +66,16 @@ function find_shell_function -a funcname
 end
 
 function find_shell_alias -a funcname
-  rg --no-filename -n "alias $funcname " $FISH_CONFIG_FILE | string match -r -q -g '^(?P<line_number>\d+)'
-  # I know that all aliases are in $FISH_CONFIG_FILE
+  # With these flags, rg prints out results one per line, with the line number and match:
+  #   whatever/file/name:64:my matching string
+  # Sed then turns that into:
+  #   whatever/file/name:64
+  # I know that all aliases are in $FISH_CONFIG_FILE or ~/.aliases.fish
   # There's no rule about it, I just know that I do that.
-  echo "$FISH_CONFIG_FILE:$line_number"
+  rg --case-sensitive --fixed-strings --no-heading --line-number \
+    "alias $funcname " \
+    -- $FISH_CONFIG_FILE ~/.aliases.fish | \
+    sed -E 's/(:[0-9]+):.+/\1/g'
 end
 
 if [ (count $argv) -eq 0 ]
