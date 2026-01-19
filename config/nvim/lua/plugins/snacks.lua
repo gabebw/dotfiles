@@ -19,6 +19,11 @@ end
 local function fuzzy_find_files()
   Snacks.picker.files({
     hidden = true,
+    matcher = {
+      frecency = true,
+      -- give more weight to chronological order
+      history_bonus = true,
+    },
     layout = {
       cycle = true,
       preset = function()
