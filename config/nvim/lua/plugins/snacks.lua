@@ -153,7 +153,7 @@ return {
         "<Leader>n",
         function()
           -- https://github.com/folke/snacks.nvim/blob/main/docs/explorer.md
-          Snacks.picker.explorer()
+          Snacks.picker.explorer({ hidden = true })
         end,
         desc = "Toggle file explorer",
       },
