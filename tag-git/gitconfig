@@ -64,6 +64,7 @@
   unstage = reset HEAD
   redo = !git reset --soft HEAD~1 && git unstage
   mm = master-to-main-wrapper merge-to %BRANCH%
+  merge-in-master = !git fetch origin && git merge --no-ff origin/master
   up = !git fetch origin && git master-to-main-wrapper rebase origin/%BRANCH%
   r = master-to-main-wrapper rebase -i origin/%BRANCH%
   rr = !git fetch && git rebase -i origin/$(git current-branch)
