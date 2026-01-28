@@ -114,7 +114,7 @@ end
 
 function prettyjavascript
   function doit
-    prettier --stdin-filepath any-name-here.js
+    npx oxfmt --stdin-filepath any-name-here.js
   end
   read-from-stdin-or-pasteboard doit
 end
