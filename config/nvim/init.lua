@@ -260,7 +260,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("gD", snacks.picker.lsp_type_definitions, "Type [D]efinition")
 
     -- Find references for the word under your cursor.
-    map("grr", snacks.picker.lsp_references, "[G]oto [R]eferences")
+    map("grr", function()
+      Snacks.picker.lsp_references({ formatters = {
+        file = {
+          min_width = 80,
+        },
+      } })
+    end, "[G]oto [R]eferences")
 
     map("gh", vim.lsp.buf.hover, "[H]over")
 
