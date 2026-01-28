@@ -11,11 +11,16 @@ return {
       require("mini.comment").setup()
     end,
     init = function()
-      vim.api.nvim_create_autocmd("VimLeavePre", {
+      -- Only create the autocmd to save the session when an actual file is opened
+      vim.api.nvim_create_autocmd("BufReadPre", {
         callback = function()
-          vim.cmd [[ mksession! ]]
+          vim.api.nvim_create_autocmd("VimLeavePre", {
+            callback = function()
+              vim.cmd [[ mksession! ]]
+            end,
+            pattern = "*",
+          })
         end,
-        pattern = "*",
       })
     end,
   },
