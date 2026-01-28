@@ -65,6 +65,48 @@ local function SearchForWordUnderCursor()
   })
 end
 
+local function pick_cmd_result(picker_opts)
+  local git_root = Snacks.git.get_root()
+  local function finder(opts, ctx)
+    return require("snacks.picker.source.proc").proc(
+      ctx:opts({
+        cmd = picker_opts.cmd,
+        args = picker_opts.args,
+        transform = function(item)
+          item.cwd = picker_opts.cwd or git_root
+          item.file = item.text
+        end,
+      }),
+      ctx
+    )
+  end
+
+  Snacks.picker.pick(picker_opts.name, {
+    finder = finder,
+    preview = picker_opts.preview,
+    title = picker_opts.title,
+  })
+end
+
+local custom_pickers = {}
+
+function custom_pickers.files_changed_in_branch()
+  local merge_base = vim.system({ "git", "mb" }, { text = true }):wait().stdout:gsub("%s+", "")
+  pick_cmd_result({
+    cmd = "git",
+    args = {
+      "diff",
+      "--name-only",
+      -- Exclude deleted files
+      "--diff-filter=d",
+      merge_base,
+    },
+    name = "git_files_changed_in_branch",
+    title = "Git Branch Changed Files",
+    preview = "file",
+  })
+end
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -179,6 +221,7 @@ return {
         end,
         desc = "Show a meta-picker",
       },
+      { "<Leader>fc", custom_pickers.files_changed_in_branch, desc = "Files that changed in current branch" },
     },
     ---@module "snacks"
     ---@type snacks.Config
