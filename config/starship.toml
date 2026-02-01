@@ -7,6 +7,7 @@ add_newline = false
 
 format = """
 [](color_aqua)\
+$time\
 $ruby\
 $nodejs\
 $java\
@@ -18,10 +19,6 @@ $git_status\
 [ ](fg:color_blue bg:color_purple)\
 [\\$](bg:color_purple fg:color_fg1)\
 [ ](color_purple)"""
-
-right_format = """
-$time
-"""
 
 palette = 'gruvbox_dark'
 
@@ -42,8 +39,8 @@ color_yellow = '#d79921'
 
 [time]
 disabled = false
-format = "[$time]($style) "
-style = "#888888"
+format = "[$time ]($style)"
+style = "bg:color_aqua fg:color_fg1"
 use_12hr = true
 
 [ruby]
