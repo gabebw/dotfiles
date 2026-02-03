@@ -6,7 +6,7 @@ return {
     opts = function()
       -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
       -- table.
-      local prettier = { "oxfmt", "prettierd", "prettier", stop_after_first = true }
+      local prettier = { "prettierd", "prettier", stop_after_first = true }
       local js = vim.deepcopy(prettier)
       table.insert(js, 1, "oxfmt")
       local jsonc = vim.deepcopy(js)
@@ -34,9 +34,8 @@ return {
             -- This has its own `condition`, so run it on every SQL file
             "sql_formatter_play",
           },
-          proto = {
-            "buf",
-          },
+          proto = { "buf" },
+          toml = { "oxfmt", "oxfmt_npx", stop_after_first = true },
         },
         formatters = {
           erb_lint = {
@@ -71,8 +70,8 @@ return {
               return ctx.filename:match "Code/User/settings.json"
             end,
           },
-          oxfmt = {
-            command = "yarn",
+          oxfmt_npx = {
+            command = "npx",
             args = {
               "oxfmt",
               "--stdin-filepath",
