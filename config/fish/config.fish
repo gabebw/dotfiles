@@ -53,6 +53,14 @@ if not inside_ssh; and not in_vs_code; and status --is-interactive; and not in_g
 end
 # }}}
 
+# Tell well-behaved tools to look in ~/.config for dotfiles
+# Rust tools that use the popular `dirs` crate to find the config dir (`dirs::config_dir()`) will
+# not look at $XDG_CONFIG_HOME on macOS, so you must set a program-specific env variable instead
+# (`set -x FOO_CONFIG_DIR ...`).
+# Open issue for this: https://github.com/xdg-rs/dirs/issues/45
+# The `xdg` and `etcetera` crates, while less popular, seem to do the right thing.
+set -x XDG_CONFIG_HOME "$HOME/.config"
+
 # Aliases {{{
 alias va "nvim ~/.aliases.fish"
 alias q "nvim (readlink ~/.config/fish/config.fish)"
@@ -396,9 +404,6 @@ status --is-interactive; and mise activate | source
 # when you sourced `config.fish`. I want it to refer to the current directory
 # wherever I am.
 set PATH ./bin/stubs $PATH
-
-# Tell well-behaved tools to look in ~/.config for dotfiles
-set -x XDG_CONFIG_HOME "$HOME/.config"
 
 # Go
 # `go install` will install executables to ~/.bin
