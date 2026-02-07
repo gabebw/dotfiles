@@ -7,7 +7,8 @@ theme = Dracula
 confirm-close-surface = false
 # 22 lines
 quick-terminal-size = 100px
-font-family = JetBrains Mono
+# "NF" = "Nerd Font"
+font-family = Maple Mono NF
 font-size = 12
 
 # https://ghostty.org/docs/config/keybind/reference

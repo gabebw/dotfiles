@@ -1,0 +1,1 @@
+uv run build.py --feat cv02,cv07,cv09,cv63,cv64 --ttf-only
