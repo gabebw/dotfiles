@@ -7,7 +7,9 @@ function db-dump -a db_name_or_connection_string filename
     return 1
   end
 
-  set -q filename; or set filename "db.dump"
+  if [ -z "$filename" ]
+    set filename "db.dump"
+  end
   if [ (count $argv) -ge 1 ]
     pg_dump --clean --create --format=custom --file=$filename $db_name_or_connection_string
     and printf "\n\n\nWrote to $filename\n"
