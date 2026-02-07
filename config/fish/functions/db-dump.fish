@@ -1,10 +1,10 @@
 function db-dump -a db_name_or_connection_string filename
-  if string match -req 'postgresql://.*pooler.*neon.tech'
+  if string match -req 'postgresql://.*pooler.*neon.tech' $db_name_or_connection_string
     # Don't `pg_dump` from a pooled connection:
     # https://github.com/pgbouncer/pgbouncer/issues/452
     # https://github.com/pgbouncer/pgbouncer/issues/976
-    echo "Do not use pooled connection strings with this. Copy the unpooled version instead" >&2
-    return 1
+    echo "Pooled connection string detected, automatically fixing" >&2
+    set db_name_or_connection_string (string replace -a -- '-pooler' '' $db_name_or_connection_string)
   end
 
   if [ -z "$filename" ]
