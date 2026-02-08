@@ -3,9 +3,7 @@ Host i
     Port 13425
     User gabe
 
-# @gabebw (the default)
 Host github.com
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_ed25519
-  IdentityFile ~/.ssh/id_rsa
