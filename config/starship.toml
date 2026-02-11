@@ -63,19 +63,19 @@ truncate_to_repo = true
 truncation_symbol = "…/"
 
 [directory.substitutions]
-# Light text
 "Documents" = "󰈙 "
-# Dark text
-color_fg1 = "#11111b" # crust from catpuccin_mocha
 "Downloads" = " "
-color_bg3 = '#665c54'
 "Music" = "󰝚 "
-color_aqua = '#689d6a'
 "Pictures" = " "
-color_orange = '#fe8019'
 "Developer" = "󰲋 "
-color_red = '#fb4934'
-color_yellow = '#d79921'
+
+[time]
+disabled = false
+# https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+time_format = "%A %I:%M %p"
+style = "bg:lavender"
+format = '[[  $time ](fg:crust bg:lavender)]($style)'
+use_12hr = true
 
 [git_branch]
 format = '[ $symbol $branch ]($style)'
@@ -109,14 +109,6 @@ format = '[ $symbol($version)]($style)'
 symbol = ""
 format = '[ $symbol( $version)(\(#$virtualenv\)) ]($style)'
 
-[time]
-disabled = false
-# https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
-time_format = "%A %I:%M %p"
-style = "bg:lavender"
-format = '[[  $time ](fg:crust bg:lavender)]($style)'
-use_12hr = true
-
 [line_break]
 disabled = false
 
@@ -149,8 +141,21 @@ $typechanged\
 $renamed\
 \\] )\
 $ahead_behind\
-](bg:color_blue)"""
+](bg:blue)"""
+# $all_status = $conflicted $stashed $deleted $renamed $modified $typechanged $staged $untracked
+# except $all_status doesn't have spaces
+conflicted = "[=](red bg:blue)"
+stashed = '[\$$count](fg:base bg:blue)'
+deleted = "[✘$count](fg:red bg:blue)"
+renamed = "[»](fg:base bg:blue)"
+modified = "[M$count](fg:base bg:blue)"
+staged = "[S$count](fg:orange bg:blue)"
+untracked = "[?$count](base bg:blue)"
 # $all_status = $conflicted $stashed $delete
+
+behind = "[↓](bold fg:base bg:blue)"
+ahead = "[↑](bold fg:base bg:blue)"
+up_to_date = "[✓](bold fg:base bg:blue)"
 
 [cmd_duration]
 show_milliseconds = true
