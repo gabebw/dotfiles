@@ -10,6 +10,10 @@ ruby = "3.4.5"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
+experimental = true
 
 [settings.node]
 gpg_verify = false
+
+[settings.ruby]
+compile = false
