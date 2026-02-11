@@ -11,6 +11,7 @@ ruby = "3.4.5"
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
 experimental = true
+use_versions_host_track = false
 
 [settings.node]
 gpg_verify = false
