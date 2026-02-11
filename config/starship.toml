@@ -56,7 +56,7 @@ format = '[ $user]($style)'
 [directory]
 style = "bg:pink fg:crust"
 format = "[ $path ]($style)"
-home_symbol	= '~'
+home_symbol = '~'
 # The number of parent folders that the current directory should be truncated to.
 truncation_length = 3
 truncate_to_repo = true
@@ -66,7 +66,7 @@ truncation_symbol = "…/"
 # Light text
 "Documents" = "󰈙 "
 # Dark text
-color_fg1 = "#11111b"  # crust from catpuccin_mocha
+color_fg1 = "#11111b" # crust from catpuccin_mocha
 "Downloads" = " "
 color_bg3 = '#665c54'
 "Music" = "󰝚 "
@@ -77,25 +77,11 @@ color_orange = '#fe8019'
 color_red = '#fb4934'
 color_yellow = '#d79921'
 
-[time]
-disabled = false
-# https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
-time_format = "%A %I:%M %p"
-style = "bg:lavender"
-format = '[[  $time ](fg:crust bg:lavender)]($style)'
-use_12hr = true
-
 [git_branch]
-symbol = ""
-style = "fg:crust bg:green"
-truncation_length = 20
 format = '[ $symbol $branch ]($style)'
-
-[git_status]
 style = "fg:crust bg:green"
-format = '([\[$all_status\]]($style))[( $ahead_behind )]($style)'
-modified = "[M](italic fg:red bg:green)"
-stashed = "[S](fg:crust bg:green)"
+symbol = ""
+truncation_length = 40
 
 [nodejs]
 symbol = ""
@@ -129,6 +115,7 @@ disabled = false
 time_format = "%A %I:%M %p"
 style = "bg:lavender"
 format = '[[  $time ](fg:crust bg:lavender)]($style)'
+use_12hr = true
 
 [line_break]
 disabled = false
@@ -140,16 +127,9 @@ success_symbol = '[❯](bold fg:green)'
 error_symbol = '[❯](bold fg:red)'
 # 2: show 1 parent directory, etc
 vimcmd_symbol = '[❮](bold fg:green)'
-style = "fg:color_fg1 bg:color_yellow"
 vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
 vimcmd_replace_symbol = '[❮](bold fg:lavender)'
 vimcmd_visual_symbol = '[❮](bold fg:yellow)'
-truncate_to_repo = true
-
-[git_branch]
-format = "[($symbol$branch )]($style)"
-style = "bg:color_blue"
-truncation_length = 40
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\) ]($style)"
@@ -157,6 +137,7 @@ style = "bg:color_blue"
 cherry_pick = "[🍒](fg:color_red bg:color_blue)"
 
 [git_status]
+style = "fg:crust bg:green"
 format = """[(\\[\
 $conflicted\
 ($stashed)\
