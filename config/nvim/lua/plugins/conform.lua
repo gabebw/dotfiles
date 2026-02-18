@@ -30,7 +30,7 @@ return {
           markdown = prettier,
           json = js,
           jsonc = jsonc,
-          sql = {
+          plsql = {
             -- This has its own `condition`, so run it on every SQL file
             "sql_formatter_play",
           },
