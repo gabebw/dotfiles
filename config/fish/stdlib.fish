@@ -1,7 +1,10 @@
 # Print the input, then error
-# If there is no input, then do nothing and succeed
+# If there is no input, then do nothing and succeed.
+# Usage:
+#     something_that_should_be_quiet | error_if_input
+#
 # `gum` must be installed: `brew install gum`
-function error
+function error_if_input
   read stdin
   if [ -n "$stdin" ]
     gum log --level=error $stdin
