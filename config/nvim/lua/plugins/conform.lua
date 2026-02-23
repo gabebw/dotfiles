@@ -59,7 +59,7 @@ return {
             command = "sql-formatter-play-evolutions",
             exit_codes = { 0 },
             condition = function(_, ctx)
-              return ctx.filename:match "conf/%d+.sql$"
+              return ctx.filename:match "conf/evolutions/default/%d+.sql$"
             end,
           },
           vscode_settings = {
