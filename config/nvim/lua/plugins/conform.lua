@@ -3,20 +3,22 @@
 return {
   {
     "stevearc/conform.nvim",
+    -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
+    -- table.
     opts = function()
-      -- `opts` is a function just so I can define the `prettier` variable. It could just as easily be a plain
-      -- table.
-      local prettier = { "prettierd", "prettier", stop_after_first = true }
-      local js = vim.deepcopy(prettier)
-      table.insert(js, 1, "oxfmt")
-      local jsonc = vim.deepcopy(js)
-      table.insert(jsonc, 1, "vscode_settings")
+      local lume = require "lume"
+      local prettier = { "prettierd", "prettier" }
+      local oxfmt = { "oxfmt", "oxfmt_npx" }
+      local js = lume.concat(oxfmt, prettier)
+      local jsonc = lume.concat({ "vscode_settings" }, js)
 
-      -- If prettier fails, try switching Yarn from `pnp` to `node-modules` linker, or add this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
+      -- Tip: if `prettier` fails, try switching Yarn from `pnp` to `node-modules` linker, or add
+      -- this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
 
       ---@module "conform"
       ---@type conform.setupOpts
       return {
+        stop_after_first = true,
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff" },
@@ -35,7 +37,7 @@ return {
             "sql_formatter_play",
           },
           proto = { "buf" },
-          toml = { "oxfmt", "oxfmt_npx", stop_after_first = true },
+          toml = oxfmt,
         },
         formatters = {
           erb_lint = {
