@@ -27,7 +27,19 @@ return {
         },
       })
 
-      setup "ts_ls"
+      setup("ts_ls", {
+        filetypes = {
+          -- Do not initialize on JS files, because it tries to find the TS installation on random
+          -- one-off JS files and then prints an error
+          -- Copied from: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua
+          -- "javascript",
+          "javascriptreact",
+          "javascript.jsx",
+          "typescript",
+          "typescriptreact",
+          "typescript.tsx",
+        },
+      })
 
       setup("ruby_lsp", {
         cmd = { "ruby-lsp" },
