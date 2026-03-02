@@ -122,6 +122,18 @@ return {
       end, {
         desc = "Re-enable autoformat-on-save",
       })
+
+      vim.api.nvim_create_user_command("FormatList", function()
+        vim.print(require("conform").list_formatters_for_buffer())
+      end, {
+        desc = "List available formatters",
+      })
+
+      vim.api.nvim_create_user_command("FormatHealth", function()
+        vim.cmd [[ checkhealth conform ]]
+      end, {
+        desc = "Check formatter health",
+      })
     end,
   },
 }
