@@ -70,8 +70,23 @@ end
 # Remove the longest common substring from each path so that they're easier to read. This might be complex, except that I know what the substring is so
 # I can hardcode it.
 set PROJECT_PREFIX $HOME/code/
-function truncated_projects
-  projects | sed "s|$PROJECT_PREFIX||" | sort
+function projects
+ {
+    projects_changed_within '2 months'
+    # It's already sorted by frecency
+    zoxide query --list --base-dir $HOME
+
+  # The `awk` removes duplicates without sorting (which `sort -u` would do), so we preserve zoxide's
+  # sorting
+  } | awk '!seen[$0]++'
+end
+
+# $period can use natural language, e.g. "1 month"
+function projects_changed_within -a period
+  command fd --print0 --changed-within $period . $PROJECT_PREFIX | \
+    rg --null-data '/$' | \
+    xargs --null -n1 -I {} git -C {} rev-parse --show-toplevel 2>/dev/null | \
+    sort -u
 end
 
 if [ (count $argv) -eq 1 ]
@@ -80,22 +95,22 @@ else if [ (count $argv) -eq 2 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1]) $argv[2]
 else
   if $USE_FZF_TMUX
-    set project_directory $(truncated_projects | fzf-tmux --reverse -d '85%')
+    set project_directory $(projects | fzf-tmux --reverse -d '85%')
   else
-    set project_directory $(truncated_projects | fzf --reverse)
+    set project_directory $(projects | fzf --reverse)
   end
 
   if [ -n "$project_directory" ]
-    set project_directory "$PROJECT_PREFIX"$project_directory
     set session_name $(tmux_normalize_session_name $project_directory)
 
     if ! connected_to $session_name
       if tmux-session-exists $session_name
         attach_to_tmux_session $session_name
       else
-        pushd $project_directory
+        zoxide init fish --cmd z | source
+        z $project_directory
         new_tmux_session_named $session_name
-        popd
+        z -
       end
     end
   end

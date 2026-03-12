@@ -413,6 +413,8 @@ set -x GOBIN ~/.bin
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
 
 if status --is-interactive
+  zoxide init fish --cmd z | source
+
   set -U fish_greeting ""
   # Erase a global (non-universal) variable if set, since it interferes with the
   # universal one.

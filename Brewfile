@@ -92,3 +92,7 @@ brew "chars"
 
 # Fancy shell scripting: https://github.com/charmbracelet/gum?tab=readme-ov-file
 brew "gum"
+
+# z to go somewhere
+# zi to fuzzy-find through directories
+brew "zoxide"
