@@ -83,9 +83,8 @@ end
 
 # $period can use natural language, e.g. "1 month"
 function projects_changed_within -a period
-  command fd --print0 --changed-within $period . $PROJECT_PREFIX | \
-    rg --null-data '/$' | \
-    xargs --null -n1 -I {} git -C {} rev-parse --show-toplevel 2>/dev/null | \
+  command fd --changed-within $period . $PROJECT_PREFIX \
+    --exec git -C {} rev-parse --show-toplevel 2>/dev/null | \
     sort -u
 end
 
