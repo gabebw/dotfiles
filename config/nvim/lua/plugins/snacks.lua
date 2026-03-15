@@ -1,3 +1,5 @@
+local Sessions = require "sessions"
+
 local function fuzzy_find_specs()
   Snacks.picker.lazy({
     matcher = { sort_empty = true },
@@ -284,7 +286,22 @@ return {
               icon = " ",
               key = "s",
               desc = "Restore Session",
-              section = "session",
+              action = function()
+                local session_name = Sessions.name()
+                local MiniSessions = require "mini.sessions"
+
+                if session_name and MiniSessions.detected[session_name] then
+                  MiniSessions.read(session_name)
+                else
+                  if session_name then
+                    vim.print("No session found for " .. session_name .. ", opening picker...")
+                  else
+                    vim.print "Session name is nil, opening picker..."
+                  end
+
+                  MiniSessions.select()
+                end
+              end,
               enabled = function()
                 return require("mini.sessions").get_latest() ~= nil
               end,

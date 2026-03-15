@@ -1,3 +1,5 @@
+local Sessions = require "sessions"
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -11,12 +13,17 @@ return {
       require("mini.comment").setup()
     end,
     init = function()
-      -- Only create the autocmd to save the session when an actual file is opened
+      -- Only create the autocmd to save the session when an actual file is opened (i.e. not an
+      -- unnamed scratch buffer that I close without saving).
+      -- Sessions are scoped to each git repo by using `Sessions.name`.
       vim.api.nvim_create_autocmd("BufReadPre", {
         callback = function()
           vim.api.nvim_create_autocmd("VimLeavePre", {
             callback = function()
-              vim.cmd [[ mksession! ]]
+              local name = Sessions.name()
+              if name then
+                MiniSessions.write(name)
+              end
             end,
             pattern = "*",
           })
