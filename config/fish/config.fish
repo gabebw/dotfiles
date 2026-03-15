@@ -63,7 +63,7 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 
 # Aliases {{{
 alias va "nvim ~/.aliases.fish"
-alias q "nvim (readlink ~/.config/fish/config.fish)"
+alias q "nvim (readlink -f ~/.config/fish/config.fish)"
 alias qq "source ~/.config/fish/config.fish"
 alias cp "cp -iv"
 alias rm "rm -Iv"
