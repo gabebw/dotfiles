@@ -34,10 +34,8 @@ return {
           -- Copied from: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua
           -- "javascript",
           "javascriptreact",
-          "javascript.jsx",
           "typescript",
           "typescriptreact",
-          "typescript.tsx",
         },
       })
 
