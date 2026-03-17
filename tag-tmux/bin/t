@@ -88,6 +88,11 @@ function projects_changed_within -a period
     sort -u
 end
 
+if ! command -v zoxide 2>/dev/null
+  echo "!!! You need to install zoxide" >&2
+  exit 1
+end
+
 if [ (count $argv) -eq 1 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1])
 else if [ (count $argv) -eq 2 ]
