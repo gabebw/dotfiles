@@ -1,6 +1,6 @@
 # vim: tw=0
 DOTFILES_DIRS=$HOME/code/personal/dotfiles
 EXCLUDES="helpful-tips system README.md Brewfile* terminal-themes install.sh setup slack-themes vscode bookmarklets stylua.toml habits* fonts node_modules package.json"
-SYMLINK_DIRS="irbrc.d bundle backups undodir um config/*"
+SYMLINK_DIRS="irbrc.d bundle backups undodir um config/* tmux/plugins"
 TAGS="clojure git python ruby rust tmux private"
 UNDOTTED="Library"
