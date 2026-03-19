@@ -82,7 +82,7 @@ javac.*_*.args
 .conform.*
 
 # Used by my `gcm` command
-/.commit-prefix
+/.commit-prefixes
 
 # Used by https://github.com/tpope/vim-projectionist
 .projections.json

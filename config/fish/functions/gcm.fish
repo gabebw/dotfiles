@@ -1,7 +1,17 @@
 # With no arguments: "git checkout [main | master]"
 # With arguments: "git commit" with the arguments as the message
 function gcm
-  set -l COMMIT_PREFIX_FILENAME ".commit-prefix"
+  # Find ".commit-prefixes" file in the root with the following format:
+  # branch-substring -> prefix
+  #
+  # For example:
+  #
+  #   care -> (care)
+  #
+  # means that any branch with the substring "care" in it would have "(care) " prefixed to commit
+  # messages.
+  # Using a substring match ensures that "(care) " isn't prefixed to commits on random fixup branches.
+  set -l COMMIT_PREFIX_FILENAME ".commit-prefixes"
   set -l COMMIT_PREFIX_FILE_PATH (git rev-parse --show-toplevel)/$COMMIT_PREFIX_FILENAME
   set -l MAX_LENGTH 50
 
@@ -11,8 +21,14 @@ function gcm
     set -f branch (git current-branch)
     set -f commit_message (string join ' ' $argv)
     if [ -r $COMMIT_PREFIX_FILE_PATH ]
-      set -l commit_prefix  (cat $COMMIT_PREFIX_FILE_PATH | tr -d '\n' | string trim)
-      set commit_message "$commit_prefix $commit_message"
+      for line in (cat .commit-prefixes | string split ' -> ' | paste  -d ' ' - -)
+        set substring (string split -f1 ' ' $line)
+        if string match -eq $substring $branch
+          set prefix (string split -f2 ' ' $line)
+          set commit_message "$commit_prefix $commit_message"
+          break
+        end
+      end
     end
 
     set -f commit_message_length (string length $commit_message)
