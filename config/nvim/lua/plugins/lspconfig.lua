@@ -47,10 +47,13 @@ return {
       })
 
       setup("pylsp", {
-        cmd = { "uvx", "--from", "python-lsp-server[all]", "pylsp" },
+        cmd = { "uvx", "--with", "python-lsp-ruff", "--from", "python-lsp-server[all]", "pylsp" },
         plugins = {
           ruff = {
             formatEnabled = true,
+            enabled = true,
+            extendSelect = { "ALL" },
+            format = { "ALL" },
             executable = "uvx ruff",
           },
         },
