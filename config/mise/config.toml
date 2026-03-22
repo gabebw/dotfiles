@@ -5,6 +5,7 @@ node = "lts"
 ruby = "3.4.5"
 "npm:typescript-language-server" = "latest"
 "npm:vscode-langservers-extracted" = "4.10.0"
+"npm:vscode-json-languageserver" = "latest"
 # https://herb-tools.dev/projects/language-server
 "npm:@herb-tools/language-server" = "latest"
 

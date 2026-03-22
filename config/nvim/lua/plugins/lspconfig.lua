@@ -3,6 +3,9 @@
 return {
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "b0o/SchemaStore.nvim",
+    },
     config = function()
       --- Wrapper for setting up and enabling language-server
       ---@param ls string server name
@@ -86,6 +89,15 @@ return {
 
       setup("oxlint", {
         cmd = { "yarn", "oxlint", "--lsp" },
+      })
+
+      setup("jsonls", {
+        settings = {
+          json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
+          },
+        },
       })
     end,
   },
