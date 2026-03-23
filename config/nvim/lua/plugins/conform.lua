@@ -18,7 +18,7 @@ return {
       ---@module "conform"
       ---@type conform.setupOpts
       return {
-        stop_after_first = true,
+        default_format_opts = { stop_after_first = true },
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff" },
