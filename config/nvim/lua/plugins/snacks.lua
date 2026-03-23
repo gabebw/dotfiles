@@ -223,6 +223,13 @@ return {
         end,
         desc = "Show a meta-picker",
       },
+      {
+        "<Leader>y",
+        function()
+          require("yanky.picker").select_in_history()
+        end,
+        desc = "Show yank history",
+      },
       { "<Leader>fc", custom_pickers.files_changed_in_branch, desc = "Files that changed in current branch" },
     },
     ---@module "snacks"
