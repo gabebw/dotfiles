@@ -60,13 +60,6 @@ return {
           auto_show_delay_ms = 0,
         },
       },
-      sources = {
-        providers = {
-          -- Defaults to `{ 'buffer' }`, which means "only show buffer if LSP has no results".
-          -- When it's blank, we always show buffer completions.
-          lsp = { fallbacks = {} },
-        },
-      },
     },
   },
 }
