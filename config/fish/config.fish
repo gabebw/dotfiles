@@ -301,7 +301,10 @@ end
 
 # Git {{{
 alias gd "git diff"
-alias gdm "git master-to-main-wrapper diff origin/%BRANCH%"
+function gdm
+  git fetch
+  and git master-to-main-wrapper diff origin/%BRANCH% $argv
+end
 alias amend "git commit --amend -Chead"
 alias amend-new "git commit --amend"
 alias ga "git add"
