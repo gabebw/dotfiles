@@ -25,7 +25,7 @@ function gcm
         set substring (string split -f1 ' ' $line)
         if string match -eq $substring $branch
           set prefix (string split -f2 ' ' $line)
-          set commit_message "$commit_prefix $commit_message"
+          set commit_message "$prefix $commit_message"
           break
         end
       end
