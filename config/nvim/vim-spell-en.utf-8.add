@@ -260,3 +260,5 @@ protobuf
 npm
 Oxfmt
 ADL
+TanStack
+Vitest
