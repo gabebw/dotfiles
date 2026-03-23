@@ -1,3 +1,18 @@
+local function oxfmt_location(config, ctx)
+  local util = require "conform.util"
+  local from_node_modules = util.from_node_modules "oxfmt"(config, ctx)
+  if from_node_modules == "oxfmt" then
+    local yarn_pnp_has_it = vim.system({ "yarn", "info", "--name-only", "oxfmt" }):wait().code == 0
+    if yarn_pnp_has_it then
+      return "pnp"
+    else
+      return "regular"
+    end
+  else
+    return "regular"
+  end
+end
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -70,6 +85,27 @@ return {
             append_args = { "--sort-keys" },
             condition = function(_, ctx)
               return ctx.filename:match "Code/User/settings.json"
+            end,
+          },
+          oxfmt = {
+            -- Inherit from https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/oxfmt.lua
+            inherit = "oxfmt",
+            command = function(config, ctx)
+              local location = oxfmt_location(config, ctx)
+              if location == "pnp" then
+                -- start building "yarn exec oxfmt"
+                return "yarn"
+              elseif location == "regular" then
+                return "oxfmt"
+              end
+            end,
+            args = function(config, ctx)
+              local location = oxfmt_location(config, ctx)
+              if location == "pnp" then
+                return { "exec", "oxfmt", "--stdin-filepath", "$FILENAME" }
+              elseif location == "regular" then
+                return { "--stdin-filepath", "$FILENAME" }
+              end
             end,
           },
           oxfmt_npx = {
