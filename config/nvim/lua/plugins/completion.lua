@@ -64,7 +64,7 @@ return {
         providers = {
           -- Defaults to `{ 'buffer' }`, which means "only show buffer if LSP has no results".
           -- When it's blank, we always show buffer completions.
-          lsp = { fallbacks = {} },
+          lsp = { fallbacks = { "buffer" } },
         },
       },
     },
