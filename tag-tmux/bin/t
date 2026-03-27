@@ -83,8 +83,11 @@ end
 
 # $period can use natural language, e.g. "1 month"
 function projects_changed_within -a period
-  command fd --changed-within $period . $PROJECT_PREFIX \
-    --exec git -C {} rev-parse --show-toplevel 2>/dev/null | \
+  fd --hidden --no-ignore --type directory --prune --full-path \
+    "\\.git/" $PROJECT_PREFIX \
+    --changed-within $period \
+    --max-depth 5 | \
+    sed -E 's|/?.git/.*||g' | \
     sort -u
 end
 
