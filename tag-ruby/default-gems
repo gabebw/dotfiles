@@ -1,3 +1,5 @@
+# https://mise.jdx.dev/lang/ruby.html#default-gems
+
 awesome_print
 redcarpet
 ruby-lsp-rails
