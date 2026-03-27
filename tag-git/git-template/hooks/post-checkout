@@ -11,7 +11,7 @@ set flag $argv[3]
 if git diff --name-only $previous_head $new_head | rg -qF Gemfile
   if bundle check > /dev/null || bundle install --jobs=4
     bundle config set bin './bin/stubs'
-    bundle binstubs --all
+    bundle binstubs --all 2>&1 | rg -v 'Bundler itself does not use binstubs because its version is selected by RubyGems'
   else
     echo "Would have run bundle, but skipped"
   end
