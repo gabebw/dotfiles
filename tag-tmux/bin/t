@@ -91,7 +91,7 @@ function projects_changed_within -a period
     sort -u
 end
 
-if ! command -v zoxide 2>/dev/null
+if ! command -v zoxide &>/dev/null
   echo "!!! You need to install zoxide" >&2
   exit 1
 end
