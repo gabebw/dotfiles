@@ -4,5 +4,7 @@ awesome_print
 redcarpet
 ruby-lsp-rails
 standard
+elastic_tabstops
+
 # parity: useful tools for Heroku development/staging/production
 parity
