@@ -2,3 +2,6 @@
 # https://docs.npmjs.com/cli/v11/using-npm/scripts#life-cycle-scripts
 # https://docs.npmjs.com/cli/v11/commands/npm-install#ignore-scripts
 ignore-scripts=true
+
+# in days
+min-release-age=7
