@@ -38,11 +38,7 @@
   "[xml]": {
     "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
-  "advancedNewFile.convenienceOptions": [
-    "last",
-    "current",
-    "root"
-  ],
+  "advancedNewFile.convenienceOptions": ["last", "current", "root"],
   "breadcrumbs.enabled": true,
   "chat.agent.enabled": false,
   "chat.checkpoints.enabled": false,
@@ -84,9 +80,7 @@
       }
     ]
   },
-  "eslint.codeActionsOnSave.rules": [
-    "unused-imports/no-unused-imports"
-  ],
+  "eslint.codeActionsOnSave.rules": ["unused-imports/no-unused-imports"],
   "eslint.format.enable": true,
   "eslint.run": "onSave",
   "explorer.confirmDelete": false,
