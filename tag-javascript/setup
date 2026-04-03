@@ -6,6 +6,3 @@ echo 'Installing NodeJS (latest LTS) and Yarn...'
 mise use --global node@lts
 npm install --silent --no-progress -g prettier
 npm install --silent --no-progress -g yarn
-
-# Turn off progress bar globally
-npm set progress=false

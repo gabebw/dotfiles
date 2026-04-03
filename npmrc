@@ -5,3 +5,6 @@ ignore-scripts=true
 
 # in days
 min-release-age=7
+
+# Turn off progress bar globally
+progress=false
