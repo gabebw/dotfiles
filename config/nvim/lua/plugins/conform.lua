@@ -41,6 +41,7 @@ return {
           typescriptreact = js,
           typescript = js,
           css = js,
+          scss = js,
           ["eruby.yaml"] = prettier,
           ruby = { "standardrb" },
           eruby = { "erb_lint" },
