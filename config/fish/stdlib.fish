@@ -19,6 +19,17 @@ function git_root
   git rev-parse --show-toplevel
 end
 
+# Is there anything:
+# a) staged but uncommitted, or
+# b) unstaged
+function git_is_dirty
+  ! git_is_clean
+end
+
+function git_is_clean
+  git diff-index --quiet HEAD --
+end
+
 # Time formats that `gum log --time` accepts, with examples:
 # (the bit after "WARN" is the format name, e.g. `layout`)
 # 03/11 09:55:26PM '26 -0700 WARN layout
