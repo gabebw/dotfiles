@@ -21,7 +21,7 @@ function gcm
     set -f branch (git current-branch)
     set -f commit_message (string join ' ' $argv)
     if [ -r $COMMIT_PREFIX_FILE_PATH ]
-      for line in (cat .commit-prefixes | string split ' -> ' | paste  -d ' ' - -)
+      for line in (cat $COMMIT_PREFIX_FILE_PATH | string split ' -> ' | paste  -d ' ' - -)
         set substring (string split -f1 ' ' $line)
         if string match -eq $substring $branch
           set prefix (string split -f2 ' ' $line)
