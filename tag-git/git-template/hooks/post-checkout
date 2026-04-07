@@ -16,5 +16,3 @@ if git diff --name-only $previous_head $new_head | rg -qF Gemfile
     echo "Would have run bundle, but skipped"
   end
 end
-
-.git/hooks/ctags >/dev/null 2>&1 &
