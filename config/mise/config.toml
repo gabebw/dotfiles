@@ -2,7 +2,7 @@
 java = "temurin-17"
 node = "lts"
 "npm:typescript" = "latest"
-ruby = "3.4.5"
+ruby = "4.0"
 "npm:typescript-language-server" = "latest"
 "npm:vscode-langservers-extracted" = "4.10.0"
 "npm:vscode-json-languageserver" = "latest"
