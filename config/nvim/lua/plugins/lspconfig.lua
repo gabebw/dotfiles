@@ -30,6 +30,8 @@ return {
         },
       })
 
+      setup "tsgo"
+
       setup("ts_ls", {
         filetypes = {
           -- Do not initialize on JS files, because it tries to find the TS installation on random
