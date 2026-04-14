@@ -7,14 +7,6 @@
 # With no arguments, fuzzy-finds a session in a directory using the `projects`
 # script.
 
-if [ (count $argv) -gt 0 ] && [ $argv[1] = with-tmux ]
-  set USE_FZF_TMUX true
-  # Remove the first argument, like `shift` in Bash/Zsh
-  set argv $argv[2..]
-else
-  set USE_FZF_TMUX false
-end
-
 function not_in_tmux
   [ -z "$TMUX" ]
 end
@@ -101,11 +93,7 @@ if [ (count $argv) -eq 1 ]
 else if [ (count $argv) -eq 2 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1]) $argv[2]
 else
-  if $USE_FZF_TMUX
-    set project_directory $(projects | fzf-tmux --reverse -d '85%')
-  else
-    set project_directory $(projects | fzf --reverse)
-  end
+  set project_directory $(projects | fzf-tmux --reverse -p)
 
   if [ -n "$project_directory" ]
     set session_name $(tmux_normalize_session_name $project_directory)
