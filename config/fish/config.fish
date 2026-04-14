@@ -135,11 +135,6 @@ function utf8
   string split '' | xargs -n1 chars
 end
 
-# All the flags I always want turned on
-alias fd-basic "command fd --no-ignore --ignore-case --full-path --type file"
-
-alias fd "fd-basic --type file"
-
 [ -r ~/.rgrc ] && set -x RIPGREP_CONFIG_PATH ~/.rgrc
 # Note that `bat` does not understand `~`, so we need `$HOME`
 set -x BAT_CONFIG_PATH "$HOME/.config/bat/config"
