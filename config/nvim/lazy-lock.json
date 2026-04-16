@@ -8,12 +8,12 @@
   "file-line": { "branch": "master", "commit": "eebcb590578f88359635b41d64c2664a0b9e4ced" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "gitsigns.nvim": { "branch": "main", "commit": "25050e4ed39e628282831d4cbecb1850454ce915" },
+  "goyo.vim": { "branch": "master", "commit": "9c72fdf2d202914318581f9f0dd09fd102f8504d" },
   "gx.nvim": { "branch": "main", "commit": "ba9c408fc0130fc4548760c3933a81b58fc50de8" },
   "koda.nvim": { "branch": "main", "commit": "a7da3ced59eadafbda6eb4d7f7e2a6a3d9ecf858" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lazydev.nvim": { "branch": "main", "commit": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d" },
   "lualine.nvim": { "branch": "master", "commit": "221ce6b2d999187044529f49da6554a92f740a96" },
-  "lush.nvim": { "branch": "main", "commit": "9c60ec2279d62487d942ce095e49006af28eed6e" },
   "lyaml": { "branch": "master", "commit": "e72ed744051a16de4c070c3f658b4c237d2637c7" },
   "mini.nvim": { "branch": "main", "commit": "ff8b3580935818ef2f21bdd651f057a2ae071eab" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "664c0b7cea1de71f8b65dfe951b7996fc3e6ccde" },
@@ -63,6 +63,5 @@
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "words-to-avoid.vim": { "branch": "master", "commit": "65913c5e43ae948c1856b68e013f435ee68fd451" },
   "yanky.nvim": { "branch": "main", "commit": "020c22d0cfa60358569e49d1d7b91630f175aef0" },
-  "yats.vim": { "branch": "master", "commit": "2d9b95b91b9f72bb1769951841b32d2a879d3cd7" },
-  "zenbones.nvim": { "branch": "main", "commit": "239bdb9a09c8d38c752c43590d02f654ed0da2b0" }
+  "yats.vim": { "branch": "master", "commit": "2d9b95b91b9f72bb1769951841b32d2a879d3cd7" }
 }

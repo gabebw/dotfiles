@@ -61,4 +61,38 @@ return {
   { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
   -- `l` text object for the current line excluding leading whitespace
   { "kana/vim-textobj-line", dependencies = { "kana/vim-textobj-user" } },
+
+  {
+    "junegunn/goyo.vim",
+    config = function()
+      local goyo_group = vim.api.nvim_create_augroup("GoyoGroup", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        desc = "Hide lualine on goyo enter",
+        group = goyo_group,
+        pattern = "GoyoEnter",
+        callback = function(args)
+          require("lualine").hide({})
+          require("gitsigns").detach(args.buf)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("BufEnter", {
+        desc = "Set Goyo width to current textwidth",
+        group = goyo_group,
+        pattern = "*.md",
+        callback = function()
+          -- Now :Goyo will automatically use the current tw
+          vim.g.goyo_width = vim.o.textwidth
+        end,
+      })
+      vim.api.nvim_create_autocmd("User", {
+        desc = "Show lualine after goyo exit",
+        group = goyo_group,
+        pattern = "GoyoLeave",
+        callback = function()
+          require("lualine").hide({ unhide = true })
+        end,
+      })
+    end,
+  },
 }
