@@ -96,3 +96,6 @@ brew "gum"
 # z to go somewhere
 # zi to fuzzy-find through directories
 brew "zoxide"
+
+# Required for random things, like node-gyp: https://github.com/Automattic/node-canvas/issues/2158
+brew "pkg-config"
