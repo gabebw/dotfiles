@@ -63,3 +63,20 @@ end
 function error
   gum log --level=error --time=stamp $argv
 end
+
+function ensure-some-output -a message
+  if [ -z "$message" ]
+    set message "No output (at least one non-blank line required)!"
+  end
+
+  # This prints every line (if any!), intentionally.
+  # Turn off color because I just want to print it as-is.
+  if ! rg --color never '.'
+    error $message
+    return 1
+  end
+end
+
+function null-terminate
+  tr '\n' '\0'
+end
