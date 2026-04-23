@@ -24,7 +24,9 @@ return {
       local lume = require "lume"
       local prettier = { "prettierd", "prettier" }
       local oxfmt = { "oxfmt", "oxfmt_npx" }
-      local js = lume.concat(prettier, oxfmt)
+      -- If Oxfmt isn't installed, try Prettier, and if that's not installed, reach for `npx oxfmt`,
+      -- which is always available regardless of project.
+      local js = lume.concat({ "oxfmt" }, prettier, { "oxfmt_npx" })
       local jsonc = lume.concat({ "vscode_settings" }, js)
 
       -- Tip: if `prettier` fails, try switching Yarn from `pnp` to `node-modules` linker, or add
