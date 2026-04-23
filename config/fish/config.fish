@@ -191,7 +191,7 @@ end
 
 # Note that these FZF options are used by fzf.vim automatically! Yay!
 # Use a separate tool to smartly ignore files
-set -x FZF_DEFAULT_COMMAND 'rg --hidden --files --ignore-file ~/.ignore'
+set -x FZF_DEFAULT_COMMAND 'command fd'
 set -x FZF_DEFAULT_OPTS_FILE $HOME/.fzfrc # Doesn't expand ~, so use $HOME
 # }}}
 
