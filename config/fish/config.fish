@@ -61,6 +61,9 @@ end
 # The `xdg` and `etcetera` crates, while less popular, seem to do the right thing.
 set -x XDG_CONFIG_HOME "$HOME/.config"
 
+# Tell well-behaved tools not to send telemetry
+set -x DO_NOT_TRACK 1
+
 # Aliases {{{
 alias va "nvim ~/.aliases.fish"
 alias q "nvim (readlink -f ~/.config/fish/config.fish)"
