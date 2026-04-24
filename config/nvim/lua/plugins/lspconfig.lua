@@ -7,6 +7,8 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
+      local lume = require "lume"
+
       --- Wrapper for setting up and enabling language-server
       ---@param ls string server name
       ---@param config? vim.lsp.Config
@@ -30,19 +32,19 @@ return {
         },
       })
 
-      setup "tsgo"
-
-      setup("ts_ls", {
-        filetypes = {
-          -- Do not initialize on JS files, because it tries to find the TS installation on random
-          -- one-off JS files and then prints an error
-          -- Copied from: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua
-          -- "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-        },
-      })
+      lume.each({ "ts_ls", "tsgo" }, function(name)
+        setup(name, {
+          filetypes = {
+            -- Do not initialize on JS files, because it tries to find the TS installation on random
+            -- one-off JS files and then prints an error
+            -- Copied from: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua
+            -- "javascript",
+            "javascriptreact",
+            "typescript",
+            "typescriptreact",
+          },
+        })
+      end)
 
       setup("ruby_lsp", {
         cmd = { "ruby-lsp" },
