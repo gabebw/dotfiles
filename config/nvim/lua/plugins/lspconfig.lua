@@ -93,10 +93,32 @@ return {
         cmd = { "yarn", "oxlint", "--lsp" },
       })
 
+      local json = require("schemastore").json
+      local extend_file_match = function(name, new_patterns)
+        if not json.get(name) then
+          vim.notify('Oops, no schema for "' .. name .. '"', vim.log.levels.ERROR)
+          return ""
+        end
+        return lume.extend(json.get(name), {
+          fileMatch = lume.extend(json.get(name).fileMatch, new_patterns),
+        })
+      end
+
       setup("jsonls", {
         settings = {
           json = {
-            schemas = require("schemastore").json.schemas(),
+            schemas = json.schemas({
+              replace = {
+                oxfmt = extend_file_match("oxfmt", {
+                  -- When editing the un-dotted file in dotfiles, turn on the LSP
+                  "dotfiles/oxfmtrc.json",
+                }),
+                ["prettierrc.json"] = extend_file_match("prettierrc.json", {
+                  -- When editing the un-dotted file in dotfiles, turn on the LSP
+                  "dotfiles/prettierrc.json",
+                }),
+              },
+            }),
             validate = { enable = true },
           },
         },
