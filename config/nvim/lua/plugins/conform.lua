@@ -1,3 +1,4 @@
+-- Returns either the string "pnp", or the absolute path to the `oxfmt` binary
 local function oxfmt_location(config, ctx)
   local util = require "conform.util"
   local from_node_modules = util.from_node_modules "oxfmt"(config, ctx)
@@ -6,10 +7,10 @@ local function oxfmt_location(config, ctx)
     if yarn_pnp_has_it then
       return "pnp"
     else
-      return "regular"
+      return from_node_modules
     end
   else
-    return "regular"
+    return from_node_modules
   end
 end
 
@@ -98,15 +99,15 @@ return {
               if location == "pnp" then
                 -- start building "yarn exec oxfmt"
                 return "yarn"
-              elseif location == "regular" then
-                return "oxfmt"
+              else
+                return location
               end
             end,
             args = function(config, ctx)
               local location = oxfmt_location(config, ctx)
               if location == "pnp" then
                 return { "exec", "oxfmt", "--stdin-filepath", "$FILENAME" }
-              elseif location == "regular" then
+              else
                 return { "--stdin-filepath", "$FILENAME" }
               end
             end,
