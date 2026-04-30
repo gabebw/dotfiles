@@ -113,6 +113,10 @@ return {
                   -- When editing the un-dotted file in dotfiles, turn on the LSP
                   "dotfiles/oxfmtrc.json",
                 }),
+                oxlint = extend_file_match("oxlint", {
+                  -- When editing the un-dotted file in dotfiles, turn on the LSP
+                  "dotfiles/oxlintrc.json",
+                }),
                 ["prettierrc.json"] = extend_file_match("prettierrc.json", {
                   -- When editing the un-dotted file in dotfiles, turn on the LSP
                   "dotfiles/prettierrc.json",

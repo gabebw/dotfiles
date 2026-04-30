@@ -1,0 +1,28 @@
+{
+  // NOTE: Setting the plugins field will overwrite the base set of plugins. The plugins array
+  // should reflect all of the plugins you want to use.
+  // List of plugins: https://oxc.rs/docs/guide/usage/linter/plugins.html#supported-plugins
+  // Default plugins: eslint, typescript, unicorn
+  "plugins": ["import", "eslint", "oxc", "promise", "typescript", "unicorn"],
+  "options": {
+    // Must be set in the root config (per-repo, not in the one in $HOME)
+    // "typeAware": true
+  },
+  "categories": {
+    "correctness": "error"
+  },
+  // https://eslint.org/docs/v8.x/use/configure/language-options#specifying-environments
+  "env": {
+    "es2024": true
+  },
+  "ignorePatterns": [".yarn/*"],
+  // Rules reference: https://oxc.rs/docs/guide/usage/linter/rules.html
+  "rules": {
+    // https://oxc.rs/docs/guide/usage/linter/rules/eslint/eqeqeq
+    "eqeqeq": "error",
+    // https://oxc.rs/docs/guide/usage/linter/rules/import/no-cycle
+    "import/no-cycle": "error"
+  },
+  "globals": {},
+  "overrides": []
+}
