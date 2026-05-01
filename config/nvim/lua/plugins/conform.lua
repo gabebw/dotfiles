@@ -1,17 +1,29 @@
+-- Returns `true` only if it's sure it's Yarn Berry. If something goes wrong, it returns `false`.
+local function is_yarn_berry()
+  local yarn_version_string = vim.system({ "yarn", "-v" }):wait().stdout
+  if yarn_version_string then
+    local yarn_v1 = yarn_version_string:sub(1, 1) == "1"
+    return not yarn_v1
+  else
+    -- We're not sure what happened, but default to "no"
+    return false
+  end
+end
+
 -- Returns either the string "pnp", or the absolute path to the `oxfmt` binary
 local function oxfmt_location(config, ctx)
   local util = require "conform.util"
   local from_node_modules = util.from_node_modules "oxfmt"(config, ctx)
-  if from_node_modules == "oxfmt" then
+  -- Check for Yarn Berry (version >=2) because `yarn info` behaves differently in Yarn v1, so stop now and don't even try.
+  -- Plus, Yarn PnP only works in Yarn Berry.
+  if from_node_modules == "oxfmt" and is_yarn_berry() then
     local yarn_pnp_has_it = vim.system({ "yarn", "info", "--name-only", "oxfmt" }):wait().code == 0
     if yarn_pnp_has_it then
       return "pnp"
-    else
-      return from_node_modules
     end
-  else
-    return from_node_modules
   end
+
+  return from_node_modules
 end
 
 ---@module "lazy.types"
