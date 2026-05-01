@@ -73,6 +73,8 @@ return {
         callback = function(args)
           require("lualine").hide({})
           require("gitsigns").detach(args.buf)
+          -- Prevent GitSigns from re-attaching on :write
+          vim.opt_local.eventignore = "BufWritePost"
         end,
       })
 
