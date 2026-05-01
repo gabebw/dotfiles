@@ -23,7 +23,7 @@ return {
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       require("koda").setup()
-      vim.cmd [[ colorscheme koda-dark ]]
+      vim.cmd [[ colorscheme koda-moss ]]
     end,
   },
 }
