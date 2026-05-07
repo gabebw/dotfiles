@@ -8,7 +8,7 @@ ruby = "4.0"
 "npm:vscode-json-languageserver" = "latest"
 # https://herb-tools.dev/projects/language-server
 "npm:@herb-tools/language-server" = "latest"
-"npm:oxfmt" = "latest"
+oxfmt = "0.46.0"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
