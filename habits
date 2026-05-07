@@ -17,3 +17,5 @@ Vim: `g=` to run a chunk of Lua code
 Vim: `<Leader>.` to open a scratch buffer
 %
 Use `spacer` to insert spacers when command output stops
+%
+Find dupes: use `fclones`
