@@ -127,6 +127,25 @@ return {
           },
         },
       })
+
+      -- https://github.com/neovim/nvim-lspconfig/blob/451d4ef9abd4f0f08e379ef0d55d1c391b6125a7/lsp/tailwindcss.lua#L102
+      local defaultTailwindClassAttributes = {
+        "class",
+        "className",
+        "class:list",
+        "classList",
+        "ngClass",
+      }
+      setup("tailwindcss", {
+        settings = {
+          tailwindCSS = {
+            -- Can use regexes in `classAttributes` and `classFunctions`
+            -- Defaults: https://github.com/tailwindlabs/tailwindcss-intellisense/blob/3c7bd0c009b8260386e05fa3574e936d987bbd78/packages/tailwindcss-language-service/src/util/state.ts#L46
+            classAttributes = lume.extend(defaultTailwindClassAttributes, { ".+ClassName", "triggerStyle" }),
+            classFunctions = { "tw", "clsx", "tw\\.[a-z-]+" },
+          },
+        },
+      })
     end,
   },
 }
