@@ -32,7 +32,7 @@ return {
         },
       })
 
-      lume.each({ "ts_ls", "tsgo" }, function(name)
+      lume.each({ "ts_ls" }, function(name)
         setup(name, {
           filetypes = {
             -- Do not initialize on JS files, because it tries to find the TS installation on random
