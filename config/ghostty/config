@@ -17,3 +17,6 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 
 # Cmd+k triggers a command palette, like VS Code
 keybind = cmd+k=toggle_command_palette
+
+# no-attention: don't badge the icon in the dock when there's a bell
+bell-features = no-attention
