@@ -1,0 +1,12 @@
+{
+  "trustedformulae": [
+    "bufbuild/buf/buf",
+    "coursier/formulas/coursier",
+    "gabebw/formulae/candle",
+    "get-celq/tap/celq",
+    "heroku/brew/heroku",
+    "schpet/tap/linear",
+    "thoughtbot/formulae/parity",
+    "tumf/tap/slack_rs"
+  ]
+}
