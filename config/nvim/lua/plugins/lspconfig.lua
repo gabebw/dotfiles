@@ -146,6 +146,8 @@ return {
           },
         },
       })
+
+      setup "bashls"
     end,
   },
 }

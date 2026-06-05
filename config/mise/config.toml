@@ -10,6 +10,7 @@ ruby = "4.0"
 "npm:@herb-tools/language-server" = "latest"
 oxfmt = "0.46.0"
 "npm:@tailwindcss/language-server" = "0.x"
+"npm:bash-language-server" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
