@@ -14,6 +14,14 @@ function error_if_input
   end
 end
 
+# A big red box
+function alert
+  gum style \
+    --border-foreground '#FF0000' --border normal \
+    --align center --width '100' --padding 1 \
+    --bold $argv
+end
+
 # The top-level directory in this git repo, where `.git` is
 function git_root
   git rev-parse --show-toplevel
