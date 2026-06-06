@@ -417,8 +417,7 @@ set -x GOBIN ~/.bin
 [ -r ~/.aliases.fish ] && source ~/.aliases.fish
 
 if status --is-interactive
-  zoxide init fish --no-cmd | source
-  alias z __zoxide_zi
+  zoxide init fish | source
 
   set -U fish_greeting ""
   # Erase a global (non-universal) variable if set, since it interferes with the
