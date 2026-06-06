@@ -1,101 +1,60 @@
 # vim: syntax=ruby filetype=ruby
 
-# rcm: dotfile management
-brew "rcm"
-
 tap "gabebw/formulae"
 # sed for HTML: https://github.com/gabebw/candle
 brew "candle"
 
-brew "heroku"
-
 brew "bat"
+brew "chars"
 brew "chrome-cli"
+brew "ctags" # so :Rtags works
+brew "difftastic"
+brew "diffutils" # macOS ships with version 2.8. Get version 3.4+ so `diff --color` works.
+brew "expect" # for `unbuffer`
+brew "eza"
 brew "fd"
+brew "ffmpeg"
+brew "fish"
+brew "fortune"
 brew "fzf"
-brew "git"
-brew "hexyl"
 brew "gh"
+brew "git"
+brew "git-delta"
+brew "git-lfs"
+brew "gnuplot" # Simple graphs with `bin/line_graph`
+brew "gum" # Fancy shell scripting: https://github.com/charmbracelet/gum
+brew "heroku"
+brew "hexyl"
+brew "jq" # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
+brew "mise" # general version manager (and more) @ https://mise.jdx.dev
+brew "moreutils" # I love `sponge` so much.
+brew "openssl@3"
+brew "pandoc"
 brew "pgrep"
+brew "php" # for Alfred workflow
+brew "pkg-config" # Required for random things, like node-gyp: https://github.com/Automattic/node-canvas/issues/2158
+brew "prettierd" # prettier daemon to avoid per-format startup cost
+brew "rcm" # rcm: dotfile management
 brew "ripgrep"
+brew "rustup" # Don't install `rust` - let rustup handle it
+brew "starship" # Prompt: https://starship.rs
 brew "tag"
 brew "tree"
-brew "vim"
-brew "git-delta"
-
-# sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
-brew "jq"
-
-# sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
-brew "xmlstarlet"
-
-# Slice and dice your CSV
-brew "xsv"
-
-# macOS ships with version 2.8. Get version 3.4+ so `diff --color` works.
-brew "diffutils"
-
-# so :Rtags works
-brew "ctags"
-
-brew "ffmpeg"
-
-# I love `sponge` so much.
-brew "moreutils"
-
-# general version manager (and more)
-# https://mise.jdx.dev
-brew "mise"
-
-# Simple graphs with `bin/line_graph`
-brew "gnuplot"
-
-# Personal manpages, written in Markdown
-brew "um"
-
-# Rust
-# Don't install `rust` - let rustup handle it
-brew "rustup"
-
-# watch COMMAND runs COMMAND on a regular cadence
-brew "watch"
-
-# Prompt: https://starship.rs
-brew "starship"
-
-# Git Large File Support
-brew "git-lfs"
-
-# Neovim/Lua
-brew "neovim"
-brew "stylua"
-brew "lua-language-server"
-brew "luarocks"
-
-brew "fish"
+brew "um" # Personal manpages, written in Markdown
 brew "uv"
-brew "prettierd" # prettier daemon to avoid per-format startup cost
-brew "eza"
-brew "difftastic"
-brew "expect" # for `unbuffer`
-brew "openssl@3"
-brew "php" # for Alfred workflow
-
-# For Scala/Play
-brew "scala"
-brew "coursier"
-brew "sql-formatter"
-
-brew "fortune"
-brew "pandoc"
-brew "chars"
-
-# Fancy shell scripting: https://github.com/charmbracelet/gum?tab=readme-ov-file
-brew "gum"
-
-# z to go somewhere
-# zi to fuzzy-find through directories
+brew "vim"
+brew "watch" # watch COMMAND runs COMMAND on a regular cadence
+brew "xmlstarlet" # sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
+brew "xsv" # Slice and dice your CSV
 brew "zoxide"
 
-# Required for random things, like node-gyp: https://github.com/Automattic/node-canvas/issues/2158
-brew "pkg-config"
+# Neovim/Lua
+brew "lua-language-server"
+brew "luarocks"
+brew "neovim"
+brew "stylua"
+
+# Scala/Play
+brew "coursier"
+brew "scala"
+brew "sql-formatter"
