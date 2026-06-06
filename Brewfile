@@ -12,6 +12,7 @@ brew "difftastic"
 brew "diffutils" # macOS ships with version 2.8. Get version 3.4+ so `diff --color` works.
 brew "expect" # for `unbuffer`
 brew "eza"
+brew "f2" # batch rename: https://github.com/ayoisaiah/f2
 brew "fd"
 brew "ffmpeg"
 brew "fish"
@@ -37,11 +38,13 @@ brew "prettierd" # prettier daemon to avoid per-format startup cost
 brew "rcm" # rcm: dotfile management
 brew "ripgrep"
 brew "rustup" # Don't install `rust` - let rustup handle it
+brew "sd" # search and replace: https://github.com/chmln/sd
 brew "starship" # Prompt: https://starship.rs
 brew "tag"
 brew "tree"
 brew "um" # Personal manpages, written in Markdown
 brew "uv"
+brew "viddy" # a better `watch`: https://github.com/sachaos/viddy
 brew "vim"
 brew "watch" # watch COMMAND runs COMMAND on a regular cadence
 brew "xmlstarlet" # sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904

@@ -18,4 +18,8 @@ Vim: `<Leader>.` to open a scratch buffer
 %
 Use `spacer` to insert spacers when command output stops
 %
-Find dupes: use `fclones`
+Find dupes: use `fclones group .`
+%
+Use `viddy` instead of `watch`
+%
+f2 docs: https://f2.freshman.tech/
