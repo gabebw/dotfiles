@@ -185,6 +185,11 @@ function notifyme
   set -l words (string join " " $argv)
   osascript -e "display notification \"$words\" with title \"Title\""
 end
+
+# Usage: github-preview-locally ./docs/README.md
+function github-preview-locally
+  go run github.com/chrishrb/go-grip@latest $argv
+end
 # }}}
 
 # Options {{{
