@@ -1,0 +1,4 @@
+#!/usr/bin/env fish --no-config
+
+# Remove all EXIF data
+exiftool -all=  $argv

@@ -30,11 +30,7 @@ function in_vs_code
   [ "$TERM_PROGRAM" = "vscode" ]
 end
 
-function in_ghostty_quick_terminal
-  [ $(tput lines) -le 25 ]
-end
-
-if not inside_ssh; and not in_vs_code; and status --is-interactive; and not in_ghostty_quick_terminal
+if not inside_ssh; and not in_vs_code; and status --is-interactive
   # Connect to most recent tmux session
 
   if not set -q TMUX; and tmux has-session 2>/dev/null
@@ -65,6 +61,7 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x DO_NOT_TRACK 1
 
 # Aliases {{{
+alias ll 'lazygit log'
 alias va "nvim ~/.aliases.fish"
 alias q "nvim (readlink -f ~/.config/fish/config.fish)"
 alias qq "source ~/.config/fish/config.fish"
@@ -85,13 +82,7 @@ function diff -w diff
   command diff --color=auto -U3 $argv
 end
 
-# It can be used anywhere, not just in git
-alias diff-long-lines "git diff --word-diff=porcelain"
 alias mkdir "command mkdir -p"
-function serialnumber
-  ioreg -l | rg IOPlatformSerialNumber | sed -e 's/^.*= "(.+)"/\1/' | tee /dev/tty | pbcopy
-  echo '(Copied for you)'
-end
 
 function read-from-stdin-or-pasteboard -a func
   if isatty stdin
@@ -99,13 +90,6 @@ function read-from-stdin-or-pasteboard -a func
   else
     $func
   end
-end
-
-function prettyjson
-  function doit
-    jq .
-  end
-  read-from-stdin-or-pasteboard doit
 end
 
 function prettyxml
@@ -130,61 +114,14 @@ function prettyjavascript
   read-from-stdin-or-pasteboard doit
 end
 
-# Remove EXIF data
-alias exif-remove "exiftool -all  "
 alias hexdump hexyl
-function utf8
-  # Pass each character to `chars`
-  string split '' | xargs -n1 chars
-end
 
 [ -r ~/.rgrc ] && set -x RIPGREP_CONFIG_PATH ~/.rgrc
 # Note that `bat` does not understand `~`, so we need `$HOME`
 set -x BAT_CONFIG_PATH "$HOME/.config/bat/config"
 alias cat bat
 alias less bat
-abbr -a -- - 'cd -'
 alias dotfiles 'cd dotfiles'
-
-# Slice out a piece of a string using a regex.
-# For example:
-#   $ slice 'sd[fg]' 'asdf'
-#   sdf
-function slice -a pattern s
-  string match -r $pattern $s
-end
-
-function dig-all -a url
-  if not string match -qre '^www\.' $url
-    printf "!! Note that CNAME cannot be on the bare domain\n\n" >&1
-  end
-
-  # Add a period to the end to canonicalize it, otherwise many records don't
-  # show up with the +norecurse flag
-  if not string match -qre '\.$' $url
-    set -f url "$url."
-  end
-
-  for record in a aaaa cname mx ns txt
-    # +noall: Turn off all output
-    # +answer: Show just the answer
-    dig +noall +answer $record $url
-  end
-
-  # Fastmail-specific email stuff
-  # https://www.fastmail.help/hc/en-us/articles/1500000280261-Setting-up-your-domain-MX-only#domain-registration
-  for fm in fm1 fm2 fm3
-    dig +noall +answer CNAME $fm._domainkey.$url
-  end
-  dig +noall +answer TXT _dmarc.$url
-end
-
-# Show a Notification Center notification. Good for long-running tasks:
-# long_running_task && notifyme "All done"
-function notifyme
-  set -l words (string join " " $argv)
-  osascript -e "display notification \"$words\" with title \"Title\""
-end
 
 # Usage: github-preview-locally ./docs/README.md
 function github-preview-locally
@@ -241,6 +178,7 @@ if status --is-interactive
   set fish_cursor_replace_one underscore
   set fish_cursor_visual block blink
 end
+
 # Fuzzy match against history, edit selected value
 # For exact match, start the query with a single quote: 'curl
 function fuzzy-history
@@ -254,24 +192,15 @@ function fuzzy-history
   commandline -f repaint
 end
 
-# Use Alfred's database of clipboard history and run it through FZF
-function fuzzy-clipboard-history
-  set -l clipboard_db "$HOME/Library/Application Support/Alfred/Databases/clipboard.alfdb"
-  set -l column_name "item"
-  set -l query (string join ' ' 'SELECT replace(item, CHAR(10), "") as ' $column_name ' FROM clipboard ORDER BY ts DESC;')
-  sqlite3 -line -noheader "$clipboard_db" $query 2>/dev/null | \
-    sed -n -e "s/$column_name = //p" | \
-    fzf --no-sort --multi
-end
-
 if status --is-interactive
   # Ctrl-r triggers fuzzy history search
   bind -M insert \cr 'fuzzy-history'
-  # Ctrl-v opens command line in your editor
+  # Ctrl-v opens command line in your editor (V for Vim)
   bind -M insert \cv edit_command_buffer
-  # Ctrl-p shows clipboard history in FZF and copies the selected item
-  bind -M insert \cp 'fuzzy-clipboard-history'
+  # Ctrl-p shows clipboard history picker and inserts results at the cursor
+  bind -M insert \cp 'commandline -i (clip)'
 end
+
 # }}}
 
 # cdpath {{{
@@ -296,21 +225,12 @@ if status --is-interactive
 end
 # }}}
 
-# Prompt {{{
-if status --is-interactive
-  starship init fish | source
-end
-# }}}
-
 # Git {{{
 alias gd "git diff"
 function gdm
   git master-to-main-wrapper diff origin/%BRANCH% $argv
 end
 
-function gdm-fetch
-  git fetch && gdm
-end
 alias amend "git commit --amend -Chead"
 alias amend-new "git commit --amend"
 alias ga "git add"
@@ -323,6 +243,7 @@ alias gcp "git rev-parse HEAD | xargs echo -n | pbcopy"
 set -x VISUAL nvim
 set -x EDITOR $VISUAL
 alias vi $VISUAL
+alias vim $VISUAL
 # }}}
 
 # Ruby/Rails {{{
@@ -333,23 +254,8 @@ alias rollback "be rake db:rollback"
 alias remigrate "migrate && rake db:rollback && migrate"
 alias rrg "rails routes | rg"
 alias db-reset "be rake db:drop db:create db:migrate db:test:prepare"
-function db-dump-and-restore -a connection_string local_db_name
-  if [ (count $argv) -ne 2 ]
-    echo "Usage: db-dump-and-restore <connection string> <local_db_name>" >&2
-    return 1
-  end
-  dropdb $local_db_name; or return 1
-  set -f dumpfile (mktemp)
-  db-dump $connection_string $dumpfile
-  and db-restore $local_db_name $dumpfile
-  # Use `command` to bypass my alias so it's quiet and not verbose
-  command rm $dumpfile
-end
 alias unfuck-gemfile "git checkout HEAD -- Gemfile.lock"
-
-# Bundler
 alias be "bundle exec"
-alias tagit 'ctags -R'
 
 # Ruby by default looks for openssl@1.1, which doesn't exist
 set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir="$(brew --prefix openssl@3)
@@ -366,8 +272,6 @@ set -x PSQL_EDITOR "nvim -c ':set ft=sql'"
 set -x HOMEBREW_NO_ANALYTICS 1
 # Do not auto-update Homebrew.
 set -x HOMEBREW_NO_AUTO_UPDATE 1
-# Always cleanup after installing or upgrading
-set -x HOMEBREW_INSTALL_CLEANUP 1
 # }}}
 
 # Set up SSH helper (mostly for Git)
@@ -392,7 +296,7 @@ set HOMEBREW_PREFIX (brew --prefix)
 fish_add_path --move --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
 # Find Node commands from current project
-set PATH $PATH ".git/safe/../../node_modules/.bin/"
+set PATH $PATH "./node_modules/.bin/"
 
 # Postgres.app takes precedence
 fish_add_path --move --path /Applications/Postgres.app/Contents/Versions/latest/bin
@@ -406,8 +310,6 @@ fish_add_path --path --move $HOME/.bin
 # https://get-coursier.io/docs/cli-installation
 fish_add_path --move --path --append $HOME"/Library/Application Support/Coursier/bin"
 
-status --is-interactive; and mise activate | source
-
 # Prepend binstubs
 # Do not use `fish_add_path` because that will expand `.` to wherever you are
 # when you sourced `config.fish`. I want it to refer to the current directory
@@ -419,9 +321,13 @@ set PATH ./bin/stubs $PATH
 set -x GOBIN ~/.bin
 # }}}
 
-[ -r ~/.aliases.fish ] && source ~/.aliases.fish
-
 if status --is-interactive
+  source ~/.config/fish/stdlib.fish
+
+  [ -r ~/.aliases.fish ] && source ~/.aliases.fish
+
+  starship init fish | source
+  mise activate | source
   zoxide init fish | source
 
   set -U fish_greeting ""

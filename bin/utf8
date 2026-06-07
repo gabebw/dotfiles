@@ -1,0 +1,14 @@
+#!/usr/bin/env fish --no-config
+
+# Print out UTF-8 information for each character on stdin, including its U+... and hex escape code
+# More about `chars`: https://github.com/boinkor-net/chars/
+
+if [ (count $argv) -gt 0 ]
+  set input $argv
+else if isatty stdin
+  set input (pbpaste)
+else
+  set input (read)
+end
+
+printf $input| string split '' | xargs -n1 chars

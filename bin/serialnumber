@@ -1,0 +1,4 @@
+#!/usr/bin/env fish --no-config
+
+ioreg -l | rg IOPlatformSerialNumber | sed -e 's/^.*= "(.+)"/\1/' | tee /dev/tty | pbcopy
+echo '(Copied for you)'

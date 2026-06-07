@@ -1,0 +1,12 @@
+#!/usr/bin/env fish --no-config
+
+# Use Alfred's database of clipboard history and run it through FZF
+set -l clipboard_db "$HOME/Library/Application Support/Alfred/Databases/clipboard.alfdb"
+
+set -l column_name "item"
+
+set -l query (string join ' ' 'SELECT replace(item, CHAR(10), "") as ' $column_name ' FROM clipboard ORDER BY ts DESC;')
+
+sqlite3 -line -noheader "$clipboard_db" $query 2>/dev/null | \
+  sed -n -e "s/$column_name = //p" | \
+  fzf --no-sort --multi

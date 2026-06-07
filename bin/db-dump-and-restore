@@ -1,0 +1,16 @@
+#!/usr/bin/env fish --no-config
+
+if [ (count $argv) -ne 2 ]
+  echo "Usage: db-dump-and-restore <connection string> <local_db_name>" >&2
+  return 1
+end
+
+set connection_string $argv[1]
+set local_db_name $argv[2]
+
+dropdb $local_db_name; or return 1
+set -f dumpfile (mktemp)
+db-dump $connection_string $dumpfile
+and db-restore $local_db_name $dumpfile
+# Use `command` to bypass my alias so it's quiet and not verbose
+command rm $dumpfile

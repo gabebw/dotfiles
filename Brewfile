@@ -27,6 +27,7 @@ brew "gum" # Fancy shell scripting: https://github.com/charmbracelet/gum
 brew "heroku"
 brew "hexyl"
 brew "jq" # sed for json: https://robots.thoughtbot.com/jq-is-sed-for-json
+brew "lazygit"
 brew "mise" # general version manager (and more) @ https://mise.jdx.dev
 brew "moreutils" # I love `sponge` so much.
 brew "openssl@3"
