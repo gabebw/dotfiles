@@ -43,6 +43,7 @@ brew "sd" # search and replace: https://github.com/chmln/sd
 brew "starship" # Prompt: https://starship.rs
 brew "tag"
 brew "tree"
+brew "tree-sitter-cli" # for `:TSInstall` in Vim
 brew "um" # Personal manpages, written in Markdown
 brew "uv"
 brew "viddy" # a better `watch`: https://github.com/sachaos/viddy
