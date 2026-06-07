@@ -297,6 +297,8 @@ fish_add_path --move --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
 
 # Find Node commands from current project
 set PATH $PATH "./node_modules/.bin/"
+# Intercept calls to `yarn` or `pnpm` and install the right version on use
+corepack enable
 
 # Postgres.app takes precedence
 fish_add_path --move --path /Applications/Postgres.app/Contents/Versions/latest/bin
