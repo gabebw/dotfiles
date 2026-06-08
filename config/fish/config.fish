@@ -323,11 +323,10 @@ set PATH ./bin/stubs $PATH
 set -x GOBIN ~/.bin
 # }}}
 
+source ~/.config/fish/stdlib.fish
+[ -r ~/.aliases.fish ] && source ~/.aliases.fish
+
 if status --is-interactive
-  source ~/.config/fish/stdlib.fish
-
-  [ -r ~/.aliases.fish ] && source ~/.aliases.fish
-
   starship init fish | source
   mise activate | source
   zoxide init fish | source
