@@ -17,5 +17,9 @@ font-size = 12
 # Cmd+k triggers a command palette, like VS Code
 keybind = cmd+k=toggle_command_palette
 
+# Turn off fullscreen keybinding (Ctrl-cmd-f)
+# To make it fullscreen: Cmd-k, then "Toggle full screen"
+fullscreen = false
+
 # no-attention: don't badge the icon in the dock when there's a bell
 bell-features = no-attention
