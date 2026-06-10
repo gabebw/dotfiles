@@ -148,6 +148,14 @@ return {
       })
 
       setup "bashls"
+
+      setup("yamlls", {
+        settings = {
+          yaml = {
+            schemas = json.schemas(),
+          },
+        },
+      })
     end,
   },
 }

@@ -51,6 +51,7 @@ brew "vim"
 brew "watch" # watch COMMAND runs COMMAND on a regular cadence
 brew "xmlstarlet" # sed for xml: http://xmlstar.sourceforge.net/doc/UG/ch04.html#idm47989546279904
 brew "xsv" # Slice and dice your CSV
+brew "yaml-language-server" # for SchemaStore support in e.g. `.yarnrc.yml`
 brew "zoxide"
 
 # Neovim/Lua
