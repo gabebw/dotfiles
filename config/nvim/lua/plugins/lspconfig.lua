@@ -156,6 +156,18 @@ return {
           },
         },
       })
+
+      -- Toml LSP: `brew install taplo`
+      setup("taplo", {
+        settings = {
+          taplo = {
+            schema = {
+              enabled = true,
+              catalogs = json.schemas(),
+            },
+          },
+        },
+      })
     end,
   },
 }
