@@ -1,3 +1,8 @@
+local function path_exists(path)
+  local stat = vim.uv.fs_stat(path)
+  return stat and stat.type == "file" or false
+end
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -89,8 +94,29 @@ return {
         },
       })
 
+      local oxlint_default_root_dir = vim.lsp.config["oxlint"].root_dir
+      --- @param root_dir string?
+      local oxlint_executable_in = function(root_dir)
+        return root_dir .. "/node_modules/.bin/oxlint"
+      end
+
       setup("oxlint", {
-        cmd = { "yarn", "oxlint", "--lsp" },
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start({ oxlint_executable_in(config.root_dir), "--lsp" }, dispatchers)
+        end,
+        -- Only start when oxlint is actually runnable.
+        -- If we never call `on_dir`, then the server doesn't start.
+        root_dir = function(bufnr, on_dir)
+          if oxlint_default_root_dir then
+            oxlint_default_root_dir(bufnr, function(dir)
+              local project_node_modules = vim.fs.root(dir, "node_modules")
+              local has_local = oxlint_executable_in(project_node_modules) ~= nil
+              if vim.fn.executable "oxlint" == 1 or has_local then
+                on_dir(dir)
+              end
+            end)
+          end
+        end,
       })
 
       local json = require("schemastore").json
