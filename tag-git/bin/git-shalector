@@ -1,18 +1,20 @@
-#!/bin/bash
+#!/usr/bin/env fish
 
 # Fuzzy-find a git commit.
-# You can use `git shalector master` to select commits from master,
+# You can use `git shalector main` to select commits from main,
 # otherwise it uses the current branch.
 
-set -eo pipefail
+if set -q $argv[1]; then
+  set branch $argv[1]
+else
+  set branch $(git rev-parse HEAD)
+end
 
-branch=${1:-$(git rev-parse HEAD)}
-
-target_commit=$(
-  git log -75 --color=always "$branch" | \
-  fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | rg -o '[a-f0-9]\{7}' | xargs git show --color=always" | \
-  awk '{print $1}' | \
-  xargs git rev-parse
+set target_commit $(
+  git log -75 --color=always "$branch" |
+    fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | rg -o '[a-f0-9]\{7}' | xargs git show --color=always" |
+    string match -rg '([a-f0-9]{7})' |
+    xargs git rev-parse
 )
 
 echo "$target_commit" | pbcopy

@@ -48,6 +48,8 @@
   # Git will then diff between `exiftool file1` and `exiftool file2`
   textconv = exiftool
 [alias]
+  ll = !"f(){ git log --format=elastic --color \"$@\" | tabwriter; }; f"
+
   ksd = difftool -t Kaleidoscope
   # `git log` with patches shown with difftastic.
   dl = -c diff.external=difft log -p --ext-diff
@@ -88,11 +90,9 @@
   pul = pull
   psuh = push
 [format]
-  # git log uses --pretty format by default, so this changes the default
-  # format.
-  # Example:
-  # 9d9a0ee curl: automatically continue downloads [Gabe Berke-Williams, 9 days ago] (HEAD -> main)
-  pretty = "%C(#d79921)%h%C(reset) %<(50)%C(blue)%s %C(reset)[%an, %>(12)%cr]%C(auto)%d%+b"
+  # git log uses the `pretty` format by default
+  pretty = "%C(reset)%<(50)%C(reset)%s %C(#bbb ul)%h%C(reset) %C(italic dim)[%an, %>(12)%cr]%C(auto)%d%+b"
+  elastic = "%C(magenta reverse)%h%C(reset)%x09%C(blue)%s%x09%C(reset)[%an,%x09%cr]%C(auto)%d%+b"
 [pretty]
   # Formats here can be used by doing `--pretty=<NAME>`.
   # You cannot redefine the same name as a built-in format, which means you
