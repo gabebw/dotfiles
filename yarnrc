@@ -1,2 +1,2 @@
 disable-self-update-check true
-ignore-scripts true
+ignore-scripts false
