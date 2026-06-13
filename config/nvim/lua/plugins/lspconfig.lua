@@ -97,7 +97,11 @@ return {
       local oxlint_default_root_dir = vim.lsp.config["oxlint"].root_dir
       --- @param root_dir string?
       local oxlint_executable_in = function(root_dir)
-        return root_dir .. "/node_modules/.bin/oxlint"
+        if root_dir then
+          return root_dir .. "/node_modules/.bin/oxlint"
+        else
+          return nil
+        end
       end
 
       setup("oxlint", {
