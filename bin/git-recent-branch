@@ -1,5 +1,7 @@
 #!/usr/bin/env fish --no-config
 
-git branch --sort=-committerdate | \
-  fzf --accept-nth '{1}{2}' --delimiter='*' | \
+# Recent branches, excluding ones that are merged into this one
+
+git branch --sort=-committerdate --no-merged HEAD | \
+  fzf | \
   string trim
