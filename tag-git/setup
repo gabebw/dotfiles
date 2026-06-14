@@ -2,7 +2,7 @@
 
 set -e
 
+git_root=$(git rev-parse --show-toplevel)
 echo "Installing Git hooks..."
-# Don't fail if there's no such file
-rm .git/hooks/post-merge || true
-ln -s "$PWD"/tag-git/hooks/dotfiles-post-merge .git/hooks/post-merge
+[ -f .git/hooks/post-merge ] && rm .git/hooks/post-merge
+ln -s "$git_root"/tag-git/hooks/dotfiles-post-merge "$git_root"/.git/hooks/post-merge
