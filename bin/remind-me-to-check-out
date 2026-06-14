@@ -1,0 +1,73 @@
+#!/usr/bin/env fish --no-config
+
+source ~/.config/fish/stdlib.fish
+
+# A script that takes in a Github repo path and makes an issue on my dotfiles repo reminding me to
+# check it out at some point.
+# Example argument: "https://github.com/stevearc/oil.nvim"
+
+function choose_labels
+  gh label list --json name -t '{{pluck "name" .|  join "\n"}}' | \
+    gum choose --no-limit --output-delimiter ","
+end
+
+# JSON fields:
+# {
+#   "description": "Neovim file explorer: edit your filesystem like a buffer",
+#   "homepageUrl": "",
+#   "name": "oil.nvim",
+#   "nameWithOwner": "stevearc/oil.nvim",
+#   "url": "https://github.com/stevearc/oil.nvim"
+# }
+set fields url nameWithOwner name homepageUrl description
+set json (gh repo view --json $(string join , $fields) $argv[1])
+for field in $fields
+  # meta programming!
+  set $field (printf $json | jq  --raw-output '.'$field)
+end
+
+if [ 1 -eq (gh issue list --repo gabebw/dotfiles --search $name --limit 1 --json id | jq length) ]
+  warn "I think you already have an issue for this. Searching..."
+  set template '
+  {{range .}}
+  {{ $color := "" }}
+  {{ if eq .state "OPEN" }}
+    {{ $color = "green" }}
+  {{ else }}
+    {{ $color = "red" }}
+  {{ end }}
+  {{tablerow
+    "Status"
+    "Number"
+    "Title"
+    "Description"
+    "Created"
+    "Last updated"
+  }}
+  {{tablerow
+    (.state | autocolor $color)
+    (printf "#%v" .number | autocolor "green")
+    .title
+    .body
+    (timeago .createdAt)
+    (timeago .updatedAt)
+  }}
+  {{end}}'
+
+  gh issue list --json state,title,body,url,updatedAt,createdAt,number --template $template --search $name
+  or exit 1
+
+  if ! gum confirm --default=no 'Do you still want to make the issue?'
+    exit 1
+  end
+end
+
+if gum confirm "Want any labels?"
+  set labels (choose_labels)
+else
+  set labels ""
+end
+or exit 1
+
+# `--editor` pre-fills fields but lets you finish it
+gh issue create --repo gabebw/dotfiles --label $labels --title 'Check it out: '$name --body "> $description"\n\n"$url" --editor
