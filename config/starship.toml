@@ -26,7 +26,7 @@ palette = 'gruvbox_dark'
 # Light text
 color_fg0 = '#fbf1c7'
 # Dark text
-color_fg1 = "#11111b"  # crust from catpuccin_mocha
+color_fg1 = "#11111b" # crust from catpuccin_mocha
 color_bg1 = '#3c3836'
 color_bg3 = '#665c54'
 color_blue = '#458588'
