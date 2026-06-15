@@ -60,6 +60,7 @@ detect_extensions = []
 symbol = ""
 format = "[($symbol$version )]($style)"
 style = "bg:color_aqua fg:color_fg0"
+not_capable_style = "bg:color_red fg:bold color_fg0"
 
 [java]
 format = "[$symbol$version ]($style)"
