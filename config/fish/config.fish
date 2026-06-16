@@ -1,3 +1,6 @@
+# Profile startup time:
+#    fish --profile-startup /tmp/start.prof -ic exit; sort -nk2 /tmp/start.prof
+
 if not status --is-interactive
   # Problem: Scripts are slow because my configuration in this file is slow.
   # Solution: Skip the configuration if not running interactively.
@@ -256,9 +259,6 @@ alias rrg "rails routes | rg"
 alias db-reset "be rake db:drop db:create db:migrate db:test:prepare"
 alias unfuck-gemfile "git checkout HEAD -- Gemfile.lock"
 alias be "bundle exec"
-
-# Ruby by default looks for openssl@1.1, which doesn't exist
-set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir="$(brew --prefix openssl@3)
 # }}}
 
 # Postgres {{{
@@ -291,14 +291,30 @@ alias ssh "TERM=xterm-256color command ssh"
 # Note that `fish_add_path` will prepend by default.
 # It is also universal by default, unless you pass "--path".
 
-# Add Homebrew to the path.
-set HOMEBREW_PREFIX (brew --prefix)
-fish_add_path --move --path $HOMEBREW_PREFIX/bin $HOMEBREW_PREFIX/sbin
+# Add Homebrew to the path. It does it globally, so don't keep doing it if it's already done.
+if ! set -q HOMEBREW_PREFIX
+  brew shellenv | source
+end
+
+# Ruby by default looks for openssl@1.1, which doesn't exist
+# $HOMEBREW_PREFIX is set by `brew shellenv`
+set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir=$HOMEBREW_PREFIX/openssl@3"
 
 # Find Node commands from current project
 set PATH $PATH "./node_modules/.bin/"
 # Intercept calls to `yarn` or `pnpm` and install the right version on use
-corepack enable
+
+set -l corepack_wrappers yarn pnpm
+for corepack_wrapper in $corepack_wrappers
+  eval "
+    function $corepack_wrapper
+      corepack enable
+      # Erase all wrappers now that corepack is enabled
+      functions --erase $corepack_wrappers
+      $corepack_wrapper $argv
+    end
+  "
+end
 
 # Postgres.app takes precedence
 fish_add_path --move --path /Applications/Postgres.app/Contents/Versions/latest/bin
@@ -328,13 +344,16 @@ source ~/.config/fish/stdlib.fish
 
 if status --is-interactive
   starship init fish | source
-  mise activate | source
   zoxide init fish | source
 
   set -U fish_greeting ""
-  # Erase a global (non-universal) variable if set, since it interferes with the
-  # universal one.
-  set --erase fish_features
+  if set -q --global fish_features
+    # Erase a global (non-universal) variable if set, since it interferes with the
+    # universal one.
+    # `set --erase fish_features` takes a surprisingly long time, maybe because it is erasing
+    # a universal variable, so check first with `set -q`.
+    set --erase --global fish_features
+  end
   # ampersand-nobg-in-token: `&` is no longer interpreted as the backgrounding
   #   operator in the middle of a token, so dealing with URLs becomes easier.
   # qmark-noglob: `?` is no longer interpreted as a glob operator in the middle
