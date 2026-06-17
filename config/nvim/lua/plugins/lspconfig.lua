@@ -113,10 +113,12 @@ return {
         root_dir = function(bufnr, on_dir)
           if oxlint_default_root_dir then
             oxlint_default_root_dir(bufnr, function(dir)
-              local project_node_modules = vim.fs.root(dir, "node_modules")
-              local has_local = oxlint_executable_in(project_node_modules) ~= nil
-              if vim.fn.executable "oxlint" == 1 or has_local then
-                on_dir(dir)
+              if dir then
+                local project_node_modules = vim.fs.root(dir, "node_modules")
+                local executable_path = oxlint_executable_in(project_node_modules)
+                if vim.fn.executable "oxlint" == 1 or (executable_path and vim.fn.executable(executable_path)) then
+                  on_dir(dir)
+                end
               end
             end)
           end
