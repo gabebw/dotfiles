@@ -1,6 +1,6 @@
 #!/usr/bin/env fish --no-config
 
-set url $argv[1]
+set url (string replace -r '^https?://' '' $argv[1])
 
 if not string match -qre '^www\.' $url
   printf "!! Note that CNAME cannot be on the bare domain\n\n" >&1
