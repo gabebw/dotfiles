@@ -64,9 +64,9 @@ end
 set PROJECT_PREFIX $HOME/code/
 function projects
  {
-    projects_changed_within '2 months'
+    projects_changed_within '2 months' &
     # It's already sorted by frecency
-    zoxide query --list --base-dir $HOME
+    zoxide query --list --base-dir $HOME &
 
   # The `awk` removes duplicates without sorting (which `sort -u` would do), so we preserve zoxide's
   # sorting
@@ -93,7 +93,7 @@ if [ (count $argv) -eq 1 ]
 else if [ (count $argv) -eq 2 ]
   tmux_try_to_connect_to $(tmux_normalize_session_name $argv[1]) $argv[2]
 else
-  set project_directory $(projects | fzf-tmux --reverse -p)
+  set project_directory $(projects | fzf --tmux --reverse)
 
   if [ -n "$project_directory" ]
     set session_name $(tmux_normalize_session_name $project_directory)
