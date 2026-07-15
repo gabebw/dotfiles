@@ -310,8 +310,8 @@ for corepack_wrapper in $corepack_wrappers
     function $corepack_wrapper
       corepack enable
       # Erase all wrappers now that corepack is enabled
-      functions --erase $corepack_wrappers
-      $corepack_wrapper $argv
+      functions --erase $corepack_wrapper
+      $corepack_wrapper \$argv
     end
   "
 end
