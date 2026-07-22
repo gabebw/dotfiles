@@ -28,11 +28,12 @@ return {
 
       -- Optimize memory allocation with serverProperties
       metals_config.settings = {
+        serverVersion = "2.0.0-M2",
         serverProperties = {
           -- Initial (minimum) heap size
           "-Xms10m",
           -- Max heap size (default 1/4 physical memory)
-          -- "-Xmx2G",
+          "-Xmx4g",
 
           -- stack size
           "-Xss4m",
@@ -51,7 +52,7 @@ return {
         -- Automatically import builds rather than prompting the user to choose. "initial" will only automatically
         -- import a build when a project is first opened, "all" will automate build imports after subsequent changes as
         -- well. (Default: off)
-        autoImportBuild = "all",
+        automaticImportBuild = "all",
 
         bloopSbtAlreadyInstalled = true, -- Set to true if you use Bloop
         enableSemanticHighlighting = false, -- Disable for better performance
