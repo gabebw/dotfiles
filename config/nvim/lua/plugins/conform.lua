@@ -39,8 +39,8 @@ return {
       local oxfmt = { "oxfmt", "oxfmt_npx" }
       -- If Oxfmt isn't installed, try Prettier, and if that's not installed, reach for `npx oxfmt`,
       -- which is always available regardless of project.
-      local js = lume.concat(prettier, { "oxfmt", "oxfmt_npx" })
-      local jsonc = lume.concat({ "vscode_settings" }, js)
+      local oxfmt_then_prettier = lume.concat({ "oxfmt" }, prettier, { "oxfmt_npx" })
+      local jsonc = lume.concat({ "vscode_settings" }, oxfmt_then_prettier)
 
       -- Tip: if `prettier` fails, try switching Yarn from `pnp` to `node-modules` linker, or add
       -- this config: https://github.com/stevearc/conform.nvim/issues/323#issuecomment-2053692761
@@ -52,16 +52,16 @@ return {
         formatters_by_ft = {
           lua = { "stylua" },
           python = { "ruff" },
-          javascript = js,
-          typescriptreact = js,
-          typescript = js,
-          css = js,
-          scss = js,
+          javascript = oxfmt_then_prettier,
+          typescriptreact = oxfmt_then_prettier,
+          typescript = oxfmt_then_prettier,
+          css = oxfmt_then_prettier,
+          scss = oxfmt_then_prettier,
           ["eruby.yaml"] = prettier,
           ruby = { "standardrb" },
           eruby = { "erb_lint" },
           markdown = prettier,
-          json = js,
+          json = oxfmt_then_prettier,
           jsonc = jsonc,
           plsql = {
             -- This has its own `condition`, so run it on every SQL file
