@@ -58,6 +58,7 @@ return {
           css = oxfmt_then_prettier,
           scss = oxfmt_then_prettier,
           ["eruby.yaml"] = oxfmt_then_prettier,
+          yaml = oxfmt_then_prettier,
           ruby = { "standardrb" },
           eruby = { "erb_lint" },
           markdown = prettier,
