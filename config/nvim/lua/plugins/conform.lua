@@ -60,7 +60,7 @@ return {
           ["eruby.yaml"] = oxfmt_then_prettier,
           yaml = oxfmt_then_prettier,
           ruby = { "standardrb" },
-          eruby = { "erb_lint" },
+          eruby = { "herb", "erb_lint" },
           markdown = prettier,
           json = oxfmt_then_prettier,
           jsonc = jsonc,
@@ -77,6 +77,9 @@ return {
             tmpfile_format = ".conform.$RANDOM.$FILENAME",
             command = "bundle",
             args = { "exec", "erb_lint", "--autocorrect", "$FILENAME" },
+          },
+          herb = {
+            command = "herb-format",
           },
           ruff = {
             command = "uvx",

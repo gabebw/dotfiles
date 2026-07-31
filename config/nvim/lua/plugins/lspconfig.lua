@@ -74,6 +74,8 @@ return {
         },
       })
 
+      setup "herb_ls"
+
       setup("pylsp", {
         cmd = { "uvx", "--with", "python-lsp-ruff", "--from", "python-lsp-server[all]", "pylsp" },
         plugins = {
