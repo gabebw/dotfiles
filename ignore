@@ -49,3 +49,6 @@ Cargo.lock
 !.vscode/
 !.env
 !.eslintrc*
+
+# Yarn releases
+yarn-*.cjs
