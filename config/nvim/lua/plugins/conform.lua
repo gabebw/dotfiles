@@ -79,7 +79,11 @@ return {
             args = { "exec", "erb_lint", "--autocorrect", "$FILENAME" },
           },
           herb = {
-            command = "herb-format",
+            command = "yarn",
+            args = { "herb-format" },
+            -- Only run if there's a .herb.yml file in the root
+            cwd = require("conform.util").root_file({ ".herb.yml" }),
+            require_cwd = true,
           },
           ruff = {
             command = "uvx",
