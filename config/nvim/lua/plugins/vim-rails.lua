@@ -14,10 +14,15 @@ return {
           alternate = "app/admin/{plural}.rb",
         },
         ["app/components/*.html.erb"] = {
-          alternate = "app/components/{}.rb",
+          alternate = "spec/components/{}_spec.rb",
+          related = "app/components/{}.rb",
         },
         ["app/components/*.rb"] = {
-          alternate = "app/components/{}.html.erb",
+          alternate = "spec/components/{}_spec.rb",
+          related = "app/components/{}.html.erb",
+        },
+        ["spec/components/*_spec.rb"] = {
+          alternate = "app/components/{}.rb",
         },
         ["spec/factories/*.rb"] = { command = "factories" },
         ["spec/factories.rb"] = { command = "factories" },
