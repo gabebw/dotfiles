@@ -9,5 +9,5 @@ function al -a where number
     return 1
   end
 
-  eza -s modified --recurse --reverse --oneline --only-files --absolute $where | rg -v ':$|^$' | head -n $number
+  eza -s modified --recurse --reverse --oneline --only-files --absolute on $where | rg -v ':$|^$' | head -n $number
 end
