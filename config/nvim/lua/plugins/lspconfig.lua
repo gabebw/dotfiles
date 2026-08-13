@@ -37,35 +37,12 @@ return {
         },
       })
 
-      lume.each({ "ts_ls" }, function(name)
+      lume.each({ "tsc", "ts_ls" }, function(name)
         setup(name, {
-          filetypes = {
-            -- Do not initialize on JS files, because it tries to find the TS installation on random
-            -- one-off JS files and then prints an error
-            -- Copied from: https://github.com/neovim/nvim-lspconfig/blob/master/lsp/ts_ls.lua
-            -- "javascript",
-            "javascriptreact",
-            "typescript",
-            "typescriptreact",
-          },
+          -- Don't start on loose files outside a project workspace
+          workspace_required = true,
         })
       end)
-
-      setup("tsgo", {
-        cmd = function(dispatchers, config)
-          -- override the command to not be `tsgo`:
-          -- https://github.com/neovim/nvim-lspconfig/blob/d224a1920728ba129880efc700d4a0180ac4ecbb/lsp/tsgo.lua#L65
-          local cmd = "tsc"
-
-          if (config or {}).root_dir then
-            local local_cmd = vim.fs.joinpath(config.root_dir, "node_modules/.bin", cmd)
-            if vim.fn.executable(local_cmd) == 1 then
-              cmd = local_cmd
-            end
-          end
-          return vim.lsp.rpc.start({ cmd, "--lsp", "--stdio" }, dispatchers)
-        end,
-      })
 
       setup("ruby_lsp", {
         cmd = { "ruby-lsp" },
