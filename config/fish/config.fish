@@ -291,10 +291,8 @@ alias ssh "TERM=xterm-256color command ssh"
 # Note that `fish_add_path` will prepend by default.
 # It is also universal by default, unless you pass "--path".
 
-# Add Homebrew to the path. It does it globally, so don't keep doing it if it's already done.
-if ! set -q HOMEBREW_PREFIX
-  brew shellenv | source
-end
+# Add Homebrew to the path.
+brew shellenv | source
 
 # Ruby by default looks for openssl@1.1, which doesn't exist
 # $HOMEBREW_PREFIX is set by `brew shellenv`
