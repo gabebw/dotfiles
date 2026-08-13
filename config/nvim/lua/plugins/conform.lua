@@ -67,6 +67,7 @@ return {
           plsql = {
             -- This has its own `condition`, so run it on every SQL file
             "sql_formatter_play",
+            "sql_formatter",
           },
           proto = { "buf" },
           toml = oxfmt,
@@ -102,6 +103,9 @@ return {
             condition = function(_, ctx)
               return ctx.filename:match "conf/evolutions/default/%d+.sql$"
             end,
+          },
+          sql_formatter = {
+            command = "sql-formatter -l postgresql",
           },
           vscode_settings = {
             -- Inherit from https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/jq.lua
