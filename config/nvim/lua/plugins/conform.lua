@@ -26,6 +26,17 @@ local function oxfmt_location(config, ctx)
   return from_node_modules
 end
 
+-- Copied from https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/oxfmt.lua
+local oxfmt_config_file_names = {
+  -- https://oxc.rs/docs/guide/usage/formatter/config.html#create-a-config-file
+  ".oxfmtrc.json",
+  ".oxfmtrc.jsonc",
+  "oxfmt.config.ts",
+  -- https://viteplus.dev/guide/fmt#configuration
+  "vite.config.ts",
+  "vite.config.js",
+}
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -116,8 +127,12 @@ return {
             end,
           },
           oxfmt = {
-            -- Inherit from https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/oxfmt.lua
-            inherit = "oxfmt",
+            -- https://github.com/stevearc/conform.nvim/blob/master/lua/conform/formatters/oxfmt.lua
+            condition = function(config, ctx)
+              -- Plain "oxfmt" probably means it's the Mise global shim, and isn't actually
+              -- installed in this project
+              return oxfmt_location(config, ctx) ~= "oxfmt"
+            end,
             command = function(config, ctx)
               local location = oxfmt_location(config, ctx)
               if location == "pnp" then
@@ -135,6 +150,8 @@ return {
                 return { "--stdin-filepath", "$FILENAME" }
               end
             end,
+            stdin = true,
+            cwd = require("conform.util").root_file(oxfmt_config_file_names),
           },
           oxfmt_npx = {
             command = "npx",
