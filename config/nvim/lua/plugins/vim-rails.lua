@@ -24,6 +24,10 @@ return {
         ["spec/components/*_spec.rb"] = {
           alternate = "app/components/{}.rb",
         },
+        ["test/components/previews/*_preview.rb"] = {
+          alternate = "app/components/{}.rb",
+          related = "app/components/{}.html.erb",
+        },
         ["spec/factories/*.rb"] = { command = "factories" },
         ["spec/factories.rb"] = { command = "factories" },
         ["spec/features/*_spec.rb"] = { command = "feature" },
