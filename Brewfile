@@ -31,6 +31,7 @@ brew "lazygit"
 brew "mise" # general version manager (and more) @ https://mise.jdx.dev
 brew "moreutils" # I love `sponge` so much.
 brew "openssl@3"
+brew "ormolu" # Haskell formatter
 brew "pandoc"
 brew "pgrep"
 brew "php" # for Alfred workflow

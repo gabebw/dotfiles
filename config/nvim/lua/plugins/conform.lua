@@ -73,6 +73,7 @@ return {
           ruby = { "standardrb" },
           eruby = { "herb", "erb_lint" },
           markdown = prettier,
+          haskell = { "ormolu" },
           json = oxfmt_then_prettier,
           jsonc = jsonc,
           plsql = {
