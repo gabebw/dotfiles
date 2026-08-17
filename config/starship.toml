@@ -16,7 +16,7 @@ $nodejs\
 $java\
 $directory\
 [](bg:color_blue fg:color_yellow)\
-$git_branch\
+${custom.git_branch}\
 $git_state\
 $git_status\
 [ ](fg:color_blue bg:color_purple)\
@@ -84,10 +84,25 @@ format = "[ ](bg:color_yellow fg:color_aqua)[$path ]($style)"
 # When in a Git repo, should we keep showing parent directories?
 truncate_to_repo = true
 
-[git_branch]
-format = "[($symbol$branch )]($style)"
+[custom.git_branch]
+format = "[(  $output )]($style)"
 style = "bg:color_blue"
-truncation_length = 40
+description = "Git branch, showing beginning and end, not truncated just at the end"
+when = true # Without this, it won't ever show anything
+require_repo = true
+command = """
+  git branch --show-current | awk -v max_len=40 -v ellipsis=… '{
+    if (length($0) > max_len) {
+        # Subtract 1 for the length of "..."
+        half = int((max_len - 1) / 2)
+        rest = (max_len - 1) - half
+        print substr($0, 1, half) ellipsis substr($0, length($0) - rest + 1)
+    } else {
+        print
+    }
+  }'
+"""
+ignore_timeout = true
 
 [git_state]
 format = "[\\($state( $progress_current/$progress_total)\\) ]($style)"
