@@ -4,14 +4,14 @@
 # You can use `git shalector main` to select commits from main,
 # otherwise it uses the current branch.
 
-if set -q $argv[1]; then
+if set -q argv[1]
   set branch $argv[1]
 else
   set branch $(git rev-parse HEAD)
 end
 
 set target_commit $(
-  git log -75 --color=always "$branch" |
+  git log -75 --color=always --pretty=shalector "$branch" |
     fzf --ansi --no-sort --reverse --tiebreak=index --preview "echo {} | rg -o '[a-f0-9]\{7}' | xargs git show --color=always" |
     string match -rg '([a-f0-9]{7})' |
     xargs git rev-parse

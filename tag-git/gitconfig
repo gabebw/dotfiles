@@ -90,14 +90,15 @@
 [format]
   # git log uses the `pretty` format by default
   pretty = "%C(cyan ul)%h%C(reset) %C(default)%<(50)%C(reset)%s %C(italic dim)%an, %cr%C(auto)%d%C(default)%w(0,0,4)%+b"
+  # Add any new formats under `[pretty]`, not `[format]`.
 [pretty]
   # Formats here can be used by doing `--pretty=<NAME>`.
   # You cannot redefine the same name as a built-in format, which means you
   # can't use: oneline, short, medium, full, fuller, reference, email, mboxrd,
   # or email.
 
-  # Full commit messages without all the junk from `--pretty=full`
-  detailed = %C(red)%H%nAuthor: %C(green)%an%n%C(magenta)%s%n%b
+  # Similar to format.pretty, but one line for `git shalector`
+  shalector = "%C(cyan ul)%h%C(reset) %C(default)%C(reset)%s %C(italic dim)%an, %cr%C(auto)%d%C(default)%w(0,0,4)"
 [svn]
   authorsfile = ~/.git-author
 
