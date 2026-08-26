@@ -64,6 +64,10 @@ function info
   gum log --level=info --time=stamp $argv
 end
 
+function success
+  info --level.foreground='#00ff00' $argv
+end
+
 function warn
   gum log --level=warn --time=stamp $argv
 end
