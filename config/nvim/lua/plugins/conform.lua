@@ -93,7 +93,7 @@ return {
           },
           herb = {
             command = "yarn",
-            args = { "herb-format" },
+            args = { "run", "--silent", "herb-format" },
             -- Only run if there's a .herb.yml file in the root
             cwd = require("conform.util").root_file({ ".herb.yml" }),
             require_cwd = true,
