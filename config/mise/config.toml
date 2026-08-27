@@ -11,6 +11,7 @@ ruby = "4.0"
 oxfmt = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 "npm:bash-language-server" = "latest"
+"npm:corepack" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
