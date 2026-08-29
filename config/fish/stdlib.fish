@@ -92,3 +92,8 @@ end
 function null-terminate
   tr '\n' '\0'
 end
+
+# Is this command's output being piped to another command?
+function is-being-piped
+  not isatty 1
+end
