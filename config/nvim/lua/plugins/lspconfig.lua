@@ -3,6 +3,17 @@ local function path_exists(path)
   return stat and stat.type == "file" or false
 end
 
+local function enable_if_has_file_at_git_root(file)
+  return function(bufnr, callback)
+    local git_root = vim.fs.root(bufnr, { ".git" })
+    if git_root and path_exists(git_root .. "/" .. file) then
+      callback(git_root)
+    else
+      -- Don't enable
+    end
+  end
+end
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -51,7 +62,10 @@ return {
         },
       })
 
-      setup "herb_ls"
+      setup("herb_ls", {
+        workspace_required = true,
+        root_dir = enable_if_has_file_at_git_root ".herb.yml",
+      })
 
       setup("pylsp", {
         cmd = { "uvx", "--with", "python-lsp-ruff", "--from", "python-lsp-server[all]", "pylsp" },
