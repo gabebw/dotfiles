@@ -8,7 +8,7 @@
 # * chrome-cli (brew install chrome-cli)
 # * https://github.com/gabebw/rust-firefox-all-open-urls
 
-set -e
+set -eo pipefail
 
 is_running(){
   ps x | rg -v rg | rg -q "$1"
