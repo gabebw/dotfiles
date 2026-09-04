@@ -65,7 +65,7 @@ function info
 end
 
 function success
-  info --level.foreground='#00ff00' $argv
+  info --level.foreground='#00ff00' $argv >&1
 end
 
 function warn
