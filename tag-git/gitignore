@@ -99,3 +99,6 @@ metals.sbt
 *.tsbuildinfo
 
 /.pnpm-store/
+
+# From `git-create-pull-request`
+saved-pr-message
