@@ -86,7 +86,7 @@ function o
     # "-X <command>" means the results are concatenated and the command is
     # executed once with all found results.
     __o_custom_fd \
-      -e mp4 -e flv -e mov -e webm -e m4v -e avi \
+      -e mp4 -e flv -e mov -e webm -e m4v -e avi -e wmv \
       $search_path_all_dirs \
       -X open
 
