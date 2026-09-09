@@ -1,17 +1,32 @@
-#!/bin/sh
+#!/usr/bin/env fish --no-config
+
+source ~/.config/fish/stdlib.fish
 
 # Only 1 branch
-if [ "$(git branch "$@" | wc -l | xargs echo)" = 1 ]; then
+if [ $(git branch $argv | wc -l | xargs echo) = 1 ]
   echo "$(basename $0): There's only one git branch, exiting." >&2
   exit 1
-fi
+end
 
-current_branch=$(git rev-parse --abbrev-ref HEAD)
+function select_branch
+  set current_branch $(git rev-parse --abbrev-ref HEAD)
+  git branch --sort=-committerdate --color=always $argv |
+    sed -E -e 's/^[[:space:]]*//' -e 's@^remotes/@@' |
+    rg -v '^\*' |
+    rg -v "remotes/origin/$current_branch" |
+    rg -v "remotes/origin/HEAD" |
+    fzf --multi --reverse --ansi --exit-0 --preview="git find-best-log $current_branch {} --color=always --" |
+    sed -e 's@^remotes/origin/@@'
+end
 
-git branch --sort=-committerdate --color=always "$@" |\
-  sed -E -e 's/^[[:space:]]*//' -e 's@^remotes/@@' |\
-  rg -v '^\*' |\
-  rg -v "remotes/origin/${current_branch}" |\
-  rg -v "remotes/origin/HEAD" |\
-  fzf --multi --reverse --ansi --exit-0 --preview="git find-best-log $current_branch {} --color=always --" |\
-  sed -e 's@^remotes/origin/@@' -e 's/ .*$//' -e 's/^\+ //'
+set branch $(select_branch)
+
+if string match -rq '^\+ ' $branch
+  set branch_without_plus_prefix $(string match -rg '^\+ (.+)' $branch)
+  set worktree_dir $(git worktree  list --no-porcelain | rg $branch_without_plus_prefix | awk '{print $1}')
+  error "That branch is being used by a worktree! To remove it, run:"
+  error "git worktree remove $worktree_dir"
+  exit 1
+else
+  echo $branch
+end
