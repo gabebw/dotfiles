@@ -102,3 +102,6 @@ metals.sbt
 
 # From `git-create-pull-request`
 saved-pr-message
+
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/install-state.gz
