@@ -84,6 +84,7 @@
   cleanup-merged = !git branch --merged | rg -v '^\\*|^  (master|main)$' | xargs git branch -d
   # Try to open a PR for the current branch; otherwise, open the main repo page
   open = !gh pr view --web 2>/dev/null || gh repo view --web --branch "$(git current-branch)"
+  switch-to-ssh-url = !git remote set-url origin "$(gh repo view --json sshUrl --jq .sshUrl)"
 
   # Typos
   pul = pull
