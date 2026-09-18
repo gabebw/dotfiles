@@ -1,4 +1,5 @@
 local Sessions = require "sessions"
+local Util = require "util"
 
 ---@module "lazy.types"
 ---@type LazySpec[]
@@ -23,7 +24,9 @@ return {
           if is_unnamed_scratch_buffer or is_command_line then
             return
           end
-          MiniSessions.write "Session.vim"
+          if Util.in_git_repo() then
+            MiniSessions.write "Session.vim"
+          end
         end,
         pattern = "*",
       })
