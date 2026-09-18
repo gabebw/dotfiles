@@ -41,6 +41,11 @@ end
 # This will recurse infinitely into the directory you give it, so just do `o
 # toplevel/` instead of `o toplevel/**/*.*`.
 function o
+  if [ $PWD = $HOME ]
+    warn "Not running in \$HOME"
+    return 1
+  end
+
   if [ (count $argv) -eq 0 ]
     if __o_confirm "Are you sure?"
       o $PWD
