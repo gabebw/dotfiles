@@ -21,12 +21,18 @@ end
 
 set branches $(select_branch $argv)
 
-if string match -rq '^\+ ' $branch
-  set branch_without_plus_prefix $(string match -rg '^\+ (.+)' $branch)
-  set worktree_dir $(git worktree  list --no-porcelain | rg $branch_without_plus_prefix | awk '{print $1}')
+if string match -rq '^\+ ' $branches
+  set branch_without_plus_prefix $(string match -rg '^\+ (.+)' $branches)
+  set worktree_dir $(git worktree list --no-porcelain | rg $branch_without_plus_prefix | awk '{print $1}')
   error "That branch is being used by a worktree! To remove it, run:"
   error "git worktree remove $worktree_dir"
   exit 1
 else
-  echo $branch
+  # Echo 1 by 1 so that each branch is on its own line.
+  # Fish splits on newlines, not spaces, so Fish scripts that consume this one's output need each
+  # ranch on its own line otherwise it thinks it's all one big branch name if you select multiple
+  # branches.
+  for branch in $branches
+    echo $branch
+  end
 end
