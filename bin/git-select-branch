@@ -19,7 +19,7 @@ function select_branch
     sed -e 's@^remotes/origin/@@'
 end
 
-set branch $(select_branch)
+set branches $(select_branch $argv)
 
 if string match -rq '^\+ ' $branch
   set branch_without_plus_prefix $(string match -rg '^\+ (.+)' $branch)
