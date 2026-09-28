@@ -234,7 +234,7 @@ function gdm
   git master-to-main-wrapper diff origin/%BRANCH% $argv
 end
 
-alias amend "git commit --amend -Chead"
+alias amend "git commit --amend -C HEAD"
 alias amend-new "git commit --amend"
 alias ga "git add"
 alias gcp "git rev-parse HEAD | xargs echo -n | pbcopy"
