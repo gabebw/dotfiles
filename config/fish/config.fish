@@ -300,19 +300,8 @@ set -x RUBY_CONFIGURE_OPTS "--with-openssl-dir=$HOMEBREW_PREFIX/openssl@3"
 
 # Find Node commands from current project
 set PATH $PATH "./node_modules/.bin/"
-# Intercept calls to `yarn` or `pnpm` and install the right version on use
 
-set -l corepack_wrappers yarn pnpm
-for corepack_wrapper in $corepack_wrappers
-  eval "
-    function $corepack_wrapper
-      corepack enable
-      # Erase all wrappers now that corepack is enabled
-      functions --erase $corepack_wrapper
-      $corepack_wrapper \$argv
-    end
-  "
-end
+corepack enable
 
 # Postgres.app takes precedence
 fish_add_path --move --path /Applications/Postgres.app/Contents/Versions/latest/bin
