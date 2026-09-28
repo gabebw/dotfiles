@@ -1,13 +1,15 @@
-#!/bin/bash
-# Delete branch locally and remotely. Used by `git mm`
+#!/usr/bin/env -S fish --no-config
 
-set -e
+# Delete branch(es) locally and remotely. Used by `git mm`
 
-if [[ $# == 0 ]]; then
-  branch=$(git-select-branch)
+if [ (count $argv) = 0 ]
+  set branches $(git-select-branch)
+  or exit 1
 else
-  branch="$1"
-fi
+  set branches $argv[1]
+end
 
-git branch -D "$branch"
-git push --no-verify origin :"$branch"
+for branch in $branches
+  git branch -D $branch
+  git push --no-verify origin :"$branch"
+end
