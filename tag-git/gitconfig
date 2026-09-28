@@ -58,7 +58,7 @@
 
   mt = mergetool
   cf = checkout -f
-  full = log --pretty=detailed
+  full = log --pretty=full
   # No color, short messages
   basic = log --pretty='%h %s'
   unstage = reset HEAD
