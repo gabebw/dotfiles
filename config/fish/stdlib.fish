@@ -76,6 +76,11 @@ function error
   gum log --level=error --time=stamp $argv
 end
 
+function emoji
+  # Interpret emoji like :arrow_right:
+  gum format --type emoji $argv
+end
+
 function ensure-some-output -a message
   if [ -z "$message" ]
     set message "No output (at least one non-blank line required)!"
