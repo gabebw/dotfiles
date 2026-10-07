@@ -48,13 +48,6 @@ return {
   -- such file: README.md:10"
   { "xim/file-line" },
   { "christoomey/vim-sort-motion" },
-  {
-    "xolox/vim-easytags",
-    dependencies = { "xolox/vim-misc" },
-    init = function()
-      vim.g.easytags_events = {}
-    end,
-  },
 
   -- Text objects
   -- `ae` text object, so `gcae` comments whole file

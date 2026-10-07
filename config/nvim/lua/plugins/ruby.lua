@@ -6,6 +6,7 @@ return {
   {
     "rhysd/vim-textobj-ruby",
     dependencies = { "kana/vim-textobj-user" },
+    ft = { "ruby" },
     init = function()
       -- definitions blocks	(module, class, def): ro
       -- loop blocks (while, for, until): rl
@@ -15,7 +16,7 @@ return {
       vim.g.textobj_ruby_more_mappings = 1
     end,
   },
-  { "tpope/vim-rake" },
+  { "tpope/vim-rake", ft = { "ruby" } },
   {
     "airblade/vim-localorie",
     init = function()
