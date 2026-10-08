@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env fish
 
 # Get all links from any running browsers.
 # Supports Safari, Firefox, and Chrome.
@@ -8,19 +8,18 @@
 # * chrome-cli (brew install chrome-cli)
 # * https://github.com/gabebw/rust-firefox-all-open-urls
 
-set -eo pipefail
+function is_running -a program
+  ps aux | rg -v rg | rg -q $program
+end
 
-is_running(){
-  ps x | rg -v rg | rg -q "$1"
-}
-
-all-safari-links(){
+function all-safari-links
   # Only check for Safari links if Safari is running, because the Applescript
   # will open Safari and we don't want do do that if Safari isn't already
   # running.
-  if is_running /Applications/Safari.app/Contents/MacOS/Safari; then
-    osascript -l JavaScript <<EOL | rg -v '^favorites://$'
+  if is_running /Applications/Safari.app/Contents/MacOS/Safari
+    set script "
       app = Application('Safari');
+
       tabs = [];
       for(var i = 0; i < app.windows.length; i++){
         window = app.windows[i];
@@ -31,35 +30,42 @@ all-safari-links(){
       }
       // console.log prints to STDERR, so just return a string, which goes to
       // STDOUT
-      tabs.join("\n")
-EOL
-  fi
-}
+      tabs.join(\"\n\")
+    "
+    osascript -l JavaScript -e $script  | rg '^http'
+  end
+end
 
-all-chrome-links(){
-  if is_running 'Google Chrome$'; then
-    if not_installed chrome-cli; then
+function all-chrome-links
+  if is_running 'Google Chrome$'
+    if not_installed chrome-cli
       echo >&2 '!!! Install chrome-cli: brew install chrome-cli'
       exit 1
-    fi
+    end
 
     chrome-cli list links | \
       sed -E 's/^.+ (.+)/\1/' | \
       rg -v '^(view-source|chrome):'
-  fi
-}
+  end
+end
 
-all-firefox-links(){
-  if is_running Firefox.app; then
-    if not_installed firefox-all-open-urls; then
+function all-firefox-links
+  if is_running Firefox.app
+    if not_installed firefox-all-open-urls
       echo >&2 '!!! Install firefox-all-open-urls:' \
         'cargo install --git https://github.com/gabebw/rust-firefox-all-open-urls'
       exit 1
-    fi
+    end
     firefox-all-open-urls
-  fi
-}
+  end
+end
 
-not_installed(){ ! command -v "$1" &>/dev/null; }
+function not_installed
+  ! command -v "$1" &>/dev/null
+end
 
-(all-safari-links; all-chrome-links; all-firefox-links) | sort -u
+{
+  all-safari-links
+  and all-chrome-links
+  and all-firefox-links
+} | sort -u
