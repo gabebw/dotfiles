@@ -65,3 +65,5 @@ brew "stylua"
 brew "coursier"
 brew "scala"
 brew "sql-formatter"
+
+brew "zizmor"
