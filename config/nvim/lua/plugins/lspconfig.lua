@@ -48,7 +48,7 @@ return {
         },
       })
 
-      lume.each({ "tsc", "ts_ls" }, function(name)
+      lume.each({ "tsc" }, function(name)
         setup(name, {
           -- Don't start on loose files outside a project workspace
           workspace_required = true,
