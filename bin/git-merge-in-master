@@ -1,0 +1,18 @@
+#!/usr/bin/env fish
+
+git fetch origin
+and if ! git merge --no-ff origin/master
+  if git diff --name-only --diff-filter=U | rg -q yarn.lock
+    echo "Fixing yarn.lock conflict for you"
+    yarn install >/dev/null
+    and git add yarn.lock
+  end
+
+  # Since yarn.lock may have been the only file with conflicts, and we just fixed it, check again
+  if [ -n "$(git diff --name-only --diff-filter=U)" ]
+    git mergetool
+  else
+    # We fixed them all
+    git commit
+  end
+end
