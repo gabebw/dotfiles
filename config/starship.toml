@@ -91,16 +91,20 @@ description = "Git branch, showing beginning and end, not truncated just at the 
 when = true # Without this, it won't ever show anything
 require_repo = true
 command = """
-  git branch --show-current | awk -v max_len=40 -v ellipsis=… '{
-    if (length($0) > max_len) {
-        # Subtract 1 for the length of "..."
-        half = int((max_len - 1) / 2)
-        rest = (max_len - 1) - half
-        print substr($0, 1, half) ellipsis substr($0, length($0) - rest + 1)
-    } else {
-        print
-    }
-  }'
+  if git symbolic-ref -q HEAD >/dev/null
+    git branch --show-current | awk -v max_len=40 -v ellipsis=… '{
+      if (length($0) > max_len) {
+          # Subtract 1 for the length of "..."
+          half = int((max_len - 1) / 2)
+          rest = (max_len - 1) - half
+          print substr($0, 1, half) ellipsis substr($0, length($0) - rest + 1)
+      } else {
+          print
+      }
+    }'
+  else
+    git rev-parse --short HEAD
+  end
 """
 ignore_timeout = true
 
