@@ -14,6 +14,72 @@ local function enable_if_has_file_at_git_root(file)
   end
 end
 
+---@type table<number, boolean>
+local oxlint_enabled = {}
+---@type table<number, boolean>
+local oxlint_pending = {}
+
+local group = vim.api.nvim_create_augroup("oxlint_diagnostics", { clear = true })
+
+vim.api.nvim_create_autocmd("LspRequest", {
+  group = group,
+  callback = function(ev)
+    local request = ev.data.request
+    if request.method ~= "textDocument/diagnostic" then
+      return
+    end
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client or client.name ~= "oxlint" then
+      return
+    end
+    if request.type == "pending" then
+      -- dd("diagnostic request pending", ev.buf)
+      oxlint_pending[ev.buf] = true
+      oxlint_enabled[ev.buf] = nil
+      return
+    end
+    if request.type == "complete" then
+      -- dd("diagnostic request complete", ev.buf)
+      oxlint_pending[ev.buf] = nil
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = group,
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client and client.name == "oxlint" and not client._patched then
+      oxlint_enabled[args.buf] = true
+      client._patched = true
+      local orig = client.supports_method
+      function client:supports_method(method, bufnr)
+        if method == vim.lsp.protocol.Methods.textDocument_diagnostic then
+          bufnr = bufnr or 0
+          bufnr = bufnr == 0 and vim.api.nvim_get_current_buf() or bufnr
+          return oxlint_enabled[bufnr] or false
+        end
+        return orig(self, method, bufnr)
+      end
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+  group = group,
+  callback = function(ev)
+    local client = vim.lsp.get_clients({ name = "oxlint", bufnr = ev.buf })[1]
+    if not client then
+      return
+    end
+    if oxlint_pending[ev.buf] then
+      return
+    end
+    oxlint_enabled[ev.buf] = true
+    vim.lsp.diagnostic._refresh(ev.buf, client.id, true)
+  end,
+})
+
 ---@module "lazy.types"
 ---@type LazySpec[]
 return {
@@ -130,6 +196,18 @@ return {
                 end
               end
             end)
+          end
+        end,
+        settings = {
+          run = "onSave",
+        },
+        before_init = function(init_params, config)
+          local oxlint_base = assert(loadfile(vim.api.nvim_get_runtime_file("lsp/oxlint.lua", false)[1]))()
+
+          oxlint_base.before_init(init_params, config)
+
+          if init_params.capabilities.workspace then
+            init_params.capabilities.workspace.diagnostics = nil
           end
         end,
       })
