@@ -261,6 +261,7 @@ return {
       })
 
       -- https://github.com/neovim/nvim-lspconfig/blob/451d4ef9abd4f0f08e379ef0d55d1c391b6125a7/lsp/tailwindcss.lua#L102
+      -- :lua= require'lspconfig'.tailwindcss.config_def.default_config.settings.tailwindCSS.classAttributes
       local defaultTailwindClassAttributes = {
         "class",
         "className",
