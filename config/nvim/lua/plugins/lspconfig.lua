@@ -159,7 +159,20 @@ return {
         },
       })
 
+      local util = require "lspconfig.util"
+
       setup("eslint", {
+        root_dir = util.root_pattern(
+          ".eslintrc",
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.yaml",
+          ".eslintrc.yml",
+          ".eslintrc.json",
+          "eslint.config.js",
+          "eslint.config.mjs",
+          "eslint.config.cjs"
+        ),
         settings = {
           -- helps eslint find the eslintrc when it's placed in a subfolder instead of the cwd root
           workingDirectories = { mode = "auto" },
