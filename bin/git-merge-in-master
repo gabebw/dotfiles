@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
 git fetch origin
-and if ! git merge --no-ff origin/master
+and if ! git master-to-main-wrapper merge --no-ff origin/%BRANCH%
   if git diff --name-only --diff-filter=U | rg -q yarn.lock
     echo "Fixing yarn.lock conflict for you"
     yarn install >/dev/null
