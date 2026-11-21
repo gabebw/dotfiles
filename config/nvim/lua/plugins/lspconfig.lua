@@ -1,12 +1,17 @@
+local lume = require "lume"
+
 local function path_exists(path)
   local stat = vim.uv.fs_stat(path)
   return stat and stat.type == "file" or false
 end
 
-local function enable_if_has_file_at_git_root(file)
+---@param files string[] files to search for
+local function enable_if_has_any_file_at_git_root(files)
   return function(bufnr, callback)
     local git_root = vim.fs.root(bufnr, { ".git" })
-    if git_root and path_exists(git_root .. "/" .. file) then
+    if git_root and lume.any(files, function(file)
+      path_exists(git_root .. "/" .. file)
+    end) then
       callback(git_root)
     else
       -- Don't enable
@@ -89,8 +94,6 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      local lume = require "lume"
-
       --- Wrapper for setting up and enabling language-server
       ---@param ls string server name
       ---@param config? vim.lsp.Config
@@ -130,7 +133,7 @@ return {
 
       setup("herb_ls", {
         workspace_required = true,
-        root_dir = enable_if_has_file_at_git_root ".herb.yml",
+        root_dir = enable_if_has_any_file_at_git_root({ ".herb.yml" }),
       })
 
       setup("pylsp", {
